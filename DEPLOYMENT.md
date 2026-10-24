@@ -57,6 +57,57 @@ If you see `GET /api/progress/raw` returning `text/html` with
 which then either serves the SPA at `/summership/` directly or 302-redirects
 the bare `/` path there.
 
+## Runtime
+
+The services run `/usr/bin/node`, so the version on the box is invisible to
+git unless this repository says what it should be.
+
+**Required version: `24.22.1`** — pinned in [`.nvmrc`](.nvmrc), mirrored in
+`server/package.json` (`engines.node`) and `render.yaml` (`NODE_VERSION`).
+A test in `server/__tests__/runtimeVersion.test.js` fails if those four
+places drift apart.
+
+24.22.1 is the release that carries the **October 21, 2026** Node.js security
+fixes:
+
+| Advisory | Severity | What it was |
+|---|---|---|
+| CVE-2026-111497 | HIGH | Brotli decoder out-of-bounds write → remote code execution |
+| CVE-2026-105483, CVE-2026-106069, CVE-2026-106072 | HIGH / MEDIUM | TLS certificate hostname verification bypasses |
+| CVE-2026-105482 | HIGH | `dns.resolve*()` silently truncates hostnames containing a NUL byte |
+| CVE-2026-105481 | MEDIUM | Keep-alive socket can accept a response sent before the request |
+
+Older lines (22.23.4, 26.12.1) carry the same fixes. Lines that are already
+end-of-life receive none of them, so staying on an EOL line means the next
+release does not reach the box at all.
+
+### Reading the version that is actually running
+
+```bash
+node -v                     # the version this shell resolves
+/usr/bin/node -v            # the version the systemd unit execs — this is the one
+systemctl cat tenali | grep ExecStart
+```
+
+The two can differ: an `nvm` or tarball install puts a newer binary on
+`PATH` and leaves `/usr/bin/node` untouched, and the unit runs the latter.
+
+### Patching the box
+
+Use a NodeSource install so `/usr/bin/node` itself is replaced — `nvm`
+installs under `~/.nvm` and the unit would keep starting the old binary.
+
+```bash
+curl -fsSL https://deb.nodesource.com/setup_24.x | sudo -E bash -
+sudo apt-get install -y nodejs
+/usr/bin/node -v                                  # expect v24.22.1 or newer
+sudo systemctl restart tenali
+curl -sS -o /dev/null -w 'HTTP %{http_code}\n' https://tenali.fun/summership/
+```
+
+A restart is required: the running process keeps the old binary until it is
+restarted.
+
 ## Environment
 
 Required in production:
