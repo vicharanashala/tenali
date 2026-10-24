@@ -1,0 +1,619 @@
+/**
+ * StudyMode.css — Explore/Focus toggle + the Focus Mode home screen.
+ *
+ * Uses the same `--clr-*` tokens as the rest of the app so both themes are
+ * handled by the existing light/dark switch. The one deliberate constant is
+ * the amber accent (#ffb300 family) already used by the mastery toast —
+ * Focus Mode reuses it rather than introducing a fourth accent colour.
+ */
+
+/* ── Toggle (app shell, top bar) ─────────────────────────────────────── */
+
+.study-mode-toggle {
+  position: fixed;
+  top: 16px;
+  /* The top-right is an existing stack of three 40px circles on a 48px
+     pitch: theme toggle (right:16), the global Home/Profile/Log-out menu
+     rendered from main.jsx (right:64), and the accessibility gear
+     (right:112). 160 is the next free slot — anything less lands on top of
+     the menu, and the gear's z-index of 9999 then paints over it. */
+  right: 160px;
+  z-index: 9998;
+  display: flex;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 999px;
+  border: 1px solid var(--clr-border);
+  background: var(--clr-surface);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.study-mode-toggle.is-focus {
+  border-color: #ffb300;
+  box-shadow: 0 2px 12px rgba(255, 179, 0, 0.28);
+}
+
+.study-mode-option {
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-radius: 999px;
+  padding: 5px 12px;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--clr-text-soft);
+  white-space: nowrap;
+  transition: background var(--transition), color var(--transition);
+}
+
+.study-mode-option:hover {
+  color: var(--clr-text);
+}
+
+.study-mode-option.is-active {
+  background: var(--clr-hover-strong);
+  color: var(--clr-text);
+}
+
+.study-mode-toggle.is-focus .study-mode-option.is-active {
+  background: linear-gradient(135deg, #ffd54f, #ffb300);
+  color: #2b1d00;
+}
+
+@media (max-width: 820px) {
+  /* Narrow screens: a second row would land on each screen's own "← Home"
+     button, so the switch stays in the top row, left of the three circles,
+     and drops to icons. The labels stay readable to screen readers. */
+  .study-mode-toggle {
+    top: 19px;
+    right: 160px;
+  }
+  .study-mode-option {
+    font-size: 0.92rem;
+    padding: 4px 9px;
+  }
+  .study-mode-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+}
+
+/* In-flow variant, used below the landing navbar where the fixed slots
+   above would sit on top of the navbar's own links. Two classes, so it
+   also wins over the max-width rule above. */
+.study-mode-toggle-row {
+  display: flex;
+  justify-content: center;
+  margin: 6px 0 12px;
+}
+.study-mode-toggle.is-inline {
+  position: static;
+  transform: none;
+}
+.study-mode-toggle.is-inline .study-mode-label {
+  position: static;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  clip: auto;
+}
+
+/* ── Focus home — shared shell ───────────────────────────────────────── */
+
+.focus-home {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: focus-home-in 260ms ease both;
+}
+
+@keyframes focus-home-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.focus-home-head {
+  text-align: center;
+}
+
+.focus-home-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #ffd54f, #ffb300);
+  color: #2b1d00;
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+}
+
+.focus-home-title {
+  margin: 12px 0 6px;
+  font-size: 1.5rem;
+  color: var(--clr-text);
+}
+
+.focus-home-sub {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--clr-text-soft);
+}
+
+.focus-progress-track {
+  margin: 14px auto 0;
+  width: min(420px, 100%);
+  height: 8px;
+  border-radius: 999px;
+  background: var(--clr-hover-strong);
+  overflow: hidden;
+}
+
+.focus-progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #ffd54f, #ffb300);
+  transition: width 400ms ease;
+}
+
+/* ── Picker ──────────────────────────────────────────────────────────── */
+
+.focus-picker-search {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 11px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--clr-border);
+  background: var(--clr-surface);
+  color: var(--clr-text);
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+}
+
+.focus-picker-search:focus {
+  outline: none;
+  border-color: #ffb300;
+}
+
+.focus-picker-chosen {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px dashed #ffb300;
+  background: var(--clr-hover-strong);
+}
+
+.focus-picker-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  max-height: 46vh;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.focus-picker-group-title {
+  margin: 0 0 8px;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--clr-text-soft);
+}
+
+.focus-picker-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.focus-chip {
+  border: 1px solid var(--clr-border);
+  background: var(--clr-surface);
+  color: var(--clr-text);
+  border-radius: 999px;
+  padding: 7px 13px;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: border-color var(--transition), background var(--transition), transform var(--transition);
+}
+
+.focus-chip:hover {
+  border-color: #ffb300;
+  transform: translateY(-1px);
+}
+
+.focus-chip.is-chosen {
+  background: linear-gradient(135deg, #ffd54f, #ffb300);
+  border-color: #ffb300;
+  color: #2b1d00;
+  font-weight: 700;
+}
+
+.focus-empty {
+  color: var(--clr-text-soft);
+  font-size: 0.88rem;
+  text-align: center;
+}
+
+/* ── Board ───────────────────────────────────────────────────────────── */
+
+.focus-topic-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 12px;
+}
+
+.focus-topic-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  min-height: 92px;
+  padding: 16px;
+  border-radius: 14px;
+  border: 1.5px solid var(--clr-border);
+  background: var(--clr-surface);
+  color: var(--clr-text);
+  font-family: var(--font-body);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+}
+
+.focus-topic-card:hover {
+  border-color: #ffb300;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.16);
+}
+
+.focus-topic-card.is-done {
+  border-color: #4caf50;
+}
+
+.focus-topic-name {
+  font-size: 1.02rem;
+  font-weight: 700;
+}
+
+.focus-topic-state {
+  margin-top: auto;
+  font-size: 0.78rem;
+  color: var(--clr-text-soft);
+}
+
+.focus-topic-card.is-done .focus-topic-state {
+  color: #4caf50;
+}
+
+/* The one card the board recommends next. */
+.focus-topic-card.is-next {
+  border-color: #ffb300;
+  background: linear-gradient(160deg, rgba(255, 179, 0, 0.10), transparent 70%), var(--clr-surface);
+  box-shadow: 0 0 0 3px rgba(255, 179, 0, 0.14);
+}
+.focus-topic-card.is-next .focus-topic-state {
+  color: #ffb300;
+  font-weight: 700;
+}
+
+/* ── Prerequisite ladder ─────────────────────────────────────────────── */
+
+.focus-ladder {
+  border-top: 1px solid var(--clr-border);
+  padding-top: 14px;
+}
+
+.focus-ladder-toggle {
+  width: 100%;
+  text-align: left;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 4px 0;
+  font-family: var(--font-body);
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--clr-text-soft);
+}
+
+.focus-ladder-toggle:hover {
+  color: var(--clr-text);
+}
+
+.focus-ladder-note {
+  margin: 6px 0 10px;
+  font-size: 0.78rem;
+  color: var(--clr-text-soft);
+}
+
+/* ── Actions ─────────────────────────────────────────────────────────── */
+
+.focus-home-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.focus-btn-primary {
+  flex: 1 1 240px;
+  padding: 13px 20px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #ffd54f, #ffb300);
+  color: #2b1d00;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform var(--transition), opacity var(--transition);
+}
+
+.focus-btn-primary:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.focus-btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.focus-btn-quiet {
+  padding: 11px 18px;
+  border: 1px solid var(--clr-border);
+  border-radius: 12px;
+  background: none;
+  color: var(--clr-text-soft);
+  font-family: var(--font-body);
+  font-size: 0.86rem;
+  cursor: pointer;
+  transition: color var(--transition), border-color var(--transition);
+}
+
+.focus-btn-quiet:hover {
+  color: var(--clr-text);
+  border-color: var(--clr-text-soft);
+}
+
+/* ── Picker: chapter headers with counts and "Add all" ─────────────────── */
+
+.focus-picker-group-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.focus-picker-group-head .focus-picker-group-title {
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.focus-picker-group-count {
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  font-size: 0.7rem;
+  letter-spacing: 0;
+  color: var(--clr-text-soft);
+}
+button.focus-picker-all {
+  padding: 3px 10px;
+  border: 1px solid var(--clr-border);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--clr-text-soft);
+  font-size: 0.74rem;
+  font-weight: 700;
+  box-shadow: none;
+}
+button.focus-picker-all:hover {
+  background: var(--clr-surface);
+  color: var(--clr-text);
+  box-shadow: none;
+}
+
+/* The Start button stays on screen while scrolling a long topic list. */
+.focus-home-actions.is-sticky {
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
+  margin: 0 -8px;
+  padding: 12px 8px calc(12px + env(safe-area-inset-bottom, 0px));
+  background: linear-gradient(to top, var(--clr-card) 75%, transparent);
+}
+
+/* ── Board cards: emoji from the Why content ───────────────────────────── */
+
+.focus-topic-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.focus-topic-emoji {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--clr-accent-soft);
+  font-size: 1.25rem;
+  flex: 0 0 auto;
+}
+
+/* ── Study timer card ──────────────────────────────────────────────────── */
+
+.focus-timer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 16px;
+  border-radius: 16px;
+  border: 1.5px solid var(--clr-border);
+  background: var(--clr-surface);
+  text-align: center;
+}
+.focus-timer.is-focus { border-color: #ffb300; }
+.focus-timer.is-break { border-color: #5aab7a; }
+.focus-timer.is-focus-done { border-color: #ffb300; animation: focus-timer-done 600ms cubic-bezier(0.3, 1.5, 0.5, 1) both; }
+.focus-timer-title { margin: 0; font-weight: 800; font-size: 1rem; color: var(--clr-text); }
+.focus-timer-sub { margin: 0; font-size: 0.84rem; color: var(--clr-text-soft); }
+.focus-timer-clock {
+  margin: 0;
+  font-size: 2.6rem;
+  font-weight: 800;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  color: var(--clr-text);
+}
+.focus-timer-track {
+  width: min(100%, 280px);
+  height: 8px;
+  border-radius: 999px;
+  background: var(--clr-card);
+  overflow: hidden;
+}
+.focus-timer-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #ffd54f, #ffb300);
+  transition: width 1s linear;
+}
+.focus-timer.is-break .focus-timer-fill { background: #5aab7a; }
+.focus-timer-lengths {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+button.focus-timer-length {
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1.5px solid #ffb300;
+  background: transparent;
+  color: var(--clr-text);
+  font-size: 0.88rem;
+  font-weight: 800;
+  box-shadow: none;
+}
+button.focus-timer-length:hover {
+  background: rgba(255, 179, 0, 0.14);
+  box-shadow: none;
+}
+button.focus-timer-length.is-primary {
+  background: linear-gradient(135deg, #ffd54f, #ffb300);
+  color: #2b1d00;
+  border-color: transparent;
+}
+.focus-timer-today { margin: 2px 0 0; font-size: 0.8rem; font-weight: 700; color: var(--clr-text-soft); }
+@keyframes focus-timer-done {
+  0% { transform: scale(0.94); }
+  60% { transform: scale(1.03); }
+  100% { transform: none; }
+}
+
+/* ── In-quiz focus bar ─────────────────────────────────────────────────── */
+
+.focus-bar {
+  position: fixed;
+  left: 50%;
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  transform: translateX(-50%);
+  z-index: 950;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  max-width: calc(100vw - 168px);
+  padding: 5px;
+  border-radius: 999px;
+  border: 1.5px solid #ffb300;
+  background: var(--clr-card);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  animation: focus-bar-in 360ms cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
+}
+.focus-bar button {
+  box-shadow: none;
+  transform: none;
+}
+.focus-bar-board,
+.focus-bar-next,
+.focus-bar-timer,
+.focus-bar-last {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+button.focus-bar-board {
+  background: transparent;
+  border: none;
+  color: var(--clr-text);
+}
+button.focus-bar-board:hover { background: var(--clr-surface); }
+.focus-bar-timer {
+  background: rgba(255, 179, 0, 0.14);
+  color: var(--clr-text);
+  font-variant-numeric: tabular-nums;
+}
+.focus-bar-timer.is-break { background: rgba(90, 171, 122, 0.18); }
+button.focus-bar-timer.is-due {
+  border: none;
+  background: linear-gradient(135deg, #ffd54f, #ffb300);
+  color: #2b1d00;
+  animation: focus-bar-pulse 1.6s ease-in-out infinite;
+}
+button.focus-bar-next {
+  gap: 0;
+  border: none;
+  min-width: 0;
+  background: linear-gradient(135deg, #ffd54f, #ffb300);
+  color: #2b1d00;
+}
+button.focus-bar-next:hover { background: linear-gradient(135deg, #ffe082, #ffc107); }
+.focus-bar-next-label {
+  margin-right: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 180px;
+}
+.focus-bar-last { color: var(--clr-text-soft); }
+/* Room at the bottom of the page so the bar never covers a quiz's own
+   last button. */
+.focus-bar-spacer { height: 76px; }
+@media (max-width: 560px) {
+  .focus-bar { max-width: calc(100vw - 150px); gap: 4px; }
+  .focus-bar-next-label { display: none; }
+  .focus-bar-board, .focus-bar-next, .focus-bar-timer, .focus-bar-last { padding: 7px 9px; font-size: 0.78rem; }
+  .focus-bar-last { display: none; }
+}
+@keyframes focus-bar-in {
+  from { opacity: 0; transform: translate(-50%, 20px); }
+  to   { opacity: 1; transform: translateX(-50%); }
+}
+@keyframes focus-bar-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 179, 0, 0.5); }
+  50% { box-shadow: 0 0 0 6px rgba(255, 179, 0, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .focus-home, .focus-home *, .focus-bar, .focus-bar *, .focus-timer {
+    animation: none !important;
+    transition: none !important;
+  }
+}
