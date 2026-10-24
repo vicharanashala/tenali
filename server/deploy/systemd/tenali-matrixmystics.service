@@ -9,6 +9,10 @@ Type=simple
 User=tenali
 Group=tenali
 WorkingDirectory=/home/tenali/tenali-matrixmystics
+# Refuse to start on an unpatched Node.js. The floor lives in .nvmrc
+# (see server/deploy/check-node-version.js); 24.22.1 carries the October
+# 21, 2026 security fixes, including CVE-2026-111497.
+ExecStartPre=/usr/bin/node /home/tenali/tenali-matrixmystics/server/deploy/check-node-version.js
 ExecStart=/usr/bin/node /home/tenali/tenali-matrixmystics/server/index.js
 Restart=always
 RestartSec=5
