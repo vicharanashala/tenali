@@ -125,6 +125,19 @@ function throttledSave(key, data) {
   }, CACHE_DEBOUNCE_MS)
 }
 
+// Drop everything this dashboard cached. The cache holds student usernames
+// and proctoring evidence (screenshots, transcripts), and it exists only to
+// make the next render fast — so when the server refuses the request, the
+// cached copy has to go with it instead of standing in for live data.
+function clearProtectedCache() {
+  _cacheTimer = null
+  _pendingCache = {}
+  try {
+    localStorage.removeItem(STORAGE_KEY_SESSIONS)
+    localStorage.removeItem(STORAGE_KEY_DETAIL)
+  } catch { /* storage unavailable */ }
+}
+
 // ── Screenshot Modal ─────────────────────────────────────────────────────
 function ScreenshotModal({ src, onClose }) {
   if (!src) return null
@@ -349,6 +362,12 @@ export default function ProctorDashboard({ onBack }) {
     try {
       const r = await fetch(`${API}/api/proctor/sessions`, { headers: makeHeaders() })
       if (r.status === 401 || r.status === 403) {
+        // The server refused to serve the sessions, so nothing cached on this
+        // machine may keep standing in for them: the cache holds student
+        // usernames and proctoring evidence. Drop it and say what happened.
+        clearProtectedCache()
+        setSessions([])
+        setDetail(null)
         setError('Admin login required. Please log in with an admin account.')
         setRefreshing(false)
         return
@@ -380,6 +399,14 @@ export default function ProctorDashboard({ onBack }) {
     if (!id) return
     try {
       const r = await fetch(`${API}/api/proctor/session/${id}`, { headers: makeHeaders() })
+      if (r.status === 401 || r.status === 403) {
+        // Same rule as above: a refused session detail must not survive in
+        // the local cache where the next render would show it.
+        clearProtectedCache()
+        setDetail(null)
+        setError('Admin login required. Please log in with an admin account.')
+        return
+      }
       if (r.ok) {
         const d = await r.json()
         setDetail(d)
