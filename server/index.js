@@ -114,6 +114,23 @@ const apiLimiter = rateLimit({
 app.use('/api/auth/login', authLimiter);
 app.use('/api/', apiLimiter);
 
+// ─── Health ──────────────────────────────────────────────────────────────────
+// Liveness probe. `render.yaml` declares `healthCheckPath: /api/health`, so
+// this route has to exist and has to answer JSON — without it the request
+// falls through to the SPA catch-all and returns index.html with a 200,
+// which tells the orchestrator nothing about the API it thinks it checked.
+//
+// Deliberately does not touch MongoDB: a liveness probe that depends on the
+// database reports "down" exactly when the database is the thing that broke,
+// which is a different question from "is this process serving requests?".
+app.get('/api/health', (req, res) => {
+  res.json({
+    status: 'ok',
+    uptime: Math.floor(process.uptime()),
+    node: process.versions.node,
+  });
+});
+
 // Static file serving: Serve built React/Vue client (both root and sub-path mount)
 app.use(express.static(clientDistPath));
 if (SUBPATH_REDIRECT && SUBPATH_REDIRECT !== '/') {
