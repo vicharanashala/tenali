@@ -21,7 +21,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version-file: '.nvmrc'
       - run: node server/lib/bkt.test.js
 
   # Lint the client. This catches broken imports and obvious errors before review.
@@ -49,7 +49,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version-file: '.nvmrc'
           cache: 'npm'
           cache-dependency-path: client/package-lock.json
       - run: npm ci
@@ -70,7 +70,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version-file: '.nvmrc'
           cache: 'npm'
           cache-dependency-path: client/package-lock.json
       - run: npm ci
@@ -100,8 +100,41 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version-file: '.nvmrc'
           cache: 'npm'
           cache-dependency-path: server/package-lock.json
       - run: npm ci
       - run: npm test
+
+  # Dependency audit — what `npm audit` sees in each committed lockfile.
+  #
+  # This job exists because nothing else here could notice a vulnerable
+  # dependency: the test, lint and contract jobs were all green while
+  # server/package-lock.json shipped proxy-addr 2.0.7 (GHSA-jqcg-44mw-7w3h,
+  # critical — the component that derives the client IP the login rate
+  # limiter keys on). The lockfile is what `npm ci` installs on every
+  # deploy, so the lockfile is what has to be audited.
+  #
+  # NON-BLOCKING today, exactly like client-lint: the client tree still
+  # carries one high advisory that can only be cleared by replacing
+  # face-api.js (tracked in #468), and a permanently red check trains
+  # everyone to ignore CI. Flip it to blocking when both trees are clean.
+  #
+  # No `npm ci` here on purpose — `npm audit` reads the lockfile, so the job
+  # stays fast and cannot be affected by an install failure.
+  dependency-audit:
+    name: Dependency audit (${{ matrix.package }})
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    strategy:
+      fail-fast: false
+      matrix:
+        package: [client, server]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+      - name: Audit the committed lockfile
+        run: npm audit --audit-level=high --omit=dev
+        working-directory: ${{ matrix.package }}
