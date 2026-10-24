@@ -75,10 +75,38 @@ describe('check-node-version.js', () => {
     expect(out).toBe(read('.nvmrc').trim());
   });
 
-  it('accepts the running runtime when it is at or above the floor', () => {
-    const result = execFileSync('node', [checkerPath], { encoding: 'utf8' });
-    expect(result).toContain('[runtime]');
-    expect(result).toContain(process.versions.node);
+  it('decides correctly for whatever runtime is running', () => {
+    // The runner may be below the floor (CI on an older Node), so the test
+    // asserts the checker's decision, not that the runtime happens to be
+    // patched. A checker that always passed would fail this.
+    const { isSupported } = requireChecker();
+    const floor = read('.nvmrc').trim().replace(/^v/, '');
+    const supported = isSupported(process.versions.node, floor);
+
+    let status = 0;
+    try {
+      execFileSync('node', [checkerPath], { encoding: 'utf8', stdio: 'pipe' });
+    } catch (err) {
+      status = err.status;
+      expect(err.stderr).toContain('older than the required');
+    }
+    expect(status === 0).toBe(supported);
+  });
+
+  it('accepts a runtime at or above the floor', () => {
+    // A scratch copy with a floor the running runtime satisfies.
+    const scratch = fs.mkdtempSync(path.join(os.tmpdir(), 'tenali-runtime-'));
+    try {
+      fs.mkdirSync(path.join(scratch, 'server', 'deploy'), { recursive: true });
+      fs.copyFileSync(checkerPath, path.join(scratch, 'server', 'deploy', 'check-node-version.js'));
+      fs.writeFileSync(path.join(scratch, '.nvmrc'), '1.0.0\n');
+      const out = execFileSync('node', [path.join(scratch, 'server', 'deploy', 'check-node-version.js')], {
+        encoding: 'utf8',
+      });
+      expect(out).toContain('satisfies the required 1.0.0');
+    } finally {
+      fs.rmSync(scratch, { recursive: true, force: true });
+    }
   });
 
   it('rejects a runtime below the floor', () => {
