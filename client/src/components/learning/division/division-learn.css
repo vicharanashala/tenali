@@ -1,0 +1,1199 @@
+/* ==========================================================================
+   Division: Equal Sharing — Visual Learning Module Styles
+   Zero emojis, animated vector characters, and tactile drag-and-drop.
+   Adheres to Tenali design system variables & accessibility standards.
+   ========================================================================== */
+
+.division-learn-container {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 20px 16px 60px;
+  font-family: var(--font-body, 'Inter', system-ui, sans-serif);
+  color: var(--clr-text, #ede8e3);
+  box-sizing: border-box;
+}
+
+/* ── SVG Icon helpers ── */
+.division-icon-svg {
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+/* ── Header & Navigation ── */
+.division-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.division-back-btn {
+  padding: 8px 18px;
+  border-radius: var(--radius-sm, 10px);
+  border: 1px solid var(--clr-border, rgba(255, 245, 230, 0.18));
+  background: var(--clr-card, #2c2622);
+  color: var(--clr-text, #ede8e3);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: var(--transition, 180ms ease);
+}
+
+.division-back-btn:hover {
+  background: var(--clr-surface, #362f2a);
+  border-color: var(--clr-accent, #e8864a);
+}
+
+.division-progress-pills {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.division-pill {
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  border: 1px solid var(--clr-border, rgba(255, 245, 230, 0.18));
+  background: var(--clr-surface, #362f2a);
+  color: var(--clr-text-soft, #a89e94);
+  transition: var(--transition, 180ms ease);
+}
+
+.division-pill.active {
+  background: var(--clr-accent, #e8864a);
+  color: #fff;
+  border-color: var(--clr-accent, #e8864a);
+  box-shadow: 0 2px 8px rgba(232, 134, 74, 0.35);
+}
+
+.division-pill.completed {
+  background: var(--clr-correct-bg, rgba(92, 184, 122, 0.15));
+  color: var(--clr-correct, #5cb87a);
+  border-color: var(--clr-correct, #5cb87a);
+}
+
+/* ── Stage Cards ── */
+.division-card {
+  background: var(--clr-card, #2c2622);
+  border: 1.5px solid var(--clr-border, rgba(255, 245, 230, 0.18));
+  border-radius: var(--radius, 16px);
+  padding: 28px 24px;
+  box-shadow: var(--shadow-card, 0 10px 30px rgba(0, 0, 0, 0.2));
+  margin-bottom: 24px;
+  position: relative;
+}
+
+/* ── Hero Graphic on Goal Screen ── */
+.division-goal-hero-graphic {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.hero-candy-badge,
+.hero-choc-badge {
+  background: var(--clr-surface, #362f2a);
+  border: 2px solid var(--clr-accent, #e8864a);
+  border-radius: 20px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 16px rgba(232, 134, 74, 0.25);
+  animation: hero-choc-pulse 2s infinite ease-in-out;
+}
+
+@keyframes hero-choc-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+.hero-arrow {
+  color: var(--clr-accent, #e8864a);
+  animation: hero-arrow-bob 1.5s infinite ease-in-out;
+}
+
+@keyframes hero-arrow-bob {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(6px); }
+}
+
+.hero-friends-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* ── Visual Goal Banner ── */
+.division-goal-banner {
+  text-align: center;
+  margin-bottom: 24px;
+  padding: 14px 20px;
+  border-radius: var(--radius-sm, 10px);
+  background: var(--clr-surface, #362f2a);
+  border: 1px solid var(--clr-border, rgba(255, 245, 230, 0.18));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.division-goal-icons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--clr-accent, #e8864a);
+}
+
+.division-goal-text {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--clr-text, #ede8e3);
+  flex: 1 1 auto;
+}
+
+.division-drag-instruction-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(232, 134, 74, 0.18);
+  border: 1px solid var(--clr-accent, #e8864a);
+  color: var(--clr-accent, #e8864a);
+  padding: 4px 12px;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.demo-skip-btn {
+  background: transparent;
+  border: 1px solid var(--clr-accent, #e8864a);
+  color: var(--clr-accent, #e8864a);
+  padding: 6px 14px;
+  border-radius: var(--radius-sm, 8px);
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.demo-skip-btn:hover {
+  background: var(--clr-accent, #e8864a);
+  color: #fff;
+}
+
+/* ── Playground Board: Jar on Left, Friends on Right ── */
+.division-board {
+  display: flex;
+  gap: 28px;
+  align-items: stretch;
+  justify-content: center;
+  margin: 20px 0;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .division-board {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* ── Glass Candy Jar Container ── */
+.division-jar-container {
+  flex: 0 0 240px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  user-select: none;
+}
+
+.division-jar {
+  width: 224px;
+  min-height: 295px;
+  border-radius: 40px 40px 48px 48px;
+  background: radial-gradient(ellipse at 50% 25%, rgba(255, 255, 255, 0.15) 0%, rgba(186, 230, 253, 0.05) 55%, rgba(255, 255, 255, 0.02) 100%);
+  border: 3.5px solid rgba(186, 230, 253, 0.5);
+  box-shadow: 
+    inset 0 8px 20px rgba(255, 255, 255, 0.28),
+    inset 8px 0 16px rgba(255, 255, 255, 0.2),
+    inset -8px 0 16px rgba(147, 197, 253, 0.2),
+    inset 0 -10px 24px rgba(186, 230, 253, 0.25),
+    0 12px 32px rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 14px 18px;
+  position: relative;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.division-jar.interactive {
+  cursor: grab;
+}
+
+.division-jar.interactive:hover {
+  transform: translateY(-2px);
+  border-color: var(--clr-accent, #e8864a);
+  box-shadow: 
+    inset 0 8px 20px rgba(255, 255, 255, 0.35),
+    inset 8px 0 18px rgba(255, 255, 255, 0.25),
+    0 16px 36px rgba(232, 134, 74, 0.28);
+}
+
+.division-jar.selected-source {
+  border-color: var(--clr-accent, #e8864a);
+  box-shadow: 0 0 24px var(--clr-accent-soft, rgba(232, 134, 74, 0.6)), inset 0 0 16px rgba(232, 134, 74, 0.2);
+}
+
+.division-jar.drop-target-active {
+  border-color: #22c55e;
+  box-shadow: 0 0 26px rgba(34, 197, 94, 0.65), inset 0 0 16px rgba(34, 197, 94, 0.25);
+  transform: scale(1.03);
+}
+
+.division-jar.jar-remainder-glow {
+  border-color: #f59e0b;
+  box-shadow: 0 0 26px rgba(245, 158, 11, 0.65), inset 0 0 20px rgba(245, 158, 11, 0.25);
+}
+
+/* ── Realistic Wooden Lid with Knob ── */
+.division-jar-lid-wrap {
+  width: 196px;
+  margin-top: -36px;
+  margin-bottom: 6px;
+  display: flex;
+  justify-content: center;
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.45));
+  pointer-events: none;
+  z-index: 2;
+}
+
+.division-jar-lid-img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Glass neck ring beneath lid */
+.division-jar-neck {
+  width: 154px;
+  height: 8px;
+  border-radius: 12px;
+  background: linear-gradient(90deg, rgba(147, 197, 253, 0.2) 0%, rgba(255, 255, 255, 0.55) 35%, rgba(147, 197, 253, 0.25) 100%);
+  border: 1.5px solid rgba(186, 230, 253, 0.55);
+  margin-bottom: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+/* Glass specular sheen highlight */
+.division-jar-glass-shine {
+  position: absolute;
+  top: 38px;
+  left: 20px;
+  width: 14px;
+  height: 140px;
+  border-radius: 20px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.05) 100%);
+  pointer-events: none;
+  filter: blur(1.5px);
+  z-index: 1;
+}
+
+/* Glass base bottom rim */
+.division-jar-base-rim {
+  position: absolute;
+  bottom: 0;
+  left: 18px;
+  right: 18px;
+  height: 14px;
+  border-radius: 0 0 42px 42px;
+  background: linear-gradient(180deg, rgba(186, 230, 253, 0.12) 0%, rgba(147, 197, 253, 0.35) 100%);
+  border-top: 1.5px solid rgba(255, 255, 255, 0.35);
+  pointer-events: none;
+}
+
+/* Jar Count Badge */
+.division-jar-badge {
+  background: rgba(44, 38, 34, 0.88);
+  backdrop-filter: blur(8px);
+  border: 2px solid var(--clr-accent, #e8864a);
+  border-radius: 50px;
+  padding: 4px 16px;
+  font-weight: 800;
+  font-size: 1.15rem;
+  color: var(--clr-text, #ede8e3);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  z-index: 2;
+}
+
+.jar-empty-label {
+  font-size: 0.95rem;
+  color: var(--clr-text-soft, #a89e94);
+  opacity: 0.7;
+  font-weight: 600;
+  margin: auto;
+}
+
+.jar-drag-prompt {
+  margin-top: 8px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--clr-accent, #e8864a);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  z-index: 2;
+}
+
+/* ── 3D Glossy Candy Pieces ── */
+.division-candy-piece-wrap,
+.division-chocolate-piece-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.18s ease;
+  user-select: none;
+}
+
+.division-candy-piece-wrap.interactive:hover,
+.division-chocolate-piece-wrap.interactive:hover {
+  transform: scale(1.18) translateY(-2px);
+  filter: drop-shadow(0 6px 10px rgba(0,0,0,0.45));
+}
+
+.division-candy-piece-wrap.top-interactive-choc,
+.division-chocolate-piece-wrap.top-interactive-choc {
+  animation: top-candy-pulse 1.8s infinite ease-in-out;
+}
+
+@keyframes top-candy-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1) translateY(-2px); }
+}
+
+.division-candy-piece-wrap.leftover-glow,
+.division-chocolate-piece-wrap.leftover-glow {
+  filter: drop-shadow(0 0 10px #f59e0b);
+  animation: pulse-leftover 1.6s infinite ease-in-out;
+}
+
+@keyframes pulse-leftover {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+/* Candies pool */
+.division-candies-pool,
+.division-chocolates-pool {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px;
+  min-height: 150px;
+  align-content: flex-end;
+}
+
+/* ── Floating Ghost Element during Drag ── */
+.division-drag-ghost,
+.division-drag-ghost * {
+  pointer-events: none !important;
+  user-select: none !important;
+}
+
+.division-drag-ghost {
+  position: fixed;
+  z-index: 999999;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(0 10px 18px rgba(0,0,0,0.5));
+  will-change: left, top, transform;
+  pointer-events: none;
+}
+
+.division-fade-opacity {
+  animation: div-fade-only 0.25s ease-out;
+}
+
+@keyframes div-fade-only {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ── Friends Container ── */
+.division-friends-container {
+  flex: 1 1 400px;
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  align-items: stretch;
+  flex-wrap: wrap;
+}
+
+/* Individual Friend Card */
+.division-friend-card {
+  flex: 1 1 140px;
+  max-width: 220px;
+  min-width: 130px;
+  background: var(--clr-surface, #362f2a);
+  border: 2px solid var(--clr-border, rgba(255, 245, 230, 0.18));
+  border-radius: var(--radius, 16px);
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  user-select: none;
+}
+
+.division-friend-card.ready-to-receive {
+  cursor: pointer;
+  border-color: var(--clr-accent, #e8864a);
+}
+
+.division-friend-card.ready-to-receive:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px rgba(232, 134, 74, 0.25);
+  border-color: #f7a46c;
+}
+
+.division-friend-card.locked {
+  opacity: 0.65;
+  filter: grayscale(0.25);
+  cursor: not-allowed;
+  border-style: dashed;
+}
+
+/* Drag hover highlights */
+.division-friend-card.drag-target-valid {
+  transform: translateY(-6px) scale(1.05);
+  border-color: #22c55e !important;
+  box-shadow: 0 0 24px rgba(34, 197, 94, 0.55), 0 10px 20px rgba(0,0,0,0.3) !important;
+  background: rgba(34, 197, 94, 0.12) !important;
+}
+
+.division-friend-card.drag-target-invalid {
+  border-color: #ef4444 !important;
+  opacity: 0.6;
+  animation: shake-invalid 0.3s ease-in-out;
+}
+
+@keyframes shake-invalid {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
+.division-friend-card.highlight-target {
+  animation: bounce-target 0.8s infinite alternate ease-in-out;
+  border-color: var(--clr-accent, #e8864a);
+}
+
+@keyframes bounce-target {
+  from { transform: translateY(0); }
+  to { transform: translateY(-5px); }
+}
+
+/* ── Friend Animated Sprite Avatar ── */
+.division-avatar-wrapper {
+  position: relative;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.division-avatar-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.25s ease;
+}
+
+.friend-avatar-halo {
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.friend-avatar-halo.halo-happy {
+  background: rgba(34, 197, 94, 0.12);
+  border: 2px solid #22c55e;
+  box-shadow: 0 4px 14px rgba(34, 197, 94, 0.25);
+}
+
+.friend-avatar-halo.halo-sad {
+  background: rgba(239, 68, 68, 0.12);
+  border: 2px solid #ef4444;
+  box-shadow: 0 4px 14px rgba(239, 68, 68, 0.25);
+}
+
+.friend-avatar-halo.halo-neutral {
+  background: rgba(255, 255, 255, 0.04);
+  border: 2px solid var(--clr-border, rgba(255, 245, 230, 0.2));
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+
+.avatar-neutral {
+  transition: transform 0.25s ease;
+}
+
+.friend-sprite-face {
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.25));
+}
+
+
+.avatar-happy {
+  animation: friend-happy-cheer 2.4s infinite ease-in-out;
+}
+
+@keyframes friend-happy-cheer {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px) scale(1.02); }
+}
+
+.avatar-sad {
+  animation: friend-sad-droop 3s infinite ease-in-out;
+}
+
+@keyframes friend-sad-droop {
+  0%, 100% { transform: translateY(2px); }
+  50% { transform: translateY(4px); }
+}
+
+.tear-drop-anim {
+  animation: tear-drop-fall 2.2s infinite ease-in;
+}
+
+@keyframes tear-drop-fall {
+  0% { opacity: 0; transform: translateY(-2px) scale(0.6); }
+  35% { opacity: 0.9; }
+  85% { opacity: 0.9; transform: translateY(8px) scale(1); }
+  100% { opacity: 0; transform: translateY(12px) scale(0.5); }
+}
+
+.blush-circle {
+  animation: blush-pulse 2s infinite ease-in-out;
+}
+
+@keyframes blush-pulse {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+/* Emotion Pill Badge under Avatar */
+.division-expression-badge {
+  position: absolute;
+  bottom: -6px;
+  right: -6px;
+  padding: 3px 9px;
+  border-radius: 50px;
+  background: var(--clr-card, #2c2622);
+  border: 1.5px solid var(--clr-border, rgba(255, 245, 230, 0.18));
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  font-size: 0.74rem;
+  font-weight: 700;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 2;
+}
+
+.division-expression-badge.happy {
+  background: var(--clr-correct-bg, rgba(92, 184, 122, 0.2));
+  border-color: var(--clr-correct, #5cb87a);
+  color: var(--clr-correct, #5cb87a);
+}
+
+.division-expression-badge.sad {
+  background: var(--clr-wrong-bg, rgba(239, 68, 68, 0.2));
+  border-color: var(--clr-wrong, #ef4444);
+  color: var(--clr-wrong, #ef4444);
+}
+
+.division-friend-name {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--clr-text, #ede8e3);
+  margin-bottom: 4px;
+}
+
+.division-lock-indicator {
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 50px;
+  margin-bottom: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.division-lock-indicator.locked {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--clr-text-soft, #a89e94);
+}
+
+.division-lock-indicator.unlocked {
+  background: var(--clr-accent-soft, rgba(232, 134, 74, 0.2));
+  color: var(--clr-accent, #e8864a);
+}
+
+/* ── Ceramic Plate Component ── */
+.division-plate {
+  width: 100%;
+  min-height: 90px;
+  background: #f7f4ef;
+  border: 3px solid #d4cdc4;
+  border-radius: 18px;
+  padding: 8px 6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: inset 0 3px 8px rgba(0,0,0,0.15), 0 4px 8px rgba(0,0,0,0.18);
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.plate-surface {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 50px;
+}
+
+.plate-empty-hint {
+  font-size: 0.78rem;
+  color: #8c827a;
+  font-weight: 600;
+}
+
+.division-plate.plate-drop-zone {
+  border-color: #22c55e;
+  box-shadow: 0 0 16px rgba(34, 197, 94, 0.5), inset 0 0 10px rgba(34, 197, 94, 0.25);
+  background: #eefbf3;
+}
+
+.division-plate-counter {
+  font-weight: 800;
+  font-size: 1.15rem;
+  color: var(--clr-text, #ede8e3);
+  margin-top: 6px;
+}
+
+/* ── Controls Bar ── */
+.division-controls-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+
+.division-action-btn {
+  padding: 12px 28px;
+  border-radius: var(--radius-sm, 10px);
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.division-action-btn.primary {
+  background: var(--clr-accent, #e8864a);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(232, 134, 74, 0.35);
+}
+
+.division-action-btn.primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(232, 134, 74, 0.45);
+}
+
+.division-action-btn.secondary {
+  background: var(--clr-surface, #362f2a);
+  color: var(--clr-text, #ede8e3);
+  border: 1px solid var(--clr-border, rgba(255, 245, 230, 0.18));
+}
+
+.division-action-btn.secondary:hover {
+  background: var(--clr-card, #2c2622);
+}
+
+.division-action-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ── Warning Banner ── */
+.division-warning-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--clr-wrong, #ef4444);
+  font-weight: 700;
+  margin-top: 16px;
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid var(--clr-wrong, #ef4444);
+  padding: 10px 16px;
+  border-radius: var(--radius-sm, 10px);
+}
+
+/* ── Info Guidance Banner ── */
+.division-info-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #38bdf8;
+  font-weight: 700;
+  margin-top: 16px;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  padding: 10px 16px;
+  border-radius: var(--radius-sm, 10px);
+}
+
+/* ── Celebration Banner ── */
+.division-celebration {
+  text-align: center;
+  padding: 24px;
+  background: var(--clr-correct-bg, rgba(92, 184, 122, 0.15));
+  border: 2px solid var(--clr-correct, #5cb87a);
+  border-radius: var(--radius, 16px);
+  margin-top: 24px;
+  animation: pop-celebrate 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes pop-celebrate {
+  0% { transform: scale(0.9); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.division-celebration-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--clr-correct, #5cb87a);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* ── Visual Equation Transition View ── */
+.division-equation-box {
+  background: var(--clr-surface, #362f2a);
+  border: 2px solid var(--clr-border, rgba(255, 245, 230, 0.18));
+  border-radius: var(--radius, 16px);
+  padding: 24px 20px;
+  margin: 24px 0;
+  text-align: center;
+}
+
+.division-breakdown-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.breakdown-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.stat-num {
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.stat-num.dividend-color { color: #4f8dff; }
+.stat-num.divisor-color { color: #22c55e; }
+.stat-num.quotient-color { color: #f08c46; }
+.stat-num.remainder-color { color: #f59e0b; }
+
+.stat-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--clr-text-soft, #a89e94);
+  margin-top: 4px;
+}
+
+.breakdown-op {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--clr-text-soft, #a89e94);
+  align-self: flex-start;
+  margin-top: 2px;
+}
+
+/* ── Visual Equation Representation Row (Cards) ── */
+.division-visual-equation-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin: 16px 0 24px;
+}
+
+.division-equation-card {
+  background: var(--clr-card, #2c2622);
+  border: 2.5px solid var(--clr-border, rgba(255, 245, 230, 0.18));
+  border-radius: 20px;
+  padding: 16px 14px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 140px;
+  min-height: 195px;
+  box-sizing: border-box;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+}
+
+.division-equation-card:hover {
+  transform: translateY(-3px);
+}
+
+.total-jar-card {
+  border-color: #4f8dff;
+  box-shadow: 0 6px 20px rgba(79, 141, 255, 0.16);
+}
+
+.groups-kids-card {
+  border-color: #22c55e;
+  box-shadow: 0 6px 20px rgba(34, 197, 94, 0.16);
+  min-width: 154px;
+}
+
+.each-hand-card {
+  border-color: #f08c46;
+  box-shadow: 0 6px 20px rgba(240, 140, 70, 0.16);
+}
+
+.remainder-jar-card {
+  border-color: #f59e0b;
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.16);
+}
+
+.division-equation-op {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--clr-text-soft, #a89e94);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+
+/* ── Mini Jar Graphic inside Equation ── */
+.eq-mini-jar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 96px;
+  min-height: 104px;
+  position: relative;
+  user-select: none;
+}
+
+.eq-mini-jar-lid-wrap {
+  width: 86px;
+  margin-top: -12px;
+  margin-bottom: 2px;
+  display: flex;
+  justify-content: center;
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.35));
+  z-index: 2;
+  pointer-events: none;
+}
+
+.eq-mini-jar-lid-img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.eq-mini-jar-body {
+  width: 92px;
+  height: 80px;
+  border-radius: 18px 18px 24px 24px;
+  background: radial-gradient(ellipse at 50% 25%, rgba(255, 255, 255, 0.18) 0%, rgba(186, 230, 253, 0.08) 55%, rgba(255, 255, 255, 0.03) 100%);
+  border: 2.5px solid rgba(186, 230, 253, 0.45);
+  box-shadow:
+    inset 0 4px 10px rgba(255, 255, 255, 0.22),
+    inset 0 -6px 12px rgba(186, 230, 253, 0.2),
+    0 6px 16px rgba(0, 0, 0, 0.28);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 4px;
+  box-sizing: border-box;
+}
+
+.eq-mini-jar-body.remainder-glow {
+  border-color: #f59e0b;
+  box-shadow: inset 0 0 12px rgba(245, 158, 11, 0.3), 0 6px 16px rgba(245, 158, 11, 0.2);
+}
+
+.eq-mini-jar-shine {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 6px;
+  height: 38px;
+  border-radius: 8px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.05) 100%);
+  filter: blur(0.8px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.eq-mini-jar-candies {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  max-height: 64px;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* ── Kids Container inside Equation ── */
+.eq-kids-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 104px;
+  max-width: 140px;
+  box-sizing: border-box;
+}
+
+.eq-kid-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Hand Image inside Equation ── */
+.eq-hand-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 104px;
+  position: relative;
+  user-select: none;
+}
+
+.eq-hand-img {
+  width: 82px;
+  height: 98px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.35));
+  pointer-events: none;
+}
+
+.eq-hand-extra-badge {
+  position: absolute;
+  top: 4px;
+  right: -6px;
+  background: #f08c46;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* ── Card Badges & Sublabels ── */
+.eq-card-badge {
+  padding: 4px 16px;
+  border-radius: 12px;
+  font-size: 1.5rem;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 6px;
+  line-height: 1;
+}
+
+.eq-card-badge.dividend {
+  color: #4f8dff;
+  background: rgba(79, 141, 255, 0.14);
+}
+
+.eq-card-badge.divisor {
+  color: #22c55e;
+  background: rgba(34, 197, 94, 0.14);
+}
+
+.eq-card-badge.quotient {
+  color: #f08c46;
+  background: rgba(240, 140, 70, 0.14);
+}
+
+.eq-card-badge.remainder {
+  color: #f59e0b;
+  background: rgba(245, 158, 11, 0.14);
+}
+
+.division-badge-sublabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--clr-text-soft, #a89e94);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  margin-top: 5px;
+}
+
+.division-equation-notation {
+  margin-top: 18px;
+  font-size: 1.35rem;
+  color: var(--clr-text, #ede8e3);
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+/* ── Final Terminology Screen ── */
+.division-terminology-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.division-term-card {
+  background: var(--clr-surface, #362f2a);
+  border: 2px solid var(--clr-border, rgba(255, 245, 230, 0.18));
+  border-radius: var(--radius, 16px);
+  padding: 20px 16px;
+  text-align: center;
+}
+
+.division-term-icon {
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.division-term-name {
+  font-size: 1.25rem;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.division-term-desc {
+  font-size: 0.88rem;
+  color: var(--clr-text-soft, #a89e94);
+  line-height: 1.4;
+}
+
+/* ── Demo Gesture Guide ── */
+.demo-board-relative {
+  position: relative;
+}
+
+.demo-animated-drag-indicator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 100;
+}
+
+.demo-hand-floating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  animation: demo-hand-move 1.2s infinite ease-in-out;
+}
+
+@keyframes demo-hand-move {
+  0% { transform: translate(-80px, 0) scale(0.95); opacity: 0.6; }
+  50% { transform: translate(60px, -20px) scale(1.1); opacity: 1; }
+  100% { transform: translate(120px, 0) scale(1); opacity: 0; }
+}
+
+.demo-carried-choc {
+  filter: drop-shadow(0 8px 12px rgba(0,0,0,0.5));
+}
+
+/* ── Reduced Motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .division-chocolate-piece-wrap,
+  .division-friend-card,
+  .division-expression-badge,
+  .division-jar,
+  .division-celebration,
+  .avatar-happy,
+  .avatar-sad,
+  .tear-drop-anim,
+  .blush-circle,
+  .demo-hand-floating {
+    animation: none !important;
+    transition: none !important;
+  }
+}

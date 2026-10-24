@@ -97,6 +97,8 @@ Learning JSON → learnContent.js → Learning Page → Interactive Components
 - [🌟 What is Tenali?](#-what-is-tenali)
 - [📊 At a Glance](#-at-a-glance)
 - [🎯 User Workflow](#-user-workflow)
+- [🗺️ Repository Navigation Map](docs/map.md)
+- [🤖 Multi-Agent Governance (AGENTS.md)](AGENTS.md)
 
 </td>
 <td width="33%" valign="top">
@@ -105,6 +107,7 @@ Learning JSON → learnContent.js → Learning Page → Interactive Components
 - [🚀 Features in Depth](#-features-in-depth)
 - [🛠️ The Puzzle Types](#-the-puzzle-types)
 - [🏗️ Architecture](#-architecture)
+- [🎯 Pedagogical Problem Statements](docs/specs/problem-statements.md)
 
 </td>
 <td width="33%" valign="top">
@@ -112,7 +115,8 @@ Learning JSON → learnContent.js → Learning Page → Interactive Components
 **🤝 Community**
 - [⚙️ Quick Start](#-quick-start)
 - [🧩 Add a Puzzle](#-add-a-new-puzzle)
-- [📝 Contributor Onboarding](#-contributor-onboarding-mandatory)
+- [📝 Contributor Onboarding](docs/contributing/orientation.md)
+- [📋 Two-Stage RFC Workflow](docs/contributing/rfc-process.md)
 - [🏆 Contributors → CONTRIBUTORS.md](CONTRIBUTORS.md)
 
 </td>
@@ -125,7 +129,7 @@ Learning JSON → learnContent.js → Learning Page → Interactive Components
 
 Tenali (named after the legendary **Tenali Raman** — the witty Indian scholar who outwitted entire courts with logic) is an **adaptive math learning platform** featuring algorithmically-generated puzzle types, real-time multiplayer battles, and step-by-step solutions for every problem. Every question is generated on the fly — there is no question database — so practice is infinite and never repeats. Difficulty adapts to each learner in real time.
 
-There isn't one canonical "puzzle count" — different parts of the codebase group content differently, and that's worth naming instead of collapsing into a single number: the server exposes **93 distinct `*-api` route pairs** (the real unit of "a puzzle type"), grouped under **69 topic areas** in the `/graph` prerequisite map, and the home-screen tile registry (`client/src/features/tiles.js`) lists **101 tiles**, because several route pairs surface as more than one tile (e.g. an MCQ "gym" drill and a full-form drill on the same topic, via `foldInto`). Use whichever number matches what you're actually counting.
+There isn't one canonical "puzzle count" — different parts of the codebase group content differently, and that's worth naming instead of collapsing into a single number: the server exposes **93 distinct `*-api` route pairs** (the real unit of "a puzzle type"), grouped under **69 topic areas** in the `/graph` prerequisite map, and the home-screen tile registry (`client/src/features/tiles.js`) lists **98 active tiles**, because several route pairs surface as more than one tile (e.g. an MCQ "gym" drill and a full-form drill on the same topic, via `foldInto`). Use whichever number matches what you're actually counting.
 
 It is built to run on a single VPS — `tenali.fun` — with one Node process serving the React app, the puzzle APIs, the JWT auth, the Socket.IO Battle Arena, and the multi-language code playground.
 
@@ -792,10 +796,12 @@ _Live data — last regenerated 2026-10-18 · auto-refreshed by [`github-actions
 > ⚠️ **You are reading the README of [`vicharanashala/tenali`](https://github.com/vicharanashala/tenali) — the canonical upstream repo, where all PRs land.** If you found this file inside a personal fork (e.g. someone's `Tenali_123`), the same rule applies from there: fork `vicharanashala/tenali` and open your PR back against it — direct pushes to a personal fork aren't reviewed and won't ship.
 
 **Before you open a PR, four rules that get a PR rejected without review — full detail in [`CONTRIBUTING.md`](CONTRIBUTING.md):**
-1. It must close an issue already listed on the tracker — nothing self-invented.
-2. Its description must include `Closes #N`.
-3. It must be conflict-free against `main`.
+1. It must close an approved issue already listed on the tracker — nothing self-invented (`Closes #N`).
+2. It must target the `demo` branch (not `main`).
+3. It must be conflict-free against upstream `demo`.
 4. It must never render hardcoded/fallback data as if it were live production data ([FLN #449](https://github.com/vicharanashala/fln/issues/449) is the reference example of why).
+5. For major features, follow the [Two-Stage RFC Workflow](docs/contributing/rfc-process.md).
+6. Human acceptance testing is required: manually verify in the browser before submitting.
 
 **Step-by-step fork-first workflow (upstream → your fork → PR back):**
 
@@ -820,10 +826,10 @@ git remote -v
 #   upstream  https://github.com/vicharanashala/tenali.git (fetch)
 #   upstream  https://github.com/vicharanashala/tenali.git (push)
 
-# 5. Stay synced with upstream main
+# 5. Stay synced with upstream demo
 git fetch upstream
-git checkout main
-git merge upstream/main
+git checkout demo
+git merge upstream/demo
 
 # 6. Create a feature branch
 git checkout -b feat/amazing
@@ -836,13 +842,22 @@ git commit -m "feat: add amazing new puzzle"
 git push origin feat/amazing
 
 # 9. Open a Pull Request from <your-username>/tenali:feat/amazing
-#    → vicharanashala/tenali:main
+#    → vicharanashala/tenali:demo
 ```
 
 Every merged PR bumps your spot in the leaderboard 🏅
 
 > 💡 Already have a fork pointed at a different, older fork instead of `vicharanashala/tenali`? Re-target it:
 > `Settings → General → Redirect this repository to vicharanashala/tenali`.
+
+---
+
+### ⚠️ Developer Utilities & Script Safety
+- **`scripts/check_errors.sh`:** Quick syntax-check of `server/index.js` and production build test of `client/`.
+- **`scripts/setup_mongo.sh`:** macOS Homebrew MongoDB setup script.
+- **`scripts/test_supertables.sh`:** Specialized sliding-window simulation script for `supermarket/SuperTables1`.
+- **`archive/scripts/dev/git-push.sh`:** Archived legacy auto-commit script. **Prohibited for automated workflows**; use standard Git commits and verification gates against `demo`.
+- For the complete repository navigation and testing matrix, see [`docs/map.md`](docs/map.md).
 
 ---
 

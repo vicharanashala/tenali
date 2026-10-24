@@ -1,0 +1,30 @@
+{
+  "title": "Division: Fair Sharing & Equal Groups",
+  "blocks": [
+    {
+      "icon": "friends",
+      "title": "1. What is Division? Fair Sharing",
+      "content": "Division means **sharing a quantity equally** among groups or friends. When we share, everyone receives the exact same amount. If everyone has equal candies, all friends are happy!"
+    },
+    {
+      "icon": "candy",
+      "title": "2. Sharing One-by-One",
+      "content": "To share fairly, give **one object at a time** in rounds. Once everyone receives one, start the next round until the jar is empty or not enough items remain to give one to each person."
+    },
+    {
+      "icon": "sparkles",
+      "title": "3. What is a Remainder? Leftovers",
+      "content": "Sometimes objects cannot be divided equally without breaking them. The items left over in the container are called the **remainder**. Having leftovers is completely natural in sharing!"
+    },
+    {
+      "icon": "equation",
+      "title": "4. The Division Equation",
+      "content": "Every sharing activity builds a mathematical sentence:\n\n**Total = (Friends × Share per Friend) + Leftovers**\n\nFor example: **10 = 3 × 3 + 1**"
+    },
+    {
+      "icon": "graduation",
+      "title": "5. Formal Mathematical Terms",
+      "content": "• **Dividend:** The total quantity you start with (candies in the jar).\n• **Divisor:** The number of equal groups or friends receiving shares.\n• **Quotient:** The amount each friend gets.\n• **Remainder:** The leftover quantity that cannot be shared equally."
+    }
+  ]
+}
