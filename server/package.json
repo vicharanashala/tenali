@@ -9,6 +9,9 @@
     "test": "vitest run --reporter=verbose",
     "test:bkt": "node lib/bkt.test.js"
   },
+  "engines": {
+    "node": ">=24.22.1 <27"
+  },
   "dependencies": {
     "bcryptjs": "^3.0.3",
     "cors": "^2.8.5",
