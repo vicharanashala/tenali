@@ -125,6 +125,43 @@ describe('systemd units', () => {
   });
 });
 
+describe('runtime floor', () => {
+  const checker = path.join(deployDir, 'check-node-version.js');
+  const nvmrc = path.join(repoRoot, '.nvmrc');
+
+  it('ships the checker and the version it enforces', () => {
+    expect(existsSync(checker)).toBe(true);
+    expect(existsSync(nvmrc)).toBe(true);
+    expect(read(nvmrc).trim()).toMatch(/^v?\d+\.\d+\.\d+$/);
+  });
+
+  it('refuses to start a unit on an unpatched runtime', () => {
+    for (const app of ['main', 'root', 'matrixmystics']) {
+      const unit = read(path.join(deployDir, 'systemd', appTable[app].unit));
+      const checkout = `/home/tenali/${appTable[app].dir}`;
+      expect(unit).toContain(`ExecStartPre=/usr/bin/node ${checkout}/server/deploy/check-node-version.js`);
+    }
+  });
+
+  it('checks the runtime before the deploy script installs anything', () => {
+    expect(scriptSource).toContain('check_node_runtime');
+    const checkAt = scriptSource.indexOf('check_node_runtime\n\n  log "$app: installing client dependencies"');
+    expect(checkAt).toBeGreaterThan(-1);
+    const installAt = scriptSource.indexOf('npm --prefix "$dir/client" ci');
+    expect(checkAt).toBeLessThan(installAt);
+  });
+
+  it('checks the binary the services actually exec', () => {
+    expect(scriptSource).toContain('TENALI_NODE_BIN:-/usr/bin/node');
+  });
+
+  it('can report the runtime that is running', () => {
+    expect(scriptSource).toContain('verify_runtime');
+    expect(scriptSource).toContain('running');
+    expect(scriptSource).toContain('required');
+  });
+});
+
 describe('deploy workflow', () => {
   const yaml = read(workflow);
 
