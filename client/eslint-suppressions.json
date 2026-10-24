@@ -1,19 +1,16 @@
 {
   "src/App.jsx": {
     "no-empty": {
-      "count": 152
+      "count": 148
     },
     "no-restricted-syntax": {
       "count": 1
-    },
-    "no-undef": {
-      "count": 40
     },
     "no-unexpected-multiline": {
       "count": 5
     },
     "no-unused-vars": {
-      "count": 213
+      "count": 209
     },
     "no-useless-escape": {
       "count": 4
@@ -41,12 +38,6 @@
     }
   },
   "src/BattleApp.jsx": {
-    "react-hooks/immutability": {
-      "count": 1
-    },
-    "react-hooks/preserve-manual-memoization": {
-      "count": 1
-    },
     "react-hooks/set-state-in-effect": {
       "count": 1
     }
