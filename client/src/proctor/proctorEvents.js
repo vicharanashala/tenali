@@ -9,6 +9,8 @@
 
 const API = import.meta.env?.VITE_API_BASE_URL || '';
 const STORAGE_KEY = 'tenali_proctor_pending_events'
+// Per-session secret returned by /api/proctor/start; the server requires it on event/end calls.
+const sessionKeys = new Map()
 const RETRY_DELAY_MS = 2000
 const REQUEST_TIMEOUT_MS = 5000
 
@@ -35,7 +37,7 @@ export async function reportProctorEvent({ sessionId, type, severity = 1, eviden
   const token = getToken();
   if (!sessionId) return null;
 
-  const body = { sessionId, type, severity, evidence, metadata, transcript, sessionStatus };
+  const body = { sessionId, type, severity, evidence, metadata, transcript, sessionStatus, sessionKey: sessionKeys.get(String(sessionId)) };
 
   const headers = { 'Content-Type': 'application/json' };
   if (token) headers['Authorization'] = `Bearer ${token}`;
@@ -107,7 +109,10 @@ export async function startProctorSession({ quizType, settings, consentGiven }) 
       signal: controller.signal,
     });
     clearTimeout(timeout)
-    return r.ok ? await r.json() : null;
+    if (!r.ok) return null
+    const data = await r.json()
+    if (data?.sessionId && data?.sessionKey) sessionKeys.set(String(data.sessionId), data.sessionKey)
+    return data
   } catch { return null }
 }
 
@@ -122,7 +127,7 @@ export async function endProctorSession(sessionId) {
     const r = await fetch(`${API}/api/proctor/end`, {
       method: 'POST',
       headers,
-      body: JSON.stringify({ sessionId }),
+      body: JSON.stringify({ sessionId, sessionKey: sessionKeys.get(String(sessionId)) }),
       signal: controller.signal,
     });
     clearTimeout(timeout)

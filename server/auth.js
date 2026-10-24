@@ -331,6 +331,18 @@ function requireAuth(req, res, next) {
   }
 }
 
+// Like requireAuth, but never rejects: sets req.user when a valid token is sent, else leaves it unset.
+function optionalAuth(req, res, next) {
+  const m = /^Bearer\s+(.+)$/i.exec(req.get('authorization') || '');
+  if (m) {
+    try {
+      const payload = jwt.verify(m[1], JWT_SECRET);
+      req.user = { id: payload.sub, username: payload.username, role: payload.role || 'user' };
+    } catch (_e) { /* invalid token: treat as logged out */ }
+  }
+  next();
+}
+
 function requireAdmin(req, res, next) {
   if (!req.user || req.user.role !== 'admin') return res.status(403).json({ error: 'admin access required' });
   next();
@@ -369,4 +381,4 @@ router.get('/me', requireAuth, (req, res) => {
   res.json({ user: req.user });
 });
 
-module.exports = { connectMongo, seedUsers, router, requireAuth, requireAdmin, JWT_SECRET, User, Progress, ContrastProgress, StudentAttemptLog, UserStats, UserMilestone, UserTopicProgress, UserCollectionProgress };
+module.exports = { connectMongo, seedUsers, router, requireAuth, requireAdmin, optionalAuth, JWT_SECRET, User, Progress, ContrastProgress, StudentAttemptLog, UserStats, UserMilestone, UserTopicProgress, UserCollectionProgress };

@@ -20,6 +20,7 @@ const ProctorSessionSchema = new mongoose.Schema({
   status:     { type: String, enum: ['active', 'completed', 'ejected'], default: 'active' },
   totalPenalty: { type: Number, default: 0 },
   consentGiven: { type: Boolean, default: false },
+  sessionKey:   { type: String, select: false }, // secret returned only to the client that started the session
   settings: {
     webcam:           { type: Boolean, default: false },
     faceDetection:    { type: Boolean, default: false },
