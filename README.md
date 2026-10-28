@@ -435,7 +435,7 @@ JWT auth with **fail-fast** in production, `express-rate-limit`, CORS allowlist,
 | 76 | Congruence | `/congruence-api` |
 | 77 | Similarity | `/similarity-api` |
 | 78 | Visual Math | `/visual-math-api` |
-| 79 | Conceptual | `/concept-api` |
+| 79 | Conceptual | `/conceptual-api` |
 | 80 | Vocabulary (7,662 words) | `/vocab-api` |
 | 81 | GK (991 questions) | `/gk-api` |
 | 82 | Tatsavit | `/tatsavit-api` |
