@@ -1,0 +1,26 @@
+[Unit]
+Description=Tenali root app (domain root) — branch tenali-root, port 4003
+After=network.target
+StartLimitIntervalSec=60
+StartLimitBurst=5
+
+[Service]
+Type=simple
+User=tenali
+Group=tenali
+WorkingDirectory=/home/tenali/tenali-root
+ExecStart=/usr/bin/node /home/tenali/tenali-root/server/index.js
+Restart=always
+RestartSec=5
+KillSignal=SIGTERM
+TimeoutStopSec=20
+Environment=NODE_ENV=production
+Environment=PORT=4003
+Environment=SUBPATH_REDIRECT=/
+EnvironmentFile=-/home/tenali/tenali-root/.env
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=tenali-root
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,26 @@
+[Unit]
+Description=Tenali Matrix Mystics app — branch matrix-mystics, port 4004
+After=network.target
+StartLimitIntervalSec=60
+StartLimitBurst=5
+
+[Service]
+Type=simple
+User=tenali
+Group=tenali
+WorkingDirectory=/home/tenali/tenali-matrixmystics
+ExecStart=/usr/bin/node /home/tenali/tenali-matrixmystics/server/index.js
+Restart=always
+RestartSec=5
+KillSignal=SIGTERM
+TimeoutStopSec=20
+Environment=NODE_ENV=production
+Environment=PORT=4004
+Environment=SUBPATH_REDIRECT=/
+EnvironmentFile=-/home/tenali/tenali-matrixmystics/.env
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=tenali-matrixmystics
+
+[Install]
+WantedBy=multi-user.target
