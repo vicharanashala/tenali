@@ -8,7 +8,7 @@
  * Spec: D:\vins-phase-2\tenali-docs-backup\FEATURE_MONSTERS.md v0.2 §4.
  *
  * API surface (all sync, all idempotent, all never-throw):
- *   - load()                    -> state
+ *   - load({ persist })         -> state (persist: false never writes)
  *   - save(state)               -> boolean (true on persisted, false on in-memory)
  *   - append(entry)             -> boolean
  *   - isMonsterSeen(id)         -> boolean
@@ -117,9 +117,13 @@ function migrate(parsedState) {
 /**
  * Load the current monster log state. Never throws.
  * Returns a state object with at least { version, log, cures, seenMonsterIds }.
+ *
+ * Pass { persist: false } to read without any side effect (no first-run
+ * write of an empty state), e.g. when called during a React render.
  */
-export function load() {
+export function load({ persist = true } = {}) {
   if (!_lsAvailable) {
+    if (!persist) return _inMemoryState ?? emptyState();
     if (_inMemoryState == null) _inMemoryState = emptyState();
     return _inMemoryState;
   }
@@ -127,7 +131,7 @@ export function load() {
   if (parsed == null) {
     const fresh = emptyState();
     // Persist the empty state so subsequent reads are fast. Best-effort.
-    writeToLocalStorage(fresh);
+    if (persist) writeToLocalStorage(fresh);
     return fresh;
   }
   return migrate(parsed);
