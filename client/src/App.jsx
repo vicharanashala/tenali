@@ -182,6 +182,36 @@ const stripBase = (pn) => {
   return x || '/';
 };
 
+// Pretty URLs (#246): a bare /<mode> path is sent to the long-standing
+// /?mode=<mode> URL, so everything after that (URL sync, Back/Forward)
+// behaves exactly as it does for ?mode= links. replace() keeps the pretty
+// URL out of history, so Back does not land on it again.
+function RedirectTo({ href }) {
+  useEffect(() => {
+    window.location.replace(href);
+  }, [href]);
+  return null;
+}
+
+// Shown for a path that is neither a page nor a mode, instead of silently
+// rendering the home grid as if the URL had worked.
+function PageNotFound({ pathname }) {
+  return (
+    <div className="app-shell">
+      <div className="card" style={{ textAlign: 'center' }}>
+        <h1 style={{ marginTop: 0 }}>Page not found</h1>
+        <p style={{ color: 'var(--clr-text-soft)' }}>
+          There is no Tenali page at <code>{pathname}</code>.
+        </p>
+        <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap', marginTop: '20px' }}>
+          <button type="button" onClick={() => { window.location.href = withBase('/?view=puzzles') }}>Browse all puzzles</button>
+          <button type="button" onClick={() => { window.location.href = withBase('/') }}>Go to the home page</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // Global fetch interceptor to automatically attach authorization header
 const originalFetch = window.fetch;
 window.fetch = function (url, options) {
@@ -45251,6 +45281,26 @@ function App() {
         </div>
       </div>
     )
+  }
+
+  // ========== ROUTING: PRETTY MODE URLS (#246) ==========
+  // Every page path returned near the top of App, so a path still unmatched
+  // here is either a mode (/trig opens Trigonometry) or not a Tenali page at
+  // all. Links that already carry ?mode= or ?view= keep their existing
+  // behaviour. This sits after the last hook in App, so it never changes how
+  // many hooks a render calls.
+  if (pathname !== '/' && pathname !== '/index.html') {
+    const params = new URLSearchParams(window.location.search)
+    if (!params.has('mode') && !params.has('view')) {
+      const segment = pathname.slice(1)
+      // stripBase lowercases the path; mode keys are matched the same way.
+      const modeKey = Object.keys(modeMap).find((k) => k.toLowerCase() === segment)
+      if (modeKey) {
+        params.set('mode', modeKey)
+        return <RedirectTo href={withBase(`/?${params.toString()}`)} />
+      }
+      return <PageNotFound pathname={pathname} />
+    }
   }
 
   // ========== LANDING PAGE VIEW (Default when mode === null and currentView === 'landing') ==========
