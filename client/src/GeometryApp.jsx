@@ -35,7 +35,7 @@ function QuizLayout({ title, onBack, children }) {
   return (
     <>
       <div className="header-row">
-        <button className="back-button" onClick={onBack}>← Home</button>
+        <button className="back-button" onClick={onBack}>← Back</button>
       </div>
       <h1 style={{ fontSize: 'clamp(1.8rem, 3.8vw, 2.4rem)' }}>{title}</h1>
       {children}

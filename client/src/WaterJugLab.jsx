@@ -951,12 +951,7 @@ export default function WaterJugLab({ onBack }) {
   // Rendering setup screen
   if (phase === 'setup') {
     return (
-      <div style={{ minHeight: '100vh', background: 'var(--clr-bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px', fontFamily: 'Inter, sans-serif' }}>
-        <div style={{
-          background: 'var(--clr-card)', border: '1.5px solid var(--clr-border)', borderRadius: '28px',
-          boxShadow: '0 20px 40px rgba(0,0,0,.45)', padding: '28px 36px 36px', maxWidth: '720px', width: '100%',
-          textAlign: 'center', position: 'relative'
-        }}>
+      <div style={{ width: '100%', maxWidth: '720px', margin: '0 auto', textAlign: 'center', position: 'relative', padding: '16px 0', fontFamily: 'Inter, sans-serif' }}>
           {/* Header Row */}
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', marginBottom: '20px', width: '100%' }}>
             {setupTab !== 'play' ? (
@@ -972,7 +967,7 @@ export default function WaterJugLab({ onBack }) {
                 borderRadius: '8px', padding: '8px 16px', color: 'var(--clr-text-soft)',
                 fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer',
                 boxShadow: '0 2px 6px rgba(0,0,0,0.2)', display: 'inline-flex', alignItems: 'center', gap: '6px'
-              }}>← Home</button>
+              }}>← Back</button>
             )}
           </div>
 
@@ -1066,7 +1061,6 @@ export default function WaterJugLab({ onBack }) {
           {setupTab === 'theory' && (
             <TheoryAutoDemo />
           )}
-        </div>
       </div>
     );
   }
@@ -1074,12 +1068,7 @@ export default function WaterJugLab({ onBack }) {
   // Rendering finished results screen
   if (phase === 'finished') {
     return (
-      <div style={{ minHeight: '100vh', background: 'var(--clr-bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px', fontFamily: 'Inter, sans-serif' }}>
-        <div style={{
-          background: 'var(--clr-card)', border: '1.5px solid var(--clr-border)', borderRadius: '28px',
-          boxShadow: '0 20px 40px rgba(0,0,0,.45)', padding: '48px 40px', maxWidth: '720px', width: '100%',
-          textAlign: 'center', position: 'relative'
-        }}>
+      <div style={{ width: '100%', maxWidth: '720px', margin: '0 auto', textAlign: 'center', position: 'relative', padding: '16px 0', fontFamily: 'Inter, sans-serif' }}>
           <h1 style={{ fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 700, fontSize: '48px', color: 'var(--clr-text)', margin: '0 0 12px', lineHeight: 1.1 }}>
             🏆 Lab Session Completed
           </h1>
@@ -1137,7 +1126,6 @@ export default function WaterJugLab({ onBack }) {
               Exit Lab
             </button>
           </div>
-        </div>
       </div>
     );
   }

@@ -310,7 +310,7 @@ export default function WordSearchApp({ onBack }) {
     return (
       <>
         <div className="header-row">
-          <button className="back-button" onClick={onBack}>← Home</button>
+          <button className="back-button" onClick={onBack}>← Back</button>
         </div>
         <h1>Word Search Puzzles</h1>
         <p className="subtitle">Find all hidden words in the letters grid</p>

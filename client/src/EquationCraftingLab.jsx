@@ -374,12 +374,7 @@ export default function EquationCraftingLab({ onBack }) {
   return (
     <div className="alchemy-lab-container">
       {phase === 'setup' && (
-        <div style={{ minHeight: '100vh', background: 'var(--clr-bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px', fontFamily: 'Inter, sans-serif' }}>
-          <div style={{
-            background: 'var(--clr-card)', border: '1.5px solid var(--clr-border)', borderRadius: '28px',
-            boxShadow: '0 20px 40px rgba(0,0,0,.45)', padding: '32px 40px 48px', maxWidth: '720px', width: '100%',
-            textAlign: 'center'
-          }}>
+        <div style={{ width: '100%', maxWidth: '720px', margin: '0 auto', textAlign: 'center', position: 'relative', padding: '16px 0', fontFamily: 'Inter, sans-serif' }}>
             <div style={{ display: 'flex', justifyContent: 'flex-start', marginBottom: '16px' }}>
               <button onClick={onBack} style={{
                 background: 'var(--clr-surface)', border: '1px solid var(--clr-border)', borderRadius: '8px',
@@ -433,7 +428,6 @@ export default function EquationCraftingLab({ onBack }) {
             }}>
               Start Lab
             </button>
-          </div>
         </div>
       )}
 
@@ -556,12 +550,7 @@ export default function EquationCraftingLab({ onBack }) {
       )}
 
       {phase === 'finished' && (
-        <div style={{ minHeight: '100vh', background: 'var(--clr-bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px', fontFamily: 'Inter, sans-serif' }}>
-          <div style={{
-            background: 'var(--clr-card)', border: '1.5px solid var(--clr-border)', borderRadius: '28px',
-            boxShadow: '0 20px 40px rgba(0,0,0,.45)', padding: '48px 40px', maxWidth: '720px', width: '100%',
-            textAlign: 'center', position: 'relative'
-          }}>
+        <div style={{ width: '100%', maxWidth: '720px', margin: '0 auto', textAlign: 'center', position: 'relative', padding: '16px 0', fontFamily: 'Inter, sans-serif' }}>
             <h1 style={{ fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 700, fontSize: '48px', color: 'var(--clr-text)', margin: '0 0 12px', lineHeight: 1.1 }}>
               🏆 Lab Session Completed
             </h1>
@@ -617,7 +606,6 @@ export default function EquationCraftingLab({ onBack }) {
                 Exit Lab
               </button>
             </div>
-          </div>
         </div>
       )}
     </div>

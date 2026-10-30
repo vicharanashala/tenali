@@ -232,9 +232,14 @@ const CheckIcon = () => (
   </svg>
 );
 
-export default function ContrastChallengeApp({ onBack }) {
-  const [phase, setPhase] = useState('list'); // list, activity
-  const [currentPair, setCurrentPair] = useState(null);
+export default function ContrastChallengeApp({ onBack, pairId: propPairId }) {
+  const [phase, setPhase] = useState(() => (propPairId ? 'activity' : 'list'));
+  const [currentPair, setCurrentPair] = useState(() => {
+    if (propPairId) {
+      return CONTRAST_PAIRS.find(p => p.id === propPairId) || null;
+    }
+    return null;
+  });
   const [progress, setProgress] = useState(loadProgress());
   const [, setUnlockedPairs] = useState(() => {
     try {
@@ -320,14 +325,20 @@ export default function ContrastChallengeApp({ onBack }) {
     }
   }, [phase]);
 
-  // Deep-link: start a specific pair if stored in localStorage
+  // Deep-link: start a specific pair if stored in localStorage or passed via prop
   useEffect(() => {
+    if (propPairId) {
+      fetchPairById(propPairId);
+      return;
+    }
     const startId = localStorage.getItem('tenali-start-contrast-id');
     if (startId) {
       localStorage.removeItem('tenali-start-contrast-id');
       fetchPairById(startId);
+    } else if (phase === 'list' && onBack) {
+      onBack();
     }
-  }, [fetchPairById]);
+  }, [propPairId, fetchPairById, phase, onBack]);
 
   // Mark a pair as completed and return to list
   const handlePairComplete = (pairId) => {
@@ -348,7 +359,11 @@ export default function ContrastChallengeApp({ onBack }) {
       syncContrastProgress(token);
     }
 
-    setPhase('list');
+    if (onBack) {
+      onBack();
+    } else {
+      setPhase('list');
+    }
   };
 
   // Mark a pair as completed without returning to the list phase (used when completing all questions)
@@ -376,7 +391,7 @@ export default function ContrastChallengeApp({ onBack }) {
     return (
       <>
         <div className="header-row">
-          <button className="back-button" onClick={onBack}>← Home</button>
+          <button className="back-button" onClick={onBack}>← Back</button>
         </div>
         <h1>Contrast Challenge</h1>
         <p className="subtitle">Distinguish similar concepts</p>
@@ -458,7 +473,7 @@ export default function ContrastChallengeApp({ onBack }) {
   if (currentPair?.id === 'area-perimeter' && phase === 'activity') {
     return (
       <AreaPerimeterChallenge
-        onBack={() => setPhase('list')}
+        onBack={onBack}
         onComplete={() => handlePairComplete('area-perimeter')}
         onMarkComplete={() => handleMarkComplete('area-perimeter')}
       />
@@ -469,7 +484,7 @@ export default function ContrastChallengeApp({ onBack }) {
   if (currentPair?.id === 'radius-diameter' && phase === 'activity') {
     return (
       <RadiusDiameterChallenge
-        onBack={() => setPhase('list')}
+        onBack={onBack}
         onComplete={() => handlePairComplete('radius-diameter')}
         onMarkComplete={() => handleMarkComplete('radius-diameter')}
       />
@@ -480,7 +495,7 @@ export default function ContrastChallengeApp({ onBack }) {
   if (currentPair?.id === 'hcf-lcm' && phase === 'activity') {
     return (
       <HcfLcmChallenge
-        onBack={() => setPhase('list')}
+        onBack={onBack}
         onComplete={() => handlePairComplete('hcf-lcm')}
         onMarkComplete={() => handleMarkComplete('hcf-lcm')}
       />
@@ -491,7 +506,7 @@ export default function ContrastChallengeApp({ onBack }) {
   if (currentPair?.id === 'factors-multiples' && phase === 'activity') {
     return (
       <FactorsMultiplesChallenge
-        onBack={() => setPhase('list')}
+        onBack={onBack}
         onComplete={() => handlePairComplete('factors-multiples')}
         onMarkComplete={() => handleMarkComplete('factors-multiples')}
       />
@@ -502,7 +517,7 @@ export default function ContrastChallengeApp({ onBack }) {
   if (currentPair?.id === 'congruence-similarity' && phase === 'activity') {
     return (
       <CongruenceSimilarityChallenge
-        onBack={() => setPhase('list')}
+        onBack={onBack}
         onComplete={() => handlePairComplete('congruence-similarity')}
         onMarkComplete={() => handleMarkComplete('congruence-similarity')}
       />
@@ -513,7 +528,7 @@ export default function ContrastChallengeApp({ onBack }) {
   if (currentPair?.id === 'matrices-determinants' && phase === 'activity') {
     return (
       <MatricesDeterminantsChallenge
-        onBack={() => setPhase('list')}
+        onBack={onBack}
         onComplete={() => handlePairComplete('matrices-determinants')}
         onMarkComplete={() => handleMarkComplete('matrices-determinants')}
       />
@@ -524,7 +539,7 @@ export default function ContrastChallengeApp({ onBack }) {
   if (currentPair?.id === 'mean-median-mode' && phase === 'activity') {
     return (
       <MeanMedianModeChallenge
-        onBack={() => setPhase('list')}
+        onBack={onBack}
         onComplete={() => handlePairComplete('mean-median-mode')}
         onMarkComplete={() => handleMarkComplete('mean-median-mode')}
       />
@@ -535,7 +550,7 @@ export default function ContrastChallengeApp({ onBack }) {
   if (currentPair?.id === 'limits-differentiation' && phase === 'activity') {
     return (
       <LimitsDifferentiationChallenge
-        onBack={() => setPhase('list')}
+        onBack={onBack}
         onComplete={() => handlePairComplete('limits-differentiation')}
         onMarkComplete={() => handleMarkComplete('limits-differentiation')}
       />
@@ -546,7 +561,7 @@ export default function ContrastChallengeApp({ onBack }) {
   if (currentPair?.id === 'differentiation-integration' && phase === 'activity') {
     return (
       <DifferentiationIntegrationChallenge
-        onBack={() => setPhase('list')}
+        onBack={onBack}
         onComplete={() => handlePairComplete('differentiation-integration')}
         onMarkComplete={() => handleMarkComplete('differentiation-integration')}
       />
@@ -557,7 +572,7 @@ export default function ContrastChallengeApp({ onBack }) {
   if (currentPair?.id === 'decimals-fractions' && phase === 'activity') {
     return (
       <DecimalsFractionsChallenge
-        onBack={() => setPhase('list')}
+        onBack={onBack}
         onComplete={() => handlePairComplete('decimals-fractions')}
         onMarkComplete={() => handleMarkComplete('decimals-fractions')}
       />
@@ -568,7 +583,7 @@ export default function ContrastChallengeApp({ onBack }) {
   if (currentPair?.id === 'permutation-combination' && phase === 'activity') {
     return (
       <PermutationCombinationChallenge
-        onBack={() => setPhase('list')}
+        onBack={onBack}
         onComplete={() => handlePairComplete('permutation-combination')}
         onMarkComplete={() => handleMarkComplete('permutation-combination')}
       />
@@ -579,7 +594,7 @@ export default function ContrastChallengeApp({ onBack }) {
   if (currentPair?.id === 'prime-composite' && phase === 'activity') {
     return (
       <PrimeCompositeChallenge
-        onBack={() => setPhase('list')}
+        onBack={onBack}
         onComplete={() => handlePairComplete('prime-composite')}
         onMarkComplete={() => handleMarkComplete('prime-composite')}
       />
@@ -590,7 +605,7 @@ export default function ContrastChallengeApp({ onBack }) {
   if (currentPair?.id === 'trig-inverse-trig' && phase === 'activity') {
     return (
       <TrigInverseTrigChallenge
-        onBack={() => setPhase('list')}
+        onBack={onBack}
         onComplete={() => handlePairComplete('trig-inverse-trig')}
         onMarkComplete={() => handlePairComplete('trig-inverse-trig', true)}
       />
@@ -601,7 +616,7 @@ export default function ContrastChallengeApp({ onBack }) {
   if (currentPair?.id === 'linear-simultaneous' && phase === 'activity') {
     return (
       <LinearSimultaneousChallenge
-        onBack={() => setPhase('list')}
+        onBack={onBack}
         onComplete={() => handlePairComplete('linear-simultaneous')}
         onMarkComplete={() => handleMarkComplete('linear-simultaneous')}
       />
@@ -612,7 +627,7 @@ export default function ContrastChallengeApp({ onBack }) {
   if (currentPair?.id === 'interior-exterior' && phase === 'activity') {
     return (
       <InteriorExteriorChallenge
-        onBack={() => setPhase('list')}
+        onBack={onBack}
         onComplete={() => handlePairComplete('interior-exterior')}
         onMarkComplete={() => handleMarkComplete('interior-exterior')}
       />

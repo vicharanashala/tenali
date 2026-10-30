@@ -4,13 +4,13 @@
       "count": 146
     },
     "no-undef": {
-      "count": 40
+      "count": 34
     },
     "no-unexpected-multiline": {
       "count": 5
     },
     "no-unused-vars": {
-      "count": 210
+      "count": 209
     },
     "no-useless-escape": {
       "count": 4
@@ -22,7 +22,7 @@
       "count": 73
     },
     "react-hooks/purity": {
-      "count": 64
+      "count": 63
     },
     "react-hooks/refs": {
       "count": 78

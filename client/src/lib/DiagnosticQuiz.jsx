@@ -263,7 +263,7 @@ export default function DiagnosticScreen({ topicKey, onPass, onFail, onSkip, onN
     return (
       <>
         <div className="header-row">
-          <button className="back-button" onClick={() => onNavigate(topicKey)}>← Home</button>
+          <button className="back-button" onClick={() => onNavigate(topicKey)}>← Back</button>
         </div>
         
         <h1>{passed ? '🎉' : '📚'} Readiness Check Complete</h1>
@@ -317,7 +317,7 @@ export default function DiagnosticScreen({ topicKey, onPass, onFail, onSkip, onN
   return (
     <>
       <div className="header-row" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <button className="back-button" onClick={() => onNavigate(topicKey)}>← Home</button>
+        <button className="back-button" onClick={() => onNavigate(topicKey)}>← Back</button>
         <button className="score-pill" onClick={onSkip} style={{ cursor: 'pointer', background: 'var(--clr-surface)' }}>Skip check →</button>
       </div>
 

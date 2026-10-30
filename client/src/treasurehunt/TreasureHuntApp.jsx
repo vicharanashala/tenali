@@ -1,17 +1,10 @@
 import { useEffect, useState } from 'react'
-import {
-  Plus, X, Calculator, CircleDot, PieChart, Percent, Scale, ArrowLeftRight,
-  TrendingUp, Landmark, Receipt, LineChart, Gauge, FunctionSquare, Hash,
-  Brackets, Layers, Divide, Square, SquareRadical, Binary, Equal, Sigma,
-  Triangle, Infinity as InfinityIcon, Variable, BookOpen, Grid3x3, ArrowUpRight, Compass,
-  Shapes, Ruler, MapPin, RotateCw, Circle, Cone, Waves, Dice5, BarChart3,
-  ListOrdered, Sparkles, ChevronUp, Superscript, Activity, Box, GitBranch,
-  CircleDot as DotIcon,
-} from 'lucide-react'
+import { getTopicIcon, formatTopicName, TOPIC_TINTS } from './topicMetadata'
 import { getOrCreateAnonymousId } from '../anonId'
 import './treasurehunt.css'
 import EquationGate from './EquationGate'
 import LifeHearts from './LifeHearts'
+import worldsData from './worldsData.json'
 
 const API = import.meta.env.VITE_API_BASE_URL || ''
 
@@ -61,182 +54,41 @@ function getWorldProgress(worldId) {
   return all[worldId] || null
 }
 
-const TOPIC_LABELS = {
-  addition: 'Addition',
-  multiply: 'Multiplication',
-  basicarith: 'Basic Arithmetic',
-  decimals: 'Decimals',
-  fractionadd: 'Fraction Addition',
-  percent: 'Percentages',
-  ratio: 'Ratio',
-  rounding: 'Rounding',
-  profitloss: 'Profit & Loss',
-  banking: 'Banking',
-  gst: 'GST',
-  shares: 'Shares',
-  sdt: 'Speed, Distance & Time',
-  variation: 'Variation',
-  stdform: 'Standard Form',
-  bounds: 'Bounds',
-  hcflcm: 'HCF & LCM',
-  primefactor: 'Prime Factorization',
-  squaring: 'Squaring',
-  sqrt: 'Square Roots',
-  bases: 'Number Bases',
-  tatsavit: 'Tatsavit Drill',
-  lineareq: 'Linear Equations',
-  quadratic: 'Quadratics',
-  ineq: 'Inequalities',
-  indices: 'Indices',
-  qformula: 'Quadratic Formula',
-  funceval: 'Function Evaluation',
-  surds: 'Surds',
-  remfactor: 'Remainder & Factor Theorem',
-  binomial: 'Binomial Expansion',
-  complex: 'Complex Numbers',
-  polymul: 'Polynomial Multiplication',
-  polyfactor: 'Polynomial Factorization',
-  log: 'Logarithms',
-  integ: 'Integration',
-  limits: 'Limits',
-  diff: 'Differentiation',
-  diffeq: 'Differential Equations',
-  matrix: 'Matrices',
-  vectors: 'Vectors',
-  dotprod: 'Dot Product',
-  linprog: 'Linear Programming',
-  lineq: 'Line Equations',
-  angles: 'Angles',
-  triangles: 'Triangles',
-  congruence: 'Congruence',
-  pythag: 'Pythagoras',
-  polygons: 'Polygons',
-  similarity: 'Similarity',
-  heron: "Heron's Formula",
-  mensur: 'Mensuration',
-  coordgeom: 'Coordinate Geometry',
-  transform: 'Transformations',
-  circmeasure: 'Circle Measure',
-  conics: 'Conics',
-  circleth: 'Circle Theorems',
-  section: 'Section Formula',
-  trig: 'Trigonometry',
-  invtrig: 'Inverse Trigonometry',
-  bearings: 'Bearings',
-  prob: 'Probability',
-  stats: 'Statistics',
-  sequences: 'Sequences',
-  sets: 'Sets',
-  permcomb: 'Permutations & Combinations',
-}
-
-function formatTopicName(topic) {
-  if (!topic) return ''
-  if (TOPIC_LABELS[topic]) return TOPIC_LABELS[topic]
-  return topic.charAt(0).toUpperCase() + topic.slice(1)
-}
-
-const TOPIC_ICONS = {
-  addition: Plus,
-  multiply: X,
-  basicarith: Calculator,
-  decimals: CircleDot,
-  fractionadd: PieChart,
-  percent: Percent,
-  ratio: Scale,
-  rounding: ArrowLeftRight,
-  profitloss: TrendingUp,
-  banking: Landmark,
-  gst: Receipt,
-  shares: LineChart,
-  sdt: Gauge,
-  variation: FunctionSquare,
-  stdform: Hash,
-  bounds: Brackets,
-  hcflcm: Layers,
-  primefactor: Divide,
-  squaring: Square,
-  sqrt: SquareRadical,
-  bases: Binary,
-  tatsavit: Sparkles,
-  lineareq: Equal,
-  quadratic: Sigma,
-  ineq: ChevronUp,
-  indices: Superscript,
-  qformula: Sigma,
-  funceval: FunctionSquare,
-  surds: SquareRadical,
-  remfactor: Variable,
-  binomial: BookOpen,
-  complex: InfinityIcon,
-  polymul: X,
-  polyfactor: Divide,
-  log: Activity,
-  integ: Sigma,
-  limits: TrendingUp,
-  diff: GitBranch,
-  diffeq: Waves,
-  matrix: Grid3x3,
-  vectors: ArrowUpRight,
-  dotprod: DotIcon,
-  linprog: Grid3x3,
-  lineq: Equal,
-  angles: Compass,
-  triangles: Triangle,
-  congruence: Shapes,
-  pythag: Ruler,
-  polygons: Shapes,
-  similarity: Shapes,
-  heron: Ruler,
-  mensur: Box,
-  coordgeom: MapPin,
-  transform: RotateCw,
-  circmeasure: Circle,
-  conics: Cone,
-  circleth: Circle,
-  section: MapPin,
-  trig: Waves,
-  invtrig: RotateCw,
-  bearings: Compass,
-  prob: Dice5,
-  stats: BarChart3,
-  sequences: ListOrdered,
-  sets: Layers,
-  permcomb: Layers,
-}
-
-const TOPIC_TINTS = [
-  'th-topic-tint-1',
-  'th-topic-tint-2',
-  'th-topic-tint-3',
-  'th-topic-tint-4',
-  'th-topic-tint-5',
-  'th-topic-tint-6',
-]
-
-function getTopicIcon(topic) {
-  return TOPIC_ICONS[topic] || BookOpen
-}
-
-export default function TreasureHuntApp({ onBack }) {
+export default function TreasureHuntApp({ onBack, initialWorldId }) {
   // How-to-Play: show once per browser session
   const [showHowToPlay, setShowHowToPlay] = useState(() => {
     return !sessionStorage.getItem('th-how-to-play-seen')
   })
 
+  const normalizedInitialWorldId = initialWorldId ? initialWorldId.replace(/_/g, '-') : null
+  const initialWorld = normalizedInitialWorldId
+    ? (Array.isArray(worldsData) ? worldsData : []).find(w => w.id === normalizedInitialWorldId) || null
+    : null
+  const initialSaved = initialWorld ? getWorldProgress(initialWorld.id) : null
+  const hasSavedTiers = Boolean(initialSaved && initialSaved.topicTiers && initialSaved.hasPlayed)
+
   // ── Phase machine ──────────────────────────────────────────────────────────
   // Phases: 'worldSelect' → 'confidenceSelect' → 'diagnostic' → 'playing'
-  const [phase, setPhase] = useState('worldSelect')
+  const [phase, setPhase] = useState(() => (initialWorldId ? 'confidenceSelect' : 'worldSelect'))
 
   // World select state
-  const [worlds, setWorlds] = useState([])
+  const [worlds, setWorlds] = useState(() => (Array.isArray(worldsData) ? worldsData : []))
   const [loadError, setLoadError] = useState('')
-  const [loadingWorlds, setLoadingWorlds] = useState(true)
-  const [selectedWorldId, setSelectedWorldId] = useState(null)
-  const [selectedWorld, setSelectedWorld] = useState(null)
+  const [loadingWorlds, setLoadingWorlds] = useState(() => (!worldsData || worldsData.length === 0))
+  const [selectedWorldId, setSelectedWorldId] = useState(() => initialWorld?.id || null)
+  const [selectedWorld, setSelectedWorld] = useState(() => initialWorld || null)
 
   // Resume-or-fresh prompt state (Part H)
-  const [resumePrompt, setResumePrompt] = useState(null)  // { worldId, worldName, savedTiers }
+  const [resumePrompt, setResumePrompt] = useState(() => {
+    if (initialWorld && hasSavedTiers) {
+      return {
+        worldId: initialWorld.id,
+        worldName: initialWorld.name,
+        savedTiers: initialSaved.topicTiers,
+      }
+    }
+    return null
+  })  // { worldId, worldName, savedTiers }
 
   // World topics preview (shown after world card click)
   const [worldPreview, setWorldPreview] = useState(null)
@@ -283,7 +135,27 @@ export default function TreasureHuntApp({ onBack }) {
       })
       .then((data) => {
         if (cancelled) return
-        setWorlds(Array.isArray(data) ? data : [])
+        const list = Array.isArray(data) ? data : []
+        if (list.length > 0) setWorlds(list)
+        if (initialWorldId) {
+          const targetId = initialWorldId.replace(/_/g, '-')
+          const targetWorld = list.find((w) => w.id === targetId)
+          if (targetWorld) {
+            setSelectedWorldId(targetWorld.id)
+            setSelectedWorld(targetWorld)
+            const saved = getWorldProgress(targetWorld.id)
+            if (saved && saved.topicTiers && saved.hasPlayed) {
+              setResumePrompt({
+                worldId: targetWorld.id,
+                worldName: targetWorld.name,
+                savedTiers: saved.topicTiers,
+              })
+              setPhase('confidenceSelect')
+            } else {
+              setPhase('confidenceSelect')
+            }
+          }
+        }
       })
       .catch((e) => {
         if (cancelled) return
@@ -293,7 +165,7 @@ export default function TreasureHuntApp({ onBack }) {
         if (!cancelled) setLoadingWorlds(false)
       })
     return () => { cancelled = true }
-  }, [])
+  }, [initialWorldId])
 
   // ── Part D: Handle world card click ────────────────────────────────────────
   const handleWorldClick = (world) => {
@@ -544,6 +416,10 @@ export default function TreasureHuntApp({ onBack }) {
     setActiveGateCell(null)
   }
   const handleBackToWorlds = () => {
+    if (initialWorldId) {
+      onBack()
+      return
+    }
     setGameEnd(null)
     setSessionId(null)
     setSelectedWorldId(null)
@@ -637,9 +513,9 @@ export default function TreasureHuntApp({ onBack }) {
               <button
                 type="button"
                 className="th-htp-btn th-end-secondary-btn"
-                onClick={handleBackToWorlds}
+                onClick={initialWorldId ? onBack : handleBackToWorlds}
               >
-                Back to Worlds
+                {initialWorldId ? 'Back to Treasure Hunt' : 'Back to Worlds'}
               </button>
             </div>
           </>
@@ -666,9 +542,9 @@ export default function TreasureHuntApp({ onBack }) {
               <button
                 type="button"
                 className="th-htp-btn th-end-secondary-btn"
-                onClick={handleBackToWorlds}
+                onClick={initialWorldId ? onBack : handleBackToWorlds}
               >
-                Back to Worlds
+                {initialWorldId ? 'Back to Treasure Hunt' : 'Back to Worlds'}
               </button>
             </div>
           </>
@@ -683,6 +559,10 @@ export default function TreasureHuntApp({ onBack }) {
       return
     }
     if (phase === 'confidenceSelect') {
+      if (initialWorldId) {
+        onBack()
+        return
+      }
       setPhase('worldSelect')
       setSelectedWorldId(null)
       setSelectedWorld(null)
@@ -705,6 +585,10 @@ export default function TreasureHuntApp({ onBack }) {
       setSessionId(null)
       setActiveGateCell(null)
       setCells(emptyGrid(gridSize))
+      if (initialWorldId) {
+        onBack()
+        return
+      }
       setPhase('worldSelect')
       setSelectedWorldId(null)
       setSelectedWorld(null)
@@ -837,7 +721,7 @@ export default function TreasureHuntApp({ onBack }) {
         </div>
       )}
 
-      {/* Part H: Resume-or-fresh prompt (overlays worldSelect) */}
+      {/* Part H: Resume-or-fresh prompt */}
       {resumePrompt && (
         <div className="th-htp-overlay">
           <div className="th-htp-popup">
@@ -857,6 +741,21 @@ export default function TreasureHuntApp({ onBack }) {
               >
                 Start fresh
               </button>
+              <button
+                type="button"
+                className="th-htp-btn"
+                style={{ background: 'transparent', border: '1px solid var(--clr-border)', color: 'var(--clr-text-soft)' }}
+                onClick={() => {
+                  setResumePrompt(null)
+                  if (initialWorldId) {
+                    onBack()
+                  } else {
+                    setPhase('worldSelect')
+                  }
+                }}
+              >
+                Cancel
+              </button>
             </div>
           </div>
         </div>
@@ -865,11 +764,21 @@ export default function TreasureHuntApp({ onBack }) {
       <div className="header-row">
         <button type="button" className="back-button" onClick={handleBack}>← Back</button>
       </div>
-      <h1>Treasure Hunt</h1>
-      <p className="subtitle">Solve &amp; seek on a treasure grid</p>
+      <h1>{selectedWorld ? selectedWorld.name : 'Treasure Hunt'}</h1>
+      <p className="subtitle">
+        {selectedWorld
+          ? `Treasure Hunt — ${selectedWorld.name}`
+          : 'Solve & seek on a treasure grid'}
+      </p>
+
+      {initialWorldId && !selectedWorld && (
+        <div className="welcome-box">
+          <p className="th-loading">Loading world…</p>
+        </div>
+      )}
 
       {/* ═══ PHASE: worldSelect ═══ */}
-      {phase === 'worldSelect' && (
+      {phase === 'worldSelect' && !initialWorldId && (
         <div className="welcome-box">
           {loadingWorlds && <p className="th-loading">Loading worlds…</p>}
           {loadError && <p className="th-error">{loadError}</p>}

@@ -82,6 +82,12 @@ describe('progress feature utilities', () => {
       const second = addCompletedTopic('addition', 'medium');
       expect(second.filter((k) => k === 'addition-medium').length).toBe(1);
     });
+
+    it('returns identical array reference if topic is already completed (idempotency guard)', () => {
+      const first = addCompletedTopic('addition', 'easy');
+      const second = addCompletedTopic('addition', 'easy');
+      expect(first === second).toBe(true);
+    });
   });
 
   describe('reconcileProgress', () => {
@@ -90,7 +96,7 @@ describe('progress feature utilities', () => {
         completedTopics: ['addition-started', 'addition-easy', 'addition-medium', 'addition-hard'],
       });
 
-      // Simulates stale closure from tenaliIncrementSolved sending outdated array
+      // Simulates stale closure sending outdated array
       const staleIncoming = {
         completedTopics: ['addition-started', 'addition-easy', 'addition-medium'],
       };
@@ -103,25 +109,25 @@ describe('progress feature utilities', () => {
       expect(reloaded).toContain('addition-hard');
     });
 
-    it('unifies goldMastery and monotonically preserves numbers', () => {
+    it('unifies goldMastery and accepts authoritative server counters including streak resets', () => {
       saveLocalProgress({
         goldMastery: ['basicarith'],
         coins: 50,
         totalSolved: 10,
-        streak: 3,
+        streak: 7,
       });
 
       const reconciled = reconcileProgress({
         goldMastery: ['addition'],
-        coins: 20, // lower
-        totalSolved: 15, // higher
-        streak: 2, // lower
+        coins: 20,
+        totalSolved: 15,
+        streak: 0, // Server reports streak reset (e.g. missed day)
       });
 
       expect(reconciled.goldMastery).toEqual(expect.arrayContaining(['basicarith', 'addition']));
-      expect(reconciled.coins).toBe(50);
+      expect(reconciled.coins).toBe(20);
       expect(reconciled.totalSolved).toBe(15);
-      expect(reconciled.streak).toBe(3);
+      expect(reconciled.streak).toBe(0); // Lower streak must be accepted!
     });
   });
 });

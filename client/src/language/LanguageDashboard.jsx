@@ -52,7 +52,7 @@ export default function LanguageDashboard({ onBack }) {
   return (
     <>
       <div className="header-row">
-        <button className="back-button" onClick={onBack}>← Home</button>
+        <button className="back-button" onClick={onBack}>← Back</button>
       </div>
       <h1>Language Puzzles</h1>
       <p className="subtitle">Enhance your vocabulary, spelling, and grammar skills</p>

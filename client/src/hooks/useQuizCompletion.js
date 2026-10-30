@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 /**
  * Evaluates whether a quiz score achieves the required passing accuracy (default 80%)
@@ -38,7 +38,8 @@ export function recordQuizCompletion({
 
 /**
  * Reusable React hook for quiz components to evaluate and persist topic completion.
- * Properly tracks all dependencies to prevent stale closure bugs when changing difficulty.
+ * Properly tracks all dependencies and uses a ref guard to ensure completion is
+ * recorded exactly once per finish cycle, preventing render loops.
  *
  * @param {Object} params
  * @param {string} params.topicKey - Topic identifier (e.g. 'addition')
@@ -60,9 +61,16 @@ export function useQuizCompletion({
   markTopicCompleted,
   passThreshold = 0.8,
 }) {
+  const hasReportedRef = useRef(false);
+
   useEffect(() => {
-    if (!finished) return;
-    recordQuizCompletion({
+    if (!finished) {
+      hasReportedRef.current = false;
+      return;
+    }
+    if (hasReportedRef.current) return;
+
+    const recorded = recordQuizCompletion({
       topicKey,
       difficulty,
       isAdaptive,
@@ -71,5 +79,8 @@ export function useQuizCompletion({
       markTopicCompleted,
       passThreshold,
     });
+    if (recorded) {
+      hasReportedRef.current = true;
+    }
   }, [finished, score, totalQ, markTopicCompleted, isAdaptive, difficulty, topicKey, passThreshold]);
 }
