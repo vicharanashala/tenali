@@ -252,6 +252,7 @@ export default function Vachana({ onBack }) {
     const onPopState = () => setActiveTab(getTabFromUrl());
     window.addEventListener('popstate', onPopState);
     return () => window.removeEventListener('popstate', onPopState);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const ExerciseComponent = activeTab ? EXERCISE_COMPONENTS[activeTab] : null;
