@@ -19,9 +19,73 @@
 ---
 
 <!-- live-changelog:start -->
-### 📊 Total: 1169 commits · 92 active days · 48 unique authors
+### 📊 Total: 1189 commits · 94 active days · 58 unique authors
 
 > **📖 How to read this:** Each entry shows a clickable SHA, the author, and a one-line subject. Sub-bullets show the **exact files touched** with per-file `+additions −deletions`, the **total line stats**, and (when present) the **commit body** explaining what & why.
+
+#### 📅 2026-10-22  <sub>(2 commits)</sub>
+
+- 🐛 [`02a90efb`](https://github.com/vicharanashala/tenali/commit/02a90efb47968a056f4ac5a718334dcd10f30fd4) — **jgupta05072003-code** — stop Multiplication and Twin Hunt throwing on every question (#459)
+    - 📁 **1 file:** `client/src/App.jsx` `+18 −8`
+    - 📊 **`+18 −8`** · 1 file
+- 🐛 [`10b8fdd7`](https://github.com/vicharanashala/tenali/commit/10b8fdd796082fafa51812c2e50ebaeaf00736c8) — **jgupta05072003-code** — load graph-data.json relative to the app base URL (#458)
+    - 📁 **1 file:** `client/src/pathMapHelpers.js` `+2 −2`
+    - 📊 **`+2 −2`** · 1 file
+
+#### 📅 2026-10-19  <sub>(18 commits)</sub>
+
+- 📌 [`3406e6d2`](https://github.com/vicharanashala/tenali/commit/3406e6d2782a8c5ca2f18f8a72d43eb36da8acc6) — **Swati Jain** — Solved issue #182 Curiosity Mode UI breakage, missing Visual Riddle images, duplicate Vachana menu entry, and quiz UI breakdown (Column Addition & Addition) (#401)
+    - 📁 **2 files:** `client/src/App.css` `+157 −11`, `client/src/App.jsx` `+13 −2`
+    - 📊 **`+170 −13`** · 2 files
+- ♻️ [`d1dcab02`](https://github.com/vicharanashala/tenali/commit/d1dcab027b2d4da81c13db9c922ab196b9f86e61) — **Rhytam Biswas** — create apps/ and extract CoordGeomInteractiveApp (#235) (#426)
+    - 📁 **4 files:** `client/eslint-suppressions.json` `+1 −1`, `client/src/App.jsx` `+3 −257`, `client/src/apps/CoordGeomInteractiveApp.jsx` `+258 −0`, `client/src/apps/README.md` `+50 −0`
+    - 📊 **`+312 −258`** · 4 files
+- 🐛 [`c99a5065`](https://github.com/vicharanashala/tenali/commit/c99a5065db7d80387c477f58db44a2e3f34c3d78) — **Vedhiga** — use pushState for mode changes and handle popstate (fixes #245) (#425)
+    - 📁 **1 file:** `client/src/App.jsx` `+25 −1`
+    - 📊 **`+25 −1`** · 1 file
+- 🐛 [`00770fe5`](https://github.com/vicharanashala/tenali/commit/00770fe55791a669a60e1895f2b49eeabf0f84bc) — **25f2002654** — silence exhaustive-deps warning (#265) (#341)
+    - 📁 **1 file:** `client/src/WaterJugLab.jsx` `+4 −0`
+    - 📊 **`+4 −0`** · 1 file
+- 🐛 [`4a360530`](https://github.com/vicharanashala/tenali/commit/4a3605302439a9bff3023fc18187d70f229e93f4) — **25f2002654** — silence react-hooks/exhaustive-deps warning (#340)
+    - 📁 **1 file:** `client/src/PlaygroundApp.jsx` `+4 −0`
+    - 📊 **`+4 −0`** · 1 file
+- 📌 [`cfdb0529`](https://github.com/vicharanashala/tenali/commit/cfdb05298a09f48c688a65b3f5115f62dacad542) — **Anshika-o** — Fix/lint battleapp blank page crash (reset to lobby ) (#438)
+    - 📁 **1 file:** `client/src/BattleApp.jsx` `+20 −52`
+    - 📊 **`+20 −52`** · 1 file
+- 🐛 [`ec7c85bb`](https://github.com/vicharanashala/tenali/commit/ec7c85bbf912cc0d8714073979edb104a4efd828) — **V T Rushi Kannan** — resolve SchemaClassifier ESLint errors (#261) (#424)
+    - 📁 **2 files:** `client/eslint-suppressions.json` `+0 −5`, `client/src/vachana/exercises/SchemaClassifier.jsx` `+26 −14`
+    - 📊 **`+26 −19`** · 2 files
+- 🐛 [`6f17f5ad`](https://github.com/vicharanashala/tenali/commit/6f17f5adb872c1107e6fc6f6841f64105e354d94) — **V T Rushi Kannan** — resolve EquationToStory ESLint errors (#262) (#423)
+    - 📁 **2 files:** `client/eslint-suppressions.json` `+0 −8`, `client/src/vachana/exercises/EquationToStory.jsx` `+15 −6`
+    - 📊 **`+15 −14`** · 2 files
+- 🐛 [`dc9f17a5`](https://github.com/vicharanashala/tenali/commit/dc9f17a5c9ee621405b8b38343d128a4774fa092) — **Shreya S Salian** — add Vachana home-grid tile and remove duplicate hamburger entries (#436)
+    - 📁 **2 files:** `client/src/App.jsx` `+0 −12`, `client/src/features/tiles.js` `+1 −0`
+    - 📊 **`+1 −12`** · 2 files
+- 🐛 [`64a4d19c`](https://github.com/vicharanashala/tenali/commit/64a4d19c6ac63076515f282d8776bc86d2ce25aa) — **Sai Sowjanya Meka** — remove obsolete fetchInterceptor eslint suppression (#358)
+- ✨ [`63a9f900`](https://github.com/vicharanashala/tenali/commit/63a9f900ae2c4ee2218d5e5b3f250bff6901fec9) — **halima-parvin** — added change for the shelf (#342)
+    - 📁 **1 file:** `client/src/features/tiles.js` `+1 −0`
+    - 📊 **`+1 −0`** · 1 file
+- ✨ [`cc28e4b1`](https://github.com/vicharanashala/tenali/commit/cc28e4b1f2adce7fede0afae2d83b63f4b21251e) — **Shreya S Salian** — add Mensuration Lab tile under Shape & Space (#435)
+    - 📁 **1 file:** `client/src/features/tiles.js` `+1 −0`
+    - 📊 **`+1 −0`** · 1 file
+- 📝 [`fe764a10`](https://github.com/vicharanashala/tenali/commit/fe764a10431027cc7aad7fbaf8a89da57e48d200) — **Shreya S Salian** — fix contradictory puzzle counts in README (#434)
+    - 📁 **1 file:** `README.md` `+57 −55`
+    - 📊 **`+57 −55`** · 1 file
+- 🐛 [`ebb07518`](https://github.com/vicharanashala/tenali/commit/ebb0751833d252bedd0d5a000ae8acf4f88a6fb2) — **Sneha Jindal** — use consistent 2 d.p. rounding in answer checks (closes #179) (#396)
+    - 📁 **2 files:** `server/routes/geometry.js` `+1 −1`, `server/routes/misc.js` `+2 −2`
+    - 📊 **`+3 −3`** · 2 files
+- 🐛 [`aa79debf`](https://github.com/vicharanashala/tenali/commit/aa79debf49f409bfbe2973e30cd7aa26d467736f) — **Megana Kurugodu** — resolve issue 178 question generation bugs (#362)
+    - 📁 **7 files:** `server/index.js` `+2 −1`, `server/lib/noRepeat.js` `+34 −0`, `server/routes/__tests__/issue178_extra.test.js` `+64 −0`, `server/routes/__tests__/issue178_math_bugs.test.js` `+179 −0`, `server/routes/algebra.js` `+26 −15`, `server/routes/geometry.js` `+2 −1`, `server/routes/misc.js` `+41 −12`
+    - 📊 **`+348 −29`** · 7 files
+- 🧪 [`f45c6786`](https://github.com/vicharanashala/tenali/commit/f45c6786e57aa335ec419165a5e27bd75d305e74) — **Lakshit Verma** — add frontend testing infrastructure (#337)
+    - 📁 **8 files:** `.github/workflows/test.yml` `+21 −0`, `CONTRIBUTING.md` `+47 −0`, `README.md` `+10 −0`, `client/package-lock.json` `+510 −7`, `client/package.json` `+9 −2`, `client/src/lib/concept/conceptApi.test.js` `+150 −0`, `client/test/setup.js` `+15 −0`, `client/vitest.config.js` `+22 −10`
+    - 📊 **`+784 −19`** · 8 files
+- ♻️ [`35f902ac`](https://github.com/vicharanashala/tenali/commit/35f902ac26c249282afeadfa5f84b1fb08dcec75) — **Aadya Singh** — extract shared math helpers (#153)
+    - 📁 **15 files:** `server/index.js` `+12 −10`, `server/labRoutes.js` `+2 −2`, `server/lib/dailyWarmup.js` `+2 −6`, `server/lib/mathHelpers.js` `+95 −0`, `server/lib/sudoku.js` `+1 −1`, `server/routes/advanced.js` `+65 −68`, `server/routes/algebra.js` `+17 −34`, `server/routes/arithmetic.js` `+8 −8` *(+7 more in [`35f902ac`](https://github.com/vicharanashala/tenali/commit/35f902ac26c249282afeadfa5f84b1fb08dcec75))*
+    - 📊 **`+304 −262`** · 15 files
+- 🐛 [`891bd147`](https://github.com/vicharanashala/tenali/commit/891bd147a738555e47da42eb06553c25240b9866) — **V T Rushi Kannan** — resolve EquationCraftingLab lint errors (#263) (#369)
+    - 📁 **3 files:** `Ideas/ONBOARDING-VT-Rushi-Kannan.md` `+166 −0`, `client/eslint-suppressions.json` `+0 −11`, `client/src/EquationCraftingLab.jsx` `+33 −27`
+    - 📊 **`+199 −38`** · 3 files
 
 #### 📅 2026-10-16  <sub>(3 commits)</sub>
 

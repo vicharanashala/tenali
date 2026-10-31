@@ -10,6 +10,7 @@
 // See #199.
 
 export const TILES = [
+    { key: 'numbers-1-to-10', name: '🐰 Hopscotch Numbers', subtitle: 'Count dots & hop with Bunny (1 to 10)', color: 'blue', category: 'number-foundations' },
     { key: 'battle', name: '⚔️ Battle Arena', subtitle: 'Live fastest-finger duels', color: 'red', category: 'shelf' },
     { key: 'detective', name: '🔍 Detective Agency', subtitle: 'Solve math mysteries and crack cases!', color: 'indigo', category: 'shelf' },
     { key: 'addition', name: 'Addition', subtitle: '20-question addition practice', color: 'blue', category: 'number-foundations' },

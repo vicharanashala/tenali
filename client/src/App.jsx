@@ -167,6 +167,7 @@ import { getLearnContent } from './data/learnContent.js'
 import AnglesLearnPage from './components/learning/AnglesLearnPage'
 import GSTLearnPage from './components/learning/GSTLearnPage'
 import FractionsLearnPage from './components/learning/FractionsLearnPage'
+import Numbers1To10App from './apps/Numbers1To10App.jsx'
 
 // API base URL from environment variables (Vite)
 export const API = import.meta.env.VITE_API_BASE_URL || '';
@@ -44596,6 +44597,7 @@ function App() {
 
     'comic-addition': ComicAdditionApp,
     gk: GKApp,                    // General Knowledge
+    'numbers-1-to-10': Numbers1To10App, // Number Foundations 1 to 10
     addition: AdditionApp,         // Basic addition
     'column-addition': ColumnAdditionApp, // Column Addition with carries
     'column-multiplication': ColumnMultiplicationApp, // Column Multiplication with carries

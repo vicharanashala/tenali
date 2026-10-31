@@ -114,6 +114,23 @@ const apiLimiter = rateLimit({
 app.use('/api/auth/login', authLimiter);
 app.use('/api/', apiLimiter);
 
+// ─── Health ──────────────────────────────────────────────────────────────────
+// Liveness probe. `render.yaml` declares `healthCheckPath: /api/health`, so
+// this route has to exist and has to answer JSON — without it the request
+// falls through to the SPA catch-all and returns index.html with a 200,
+// which tells the orchestrator nothing about the API it thinks it checked.
+//
+// Deliberately does not touch MongoDB: a liveness probe that depends on the
+// database reports "down" exactly when the database is the thing that broke,
+// which is a different question from "is this process serving requests?".
+app.get('/api/health', (req, res) => {
+  res.json({
+    status: 'ok',
+    uptime: Math.floor(process.uptime()),
+    node: process.versions.node,
+  });
+});
+
 // Static file serving: Serve built React/Vue client (both root and sub-path mount)
 app.use(express.static(clientDistPath));
 if (SUBPATH_REDIRECT && SUBPATH_REDIRECT !== '/') {
@@ -1292,8 +1309,12 @@ app.post('/api/proctor/end', async (req, res) => {
   }
 });
 
-// Get proctor session details — public for dashboard view (no login)
-app.get('/api/proctor/session/:id', async (req, res) => {
+// Get proctor session details — admin only.
+// A session carries the student's username and id, and every event carries
+// base64 webcam images, audio and speech transcripts. Those must not be
+// readable by anyone who can reach the server, so this route requires an
+// admin token (VULN-01 in #457).
+app.get('/api/proctor/session/:id', auth.requireAuth, auth.requireAdmin, async (req, res) => {
   try {
     const session = await ProctorSession.findById(req.params.id);
     if (!session) return res.status(404).json({ error: 'session not found' });
@@ -1304,11 +1325,10 @@ app.get('/api/proctor/session/:id', async (req, res) => {
   }
 });
 
-// Get all proctor sessions — public for instructor dashboard view (no login)
-// The dashboard at /proctor is meant to be accessible to anyone monitoring the exam
+// Get all proctor sessions — admin only (see the note on /api/proctor/session/:id)
 app.get('/api/proctor/ping', (req, res) => { res.json({ ok: true }) });
 
-app.get('/api/proctor/sessions', async (req, res) => {
+app.get('/api/proctor/sessions', auth.requireAuth, auth.requireAdmin, async (req, res) => {
   try {
     const limit = Math.min(parseInt(req.query.limit, 10) || 100, 200)
     const sessions = await ProctorSession.find({})
@@ -1380,16 +1400,20 @@ app.post('/api/proctor/face/verify', async (req, res) => {
 
 // ─── Emotion endpoints ───────────────────────────────────────────────────────
 
-// Submit an emotion for a quiz — public (no login)
-app.post('/api/emotions/submit', async (req, res) => {
+// Submit an emotion for a quiz — signed-in students only.
+// The identity is taken from the token, not from the request body: a body
+// that names another student would file the record under that student
+// (VULN-03 in #457). The client already sends the bearer token and skips
+// the call when there is none.
+app.post('/api/emotions/submit', auth.requireAuth, async (req, res) => {
   try {
-    const { quizType, emotion, feedback, userId, username } = req.body;
+    const { quizType, emotion, feedback } = req.body;
     if (!quizType || !emotion) return res.status(400).json({ error: 'quizType and emotion required' });
     const valid = ['very_sad', 'sad', 'neutral', 'happy', 'very_happy'];
     if (!valid.includes(emotion)) return res.status(400).json({ error: 'invalid emotion' });
     const doc = await Emotion.create({
-      userId: userId || 'anonymous',
-      username: username || 'anonymous',
+      userId: req.user.id || req.user.username,
+      username: req.user.username,
       quizType,
       emotion,
       feedback: feedback || '',
@@ -1421,11 +1445,17 @@ app.get('/api/emotions/stats/:quizType', async (req, res) => {
   }
 });
 
-// Get emotion history for a user — public (filter by userId if provided)
-app.get('/api/emotions/history', async (req, res) => {
+// Get emotion history — the caller's own records, or any student's for an admin.
+// The userId filter is a request parameter, so a non-admin's filter is
+// ignored rather than honoured: asking for someone else's id must not
+// return someone else's records (VULN-03 in #457).
+app.get('/api/emotions/history', auth.requireAuth, async (req, res) => {
   try {
     const { userId, limit = 50 } = req.query;
-    const query = userId ? { userId } : {};
+    const isAdmin = req.user.role === 'admin';
+    const query = isAdmin
+      ? (userId ? { userId: String(userId) } : {})
+      : { userId: req.user.id || req.user.username };
     const emotions = await Emotion.find(query).sort({ timestamp: -1 }).limit(parseInt(limit));
     res.json({ emotions });
   } catch (e) {

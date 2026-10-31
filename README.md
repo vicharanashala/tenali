@@ -137,12 +137,12 @@ It is built to run on a single VPS — `tenali.fun` — with one Node process se
 <p align="center">
   <table>
     <tr>
-      <td align="center"><b>1169</b><br/><sub>commits</sub></td>
+      <td align="center"><b>1189</b><br/><sub>commits</sub></td>
       <td align="center"><b>131</b><br/><sub>PRs merged</sub></td>
-      <td align="center"><b>50</b><br/><sub>GitHub contributors</sub></td>
-      <td align="center"><b>⭐ 16</b><br/><sub>stars</sub></td>
-      <td align="center"><b>🍴 101</b><br/><sub>forks</sub></td>
-      <td align="center"><b>🐛 111</b><br/><sub>open issues</sub></td>
+      <td align="center"><b>62</b><br/><sub>GitHub contributors</sub></td>
+      <td align="center"><b>⭐ 18</b><br/><sub>stars</sub></td>
+      <td align="center"><b>🍴 104</b><br/><sub>forks</sub></td>
+      <td align="center"><b>🐛 114</b><br/><sub>open issues</sub></td>
     </tr>
   </table>
 </p>
@@ -702,19 +702,19 @@ tenali.fun
 <!-- live-snapshot:start -->
 | 🏆 Commits | 🔀 Merged PRs | 👥 Contributors | 🧩 Puzzles | 📚 Vocab | 🌍 GK |
 |----------:|------------:|--------------:|---------:|-------:|----:|
-| **1169** | **131** | **50** | **93** | **7,662** | **991** |
+| **1189** | **131** | **62** | **93** | **7,662** | **991** |
 <!-- live-snapshot:end -->
 
 ### 🥇 Leaderboard
 
 <!-- live-rank:start -->
-_Live data — last regenerated 2026-10-18 · auto-refreshed by [`github-actions[bot]`](https://github.com/features/actions) on every push to `main` and every 12h._
+_Live data — last regenerated 2026-10-27 · auto-refreshed by [`github-actions[bot]`](https://github.com/features/actions) on every push to `main` and every 12h._
 
 | # | 👤 Real Name | 🔗 GitHub ID | 📝 Commits | 🔀 PRs | 🏷️ Role |
 |--:|:-------------|:-------------|----------:|-----:|:--------|
-| 🥇 | **S. R. S. Iyengar**<br/><sub>↳ also commits as <b>sudarshan</b></sub> | [sudarshansudarshan](https://github.com/sudarshansudarshan) | **281** | 0  | Lead Architect · Curriculum Author · 69 topic areas |
+| 🥇 | **S. R. S. Iyengar**<br/><sub>↳ also commits as <b>sudarshan</b></sub> | [sudarshansudarshan](https://github.com/sudarshansudarshan) | **281** | 0  | Lead Architect · Curriculum Author · 69 puzzle families |
 | 🥈 | **25f2002654**<br/><sub>↳ also commits as <b>Mudit Agrawal</b></sub> | [muditagrawal2007](https://github.com/muditagrawal2007) | **193** | 25  | Maintainer · Battle Arena · Linear Algebra · Sudoku · Playground |
-| 🥉 | **Jinal Gupta** | [jgupta05072003-code](https://github.com/jgupta05072003-code) | **147** | 0  | Upstream Repo Maintainer & PR Reviewer |
+| 🥉 | **Jinal Gupta** | [jgupta05072003-code](https://github.com/jgupta05072003-code) | **149** | 0  | Upstream Repo Maintainer & PR Reviewer |
 | 4. | **Priyanshu Kumar** | [priyanshu7725](https://github.com/priyanshu7725) | **54** | 1  | — |
 | 5. | **Vaibhav Satish**<br/><sub>↳ also commits as <b>Vaibhav</b></sub> | [Vaibhav-sa30](https://github.com/Vaibhav-sa30) | **50** | 3  | Vachana Literacy Lab & Vocabulary |
 | 6. | **Lakshmi Varshini Nandula ** | [varshini-nandula](https://github.com/varshini-nandula) | **43** | 1  | Profile Showcase & Offline Storage |
@@ -742,26 +742,38 @@ _Live data — last regenerated 2026-10-18 · auto-refreshed by [`github-actions
 | 28. | **tarang-rajvanshi**<br/><sub>↳ also commits as <b>Tarang Rajvanshi</b></sub> | [tarang-rajvanshi](https://github.com/tarang-rajvanshi) | **5** | 0  | — |
 | 29. | **tenzai-aj**<br/><sub>↳ also commits as <b>Tenzai-AJ</b></sub> | [tenzai-aj](https://github.com/tenzai-aj) | **5** | 0  | — |
 | 30. | **Rukmender T** | [RukmenderT](https://github.com/RukmenderT) | **5** | 1  | Curiosity Mode |
-| 31. | **Ayush Mishra** | [codefixxx](https://github.com/codefixxx) | **4** | 2  | — |
-| 32. | **Anshul Kanodia** | [AnshulKanodia](https://github.com/AnshulKanodia) | **4** | 1  | Geometry Game Restoration |
-| 33. | **sharad**<br/><sub>↳ also commits as <b>Sharad</b></sub> | [sharad](https://github.com/sharad) | **4** | 0  | — |
-| 34. | **sharad-**<br/><sub>↳ also commits as <b>Sharad.</b></sub> | [sharad-](https://github.com/sharad-) | **4** | 0  | — |
-| 35. | **Disha Bansal** | [disha01bansal](https://github.com/disha01bansal) | **4** | 0  | — |
-| 36. | **sai-sowjanya-meka**<br/><sub>↳ also commits as <b>Sai Sowjanya Meka</b></sub> | [sai-sowjanya-meka](https://github.com/sai-sowjanya-meka) | **3** | 0  | — |
-| 37. | **yummypancake2607**<br/><sub>↳ also commits as <b>yummyPancake2607</b></sub> | [yummypancake2607](https://github.com/yummypancake2607) | **3** | 0  | — |
-| 38. | **pradeep-gupta7**<br/><sub>↳ also commits as <b>Pradeep-gupta7</b></sub> | [pradeep-gupta7](https://github.com/pradeep-gupta7) | **3** | 0  | — |
-| 39. | **S. Hamsalekha**<br/><sub>↳ also commits as <b>S Hamsalekha</b></sub> | [S-Hamsalekha-annamai](https://github.com/S-Hamsalekha-annamai) | **3** | 1  | Track User Progress |
-| 40. | **code-zero07**<br/><sub>↳ also commits as <b>Code-Zero07</b></sub> | [code-zero07](https://github.com/code-zero07) | **2** | 0  | — |
-| 41. | **nirmal-np**<br/><sub>↳ also commits as <b>Nirmal_np</b></sub> | [nirmal-np](https://github.com/nirmal-np) | **2** | 0  | — |
-| 42. | **disha-singh**<br/><sub>↳ also commits as <b>Disha Singh</b></sub> | [disha-singh](https://github.com/disha-singh) | **2** | 0  | — |
-| 43. | **Remy baastin rayappan** | [remy-baastin](https://github.com/remy-baastin) | **2** | 1  | — |
-| 44. | **harsh**<br/><sub>↳ also commits as <b>Harsh</b></sub> | [harsh](https://github.com/harsh) | **2** | 0  | — |
-| 45. | **dynosuprovo**<br/><sub>↳ also commits as <b>DYNOSuprovo</b></sub> | [dynosuprovo](https://github.com/dynosuprovo) | **1** | 0  | — |
-| 46. | **athira-kv**<br/><sub>↳ also commits as <b>Athira Kv</b></sub> | [athira-kv](https://github.com/athira-kv) | **1** | 0  | — |
-| 47. | **garv-arora**<br/><sub>↳ also commits as <b>Garv Arora</b></sub> | [garv-arora](https://github.com/garv-arora) | **1** | 0  | — |
-| 48. | **pradeep-gupta**<br/><sub>↳ also commits as <b>Pradeep Gupta</b></sub> | [pradeep-gupta](https://github.com/pradeep-gupta) | **1** | 0  | — |
-| 49. | **priyanshu-kumar**<br/><sub>↳ also commits as <b>Priyanshu Kumar</b></sub> | [priyanshu-kumar](https://github.com/priyanshu-kumar) | **1** | 0  | — |
-| 50. | **Vasuki** | [vasuki-tenali](https://github.com/vasuki-tenali) | **1** | 0  | Infra contributor |
+| 31. | **sai-sowjanya-meka**<br/><sub>↳ also commits as <b>Sai Sowjanya Meka</b></sub> | [sai-sowjanya-meka](https://github.com/sai-sowjanya-meka) | **4** | 0  | — |
+| 32. | **Ayush Mishra** | [codefixxx](https://github.com/codefixxx) | **4** | 2  | — |
+| 33. | **Anshul Kanodia** | [AnshulKanodia](https://github.com/AnshulKanodia) | **4** | 1  | Geometry Game Restoration |
+| 34. | **sharad**<br/><sub>↳ also commits as <b>Sharad</b></sub> | [sharad](https://github.com/sharad) | **4** | 0  | — |
+| 35. | **sharad-**<br/><sub>↳ also commits as <b>Sharad.</b></sub> | [sharad-](https://github.com/sharad-) | **4** | 0  | — |
+| 36. | **Disha Bansal** | [disha01bansal](https://github.com/disha01bansal) | **4** | 0  | — |
+| 37. | **v-t-rushi-kannan**<br/><sub>↳ also commits as <b>V T Rushi Kannan</b></sub> | [v-t-rushi-kannan](https://github.com/v-t-rushi-kannan) | **3** | 0  | — |
+| 38. | **shreya-s-salian**<br/><sub>↳ also commits as <b>Shreya S Salian</b></sub> | [shreya-s-salian](https://github.com/shreya-s-salian) | **3** | 0  | — |
+| 39. | **yummypancake2607**<br/><sub>↳ also commits as <b>yummyPancake2607</b></sub> | [yummypancake2607](https://github.com/yummypancake2607) | **3** | 0  | — |
+| 40. | **pradeep-gupta7**<br/><sub>↳ also commits as <b>Pradeep-gupta7</b></sub> | [pradeep-gupta7](https://github.com/pradeep-gupta7) | **3** | 0  | — |
+| 41. | **S. Hamsalekha**<br/><sub>↳ also commits as <b>S Hamsalekha</b></sub> | [S-Hamsalekha-annamai](https://github.com/S-Hamsalekha-annamai) | **3** | 1  | Track User Progress |
+| 42. | **25f2002654** | [25f2002654](https://github.com/25f2002654) | **2** | 0  | — |
+| 43. | **code-zero07**<br/><sub>↳ also commits as <b>Code-Zero07</b></sub> | [code-zero07](https://github.com/code-zero07) | **2** | 0  | — |
+| 44. | **nirmal-np**<br/><sub>↳ also commits as <b>Nirmal_np</b></sub> | [nirmal-np](https://github.com/nirmal-np) | **2** | 0  | — |
+| 45. | **disha-singh**<br/><sub>↳ also commits as <b>Disha Singh</b></sub> | [disha-singh](https://github.com/disha-singh) | **2** | 0  | — |
+| 46. | **Remy baastin rayappan** | [remy-baastin](https://github.com/remy-baastin) | **2** | 1  | — |
+| 47. | **harsh**<br/><sub>↳ also commits as <b>Harsh</b></sub> | [harsh](https://github.com/harsh) | **2** | 0  | — |
+| 48. | **swati-jain**<br/><sub>↳ also commits as <b>Swati Jain</b></sub> | [swati-jain](https://github.com/swati-jain) | **1** | 0  | — |
+| 49. | **rhytam-biswas**<br/><sub>↳ also commits as <b>Rhytam Biswas</b></sub> | [rhytam-biswas](https://github.com/rhytam-biswas) | **1** | 0  | — |
+| 50. | **vedhiga**<br/><sub>↳ also commits as <b>Vedhiga</b></sub> | [vedhiga](https://github.com/vedhiga) | **1** | 0  | — |
+| 51. | **anshika-o**<br/><sub>↳ also commits as <b>Anshika-o</b></sub> | [anshika-o](https://github.com/anshika-o) | **1** | 0  | — |
+| 52. | **halima-parvin** | [halima-parvin](https://github.com/halima-parvin) | **1** | 0  | — |
+| 53. | **sneha-jindal**<br/><sub>↳ also commits as <b>Sneha Jindal</b></sub> | [sneha-jindal](https://github.com/sneha-jindal) | **1** | 0  | — |
+| 54. | **megana-kurugodu**<br/><sub>↳ also commits as <b>Megana Kurugodu</b></sub> | [megana-kurugodu](https://github.com/megana-kurugodu) | **1** | 0  | — |
+| 55. | **lakshit-verma**<br/><sub>↳ also commits as <b>Lakshit Verma</b></sub> | [lakshit-verma](https://github.com/lakshit-verma) | **1** | 0  | — |
+| 56. | **aadya-singh**<br/><sub>↳ also commits as <b>Aadya Singh</b></sub> | [aadya-singh](https://github.com/aadya-singh) | **1** | 0  | — |
+| 57. | **dynosuprovo**<br/><sub>↳ also commits as <b>DYNOSuprovo</b></sub> | [dynosuprovo](https://github.com/dynosuprovo) | **1** | 0  | — |
+| 58. | **athira-kv**<br/><sub>↳ also commits as <b>Athira Kv</b></sub> | [athira-kv](https://github.com/athira-kv) | **1** | 0  | — |
+| 59. | **garv-arora**<br/><sub>↳ also commits as <b>Garv Arora</b></sub> | [garv-arora](https://github.com/garv-arora) | **1** | 0  | — |
+| 60. | **pradeep-gupta**<br/><sub>↳ also commits as <b>Pradeep Gupta</b></sub> | [pradeep-gupta](https://github.com/pradeep-gupta) | **1** | 0  | — |
+| 61. | **priyanshu-kumar**<br/><sub>↳ also commits as <b>Priyanshu Kumar</b></sub> | [priyanshu-kumar](https://github.com/priyanshu-kumar) | **1** | 0  | — |
+| 62. | **Vasuki** | [vasuki-tenali](https://github.com/vasuki-tenali) | **1** | 0  | Infra contributor |
 <!-- live-rank:end -->
 
 
