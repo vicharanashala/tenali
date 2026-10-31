@@ -2,86 +2,116 @@
 
 Welcome, and thank you for your interest in contributing to Tenali! 
 
-We welcome contributions from everyone, whether it's fixing a bug, adding a new feature, improving documentation, or suggesting an idea.
+We welcome contributions from everyone — whether fixing a bug, adding an educational feature, improving documentation, or refining developer tooling.
 
-## How to Contribute
+---
 
-### 1. Work only from issues already listed on the repo
+## 1. Governance & Contribution Rules
 
-**Do not open a PR for something you thought of yourself — every PR must close an issue that already exists on the tracker.** If you've spotted a bug or have a feature idea that isn't filed yet, open an issue describing it and wait for it to be scoped before writing any code. A PR that isn't tied to a listed issue will be rejected regardless of how good the change is — this isn't a judgment call on the code, it's a process rule everyone is held to equally.
+### 1.1 Work only from approved issues
+**Every pull request must close an approved issue already tracked on the repository (`Closes #N`).** Do not open an unprompted PR for unsolicited changes. If you identify a bug or have an educational feature idea, open an issue using the appropriate template ([`.github/ISSUE_TEMPLATE/feature_proposal.md`](.github/ISSUE_TEMPLATE/feature_proposal.md)) and wait for maintainer triage and assignment before writing code. PRs not linked to an approved issue will be rejected.
 
-### 2. Making Changes
-- **Fork the repository** and clone it locally.
-- **Create a branch** for your changes, named `<type>/<short-description>` — `feat/add-new-quiz-mode` or `fix/login-bug`, not `feature/...` (see the [README's branch table](README.md#-quick-start) for the full list of prefixes actually in use: `feat`, `fix`, `chore`, `docs`, `refactor`).
-- **Make your changes**. Ensure your code is clean and readable.
+### 1.2 Two-Stage RFC Workflow for Major Features
+Major features and new learning vertical modules must follow the **Two-Stage RFC Workflow** detailed in [`docs/contributing/rfc-process.md`](docs/contributing/rfc-process.md):
+1. **Stage 1:** Propose via a GitHub Issue using `.github/ISSUE_TEMPLATE/feature_proposal.md`.
+2. **Stage 2:** Upon maintainer approval, draft an RFC in `docs/rfcs/<module>/000X-<feature-name>.md` using [`docs/templates/0000-rfc-template.md`](docs/templates/0000-rfc-template.md) and implement your modular code in a feature branch.
 
-### 3. Quality Checks
-These are what CI actually runs on every PR (see `.github/workflows/test.yml`) — matching them locally means you're not surprised by a red check:
-- **Client tests:** `cd client && npm test` (see [Frontend Testing](#frontend-testing) below).
-- **Client lint:** `cd client && npm run lint` (currently non-blocking in CI until `App.jsx` is split up — but please still run it and fix what you introduce).
-- **Server tests:** `cd server && npm test`.
-- **BKT unit check:** `node server/lib/bkt.test.js`.
-- If you fix existing lint issues, run `npx eslint . --prune-suppressions` to remove obsolete entries from `eslint-suppressions.json`.
+*(Bug fixes, documentation improvements, and minor chore tasks do not require an RFC document, but still require an approved issue and the standard PR checklist.)*
 
-There is no `npm run format` or root-level `npm run build`/`npm run test` in this repo — don't rely on tooling docs that assume a single unified script at the root; `client/` and `server/` are separate npm packages with their own scripts.
+### 1.3 Target Branch: `demo`
+**All Pull Requests must target the `demo` branch**, which serves as Tenali's canonical active development branch. PRs submitted against `main` will be asked to re-target `demo`.
 
-### 4. Submitting a Pull Request
-- Push your branch to your fork.
-- Open a Pull Request against the `main` branch.
-- **Your PR description must include `Closes #N`**, referencing the issue this PR addresses (see §1) — a PR without this link will be rejected.
-- Describe what changed and why; add screenshots if your changes affect the UI. (There is currently no `.github/PULL_REQUEST_TEMPLATE.md` in this repo, so there's no checklist to fill out — just a clear description.)
-- **Keep your branch mergeable.** Any PR with a merge conflict against `main` is an automatic rejection — this is not reviewed for exceptions, resolve the conflict and push again.
-- **Never render hardcoded/fallback data as if it were live production data** — if an API call fails or returns empty, show a real loading, error, or empty state instead of silently substituting placeholder records. (See [FLN #449](https://github.com/vicharanashala/fln/issues/449) for a concrete example of exactly this failure mode and why it's an automatic finding, not a style preference.)
-- Wait for a maintainer to review your code. We may request some changes before merging!
-- **New contributors:** submit the [Onboarding Document](README.md#-contributor-onboarding-mandatory) to `Ideas/` before your first PR — see the README for the required sections.
+### 1.4 Branch Naming Convention
+Always branch off the latest `upstream/demo`. Use standardized prefixes:
+- `feat/<short-description>` (e.g. `feat/fraction-number-line`)
+- `fix/<short-description>` (e.g. `fix/bkt-edge-case`)
+- `docs/<short-description>` (e.g. `docs/update-orientation`)
+- `chore/<short-description>` (e.g. `chore/eslint-cleanup`)
+- `refactor/<short-description>` (e.g. `refactor/extract-tile-helpers`)
 
-## Frontend Testing
+*(Note: Use `feat/`, not `feature/`)*
 
-The client uses **Vitest** with **Testing Library** and a **jsdom** environment. Configuration lives in `client/vitest.config.js` (which layers test settings on top of `client/vite.config.js`); global setup is `client/test/setup.js`, which registers the `@testing-library/jest-dom` matchers and clears `localStorage` after every test.
+### 1.5 Concurrency Lock Zones
+To prevent merge conflicts across parallel contributors and AI agents:
+- **Red Zone (Hard Lock):** Do **NOT** modify `client/src/App.jsx` (~67.4k lines) or `server/index.js` (~2.9k lines) without explicit architectural assignment. Develop modular components under `client/src/apps/<module>/` or routes under `server/routes/`.
+- Refer to [`AGENTS.md`](AGENTS.md) and [`docs/map.md`](docs/map.md) for full concurrency rules.
+
+---
+
+## 2. Quality Checks & Verification
+
+CI runs automated checks on every PR (see `.github/workflows/test.yml`). Run them locally before opening your PR:
+
+1. **Client tests:**
+   ```bash
+   cd client
+   npm test
+   ```
+2. **BKT unit verification:**
+   ```bash
+   node server/lib/bkt.test.js
+   ```
+3. **Client lint:**
+   ```bash
+   cd client
+   npm run lint
+   ```
+   *Current baseline: 0 errors, 117 warnings. Ensure you introduce 0 new errors or warnings.*
+4. **Production client build:**
+   ```bash
+   cd client
+   npm run build
+   ```
+5. **Human Acceptance Testing (Mandatory Gate):**
+   Automated tests are necessary but not sufficient. You must manually verify the feature in your browser across viewport sizes, ensure interactive mechanics behave properly, and provide step-by-step reproduction instructions in your PR.
+
+---
+
+## 3. Submitting a Pull Request
+
+1. **Push your branch** to your fork:
+   ```bash
+   git push origin feat/<short-description>
+   ```
+2. **Open a Pull Request** against upstream `demo`.
+3. Complete the [`.github/PULL_REQUEST_TEMPLATE.md`](.github/PULL_REQUEST_TEMPLATE.md) checklist:
+   - Include `Closes #N` linking your approved issue.
+   - Confirm branch targets `demo`.
+   - List verification commands executed.
+   - Include clear manual testing instructions and UI screenshots/recordings.
+4. **Keep your branch mergeable.** PRs with merge conflicts against `demo` will require local rebase/merge before review.
+5. **Never substitute fake/hardcoded data for live production state.** If an API call fails or returns empty, show authentic loading, error, or empty UI states.
+6. Await maintainer review. Be prepared to demo or discuss changes at standups.
+
+---
+
+## 4. Frontend Testing Guide
+
+Tenali's client uses **Vitest** with **React Testing Library** and a **jsdom** environment (`client/vitest.config.js`).
 
 ### Running tests
-
 ```bash
 cd client
-npm test            # single run (what CI runs)
-npm run test:watch  # watch mode — re-runs on file changes
+npm test            # single run (matches CI)
+npm run test:watch  # watch mode for local development
 ```
 
 ### Test naming and location
+- Name test files `*.test.js` or `*.test.jsx`.
+- Colocate tests alongside the module under test (e.g., `client/src/lib/concept/conceptApi.test.js` next to `conceptApi.js`).
+- Test extracted modular components, features, and utility libraries.
 
-- Name files `*.test.js` or `*.test.jsx` (e.g. `conceptApi.test.js`).
-- Colocate the test next to the code it tests unless the surrounding directory already uses a different convention — `src/lib/concept/conceptApi.test.js` sits beside `src/lib/concept/conceptApi.js`.
+### Mocking network and authentication
+- API tests must never make real network requests. Stub global `fetch` with `vi.stubGlobal` / `vi.fn()` (see `client/src/lib/concept/conceptApi.test.js` as reference).
+- Use mock tokens for `localStorage` authentication states (`tenali-auth-token`). Never use real credentials.
 
-### What to test (and what not to)
+---
 
-Target extracted modules and components such as:
+## 5. Contributor Onboarding & Reference
 
-- `client/src/features/tiles.js`
-- `client/src/lib/concept/*`
-- individual React components once they are extracted out of `App.jsx`
+- **New Contributors & Interns:** Start with the [Orientation Guide](docs/contributing/orientation.md).
+- **Core Architecture & Navigation:** See [Repository Map](docs/map.md).
+- **AI Agent & Multi-Agent Workflows:** See [AGENTS.md](AGENTS.md).
+- **Design Tokens & UI Styling:** See [UI Guidelines](docs/design/ui-guidelines.md).
 
-**Testing the full `App.jsx` is explicitly out of scope** — it is a 70k-line monolith that imports most of the app, so it stays untested until the planned component-extraction work progresses. Do not refactor it as part of a test PR.
-
-### Mocking fetch
-
-API tests must never make real network requests. Stub the global `fetch` with `vi.stubGlobal` / `vi.fn()` and assert on the outcomes your code actually returns or throws. `client/src/lib/concept/conceptApi.test.js` is the reference example — it shows how to simulate:
-
-- a successful JSON response
-- a rejected fetch (network failure)
-- an HTTP error response such as 401
-- a non-JSON / malformed response body
-
-Reset stubs between tests (`vi.unstubAllGlobals()` in `afterEach`, a fresh mock in `beforeEach`) so tests cannot affect each other.
-
-### localStorage and authentication
-
-Several modules read auth state (e.g. the JWT under `tenali-auth-token`) from `localStorage`. jsdom provides a real `localStorage`, so tests can seed a fake value before the call and let the setup file's global `afterEach` clear it. **Never use a real credential or depend on an actual authenticated session** — a fake token string in the test is enough, as demonstrated in `conceptApi.test.js`.
-
-### Testing philosophy
-
-Write React component tests with Testing Library and assert on **what a user can perceive** — text, roles, accessible names, visible state — rather than React implementation details (internal state, component instances, hook mechanics). If a test breaks when you refactor a component without changing its behaviour, it is testing the wrong thing.
-
-## Core Maintainers & Interns
-If you are joining as a dedicated intern or a core maintainer, please refer to the `docs/` directory in this repository for more in-depth guidelines, RFC templates, and project standards.
-
-Thank you for helping make Tenali better!
+Thank you for contributing to Tenali and helping make open math learning accessible to everyone!
