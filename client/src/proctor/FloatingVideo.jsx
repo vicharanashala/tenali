@@ -206,7 +206,6 @@ export default function FloatingVideo({ videoRef, isRunning, error, penaltyScore
       clearTimeout(overlayTimerRef.current)
     }
   }, [isAnomalyDetected, penaltyScore])
-  /* eslint-enable react-hooks/set-state-in-effect */
 
   const handleMouseDown = (e) => {
     if (e.target.closest('button')) return

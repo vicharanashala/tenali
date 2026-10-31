@@ -15,6 +15,7 @@ export const TILES = [
     { key: 'addition', name: 'Addition', subtitle: '20-question addition practice', color: 'blue', category: 'number-foundations' },
     { key: 'column-addition', name: 'Column Addition', subtitle: 'Vertical addition with carrying', color: 'blue', category: 'number-foundations', foldInto: 'basicarith' },
     { key: 'column-division', name: 'Column Division', subtitle: 'Vertical division with long division', color: 'blue', category: 'number-foundations', foldInto: 'basicarith' },
+    { key: 'division-discovery', name: 'Division: Fair Share', subtitle: 'Share treats equally to discover division', color: 'blue', category: 'number-foundations' },
     { key: 'column-multiplication', name: 'Column Multiplication', subtitle: 'Vertical multiplication with carrying', color: 'blue', category: 'number-foundations', foldInto: 'basicarith' },
     { key: 'column-subtraction', name: 'Column Subtraction', subtitle: 'Vertical subtraction with borrowing', color: 'blue', category: 'number-foundations', foldInto: 'basicarith' },
     { key: 'angles', name: 'Angles', subtitle: 'Lines, points, parallel lines', color: 'green', category: 'shape-space' },
