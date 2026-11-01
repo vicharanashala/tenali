@@ -19,9 +19,45 @@
 ---
 
 <!-- live-changelog:start -->
-### 📊 Total: 1189 commits · 94 active days · 58 unique authors
+### 📊 Total: 1200 commits · 95 active days · 61 unique authors
 
 > **📖 How to read this:** Each entry shows a clickable SHA, the author, and a one-line subject. Sub-bullets show the **exact files touched** with per-file `+additions −deletions`, the **total line stats**, and (when present) the **commit body** explaining what & why.
+
+#### 📅 2026-10-28  <sub>(11 commits)</sub>
+
+- 🐛 [`e4d9fe44`](https://github.com/vicharanashala/tenali/commit/e4d9fe443cc0d69306b69b1d66c46277467a99a9) — **25f2002654** — send the Contrast practice buttons to real practice screens (#473) (#480)
+    - 📁 **2 files:** `client/src/ContrastChallengeApp.jsx` `+9 −4`, `client/src/navigationTargets.test.js` `+49 −0`
+    - 📊 **`+58 −4`** · 2 files
+- ✨ [`8ff8b8c4`](https://github.com/vicharanashala/tenali/commit/8ff8b8c4ee690286c3b7dcd8b5027b23fa88cd93) — **25f2002654** — serve GET /api/health, the path render.yaml already probes (#469) (#478)
+    - 📁 **2 files:** `server/__tests__/health.test.js` `+63 −0`, `server/index.js` `+17 −0`
+    - 📊 **`+80 −0`** · 2 files
+- 👷 [`9710f94d`](https://github.com/vicharanashala/tenali/commit/9710f94d85119a5c3e95d255f350738bb30f93a0) — **25f2002654** — audit the committed lockfiles and run CI on the pinned runtime (#470) (#477)
+    - 📁 **2 files:** `.github/workflows/test.yml` `+37 −4`, `.nvmrc` `+1 −0`
+    - 📊 **`+38 −4`** · 2 files
+- 🐛 [`800bc260`](https://github.com/vicharanashala/tenali/commit/800bc260255f4f5edcb4e680b8309cfaab8ea19c) — **25f2002654** — clear the client advisories that are fixable in range (#468) (#476)
+    - 📁 **1 file:** `client/package-lock.json` `+10 −10`
+    - 📊 **`+10 −10`** · 1 file
+- 🐛 [`90aeb3d7`](https://github.com/vicharanashala/tenali/commit/90aeb3d78685f021615a6b24429f57752a502e04) — **25f2002654** — clear the server advisories in the lockfile (#467) (#475)
+    - 📁 **2 files:** `server/package-lock.json` `+22 −18`, `server/package.json` `+3 −0`
+    - 📊 **`+25 −18`** · 2 files
+- 🐛 [`c5f043da`](https://github.com/vicharanashala/tenali/commit/c5f043dad2e2a60fc1ffb536454659451ce88e20) — **25f2002654** — gate the proctor read routes and the emotion routes behind auth (#471) (#479)
+    - 📁 **3 files:** `client/src/proctor/ProctorDashboard.jsx` `+27 −0`, `server/__tests__/proctorAuthz.test.js` `+132 −0`, `server/index.js` `+26 −13`
+    - 📊 **`+185 −13`** · 3 files
+- 👷 [`f9531173`](https://github.com/vicharanashala/tenali/commit/f95311737515b34a93f26058b262a7817bb0b9a5) — **Sonali Bharti** — baseline existing client lint errors (#432)
+    - 📁 **5 files:** `.github/workflows/test.yml` `+2 −15`, `CONTRIBUTING.md` `+1 −1`, `client/eslint-suppressions.json` `+2 −13`, `client/package.json` `+1 −1`, `client/vite.config.js` `+0 −25`
+    - 📊 **`+6 −55`** · 5 files
+- 📝 [`a330c800`](https://github.com/vicharanashala/tenali/commit/a330c800990e6bbe309404ef6709bdb6aae7888c) — **Swati Jain** — add contributor onboarding document — Swati Jain (#484)
+    - 📁 **1 file:** `Ideas/ONBOARDING-Swati-Jain.md` `+343 −0`
+    - 📊 **`+343 −0`** · 1 file
+- 📝 [`5a7b862b`](https://github.com/vicharanashala/tenali/commit/5a7b862b6dc71bab3ceaae0f8e097c096d52731d) — **Shreya S Salian** — add onboarding document (Shreya S Salian) (#454)
+    - 📁 **1 file:** `Ideas/ONBOARDING-Shreya-S-Salian.md` `+57 −0`
+    - 📊 **`+57 −0`** · 1 file
+- 📝 [`12fa9e99`](https://github.com/vicharanashala/tenali/commit/12fa9e99aa4ee4f72c7203f714dce9ceadf7f76b) — **Gurnoor Singh** — add onboarding document for Gurnoor Singh (#440)
+    - 📁 **1 file:** `Ideas/ONBOARDING-Gurnoor-Singh.md` `+316 −0`
+    - 📊 **`+316 −0`** · 1 file
+- 📝 [`adac4f4d`](https://github.com/vicharanashala/tenali/commit/adac4f4d71b12a955fd05925be42795ab55d31d4) — **sweta010708-ai** — onboarding document (#437)
+    - 📁 **1 file:** `Ideas/ONBOARDING-Sweta-Vishwakarma.md` `+123 −0`
+    - 📊 **`+123 −0`** · 1 file
 
 #### 📅 2026-10-22  <sub>(2 commits)</sub>
 
