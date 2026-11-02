@@ -176,6 +176,9 @@ test('newlyMastered is true only on false → true and false on true → true', 
   const second = await masteryEngine.update(userId, topicId, true);
   expect(second.isMastered).toBe(true);
   expect(second.newlyMastered).toBe(false);
+  // completedAt is the moment mastery was first reached; it must not move.
+  const storedAfterSecond = await ConceptMastery.findOne({ userId, topicId });
+  expect(storedAfterSecond.completedAt.getTime()).toBe(storedAfterFirst.completedAt.getTime());
 });
 
 // ─── 6. incorrectStreak is telemetry only ────────────────────────────────────

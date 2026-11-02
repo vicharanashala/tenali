@@ -90,6 +90,7 @@ const TOPIC_DOMAINS = {
 };
 
 const MASTERY_THRESHOLD = 0.85;
+// Reserved for a future migration. It is not stored on ConceptMastery yet.
 const MASTERY_POLICY_VERSION = 'bkt-v1';
 
 module.exports = {
