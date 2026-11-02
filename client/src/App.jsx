@@ -167,6 +167,7 @@ import { getLearnContent } from './data/learnContent.js'
 import AnglesLearnPage from './components/learning/AnglesLearnPage'
 import GSTLearnPage from './components/learning/GSTLearnPage'
 import FractionsLearnPage from './components/learning/FractionsLearnPage'
+import DivisionDiscoveryApp from './components/learning/division/DivisionDiscoveryApp'
 
 // API base URL from environment variables (Vite)
 export const API = import.meta.env.VITE_API_BASE_URL || '';
@@ -44600,6 +44601,7 @@ function App() {
     'column-addition': ColumnAdditionApp, // Column Addition with carries
     'column-multiplication': ColumnMultiplicationApp, // Column Multiplication with carries
     'column-division': ColumnDivisionApp, // Column Division with long division steps
+    'division-discovery': DivisionDiscoveryApp, // Division: Fair Sharing visual concept lab
     'column-subtraction': ColumnSubtractionApp, // Column Subtraction with borrows
     quadratic: QuadraticApp,       // Quadratic substitution
     multiply: MultiplyApp,         // Multiplication tables
@@ -44871,6 +44873,7 @@ function App() {
       sqrt: 'Square Root', polymul: 'Polynomial Multiplication', polyfactor: 'Polynomial Factoring',
       primefactor: 'Prime Factorization', qformula: 'Quadratic Formula', simul: 'Simultaneous Equations',
       'qformula-concept': 'Quadratics: Concept Lab', 'simul-concept': 'Sim. Equations: Concept Lab',
+      'division-discovery': 'Division: Fair Share',
       funceval: 'Functions', lineq: 'Line Equations', basicarith: 'Arithmetic',
       fractionadd: 'Fractions', surds: 'Surds', indices: 'Indices',
       sequences: 'Sequences & Series', ratio: 'Ratio & Proportion', percent: 'Percentages',
@@ -49055,6 +49058,7 @@ function ColumnDivisionApp({ onBack, initialDifficulty, initialNumQuestions, ini
   const timer = useTimer()
   const [sessionGoal, setSessionGoal] = useState(isGoalMode ? 'speed' : 'standard')
   const [showHelp, setShowHelp] = useState(false)
+  const [viewingLearn, setViewingLearn] = useState(false)
 
   const [quotientInputs, setQuotientInputs] = useState([])
   const [productInputs, setProductInputs] = useState([])
@@ -49324,6 +49328,15 @@ function ColumnDivisionApp({ onBack, initialDifficulty, initialNumQuestions, ini
 
   const diffLabels = { easy: 'Easy (3\u00f71)', medium: 'Medium (4\u00f71)', hard: 'Hard (4\u00f72)', extrahard: 'XHard (5\u00f72)' }
 
+  if (viewingLearn) {
+    return (
+      <DivisionDiscoveryApp
+        onBack={() => setViewingLearn(false)}
+        onStartTest={() => setViewingLearn(false)}
+      />
+    )
+  }
+
   if (!started && !finished) {
     return (
       <div style={{ minHeight: '100vh', background: 'var(--clr-bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px', fontFamily: 'Inter, sans-serif' }}>
@@ -49332,7 +49345,8 @@ function ColumnDivisionApp({ onBack, initialDifficulty, initialNumQuestions, ini
           <h1 style={{ fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 700, fontSize: '48px', color: 'var(--clr-text)', margin: '0 0 12px', lineHeight: 1.1 }}>Column Division</h1>
           <p style={{ color: 'var(--clr-text-soft)', fontSize: '0.9rem', margin: '0 0 24px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>Paper-style long division with step-by-step work</p>
 
-          <div style={{ marginBottom: '20px' }}>
+          <div style={{ marginBottom: '20px', display: 'flex', gap: '10px', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <button onClick={() => setViewingLearn(true)} style={{ background: 'var(--clr-accent-soft, rgba(232, 134, 74, 0.18))', border: '1px solid var(--clr-accent)', borderRadius: '50px', padding: '6px 18px', color: 'var(--clr-accent)', fontFamily: 'Inter, sans-serif', fontWeight: 700, fontSize: '0.85rem', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>📖 Learn Division (Fair Share)</button>
             <button onClick={() => setShowHelp(h => !h)} style={{ background: showHelp ? 'var(--clr-input)' : 'transparent', border: '1px solid var(--clr-border)', borderRadius: '50px', padding: '6px 16px', color: 'var(--clr-accent)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.8rem', cursor: 'pointer' }}>{showHelp ? '\u2715 Close' : '? How to play'}</button>
           </div>
 
