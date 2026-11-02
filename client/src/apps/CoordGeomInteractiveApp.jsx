@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
-import { API, QuizLayout, useTimer, useProgressSubmit, renderFeedback } from '../App.jsx'
+import { QuizLayout, FeedbackDisplay } from '../components'
 import CoordinateGrid from '../components/interactive/CoordinateGrid'
+import useTimer from '../hooks/useTimer';
+import useProgressSubmit from '../hooks/useProgressSubmit';
+import CONFIG from '../config';
 
 export default function CoordGeomInteractiveApp({ onBack }) {
   const [started, setStarted] = useState(false);
@@ -23,7 +26,7 @@ export default function CoordGeomInteractiveApp({ onBack }) {
 
   const loadQuestion = async () => {
     try {
-      const r = await fetch(`${API}/coordgeom-api/question?difficulty=${difficulty}`);
+      const r = await fetch(`${CONFIG.api}/coordgeom-api/question?difficulty=${difficulty}`);
       if (!r.ok) throw new Error('Server error');
       const data = await r.json();
       setCurrentQ(data);
@@ -65,7 +68,7 @@ export default function CoordGeomInteractiveApp({ onBack }) {
         ...currentQ,
         userAnswer: currentQ.type === 'coord' ? `(${dartPos.x}, ${dartPos.y})` : textAnswer
       };
-      const r = await fetch(`${API}/coordgeom-api/check`, {
+      const r = await fetch(`${CONFIG.api}/coordgeom-api/check`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
@@ -249,7 +252,7 @@ export default function CoordGeomInteractiveApp({ onBack }) {
 
         {revealed && (
           <div style={{ marginTop: 20 }}>
-            {renderFeedback(feedback, isCorrect)}
+            <FeedbackDisplay feedback={feedback} isCorrect={isCorrect} />
           </div>
         )}
       </div>

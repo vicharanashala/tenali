@@ -42,14 +42,13 @@ import {
 } from './features/progress';
 import useAuth from './hooks/useAuth.js';
 import useAutoAdvance from './hooks/useAutoAdvance.js';
-import useQuizHintsAndXp from './hooks/useHints.jsx';
 import { useQuizCompletion } from './hooks/useQuizCompletion';
 import FeedbackDisplay from './components/common/FeedbackDisplay.jsx'
 import useTimer from './hooks/useTimer.js'
 import useProgressSubmit from './hooks/useProgressSubmit.js'
-import { MathLabHub, MensurationLab, BasicArithmeticLab, GK, ColumnAddition, ColumnMultiplication, ColumnDivision, ColumnSubtraction, Gym, ProgressTracker } from './components';
+import { MathLabHub, MensurationLab, BasicArithmeticLab, GK, ColumnAddition, ColumnMultiplication, ColumnDivision, ColumnSubtraction, Gym, ProgressTracker, BadgeIcon } from './components';
 import journeyFetch from './utils/journeyFetch.js';
-
+import useQuizHintsAndXp from './hooks/useHints.js';
 
 window.React = React;
 
@@ -42643,7 +42642,7 @@ function App() {
     polygym: PolyGym,           // Polynomials Gym — arithmetic → monomial algebra (MCQ)
     treasurehunt: TreasureHuntApp, // Treasure Hunt — solve & seek grid game
     // matrixmystics mode removed — Matrix Mystics content now embedded in LinearAlgebraApp's mission quiz
-    trackProgress: ProgressTrackerApp,
+    trackProgress: ProgressTracker,
     riddle: RiddleApp,              // Math Riddles
     'water-jug-lab': WaterJugLab,
     'equation-crafting-lab': EquationCraftingLab,

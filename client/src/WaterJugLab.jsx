@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { QuizLayout } from './App';
+import { QuizLayout } from './components';
 import './WaterJugLab.css';
 
 /**

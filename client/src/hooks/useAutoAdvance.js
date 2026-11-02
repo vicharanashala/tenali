@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { CONFIG } from '../config.js';
+import CONFIG from '../config.js';
 /**
  * useAutoAdvance Hook
  * Auto-advances to the next question after correct answer is revealed.
@@ -11,7 +11,7 @@ import { CONFIG } from '../config.js';
  * @param {boolean} isCorrect - Whether the user's answer was correct
  * @param {boolean} isDisabled=true Whether the auto advance should advance questions or not. Default true
  */
-function useAutoAdvance(revealed, advanceFnRef, isCorrect, isDisabled=true, autoAdvanceTime= CONFIG.AUTO_ADVANCE_MS) {
+function useAutoAdvance(revealed, advanceFnRef, isCorrect, isDisabled = true, autoAdvanceTime = CONFIG.AUTO_ADVANCE_MS) {
     useEffect(() => {
         if (isDisabled || !revealed || !isCorrect) return;
 
@@ -19,7 +19,7 @@ function useAutoAdvance(revealed, advanceFnRef, isCorrect, isDisabled=true, auto
             advanceFnRef?.current();
         }, autoAdvanceTime);
         return () => clearTimeout(timer);
-        
+
     }, [revealed, isCorrect, advanceFnRef, isDisabled, autoAdvanceTime]);
 }
 

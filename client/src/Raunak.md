@@ -4,6 +4,7 @@
 - Extracted and kept repeating helper functions into [src/utils](./utils/)
 - Extracted and kept hook in [src/hooks](./hooks/)
 - Created subfolder inside components which will hold group of different components
+- Renamed `renderFeedback` to `FeedbackDisplay` and converted the function to a component
 
 
 ## To Do:

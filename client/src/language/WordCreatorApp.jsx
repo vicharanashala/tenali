@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useTimer } from '../hooks/useTimer';
-import { QuizLayout } from '../components/layout/QuizLayout';
+import useTimer from '../hooks/useTimer';
+import { QuizLayout } from '../components';
 
 // Anchor /wordcreator-api fetches to the current sub-path so they reach
 // /summership/wordcreator-api on the sub-path deployment (where the route
@@ -86,7 +86,7 @@ export default function WordCreatorApp({ onBack }) {
         const data = await res.json();
         setPuzzle(data);
         setUserInputs(Array(data.blanksCount).fill(''));
-        
+
         // Load words found for this level/puzzle
         const savedWordsKey = `tenali_wordcreator_words_${level}_${puzzleIndex}`;
         const savedWords = localStorage.getItem(savedWordsKey);
@@ -169,8 +169,8 @@ export default function WordCreatorApp({ onBack }) {
       const res = await fetch(`${WC_BASE}/check`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-          word: finalWord, 
+        body: JSON.stringify({
+          word: finalWord,
           pattern: puzzle.pattern,
           level: level,
           index: puzzleIndex
@@ -181,7 +181,7 @@ export default function WordCreatorApp({ onBack }) {
       if (data.correct) {
         setIsCorrect(true);
         setFeedback(`Success! "${finalWord.toUpperCase()}" is a valid word.`);
-        
+
         // Reward XP (level * 10)
         const xpEarned = level * 10;
         const newXp = totalXp + xpEarned;
@@ -323,8 +323,8 @@ export default function WordCreatorApp({ onBack }) {
 
   if (showLevelSelect) {
     const levels = Array.from({ length: 20 }, (_, i) => i + 1);
-    const filteredLevels = levels.filter(lvl => 
-      `level ${lvl}`.includes(levelSearch.toLowerCase()) || 
+    const filteredLevels = levels.filter(lvl =>
+      `level ${lvl}`.includes(levelSearch.toLowerCase()) ||
       getLevelDesc(lvl).toLowerCase().includes(levelSearch.toLowerCase())
     );
 
@@ -333,7 +333,7 @@ export default function WordCreatorApp({ onBack }) {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24, padding: 12, borderRadius: 12, background: 'rgba(255,255,255,0.03)' }}>
           <div style={{ fontSize: '1.1rem', fontWeight: 'bold' }}>Cumulative Language XP: <span style={{ color: 'var(--clr-accent, #05c46b)' }}>{totalXp} XP</span></div>
         </div>
-        
+
         <div className="search-bar-row">
           <input
             className="search-bar"
@@ -346,15 +346,15 @@ export default function WordCreatorApp({ onBack }) {
 
         <div className="menu-grid">
           {filteredLevels.map((lvl) => (
-            <button 
-              key={lvl} 
-              className="menu-card green" 
-              onClick={() => { 
-                setLevel(lvl); 
-                setPuzzleIndex(1); 
+            <button
+              key={lvl}
+              className="menu-card green"
+              onClick={() => {
+                setLevel(lvl);
+                setPuzzleIndex(1);
                 initPuzzleStats();
                 setShowResults(false);
-                setShowLevelSelect(false); 
+                setShowLevelSelect(false);
               }}
             >
               <span className="menu-title">Level {lvl}</span>
@@ -373,8 +373,8 @@ export default function WordCreatorApp({ onBack }) {
     const totalLevelTime = statsArray.reduce((sum, s) => sum + s.timeSpent, 0);
     const totalCorrectWords = statsArray.reduce((sum, s) => sum + s.correctWords.length, 0);
     const totalWrongAttempts = statsArray.reduce((sum, s) => sum + s.wrongAttempts.length, 0);
-    
-    const accuracy = totalCorrectWords + totalWrongAttempts > 0 
+
+    const accuracy = totalCorrectWords + totalWrongAttempts > 0
       ? Math.round((totalCorrectWords / (totalCorrectWords + totalWrongAttempts)) * 100)
       : 100;
 
@@ -385,13 +385,13 @@ export default function WordCreatorApp({ onBack }) {
     };
 
     return (
-      <QuizLayout 
-        title={`Results · Level ${level}`} 
-        subtitle="Level completion stats and performance report" 
+      <QuizLayout
+        title={`Results · Level ${level}`}
+        subtitle="Level completion stats and performance report"
         onBack={() => setShowLevelSelect(true)}
       >
         <div style={{ display: 'flex', flexDirection: 'column', gap: 24, width: '100%', maxWidth: '800px', margin: '0 auto' }}>
-          
+
           {/* Summary Cards */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: 16 }}>
             <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 12, padding: 16, textAlign: 'center' }}>
@@ -422,18 +422,18 @@ export default function WordCreatorApp({ onBack }) {
               {Object.keys(puzzleStats).map((idxStr) => {
                 const idx = parseInt(idxStr, 10);
                 const stat = puzzleStats[idx];
-                
+
                 // Get list of missed common words
                 const userWordsSet = new Set((stat.correctWords || []).map(w => w.word.toLowerCase()));
                 const missedWords = (stat.solutions || []).filter(sol => !userWordsSet.has(sol.toLowerCase()));
 
                 return (
-                  <div 
-                    key={idx} 
-                    style={{ 
-                      padding: 16, 
-                      borderRadius: 12, 
-                      background: 'rgba(255,255,255,0.01)', 
+                  <div
+                    key={idx}
+                    style={{
+                      padding: 16,
+                      borderRadius: 12,
+                      background: 'rgba(255,255,255,0.01)',
                       border: '1px solid rgba(255,255,255,0.06)',
                       display: 'flex',
                       flexDirection: 'column',
@@ -459,16 +459,16 @@ export default function WordCreatorApp({ onBack }) {
                       {stat.correctWords && stat.correctWords.length > 0 ? (
                         <div style={{ display: 'inline-flex', gap: 6, flexWrap: 'wrap' }}>
                           {stat.correctWords.map((item, wIdx) => (
-                            <span 
-                              key={wIdx} 
-                              title={`${item.partOfSpeech || 'word'}: ${item.definition || ''}`} 
-                              style={{ 
-                                fontSize: '0.8rem', 
-                                background: 'rgba(5, 196, 107, 0.12)', 
-                                border: '1px solid rgba(5, 196, 107, 0.3)', 
-                                color: '#26de81', 
-                                padding: '2px 6px', 
-                                borderRadius: 4, 
+                            <span
+                              key={wIdx}
+                              title={`${item.partOfSpeech || 'word'}: ${item.definition || ''}`}
+                              style={{
+                                fontSize: '0.8rem',
+                                background: 'rgba(5, 196, 107, 0.12)',
+                                border: '1px solid rgba(5, 196, 107, 0.3)',
+                                color: '#26de81',
+                                padding: '2px 6px',
+                                borderRadius: 4,
                                 textTransform: 'uppercase',
                                 cursor: 'help'
                               }}
@@ -488,15 +488,15 @@ export default function WordCreatorApp({ onBack }) {
                         <span style={{ fontSize: '0.85rem', color: 'var(--clr-text-soft)' }}>Missed Common:</span>
                         <div style={{ display: 'inline-flex', gap: 6, flexWrap: 'wrap' }}>
                           {missedWords.map((word, wIdx) => (
-                            <span 
-                              key={wIdx} 
-                              style={{ 
-                                fontSize: '0.8rem', 
-                                background: 'rgba(255,255,255,0.05)', 
-                                border: '1px solid rgba(255,255,255,0.1)', 
-                                color: 'var(--clr-text-soft)', 
-                                padding: '2px 6px', 
-                                borderRadius: 4, 
+                            <span
+                              key={wIdx}
+                              style={{
+                                fontSize: '0.8rem',
+                                background: 'rgba(255,255,255,0.05)',
+                                border: '1px solid rgba(255,255,255,0.1)',
+                                color: 'var(--clr-text-soft)',
+                                padding: '2px 6px',
+                                borderRadius: 4,
                                 textTransform: 'uppercase'
                               }}
                             >
@@ -513,15 +513,15 @@ export default function WordCreatorApp({ onBack }) {
                         <span style={{ fontSize: '0.85rem', color: 'var(--clr-text-soft)' }}>Wrong Attempts:</span>
                         <div style={{ display: 'inline-flex', gap: 6, flexWrap: 'wrap' }}>
                           {stat.wrongAttempts.map((attempt, wIdx) => (
-                            <span 
-                              key={wIdx} 
-                              style={{ 
-                                fontSize: '0.8rem', 
-                                background: 'rgba(248, 81, 73, 0.12)', 
-                                border: '1px solid rgba(248, 81, 73, 0.3)', 
-                                color: '#ff6b6b', 
-                                padding: '2px 6px', 
-                                borderRadius: 4, 
+                            <span
+                              key={wIdx}
+                              style={{
+                                fontSize: '0.8rem',
+                                background: 'rgba(248, 81, 73, 0.12)',
+                                border: '1px solid rgba(248, 81, 73, 0.3)',
+                                color: '#ff6b6b',
+                                padding: '2px 6px',
+                                borderRadius: 4,
                                 textTransform: 'uppercase'
                               }}
                             >
@@ -537,20 +537,20 @@ export default function WordCreatorApp({ onBack }) {
             </div>
           </div>
 
-          <button 
+          <button
             onClick={() => {
               setShowLevelSelect(true);
               setShowResults(false);
             }}
-            style={{ 
-              alignSelf: 'center', 
-              padding: '12px 32px', 
-              fontSize: '1.1rem', 
-              fontWeight: 'bold', 
-              background: 'var(--clr-accent, #05c46b)', 
-              color: '#fff', 
-              border: 'none', 
-              borderRadius: 8, 
+            style={{
+              alignSelf: 'center',
+              padding: '12px 32px',
+              fontSize: '1.1rem',
+              fontWeight: 'bold',
+              background: 'var(--clr-accent, #05c46b)',
+              color: '#fff',
+              border: 'none',
+              borderRadius: 8,
               cursor: 'pointer',
               boxShadow: '0 4px 12px rgba(5,196,107,0.3)',
               transition: 'all 0.2s'
@@ -564,9 +564,9 @@ export default function WordCreatorApp({ onBack }) {
   }
 
   return (
-    <QuizLayout 
-      title={`Word Creator · Level ${level}`} 
-      subtitle={getLevelDesc(level)} 
+    <QuizLayout
+      title={`Word Creator · Level ${level}`}
+      subtitle={getLevelDesc(level)}
       onBack={() => setShowLevelSelect(true)}
       timer={timer}
     >
@@ -584,7 +584,7 @@ export default function WordCreatorApp({ onBack }) {
           <div style={{ textAlign: 'center', padding: 20, color: 'var(--clr-text-soft)' }}>Loading puzzle pattern...</div>
         ) : (
           <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 20, alignItems: 'center', width: '100%' }}>
-            
+
             {/* Word Pattern Row */}
             <div className="question-box" style={{ margin: '12px 0' }}>
               <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', justifyContent: 'center' }}>
@@ -592,8 +592,8 @@ export default function WordCreatorApp({ onBack }) {
                   const isBlank = char === "_";
                   if (!isBlank) {
                     return (
-                      <div 
-                        key={idx} 
+                      <div
+                        key={idx}
                         style={{
                           width: 44,
                           height: 48,
@@ -645,7 +645,7 @@ export default function WordCreatorApp({ onBack }) {
 
             {puzzle.solutions && puzzle.solutions.length > 0 && (
               <div style={{ fontSize: '0.9rem', color: 'var(--clr-text-soft)', marginTop: -8, marginBottom: 8, fontStyle: 'italic', textAlign: 'center' }}>
-                {puzzle.solutions.length > 1 
+                {puzzle.solutions.length > 1
                   ? `💡 Tip: At least ${puzzle.solutions.length} common words match this pattern! (${foundWords.length} found)`
                   : `💡 Tip: At least 1 common word matches this pattern! (${foundWords.length} found)`
                 }
@@ -660,8 +660,8 @@ export default function WordCreatorApp({ onBack }) {
 
             <div className="button-row">
               {!revealed && (
-                <button 
-                  type="submit" 
+                <button
+                  type="submit"
                   disabled={submitting || userInputs.some(v => !v)}
                 >
                   {submitting ? "Checking..." : "Verify Word"}
@@ -673,23 +673,23 @@ export default function WordCreatorApp({ onBack }) {
 
         {/* Puzzle Navigation Row */}
         <div style={{ display: 'flex', justifyContent: 'space-between', borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: 16, width: '100%', maxWidth: '500px' }}>
-          <button 
-            disabled={puzzleIndex <= 1} 
+          <button
+            disabled={puzzleIndex <= 1}
             onClick={handlePrevPuzzle}
             style={{ padding: '6px 12px', background: 'transparent', border: '1px solid rgba(255,255,255,0.2)', borderRadius: 6, color: 'inherit', cursor: 'pointer' }}
           >
             ← Previous Puzzle
           </button>
           {puzzleIndex < 20 ? (
-            <button 
-              disabled={foundWords.length === 0} 
+            <button
+              disabled={foundWords.length === 0}
               onClick={handleNextPuzzle}
-              style={{ 
-                padding: '6px 16px', 
-                background: foundWords.length === 0 ? 'rgba(255,255,255,0.05)' : 'var(--clr-accent, #05c46b)', 
-                border: foundWords.length === 0 ? '1px solid rgba(255,255,255,0.1)' : 'none', 
-                borderRadius: 6, 
-                color: foundWords.length === 0 ? 'var(--clr-text-soft)' : '#fff', 
+              style={{
+                padding: '6px 16px',
+                background: foundWords.length === 0 ? 'rgba(255,255,255,0.05)' : 'var(--clr-accent, #05c46b)',
+                border: foundWords.length === 0 ? '1px solid rgba(255,255,255,0.1)' : 'none',
+                borderRadius: 6,
+                color: foundWords.length === 0 ? 'var(--clr-text-soft)' : '#fff',
                 cursor: foundWords.length === 0 ? 'not-allowed' : 'pointer',
                 fontWeight: foundWords.length === 0 ? 'normal' : 'bold',
                 transition: 'all var(--transition)'
@@ -698,15 +698,15 @@ export default function WordCreatorApp({ onBack }) {
               Next Puzzle →
             </button>
           ) : (
-            <button 
-              disabled={foundWords.length === 0} 
+            <button
+              disabled={foundWords.length === 0}
               onClick={handleCompleteLevel}
-              style={{ 
-                padding: '6px 16px', 
-                background: foundWords.length === 0 ? 'rgba(255,255,255,0.05)' : 'var(--clr-accent, #05c46b)', 
-                border: foundWords.length === 0 ? '1px solid rgba(255,255,255,0.1)' : 'none', 
-                borderRadius: 6, 
-                color: foundWords.length === 0 ? 'var(--clr-text-soft)' : '#fff', 
+              style={{
+                padding: '6px 16px',
+                background: foundWords.length === 0 ? 'rgba(255,255,255,0.05)' : 'var(--clr-accent, #05c46b)',
+                border: foundWords.length === 0 ? '1px solid rgba(255,255,255,0.1)' : 'none',
+                borderRadius: 6,
+                color: foundWords.length === 0 ? 'var(--clr-text-soft)' : '#fff',
                 cursor: foundWords.length === 0 ? 'not-allowed' : 'pointer',
                 fontWeight: foundWords.length === 0 ? 'normal' : 'bold',
                 transition: 'all var(--transition)'
@@ -729,28 +729,28 @@ export default function WordCreatorApp({ onBack }) {
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               {foundWords.map((item, idx) => (
-                <div 
-                  key={idx} 
-                  style={{ 
-                    padding: 16, 
-                    borderRadius: 12, 
-                    background: 'rgba(255,255,255,0.02)', 
-                    border: '1px solid rgba(255,255,255,0.06)', 
-                    display: 'flex', 
-                    flexDirection: 'column', 
-                    gap: 6 
+                <div
+                  key={idx}
+                  style={{
+                    padding: 16,
+                    borderRadius: 12,
+                    background: 'rgba(255,255,255,0.02)',
+                    border: '1px solid rgba(255,255,255,0.06)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 6
                   }}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
                     <strong style={{ fontSize: '1.2rem', color: 'var(--clr-accent, #05c46b)', textTransform: 'uppercase' }}>{item.word}</strong>
                     {item.phonetic && <span style={{ fontSize: '0.85rem', color: 'var(--clr-text-soft)' }}>{item.phonetic}</span>}
                     {item.partOfSpeech && (
-                      <span 
-                        style={{ 
-                          fontSize: '0.75rem', 
-                          padding: '2px 6px', 
-                          borderRadius: 4, 
-                          fontStyle: 'italic', 
+                      <span
+                        style={{
+                          fontSize: '0.75rem',
+                          padding: '2px 6px',
+                          borderRadius: 4,
+                          fontStyle: 'italic',
                           fontWeight: 600,
                           ...getPosStyle(item.partOfSpeech)
                         }}
