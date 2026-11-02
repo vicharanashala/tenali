@@ -114,6 +114,59 @@ import CoordinateGrid from './components/CoordinateGrid';
 import LanguageDashboard from './language/LanguageDashboard'
 import ContrastChallengeApp, { QuizLayoutExtension } from './ContrastChallengeApp'
 import CoordGeomInteractiveApp from './apps/CoordGeomInteractiveApp.jsx'
+import TrigApp from './apps/TrigApp.jsx'
+import IneqApp from './apps/IneqApp.jsx'
+import CoordGeomApp from './apps/CoordGeomApp.jsx'
+import ProbApp from './apps/ProbApp.jsx'
+import StatsApp from './apps/StatsApp.jsx'
+import MatrixApp from './apps/MatrixApp.jsx'
+import VectorsApp from './apps/VectorsApp.jsx'
+import TransformApp from './apps/TransformApp.jsx'
+import MensurApp from './apps/MensurApp.jsx'
+import BearingsApp from './apps/BearingsApp.jsx'
+import LogApp from './apps/LogApp.jsx'
+import DiffApp from './apps/DiffApp.jsx'
+import BasesApp from './apps/BasesApp.jsx'
+import CircleThApp from './apps/CircleThApp.jsx'
+import IntegApp from './apps/IntegApp.jsx'
+import StdFormApp from './apps/StdFormApp.jsx'
+import BoundsApp from './apps/BoundsApp.jsx'
+import SDTApp from './apps/SDTApp.jsx'
+import VariationApp from './apps/VariationApp.jsx'
+import HcfLcmApp from './apps/HcfLcmApp.jsx'
+import ProfitLossApp from './apps/ProfitLossApp.jsx'
+import RoundingApp from './apps/RoundingApp.jsx'
+import BinomialApp from './apps/BinomialApp.jsx'
+import ComplexApp from './apps/ComplexApp.jsx'
+import AnglesApp from './apps/AnglesApp.jsx'
+import TrianglesApp from './apps/TrianglesApp.jsx'
+import CongruenceApp from './apps/CongruenceApp.jsx'
+import PythagApp from './apps/PythagApp.jsx'
+import PolygonsApp from './apps/PolygonsApp.jsx'
+import SimilarityApp from './apps/SimilarityApp.jsx'
+import LinearEqApp from './apps/LinearEqApp.jsx'
+import DecimalsApp from './apps/DecimalsApp.jsx'
+import PermCombApp from './apps/PermCombApp.jsx'
+import LimitsApp from './apps/LimitsApp.jsx'
+import InvTrigApp from './apps/InvTrigApp.jsx'
+import RemFactorApp from './apps/RemFactorApp.jsx'
+import HeronApp from './apps/HeronApp.jsx'
+import SharesApp from './apps/SharesApp.jsx'
+import BankingApp from './apps/BankingApp.jsx'
+import GymDecimalsApp from './apps/GymDecimalsApp.jsx'
+import FuncGymApp from './apps/FuncGymApp.jsx'
+import DotProdGymApp from './apps/DotProdGymApp.jsx'
+import FracAddGymApp from './apps/FracAddGymApp.jsx'
+import LinEqGymApp from './apps/LinEqGymApp.jsx'
+import IndicesGymApp from './apps/IndicesGymApp.jsx'
+import PolyGymApp from './apps/PolyGymApp.jsx'
+import MatrixMysticsApp from './apps/MatrixMysticsApp.jsx'
+import GSTApp from './apps/GSTApp.jsx'
+import SectionApp from './apps/SectionApp.jsx'
+import LinProgApp from './apps/LinProgApp.jsx'
+import CircMeasureApp from './apps/CircMeasureApp.jsx'
+import ConicsApp from './apps/ConicsApp.jsx'
+import DiffEqApp from './apps/DiffEqApp.jsx'
 import { VOCAB_CORPUS } from './vocabCorpus'
 import PercentExplanationApp from './PercentExplanationApp'
 import { playSound } from './audioContext'
@@ -881,7 +934,7 @@ function GoalSuccessScorecard({ score, totalQ, sessionGoal, resultsTable, button
     bgLight: 'rgba(232, 134, 74, 0.08)',
   };
 
-  const encouragingTexts = {
+  const encouragingTexts = useMemo(() => ({
     speed: [
       "You have shown extreme talent by choosing this and mastering the speed!",
       "Lightning fast! Your rapid calculations are absolutely elite.",
@@ -900,16 +953,16 @@ function GoalSuccessScorecard({ score, totalQ, sessionGoal, resultsTable, button
       "Consistency is key! You've shown extreme talent by choosing to review your knowledge.",
       "True learning mastery! Re-evaluating and refining your skills shows extreme talent."
     ]
-  }[sessionGoal] || [
+  })[sessionGoal] || [
     "Fantastic work! You have shown extreme talent by choosing this practice goal."
-  ];
+  ], [sessionGoal]);
 
   const [encourageText, setEncourageText] = useState('');
   useEffect(() => {
     const textList = encouragingTexts;
     const randomText = textList[Math.floor(Math.random() * textList.length)];
     setEncourageText(randomText);
-  }, [sessionGoal]);
+  }, [encouragingTexts]);
 
   return (
     <div className="goal-success-card" style={{ border: `2px solid ${goalDetails.bgGlow}`, boxShadow: `0 8px 32px ${goalDetails.bgGlow}, var(--shadow-card)` }}>
@@ -54192,7 +54245,7 @@ const GYM_OPTION_LABEL = { A: '1', B: '2', C: '3', D: '4' }
  * difficulty, results table, auto-advance, "Solve" button) but renders each
  * question as a 4-button options grid instead of a free-form text input.
  */
-function makeMCQuizApp({ title, subtitle, apiPath, diffLabels, tip, adaptiveOnly, topicKey }) {
+export function makeMCQuizApp({ title, subtitle, apiPath, diffLabels, tip, adaptiveOnly, topicKey }) {
   return function GeneratedMCQuizApp({ onBack, isGoalMode = false }) {
     const diffs = Object.keys(diffLabels)
     const [difficulty, setDifficulty] = useState(diffs[0])
@@ -54885,7 +54938,7 @@ function TransferChallengeApp({ topicKey, onBack, completedTopics, goldMastery, 
   )
 }
 
-function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, answerField, topicKey: customTopicKey }) {
+export function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, answerField, topicKey: customTopicKey }) {
   return function GeneratedQuizApp({ onBack, completedTopics = [], goldMastery = [], markTopicCompleted, markGoldMastery, updateCoins, setMode, setTransferTopic, initialDifficulty, initialNumQuestions, initialStarted, isGoalMode = false }) {
     const diffs = Object.keys(diffLabels)
     // Feature CR: a just-earned Road License pre-selects the earned difficulty (one-shot; student can change it)
@@ -55393,50 +55446,6 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
 }
 
 // ── Generate all 14 new quiz apps ──────────────────────
-const TrigApp = makeQuizApp({
-  title: 'Trigonometry', subtitle: 'SOH-CAH-TOA, sine/cosine rule', apiPath: 'trig-api', topicKey: 'trigonometry',
-  diffLabels: { easy: 'Easy — Pythagoras', medium: 'Medium — Find Angle', hard: 'Hard — Sine Rule', extrahard: 'Extra Hard — Cosine/Area' },
-  placeholders: 'e.g. 13 or 45.5',
-})
-
-const IneqApp = makeQuizApp({
-  title: 'Inequalities', subtitle: 'Linear & quadratic inequalities', apiPath: 'ineq-api', topicKey: 'inequalities',
-  diffLabels: { easy: 'Easy — Linear', medium: 'Medium — List integers', hard: 'Hard — Quadratic', extrahard: 'Extra Hard — Count' },
-  placeholders: (q, d) => d === 'easy' ? 'e.g. x > 3' : d === 'medium' ? 'e.g. -1, 0, 1, 2' : d === 'hard' ? 'e.g. 1<=x<=5' : 'e.g. 7',
-  tip: 'Use >= for ≥ and <= for ≤',
-})
-
-const CoordGeomApp = makeQuizApp({
-  title: 'Coordinate Geometry', subtitle: 'Midpoint, distance, gradient', apiPath: 'coordgeom-api', topicKey: 'coordinate-geometry',
-  diffLabels: { easy: 'Easy — Midpoint', medium: 'Medium — Distance', hard: 'Hard — Gradient', extrahard: 'Extra Hard — Perp. Bisector' },
-  placeholders: (q, d) => d === 'easy' ? 'e.g. (3, 4)' : d === 'hard' || d === 'extrahard' ? 'e.g. 3/4 or 2' : 'e.g. 13',
-})
-
-const ProbApp = makeQuizApp({
-  title: 'Probability', subtitle: 'Single & combined events', apiPath: 'prob-api', topicKey: 'probability',
-  diffLabels: { easy: 'Easy — Simple', medium: 'Medium — Independent', hard: 'Hard — Or events', extrahard: 'Extra Hard — No replacement' },
-  placeholders: 'e.g. 3/10',
-})
-
-const StatsApp = makeQuizApp({
-  title: 'Statistics', subtitle: 'Mean, median, mode, range', apiPath: 'stats-api', topicKey: 'statistics',
-  diffLabels: { easy: 'Easy — Mean', medium: 'Medium — Median', hard: 'Hard — Mode/Range', extrahard: 'Extra Hard — Frequency' },
-  placeholders: 'e.g. 12 or 7/3',
-})
-
-const MatrixApp = makeQuizApp({
-  title: 'Matrices', subtitle: 'Add, multiply, determinant', apiPath: 'matrix-api', topicKey: 'matrices',
-  diffLabels: { easy: 'Easy — Addition', medium: 'Medium — Scalar ×', hard: 'Hard — Determinant', extrahard: 'Extra Hard — Multiply' },
-  placeholders: (q, d) => d === 'hard' ? 'e.g. 7' : 'e.g. [1,2;3,4]',
-  tip: 'Enter matrices as [a,b;c,d] — semicolon separates rows',
-})
-
-const VectorsApp = makeQuizApp({
-  title: 'Vectors', subtitle: 'Add, scale, magnitude', apiPath: 'vectors-api', topicKey: 'vectors',
-  diffLabels: { easy: 'Easy — Addition', medium: 'Medium — Scalar ×', hard: 'Hard — Magnitude', extrahard: 'Extra Hard — Position' },
-  placeholders: (q, d) => d === 'hard' ? 'e.g. 13' : 'e.g. (3, -2)',
-})
-
 // ── Matrix / Vector display helpers for DotProdApp ─────────────
 function MatrixBox({ matrix, label }) {
   return (
@@ -55848,321 +55857,24 @@ const loadQuestion = async () => {
   )
 }
 
-const TransformApp = makeQuizApp({
-  title: 'Transformations', subtitle: 'Reflect, translate, rotate, enlarge', apiPath: 'transform-api', topicKey: 'transformations',
-  diffLabels: { easy: 'Easy — Reflect', medium: 'Medium — Translate', hard: 'Hard — Rotate', extrahard: 'Extra Hard — Enlarge' },
-  placeholders: 'e.g. (-3, 4)',
-})
-
-const MensurApp = makeQuizApp({
-  title: 'Mensuration', subtitle: 'Area, volume, surface area', apiPath: 'mensur-api', topicKey: 'mensuration',
-  diffLabels: { easy: 'Easy — 2D Area', medium: 'Medium — Circle', hard: 'Hard — Volume', extrahard: 'Extra Hard — Surface Area' },
-  placeholders: 'e.g. 150.72',
-})
-
-const BearingsApp = makeQuizApp({
-  title: 'Bearings', subtitle: 'Three-figure bearings', apiPath: 'bearings-api', topicKey: 'bearings',
-  diffLabels: { easy: 'Easy — Compass', medium: 'Medium — Back bearing', hard: 'Hard — From coords', extrahard: 'Extra Hard — Components' },
-  placeholders: 'e.g. 045 or 270',
-})
-
-const LogApp = makeQuizApp({
-  title: 'Logarithms', subtitle: 'Evaluate, simplify, solve', apiPath: 'log-api', topicKey: 'logarithms',
-  diffLabels: { easy: 'Easy — Evaluate', medium: 'Medium — Laws of logs', hard: 'Hard — Solve bˣ = n', extrahard: 'Extra Hard — Log equations' },
-  placeholders: (q, d) => d === 'medium' ? 'e.g. 40 (the argument)' : 'e.g. 3',
-})
-
-const DiffApp = makeQuizApp({
-  title: 'Differentiation', subtitle: 'Power rule, turning points', apiPath: 'diff-api', topicKey: 'differentiation',
-  diffLabels: { easy: 'Easy — Power rule', medium: 'Medium — Polynomial', hard: 'Hard — Turning point x', extrahard: 'Extra Hard — Min/Max value' },
-  placeholders: 'e.g. 12 or -3/2',
-})
-
-const BasesApp = makeQuizApp({
-  title: 'Number Bases', subtitle: 'Binary, decimal, hexadecimal', apiPath: 'bases-api', topicKey: 'number-bases',
-  diffLabels: { easy: 'Easy — Dec→Bin', medium: 'Medium — Bin→Dec', hard: 'Hard — Dec→Hex', extrahard: 'Extra Hard — Bin add / Hex→Bin' },
-  placeholders: (q, d) => d === 'medium' ? 'e.g. 42' : d === 'hard' ? 'e.g. FF' : 'e.g. 101010',
-})
-
-const CircleThApp = makeQuizApp({
-  title: 'Circle Theorems', subtitle: 'Angles, tangents, cyclic quads', apiPath: 'circleth-api', topicKey: 'circle-theorems',
-  diffLabels: { easy: 'Easy — Semicircle', medium: 'Medium — Centre/Circum', hard: 'Hard — Cyclic quad', extrahard: 'Extra Hard — Tangent' },
-  placeholders: 'e.g. 45',
-})
-
-const IntegApp = makeQuizApp({
-  title: 'Integration', subtitle: 'Reverse differentiation & areas', apiPath: 'integ-api', topicKey: 'integration',
-  diffLabels: { easy: 'Easy — Power rule', medium: 'Medium — Definite integral', hard: 'Hard — Substitution', extrahard: 'Extra Hard — Area under curve' },
-  placeholders: 'e.g. 3/4', tip: 'Use fractions like 3/4 if needed',
-})
-
-const StdFormApp = makeQuizApp({
-  title: 'Standard Form', subtitle: 'Scientific notation operations', apiPath: 'stdform-api', topicKey: 'standard-form',
-  diffLabels: { easy: 'Easy — Convert', medium: 'Medium — Multiply', hard: 'Hard — Divide', extrahard: 'Extra Hard — Add' },
-  placeholders: 'e.g. 3.5 × 10^4', tip: 'Format: a × 10^n',
-})
-
-const BoundsApp = makeQuizApp({
-  title: 'Bounds', subtitle: 'Upper & lower bounds, error intervals', apiPath: 'bounds-api', topicKey: 'bounds',
-  diffLabels: { easy: 'Easy — Lower bound', medium: 'Medium — Nearest 10', hard: 'Hard — Sum bounds', extrahard: 'Extra Hard — Division bounds' },
-  placeholders: 'e.g. 4.25',
-})
-
-const SDTApp = makeQuizApp({
-  title: 'Speed, Distance, Time', subtitle: 'Rate problems & conversions', apiPath: 'sdt-api', topicKey: 'speed-distance-time',
-  diffLabels: { easy: 'Easy — Distance', medium: 'Medium — Time', hard: 'Hard — Average speed', extrahard: 'Extra Hard — Convert' },
-  placeholders: 'e.g. 120',
-})
-
-const VariationApp = makeQuizApp({
-  title: 'Variation', subtitle: 'Direct & inverse proportion equations', apiPath: 'variation-api', topicKey: 'variation',
-  diffLabels: { easy: 'Easy — Direct (y∝x)', medium: 'Medium — Inverse (y∝1/x)', hard: 'Hard — y∝x²', extrahard: 'Extra Hard — y∝1/√x' },
-  placeholders: 'e.g. 24',
-})
-
-const HcfLcmApp = makeQuizApp({
-  title: 'HCF & LCM', subtitle: 'Highest common factor & lowest common multiple', apiPath: 'hcflcm-api', topicKey: 'hcf-and-lcm',
-  diffLabels: { easy: 'Easy — HCF', medium: 'Medium — LCM', hard: 'Hard — Three numbers', extrahard: 'Extra Hard — Word problem' },
-  placeholders: 'e.g. 60',
-})
-
-const ProfitLossApp = makeQuizApp({
-  title: 'Profit & Loss', subtitle: 'Cost price, selling price, discounts', apiPath: 'profitloss-api', topicKey: 'profit-and-loss',
-  diffLabels: { easy: 'Easy — Find profit', medium: 'Medium — Profit %', hard: 'Hard — Discount', extrahard: 'Extra Hard — Successive discounts' },
-  placeholders: 'e.g. 150',
-})
-
-const RoundingApp = makeQuizApp({
-  title: 'Rounding', subtitle: 'Decimal places, significant figures, estimation', apiPath: 'rounding-api', topicKey: 'rounding',
-  diffLabels: { easy: 'Easy — Decimal places', medium: 'Medium — Sig. figures', hard: 'Hard — Truncation', extrahard: 'Extra Hard — Estimation' },
-  placeholders: 'e.g. 3.14',
-})
-
-const BinomialApp = makeQuizApp({
-  title: 'Binomial Theorem', subtitle: 'Expansions, coefficients, nCr', apiPath: 'binomial-api', topicKey: 'binomial-theorem',
-  diffLabels: { easy: 'Easy — nCr', medium: 'Medium — (1+x)^n', hard: 'Hard — (a+bx)^n', extrahard: 'Extra Hard — Specific term' },
-  placeholders: 'e.g. 210',
-})
-
-const ComplexApp = makeQuizApp({
-  title: 'Complex Numbers', subtitle: 'Add, multiply, modulus of complex numbers', apiPath: 'complex-api', topicKey: 'complex-numbers',
-  diffLabels: { easy: 'Easy — Addition', medium: 'Medium — Multiplication', hard: 'Hard — Modulus', extrahard: 'Extra Hard — z²' },
-  placeholders: (q, d) => d === 'hard' ? 'e.g. 13' : 'e.g. 3,-2 for 3-2i',
-  tip: 'For complex answers give a,b where z = a + bi',
-})
-
-const AnglesApp = makeQuizApp({
-  title: 'Angles', subtitle: 'Lines, points, parallel line angles', apiPath: 'angles-api', topicKey: 'angles',
-  diffLabels: { easy: 'Easy — Straight line', medium: 'Medium — At a point', hard: 'Hard — Vertically opposite', extrahard: 'Extra Hard — Parallel lines' },
-  placeholders: 'e.g. 65',
-})
-
-const TrianglesApp = makeQuizApp({
-  title: 'Triangles', subtitle: 'Angle sum, isosceles, exterior angle', apiPath: 'triangles-api', topicKey: 'triangles',
-  diffLabels: { easy: 'Easy — Angle sum', medium: 'Medium — Isosceles', hard: 'Hard — Exterior angle', extrahard: 'Extra Hard — Multi-step' },
-  placeholders: 'e.g. 72',
-})
-
-const CongruenceApp = makeQuizApp({
-  title: 'Congruence', subtitle: 'SSS, SAS, ASA, RHS', apiPath: 'congruence-api', topicKey: 'congruence',
-  diffLabels: { easy: 'Easy — Find side', medium: 'Medium — Find angle', hard: 'Hard — Name the rule', extrahard: 'Extra Hard — In a figure' },
-  placeholders: (q, d) => d === 'hard' ? 'e.g. SAS' : 'e.g. 7',
-})
-
-const PythagApp = makeQuizApp({
-  title: "Pythagoras' Theorem", subtitle: 'Hypotenuse, legs, 3D diagonal', apiPath: 'pythag-api', topicKey: 'pythagoras-theorem',
-  diffLabels: { easy: 'Easy — Hypotenuse', medium: 'Medium — Shorter side', hard: 'Hard — Word problem', extrahard: 'Extra Hard — 3D diagonal' },
-  placeholders: 'e.g. 13',
-})
-
-const PolygonsApp = makeQuizApp({
-  title: 'Polygons', subtitle: 'Interior & exterior angles, diagonals', apiPath: 'polygons-api', topicKey: 'polygons',
-  diffLabels: { easy: 'Easy — Angle sum', medium: 'Medium — Each angle', hard: 'Hard — Find sides', extrahard: 'Extra Hard — Diagonals' },
-  placeholders: 'e.g. 540',
-})
-
-const SimilarityApp = makeQuizApp({
-  title: 'Similarity', subtitle: 'Scale factor, area & volume ratios', apiPath: 'similarity-api', topicKey: 'similarity',
-  diffLabels: { easy: 'Easy — Missing side', medium: 'Medium — Scale factor', hard: 'Hard — Area ratio', extrahard: 'Extra Hard — Volume ratio' },
-  placeholders: 'e.g. 24',
-})
-
-const LinearEqApp = makeQuizApp({
-  title: 'Linear Equations', subtitle: 'Solve for x', apiPath: 'lineareq-api', topicKey: 'linear-equations',
-  diffLabels: { easy: 'Easy — ax+b=c', medium: 'Medium — ax+b=cx+d', hard: 'Hard — a(bx+c)=d', extrahard: 'Extra Hard — (ax+b)/c=d' },
-  placeholders: 'e.g. 3 or -2.5',
-})
-
-const DecimalsApp = makeQuizApp({
-  title: 'Decimals', subtitle: 'Add, subtract, multiply, divide', apiPath: 'decimals-api', topicKey: 'decimals',
-  diffLabels: { easy: 'Easy — Add', medium: 'Medium — Subtract', hard: 'Hard — Multiply', extrahard: 'Extra Hard — Divide' },
-  placeholders: 'e.g. 6.1',
-})
-
-const PermCombApp = makeQuizApp({
-  title: 'Perm. & Comb.', subtitle: 'Permutations & combinations', apiPath: 'permcomb-api', topicKey: 'permutations-and-combinations',
-  diffLabels: { easy: 'Easy — nPr', medium: 'Medium — nCr', hard: 'Hard — Word problems', extrahard: 'Extra Hard — With/without repetition' },
-  placeholders: 'e.g. 120',
-})
-
-const LimitsApp = makeQuizApp({
-  title: 'Limits', subtitle: 'Evaluate limits', apiPath: 'limits-api', topicKey: 'limits',
-  diffLabels: { easy: 'Easy — Direct sub', medium: 'Medium — Factorable', hard: 'Hard — Trig limits', extrahard: 'Extra Hard — Limits at infinity' },
-  placeholders: 'e.g. 4 or 0.5',
-})
-
-const InvTrigApp = makeQuizApp({
-  title: 'Inverse Trig', subtitle: 'arcsin, arccos, arctan', apiPath: 'invtrig-api', topicKey: 'inverse-trigonometry',
-  diffLabels: { easy: 'Easy — Basic values', medium: 'Medium — √ values', hard: 'Hard — Compositions', extrahard: 'Extra Hard — Principal values' },
-  placeholders: 'e.g. 30 or 45',
-})
-
-const RemFactorApp = makeQuizApp({
-  title: 'Remainder Theorem', subtitle: 'Remainder & factor theorem', apiPath: 'remfactor-api', topicKey: 'remainder-theorem',
-  diffLabels: { easy: 'Easy — Remainder (deg 2)', medium: 'Medium — Factor check', hard: 'Hard — Remainder (deg 3)', extrahard: 'Extra Hard — Find k' },
-  placeholders: 'e.g. 7 or yes/no',
-})
-
-const HeronApp = makeQuizApp({
-  title: "Heron's Formula", subtitle: 'Triangle area from sides', apiPath: 'heron-api', topicKey: 'herons-formula',
-  diffLabels: { easy: 'Easy — Semi-perimeter', medium: 'Medium — Integer area', hard: 'Hard — Decimal area', extrahard: 'Extra Hard — Find side' },
-  placeholders: 'e.g. 24',
-})
-
-const SharesApp = makeQuizApp({
-  title: 'Shares & Dividends', subtitle: 'Shares, dividends, returns', apiPath: 'shares-api', topicKey: 'shares-and-dividends',
-  diffLabels: { easy: 'Easy — Find dividend', medium: 'Medium — Income', hard: 'Hard — Return %', extrahard: 'Extra Hard — Buy for target' },
-  placeholders: 'e.g. 500',
-})
-
-const BankingApp = makeQuizApp({
-  title: 'Banking (RD)', subtitle: 'Interest & recurring deposits', apiPath: 'banking-api', topicKey: 'banking',
-  diffLabels: { easy: 'Easy — Simple interest', medium: 'Medium — Compound interest', hard: 'Hard — RD maturity', extrahard: 'Extra Hard — Find installment' },
-  placeholders: 'e.g. 12600',
-})
-
 // Gym Decimals — multiply two signed single-digit numbers each shifted by a
 // power of 10 (e.g., -0.8 × 90, 0.002 × -0.7). Multiple-choice with
 // distractors that test sign and decimal-place precision.
-const GymDecimalsApp = makeMCQuizApp({
-  title: 'Gym Decimals', subtitle: 'Signed decimal multiplication — 1-digit × 1-digit', apiPath: 'gymdecimals-api',
-  adaptiveOnly: true,
-  diffLabels: {
-    easy: 'Easy — shift ≤ 1 place',
-    medium: 'Medium — ≤ 2 places',
-    hard: 'Hard — ≤ 3 places',
-    extrahard: 'Extra Hard — ≤ 4 places',
-  },
-  tip: 'Each operand is one non-zero digit (1-9) with a sign and the decimal point moved. Multiply the digits, apply the sign rule, then count decimal places.',
-})
-
 // Functions Gym — evaluate degree-1/2/3 polynomials and simple linear
 // rationals at integer x. All multiplications stay within single-digit
 // times-tables.
-const FuncGymApp = makeMCQuizApp({
-  title: 'Functions Gym', subtitle: 'Evaluate small polynomials & rationals',
-  apiPath: 'funcgym-api',
-  adaptiveOnly: true,
-  diffLabels: {
-    easy: 'Easy — degree 1 (ax + b)',
-    medium: 'Medium — degree 2 (ax² + bx + c)',
-    hard: 'Hard — degree 3',
-    extrahard: 'Extra Hard — (ax + b) ÷ k',
-  },
-  tip: 'Substitute x and evaluate. Distractors are off by a small slip — sign or off-by-one — so read carefully.',
-})
-
 // DotProducts Gym — 2D and 3D dot products with single-digit signed integers.
-const DotProdGymApp = makeMCQuizApp({
-  title: 'DotProducts Gym', subtitle: 'a · b for 2- and 3-tuples (signed digits)',
-  apiPath: 'dotprodgym-api',
-  adaptiveOnly: true,
-  diffLabels: {
-    easy: 'Easy — 2D vectors',
-    medium: 'Medium — mixed 2D / 3D',
-    hard: 'Hard — 3D, components up to ±6',
-    extrahard: 'Extra Hard — 3D, components up to ±9',
-  },
-  tip: 'Multiply each pair of components and add. Watch the signs — most distractors flip exactly one term.',
-})
-
 // Fractions-add-gym — add two single-digit fractions, multiple choice.
-const FracAddGymApp = makeMCQuizApp({
-  title: 'Fractions-add-gym', subtitle: 'Add single-digit fractions',
-  apiPath: 'fracaddgym-api',
-  adaptiveOnly: true,
-  diffLabels: {
-    easy: 'Easy — same denominator',
-    medium: 'Medium — different denominators',
-    hard: 'Hard — answers may need simplifying',
-    extrahard: 'Extra Hard — signed numerators',
-  },
-  tip: 'Find a common denominator, add the numerators, then simplify. Distractors include the classic "added across" mistake.',
-})
-
 // LinearEquations-Gym — solve ax+b=0 (and harder forms) where every division
 // stays inside single-digit times-tables.
-const LinEqGymApp = makeMCQuizApp({
-  title: 'LinearEquations-Gym', subtitle: 'Solve linear equations with integer answers',
-  apiPath: 'lineqgym-api',
-  adaptiveOnly: true,
-  diffLabels: {
-    easy: 'Easy — ax + b = 0, |a| ≤ 5',
-    medium: 'Medium — ax + b = 0, |a| ≤ 9',
-    hard: 'Hard — ax + b = c',
-    extrahard: 'Extra Hard — ax + b = cx + d',
-  },
-  tip: 'Solutions are always whole numbers. The equation is built so you only ever divide by a single-digit number.',
-})
-
 // Indices-Gym — index laws (a^k · a^l = a^(k+l), a^k ÷ a^l = a^(k-l), etc.)
-const IndicesGymApp = makeMCQuizApp({
-  title: 'Indices-Gym', subtitle: 'Apply index laws — multiply, divide, power',
-  apiPath: 'indicesgym-api',
-  adaptiveOnly: true,
-  diffLabels: {
-    easy: 'Easy — multiply / divide on one base',
-    medium: 'Medium — adds (a^k)^l',
-    hard: 'Hard — two bases & chained ops',
-    extrahard: 'Extra Hard — power-of-power chains',
-  },
-  tip: 'Use a^k · a^l = a^(k+l), a^k ÷ a^l = a^(k−l), (a^k)^l = a^(k·l). Distractors swap the wrong rule.',
-})
-
 // Polynomials Gym — progressive ladder from signed integer arithmetic up
 // through monomial × monomial. All multiplications stay within the
 // 9-times-tables (single-digit factors); additions can use larger numbers.
-const PolyGymApp = makeMCQuizApp({
-  title: 'Polynomials Gym', subtitle: 'Arithmetic → monomial algebra (single-digit ×)',
-  apiPath: 'polygym-api',
-  adaptiveOnly: true,
-  diffLabels: {
-    easy: 'Easy — signed int × int / two-digit add',
-    medium: 'Medium — int × monomial / like-term add',
-    hard: 'Hard — monomial × monomial',
-    extrahard: 'Extra Hard — squaring & collect like terms',
-  },
-  tip: 'Every multiplication reduces to two single-digit numbers. Watch the signs and the powers.',
-})
-
 // ───────────────────────────────────────────────────────────────────────────
 // MATRIX MYSTICS — comprehensive linear algebra MCQ test bank
 // 6 modules, 53 topics, 1855+ questions across easy/medium/hard + real app.
 // ───────────────────────────────────────────────────────────────────────────
-
-const MatrixMysticsApp = makeMCQuizApp({
-  title: 'Matrix Mystics',
-  subtitle: 'Linear Algebra — 6 modules, 53 topics',
-  apiPath: 'matrixmystics-api',
-  adaptiveOnly: true,
-  diffLabels: {
-    easy: 'Easy',
-    medium: 'Medium',
-    hard: 'Hard',
-    extrahard: 'Extra Hard',
-  },
-  tip: 'All questions are MCQ. Read carefully — options are similar length to test real understanding.',
-})
 
 // ───────────────────────────────────────────────────────────────────────────
 // GYM — unified adaptive puzzle that draws from all 7 gym families.
@@ -56816,12 +56528,6 @@ function GymApp({ onBack }) {
 }
 // ──────────────────────────── /Gym ─────────────────────────────
 
-const GSTApp = makeQuizApp({
-  title: 'GST', subtitle: 'Goods & Services Tax', apiPath: 'gst-api', topicKey: 'gst',
-  diffLabels: { easy: 'Easy — GST amount', medium: 'Medium — Total with GST', hard: 'Hard — CGST+SGST', extrahard: 'Extra Hard — Input tax credit' },
-  placeholders: 'e.g. 180',
-})
-
 function GSTPage(props) {
   const [learningPhase, setLearningPhase] = useState('select'); // 'select', 'learn', 'test'
   
@@ -56891,36 +56597,6 @@ function GSTPage(props) {
     return <GSTApp {...props} onBack={props.onBack} />;
   }
 }
-
-const SectionApp = makeQuizApp({
-  title: 'Section Formula', subtitle: 'Midpoint, section, centroid', apiPath: 'section-api', topicKey: 'section-formula',
-  diffLabels: { easy: 'Easy — Midpoint', medium: 'Medium — Internal division', hard: 'Hard — Find ratio', extrahard: 'Extra Hard — Centroid' },
-  placeholders: 'e.g. 3,5',
-})
-
-const LinProgApp = makeQuizApp({
-  title: 'Linear Programming', subtitle: 'Optimize objective functions', apiPath: 'linprog-api', topicKey: 'linear-programming',
-  diffLabels: { easy: 'Easy — Evaluate at vertex', medium: 'Medium — Max from vertices', hard: 'Hard — 2-constraint LP', extrahard: 'Extra Hard — 3-constraint LP' },
-  placeholders: 'e.g. 42',
-})
-
-const CircMeasureApp = makeQuizApp({
-  title: 'Circular Measure', subtitle: 'Radians, arc length, sectors', apiPath: 'circmeasure-api', topicKey: 'circular-measure',
-  diffLabels: { easy: 'Easy — Deg→Rad', medium: 'Medium — Rad→Deg', hard: 'Hard — Arc length', extrahard: 'Extra Hard — Sector area' },
-  placeholders: 'e.g. 1.57',
-})
-
-const ConicsApp = makeQuizApp({
-  title: 'Conic Sections', subtitle: 'Circle, parabola, ellipse, hyperbola', apiPath: 'conics-api', topicKey: 'conic-sections',
-  diffLabels: { easy: 'Easy — Identify conic', medium: 'Medium — Circle radius', hard: 'Hard — Eccentricity', extrahard: 'Extra Hard — Focus of parabola' },
-  placeholders: (q, d) => d === 'easy' ? 'e.g. circle' : 'e.g. 5',
-})
-
-const DiffEqApp = makeQuizApp({
-  title: 'Differential Equations', subtitle: 'Order, degree, solve DEs', apiPath: 'diffeq-api', topicKey: 'differential-equations',
-  diffLabels: { easy: 'Easy — Find order', medium: 'Medium — Find degree', hard: 'Hard — Verify solution', extrahard: 'Extra Hard — Solve separable' },
-  placeholders: (q, d) => d === 'hard' ? 'yes or no' : 'e.g. 2',
-})
 
 /* ── Tatsavit App ─────────────────────────────────── */
 // Algebra Simplification Drill — 3 topics, 13 levels
