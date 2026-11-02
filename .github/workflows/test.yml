@@ -2,9 +2,9 @@ name: Tests
 
 on:
   push:
-    branches: [main]
+    branches: [main, demo]
   pull_request:
-    branches: [main]
+    branches: [main, demo]
 
 # Cancel in-flight runs for the same ref — no point testing a PR twice
 concurrency:
