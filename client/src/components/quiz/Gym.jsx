@@ -5,9 +5,9 @@ import CONFIG from '../../config'
 import useAutoAdvance from '../../hooks/useAutoAdvance'
 import useTimer from '../../hooks/useTimer'
 import FeedbackDisplay from '../common/FeedbackDisplay'
-import QuizLayout from '../layout/QuizLayout'
 import GlossaryText from '../common/GlossaryText'
 import ResultsTable from '../common/ResultsTable'
+import QuizLayout from '../layout/QuizLayout'
 
 const ADAPT_COLORS = { easy: '#4caf50', medium: '#ff9800', hard: '#f44336', extrahard: '#9c27b0' }
 

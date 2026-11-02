@@ -20,26 +20,28 @@ function Confetti() {
     const [particles] = useState(createParticles);
 
     return (
-        <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 99, overflow: 'hidden' }}>
-        {particles.map(p => (
-            <div
-            key={p.id}
-            className="confetti-particle"
-            style={{
-                left: p.left,
-                '--confetti-color': p.color,
-                '--confetti-radius': p.radius,
-                '--confetti-duration': p.duration,
-                backgroundColor: p.color,
-                borderRadius: p.radius,
-                width: p.size,
-                height: p.size,
-                animationDelay: p.delay,
-                transform: p.transform,
-                position: 'absolute',
-            }}
-            />
-        ))}
+        <div style={{ position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 9999, overflow: 'hidden' }}>
+            <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 99, overflow: 'hidden' }}>
+            {particles.map(p => (
+                <div
+                key={p.id}
+                className="confetti-particle"
+                style={{
+                    left: p.left,
+                    '--confetti-color': p.color,
+                    '--confetti-radius': p.radius,
+                    '--confetti-duration': p.duration,
+                    backgroundColor: p.color,
+                    borderRadius: p.radius,
+                    width: p.size,
+                    height: p.size,
+                    animationDelay: p.delay,
+                    transform: p.transform,
+                    position: 'absolute',
+                }}
+                />
+            ))}
+            </div>
         </div>
     );
 }

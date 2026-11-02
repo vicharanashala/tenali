@@ -437,11 +437,7 @@ function ScaffoldedTables({ studentName }) {
         const nextTable = currentTable < 19 ? currentTable + 1 : null
         return (
         <div className="app-shell">
-            {showCelebration && (
-                <div style={{ position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 9999, overflow: 'hidden' }}>
-                    <Confetti />
-                </div>
-            )}
+            {showCelebration && <Confetti />}
             <div className="card">
             <h1 style={{ fontSize: '2rem' }}>
                 {studentName} MASTERED {currentTable}x!
