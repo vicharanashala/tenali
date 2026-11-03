@@ -16,6 +16,8 @@ export const STORAGE_KEYS = {
   STREAK: 'tenali-streak',
 };
 
+// In-memory cache to preserve array reference equality across un-mutated loads
+let memoryCompletedTopics = null;
 
 /**
  * Checks whether a topic has achieved Stage 3 completion.
@@ -88,16 +90,30 @@ export function calculateSectionProgress(sectionTiles = [], completedTopics = []
  */
 export function loadLocalProgress() {
   try {
+    const raw = localStorage.getItem(STORAGE_KEYS.COMPLETED_TOPICS);
+    const parsed = raw ? JSON.parse(raw) : [];
+
+    if (
+      memoryCompletedTopics &&
+      memoryCompletedTopics.length === parsed.length &&
+      memoryCompletedTopics.every((k, i) => k === parsed[i])
+    ) {
+      // Reuse cached reference to preserve reference equality across renders
+    } else {
+      memoryCompletedTopics = parsed;
+    }
+
     return {
-      completedTopics: JSON.parse(localStorage.getItem(STORAGE_KEYS.COMPLETED_TOPICS) || '[]'),
+      completedTopics: memoryCompletedTopics,
       goldMastery: JSON.parse(localStorage.getItem(STORAGE_KEYS.GOLD_MASTERY) || '[]'),
       coins: parseInt(localStorage.getItem(STORAGE_KEYS.COINS) || '0', 10),
       totalSolved: parseInt(localStorage.getItem(STORAGE_KEYS.TOTAL_SOLVED) || '0', 10),
       streak: parseInt(localStorage.getItem(STORAGE_KEYS.STREAK) || '0', 10),
     };
   } catch {
+    memoryCompletedTopics = [];
     return {
-      completedTopics: [],
+      completedTopics: memoryCompletedTopics,
       goldMastery: [],
       coins: 0,
       totalSolved: 0,
@@ -121,6 +137,7 @@ export function loadLocalProgress() {
 export function saveLocalProgress({ completedTopics, goldMastery, coins, totalSolved, streak } = {}) {
   try {
     if (completedTopics !== undefined) {
+      memoryCompletedTopics = completedTopics;
       localStorage.setItem(STORAGE_KEYS.COMPLETED_TOPICS, JSON.stringify(completedTopics));
     }
     if (goldMastery !== undefined) {
@@ -153,6 +170,13 @@ export function addCompletedTopic(topicKey, difficulty = '') {
   const local = loadLocalProgress();
   const targetKey = difficulty ? `${topicKey}-${difficulty}` : topicKey;
   const startedKey = `${topicKey}-started`;
+
+  // Idempotency guard: if both targetKey and startedKey are already present,
+  // return the identical array reference without writing to storage or triggering state updates.
+  if (local.completedTopics.includes(targetKey) && local.completedTopics.includes(startedKey)) {
+    return local.completedTopics;
+  }
+
   const set = new Set(local.completedTopics);
   set.add(targetKey);
   set.add(startedKey);
@@ -165,6 +189,8 @@ export function addCompletedTopic(topicKey, difficulty = '') {
  * Merges incoming progress updates with existing local storage monotonically.
  * Completed topics and gold mastery are unified (Set union) so completed topics
  * can NEVER be overwritten, lost, or downgraded by stale closures or async syncs.
+ * For numeric counters (streak, coins, totalSolved), the incoming/server value is
+ * authoritative when provided so resets (such as missed daily streaks) take effect.
  *
  * @param {{
  *   completedTopics?: string[],
@@ -189,9 +215,9 @@ export function reconcileProgress(incoming = {}) {
   const goldMastery = Array.from(
     new Set([...local.goldMastery, ...(incoming.goldMastery || [])])
   );
-  const coins = incoming.coins !== undefined ? Math.max(local.coins, incoming.coins) : local.coins;
-  const totalSolved = incoming.totalSolved !== undefined ? Math.max(local.totalSolved, incoming.totalSolved) : local.totalSolved;
-  const streak = incoming.streak !== undefined ? Math.max(local.streak, incoming.streak) : local.streak;
+  const coins = incoming.coins !== undefined ? incoming.coins : local.coins;
+  const totalSolved = incoming.totalSolved !== undefined ? incoming.totalSolved : local.totalSolved;
+  const streak = incoming.streak !== undefined ? incoming.streak : local.streak;
 
   const merged = { completedTopics, goldMastery, coins, totalSolved, streak };
   saveLocalProgress(merged);

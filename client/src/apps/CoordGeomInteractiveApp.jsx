@@ -117,39 +117,19 @@ export default function CoordGeomInteractiveApp({ onBack }) {
   if (!started) {
     const diffLabels = { easy: 'Easy — Foundations', medium: 'Medium — Lengths', hard: 'Hard — Slopes & Eqs', extrahard: 'Extra Hard — Advanced' };
     return (
-      <div style={{ minHeight: '100vh', background: '#181512', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px', fontFamily: 'Inter, sans-serif' }}>
-        <div style={{
-          background: '#2D2520', border: '1.5px solid #4A4038', borderRadius: '28px',
-          boxShadow: '0 20px 40px rgba(0,0,0,.45)', padding: '48px 40px', maxWidth: '720px', width: '100%',
-          textAlign: 'center', position: 'relative'
-        }}>
-          <button onClick={onBack} style={{
-            position: 'absolute', top: '24px', left: '24px', background: 'transparent',
-            border: '1px solid #5B5048', borderRadius: '6px', padding: '6px 14px',
-            color: '#A89C93', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer'
-          }}>← Home</button>
-
-          <h1 style={{ fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 700, fontSize: '48px', color: '#F4F1ED', margin: '0 0 12px', lineHeight: 1.1 }}>
-            Coordinate Geometry
-          </h1>
-          <p style={{ color: '#988D84', fontSize: '0.9rem', margin: '0 0 40px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>
-            Choose a level and solve coordinate geometry challenges
-          </p>
-          <p style={{ color: '#988D84', fontSize: '0.9rem', margin: '0 0 24px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>
-            Practice coordinate geometry!
-          </p>
-
+      <QuizLayout title="Coordinate Geometry" subtitle="Choose a level and solve coordinate geometry challenges" onBack={onBack}>
+        <div className="welcome-box">
           <div style={{ marginBottom: '24px' }}>
-            <h3 style={{ color: '#F4F1ED', fontSize: '0.9rem', margin: '0 0 16px', fontFamily: 'Inter, sans-serif', fontWeight: 700 }}>
+            <h3 style={{ color: 'var(--clr-text)', fontSize: '0.9rem', margin: '0 0 16px', fontFamily: 'Inter, sans-serif', fontWeight: 700 }}>
               Select Difficulty:
             </h3>
             <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '12px' }}>
               {['easy', 'medium', 'hard', 'extrahard'].map(d => (
                 <button key={d} onClick={() => setDifficulty(d)} style={{
-                  background: difficulty === d ? '#F08C46' : 'transparent',
-                  border: difficulty === d ? '1px solid #F08C46' : '1px solid #5B5048',
+                  background: difficulty === d ? 'var(--clr-accent)' : 'transparent',
+                  border: difficulty === d ? '1px solid var(--clr-accent)' : '1px solid var(--clr-border)',
                   borderRadius: '50px', padding: '8px 16px',
-                  color: difficulty === d ? '#FFF' : '#988D84', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer'
+                  color: difficulty === d ? '#FFF' : 'var(--clr-text-soft)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer'
                 }}>
                   {diffLabels[d]}
                 </button>
@@ -158,24 +138,24 @@ export default function CoordGeomInteractiveApp({ onBack }) {
           </div>
 
           <div style={{ marginBottom: '32px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <label style={{ color: '#988D84', fontSize: '0.85rem', margin: '0 0 12px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>
+            <label style={{ color: 'var(--clr-text-soft)', fontSize: '0.85rem', margin: '0 0 12px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>
               How many questions?
             </label>
             <input type="text" value={numQuestions} onChange={(e) => { const v = e.target.value; if (v === '' || /^\d+$/.test(v)) setNumQuestions(v) }} style={{
-              background: '#463B34', border: '1px solid #5B5048', borderRadius: '6px',
-              padding: '10px', color: '#FFF', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem',
+              background: 'var(--clr-input)', border: '1px solid var(--clr-border)', borderRadius: '6px',
+              padding: '10px', color: 'var(--clr-text)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem',
               width: '100px', textAlign: 'center', outline: 'none'
             }} placeholder="10" />
           </div>
 
           <button onClick={startGame} style={{
-            background: '#F08C46', border: 'none', borderRadius: '6px',
+            background: 'var(--clr-accent)', border: 'none', borderRadius: '6px',
             padding: '10px 24px', color: '#FFF', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer'
           }}>
             Start Quiz
           </button>
         </div>
-      </div>
+      </QuizLayout>
     );
   }
 

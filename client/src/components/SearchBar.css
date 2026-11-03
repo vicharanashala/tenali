@@ -16,13 +16,64 @@
   align-items: center;
 }
 
-/* Magnifying glass icon on left */
+/* Base search input styling (applies to all standalone .search-bar elements across Tenali) */
+.search-bar {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 10px 18px;
+  border: 1.5px solid var(--clr-border);
+  border-radius: 9999px;
+  background: var(--clr-surface);
+  color: #ffffff;
+  outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition), background-color var(--transition);
+}
+
+.search-bar::placeholder {
+  color: var(--clr-text-soft);
+  opacity: 0.85;
+  font-weight: 400;
+}
+
+.search-bar:hover {
+  border-color: var(--clr-accent);
+}
+
+.search-bar:focus {
+  border-color: var(--clr-accent);
+  background: var(--clr-surface);
+  color: #ffffff;
+  box-shadow: 0 0 0 3px var(--clr-accent-soft), 0 4px 16px rgba(0, 0, 0, 0.18);
+}
+
+/* Light Theme Adjustments for Base Search Bar */
+[data-theme="light"] .search-bar {
+  background: #ffffff;
+  color: var(--clr-text);
+  border-color: var(--clr-border);
+}
+
+[data-theme="light"] .search-bar:hover {
+  border-color: var(--clr-accent);
+}
+
+[data-theme="light"] .search-bar:focus {
+  background: #ffffff;
+  color: #1a1614;
+  border-color: var(--clr-accent);
+}
+
+/* Magnifying glass icon on left for wrapped search bars */
 .search-input-icon {
   position: absolute;
   left: 16px;
   width: 18px;
   height: 18px;
-  color: var(--clr-text-soft); /* Subtle neutral in regular state */
+  color: var(--clr-text-soft);
   pointer-events: none;
   transition: color var(--transition), transform var(--transition);
   z-index: 1;
@@ -30,83 +81,36 @@
 
 .search-bar-wrapper:hover .search-input-icon,
 .search-bar-wrapper:focus-within .search-input-icon {
-  color: var(--clr-accent); /* Accent on hover/focus/active */
+  color: var(--clr-accent);
 }
 
 .search-bar-wrapper:focus-within .search-input-icon {
   transform: scale(1.08);
 }
 
-/* Stadium Pill Input */
+/* Stadium Pill Input with Icon Padding inside .search-bar-wrapper */
 .search-bar-wrapper .search-bar {
-  width: 100%;
-  max-width: 100%;
-  font-family: var(--font-body);
-  font-size: 0.95rem;
-  font-weight: 500;
   padding: 12px 44px 12px 44px; /* 44px left space for icon, 44px right space for clear button */
-  border: 1.5px solid var(--clr-border); /* Subtle neutral border in regular state */
-  border-radius: 9999px; /* Smooth stadium pill shape */
-  background: var(--clr-surface);
-  color: var(--clr-text);
-  outline: none;
-  box-sizing: border-box;
-  transition: border-color var(--transition), box-shadow var(--transition), background var(--transition), color var(--transition);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-}
-
-.search-bar-wrapper .search-bar::placeholder {
-  color: var(--clr-text-soft);
-  opacity: 0.85;
-  font-weight: 400;
-}
-
-/* Hover State: Accent border appears on hover */
-.search-bar-wrapper:hover .search-bar {
-  border-color: var(--clr-accent);
-}
-
-/* Active & Focused State: Accent border and glow */
-.search-bar-wrapper .search-bar:focus {
-  border-color: var(--clr-accent);
-  background: var(--clr-surface); /* Keep background identical on focus/typing */
-  color: #ffffff; /* Bright white text in dark mode */
-  box-shadow: 0 0 0 3px var(--clr-accent-soft), 0 4px 16px rgba(0, 0, 0, 0.18);
-}
-
-.search-bar-wrapper .search-bar:active {
-  border-color: var(--clr-accent);
 }
 
 /* Autofill styling prevention */
 .search-bar-wrapper .search-bar:-webkit-autofill,
 .search-bar-wrapper .search-bar:-webkit-autofill:hover,
-.search-bar-wrapper .search-bar:-webkit-autofill:focus {
+.search-bar-wrapper .search-bar:-webkit-autofill:focus,
+.search-bar:-webkit-autofill,
+.search-bar:-webkit-autofill:hover,
+.search-bar:-webkit-autofill:focus {
   -webkit-text-fill-color: #ffffff;
   -webkit-box-shadow: 0 0 0px 1000px var(--clr-surface) inset;
   transition: background-color 5000s ease-in-out 0s;
 }
 
-/* Light Theme Adjustments */
-[data-theme="light"] .search-bar-wrapper .search-bar {
-  background: #ffffff;
-  color: var(--clr-text);
-  border-color: var(--clr-border);
-}
-
-[data-theme="light"] .search-bar-wrapper:hover .search-bar {
-  border-color: var(--clr-accent);
-}
-
-[data-theme="light"] .search-bar-wrapper .search-bar:focus {
-  background: #ffffff;
-  color: #1a1614;
-  border-color: var(--clr-accent);
-}
-
 [data-theme="light"] .search-bar-wrapper .search-bar:-webkit-autofill,
 [data-theme="light"] .search-bar-wrapper .search-bar:-webkit-autofill:hover,
-[data-theme="light"] .search-bar-wrapper .search-bar:-webkit-autofill:focus {
+[data-theme="light"] .search-bar-wrapper .search-bar:-webkit-autofill:focus,
+[data-theme="light"] .search-bar:-webkit-autofill,
+[data-theme="light"] .search-bar:-webkit-autofill:hover,
+[data-theme="light"] .search-bar:-webkit-autofill:focus {
   -webkit-text-fill-color: #1a1614;
   -webkit-box-shadow: 0 0 0px 1000px #ffffff inset;
 }

@@ -37,6 +37,7 @@ import NetBuilderApp from './NetBuilderApp';
 import CrossSectionApp from './CrossSectionApp';
 
 window.React = React;
+import TILES from './features/tiles';
 import Home from './components/Home';
 import LinearAlgebraApp from './LinearAlgebraApp';
 import PathMap, { PmSuggestIcon } from './PathMap';
@@ -112,6 +113,9 @@ import VisualMathLabRedux, {
 } from './VisualMathLabRedux';
 import CoordinateGrid from './components/CoordinateGrid';
 import LanguageDashboard from './language/LanguageDashboard'
+import CrosswordApp from './language/CrosswordApp'
+import WordSearchApp from './language/WordSearchApp'
+import WordCreatorApp from './language/WordCreatorApp'
 import ContrastChallengeApp, { QuizLayoutExtension } from './ContrastChallengeApp'
 import CoordGeomInteractiveApp from './apps/CoordGeomInteractiveApp.jsx'
 import { VOCAB_CORPUS } from './vocabCorpus'
@@ -5316,7 +5320,7 @@ function SuperTables1App() {
         <div style={{ maxWidth: 620, margin: '0 auto' }}>
           {/* Header */}
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
-            <button onClick={goHome} style={S.back}>← Home</button>
+            <button onClick={goHome} style={S.back}>← Back</button>
             <div style={{ textAlign: 'center' }}>
               <div style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--clr-text-soft)' }}>Table of {tableNum}</div>
               <div style={{ fontSize: '1rem', fontWeight: 800, color: phase === 1 ? 'var(--clr-accent)' : 'var(--clr-correct)' }}>
@@ -9654,7 +9658,7 @@ function Chapter5App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack}>← Home</button>
+          <button className="back-button" onClick={onBack}>← Back</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter 5 — Fractions, Percentages & Standard Form</h1>
@@ -10737,7 +10741,7 @@ function Chapter6App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack}>← Home</button>
+          <button className="back-button" onClick={onBack}>← Back</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter 6 — Equations, Factors and Formulae</h1>
@@ -12413,7 +12417,7 @@ function Chapter7App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack}>← Home</button>
+          <button className="back-button" onClick={onBack}>← Back</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter 7 — Perimeter, Area & Volume</h1>
@@ -13913,7 +13917,7 @@ function Chapter8App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack}>← Home</button>
+          <button className="back-button" onClick={onBack}>← Back</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter 8 — Introduction to Probability</h1>
@@ -15599,7 +15603,7 @@ function Chapter9App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack}>← Home</button>
+          <button className="back-button" onClick={onBack}>← Back</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter 9 — Sequences, Surds & Sets</h1>
@@ -17287,7 +17291,7 @@ function Chapter10App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack}>← Home</button>
+          <button className="back-button" onClick={onBack}>← Back</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter 10 — Straight Lines Sequences, Surds & Sets Quadratic Equations</h1>
@@ -18834,7 +18838,7 @@ function Chapter11App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack}>← Home</button>
+          <button className="back-button" onClick={onBack}>← Back</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter 11 — Straight Lines Sequences, Surds & Sets Quadratic Equations</h1>
@@ -20387,7 +20391,7 @@ function Chapter12App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack}>← Home</button>
+          <button className="back-button" onClick={onBack}>← Back</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter 12 — Straight Lines Sequences, Surds & Sets Quadratic Equations</h1>
@@ -21775,7 +21779,7 @@ function Chapter13App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack}>← Home</button>
+          <button className="back-button" onClick={onBack}>← Back</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter 13 — Straight Lines Sequences, Surds & Sets Quadratic Equations</h1>
@@ -23312,7 +23316,7 @@ function Chapter14App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack}>← Home</button>
+          <button className="back-button" onClick={onBack}>← Back</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter 14 — Further Equations & Inequalities</h1>
@@ -24980,7 +24984,7 @@ function Chapter15App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack}>← Home</button>
+          <button className="back-button" onClick={onBack}>← Back</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter  — Scale Drawings, Bearings & Trigonometry</h1>
@@ -26120,7 +26124,7 @@ function Chapter16App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack}>← Home</button>
+          <button className="back-button" onClick={onBack}>← Back</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter  — Scale Drawings, Bearings & Trigonometry</h1>
@@ -27513,7 +27517,7 @@ function Chapter17App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack}>← Home</button>
+          <button className="back-button" onClick={onBack}>← Back</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter  — Scale Drawings, Bearings & Trigonometry</h1>
@@ -29172,7 +29176,7 @@ function Chapter18App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack}>← Home</button>
+          <button className="back-button" onClick={onBack}>← Back</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter  — Scale Drawings, Bearings & Trigonometry</h1>
@@ -30569,7 +30573,7 @@ function Chapter19App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack}>← Home</button>
+          <button className="back-button" onClick={onBack}>← Back</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter  — Scale Drawings, Bearings & Trigonometry</h1>
@@ -31833,7 +31837,7 @@ function Chapter20App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack}>← Home</button>
+          <button className="back-button" onClick={onBack}>← Back</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter  — Scale Drawings, Bearings & Trigonometry</h1>
@@ -33360,7 +33364,7 @@ function Chapter21App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack}>← Home</button>
+          <button className="back-button" onClick={onBack}>← Back</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter  — Scale Drawings, Bearings & Trigonometry</h1>
@@ -34716,7 +34720,7 @@ function Chapter22App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack}>← Home</button>
+          <button className="back-button" onClick={onBack}>← Back</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter 22 — More Equations, Formulae & Functions</h1>
@@ -36194,7 +36198,7 @@ function Chapter23App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack}>← Home</button>
+          <button className="back-button" onClick={onBack}>← Back</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter 23 — Transformations & Vectors</h1>
@@ -37627,7 +37631,7 @@ function Chapter24App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack}>← Home</button>
+          <button className="back-button" onClick={onBack}>← Back</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter 24 — Probability with Tree & Venn Diagrams</h1>
@@ -38477,7 +38481,7 @@ function Chapter1App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack}>← Home</button>
+          <button className="back-button" onClick={onBack}>← Back</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter 1 — Reviewing Number Concepts</h1>
@@ -39298,7 +39302,7 @@ function Chapter2App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack}>← Home</button>
+          <button className="back-button" onClick={onBack}>← Back</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter 2 — Making Sense of Algebra</h1>
@@ -40094,7 +40098,7 @@ function Chapter3App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack}>← Home</button>
+          <button className="back-button" onClick={onBack}>← Back</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter 3 — Lines, Angles and Shapes</h1>
@@ -40888,7 +40892,7 @@ function Chapter4App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack}>← Home</button>
+          <button className="back-button" onClick={onBack}>← Back</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter 4 — Collecting, Organising and Displaying Data</h1>
@@ -41213,7 +41217,7 @@ function TenthApp({ onBack }) {
   return (
     <div style={{ maxWidth: 980, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
       <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-        <button className="back-button" onClick={onBack}>← Home</button>
+        <button className="back-button" onClick={onBack}>← Back</button>
       </div>
       {user && (
         <p style={{ margin: '0 0 12px', fontSize: '1.1rem', opacity: 0.85 }}>
@@ -41298,22 +41302,6 @@ function TenthApp({ onBack }) {
 
 
 
-const getTopicBadgeType = (topicKey, completedTopicsList) => {
-  if (!completedTopicsList || !Array.isArray(completedTopicsList)) return 'topic_blue';
-  if (completedTopicsList.includes(`${topicKey}-extrahard`) || completedTopicsList.includes(`${topicKey}-hard`) || completedTopicsList.includes(`${topicKey}-adaptive`)) {
-    return 'topic_gold';
-  }
-  if (completedTopicsList.includes(`${topicKey}-medium`)) {
-    return 'topic_silver';
-  }
-  if (completedTopicsList.includes(`${topicKey}-easy`)) {
-    return 'topic_bronze';
-  }
-  if (completedTopicsList.includes(`${topicKey}-started`)) {
-    return 'topic_blue';
-  }
-  return 'topic_blue';
-};
 
 function ComicAdditionApp({ onBack }) {
   const [started, setStarted] = useState(false)
@@ -42191,6 +42179,21 @@ function PercentPage(props) {
   return <PercentExplanationApp {...props} PercentApp={PercentApp} />;
 }
 
+function getCategoryForMode(modeKey) {
+  if (!modeKey || modeKey === 'goalpractice') return null;
+  if (typeof modeKey === 'string') {
+    if (modeKey === 'contrastlist' || modeKey.startsWith('contrast-')) return 'contrast-challenge';
+    if (modeKey === 'treasurehunt' || modeKey.startsWith('treasurehunt-') || modeKey.startsWith('treasurehunt_')) return 'treasure-hunt';
+    if (modeKey === 'riddle' || modeKey.startsWith('riddle-') || modeKey.startsWith('riddle_')) return 'math-riddles';
+    if (modeKey === 'playground' || modeKey === 'local-compiler') return 'coding-playground';
+  }
+  if (Array.isArray(TILES)) {
+    const tile = TILES.find(t => t.key === modeKey);
+    if (tile?.category) return tile.category;
+  }
+  return 'shelf';
+}
+
 function App() {
   const [diagnosticState, setDiagnosticState] = useState({});
   const { t } = useI18n();
@@ -42199,11 +42202,54 @@ function App() {
   const [mode, setMode] = useState(() => {
     try {
       const params = new URLSearchParams(window.location.search);
-      return params.get('mode') || null;
+      const m = params.get('mode');
+      if (m && m.startsWith('contrast-')) {
+        localStorage.setItem('tenali-start-contrast-id', m.replace(/^contrast-/, ''));
+        return m;
+      }
+      if (m === 'contrastlist') {
+        return null;
+      }
+      if (m === 'treasurehunt') {
+        return null;
+      }
+      if (m === 'riddle') {
+        return null;
+      }
+      return m || null;
     } catch {
       return null;
     }
   })
+
+  // Currently selected section on Home (null = cards grid, or section key like 'contrast-challenge')
+  const [selectedHomeSection, setSelectedHomeSection] = useState(() => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const m = params.get('mode');
+      const sec = params.get('section');
+      if (sec) return sec;
+      if (m === 'contrastlist' || (m && m.startsWith('contrast-'))) return 'contrast-challenge';
+      if (m === 'treasurehunt' || (m && (m.startsWith('treasurehunt-') || m.startsWith('treasurehunt_')))) return 'treasure-hunt';
+      if (m === 'riddle' || (m && (m.startsWith('riddle-') || m.startsWith('riddle_')))) return 'math-riddles';
+      return null;
+    } catch {
+      return null;
+    }
+  });
+
+  const handleSelectSection = (sec) => {
+    setSelectedHomeSection(sec);
+    try {
+      const url = new URL(window.location.href);
+      if (sec) {
+        url.searchParams.set('section', sec);
+      } else {
+        url.searchParams.delete('section');
+      }
+      window.history.replaceState({}, '', url.toString());
+    } catch {}
+  };
 
   // Current view when mode is null: 'landing' (full landing page) or 'puzzles' (90+ puzzles grid)
   const [currentView, setCurrentView] = useState(() => {
@@ -42312,17 +42358,21 @@ function App() {
       const params = new URLSearchParams(window.location.search);
       const currentMode = params.get('mode');
       const currentParamView = params.get('view');
+      const currentParamSection = params.get('section');
       if (mode) {
         if (currentMode !== mode) {
-          window.history.pushState({ mode }, '', `${BASE}/?mode=${mode}`);
+          const sectionQuery = selectedHomeSection ? `&section=${encodeURIComponent(selectedHomeSection)}` : '';
+          window.history.pushState({ mode }, '', `${BASE}/?mode=${mode}${sectionQuery}`);
         }
       } else {
         if (currentView === 'puzzles') {
-          if (currentParamView !== 'puzzles' || currentMode) {
-            window.history.replaceState({}, '', `${BASE}/?view=puzzles`);
+          const sectionQuery = selectedHomeSection ? `&section=${encodeURIComponent(selectedHomeSection)}` : '';
+          const targetUrl = `${BASE}/?view=puzzles${sectionQuery}`;
+          if (currentParamView !== 'puzzles' || currentMode || currentParamSection !== (selectedHomeSection || null)) {
+            window.history.replaceState({}, '', targetUrl);
           }
         } else {
-          if (currentMode || currentParamView) {
+          if (currentMode || currentParamView || currentParamSection) {
             window.history.replaceState({}, '', `${BASE}/`);
           }
         }
@@ -42330,7 +42380,7 @@ function App() {
     } catch (e) {
       console.error('Failed to sync URL mode:', e);
     }
-  }, [mode, currentView]);
+  }, [mode, currentView, selectedHomeSection]);
 
   // Listen for browser Back/Forward navigation (popstate) to restore mode and view
   useEffect(() => {
@@ -42338,8 +42388,28 @@ function App() {
       try {
         const params = new URLSearchParams(window.location.search);
         const urlMode = params.get('mode') || null;
+        const urlSection = params.get('section') || null;
         const urlView = params.get('view') || (urlMode ? 'puzzles' : 'landing');
-        setMode(urlMode);
+        let effectiveMode = urlMode;
+        let effectiveSection = urlSection;
+        if (urlMode === 'contrastlist') {
+          effectiveMode = null;
+          effectiveSection = 'contrast-challenge';
+        } else if (urlMode === 'treasurehunt') {
+          effectiveMode = null;
+          effectiveSection = 'treasure-hunt';
+        } else if (urlMode && urlMode.startsWith('contrast-')) {
+          effectiveSection = 'contrast-challenge';
+        } else if (urlMode === 'riddle') {
+          effectiveMode = null;
+          effectiveSection = 'math-riddles';
+        } else if (urlMode && (urlMode.startsWith('treasurehunt-') || urlMode.startsWith('treasurehunt_'))) {
+          effectiveSection = 'treasure-hunt';
+        } else if (urlMode && (urlMode.startsWith('riddle-') || urlMode.startsWith('riddle_'))) {
+          effectiveSection = 'math-riddles';
+        }
+        setMode(effectiveMode);
+        setSelectedHomeSection(effectiveSection);
         setCurrentView(urlView === 'puzzles' ? 'puzzles' : 'landing');
         if (urlMode === 'angles') {
           setLearningPhase('select');
@@ -42375,6 +42445,10 @@ function App() {
   const [celebrationQueue, setCelebrationQueue] = useState([])
   const [transferTopic, setTransferTopic] = useState(null)
   const syncTimeoutRef = useRef(null)
+  const goldMasteryRef = useRef(goldMastery)
+  goldMasteryRef.current = goldMastery
+  const coinsRef = useRef(coins)
+  coinsRef.current = coins
 
   // Generate confetti particles once per active celebration card so they
   // don't teleport to new positions on every parent re-render (timer
@@ -42642,11 +42716,14 @@ function App() {
     }, 1000);
   };
 
-  const markTopicCompleted = (topicKey, difficulty = '') => {
-    const next = addCompletedTopic(topicKey, difficulty);
-    setCompletedTopics(next);
-    syncProgressToServer(next, goldMastery, coins);
-  };
+  const markTopicCompleted = useCallback((topicKey, difficulty = '') => {
+    setCompletedTopics((prev) => {
+      const next = addCompletedTopic(topicKey, difficulty);
+      if (next === prev) return prev;
+      syncProgressToServer(next, goldMasteryRef.current, coinsRef.current);
+      return next;
+    });
+  }, []);
 
   const markGoldMastery = (topicKey) => {
     if (goldMastery.includes(topicKey)) return;
@@ -42699,7 +42776,17 @@ function App() {
   useEffect(() => {
     const handleModeChange = (e) => {
       if (e.detail) {
-        setMode(e.detail);
+        if (typeof e.detail === 'string' && e.detail.startsWith('contrast-')) {
+          const pairId = e.detail.replace(/^contrast-/, '');
+          try { localStorage.setItem('tenali-start-contrast-id', pairId); } catch {}
+          setSelectedHomeSection('contrast-challenge');
+          setMode(e.detail);
+        } else if (e.detail === 'contrastlist') {
+          handleSelectSection('contrast-challenge');
+          setMode(null);
+        } else {
+          setMode(e.detail);
+        }
       }
     };
     window.addEventListener('tenali-change-mode', handleModeChange);
@@ -42726,6 +42813,65 @@ function App() {
     // Persist to localStorage for future sessions
     try { localStorage.setItem('tenali-theme', theme) } catch { }
   }, [theme])
+
+  // ========== LEARN / TEST GATEWAY HOOKS ==========
+  const [learningPhase, setLearningPhase] = useState(() => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('mode') === 'angles' ? 'select' : null;
+    } catch {
+      return null;
+    }
+  })
+  const [learnData, setLearnData] = useState(null)
+  const [revealedBlocks, setRevealedBlocks] = useState(1)
+  const [blockStartTime, setBlockStartTime] = useState(Date.now())
+  const [warningMessage, setWarningMessage] = useState(null)
+
+  const getModeLabel = (key) => {
+    const labels = {
+      gk: 'General Knowledge', addition: 'Addition', quadratic: 'Quadratic Substitution',
+      multiply: 'Multiplication Tables', vocab: 'Vocabulary', spot: 'Twin Hunt',
+      sqrt: 'Square Root', polymul: 'Polynomial Multiplication', polyfactor: 'Polynomial Factoring',
+      primefactor: 'Prime Factorization', qformula: 'Quadratic Formula', simul: 'Simultaneous Equations',
+      'qformula-concept': 'Quadratics: Concept Lab', 'simul-concept': 'Sim. Equations: Concept Lab',
+      funceval: 'Functions', lineq: 'Line Equations', basicarith: 'Arithmetic',
+      fractionadd: 'Fractions', surds: 'Surds', indices: 'Indices',
+      sequences: 'Sequences & Series', ratio: 'Ratio & Proportion', percent: 'Percentages',
+      sets: 'Sets & Venn Diagrams', trig: 'Trigonometry', ineq: 'Inequalities',
+      coordgeom: 'Coordinate Geometry', prob: 'Probability', stats: 'Statistics',
+      matrix: 'Matrices', vectors: 'Vectors', dotprod: 'Dot Products',
+      transform: 'Transformations', mensur: 'Mensuration', bearings: 'Bearings',
+      log: 'Logarithms', diff: 'Differentiation', bases: 'Number Bases',
+      circleth: 'Circle Theorems', integ: 'Integration', stdform: 'Standard Form',
+      bounds: 'Bounds', sdt: 'Speed, Distance, Time', variation: 'Variation',
+      hcflcm: 'HCF & LCM', profitloss: 'Profit & Loss', rounding: 'Rounding',
+      binomial: 'Binomial Theorem', complex: 'Complex Numbers', angles: 'Angles',
+      triangles: 'Triangles', congruence: 'Congruence', pythag: "Pythagoras' Theorem",
+      polygons: 'Polygons', similarity: 'Similarity', squaring: 'Squaring (a+b)²',
+      lineareq: 'Linear Equations', decimals: 'Decimals', permcomb: 'Permutations & Combinations',
+      limits: 'Limits', invtrig: 'Inverse Trig', remfactor: 'Remainder Theorem',
+      heron: "Heron's Formula", shares: 'Shares & Dividends', banking: 'Banking (RD)',
+      gst: 'GST', section: 'Section Formula', linprog: 'Linear Programming',
+      circmeasure: 'Circular Measure', conics: 'Conic Sections', diffeq: 'Differential Equations',
+      tatsavit: 'Math Drill', randommix: 'Random Mix', custom: 'Custom Lesson',
+      gym: 'Gym', guess: 'Guess the Number',
+      gymdecimals: 'Gym Decimals', funcgym: 'Functions Gym', dotprodgym: 'Dot Products Gym',
+      fracaddgym: 'Fractions Gym', lineqgym: 'Linear Equations Gym',
+      indicesgym: 'Indices Gym', polygym: 'Polynomials Gym',
+    }
+    return labels[key] || key
+  }
+
+  useEffect(() => {
+    if (mode && learningPhase === 'learn') {
+      const topicName = getModeLabel(mode)
+      setLearnData(null)
+      getLearnContent(mode, topicName).then(data => {
+        setLearnData(data)
+      })
+    }
+  }, [mode, learningPhase])
 
   /**
    * toggleTheme(): Switch between dark and light modes
@@ -42875,16 +43021,8 @@ function App() {
   }
 
   if (pathname === '/riddle') {
-    return (
-      <>
-        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-        <div className="app-shell"><div className="card">
-          <RiddleApp onBack={() => { window.location.href = withBase('/') }} />
-        </div></div>
-      </>
-    )
+    window.location.replace(withBase('/?section=math-riddles'));
+    return null;
   }
 
   // Route: /tatsavit0 → legacy 9-level progressive math drill (kept for reference)
@@ -43370,7 +43508,11 @@ function App() {
         <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
           {theme === 'dark' ? '☀️' : '🌙'}
         </button>
-        <PlaygroundApp onBack={() => { window.location.href = withBase('/') }} />
+        <div className="app-shell">
+          <div className="card is-wide">
+            <PlaygroundApp onBack={() => { window.location.href = withBase('/?section=coding-playground') }} />
+          </div>
+        </div>
       </>
     )
   }
@@ -43407,7 +43549,11 @@ function App() {
         <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
           {theme === 'dark' ? '\u2600\uFE0F' : '\uD83C\uDF19'}
         </button>
-        <LocalCompilerApp onBack={() => { window.location.href = withBase('/') }} />
+        <div className="app-shell">
+          <div className="card is-wide">
+            <LocalCompilerApp onBack={() => { window.location.href = withBase('/?section=coding-playground') }} />
+          </div>
+        </div>
       </>
     )
   }
@@ -43432,7 +43578,9 @@ function App() {
           {theme === 'dark' ? '☀️' : '🌙'}
         </button>
         <div className="app-shell">
-          <Vachana onBack={() => { window.location.href = withBase('/') }} />
+          <div className="card is-wide">
+            <Vachana onBack={() => { window.location.href = withBase('/?section=language-words') }} />
+          </div>
         </div>
       </>
     )
@@ -44128,11 +44276,39 @@ function App() {
   }
 
   // ========== MATH RIDDLES APP ==========
-  function RiddleApp({ onBack }) {
+  function RiddleApp({ onBack, initialType, autoStartMixed }) {
     const [stage, setStage] = useState('setup')
     const [difficulty, setDifficulty] = useState(2)
-    const [selectedType, setSelectedType] = useState(null)
-    const [riddleType, setRiddleType] = useState(null)
+    const [selectedType, setSelectedType] = useState(initialType || null)
+    const [riddleType, setRiddleType] = useState(initialType || null)
+    const RIDDLE_TYPES = [
+      {
+        type: 'find-rule',
+        icon: '🔍',
+        label: 'Find the Rule',
+        desc: 'Study input → output pairs, spot the hidden formula, then apply it to a new input.',
+      },
+      {
+        type: 'sequence',
+        icon: '🔢',
+        label: 'Number Sequence',
+        desc: 'Look at the pattern in a list of numbers and predict what comes next.',
+      },
+      {
+        type: 'logic',
+        icon: '🧩',
+        label: 'Logic Puzzle',
+        desc: 'Read a word problem, reason it through step by step to reach the answer.',
+      },
+      {
+        type: 'image',
+        icon: '🖼️',
+        label: 'Visual Puzzle',
+        desc: 'Decode shapes, patterns and images — pick the option that completes the picture.',
+      }
+    ]
+    const currentMeta = RIDDLE_TYPES.find(r => r.type === (selectedType || riddleType || initialType)) || RIDDLE_TYPES[0]
+
     const [maxForType, setMaxForType] = useState(44)
     const [question, setQuestion] = useState(null)
     const [answer, setAnswer] = useState('')
@@ -44207,6 +44383,17 @@ function App() {
         })
       } catch (e) { setMaxForType(44) }
     }
+
+    useEffect(() => {
+      if (initialType) {
+        selectType(initialType)
+      } else if (autoStartMixed) {
+        setSelectedType(null)
+        setRiddleType(null)
+        setMaxForType(44)
+        startGame()
+      }
+    }, [initialType, autoStartMixed])
 
     const advance = () => {
       if (questionNumber >= totalQuestions) { setStage('finished'); return }
@@ -44286,88 +44473,35 @@ function App() {
       <>
           <div style={{ display: 'flex', alignItems: 'center', marginBottom: '16px' }}>
             <button className="back-button" onClick={onBack}>&larr;</button>
-            <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '1.5rem', margin: 0, flex: 1, textAlign: 'center', color: 'var(--clr-text)' }}>Math Riddles</h2>
-            <div style={{ width: 40 }} />
           </div>
 
           {stage === 'setup' && (
             <div className="welcome-box">
-              <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '1.8rem', color: 'var(--clr-text)', marginBottom: '8px' }}>Math Riddles</h2>
-              <p className="welcome-text">Pick a riddle type to begin!</p>
+              <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '1.8rem', color: 'var(--clr-text)', marginBottom: '8px' }}>
+                {currentMeta.icon} {currentMeta.label}
+              </h2>
+              <p className="welcome-text" style={{ maxWidth: 520, margin: '0 auto 16px' }}>
+                {currentMeta.desc}
+              </p>
 
-              {/* Flashcards for each riddle type */}
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '12px', margin: '16px 0' }}>
-                {[
-                  {
-                    type: 'find-rule',
-                    icon: '🔍',
-                    label: 'Find the Rule',
-                    color: 'var(--clr-accent)',
-                    desc: 'Study input → output pairs, spot the hidden formula, then apply it to a new input.',
-                    example: '3 → 8, 7 → 12  ⇒  9 → ?'
-                  },
-                  {
-                    type: 'sequence',
-                    icon: '🔢',
-                    label: 'Number Sequence',
-                    color: '#7c5cff',
-                    desc: 'Look at the pattern in a list of numbers and predict what comes next.',
-                    example: '2, 4, 8, 16, ?'
-                  },
-                  {
-                    type: 'logic',
-                    icon: '🧩',
-                    label: 'Logic Puzzle',
-                    color: '#ff8a5c',
-                    desc: 'Read a word problem, reason it through step by step to reach the answer.',
-                    example: 'If all Bloops are Razzies…'
-                  },
-                  {
-                    type: 'image',
-                    icon: '🖼️',
-                    label: 'Visual Puzzle',
-                    color: '#2bbf9c',
-                    desc: 'Decode shapes, patterns and images — pick the option that completes the picture.',
-                    example: 'Which piece fits the gap?'
-                  }
-                ].map((fc, i) => (
-                  <div key={i} onClick={() => selectType(fc.type)}
-                    style={{ background: selectedType === fc.type ? 'var(--clr-accent-soft)' : 'var(--clr-surface)', border: selectedType === fc.type ? `2px solid ${fc.color}` : '1px solid var(--clr-border)', borderTop: `3px solid ${fc.color}`, borderRadius: 'var(--radius)', padding: '14px 16px', textAlign: 'left', cursor: 'pointer', transition: 'transform 0.12s, box-shadow 0.12s' }}
-                    onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = '0 6px 18px rgba(0,0,0,0.25)' }}
-                    onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = 'none' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
-                      <span style={{ fontSize: '1.4rem' }}>{fc.icon}</span>
-                      <span style={{ fontFamily: 'var(--font-display)', fontSize: '1.05rem', color: fc.color, fontWeight: 700 }}>{fc.label}</span>
-                    </div>
-                    <p style={{ fontSize: '0.85rem', lineHeight: 1.45, color: 'var(--clr-text-soft)', margin: '0 0 8px' }}>{fc.desc}</p>
-                    <div style={{ fontSize: '0.82rem', fontStyle: 'italic', color: 'var(--clr-text)', background: 'var(--clr-input)', borderRadius: '8px', padding: '6px 8px' }}>{fc.example}</div>
-                    <div style={{ marginTop: '10px', fontSize: '0.78rem', fontWeight: 600, color: fc.color }}>{selectedType === fc.type ? '✓ Selected' : '▶ Select →'}</div>
-                  </div>
-                ))}
-              </div>
-
-              {/* Options appear only after a type is selected */}
-              {selectedType && (
-                <div style={{ marginTop: '8px' }}>
-                  <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', flexWrap: 'wrap', margin: '12px 0' }}>
-                    {[{ v: 1, l: 'Easy' }, { v: 2, l: 'Medium' }, { v: 3, l: 'Hard' }, { v: 5, l: 'All' }].map(d => (
-                      <button key={d.v} className={`radio-pill${difficulty === d.v ? ' active' : ''}`} onClick={() => setDifficulty(d.v)}>{d.l}</button>
-                    ))}
-                  </div>
-                  <div className="question-count-row" style={{ marginTop: '12px' }}>
-                    <label className="question-count-label">How many riddles? (max {maxForType})</label>
-                    <input className="answer-input question-count-input" type="text" value={totalQuestions} onChange={e => {
-                      const v = e.target.value
-                      if (v === '') { setTotalQuestions(''); return }
-                      if (/^\d+$/.test(v)) { const n = Number(v); if (n >= 1 && n <= maxForType) setTotalQuestions(n); }
-                    }} onBlur={() => { if (totalQuestions === '' || Number(totalQuestions) < 1) setTotalQuestions(Math.min(15, maxForType)) }} />
-                  </div>
-                  <div className="button-row">
-                    <button onClick={() => startGameWithType(selectedType)}>Start Riddles</button>
-                    <button onClick={() => { setSelectedType(null); setRiddleType(null); setMaxForType(44); startGame() }} style={{ background: 'transparent', border: '1px solid var(--clr-text-soft)', color: 'var(--clr-text-soft)' }}>Mixed</button>
-                  </div>
+              <div style={{ marginTop: '8px' }}>
+                <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', flexWrap: 'wrap', margin: '16px 0 12px' }}>
+                  {[{ v: 1, l: 'Easy' }, { v: 2, l: 'Medium' }, { v: 3, l: 'Hard' }, { v: 5, l: 'All' }].map(d => (
+                    <button key={d.v} className={`radio-pill${difficulty === d.v ? ' active' : ''}`} onClick={() => setDifficulty(d.v)}>{d.l}</button>
+                  ))}
                 </div>
-              )}
+                <div className="question-count-row" style={{ marginTop: '12px' }}>
+                  <label className="question-count-label">How many riddles? (max {maxForType})</label>
+                  <input className="answer-input question-count-input" type="text" value={totalQuestions} onChange={e => {
+                    const v = e.target.value
+                    if (v === '') { setTotalQuestions(''); return }
+                    if (/^\d+$/.test(v)) { const n = Number(v); if (n >= 1 && n <= maxForType) setTotalQuestions(n); }
+                  }} onBlur={() => { if (totalQuestions === '' || Number(totalQuestions) < 1) setTotalQuestions(Math.min(15, maxForType)) }} />
+                </div>
+                <div className="button-row" style={{ marginTop: '20px' }}>
+                  <button onClick={() => startGameWithType(selectedType || currentMeta.type)}>Start Riddles</button>
+                </div>
+              </div>
             </div>
           )}
 
@@ -44571,8 +44705,8 @@ function App() {
               <p className="final-score">{score}/{total} Riddles Solved!</p>
               <p className="welcome-text">Accuracy: {pct}% · Hints used: {hintUsed ? 'Yes' : 'No'}</p>
               <div className="button-row">
-                <button onClick={() => { setStage('setup'); setRiddleType(null) }}>Play Again</button>
-                <button onClick={onBack} style={{ background: 'transparent', border: '1px solid var(--clr-accent)', color: 'var(--clr-accent)' }}>Back to Home</button>
+                <button onClick={() => { setStage('setup'); setRiddleType(initialType || selectedType || currentMeta.type); setSelectedType(initialType || selectedType || currentMeta.type); }}>Play Again</button>
+                <button onClick={onBack} style={{ background: 'transparent', border: '1px solid var(--clr-accent)', color: 'var(--clr-accent)' }}>Back</button>
               </div>
             </div>
           )}
@@ -44677,6 +44811,9 @@ function App() {
     diffeq: DiffEqApp,             // Differential Equations
     tatsavit: TatsavitApp,         // Tatsavit (progressive math drill)
     language: LanguageDashboard,   // Language Puzzles Dashboard
+    crossword: CrosswordApp,
+    wordsearch: WordSearchApp,
+    wordcreator: WordCreatorApp,
     randommix: RandomMixApp,       // Random Mix (adaptive)
     custom: CustomApp,             // Custom lesson builder
     gym: GymApp,                   // Unified adaptive Gym — bundles all 7 below
@@ -44696,13 +44833,60 @@ function App() {
     riddle: RiddleApp,              // Math Riddles
     'water-jug-lab': WaterJugLab,
     'equation-crafting-lab': EquationCraftingLab,
+    playground: PlaygroundApp,
+    'local-compiler': LocalCompilerApp,
     pathmap: PathMap, // Learning Path (prerequisite graph & personalized path)
   }
 
   // Get the component to render (or null if mode not set)
-  const ActiveApp = mode && mode !== 'goalpractice' ? modeMap[mode] : null
+  const ActiveApp = mode && mode !== 'goalpractice'
+    ? (mode.startsWith('contrast-') ? ContrastChallengeApp : modeMap[mode])
+    : null;
 
   const renderContent = () => {
+    if (mode === 'treasurehunt' || (mode && (mode.startsWith('treasurehunt-') || mode.startsWith('treasurehunt_')))) {
+      const rawWorldId = (mode.startsWith('treasurehunt-') || mode.startsWith('treasurehunt_'))
+        ? mode.replace(/^treasurehunt[-_]/, '')
+        : null;
+      const worldId = rawWorldId ? rawWorldId.replace(/_/g, '-') : null;
+      return (
+        <TreasureHuntApp
+          initialWorldId={worldId}
+          onBack={() => {
+            setMode(null);
+            setSelectedHomeSection('treasure-hunt');
+            setCurrentView('puzzles');
+          }}
+        />
+      );
+    }
+
+    if (mode && mode.startsWith('riddle-')) {
+      const riddleType = mode.replace(/^riddle-/, '');
+      return (
+        <RiddleApp
+          initialType={riddleType}
+          onBack={() => {
+            setMode(null);
+            setSelectedHomeSection('math-riddles');
+            setCurrentView('puzzles');
+          }}
+        />
+      );
+    }
+
+    if (mode === 'playground') {
+      return (
+        <PlaygroundApp onBack={() => setMode(null)} />
+      );
+    }
+
+    if (mode === 'local-compiler') {
+      return (
+        <LocalCompilerApp onBack={() => setMode(null)} />
+      );
+    }
+
     if (mode === 'transfer') {
       return (
         <TransferChallengeApp
@@ -44765,12 +44949,25 @@ function App() {
           isGoalSelection={true}
           completedTopics={completedTopics}
           goldMastery={goldMastery}
+          selectedSection={selectedHomeSection}
+          onSelectSection={handleSelectSection}
           onBack={() => {
             setMode(null);
             setIsGoalMode(false);
           }}
           onSelect={(key) => {
-            setMode(key);
+            const cat = getCategoryForMode(key);
+            if (cat) {
+              setSelectedHomeSection(cat);
+            }
+            if (key && key.startsWith('contrast-')) {
+              const pairId = key.replace(/^contrast-/, '');
+              try { localStorage.setItem('tenali-start-contrast-id', pairId); } catch {}
+              setSelectedHomeSection('contrast-challenge');
+              setMode(key);
+            } else {
+              setMode(key);
+            }
             setIsGoalMode(true);
           }}
         />
@@ -44786,6 +44983,7 @@ function App() {
           markGoldMastery={markGoldMastery}
           updateCoins={updateCoins}
           setMode={setMode}
+          pairId={mode?.startsWith('contrast-') ? mode.replace(/^contrast-/, '') : undefined}
           setTransferTopic={setTransferTopic}
           onBack={journeyContext ? async () => {
             const isCompleted = !!document.querySelector('.final-score');
@@ -44821,14 +45019,26 @@ function App() {
       <Home
         completedTopics={completedTopics}
         goldMastery={goldMastery}
+        selectedSection={selectedHomeSection}
+        onSelectSection={handleSelectSection}
         onSelect={(key) => {
           setCurrentView('puzzles');
+          const cat = getCategoryForMode(key);
+          if (cat) {
+            setSelectedHomeSection(cat);
+          }
           if (key === 'goalpractice') {
             setMode('goalpractice');
           } else if (key === 'angles') {
             // PROTOTYPE: ONLY Angles enters the Learn/Test gateway
             setIsGoalMode(false);
             handleSelectMode(key);
+          } else if (key && key.startsWith('contrast-')) {
+            const pairId = key.replace(/^contrast-/, '');
+            try { localStorage.setItem('tenali-start-contrast-id', pairId); } catch {}
+            setSelectedHomeSection('contrast-challenge');
+            setMode(key);
+            setIsGoalMode(false);
           } else {
             // All other topics bypass the gateway and go straight to quiz configuration
             setMode(key);
@@ -44840,66 +45050,17 @@ function App() {
   };
 
   // ========== LEARN / TEST GATEWAY ==========
-  const [learningPhase, setLearningPhase] = useState(() => {
-  try {
-    const params = new URLSearchParams(window.location.search);
-    return params.get('mode') === 'angles' ? 'select' : null;
-  } catch {
-    return null;
-  }
-})
-  const [learnData, setLearnData] = useState(null)
-  const [revealedBlocks, setRevealedBlocks] = useState(1)
-  const [blockStartTime, setBlockStartTime] = useState(Date.now())
-  const [warningMessage, setWarningMessage] = useState(null)
-
-  useEffect(() => {
-    if (mode && learningPhase === 'learn') {
-      const topicName = getModeLabel(mode)
-      setLearnData(null)
-      getLearnContent(mode, topicName).then(data => {
-        setLearnData(data)
-      })
-    }
-  }, [mode, learningPhase])
-
-
-  const getModeLabel = (key) => {
-    const labels = {
-      gk: 'General Knowledge', addition: 'Addition', quadratic: 'Quadratic Substitution',
-      multiply: 'Multiplication Tables', vocab: 'Vocabulary', spot: 'Twin Hunt',
-      sqrt: 'Square Root', polymul: 'Polynomial Multiplication', polyfactor: 'Polynomial Factoring',
-      primefactor: 'Prime Factorization', qformula: 'Quadratic Formula', simul: 'Simultaneous Equations',
-      'qformula-concept': 'Quadratics: Concept Lab', 'simul-concept': 'Sim. Equations: Concept Lab',
-      funceval: 'Functions', lineq: 'Line Equations', basicarith: 'Arithmetic',
-      fractionadd: 'Fractions', surds: 'Surds', indices: 'Indices',
-      sequences: 'Sequences & Series', ratio: 'Ratio & Proportion', percent: 'Percentages',
-      sets: 'Sets & Venn Diagrams', trig: 'Trigonometry', ineq: 'Inequalities',
-      coordgeom: 'Coordinate Geometry', prob: 'Probability', stats: 'Statistics',
-      matrix: 'Matrices', vectors: 'Vectors', dotprod: 'Dot Products',
-      transform: 'Transformations', mensur: 'Mensuration', bearings: 'Bearings',
-      log: 'Logarithms', diff: 'Differentiation', bases: 'Number Bases',
-      circleth: 'Circle Theorems', integ: 'Integration', stdform: 'Standard Form',
-      bounds: 'Bounds', sdt: 'Speed, Distance, Time', variation: 'Variation',
-      hcflcm: 'HCF & LCM', profitloss: 'Profit & Loss', rounding: 'Rounding',
-      binomial: 'Binomial Theorem', complex: 'Complex Numbers', angles: 'Angles',
-      triangles: 'Triangles', congruence: 'Congruence', pythag: "Pythagoras' Theorem",
-      polygons: 'Polygons', similarity: 'Similarity', squaring: 'Squaring (a+b)²',
-      lineareq: 'Linear Equations', decimals: 'Decimals', permcomb: 'Permutations & Combinations',
-      limits: 'Limits', invtrig: 'Inverse Trig', remfactor: 'Remainder Theorem',
-      heron: "Heron's Formula", shares: 'Shares & Dividends', banking: 'Banking (RD)',
-      gst: 'GST', section: 'Section Formula', linprog: 'Linear Programming',
-      circmeasure: 'Circular Measure', conics: 'Conic Sections', diffeq: 'Differential Equations',
-      tatsavit: 'Math Drill', randommix: 'Random Mix', custom: 'Custom Lesson',
-      gym: 'Gym', guess: 'Guess the Number',
-      gymdecimals: 'Gym Decimals', funcgym: 'Functions Gym', dotprodgym: 'Dot Products Gym',
-      fracaddgym: 'Fractions Gym', lineqgym: 'Linear Equations Gym',
-      indicesgym: 'Indices Gym', polygym: 'Polynomials Gym',
-    }
-    return labels[key] || key
-  }
-
   const handleSelectMode = (key) => {
+    const cat = getCategoryForMode(key);
+    if (cat) {
+      setSelectedHomeSection(cat);
+    }
+    if (key && key.startsWith('contrast-')) {
+      const pairId = key.replace(/^contrast-/, '');
+      try { localStorage.setItem('tenali-start-contrast-id', pairId); } catch {}
+      setMode(key);
+      return;
+    }
     setMode(key)
     setLearningPhase('select')
     setRevealedBlocks(1)
@@ -44908,6 +45069,10 @@ function App() {
   }
 
   const handleBackToHome = () => {
+    const currentCat = getCategoryForMode(mode);
+    if (currentCat) {
+      setSelectedHomeSection(currentCat);
+    }
     setMode(null)
     setLearningPhase(null)
     setRevealedBlocks(1)
@@ -44925,7 +45090,7 @@ function App() {
         <div className="card">
           <div style={{ maxWidth: 640, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
             <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
-              <button className="back-button" onClick={handleBackToHome}>← Home</button>
+              <button className="back-button" onClick={handleBackToHome}>← Back</button>
             </div>
             <div style={{ textAlign: 'center', marginBottom: 32 }}>
               <h1 style={{ marginBottom: 8, fontSize: '2.5rem' }}>{topicName}</h1>
@@ -45250,11 +45415,21 @@ function App() {
           }}
           onSelectTopic={(topicKey) => {
             setCurrentView('puzzles');
+            const cat = getCategoryForMode(topicKey);
+            if (cat) {
+              setSelectedHomeSection(cat);
+            }
             if (topicKey === 'goalpractice') {
               setMode('goalpractice');
             } else if (topicKey === 'angles') {
               setIsGoalMode(false);
               handleSelectMode(topicKey);
+            } else if (topicKey && topicKey.startsWith('contrast-')) {
+              const pairId = topicKey.replace(/^contrast-/, '');
+              try { localStorage.setItem('tenali-start-contrast-id', pairId); } catch {}
+              setSelectedHomeSection('contrast-challenge');
+              setMode(topicKey);
+              setIsGoalMode(false);
             } else {
               setMode(topicKey);
               setIsGoalMode(false);
@@ -45398,13 +45573,9 @@ function App() {
         </div>
       )}
       <div>
-        {mode === 'vachana' ? (
-          <Vachana onBack={() => setMode(null)} initialAdaptScore={diagnosticState[mode] || 0} />
-        ) : (
-          <div className={`card ${mode === 'contrastlist' ? 'is-wide' : ''}`}>
-            {renderContent()}
-          </div>
-        )}
+        <div className={`card ${mode === 'contrastlist' || (mode && mode.startsWith('contrast-')) || mode === 'vachana' || mode === 'treasurehunt' || (mode && (mode.startsWith('treasurehunt-') || mode.startsWith('treasurehunt_'))) || mode === 'playground' || mode === 'local-compiler' ? 'is-wide' : ''}`}>
+          {renderContent()}
+        </div>
       </div>
       {renderCelebrationModal()}
       {/* Misconception Monsters — toast overlay (portals to body) + Hall modal. Spec §6. */}
@@ -48034,13 +48205,13 @@ function ColumnAdditionApp({ onBack, initialDifficulty, initialNumQuestions, ini
 
   const diffLabels = { easy: 'Easy — 1 digit', medium: 'Medium — 2 digits', hard: 'Hard — 3 digits', extrahard: 'Extra Hard — 4 digits' }
 
-  if (!started && !finished) {
-    return (
-      <div style={{ minHeight: '100vh', background: 'var(--clr-bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px', fontFamily: 'Inter, sans-serif' }}>
-        <div style={{ background: 'var(--clr-card)', border: '1.5px solid var(--clr-border)', borderRadius: '28px', boxShadow: '0 20px 40px rgba(0,0,0,.45)', padding: '48px 40px', maxWidth: '720px', width: '100%', textAlign: 'center', position: 'relative' }}>
-          <button onClick={onBack} style={{ position: 'absolute', top: '24px', left: '24px', background: 'transparent', border: '1px solid var(--clr-border)', borderRadius: '6px', padding: '6px 14px', color: 'var(--clr-text-soft)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer' }}>← Home</button>
-          <h1 style={{ fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 700, fontSize: '48px', color: 'var(--clr-text)', margin: '0 0 12px', lineHeight: 1.1 }}>Column Addition</h1>
-          <p style={{ color: 'var(--clr-text-soft)', fontSize: '0.9rem', margin: '0 0 24px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>Add numbers vertically with carrying</p>
+  const ansLen = question ? question.answerDigits.length : 1
+  const opLen = question ? question.digits : 1
+
+  return (
+    <QuizLayout title="Column Addition" subtitle="Add numbers vertically with carrying" onBack={onBack} timer={started && !finished ? timer : null}>
+      {!started && !finished && (
+        <div className="welcome-box">
           <div style={{ marginBottom: '24px' }}>
             <h3 style={{ color: 'var(--clr-text)', fontSize: '0.9rem', margin: '0 0 16px', fontFamily: 'Inter, sans-serif', fontWeight: 700 }}>Select Difficulty:</h3>
             <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
@@ -48055,15 +48226,7 @@ function ColumnAdditionApp({ onBack, initialDifficulty, initialNumQuestions, ini
           </div>
           <button onClick={startQuiz} style={{ background: 'var(--clr-accent)', border: 'none', borderRadius: '6px', padding: '10px 24px', color: '#FFF', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer' }}>Start Quiz</button>
         </div>
-      </div>
-    )
-  }
-
-  const ansLen = question ? question.answerDigits.length : 1
-  const opLen = question ? question.digits : 1
-
-  return (
-    <QuizLayout title="Column Addition" onBack={onBack} timer={timer}>
+      )}
       {started && !finished && <>
         <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem', marginBottom: '0.3rem' }}>
           <div className="progress-pill center">Question {questionNumber}/{totalQ}</div>
@@ -48652,96 +48815,6 @@ function ColumnMultiplicationApp({ onBack, initialDifficulty, initialNumQuestion
     fontFamily: '"Courier New", monospace', outline: 'none'
   })
 
-  if (!started && !finished) {
-    return (
-      <div style={{ minHeight: '100vh', background: 'var(--clr-bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px', fontFamily: 'Inter, sans-serif' }}>
-        <div style={{ background: 'var(--clr-card)', border: '1.5px solid var(--clr-border)', borderRadius: '28px', boxShadow: '0 20px 40px rgba(0,0,0,.45)', padding: '48px 40px', maxWidth: '720px', width: '100%', textAlign: 'center', position: 'relative' }}>
-          <button onClick={onBack} style={{ position: 'absolute', top: '24px', left: '24px', background: 'transparent', border: '1px solid var(--clr-border)', borderRadius: '6px', padding: '6px 14px', color: 'var(--clr-text-soft)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer' }}>← Home</button>
-          <h1 style={{ fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 700, fontSize: '48px', color: 'var(--clr-text)', margin: '0 0 12px', lineHeight: 1.1 }}>Column Multiplication</h1>
-          <p style={{ color: 'var(--clr-text-soft)', fontSize: '0.9rem', margin: '0 0 24px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>Multiply vertically with carrying</p>
-
-          {/* Help toggle */}
-          <div style={{ marginBottom: '20px' }}>
-            <button onClick={() => setShowHelp(h => !h)} style={{ background: showHelp ? 'var(--clr-input)' : 'transparent', border: '1px solid var(--clr-border)', borderRadius: '50px', padding: '6px 16px', color: 'var(--clr-accent)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.8rem', cursor: 'pointer' }}>{showHelp ? '✕ Close' : '? How to play'}</button>
-          </div>
-
-          {showHelp && (
-            <div style={{ textAlign: 'left', background: 'var(--clr-surface)', border: '1px solid var(--clr-border)', borderRadius: '16px', padding: '28px 28px', marginBottom: '24px', maxWidth: '580px', margin: '0 auto 24px' }}>
-              <h3 style={{ color: 'var(--clr-accent)', fontSize: '1.05rem', margin: '0 0 20px', fontFamily: 'Inter, sans-serif', fontWeight: 700, textAlign: 'center' }}>How Column Multiplication Works</h3>
-
-              {/* Step 1 */}
-              <div style={{ display: 'flex', gap: '14px', marginBottom: '18px', alignItems: 'flex-start' }}>
-                <div style={{ minWidth: '28px', height: '28px', borderRadius: '50%', background: 'var(--clr-accent)', color: '#FFF', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 700, fontFamily: 'Inter, sans-serif' }}>1</div>
-                <div style={{ flex: 1 }}>
-                  <div style={{ color: 'var(--clr-text)', fontSize: '0.85rem', fontWeight: 600, fontFamily: 'Inter, sans-serif', marginBottom: '6px' }}>Multiply by the rightmost digit first</div>
-                  <div style={{ color: 'var(--clr-text-soft)', fontSize: '0.82rem', fontFamily: 'Inter, sans-serif', lineHeight: '1.5', marginBottom: '10px' }}>Take the <strong style={{ color: 'var(--clr-accent)' }}>rightmost digit</strong> of the multiplier and multiply it by each digit of the top number. Write carries above and products below the line.</div>
-                  <div style={{ background: 'var(--clr-card)', borderRadius: '10px', padding: '14px 16px', fontFamily: '"Courier New", monospace', fontSize: '1.1rem', fontWeight: 700, lineHeight: '1.6', textAlign: 'center' }}>
-                    <div style={{ fontSize: '0.7rem', color: 'var(--clr-accent)', fontFamily: 'Inter, sans-serif', marginBottom: '2px' }}>Step 1: multiply by 9</div>
-                    <div>31</div>
-                    <div style={{ color: 'var(--clr-text-soft)', fontSize: '0.9rem' }}>× <span style={{ color: 'var(--clr-accent)', border: '1.5px solid var(--clr-accent)', borderRadius: '4px', padding: '0 3px' }}>4</span>9</div>
-                    <div style={{ width: '60px', height: '2px', background: 'var(--clr-border)', margin: '4px auto' }} />
-                    <div style={{ color: 'var(--clr-accent)' }}>_ _</div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Step 2 */}
-              <div style={{ display: 'flex', gap: '14px', marginBottom: '18px', alignItems: 'flex-start' }}>
-                <div style={{ minWidth: '28px', height: '28px', borderRadius: '50%', background: 'var(--clr-accent)', color: '#FFF', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 700, fontFamily: 'Inter, sans-serif' }}>2</div>
-                <div style={{ flex: 1 }}>
-                  <div style={{ color: 'var(--clr-text)', fontSize: '0.85rem', fontWeight: 600, fontFamily: 'Inter, sans-serif', marginBottom: '6px' }}>Move to the next digit (shift left)</div>
-                  <div style={{ color: 'var(--clr-text-soft)', fontSize: '0.82rem', fontFamily: 'Inter, sans-serif', lineHeight: '1.5', marginBottom: '10px' }}>Multiply by the <strong style={{ color: 'var(--clr-text)' }}>next digit</strong> to the left. The result shifts one place to the left. The app highlights which digit you're working on.</div>
-                  <div style={{ background: 'var(--clr-card)', borderRadius: '10px', padding: '14px 16px', fontFamily: '"Courier New", monospace', fontSize: '1.1rem', fontWeight: 700, lineHeight: '1.6', textAlign: 'center' }}>
-                    <div style={{ fontSize: '0.7rem', color: 'var(--clr-text)', fontFamily: 'Inter, sans-serif', marginBottom: '2px' }}>Step 2: multiply by 4</div>
-                    <div>31</div>
-                    <div style={{ color: 'var(--clr-text-soft)', fontSize: '0.9rem' }}>× <span style={{ color: 'var(--clr-text)', border: '1.5px solid var(--clr-text)', borderRadius: '4px', padding: '0 3px' }}>4</span>9</div>
-                    <div style={{ width: '60px', height: '2px', background: 'var(--clr-border)', margin: '4px auto' }} />
-                    <div>2 7 9</div>
-                    <div style={{ color: 'var(--clr-accent)' }}>1 2 4 _</div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Step 3 */}
-              <div style={{ display: 'flex', gap: '14px', marginBottom: '18px', alignItems: 'flex-start' }}>
-                <div style={{ minWidth: '28px', height: '28px', borderRadius: '50%', background: 'var(--clr-accent)', color: '#FFF', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 700, fontFamily: 'Inter, sans-serif' }}>3</div>
-                <div style={{ flex: 1 }}>
-                  <div style={{ color: 'var(--clr-text)', fontSize: '0.85rem', fontWeight: 600, fontFamily: 'Inter, sans-serif', marginBottom: '6px' }}>Add all partial products for the final answer</div>
-                  <div style={{ color: 'var(--clr-text-soft)', fontSize: '0.82rem', fontFamily: 'Inter, sans-serif', lineHeight: '1.5' }}>After all partial products are entered, add them up to get the final answer. Work right to left, carrying as needed.</div>
-                </div>
-              </div>
-
-              {/* Keyboard shortcuts */}
-              <div style={{ borderTop: '1px solid var(--clr-border)', paddingTop: '14px', marginTop: '14px' }}>
-                <div style={{ color: 'var(--clr-text)', fontSize: '0.82rem', fontWeight: 600, fontFamily: 'Inter, sans-serif', marginBottom: '8px' }}>Keyboard shortcuts:</div>
-                <div style={{ color: 'var(--clr-text-soft)', fontSize: '0.78rem', fontFamily: 'Inter, sans-serif', lineHeight: '1.7' }}>
-                  <strong>↑ / ↓</strong> — move between carry and digit rows &nbsp;&nbsp;
-                  <strong>← / →</strong> — move between columns &nbsp;&nbsp;
-                  <strong>Tab</strong> — jump to next partial product<br />
-                  <strong>Backspace</strong> — clear and move back
-                </div>
-              </div>
-            </div>
-          )}
-
-          <div style={{ marginBottom: '24px' }}>
-            <h3 style={{ color: 'var(--clr-text)', fontSize: '0.9rem', margin: '0 0 16px', fontFamily: 'Inter, sans-serif', fontWeight: 700 }}>Select Difficulty:</h3>
-            <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
-              {['easy', 'medium', 'hard', 'extrahard'].map(d => (
-                <button key={d} onClick={() => setDifficulty(d)} style={{ background: difficulty === d ? 'var(--clr-accent)' : 'transparent', border: difficulty === d ? '1px solid var(--clr-accent)' : '1px solid var(--clr-border)', borderRadius: '50px', padding: '8px 16px', color: difficulty === d ? '#FFF' : 'var(--clr-text-soft)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer' }}>{diffLabels[d]}</button>
-              ))}
-            </div>
-          </div>
-          <div style={{ marginBottom: '32px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <label style={{ color: 'var(--clr-text-soft)', fontSize: '0.85rem', margin: '0 0 12px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>How many questions? (max 100)</label>
-            <input type="text" value={numQuestions} onChange={(e) => { const v = e.target.value; if (v === '' || (/^\d+$/.test(v) && Number(v) <= 100)) setNumQuestions(v) }} style={{ background: 'var(--clr-input)', border: '1px solid var(--clr-border)', borderRadius: '6px', padding: '10px', color: 'var(--clr-text)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem', width: '100px', textAlign: 'center', outline: 'none' }} placeholder={String(DEFAULT_TOTAL)} />
-          </div>
-          <button onClick={startQuiz} style={{ background: 'var(--clr-accent)', border: 'none', borderRadius: '6px', padding: '10px 24px', color: '#FFF', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer' }}>Start Quiz</button>
-        </div>
-      </div>
-    )
-  }
-
   const ansLen = question ? question.answerDigits.length : 1
 
   const renderSingleDigit = () => (
@@ -48991,7 +49064,89 @@ function ColumnMultiplicationApp({ onBack, initialDifficulty, initialNumQuestion
   }
 
   return (
-    <QuizLayout title="Column Multiplication" onBack={onBack} timer={timer}>
+    <QuizLayout title="Column Multiplication" subtitle="Multiply vertically with carrying" onBack={onBack} timer={started && !finished ? timer : null}>
+      {!started && !finished && (
+        <div className="welcome-box">
+          <div style={{ marginBottom: '20px' }}>
+            <button onClick={() => setShowHelp(h => !h)} style={{ background: showHelp ? 'var(--clr-input)' : 'transparent', border: '1px solid var(--clr-border)', borderRadius: '50px', padding: '6px 16px', color: 'var(--clr-accent)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.8rem', cursor: 'pointer' }}>{showHelp ? '✕ Close' : '? How to play'}</button>
+          </div>
+
+          {showHelp && (
+            <div style={{ textAlign: 'left', background: 'var(--clr-surface)', border: '1px solid var(--clr-border)', borderRadius: '16px', padding: '28px 28px', marginBottom: '24px', maxWidth: '580px', margin: '0 auto 24px' }}>
+              <h3 style={{ color: 'var(--clr-accent)', fontSize: '1.05rem', margin: '0 0 20px', fontFamily: 'Inter, sans-serif', fontWeight: 700, textAlign: 'center' }}>How Column Multiplication Works</h3>
+
+              <div style={{ display: 'flex', gap: '14px', marginBottom: '18px', alignItems: 'flex-start' }}>
+                <div style={{ minWidth: '28px', height: '28px', borderRadius: '50%', background: 'var(--clr-accent)', color: '#FFF', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 700, fontFamily: 'Inter, sans-serif' }}>1</div>
+                <div style={{ flex: 1 }}>
+                  <div style={{ color: 'var(--clr-text)', fontSize: '0.85rem', fontWeight: 600, fontFamily: 'Inter, sans-serif', marginBottom: '6px' }}>Multiply by the rightmost digit first</div>
+                  <div style={{ color: 'var(--clr-text-soft)', fontSize: '0.82rem', fontFamily: 'Inter, sans-serif', lineHeight: '1.5', marginBottom: '10px' }}>Take the <strong style={{ color: 'var(--clr-accent)' }}>rightmost digit</strong> of the multiplier and multiply it by each digit of the top number. Write carries above and products below the line.</div>
+                  <div style={{ background: 'var(--clr-card)', borderRadius: '10px', padding: '14px 16px', fontFamily: '"Courier New", monospace', fontSize: '1.1rem', fontWeight: 700, lineHeight: '1.6', textAlign: 'center' }}>
+                    <div style={{ fontSize: '0.7rem', color: 'var(--clr-accent)', fontFamily: 'Inter, sans-serif', marginBottom: '2px' }}>Step 1: multiply by 9</div>
+                    <div>31</div>
+                    <div style={{ color: 'var(--clr-text-soft)', fontSize: '0.9rem' }}>× <span style={{ color: 'var(--clr-accent)', border: '1.5px solid var(--clr-accent)', borderRadius: '4px', padding: '0 3px' }}>4</span>9</div>
+                    <div style={{ width: '60px', height: '2px', background: 'var(--clr-border)', margin: '4px auto' }} />
+                    <div style={{ color: 'var(--clr-accent)' }}>_ _</div>
+                  </div>
+                </div>
+              </div>
+
+              <div style={{ display: 'flex', gap: '14px', marginBottom: '18px', alignItems: 'flex-start' }}>
+                <div style={{ minWidth: '28px', height: '28px', borderRadius: '50%', background: 'var(--clr-accent)', color: '#FFF', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 700, fontFamily: 'Inter, sans-serif' }}>2</div>
+                <div style={{ flex: 1 }}>
+                  <div style={{ color: 'var(--clr-text)', fontSize: '0.85rem', fontWeight: 600, fontFamily: 'Inter, sans-serif', marginBottom: '6px' }}>Shift left with zero placeholder</div>
+                  <div style={{ color: 'var(--clr-text-soft)', fontSize: '0.82rem', fontFamily: 'Inter, sans-serif', lineHeight: '1.5', marginBottom: '10px' }}>When multiplying by the tens digit, put a <strong style={{ color: 'var(--clr-accent)' }}>0 in the ones place</strong> to shift the next product one position to the left.</div>
+                  <div style={{ background: 'var(--clr-card)', borderRadius: '10px', padding: '14px 16px', fontFamily: '"Courier New", monospace', fontSize: '1.1rem', fontWeight: 700, lineHeight: '1.6', textAlign: 'center' }}>
+                    <div style={{ fontSize: '0.7rem', color: 'var(--clr-accent)', fontFamily: 'Inter, sans-serif', marginBottom: '2px' }}>Step 2: multiply by 4</div>
+                    <div>31</div>
+                    <div style={{ color: 'var(--clr-text-soft)', fontSize: '0.9rem' }}>× <span style={{ color: 'var(--clr-accent)', border: '1.5px solid var(--clr-accent)', borderRadius: '4px', padding: '0 3px' }}>4</span>9</div>
+                    <div style={{ width: '60px', height: '2px', background: 'var(--clr-border)', margin: '4px auto' }} />
+                    <div>279</div>
+                    <div style={{ color: 'var(--clr-accent)' }}>124<span style={{ opacity: 0.6 }}>0</span></div>
+                  </div>
+                </div>
+              </div>
+
+              <div style={{ display: 'flex', gap: '14px', marginBottom: '20px', alignItems: 'flex-start' }}>
+                <div style={{ minWidth: '28px', height: '28px', borderRadius: '50%', background: 'var(--clr-accent)', color: '#FFF', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 700, fontFamily: 'Inter, sans-serif' }}>3</div>
+                <div style={{ flex: 1 }}>
+                  <div style={{ color: 'var(--clr-text)', fontSize: '0.85rem', fontWeight: 600, fontFamily: 'Inter, sans-serif', marginBottom: '6px' }}>Add all partial products</div>
+                  <div style={{ color: 'var(--clr-text-soft)', fontSize: '0.82rem', fontFamily: 'Inter, sans-serif', lineHeight: '1.5', marginBottom: '10px' }}>Add the rows together from right to left, carrying if needed, to find the <strong style={{ color: 'var(--clr-accent)' }}>final product</strong>.</div>
+                  <div style={{ background: 'var(--clr-card)', borderRadius: '10px', padding: '14px 16px', fontFamily: '"Courier New", monospace', fontSize: '1.1rem', fontWeight: 700, lineHeight: '1.6', textAlign: 'center' }}>
+                    <div style={{ fontSize: '0.7rem', color: 'var(--clr-accent)', fontFamily: 'Inter, sans-serif', marginBottom: '2px' }}>Step 3: add rows</div>
+                    <div>279</div>
+                    <div style={{ color: 'var(--clr-text-soft)', fontSize: '0.9rem' }}>+ 1240</div>
+                    <div style={{ width: '60px', height: '2px', background: 'var(--clr-border)', margin: '4px auto' }} />
+                    <div style={{ color: 'var(--clr-correct)', fontWeight: 800 }}>1519</div>
+                  </div>
+                </div>
+              </div>
+
+              <div style={{ borderTop: '1px solid var(--clr-border)', paddingTop: '16px' }}>
+                <div style={{ color: 'var(--clr-text)', fontSize: '0.85rem', fontWeight: 600, fontFamily: 'Inter, sans-serif', marginBottom: '8px' }}>Pro Tips:</div>
+                <div style={{ color: 'var(--clr-text-soft)', fontSize: '0.8rem', fontFamily: 'Inter, sans-serif', lineHeight: '1.7' }}>
+                  • Use <strong>Tab</strong> to move between digits quickly<br />
+                  • Carries are written in the smaller boxes above each digit<br />
+                  • Don't forget to add your carry after multiplying!
+                </div>
+              </div>
+            </div>
+          )}
+
+          <div style={{ marginBottom: '24px' }}>
+            <h3 style={{ color: 'var(--clr-text)', fontSize: '0.9rem', margin: '0 0 16px', fontFamily: 'Inter, sans-serif', fontWeight: 700 }}>Select Difficulty:</h3>
+            <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
+              {['easy', 'medium', 'hard', 'extrahard'].map(d => (
+                <button key={d} onClick={() => setDifficulty(d)} style={{ background: difficulty === d ? 'var(--clr-accent)' : 'transparent', border: difficulty === d ? '1px solid var(--clr-accent)' : '1px solid var(--clr-border)', borderRadius: '50px', padding: '8px 16px', color: difficulty === d ? '#FFF' : 'var(--clr-text-soft)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer' }}>{diffLabels[d]}</button>
+              ))}
+            </div>
+          </div>
+          <div style={{ marginBottom: '32px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <label style={{ color: 'var(--clr-text-soft)', fontSize: '0.85rem', margin: '0 0 12px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>How many questions? (max 100)</label>
+            <input type="text" value={numQuestions} onChange={(e) => { const v = e.target.value; if (v === '' || (/^\d+$/.test(v) && Number(v) <= 100)) setNumQuestions(v) }} style={{ background: 'var(--clr-input)', border: '1px solid var(--clr-border)', borderRadius: '6px', padding: '10px', color: 'var(--clr-text)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem', width: '100px', textAlign: 'center', outline: 'none' }} placeholder={String(DEFAULT_TOTAL)} />
+          </div>
+          <button onClick={startQuiz} style={{ background: 'var(--clr-accent)', border: 'none', borderRadius: '6px', padding: '10px 24px', color: '#FFF', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer' }}>Start Quiz</button>
+        </div>
+      )}
       {started && !finished && <>
         <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem', marginBottom: '0.3rem' }}>
           <div className="progress-pill center">Question {questionNumber}/{totalQ}</div>
@@ -49324,62 +49479,6 @@ function ColumnDivisionApp({ onBack, initialDifficulty, initialNumQuestions, ini
 
   const diffLabels = { easy: 'Easy (3\u00f71)', medium: 'Medium (4\u00f71)', hard: 'Hard (4\u00f72)', extrahard: 'XHard (5\u00f72)' }
 
-  if (!started && !finished) {
-    return (
-      <div style={{ minHeight: '100vh', background: 'var(--clr-bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px', fontFamily: 'Inter, sans-serif' }}>
-        <div style={{ background: 'var(--clr-card)', border: '1.5px solid var(--clr-border)', borderRadius: '28px', boxShadow: '0 20px 40px rgba(0,0,0,.45)', padding: '48px 40px', maxWidth: '720px', width: '100%', textAlign: 'center', position: 'relative' }}>
-          <button onClick={onBack} style={{ position: 'absolute', top: '24px', left: '24px', background: 'transparent', border: '1px solid var(--clr-border)', borderRadius: '6px', padding: '6px 14px', color: 'var(--clr-text-soft)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer' }}>{'\u2190'} Home</button>
-          <h1 style={{ fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 700, fontSize: '48px', color: 'var(--clr-text)', margin: '0 0 12px', lineHeight: 1.1 }}>Column Division</h1>
-          <p style={{ color: 'var(--clr-text-soft)', fontSize: '0.9rem', margin: '0 0 24px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>Paper-style long division with step-by-step work</p>
-
-          <div style={{ marginBottom: '20px' }}>
-            <button onClick={() => setShowHelp(h => !h)} style={{ background: showHelp ? 'var(--clr-input)' : 'transparent', border: '1px solid var(--clr-border)', borderRadius: '50px', padding: '6px 16px', color: 'var(--clr-accent)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.8rem', cursor: 'pointer' }}>{showHelp ? '\u2715 Close' : '? How to play'}</button>
-          </div>
-
-          {showHelp && (
-            <div style={{ textAlign: 'left', background: 'var(--clr-surface)', border: '1px solid var(--clr-border)', borderRadius: '16px', padding: '28px 28px', marginBottom: '24px', maxWidth: '580px', margin: '0 auto 24px' }}>
-              <h3 style={{ color: 'var(--clr-accent)', fontSize: '1.05rem', margin: '0 0 20px', fontFamily: 'Inter, sans-serif', fontWeight: 700, textAlign: 'center' }}>How Paper-Style Division Works</h3>
-              {[
-                { n: 1, title: 'Divide', desc: 'Find how many times the divisor goes into the current digits. Write that digit above the line.' },
-                { n: 2, title: 'Multiply', desc: 'Multiply the divisor \u00d7 quotient digit. Write the product below the current digits.' },
-                { n: 3, title: 'Subtract & bring down', desc: 'Subtract to get the remainder. Bring down the next dividend digit beside it.' },
-                { n: 4, title: 'Repeat', desc: 'Repeat until all digits are used. The final remainder is what\u2019s left.' },
-              ].map(({ n, title, desc }) => (
-                <div key={n} style={{ display: 'flex', gap: '14px', marginBottom: '16px', alignItems: 'flex-start' }}>
-                  <div style={{ minWidth: '28px', height: '28px', borderRadius: '50%', background: 'var(--clr-accent)', color: '#FFF', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 700, fontFamily: 'Inter, sans-serif' }}>{n}</div>
-                  <div style={{ flex: 1 }}>
-                    <div style={{ color: 'var(--clr-text)', fontSize: '0.85rem', fontWeight: 600, fontFamily: 'Inter, sans-serif', marginBottom: '4px' }}>{title}</div>
-                    <div style={{ color: 'var(--clr-text-soft)', fontSize: '0.82rem', fontFamily: 'Inter, sans-serif', lineHeight: '1.5' }}>{desc}</div>
-                  </div>
-                </div>
-              ))}
-              <div style={{ borderTop: '1px solid var(--clr-border)', paddingTop: '14px', marginTop: '14px' }}>
-                <div style={{ color: 'var(--clr-text)', fontSize: '0.82rem', fontWeight: 600, fontFamily: 'Inter, sans-serif', marginBottom: '8px' }}>Fill in each row:</div>
-                <div style={{ color: 'var(--clr-text-soft)', fontSize: '0.78rem', fontFamily: 'Inter, sans-serif', lineHeight: '1.7' }}>
-                  <strong>Quotient</strong> above the line, <strong>products</strong> below the working digits, <strong>remainders</strong> after each subtraction. Tab advances to the next field.
-                </div>
-              </div>
-            </div>
-          )}
-
-          <div style={{ marginBottom: '24px' }}>
-            <h3 style={{ color: 'var(--clr-text)', fontSize: '0.9rem', margin: '0 0 16px', fontFamily: 'Inter, sans-serif', fontWeight: 700 }}>Select Difficulty:</h3>
-            <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
-              {['easy', 'medium', 'hard', 'extrahard'].map(d => (
-                <button key={d} onClick={() => setDifficulty(d)} style={{ background: difficulty === d ? 'var(--clr-accent)' : 'transparent', border: difficulty === d ? '1px solid var(--clr-accent)' : '1px solid var(--clr-border)', borderRadius: '50px', padding: '8px 16px', color: difficulty === d ? '#FFF' : 'var(--clr-text-soft)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer' }}>{diffLabels[d]}</button>
-              ))}
-            </div>
-          </div>
-          <div style={{ marginBottom: '32px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <label style={{ color: 'var(--clr-text-soft)', fontSize: '0.85rem', margin: '0 0 12px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>How many questions? (max 100)</label>
-            <input type="text" value={numQuestions} onChange={(e) => { const v = e.target.value; if (v === '' || (/^\d+$/.test(v) && Number(v) <= 100)) setNumQuestions(v) }} style={{ background: 'var(--clr-input)', border: '1px solid var(--clr-border)', borderRadius: '6px', padding: '10px', color: 'var(--clr-text)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem', width: '100px', textAlign: 'center', outline: 'none' }} placeholder={String(DEFAULT_TOTAL)} />
-          </div>
-          <button onClick={startQuiz} style={{ background: 'var(--clr-accent)', border: 'none', borderRadius: '6px', padding: '10px 24px', color: '#FFF', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer' }}>Start Quiz</button>
-        </div>
-      </div>
-    )
-  }
-
   const digitStyle = (isRight, isWrong, big) => ({
     width: COL, height: big ? 44 : 38, textAlign: 'center', fontSize: big ? '1.3rem' : '1.05rem', fontWeight: 700,
     background: isRight ? 'var(--clr-correct-bg)' : isWrong ? 'var(--clr-wrong-bg)' : 'var(--clr-input)',
@@ -49429,7 +49528,54 @@ function ColumnDivisionApp({ onBack, initialDifficulty, initialNumQuestions, ini
   }
 
   return (
-    <QuizLayout title="Column Division" onBack={onBack} timer={timer}>
+    <QuizLayout title="Column Division" subtitle="Paper-style long division with step-by-step work" onBack={onBack} timer={started && !finished ? timer : null}>
+      {!started && !finished && (
+        <div className="welcome-box">
+          <div style={{ marginBottom: '20px' }}>
+            <button onClick={() => setShowHelp(h => !h)} style={{ background: showHelp ? 'var(--clr-input)' : 'transparent', border: '1px solid var(--clr-border)', borderRadius: '50px', padding: '6px 16px', color: 'var(--clr-accent)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.8rem', cursor: 'pointer' }}>{showHelp ? '\u2715 Close' : '? How to play'}</button>
+          </div>
+
+          {showHelp && (
+            <div style={{ textAlign: 'left', background: 'var(--clr-surface)', border: '1px solid var(--clr-border)', borderRadius: '16px', padding: '28px 28px', marginBottom: '24px', maxWidth: '580px', margin: '0 auto 24px' }}>
+              <h3 style={{ color: 'var(--clr-accent)', fontSize: '1.05rem', margin: '0 0 20px', fontFamily: 'Inter, sans-serif', fontWeight: 700, textAlign: 'center' }}>How Paper-Style Division Works</h3>
+              {[
+                { n: 1, title: 'Divide', desc: 'Find how many times the divisor goes into the current digits. Write that digit above the line.' },
+                { n: 2, title: 'Multiply', desc: 'Multiply the divisor \u00d7 quotient digit. Write the product below the current digits.' },
+                { n: 3, title: 'Subtract & bring down', desc: 'Subtract to get the remainder. Bring down the next dividend digit beside it.' },
+                { n: 4, title: 'Repeat', desc: 'Repeat until all digits are used. The final remainder is what\u2019s left.' },
+              ].map(({ n, title, desc }) => (
+                <div key={n} style={{ display: 'flex', gap: '14px', marginBottom: '16px', alignItems: 'flex-start' }}>
+                  <div style={{ minWidth: '28px', height: '28px', borderRadius: '50%', background: 'var(--clr-accent)', color: '#FFF', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 700, fontFamily: 'Inter, sans-serif' }}>{n}</div>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ color: 'var(--clr-text)', fontSize: '0.85rem', fontWeight: 600, fontFamily: 'Inter, sans-serif', marginBottom: '4px' }}>{title}</div>
+                    <div style={{ color: 'var(--clr-text-soft)', fontSize: '0.82rem', fontFamily: 'Inter, sans-serif', lineHeight: '1.5' }}>{desc}</div>
+                  </div>
+                </div>
+              ))}
+              <div style={{ borderTop: '1px solid var(--clr-border)', paddingTop: '14px', marginTop: '14px' }}>
+                <div style={{ color: 'var(--clr-text)', fontSize: '0.82rem', fontWeight: 600, fontFamily: 'Inter, sans-serif', marginBottom: '8px' }}>Fill in each row:</div>
+                <div style={{ color: 'var(--clr-text-soft)', fontSize: '0.78rem', fontFamily: 'Inter, sans-serif', lineHeight: '1.7' }}>
+                  <strong>Quotient</strong> above the line, <strong>products</strong> below the working digits, <strong>remainders</strong> after each subtraction. Tab advances to the next field.
+                </div>
+              </div>
+            </div>
+          )}
+
+          <div style={{ marginBottom: '24px' }}>
+            <h3 style={{ color: 'var(--clr-text)', fontSize: '0.9rem', margin: '0 0 16px', fontFamily: 'Inter, sans-serif', fontWeight: 700 }}>Select Difficulty:</h3>
+            <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
+              {['easy', 'medium', 'hard', 'extrahard'].map(d => (
+                <button key={d} onClick={() => setDifficulty(d)} style={{ background: difficulty === d ? 'var(--clr-accent)' : 'transparent', border: difficulty === d ? '1px solid var(--clr-accent)' : '1px solid var(--clr-border)', borderRadius: '50px', padding: '8px 16px', color: difficulty === d ? '#FFF' : 'var(--clr-text-soft)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer' }}>{diffLabels[d]}</button>
+              ))}
+            </div>
+          </div>
+          <div style={{ marginBottom: '32px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <label style={{ color: 'var(--clr-text-soft)', fontSize: '0.85rem', margin: '0 0 12px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>How many questions? (max 100)</label>
+            <input type="text" value={numQuestions} onChange={(e) => { const v = e.target.value; if (v === '' || (/^\d+$/.test(v) && Number(v) <= 100)) setNumQuestions(v) }} style={{ background: 'var(--clr-input)', border: '1px solid var(--clr-border)', borderRadius: '6px', padding: '10px', color: 'var(--clr-text)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem', width: '100px', textAlign: 'center', outline: 'none' }} placeholder={String(DEFAULT_TOTAL)} />
+          </div>
+          <button onClick={startQuiz} style={{ background: 'var(--clr-accent)', border: 'none', borderRadius: '6px', padding: '10px 24px', color: '#FFF', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer' }}>Start Quiz</button>
+        </div>
+      )}
       {started && !finished && <>
         <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem', marginBottom: '0.3rem' }}>
           <div className="progress-pill center">Question {questionNumber}/{totalQ}</div>
@@ -49903,15 +50049,12 @@ function ColumnSubtractionApp({ onBack, initialDifficulty, initialNumQuestions, 
 
   const diffLabels = { easy: 'Easy — 2 digit', medium: 'Medium — 2 digit', hard: 'Hard — 3 digit', extrahard: 'Extra Hard — 4 digit' }
 
-  if (!started && !finished) {
-    return (
-      <div style={{ minHeight: '100vh', background: 'var(--clr-bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px', fontFamily: 'Inter, sans-serif' }}>
-        <div style={{ background: 'var(--clr-card)', border: '1.5px solid var(--clr-border)', borderRadius: '28px', boxShadow: '0 20px 40px rgba(0,0,0,.45)', padding: '48px 40px', maxWidth: '720px', width: '100%', textAlign: 'center', position: 'relative' }}>
-          <button onClick={onBack} style={{ position: 'absolute', top: '24px', left: '24px', background: 'transparent', border: '1px solid var(--clr-border)', borderRadius: '6px', padding: '6px 14px', color: 'var(--clr-text-soft)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer' }}>← Home</button>
-          <h1 style={{ fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 700, fontSize: '48px', color: 'var(--clr-text)', margin: '0 0 12px', lineHeight: 1.1 }}>Column Subtraction</h1>
-          <p style={{ color: 'var(--clr-text-soft)', fontSize: '0.9rem', margin: '0 0 24px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>Subtract vertically with borrowing</p>
+  const ansLen = question ? question.answerDigits.length : 1
 
-          {/* Help toggle */}
+  return (
+    <QuizLayout title="Column Subtraction" subtitle="Subtract vertically with borrowing" onBack={onBack} timer={started && !finished ? timer : null}>
+      {!started && !finished && (
+        <div className="welcome-box">
           <div style={{ marginBottom: '20px' }}>
             <button onClick={() => setShowHelp(h => !h)} style={{ background: showHelp ? 'var(--clr-input)' : 'transparent', border: '1px solid var(--clr-border)', borderRadius: '50px', padding: '6px 16px', color: 'var(--clr-accent)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.8rem', cursor: 'pointer' }}>{showHelp ? '✕ Close' : '? How to play'}</button>
           </div>
@@ -49920,78 +50063,37 @@ function ColumnSubtractionApp({ onBack, initialDifficulty, initialNumQuestions, 
             <div style={{ textAlign: 'left', background: 'var(--clr-surface)', border: '1px solid var(--clr-border)', borderRadius: '16px', padding: '28px 28px', marginBottom: '24px', maxWidth: '580px', margin: '0 auto 24px' }}>
               <h3 style={{ color: 'var(--clr-accent)', fontSize: '1.05rem', margin: '0 0 20px', fontFamily: 'Inter, sans-serif', fontWeight: 700, textAlign: 'center' }}>How Column Subtraction Works</h3>
 
-              {/* Step 1 */}
               <div style={{ display: 'flex', gap: '14px', marginBottom: '18px', alignItems: 'flex-start' }}>
                 <div style={{ minWidth: '28px', height: '28px', borderRadius: '50%', background: 'var(--clr-accent)', color: '#FFF', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 700, fontFamily: 'Inter, sans-serif' }}>1</div>
                 <div style={{ flex: 1 }}>
-                  <div style={{ color: 'var(--clr-text)', fontSize: '0.85rem', fontWeight: 600, fontFamily: 'Inter, sans-serif', marginBottom: '6px' }}>See the problem</div>
-                  <div style={{ color: 'var(--clr-text-soft)', fontSize: '0.82rem', fontFamily: 'Inter, sans-serif', lineHeight: '1.5', marginBottom: '10px' }}>The problem appears vertically. Start from the <strong style={{ color: 'var(--clr-text)' }}>rightmost column</strong> and work left.</div>
-                  <div style={{ background: 'var(--clr-card)', borderRadius: '10px', padding: '14px 16px', fontFamily: '"Courier New", monospace', fontSize: '1.2rem', fontWeight: 700, lineHeight: '1.5', textAlign: 'center' }}>
-                    <div><span style={{ color: 'var(--clr-text)' }}>2</span><span style={{ color: 'var(--clr-text)' }}>3</span></div>
-                    <div><span style={{ color: 'var(--clr-text-soft)', fontSize: '0.9rem' }}>− </span><span style={{ color: 'var(--clr-text)' }}>1</span><span style={{ color: 'var(--clr-text)' }}>8</span></div>
-                    <div style={{ width: '80px', height: '2px', background: 'var(--clr-border)', margin: '4px auto' }} />
-                    <div><span style={{ color: 'var(--clr-text)' }}>_</span><span style={{ color: 'var(--clr-text)' }}>_</span></div>
-                  </div>
+                  <div style={{ color: 'var(--clr-text)', fontSize: '0.85rem', fontWeight: 600, fontFamily: 'Inter, sans-serif', marginBottom: '6px' }}>Subtract right to left</div>
+                  <div style={{ color: 'var(--clr-text-soft)', fontSize: '0.82rem', fontFamily: 'Inter, sans-serif', lineHeight: '1.5' }}>Start with the ones column. If the top digit is smaller than the bottom digit, you need to borrow!</div>
                 </div>
               </div>
 
-              {/* Step 2 */}
               <div style={{ display: 'flex', gap: '14px', marginBottom: '18px', alignItems: 'flex-start' }}>
                 <div style={{ minWidth: '28px', height: '28px', borderRadius: '50%', background: 'var(--clr-accent)', color: '#FFF', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 700, fontFamily: 'Inter, sans-serif' }}>2</div>
                 <div style={{ flex: 1 }}>
-                  <div style={{ color: 'var(--clr-text)', fontSize: '0.85rem', fontWeight: 600, fontFamily: 'Inter, sans-serif', marginBottom: '6px' }}>Can't subtract? Click the top digit to borrow</div>
-                  <div style={{ color: 'var(--clr-text-soft)', fontSize: '0.82rem', fontFamily: 'Inter, sans-serif', lineHeight: '1.5', marginBottom: '10px' }}>3 − 8 is not possible, so click the <strong style={{ color: 'var(--clr-accent)' }}>3</strong> above. It gets a <span style={{ textDecoration: 'line-through', color: 'var(--clr-accent)' }}>strikethrough</span> and a box appears above it.</div>
-                  <div style={{ background: 'var(--clr-card)', borderRadius: '10px', padding: '14px 16px', fontFamily: '"Courier New", monospace', fontSize: '1.2rem', fontWeight: 700, lineHeight: '1.5', textAlign: 'center' }}>
-                    <div style={{ fontSize: '0.75rem', color: 'var(--clr-accent)', marginBottom: '2px', fontFamily: 'Inter, sans-serif', fontWeight: 600 }}>↑ box appears here</div>
-                    <div><span style={{ color: 'var(--clr-text-soft)', opacity: 0.5, textDecoration: 'line-through' }}>2</span><span style={{ color: 'var(--clr-accent)', border: '1.5px solid var(--clr-accent)', borderRadius: '4px', padding: '0 4px' }}>3</span></div>
-                    <div><span style={{ color: 'var(--clr-text-soft)', fontSize: '0.9rem' }}>− </span><span style={{ color: 'var(--clr-text)' }}>1</span><span style={{ color: 'var(--clr-text)' }}>8</span></div>
-                    <div style={{ width: '80px', height: '2px', background: 'var(--clr-border)', margin: '4px auto' }} />
-                    <div><span style={{ color: 'var(--clr-text)' }}>_</span><span style={{ color: 'var(--clr-text)' }}>_</span></div>
-                  </div>
+                  <div style={{ color: 'var(--clr-text)', fontSize: '0.85rem', fontWeight: 600, fontFamily: 'Inter, sans-serif', marginBottom: '6px' }}>Click to borrow</div>
+                  <div style={{ color: 'var(--clr-text-soft)', fontSize: '0.82rem', fontFamily: 'Inter, sans-serif', lineHeight: '1.5' }}>Click any digit in the top number to cross it out and borrow from it. Enter the new reduced value above it!</div>
                 </div>
               </div>
 
-              {/* Step 3 */}
-              <div style={{ display: 'flex', gap: '14px', marginBottom: '18px', alignItems: 'flex-start' }}>
+              <div style={{ display: 'flex', gap: '14px', marginBottom: '20px', alignItems: 'flex-start' }}>
                 <div style={{ minWidth: '28px', height: '28px', borderRadius: '50%', background: 'var(--clr-accent)', color: '#FFF', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 700, fontFamily: 'Inter, sans-serif' }}>3</div>
                 <div style={{ flex: 1 }}>
-                  <div style={{ color: 'var(--clr-text)', fontSize: '0.85rem', fontWeight: 600, fontFamily: 'Inter, sans-serif', marginBottom: '6px' }}>Type the converted value</div>
-                  <div style={{ color: 'var(--clr-text-soft)', fontSize: '0.82rem', fontFamily: 'Inter, sans-serif', lineHeight: '1.5', marginBottom: '10px' }}>3 becomes <strong style={{ color: 'var(--clr-text)' }}>13</strong> after borrowing. Type <strong style={{ color: 'var(--clr-text)' }}>13</strong> in the box. Now 13 − 8 = <strong style={{ color: 'var(--clr-text)' }}>5</strong>.</div>
-                  <div style={{ background: 'var(--clr-card)', borderRadius: '10px', padding: '14px 16px', fontFamily: '"Courier New", monospace', fontSize: '1.2rem', fontWeight: 700, lineHeight: '1.5', textAlign: 'center' }}>
-                    <div style={{ marginBottom: '2px' }}><span style={{ fontSize: '1.1rem', color: 'var(--clr-accent)', border: '1.5px solid var(--clr-accent)', borderRadius: '4px', padding: '2px 6px' }}>13</span></div>
-                    <div><span style={{ color: 'var(--clr-text-soft)', textDecoration: 'line-through', opacity: 0.5 }}>2</span><span style={{ color: 'var(--clr-text-soft)' }}>3</span></div>
-                    <div><span style={{ color: 'var(--clr-text-soft)', fontSize: '0.9rem' }}>− </span><span style={{ color: 'var(--clr-text)' }}>1</span><span style={{ color: 'var(--clr-text)' }}>8</span></div>
-                    <div style={{ width: '80px', height: '2px', background: 'var(--clr-border)', margin: '4px auto' }} />
-                    <div><span style={{ color: 'var(--clr-text)' }}>_</span><span style={{ color: 'var(--clr-correct)' }}>5</span></div>
-                  </div>
+                  <div style={{ color: 'var(--clr-text)', fontSize: '0.85rem', fontWeight: 600, fontFamily: 'Inter, sans-serif', marginBottom: '6px' }}>Subtract with borrowed value</div>
+                  <div style={{ color: 'var(--clr-text-soft)', fontSize: '0.82rem', fontFamily: 'Inter, sans-serif', lineHeight: '1.5' }}>Add 10 to the column that needed help, then subtract the bottom digit. Type your answer below!</div>
                 </div>
               </div>
 
-              {/* Step 4 */}
-              <div style={{ display: 'flex', gap: '14px', marginBottom: '18px', alignItems: 'flex-start' }}>
-                <div style={{ minWidth: '28px', height: '28px', borderRadius: '50%', background: 'var(--clr-accent)', color: '#FFF', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 700, fontFamily: 'Inter, sans-serif' }}>4</div>
-                <div style={{ flex: 1 }}>
-                  <div style={{ color: 'var(--clr-text)', fontSize: '0.85rem', fontWeight: 600, fontFamily: 'Inter, sans-serif', marginBottom: '6px' }}>Move left, subtract next column</div>
-                  <div style={{ color: 'var(--clr-text-soft)', fontSize: '0.82rem', fontFamily: 'Inter, sans-serif', lineHeight: '1.5', marginBottom: '10px' }}>The 2 became <strong style={{ color: 'var(--clr-text)' }}>1</strong> after lending. Now 1 − 1 = <strong style={{ color: 'var(--clr-text)' }}>0</strong>. Answer is <strong style={{ color: 'var(--clr-correct)' }}>05</strong> = 5. Correct!</div>
-                  <div style={{ background: 'var(--clr-card)', borderRadius: '10px', padding: '14px 16px', fontFamily: '"Courier New", monospace', fontSize: '1.2rem', fontWeight: 700, lineHeight: '1.5', textAlign: 'center' }}>
-                    <div style={{ marginBottom: '2px' }}><span style={{ fontSize: '1.1rem', color: 'var(--clr-text-soft)' }}>  </span></div>
-                    <div><span style={{ color: 'var(--clr-text-soft)', textDecoration: 'line-through', opacity: 0.5 }}>2</span><span style={{ color: 'var(--clr-text-soft)', textDecoration: 'line-through', opacity: 0.5 }}>3</span></div>
-                    <div><span style={{ color: 'var(--clr-text-soft)', fontSize: '0.9rem' }}>− </span><span style={{ color: 'var(--clr-text)' }}>1</span><span style={{ color: 'var(--clr-text)' }}>8</span></div>
-                    <div style={{ width: '80px', height: '2px', background: 'var(--clr-border)', margin: '4px auto' }} />
-                    <div><span style={{ color: 'var(--clr-correct)' }}>0</span><span style={{ color: 'var(--clr-correct)' }}>5</span></div>
-                  </div>
+              <div style={{ borderTop: '1px solid var(--clr-border)', paddingTop: '16px' }}>
+                <div style={{ color: 'var(--clr-text)', fontSize: '0.85rem', fontWeight: 600, fontFamily: 'Inter, sans-serif', marginBottom: '8px' }}>Pro Tips:</div>
+                <div style={{ color: 'var(--clr-text-soft)', fontSize: '0.8rem', fontFamily: 'Inter, sans-serif', lineHeight: '1.7' }}>
+                  • Click a top digit to cross it out and show the borrow box<br />
+                  • Click again to undo if you made a mistake<br />
+                  • Use Tab / Arrow keys to move between boxes
                 </div>
-              </div>
-
-              {/* Navigation tips */}
-              <div style={{ background: 'var(--clr-card)', borderRadius: '10px', padding: '14px 18px', marginTop: '4px' }}>
-                <div style={{ color: 'var(--clr-text)', fontSize: '0.82rem', fontWeight: 600, fontFamily: 'Inter, sans-serif', marginBottom: '8px' }}>Keyboard shortcuts</div>
-                <div style={{ color: 'var(--clr-text-soft)', fontSize: '0.78rem', fontFamily: 'Inter, sans-serif', lineHeight: '1.8' }}>
-                  <div><span style={{ color: 'var(--clr-accent)', fontFamily: '"Courier New", monospace', background: 'var(--clr-input)', padding: '1px 6px', borderRadius: '3px', fontSize: '0.75rem' }}>← →</span> Move between answer digits</div>
-                  <div><span style={{ color: 'var(--clr-accent)', fontFamily: '"Courier New", monospace', background: 'var(--clr-input)', padding: '1px 6px', borderRadius: '3px', fontSize: '0.75rem' }}>↑ ↓</span> Jump between answer and borrow box</div>
-                  <div><span style={{ color: 'var(--clr-accent)', fontFamily: '"Courier New", monospace', background: 'var(--clr-input)', padding: '1px 6px', borderRadius: '3px', fontSize: '0.75rem' }}>Backspace</span> Clear and move right</div>
-                </div>
-                <div style={{ color: 'var(--clr-text-soft)', fontSize: '0.78rem', fontFamily: 'Inter, sans-serif', marginTop: '8px', lineHeight: '1.5' }}>Click a top digit again to <strong>cancel</strong> the borrow. If a column doesn't need borrowing, just fill the answer directly.</div>
               </div>
             </div>
           )}
@@ -50009,14 +50111,7 @@ function ColumnSubtractionApp({ onBack, initialDifficulty, initialNumQuestions, 
           </div>
           <button onClick={startQuiz} style={{ background: 'var(--clr-accent)', border: 'none', borderRadius: '6px', padding: '10px 24px', color: '#FFF', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer' }}>Start Quiz</button>
         </div>
-      </div>
-    )
-  }
-
-  const ansLen = question ? question.answerDigits.length : 1
-
-  return (
-    <QuizLayout title="Column Subtraction" onBack={onBack} timer={timer}>
+      )}
       {started && !finished && <>
         <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem', marginBottom: '0.3rem' }}>
           <div className="progress-pill center">Question {questionNumber}/{totalQ}</div>
@@ -50529,39 +50624,23 @@ const fetchQuestion = async (selectedDifficulty = difficulty) => {
     return <ComicAdditionApp onBack={() => setShowComicAddition(false)} />
   }
 
-  if (!started && !finished) {
-    return (
-      <div style={{ minHeight: '100vh', background: '#181512', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px', fontFamily: 'Inter, sans-serif' }}>
-        <div style={{
-          background: '#2D2520', border: '1.5px solid #4A4038', borderRadius: '28px',
-          boxShadow: '0 20px 40px rgba(0,0,0,.45)', padding: '48px 40px', maxWidth: '720px', width: '100%',
-          textAlign: 'center', position: 'relative'
-        }}>
-          <button onClick={onBack} style={{
-            position: 'absolute', top: '24px', left: '24px', background: 'transparent',
-            border: '1px solid #5B5048', borderRadius: '6px', padding: '6px 14px',
-            color: '#A89C93', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer'
-          }}>← Home</button>
-
-          <h1 style={{ fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 700, fontSize: '48px', color: '#F4F1ED', margin: '0 0 12px', lineHeight: 1.1 }}>
-            Addition
-          </h1>
-          <p style={{ color: '#988D84', fontSize: '0.9rem', margin: '0 0 24px', fontFamily: 'Inter, sans-serif', fontWeight: 400, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
-            <span>Practice addition!</span>
-          </p>
+  return (
+    <QuizLayout title="Addition" subtitle="Practice addition!" onBack={onBack} timer={started && !finished ? timer : null}>
+      {!started && !finished && (
+        <div className="welcome-box">
           <KeyTerms topicKey="addition" />
 
           <div style={{ marginBottom: '24px' }}>
-            <h3 style={{ color: '#F4F1ED', fontSize: '0.9rem', margin: '0 0 16px', fontFamily: 'Inter, sans-serif', fontWeight: 700 }}>
+            <h3 style={{ color: 'var(--clr-text)', fontSize: '0.9rem', margin: '0 0 16px', fontFamily: 'Inter, sans-serif', fontWeight: 700 }}>
               Select Difficulty:
             </h3>
             <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '12px' }}>
               {['easy', 'medium', 'hard', ...(additionMode === 'standard' ? ['extrahard'] : [])].map(d => (
                 <button key={d} onClick={() => { setDifficulty(d); setIsAdaptive(false); }} style={{
-                  background: (!isAdaptive && difficulty === d) ? '#F08C46' : 'transparent',
-                  border: (!isAdaptive && difficulty === d) ? '1px solid #F08C46' : '1px solid #5B5048',
+                  background: (!isAdaptive && difficulty === d) ? 'var(--clr-accent)' : 'transparent',
+                  border: (!isAdaptive && difficulty === d) ? '1px solid var(--clr-accent)' : '1px solid var(--clr-border)',
                   borderRadius: '50px', padding: '8px 16px',
-                  color: (!isAdaptive && difficulty === d) ? '#FFF' : '#988D84', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer'
+                  color: (!isAdaptive && difficulty === d) ? '#FFF' : 'var(--clr-text-soft)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer'
                 }}>
                   {diffLabels[d]}
                 </button>
@@ -50570,10 +50649,10 @@ const fetchQuestion = async (selectedDifficulty = difficulty) => {
             {additionMode === 'standard' && (
               <div style={{ display: 'flex', justifyContent: 'center' }}>
                 <button onClick={() => setIsAdaptive(true)} style={{
-                  background: isAdaptive ? '#F08C46' : 'transparent',
-                  border: isAdaptive ? '1px solid #F08C46' : '1px solid #5B5048',
+                  background: isAdaptive ? 'var(--clr-accent)' : 'transparent',
+                  border: isAdaptive ? '1px solid var(--clr-accent)' : '1px solid var(--clr-border)',
                   borderRadius: '50px', padding: '8px 16px',
-                  color: isAdaptive ? '#FFF' : '#988D84', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer'
+                  color: isAdaptive ? '#FFF' : 'var(--clr-text-soft)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer'
                 }}>
                   Adaptive
                 </button>
@@ -50582,61 +50661,57 @@ const fetchQuestion = async (selectedDifficulty = difficulty) => {
           </div>
 
           <div style={{ marginBottom: '32px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <label style={{ color: '#988D84', fontSize: '0.85rem', margin: '0 0 12px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>
+            <label style={{ color: 'var(--clr-text-soft)', fontSize: '0.85rem', margin: '0 0 12px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>
               How many questions? (max 100)
             </label>
             <input type="text" value={numQuestions} onChange={(e) => { const v = e.target.value; if (v === '' || (/^\d+$/.test(v) && Number(v) <= 100)) setNumQuestions(v) }} style={{
-              background: '#463B34', border: '1px solid #5B5048', borderRadius: '6px',
-              padding: '10px', color: '#FFF', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem',
+              background: 'var(--clr-input)', border: '1px solid var(--clr-border)', borderRadius: '6px',
+              padding: '10px', color: 'var(--clr-text)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem',
               width: '100px', textAlign: 'center', outline: 'none'
             }} placeholder={String(DEFAULT_TOTAL)} />
           </div>
 
           <button onClick={startQuiz} style={{
-            background: '#F08C46', border: 'none', borderRadius: '6px',
+            background: 'var(--clr-accent)', border: 'none', borderRadius: '6px',
             padding: '10px 24px', color: '#FFF', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer'
           }}>
             Start Quiz
           </button>
 
           <button type="button" onClick={() => setShowComicAddition(true)} style={{
-            marginTop: '16px', background: 'transparent', border: '1px solid #5B5048', borderRadius: '6px',
-            padding: '10px 24px', color: '#C9BFB6', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer'
+            marginTop: '16px', background: 'transparent', border: '1px solid var(--clr-border)', borderRadius: '6px',
+            padding: '10px 24px', color: 'var(--clr-text-soft)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer'
           }}>
             Comic Addition — Story Mode
           </button>
-        </div>
-        {isStage3Completed('addition', completedTopics) && (
-          <div className="transfer-cta-box" style={{ marginTop: '20px', padding: '16px', background: 'var(--clr-hover, rgba(255,255,255,0.03))', borderRadius: '10px', border: '1px solid var(--clr-border)', textAlign: 'center' }}>
-            <p style={{ margin: '0 0 12px', fontSize: '0.9rem', color: 'var(--clr-text-soft)', lineHeight: '1.4' }}>
-              {goldMastery.includes('addition') ? (
-                <>🥇 You have achieved Gold Mastery for this topic!</>
-              ) : (
-                <>🎉 You have completed Stage 3 Practice for this topic!</>
-              )}
-            </p>
-            <button
-              className="btn-transfer-cta"
-              onClick={() => {
-                if (setTransferTopic) setTransferTopic('addition')
-                if (setMode) setMode('transfer')
-              }}
-              style={{ width: '100%', padding: '10px', background: 'linear-gradient(135deg, #FFD700, #FFA500)', color: '#000', fontWeight: 'bold', border: 'none', borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
-            >
-              {goldMastery.includes('addition') ? (
-                <>🔄 Revisit Transfer Challenge (Stage 4) 🥇</>
-              ) : (
-                <>🚀 Start Transfer Challenge (Stage 4) 🥇</>
-              )}
-            </button>
-          </div>
-        )}
-      </div>
-    )
-  }
 
-  return (
-    <QuizLayout title="Addition" onBack={onBack} timer={timer}>
+          {isStage3Completed('addition', completedTopics) && (
+            <div className="transfer-cta-box" style={{ marginTop: '20px', padding: '16px', background: 'var(--clr-hover, rgba(255,255,255,0.03))', borderRadius: '10px', border: '1px solid var(--clr-border)', textAlign: 'center' }}>
+              <p style={{ margin: '0 0 12px', fontSize: '0.9rem', color: 'var(--clr-text-soft)', lineHeight: '1.4' }}>
+                {goldMastery.includes('addition') ? (
+                  <>🥇 You have achieved Gold Mastery for this topic!</>
+                ) : (
+                  <>🎉 You have completed Stage 3 Practice for this topic!</>
+                )}
+              </p>
+              <button
+                className="btn-transfer-cta"
+                onClick={() => {
+                  if (setTransferTopic) setTransferTopic('addition')
+                  if (setMode) setMode('transfer')
+                }}
+                style={{ width: '100%', padding: '10px', background: 'linear-gradient(135deg, #FFD700, #FFA500)', color: '#000', fontWeight: 'bold', border: 'none', borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
+              >
+                {goldMastery.includes('addition') ? (
+                  <>🔄 Revisit Transfer Challenge (Stage 4) 🥇</>
+                ) : (
+                  <>🚀 Start Transfer Challenge (Stage 4) 🥇</>
+                )}
+              </button>
+            </div>
+          )}
+        </div>
+      )}
       {started && !finished && <>
         {/* Progress Display */}
         <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '0.3rem' }}>
@@ -51649,7 +51724,7 @@ function GymQuiz({ title, subtitle, typeKeys, welcomeText, algebraInput, onBack 
         <div className="kid-card" style={{ marginTop: '5vh' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <h1>{title}</h1>
-            <button className="kid-back-btn" onClick={onBack}>← Home</button>
+            <button className="kid-back-btn" onClick={onBack}>← Back</button>
           </div>
           <p className="subtitle">{subtitle}</p>
 
@@ -51742,7 +51817,7 @@ function GymQuiz({ title, subtitle, typeKeys, welcomeText, algebraInput, onBack 
           <ResultsTable results={results} />
           <div className="button-row" style={{ gap: '0.5rem' }}>
             <button onClick={() => { setStarted(false); setFinished(false); setAdaptive(false) }}>Play Again</button>
-            <button onClick={onBack} style={{ background: 'transparent', border: '1px solid var(--clr-accent)', color: 'var(--clr-accent)' }}>Back to Home</button>
+            <button onClick={onBack} style={{ background: 'transparent', border: '1px solid var(--clr-accent)', color: 'var(--clr-accent)' }}>Back</button>
           </div>
         </div>
       )}
@@ -54077,8 +54152,7 @@ function FractionsPage(props) {
 
   if (learningPhase === 'select') {
     return (
-      <div className="app-shell" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', paddingTop: '40px' }}>
-        <div className="card" style={{ maxWidth: 900, width: '90%', padding: '3rem', color: 'var(--clr-text)', textAlign: 'center', borderRadius: '24px', boxShadow: '0 10px 30px rgba(0,0,0,0.05)', background: 'var(--clr-card)' }}>
+      <div style={{ maxWidth: 900, width: '100%', margin: '0 auto', padding: '1rem', color: 'var(--clr-text)', textAlign: 'center' }}>
           <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
             <button className="kid-btn-secondary" onClick={props.onBack} style={{ padding: '8px 16px', borderRadius: '20px', fontWeight: 'bold', border: 'none', background: 'rgba(0,0,0,0.05)', cursor: 'pointer', color: 'var(--clr-text)' }}>
               ← Back to Home
@@ -54108,7 +54182,6 @@ function FractionsPage(props) {
           }}>
             Idli Vada Sambhar — multiples & LCM game
           </button>
-        </div>
       </div>
     );
   }
@@ -55183,43 +55256,23 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
 
     const curAdaptLevel = adaptiveLevel(adaptScore)
 
-    if (!started && !finished) {
-      return (
-      <div style={{ minHeight: '100vh', background: 'var(--clr-bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px', fontFamily: 'Inter, sans-serif' }}>
-          <div style={{
-            background: '#2D2520', border: '1.5px solid #4A4038', borderRadius: '28px',
-            boxShadow: '0 20px 40px rgba(0,0,0,.45)', padding: '48px 40px', maxWidth: '720px', width: '100%',
-            textAlign: 'center', position: 'relative'
-          }}>
-            <button onClick={onBack} style={{
-              position: 'absolute', top: '24px', left: '24px', background: 'transparent',
-              border: '1px solid #5B5048', borderRadius: '6px', padding: '6px 14px',
-              color: '#A89C93', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer'
-            }}>← Home</button>
-
-            <h1 style={{ fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 700, fontSize: '48px', color: '#F4F1ED', margin: '0 0 12px', lineHeight: 1.1 }}>
-              {title}
-            </h1>
-            <p style={{ color: '#988D84', fontSize: '0.9rem', margin: '0 0 40px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>
-              {subtitle}
-            </p>
-            <p style={{ color: '#988D84', fontSize: '0.9rem', margin: '0 0 24px', fontFamily: 'Inter, sans-serif', fontWeight: 400, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
-              <span>Practice {title.toLowerCase()}!</span>
-            </p>
-            {tip && <p style={{ fontSize: '0.85rem', color: '#A89C93', marginBottom: '16px' }}>{tip}</p>}
-            {topicKey && <KeyTerms topicKey={topicKey} />}
+    return (
+      <QuizLayout title={title} subtitle={subtitle} onBack={onBack} timer={started && !finished ? timer : null}>
+        {!started && !finished && (
+          <div className="welcome-box">
+            <KeyTerms topicKey={topicKey} />
 
             <div style={{ marginBottom: '24px' }}>
-              <h3 style={{ color: '#F4F1ED', fontSize: '0.9rem', margin: '0 0 16px', fontFamily: 'Inter, sans-serif', fontWeight: 700 }}>
+              <h3 style={{ color: 'var(--clr-text)', fontSize: '0.9rem', margin: '0 0 16px', fontFamily: 'Inter, sans-serif', fontWeight: 700 }}>
                 Select Difficulty:
               </h3>
               <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '12px' }}>
                 {diffs.map(d => (
                   <button key={d} onClick={() => { setDifficulty(d); setIsAdaptive(false); }} style={{
-                    background: (!isAdaptive && difficulty === d) ? '#F08C46' : 'transparent',
-                    border: (!isAdaptive && difficulty === d) ? '1px solid #F08C46' : '1px solid #5B5048',
+                    background: (!isAdaptive && difficulty === d) ? 'var(--clr-accent)' : 'transparent',
+                    border: (!isAdaptive && difficulty === d) ? '1px solid var(--clr-accent)' : '1px solid var(--clr-border)',
                     borderRadius: '50px', padding: '8px 16px',
-                    color: (!isAdaptive && difficulty === d) ? '#FFF' : '#988D84', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer'
+                    color: (!isAdaptive && difficulty === d) ? '#FFF' : 'var(--clr-text-soft)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer'
                   }}>
                     {diffLabels[d]}
                   </button>
@@ -55227,10 +55280,10 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
               </div>
               <div style={{ display: 'flex', justifyContent: 'center' }}>
                 <button onClick={() => setIsAdaptive(true)} style={{
-                  background: isAdaptive ? '#F08C46' : 'transparent',
-                  border: isAdaptive ? '1px solid #F08C46' : '1px solid #5B5048',
+                  background: isAdaptive ? 'var(--clr-accent)' : 'transparent',
+                  border: isAdaptive ? '1px solid var(--clr-accent)' : '1px solid var(--clr-border)',
                   borderRadius: '50px', padding: '8px 16px',
-                  color: isAdaptive ? '#FFF' : '#988D84', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer'
+                  color: isAdaptive ? '#FFF' : 'var(--clr-text-soft)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer'
                 }}>
                   Adaptive
                 </button>
@@ -55238,54 +55291,50 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
             </div>
 
             <div style={{ marginBottom: '32px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-              <label style={{ color: '#988D84', fontSize: '0.85rem', margin: '0 0 12px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>
+              <label style={{ color: 'var(--clr-text-soft)', fontSize: '0.85rem', margin: '0 0 12px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>
                 How many questions? (max 100)
               </label>
               <input type="text" value={numQuestions} onChange={(e) => { const v = e.target.value; if (v === '' || (/^\d+$/.test(v) && Number(v) <= 100)) setNumQuestions(v) }} style={{
-                background: '#463B34', border: '1px solid #5B5048', borderRadius: '6px',
-                padding: '10px', color: '#FFF', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem',
+                background: 'var(--clr-input)', border: '1px solid var(--clr-border)', borderRadius: '6px',
+                padding: '10px', color: 'var(--clr-text)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem',
                 width: '100px', textAlign: 'center', outline: 'none'
               }} placeholder={String(DEFAULT_TOTAL)} />
             </div>
 
             <button onClick={startQuiz} style={{
-              background: '#F08C46', border: 'none', borderRadius: '6px',
+              background: 'var(--clr-accent)', border: 'none', borderRadius: '6px',
               padding: '10px 24px', color: '#FFF', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer'
             }}>
               Start Quiz
             </button>
-          </div>
-        {isStage3Completed(topicKey, completedTopics) && (
-          <div className="transfer-cta-box" style={{ marginTop: '20px', padding: '16px', background: 'var(--clr-hover, rgba(255,255,255,0.03))', borderRadius: '10px', border: '1px solid var(--clr-border)', textAlign: 'center' }}>
-            <p style={{ margin: '0 0 12px', fontSize: '0.9rem', color: 'var(--clr-text-soft)', lineHeight: '1.4' }}>
-              {goldMastery.includes(topicKey) ? (
-                <>🥇 You have achieved Gold Mastery for this topic!</>
-              ) : (
-                <>🎉 You have completed Stage 3 Practice for this topic!</>
-              )}
-            </p>
-            <button
-              className="btn-transfer-cta"
-              onClick={() => {
-                if (setTransferTopic) setTransferTopic(topicKey)
-                if (setMode) setMode('transfer')
-              }}
-              style={{ width: '100%', padding: '10px', background: 'linear-gradient(135deg, #FFD700, #FFA500)', color: '#000', fontWeight: 'bold', border: 'none', borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
-            >
-              {goldMastery.includes(topicKey) ? (
-                <>🔄 Revisit Transfer Challenge (Stage 4) 🥇</>
-              ) : (
-                <>🚀 Start Transfer Challenge (Stage 4) 🥇</>
-              )}
-            </button>
+
+            {isStage3Completed(topicKey, completedTopics) && (
+              <div className="transfer-cta-box" style={{ marginTop: '20px', padding: '16px', background: 'var(--clr-hover, rgba(255,255,255,0.03))', borderRadius: '10px', border: '1px solid var(--clr-border)', textAlign: 'center' }}>
+                <p style={{ margin: '0 0 12px', fontSize: '0.9rem', color: 'var(--clr-text-soft)', lineHeight: '1.4' }}>
+                  {goldMastery.includes(topicKey) ? (
+                    <>🥇 You have achieved Gold Mastery for this topic!</>
+                  ) : (
+                    <>🎉 You have completed Stage 3 Practice for this topic!</>
+                  )}
+                </p>
+                <button
+                  className="btn-transfer-cta"
+                  onClick={() => {
+                    if (setTransferTopic) setTransferTopic(topicKey)
+                    if (setMode) setMode('transfer')
+                  }}
+                  style={{ width: '100%', padding: '10px', background: 'linear-gradient(135deg, #FFD700, #FFA500)', color: '#000', fontWeight: 'bold', border: 'none', borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
+                >
+                  {goldMastery.includes(topicKey) ? (
+                    <>🔄 Revisit Transfer Challenge (Stage 4) 🥇</>
+                  ) : (
+                    <>🚀 Start Transfer Challenge (Stage 4) 🥇</>
+                  )}
+                </button>
+              </div>
+            )}
           </div>
         )}
-        </div>
-      )
-    }
-
-    return (
-      <QuizLayout title={title} subtitle={subtitle} onBack={onBack} timer={timer}>
         {started && !finished && <>
           <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '0.3rem' }}>
             <div className="progress-pill center">Question {questionNumber}/{totalQ}</div>
@@ -56355,6 +56404,7 @@ function GymApp({ onBack }) {
   const [loading, setLoading] = useState(false)
   const [loadError, setLoadError] = useState('')
   const timer = useTimer()
+  const finished = phase === 'finished'
   const { hintsUsedCount, xpBreakdown, bonusLoading } = useQuizHintsAndXp('gym', finished, score, totalQ, typeof isCorrect !== 'undefined' ? (isCorrect || false) : false, results);
   const sessionGoal = 'standard'
   const isAdaptive = true
@@ -56837,8 +56887,7 @@ function GSTPage(props) {
 
   if (learningPhase === 'select') {
     return (
-      <div className="app-shell" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', paddingTop: '40px' }}>
-        <div className="card" style={{ maxWidth: 900, width: '90%', padding: '3rem', color: 'var(--clr-text)', textAlign: 'center', borderRadius: '24px', boxShadow: '0 10px 30px rgba(0,0,0,0.05)', background: 'var(--clr-card)' }}>
+      <div style={{ maxWidth: 900, width: '100%', margin: '0 auto', padding: '1rem', color: 'var(--clr-text)', textAlign: 'center' }}>
           <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
             <button className="kid-btn-secondary" onClick={props.onBack} style={{ padding: '8px 16px', borderRadius: '20px', fontWeight: 'bold', border: 'none', background: 'rgba(0,0,0,0.05)', cursor: 'pointer', color: 'var(--clr-text)' }}>
               ← Back to Home
@@ -56862,7 +56911,6 @@ function GSTPage(props) {
               <span style={{ color: 'var(--clr-text-soft)' }}>Jump straight to the GST quiz</span>
             </button>
           </div>
-        </div>
       </div>
     );
   }
@@ -57432,7 +57480,7 @@ function TatsavitApp({ onBack }) {
   if (homeScreen && !drillingScreen && !summaryScreen) {
     return (
       <div style={baseStyles.container}>
-        <button onClick={onBack} style={{ ...baseStyles.buttonSecondary, alignSelf: 'flex-start', marginBottom: '16px' }}>← Home</button>
+        <button onClick={onBack} style={{ ...baseStyles.buttonSecondary, alignSelf: 'flex-start', marginBottom: '16px' }}>← Back</button>
         <div style={baseStyles.card}>
           <h1 style={baseStyles.title}>Tatsavit</h1>
           <p style={baseStyles.subtitle}>Algebra Simplification Drill</p>
@@ -57469,7 +57517,7 @@ function TatsavitApp({ onBack }) {
 
     return (
       <div style={baseStyles.container}>
-        <button onClick={onBack} style={{ ...baseStyles.buttonSecondary, alignSelf: 'flex-start', marginBottom: '16px' }}>← Home</button>
+        <button onClick={onBack} style={{ ...baseStyles.buttonSecondary, alignSelf: 'flex-start', marginBottom: '16px' }}>← Back</button>
         <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '16px' }}>
           <div style={baseStyles.progressPill}>Level {level}</div>
           <div style={baseStyles.progressPill}>{levelInfo}</div>
@@ -57529,7 +57577,7 @@ function TatsavitApp({ onBack }) {
   if (summaryScreen && !homeScreen && !drillingScreen) {
     return (
       <div style={baseStyles.container}>
-        <button onClick={onBack} style={{ ...baseStyles.buttonSecondary, alignSelf: 'flex-start', marginBottom: '16px' }}>← Home</button>
+        <button onClick={onBack} style={{ ...baseStyles.buttonSecondary, alignSelf: 'flex-start', marginBottom: '16px' }}>← Back</button>
         <div style={baseStyles.card}>
           <h2 style={{ fontSize: '1.8rem', marginBottom: '16px' }}>Drill Complete!</h2>
           <p style={{ fontSize: '2rem', fontWeight: 600, color: 'var(--clr-accent)', marginBottom: '8px' }}>Score: {score}</p>
@@ -57541,7 +57589,7 @@ function TatsavitApp({ onBack }) {
           </p>
           <div style={baseStyles.buttonRow}>
             <button onClick={startDrill} style={baseStyles.button}>Try Again</button>
-            <button onClick={goHome} style={{ ...baseStyles.button, background: 'var(--clr-text-soft)' }}>Back to Home</button>
+            <button onClick={goHome} style={{ ...baseStyles.button, background: 'var(--clr-text-soft)' }}>Back</button>
           </div>
         </div>
       </div>
@@ -57894,7 +57942,7 @@ function GuessNumberApp({ onBack }) {
   return (
     <>
       <div className="header-row">
-        <button className="back-button" onClick={onBack}>← Home</button>
+        <button className="back-button" onClick={onBack}>← Back</button>
       </div>
       <h1>Guess the Number</h1>
       <p className="subtitle">Think of a number from 0 to 31 — I'll find it!</p>
@@ -68975,7 +69023,7 @@ export function QuizLayout({ title, subtitle, onBack, children, timer, sessionGo
   return (
     <>
       <div className="header-row">
-        <button className="back-button" onClick={onBack}>← Home</button>
+        <button className="back-button" onClick={onBack}>← Back</button>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           {goalBadge}
           {timerDisplay}
@@ -69761,7 +69809,7 @@ function ProgressTrackerApp({ onBack }) {
   return (
     <>
       <div className="header-row">
-        <button className="back-button" onClick={onBack}>← Home</button>
+        <button className="back-button" onClick={onBack}>← Back</button>
       </div>
       <h1>Track Progress</h1>
 
@@ -70051,39 +70099,23 @@ function GenericLabApp({ title, subtitle, endpoint, onBack, renderQuestionCustom
 
   if (!started && !finished) {
     return (
-      <div style={{ minHeight: '100vh', background: '#181512', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px', fontFamily: 'Inter, sans-serif' }}>
-        <div style={{
-          background: '#2D2520', border: '1.5px solid #4A4038', borderRadius: '28px',
-          boxShadow: '0 20px 40px rgba(0,0,0,.45)', padding: '48px 40px', maxWidth: '720px', width: '100%',
-          textAlign: 'center', position: 'relative'
-        }}>
-          <button onClick={onBack} style={{
-            position: 'absolute', top: '24px', left: '24px', background: 'transparent',
-            border: '1px solid #5B5048', borderRadius: '6px', padding: '6px 14px',
-            color: '#A89C93', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer'
-          }}>← Home</button>
-
-          <h1 style={{ fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 700, fontSize: '48px', color: '#F4F1ED', margin: '0 0 12px', lineHeight: 1.1 }}>
-            {title.replace('🔷 ', '')}
-          </h1>
-          <p style={{ color: '#988D84', fontSize: '0.9rem', margin: '0 0 40px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>
-            {subtitle}
-          </p>
-          <p style={{ color: '#988D84', fontSize: '0.9rem', margin: '0 0 24px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>
+      <QuizLayout title={title.replace('🔷 ', '')} subtitle={subtitle} onBack={onBack}>
+        <div className="welcome-box">
+          <p style={{ color: 'var(--clr-text-soft)', fontSize: '0.9rem', margin: '0 0 24px' }}>
             Practice {title.toLowerCase().replace('🔷 ', '')}!
           </p>
 
           <div style={{ marginBottom: '24px' }}>
-            <h3 style={{ color: '#F4F1ED', fontSize: '0.9rem', margin: '0 0 16px', fontFamily: 'Inter, sans-serif', fontWeight: 700 }}>
+            <h3 style={{ color: 'var(--clr-text)', fontSize: '0.9rem', margin: '0 0 16px', fontFamily: 'Inter, sans-serif', fontWeight: 700 }}>
               Select Difficulty:
             </h3>
             <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '12px' }}>
               {[['Easy', 'easy'], ['Medium', 'medium'], ['Hard', 'hard']].map(([lbl, val]) => (
                 <button key={val} onClick={() => setDifficulty(val)} style={{
-                  background: difficulty === val ? '#F08C46' : 'transparent',
-                  border: difficulty === val ? '1px solid #F08C46' : '1px solid #5B5048',
+                  background: difficulty === val ? 'var(--clr-accent)' : 'transparent',
+                  border: difficulty === val ? '1px solid var(--clr-accent)' : '1px solid var(--clr-border)',
                   borderRadius: '50px', padding: '8px 16px',
-                  color: difficulty === val ? '#FFF' : '#988D84', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer'
+                  color: difficulty === val ? '#FFF' : 'var(--clr-text-soft)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer'
                 }}>
                   {lbl}
                 </button>
@@ -70092,24 +70124,24 @@ function GenericLabApp({ title, subtitle, endpoint, onBack, renderQuestionCustom
           </div>
 
           <div style={{ marginBottom: '32px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <label style={{ color: '#988D84', fontSize: '0.85rem', margin: '0 0 12px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>
+            <label style={{ color: 'var(--clr-text-soft)', fontSize: '0.85rem', margin: '0 0 12px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>
               How many questions?
             </label>
             <input type="text" value={numQuestions} onChange={(e) => { const v = e.target.value; if (v === '' || /^\d+$/.test(v)) setNumQuestions(v) }} style={{
-              background: '#463B34', border: '1px solid #5B5048', borderRadius: '6px',
-              padding: '10px', color: '#FFF', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem',
+              background: 'var(--clr-input)', border: '1px solid var(--clr-border)', borderRadius: '6px',
+              padding: '10px', color: 'var(--clr-text)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem',
               width: '100px', textAlign: 'center', outline: 'none'
             }} placeholder="5" />
           </div>
 
           <button onClick={startQuiz} style={{
-            background: '#F08C46', border: 'none', borderRadius: '6px',
+            background: 'var(--clr-accent)', border: 'none', borderRadius: '6px',
             padding: '10px 24px', color: '#FFF', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer'
           }}>
             Start Quiz
           </button>
         </div>
-      </div>
+      </QuizLayout>
     );
   }
 
@@ -70176,7 +70208,7 @@ function GenericLabApp({ title, subtitle, endpoint, onBack, renderQuestionCustom
           </div>
           <div className="button-row" style={{ marginTop: '30px' }}>
             <button className="kid-btn-primary" onClick={() => { setStarted(false); setFinished(false); }}>Play Again 🔄</button>
-            <button className="kid-back-btn" onClick={onBack} style={{ marginLeft: '15px' }}>← Back to Home</button>
+            <button className="kid-back-btn" onClick={onBack}>← Back</button>
           </div>
         </div>
       )}

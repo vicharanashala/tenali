@@ -4,7 +4,7 @@ import './CategoryCardsGrid.css';
 
 /**
  * CategoryCardsGrid
- * Displays the 8 main Category Cards on the Home screen outer view.
+ * Displays the Category Cards on the Home screen outer view.
  */
 export default function CategoryCardsGrid({
   sections = [],

@@ -1582,7 +1582,7 @@ export default function EnhancedMathDetectiveApp({ onBack }) {
       <DetectiveParticles />
       <div className="app-shell">
         <div className="card" style={{ maxWidth: 'min(600px, 95vw)', margin: '0 auto', position: 'relative', zIndex: 1 }}>
-          <button className="back-button" onClick={onBack} style={{ alignSelf: 'flex-start', marginBottom: '1rem' }}>← Home</button>
+          <button className="back-button" onClick={onBack} style={{ alignSelf: 'flex-start', marginBottom: '1rem' }}>← Back</button>
 
           {/* Header */}
           <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
