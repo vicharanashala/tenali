@@ -1,25 +1,58 @@
 /**
  * whisperVoiceClient.js
  *
- * Client-side bridge connecting browser microphone streams to the local
- * Python Whisper server (whisper_voice_recognizer.py --serve --port 5001).
+ * Universal client-side bridge connecting browser microphone streams to Whisper.
+ *
+ * Supports 2 Modes:
+ * 1. Direct Cloud Whisper API (via Groq Whisper Large-v3) -> Zero backend server needed, ~90ms latency!
+ * 2. Self-hosted Python Whisper service (via VITE_WHISPER_API_URL or http://localhost:5001).
  *
  * Features:
  * - Direct 16kHz PCM WAV encoding in pure JavaScript (zero ffmpeg dependency!).
- * - Fast silence gating (doesn't spam the server when user is not speaking).
- * - Non-blocking asynchronous transcription with phonetic homophone resolution.
- * - Completely safe: fails silently if the server is offline, allowing native Web Speech to take over.
+ * - Fast silence gating (discards empty audio before sending to save bandwidth/compute).
+ * - Multi-language and whispered homophone resolution ('bun' -> 1, 'bye' -> 5, 'dead' -> 10).
+ * - Completely safe: fails silently if offline, allowing native Web Speech to take over.
  */
+
+export const GROQ_API_KEY = (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_GROQ_API_KEY)
+  ? import.meta.env.VITE_GROQ_API_KEY.trim()
+  : '';
 
 export const WHISPER_API_URL = (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_WHISPER_API_URL)
   ? import.meta.env.VITE_WHISPER_API_URL.replace(/\/+$/, '')
   : 'http://localhost:5001';
 
+// Phonetic homophone dictionary for numbers 1 to 10
+export const PHONETIC_MAP = {
+  1:  /\b(1|one|won|wan|van|when|run|bun|fun|done|first|ek|ondru|onnu|onru|un|uno)\b/i,
+  2:  /\b(2|two|to|too|tu|do|doo|second|rendu|erandu|irandu|dos)\b/i,
+  3:  /\b(3|three|tree|free|thee|tri|third|teen|tin|moonu|moondru|tres)\b/i,
+  4:  /\b(4|four|for|fore|far|ford|fourth|char|chaar|naalu|naangu|cuatro)\b/i,
+  5:  /\b(5|five|faiv|fai|fiv|fifth|panch|paanch|anju|aindhu|ainthu|cinco|bye|buy)\b/i,
+  6:  /\b(6|six|siks|sex|sick|sixth|chhe|che|chha|aaru|seis)\b/i,
+  7:  /\b(7|seven|sevn|sevan|seventh|saat|sat|yezhu|ezhu|siete)\b/i,
+  8:  /\b(8|eight|ate|ait|eat|eighth|aath|ath|ettu|ocho)\b/i,
+  9:  /\b(9|nine|nain|nin|night|ninth|nau|no|ombodhu|onpathu|onbathu|nueve)\b/i,
+  10: /\b(10|ten|tan|tin|den|tenth|das|dus|pathu|patthu|diez|dead)\b/i
+};
+
+export function resolveTextToNumber(text) {
+  if (!text) return null;
+  const clean = text.toLowerCase().replace(/[^a-z0-9\s]/g, ' ');
+  for (let n = 1; n <= 10; n++) {
+    if (PHONETIC_MAP[n].test(clean)) return n;
+  }
+  return null;
+}
+
 /**
- * Checks if the local Whisper server is online and ready.
+ * Checks if Whisper is available (either Cloud API or local server).
  */
 export async function checkWhisperServerHealth() {
   if (typeof window === 'undefined') return false;
+  // If Groq Cloud Whisper API key is present, it's always ready!
+  if (GROQ_API_KEY) return true;
+
   try {
     const res = await fetch(`${WHISPER_API_URL}/health`, {
       method: 'GET',
@@ -108,7 +141,7 @@ function downsampleTo16k(audioBuffer, inputSampleRate) {
 }
 
 /**
- * Creates a stream recorder that records ~2.0-second audio slices and posts WAV bytes to Whisper server.
+ * Creates a stream recorder that records ~1.8-second audio slices and transcribes them via Whisper.
  */
 export function createWhisperStreamer({ onNumberDetected, onTextHeard, onStatusChange }) {
   let audioStream = null;
@@ -134,7 +167,7 @@ export function createWhisperStreamer({ onNumberDetected, onTextHeard, onStatusC
         audio: {
           channelCount: 1,
           echoCancellation: true,
-          noiseSuppression: false, // Don't suppress faint whispers
+          noiseSuppression: false, // Preserve delicate whisper frequencies
           autoGainControl: true
         }
       });
@@ -153,9 +186,9 @@ export function createWhisperStreamer({ onNumberDetected, onTextHeard, onStatusC
         const channelData = event.inputBuffer.getChannelData(0);
         sampleBuffer.push(new Float32Array(channelData));
 
-        // ~2.0 seconds worth of samples
+        // ~1.8 seconds worth of audio samples
         const totalSamples = sampleBuffer.reduce((acc, curr) => acc + curr.length, 0);
-        const targetSampleCount = Math.round(audioContext.sampleRate * 2.0);
+        const targetSampleCount = Math.round(audioContext.sampleRate * 1.8);
 
         if (totalSamples >= targetSampleCount && !isSending) {
           // Flatten accumulated buffer
@@ -165,7 +198,7 @@ export function createWhisperStreamer({ onNumberDetected, onTextHeard, onStatusC
             merged.set(chunk, offset);
             offset += chunk.length;
           }
-          // Reset buffer
+          // Reset buffer immediately
           sampleBuffer = [];
 
           // Downsample to 16kHz
@@ -188,23 +221,53 @@ export function createWhisperStreamer({ onNumberDetected, onTextHeard, onStatusC
           isSending = true;
 
           try {
-            const res = await fetch(`${WHISPER_API_URL}/transcribe`, {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'audio/wav'
-              },
-              body: wavBlob
-            });
+            // MODE A: Direct Cloud Whisper API (Groq Whisper Large-v3 Turbo) -> ~90ms latency, zero backend!
+            if (GROQ_API_KEY) {
+              const formData = new FormData();
+              formData.append('file', wavBlob, 'audio.wav');
+              formData.append('model', 'whisper-large-v3-turbo');
+              formData.append('prompt', '1, 2, 3, 4, 5, 6, 7, 8, 9, 10. Counting numbers: one, two, three, four, five, six, seven, eight, nine, ten.');
+              formData.append('temperature', '0');
 
-            if (res.ok) {
-              const result = await res.json();
-              if (result && result.success) {
-                const raw = result.raw_text || result.text;
+              const res = await fetch('https://api.groq.com/openai/v1/audio/transcriptions', {
+                method: 'POST',
+                headers: {
+                  'Authorization': `Bearer ${GROQ_API_KEY}`
+                },
+                body: formData
+              });
+
+              if (res.ok) {
+                const result = await res.json();
+                const raw = result.text ? result.text.trim() : '';
                 if (raw && onTextHeard) {
                   onTextHeard(raw);
                 }
-                if (result.number && onNumberDetected) {
-                  onNumberDetected(result.number, result.text, raw);
+                const detectedNumber = resolveTextToNumber(raw);
+                if (detectedNumber && onNumberDetected) {
+                  onNumberDetected(detectedNumber, raw, raw);
+                }
+              }
+            } else {
+              // MODE B: Self-Hosted Whisper HTTP Server (Python or Hugging Face Space)
+              const res = await fetch(`${WHISPER_API_URL}/transcribe`, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'audio/wav'
+                },
+                body: wavBlob
+              });
+
+              if (res.ok) {
+                const result = await res.json();
+                if (result && result.success) {
+                  const raw = result.raw_text || result.text;
+                  if (raw && onTextHeard) {
+                    onTextHeard(raw);
+                  }
+                  if (result.number && onNumberDetected) {
+                    onNumberDetected(result.number, result.text, raw);
+                  }
                 }
               }
             }
