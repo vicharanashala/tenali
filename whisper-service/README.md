@@ -4,7 +4,7 @@ emoji: 🎙️
 colorFrom: green
 colorTo: blue
 sdk: gradio
-sdk_version: 4.44.0
+sdk_version: 6.31.0
 app_file: app.py
 pinned: false
 ---
@@ -19,3 +19,6 @@ ZeroGPU-accelerated speech recognition service for the Tenali Mathematics Platfo
 - **REST Endpoints**:
   - `GET  /health` - Readiness check
   - `POST /transcribe` - Accepts 16kHz mono WAV audio and returns detected number & text.
+
+
+Check out the configuration reference at https://huggingface.co/docs/hub/spaces-config-reference

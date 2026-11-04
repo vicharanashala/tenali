@@ -13,3 +13,4 @@ export * from './numbers1To10Data.js';
 export * from './voiceRecognizer.js';
 
 export { default } from './Numbers1To10App.jsx';
+

@@ -61,7 +61,7 @@ export async function checkWhisperServerHealth() {
   try {
     const res = await fetch(`${WHISPER_API_URL}/health`, {
       method: 'GET',
-      signal: AbortSignal.timeout(1200)
+      signal: AbortSignal.timeout(4500)
     });
     return res.ok;
   } catch {
@@ -414,3 +414,4 @@ export default {
   createVoiceRecognizer,
   PHONETIC_MAP
 };
+
