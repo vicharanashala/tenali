@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
-import ThreeDViewer from './components/ThreeDViewer'
-import ScribbleCanvas from './components/ScribbleCanvas'
+import ThreeDViewer from './components/interactive/ThreeDViewer'
+import ScribbleCanvas from './components/interactive/ScribbleCanvas'
 
 const C = { bg: '#0b0e14', card: '#141820', surface: '#1c2028', accent: '#4dabf7', green: '#51cf66', red: '#ff6b6b', text: '#e8e8e8', muted: '#8b949e', border: '#2d333b' }
 

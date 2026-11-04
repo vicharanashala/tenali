@@ -3,7 +3,7 @@ import { getLearnContent } from '../../data/learnContent.js';
 import DragAngle from './DragAngle';
 import AngleChallenge from './AngleChallenge';
 import AngleDetective from './AngleDetective';
-import LearningVisual from '../LearningVisual';
+import LearningVisual from '../interactive/LearningVisual';
 import './angles-learn.css';
 
 const AngleTypesInteractive = ({ onComplete }) => {

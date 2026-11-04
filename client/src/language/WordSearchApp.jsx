@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useTimer } from '../hooks/useTimer';
-import { QuizLayout } from '../components/QuizLayout';
+import React, { useState, useEffect } from 'react';
+import useTimer from '../hooks/useTimer';
+import { QuizLayout } from '../components/layout/QuizLayout';
 // eslint-disable-next-line no-unused-vars -- motion is used as <motion.div> in JSX
 import { motion, AnimatePresence } from 'framer-motion';
 import './WordSearchApp.css';
@@ -298,7 +298,7 @@ export default function WordSearchApp({ onBack }) {
       }
       return true;
     }
-    
+
     return false;
   };
 
@@ -403,7 +403,7 @@ export default function WordSearchApp({ onBack }) {
   // Hints handler
   const handleHint = () => {
     if (hintsLeft <= 0) return;
-    
+
     let targetWord = null;
     if (activeWord) {
       targetWord = wordPositions.find(p => p.word === activeWord);
@@ -629,7 +629,7 @@ export default function WordSearchApp({ onBack }) {
               </button>
             )}
           </div>
-          </div>
+        </div>
 
         {/* Target Words */}
         <div className="ws-words-panel">

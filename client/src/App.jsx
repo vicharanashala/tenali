@@ -23,111 +23,90 @@
 
 
 
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+import LinearAlgebraApp from './LinearAlgebraApp';
 import { HintModal } from './components/HintSystem/HintModal.jsx';
-import { useQuizHintsAndXp } from './components/HintSystem/useHints.jsx';
-import React, { useEffect, useState, useRef, useMemo, useCallback } from 'react';
-import ConceptualVisualDiagram from './components/ConceptualVisualDiagram';
-import VoiceAssistant from './components/VoiceAssistant';
-import OnboardingTour from './components/OnboardingTour';
-import SpatialReasoningMCQ from './SpatialReasoningMCQ';
-import ScribbleGuessApp from './ScribbleGuessApp';
-import ShapeSlicer3D from './ShapeSlicer3D';
-import ShapeTranslatorApp from './ShapeTranslatorApp';
-import NetBuilderApp from './NetBuilderApp';
-import CrossSectionApp from './CrossSectionApp';
+import LandingNavbar from './components/LandingPage/LandingNavbar.jsx';
+import LandingPage from './components/LandingPage/LandingPage.jsx';
+import PathMap, { PmSuggestIcon } from './components/PathMap';
+import Home from './components/home/Home';
+import ConceptualVisualDiagram from './components/interactive/ConceptualVisualDiagram';
+import OnboardingTour from './components/onboarding/OnboardingTour';
+import {
+  addCompletedTopic,
+  getTopicBadgeLevel,
+  isStage3Completed,
+  loadLocalProgress,
+  reconcileProgress,
+  saveLocalProgress,
+} from './features/progress';
+import useAuth from './hooks/useAuth.js';
+import useAutoAdvance from './hooks/useAutoAdvance.js';
+import { useQuizCompletion } from './hooks/useQuizCompletion';
+import FeedbackDisplay from './components/common/FeedbackDisplay.jsx'
+import useTimer from './hooks/useTimer.js'
+import useProgressSubmit from './hooks/useProgressSubmit.js'
+import { MathLabHub, MensurationLab, BasicArithmeticLab, GK, ColumnAddition, ColumnMultiplication, ColumnDivision, ColumnSubtraction, Gym, ProgressTracker, BadgeIcon } from './components';
+import journeyFetch from './utils/journeyFetch.js';
+import useQuizHintsAndXp from './hooks/useHints.js';
 
 window.React = React;
-import Home from './components/Home';
-import LinearAlgebraApp from './LinearAlgebraApp';
-import PathMap, { PmSuggestIcon } from './PathMap';
-import { pmTrackAnswer } from './pathMapHelpers';
-import LandingPage from './components/LandingPage/LandingPage.jsx';
-import LandingNavbar from './components/LandingPage/LandingNavbar.jsx';
-import {
-  isStage3Completed,
-  getTopicBadgeLevel,
-  saveLocalProgress,
-  loadLocalProgress,
-  addCompletedTopic,
-  reconcileProgress,
-} from './features/progress';
-import { useQuizCompletion } from './hooks/useQuizCompletion';
-
-export { getTopicBadgeLevel };
 
 
 /**
  * useProgressSubmit Hook
  * Submits the result of a quiz question to the backend to track mastery and ensure unique questions.
  */
-export function useProgressSubmit(revealed, isCorrect, topic, questionId) {
-  useEffect(() => {
-    if (!revealed) return;
-    try { pmTrackAnswer(topic, 'medium', isCorrect); } catch {}
-    const token = localStorage.getItem('tenali-auth-token');
-    if (!token || !topic) return;
-
-    const API = import.meta.env.VITE_API_BASE_URL || '';
-    fetch(`${API}/api/progress/update`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
-      body: JSON.stringify({
-        topic,
-        isCorrect,
-        questionId
-      })
-    }).catch(err => console.error('Failed to update progress', err));
-  }, [revealed, isCorrect, topic, questionId]);
-}
 
 
-import Vachana from './vachana'
-import ReflectionJournal from './ReflectionJournal'  // Feature CT — platform-wide reflection journal
-import 'chart.js/auto'
-import { Line } from 'react-chartjs-2'
 
-import './App.css'
-import TreasureHuntApp from './treasurehunt/TreasureHuntApp.jsx'
-import EnhancedMathDetectiveApp from './detective-app'
-import GlossaryText from './components/GlossaryText'
-import LearningVisual from './components/LearningVisual'
-import KeyTerms from './components/KeyTerms'
-import InteractiveLcmHcfApp from './LcmHcfApp';
-import IdliVadaSambharApp from './IdliVadaSambharApp';
+import 'chart.js/auto';
+import ReflectionJournal from './ReflectionJournal'; // Feature CT — platform-wide reflection journal
+import Vachana from './vachana';
+
+import './App.css';
+import BattleApp from './BattleApp';
 import CarJourneyApp from './CarJourneyApp';
-import RealWorldHubApp from './RealWorldHub';
-import { cjTakeReco } from './cjReco'; // Feature CR — Road License difficulty hand-off
-const CJ_RECO_DIFFS = ['easy', 'medium', 'hard', 'extrahard'];
-import VisualMathLabRedux, {
-  FrogJumpTemplate,
-  MathMachineTemplate,
-  PlantArrayTemplate,
-  CandySharingTemplate,
-  EqualGroupsTemplate,
-  PictureMultiTemplate,
-  AnswerInput,
-} from './VisualMathLabRedux';
-import CoordinateGrid from './components/CoordinateGrid';
-import LanguageDashboard from './language/LanguageDashboard'
-import ContrastChallengeApp, { QuizLayoutExtension } from './ContrastChallengeApp'
-import CoordGeomInteractiveApp from './apps/CoordGeomInteractiveApp.jsx'
-import { VOCAB_CORPUS } from './vocabCorpus'
-import PercentExplanationApp from './PercentExplanationApp'
-import { playSound } from './audioContext'
-import { installMonstersInterceptor } from './monsters/fetchInterceptor.js';
-import MonsterToast from './monsters/MonsterToast.jsx';
-import HallPanel from './monsters/HallPanel.jsx';
-import CureFlow from './monsters/CureFlow.jsx';
-import GuidedSolver from './monsters/GuidedSolver.jsx';
-import { load as loadMonsterLog, getMonsterHealedState } from './monsters/monsterStore.js';
-import MonsterAvatar from './monsters/MonsterAvatar.jsx';
+import ContrastChallengeApp from './ContrastChallengeApp';
+import CuriosityApp from './Curiosity.jsx';
+import EquationCraftingLab from './EquationCraftingLab';
 import GeometryApp from './GeometryApp';
-import EquationSandboxApp from './lib/EquationSandboxApp.jsx';
+import IdliVadaSambharApp from './IdliVadaSambharApp';
+import InteractiveLcmHcfApp from './LcmHcfApp';
+import LocalCompilerApp from './LocalCompilerApp';
+import PercentExplanationApp from './PercentExplanationApp';
+import PlaygroundApp from './PlaygroundApp';
+import RealWorldHubApp from './RealWorldHub';
+import SudokuApp from './SudokuApp';
+import VisualMathLabRedux from './VisualMathLabRedux';
+import WaterJugLab from './WaterJugLab';
+import CoordGeomInteractiveApp from './apps/CoordGeomInteractiveApp.jsx';
+import { playSound } from './audioContext';
+import { cjTakeReco } from './cjReco'; // Feature CR — Road License difficulty hand-off
+import GlossaryText from './components/common/GlossaryText';
+import KeyTerms from './components/common/KeyTerms';
+import LearningVisual from './components/interactive/LearningVisual';
+import AnglesLearnPage from './components/learning/AnglesLearnPage';
+import FractionsLearnPage from './components/learning/FractionsLearnPage';
+import GSTLearnPage from './components/learning/GSTLearnPage';
+import { getLearnContent } from './data/learnContent.js';
+import EnhancedMathDetectiveApp from './detective-app';
+import LanguageDashboard from './language/LanguageDashboard';
 import QFormulaConceptApp from './lib/concept/QFormulaConceptApp.jsx';
+import { useI18n } from './lib/i18n.jsx';
 import SimulConceptApp from './lib/simul-concept/SimulConceptApp.jsx';
+import CureFlow from './monsters/CureFlow.jsx';
+import HallPanel from './monsters/HallPanel.jsx';
+import MonsterAvatar from './monsters/MonsterAvatar.jsx';
+import MonsterToast from './monsters/MonsterToast.jsx';
+import { installMonstersInterceptor } from './monsters/fetchInterceptor.js';
+import { getMonsterHealedState, load as loadMonsterLog } from './monsters/monsterStore.js';
+import ProctorDashboard from './proctor/ProctorDashboard';
+import ProctorPanel from './proctor/ProctorPanel';
+import ProctoredQuiz from './proctor/ProctoredQuiz';
+import TreasureHuntApp from './treasurehunt/TreasureHuntApp.jsx';
+import { authGetToken } from './utils/authHelper.js';
+const CJ_RECO_DIFFS = ['easy', 'medium', 'hard', 'extrahard'];
 
 // Concept Playgrounds entry points.
 //
@@ -150,23 +129,6 @@ function SimulConceptMode({ onBack }) {
     </AuthGate>
   );
 }
-import DiagnosticQuiz from './lib/DiagnosticQuiz.jsx';
-import { useI18n } from './lib/i18n.jsx';
-import CuriosityApp from './Curiosity.jsx';
-import ProctoredQuiz from './proctor/ProctoredQuiz'
-import useProctor from './proctor/useProctor'
-import ProctorDashboard from './proctor/ProctorDashboard'
-import ProctorPanel from './proctor/ProctorPanel'
-import PlaygroundApp from './PlaygroundApp'
-import LocalCompilerApp from './LocalCompilerApp'
-import BattleApp from './BattleApp'
-import SudokuApp from './SudokuApp'
-import WaterJugLab from './WaterJugLab'
-import EquationCraftingLab from './EquationCraftingLab'
-import { getLearnContent } from './data/learnContent.js'
-import AnglesLearnPage from './components/learning/AnglesLearnPage'
-import GSTLearnPage from './components/learning/GSTLearnPage'
-import FractionsLearnPage from './components/learning/FractionsLearnPage'
 
 // API base URL from environment variables (Vite)
 export const API = import.meta.env.VITE_API_BASE_URL || '';
@@ -217,54 +179,7 @@ const TENALI_VERSION = '1.0.87'
 const TENALI_BUILD_DATE = '2026-07-08 12:52 IST'
 // ─── Auth helpers ───────────────────────────────────────────────────────────
 // Tiny pub/sub on top of localStorage so AuthMenu and AuthGate stay in sync.
-const AUTH_TOKEN_KEY = 'tenali-auth-token'
-const AUTH_USER_KEY = 'tenali-auth-user'
-const AUTH_EVENT = 'tenali-auth-change'
-function authGetToken() { try { return localStorage.getItem(AUTH_TOKEN_KEY) || null } catch { return null } }
-function authGetUser() { try { return JSON.parse(localStorage.getItem(AUTH_USER_KEY) || 'null') } catch { return null } }
-function authSet(token, user) {
-  try {
-    localStorage.setItem(AUTH_TOKEN_KEY, token)
-    localStorage.setItem(AUTH_USER_KEY, JSON.stringify(user))
-  } catch { }
-  try { window.dispatchEvent(new Event(AUTH_EVENT)) } catch { }
-}
-function authClear() {
-  try {
-    localStorage.removeItem(AUTH_TOKEN_KEY)
-    localStorage.removeItem(AUTH_USER_KEY)
-  } catch { }
-  try { window.dispatchEvent(new Event(AUTH_EVENT)) } catch { }
-}
-function useAuth() {
-  const [user, setUser] = useState(authGetUser)
-  useEffect(() => {
-    const onChange = () => setUser(authGetUser())
-    window.addEventListener(AUTH_EVENT, onChange)
-    window.addEventListener('storage', onChange)
-    return () => {
-      window.removeEventListener(AUTH_EVENT, onChange)
-      window.removeEventListener('storage', onChange)
-    }
-  }, [])
-  const login = async (username, password) => {
-    const r = await fetch(`${API}/api/auth/login`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, password }),
-    })
-    if (!r.ok) {
-      const err = await r.json().catch(() => ({ error: 'login failed' }))
-      throw new Error(err.error || `login failed (HTTP ${r.status})`)
-    }
-    const data = await r.json()
-    authSet(data.token, data.user)
-    setUser(data.user)
-    return data.user
-  }
-  const logout = () => { authClear(); setUser(null) }
-  return { user, login, logout }
-}
+
 
 // Hamburger button (top-right) + dropdown + login modal.
 // Renders globally — sits next to the .theme-toggle.
@@ -521,23 +436,6 @@ const DEFAULT_TOTAL = 20
 const AUTO_ADVANCE_MS = 3500
 
 /**
- * useAutoAdvance Hook
- * Auto-advances to the next question after correct answer is revealed.
- * Only triggers if revealed=true AND isCorrect=true.
- * Calls advanceFnRef.current() after AUTO_ADVANCE_MS delay.
- *
- * @param {boolean} revealed - Whether the answer feedback is shown
- * @param {React.MutableRefObject<Function>} advanceFnRef - Ref to the advance function
- * @param {boolean} isCorrect - Whether the user's answer was correct
- */
-function useAutoAdvance(revealed, advanceFnRef, isCorrect) {
-  useEffect(() => {
-    // Disabled auto-advance so user has to click "Next Question" manually.
-    return;
-  }, [revealed, isCorrect])
-}
-
-/**
  * Speed-run time limits per difficulty level (seconds).
  * Easy: 8s | Medium: 12s | Hard: 20s | Extra Hard: 30s | Adaptive: 15s
  */
@@ -547,110 +445,8 @@ function getSpeedRunLimit(difficulty, isAdaptive) {
   return limits[difficulty] ?? 10
 }
 
-/**
- * useTimer Hook
- * Supports three modes driven by the sessionGoal:
- *   'speed'    — countdown from limitSeconds → 0; fires onTimeout when it hits 0
- *   'perfect'  — hidden (elapsed kept internally but not shown by QuizLayout)
- *   other      — count-up stopwatch (original behaviour)
- *
- * start(goal?, onTimeout?, limitSeconds?)
- *   goal        — 'speed' | 'perfect' | 'standard' | 'revision'
- *   onTimeout   — async function called when countdown reaches 0 (speed only)
- *   limitSeconds — total seconds for countdown (speed only)
- *
- * @returns {{ elapsed, remaining, mode, start, stop, reset }}
- *   elapsed   — seconds since start (count-up value; also used for timeTaken)
- *   remaining — seconds left (countdown; only meaningful in speed mode)
- *   mode      — current goal mode string
- *   start / stop / reset — control methods
- */
-export function useTimer() {
-  // Current elapsed time in seconds, displayed to user
-  const [elapsed, setElapsed]     = useState(0)
-  // Remaining time in seconds (for speed mode countdown)
-  const [remaining, setRemaining] = useState(0)
-  // Goal mode ('standard' | 'speed' | 'perfect' | 'revision')
-  const [mode, setMode]           = useState('standard')
-  // Reference to the timestamp when timer started (using Date.now())
-  const startRef    = useRef(typeof window !== 'undefined' ? Date.now() : 0)
-  
-  // Helper to extract current timestamp
-  const getTimestamp = () => Date.now()
-  const intervalRef = useRef(null)
-  const limitRef    = useRef(0)
-  const onTORef     = useRef(null) // timeout callback ref (avoids stale closure)
-  const firedRef    = useRef(false) // prevent double-fire
-
-  /**
-   * start(goal, onTimeout, limitSeconds)
-   * Backward-compatible: calling with no args or a number (initialValue) still starts a count-up timer.
-   */
-  const start = (goal = 'standard', onTimeout = null, limitSeconds = 15) => {
-    clearInterval(intervalRef.current)
-    let initialValue = 0
-    let currentGoal = goal
-    
-    // If the first argument is a number, we treat it as initialValue (backward compatibility for count-up timer)
-    if (typeof goal === 'number') {
-      initialValue = goal
-      currentGoal = 'standard'
-    }
-    
-    startRef.current = Date.now() - (initialValue * 1000)
-    limitRef.current = limitSeconds
-    onTORef.current  = onTimeout
-    firedRef.current = false
-    setMode(currentGoal)
-    setElapsed(initialValue)
-    setRemaining(currentGoal === 'speed' ? limitSeconds : 0)
-
-    intervalRef.current = setInterval(() => {
-      const secs = Math.floor((Date.now() - startRef.current) / 1000)
-      setElapsed(secs)
-      if (currentGoal === 'speed') {
-        const left = Math.max(0, limitRef.current - secs)
-        setRemaining(left)
-        if (left === 0 && !firedRef.current) {
-          firedRef.current = true
-          clearInterval(intervalRef.current)
-          if (typeof onTORef.current === 'function') onTORef.current()
-        }
-      }
-    }, 250)
-  }
-
-  const stop = () => {
-    clearInterval(intervalRef.current)
-    firedRef.current = true // prevent timeout after manual stop
-    return Math.floor((Date.now() - startRef.current) / 1000)
-  }
-
-  const reset = () => {
-    clearInterval(intervalRef.current)
-    firedRef.current = true
-    setElapsed(0)
-    setRemaining(0)
-  }
-
-  useEffect(() => () => clearInterval(intervalRef.current), [])
-
-  return { elapsed, remaining, mode, start, stop, reset }
-}
-
-/**
- * ResultsTable Component
- * Displays a summary table of all quiz answers: question, user's answer, correct answer, and time.
- * Shows row highlighting: green for correct, red for wrong.
- * Includes total time and average time per question in footer.
- *
- * @param {Object} props
- * @param {Array<{question: string, userAnswer: string, correctAnswer: string|number, correct: boolean, time: number}>} props.results
- *   Array of result objects from quiz attempts. Each has question text, user answer, correct answer, correctness flag, and time in seconds.
- * @returns {ReactElement|null} Table element or null if no results
- */
-const STORAGE_KEY = 'gymQuizHistory_v1'
-const MAX_HISTORY = 500
+const STORAGE_KEY = 'gymQuizHistory_v1';
+const MAX_HISTORY = 500;
 const SUPPORTED_GYMS = [
   'Gym Decimals',
   'Functions Gym',
@@ -659,7 +455,8 @@ const SUPPORTED_GYMS = [
   'LinearEquations-Gym',
   'Indices-Gym',
   'Polynomials Gym',
-]
+];
+
 
 function loadHistory() {
   try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]') } catch { return [] }
@@ -690,1855 +487,6 @@ function saveGymResult({ gymName, totalQuestions, correctAnswers, timeTakenSecon
   saveHistory(record)
 }
 
-function ResultsTable({ results }) {
-  const processedRef = useRef(false);
-  useEffect(() => {
-    if (processedRef.current) return;
-    if (results && results.length > 0) {
-      processedRef.current = true;
-      const correctCount = results.filter(r => r.correct).length;
-      if (correctCount > 0 && typeof window.tenaliIncrementSolved === 'function') {
-        window.tenaliIncrementSolved(correctCount);
-      }
-    }
-  }, [results]);
-
-  // Hide table if empty or null
-  if (!results || results.length === 0) return null
-  const totalTime = results.reduce((sum, r) => sum + r.time, 0)
-  const avgTime = (totalTime / results.length).toFixed(1)
-  const hasCarries = results.some(r => r.userCarries || r.correctCarries)
-  return (
-    <div className="results-table-wrapper">
-      <table className="results-table">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Question</th>
-            <th>Your Answer</th>
-            <th>Result</th>
-            {hasCarries && <th>Carries</th>}
-            <th>Time</th>
-          </tr>
-        </thead>
-        <tbody>
-          {results.map((r, i) => (
-            <tr key={i} className={r.correct ? 'row-correct' : 'row-wrong'}>
-              <td>{i + 1}</td>
-              <td>{r.question || r.prompt || `Question ${i + 1}`}</td>
-              <td>{r.userAnswer || '-'}</td>
-              <td>{r.correct ? `✓ (${r.correctAnswer || r.display || ''})` : `✗ (${r.correctAnswer || r.display || 'Ans'})`}</td>
-              {hasCarries && (
-                <td style={{ fontSize: '0.8rem', whiteSpace: 'pre-line' }}>
-                  {r.userCarries && <span>Yours: {r.userCarries}</span>}
-                  {r.userCarries && r.correctCarries && <br />}
-                  {r.correctCarries && <span style={{ color: 'var(--clr-correct)' }}>Ans: {r.correctCarries}</span>}
-                </td>
-              )}
-              <td>{r.time}s</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <div className="results-summary">
-        Total time: {totalTime}s &middot; Average: {avgTime}s per question
-      </div>
-    </div>
-  )
-}
-
-// ── Helper functions for traversing React children tree ──
-
-const findElementWithClass = (node, className) => {
-  if (!node || !React.isValidElement(node)) return null;
-  if (node.props && node.props.className && typeof node.props.className === 'string' && node.props.className.includes(className)) {
-    return node;
-  }
-  if (node.props && node.props.children) {
-    const children = React.Children.toArray(node.props.children);
-    for (const child of children) {
-      const found = findElementWithClass(child, className);
-      if (found) return found;
-    }
-  }
-  return null;
-};
-
-const findElementByType = (node, typeName) => {
-  if (!node || !React.isValidElement(node)) return null;
-  if (node.type === typeName || (node.type && node.type.name === typeName)) {
-    return node;
-  }
-  if (node.props && node.props.children) {
-    const children = React.Children.toArray(node.props.children);
-    for (const child of children) {
-      const found = findElementByType(child, typeName);
-      if (found) return found;
-    }
-  }
-  return null;
-};
-
-const findAllElementsByType = (node, type) => {
-  if (!node || !React.isValidElement(node)) return [];
-  let found = [];
-  if (node.type === type) {
-    found.push(node);
-  }
-  if (node.props && node.props.children) {
-    const children = React.Children.toArray(node.props.children);
-    for (const child of children) {
-      found = found.concat(findAllElementsByType(child, type));
-    }
-  }
-  return found;
-};
-
-const getNodeText = (node) => {
-  if (!node) return '';
-  if (typeof node === 'string' || typeof node === 'number') return String(node);
-  if (Array.isArray(node)) return node.map(getNodeText).join('');
-  if (node.props && node.props.children) {
-    return getNodeText(node.props.children);
-  }
-  return '';
-};
-
-// Confetti particle component
-function Confetti() {
-  const [particles, setParticles] = useState([]);
-  useEffect(() => {
-    // Restricted to brown, orange, gold, copper, bronze, and cream colors to fit the theme
-    const colors = ['#e8864a', '#ff9800', '#ffb300', '#d27c3c', '#a16738', '#ffd54f', '#ede8e3', '#795548', '#b57c50'];
-    const shapes = ['50%', '0%']; // circles or squares
-    const newParticles = Array.from({ length: 50 }).map((_, i) => ({
-      id: i,
-      left: `${Math.random() * 100}%`,
-      color: colors[Math.floor(Math.random() * colors.length)],
-      radius: shapes[Math.floor(Math.random() * shapes.length)],
-      duration: `${2 + Math.random() * 2.5}s`,
-      delay: `${Math.random() * 1.5}s`,
-      size: `${6 + Math.random() * 8}px`,
-      transform: `rotate(${Math.random() * 360}deg)`
-    }));
-    setParticles(newParticles);
-  }, []);
-
-  return (
-    <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 99, overflow: 'hidden' }}>
-      {particles.map(p => (
-        <div
-          key={p.id}
-          className="confetti-particle"
-          style={{
-            left: p.left,
-            '--confetti-color': p.color,
-            '--confetti-radius': p.radius,
-            '--confetti-duration': p.duration,
-            backgroundColor: p.color,
-            borderRadius: p.radius,
-            width: p.size,
-            height: p.size,
-            animationDelay: p.delay,
-            transform: p.transform,
-            position: 'absolute',
-          }}
-        />
-      ))}
-    </div>
-  );
-}
-
-// Success Scorecard Component
-function GoalSuccessScorecard({ score, totalQ, sessionGoal, resultsTable, buttons }) {
-  const goalDetails = {
-    speed: {
-      title: 'Speed Run Achieved!',
-      badge: '⚡ Speed Run',
-      color: 'var(--clr-accent)',
-      bgGlow: 'rgba(232, 134, 74, 0.15)',
-      bgLight: 'rgba(232, 134, 74, 0.08)',
-    },
-    perfect: {
-      title: 'Perfect Solve Achieved!',
-      badge: '🎯 Perfect Solve',
-      color: '#ffb300',
-      bgGlow: 'rgba(255, 179, 0, 0.15)',
-      bgLight: 'rgba(255, 179, 0, 0.08)',
-    },
-    revision: {
-      title: 'Revision Achieved!',
-      badge: '🔄 Revision',
-      color: '#d27c3c',
-      bgGlow: 'rgba(210, 124, 60, 0.15)',
-      bgLight: 'rgba(210, 124, 60, 0.08)',
-    }
-  }[sessionGoal] || {
-    title: 'Goal Achieved!',
-    badge: '🏆 Goal Completed',
-    color: 'var(--clr-accent)',
-    bgGlow: 'rgba(232, 134, 74, 0.15)',
-    bgLight: 'rgba(232, 134, 74, 0.08)',
-  };
-
-  const encouragingTexts = {
-    speed: [
-      "You have shown extreme talent by choosing this and mastering the speed!",
-      "Lightning fast! Your rapid calculations are absolutely elite.",
-      "Blazing reflexes! You've shown incredible mental agility under pressure.",
-      "Speed demon! You cruised through this challenge with extreme talent!"
-    ],
-    perfect: [
-      "Absolute perfection! You have shown extreme talent by choosing this and getting everything right.",
-      "A flawless performance! Your precision and focus are second to none.",
-      "Mastery unlocked! Not a single mistake was made. Exceptional talent!",
-      "Perfect score! You've demonstrated extreme talent and absolute mastery here."
-    ],
-    revision: [
-      "Outstanding dedication! You have shown extreme talent by choosing to revise and reinforce your skills.",
-      "Skill solidified! Dedicated revision is the hallmark of extreme talent.",
-      "Consistency is key! You've shown extreme talent by choosing to review your knowledge.",
-      "True learning mastery! Re-evaluating and refining your skills shows extreme talent."
-    ]
-  }[sessionGoal] || [
-    "Fantastic work! You have shown extreme talent by choosing this practice goal."
-  ];
-
-  const [encourageText, setEncourageText] = useState('');
-  useEffect(() => {
-    const textList = encouragingTexts;
-    const randomText = textList[Math.floor(Math.random() * textList.length)];
-    setEncourageText(randomText);
-  }, [sessionGoal]);
-
-  return (
-    <div className="goal-success-card" style={{ border: `2px solid ${goalDetails.bgGlow}`, boxShadow: `0 8px 32px ${goalDetails.bgGlow}, var(--shadow-card)` }}>
-      <Confetti />
-      
-      <div className="success-checkmark-container">
-        <svg className="success-checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52" style={{
-          width: '80px',
-          height: '80px',
-          borderRadius: '50%',
-          display: 'block',
-          strokeWidth: '4',
-          stroke: goalDetails.color,
-          strokeMiterlimit: '10',
-          background: goalDetails.bgLight,
-          animation: `checkmarkFill .4s ease-in-out .4s forwards, checkmarkScale .3s ease-in-out .9s both`,
-        }}>
-          <circle className="success-checkmark-circle" cx="26" cy="26" r="25" fill="none" style={{
-            strokeDasharray: '166',
-            strokeDashoffset: '166',
-            strokeWidth: '4',
-            strokeMiterlimit: '10',
-            stroke: goalDetails.color,
-            animation: 'checkmarkStroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards'
-          }} />
-          <path className="success-checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" style={{
-            transformOrigin: '50% 50%',
-            strokeDasharray: '48',
-            strokeDashoffset: '48',
-            animation: 'checkmarkStroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.6s forwards'
-          }} />
-        </svg>
-      </div>
-
-      <div style={{
-        display: 'inline-block',
-        padding: '4px 14px',
-        borderRadius: '20px',
-        fontSize: '0.85rem',
-        fontWeight: 'bold',
-        textTransform: 'uppercase',
-        letterSpacing: '1px',
-        color: '#fff',
-        backgroundColor: goalDetails.color,
-        marginBottom: '1rem',
-        boxShadow: `0 4px 12px ${goalDetails.bgGlow}`,
-      }}>
-        {goalDetails.badge}
-      </div>
-
-      <h2 style={{
-        fontSize: '2.2rem',
-        fontWeight: '800',
-        marginBottom: '0.5rem',
-        color: goalDetails.color,
-        fontFamily: 'var(--font-display, Georgia, serif)',
-      }}>
-        {goalDetails.title}
-      </h2>
-
-      <p style={{
-        fontSize: '1.05rem',
-        fontStyle: 'italic',
-        fontWeight: '500',
-        color: 'var(--clr-text-soft)',
-        margin: '1.2rem auto',
-        lineHeight: '1.6',
-        maxWidth: '460px',
-        padding: '0.8rem 1.2rem',
-        borderRadius: '12px',
-        background: 'var(--clr-hover)',
-        borderLeft: `4px solid ${goalDetails.color}`,
-        textAlign: 'center'
-      }}>
-        "{encourageText}"
-      </p>
-
-      <div style={{
-        margin: '2rem 0',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}>
-        <div style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '2px', color: 'var(--clr-text-soft)', opacity: 0.7, marginBottom: '0.5rem' }}>
-          Final Score
-        </div>
-        <div style={{
-          fontSize: '3.5rem',
-          fontWeight: '900',
-          color: 'var(--clr-text)',
-          fontFamily: 'var(--font-display, Georgia, serif)',
-          display: 'flex',
-          alignItems: 'baseline',
-          justifyContent: 'center',
-          gap: '4px'
-        }}>
-          <span style={{ color: goalDetails.color }}>{score}</span>
-          <span style={{ fontSize: '1.8rem', color: 'var(--clr-text-soft)', opacity: 0.5, fontWeight: '400' }}>/</span>
-          <span style={{ fontSize: '1.8rem', color: 'var(--clr-text-soft)', opacity: 0.5, fontWeight: '400' }}>{totalQ}</span>
-        </div>
-      </div>
-
-      {resultsTable && (
-        <div style={{ textAlign: 'left', marginTop: '2rem', maxHeight: '300px', overflowY: 'auto', borderRadius: '12px', border: '1px solid var(--clr-border)' }}>
-          {resultsTable}
-        </div>
-      )}
-
-      <div style={{
-        display: 'flex',
-        gap: '12px',
-        justifyContent: 'center',
-        marginTop: '2.5rem',
-        flexWrap: 'wrap'
-      }}>
-        {buttons && buttons.map((btn, idx) => {
-          return React.cloneElement(btn, {
-            key: idx,
-            style: {
-              ...(btn.props.style || {}),
-              padding: '12px 24px',
-              fontSize: '0.95rem',
-              fontWeight: '600',
-              borderRadius: '30px',
-              cursor: 'pointer',
-              transition: 'all 0.2s ease',
-              border: btn.props.style?.border || 'none',
-              background: btn.props.style?.background || `linear-gradient(135deg, ${goalDetails.color} 0%, rgba(141,110,99,0.3) 100%)`,
-              color: btn.props.style?.color || '#fff',
-              boxShadow: `0 4px 12px ${goalDetails.bgGlow}`,
-            }
-          });
-        })}
-      </div>
-    </div>
-  );
-}
-
-const enhanceFinishedScreen = (node, sessionGoal) => {
-  if (!node) return node;
-
-  if (React.isValidElement(node)) {
-    const isWelcomeBox = node.props && node.props.className && typeof node.props.className === 'string' && node.props.className.includes('welcome-box');
-    if (isWelcomeBox) {
-      const finalScoreNode = findElementWithClass(node, 'final-score');
-      if (finalScoreNode) {
-        const text = getNodeText(finalScoreNode);
-        const numbers = text.match(/\d+/g)?.map(Number);
-        if (numbers && numbers.length >= 2) {
-          const [score, totalQ] = numbers;
-          
-          let isSuccess = false;
-          if (sessionGoal === 'perfect') {
-            isSuccess = score === totalQ;
-          } else if (sessionGoal === 'speed' || sessionGoal === 'revision') {
-            isSuccess = true;
-          }
-          
-          if (isSuccess) {
-            const resultsTable = findElementByType(node, 'ResultsTable');
-            const buttons = findAllElementsByType(node, 'button');
-            
-            return (
-              <GoalSuccessScorecard
-                score={score}
-                totalQ={totalQ}
-                sessionGoal={sessionGoal}
-                resultsTable={resultsTable}
-                buttons={buttons}
-              />
-            );
-          }
-        }
-      }
-    }
-
-    if (node.props && node.props.children) {
-      const enhancedChildren = React.Children.map(node.props.children, child =>
-        enhanceFinishedScreen(child, sessionGoal)
-      );
-      return React.cloneElement(node, {}, enhancedChildren);
-    }
-  }
-
-  return node;
-};
-
-/**
-
-/**
- * NumPad Component
- * Virtual numeric keypad for touch-friendly numeric input (0-9, ±, backspace).
- * Used in addition, quadratic, multiplication, and other numeric quizzes.
- *
- * @param {Object} props
- * @param {string} props.value - Current input value
- * @param {Function} props.onChange - Callback when user presses a key: receives new value string
- * @param {Function} props.onSubmit - (Optional) Callback when user presses submit key
- * @param {boolean} props.disabled - If true, all buttons are disabled
- */
-
-/**
- * renderFeedback — Renders feedback text. For solve feedback, renders a
- * structured card with highlighted answer and formatted explanation.
- * For normal correct/wrong feedback, renders inline text.
- */
-export function renderFeedback(feedback, isCorrect) {
-  if (!feedback) return null
-  const isSolve = isCorrect === false && feedback.startsWith('Solution:')
-  if (!isSolve) {
-    return (
-      <div className={`feedback ${isCorrect ? 'correct' : 'wrong'}`} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
-        <span>{feedback}</span>
-      </div>
-    )
-  }
-  // Parse solve feedback: "Solution: ANSWER\nExplanation..."
-  const lines = feedback.split('\n')
-  const answerLine = lines[0].replace('Solution: ', '').trim()
-  const rawExplanation = lines.slice(1).filter(l => l.trim()).map(l => l.trim())
-
-  // Group lines into steps: lines starting with a keyword or number are step headers
-  const steps = []
-  for (const line of rawExplanation) {
-    // Detect step boundaries: numbered lines, "Step N:", "Answer:", "So,", "Therefore", etc.
-    const isStepStart = /^(\d+[\.\):]|Step\s|Answer:|So[, ]|Therefore|Result:|Formula:|First|Next|Then|Finally|Multiply|Divide|Add|Subtract|Convert|Simplify|Calculate|Apply|Using|Problem:)/i.test(line)
-    if (isStepStart || steps.length === 0) {
-      steps.push(line)
-    } else {
-      // Append to previous step
-      steps[steps.length - 1] += '\n' + line
-    }
-  }
-
-  return (
-    <div className="feedback solve">
-      <div className="solve-answer-badge" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
-        <span>{answerLine}</span>
-      </div>
-      {steps.length > 0 && (
-        <div className="solve-timeline">
-          {steps.map((step, i) => (
-            <div key={i} className="solve-step">
-              <div className="solve-step-marker">
-                <div className="solve-step-dot" />
-                {i < steps.length - 1 && <div className="solve-step-line" />}
-              </div>
-              <div className="solve-step-content" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px', width: '100%' }}>
-                <span>{step}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-  )
-}
-
-/**
- * DifficultySlider — Interactive difficulty bar with draggable seeker.
- * Props:
- *   pct        — current position 0-100
- *   onChange   — (newPct: number) => void  called on drag/click with 0-100
- *   maxWidth   — optional, default 260
- */
-function DifficultySlider({ pct, onChange, maxWidth = 260 }) {
-  const barRef = useRef(null)
-  const pctToPos = (p) => Math.min(100, Math.max(0, p))
-  const handleInteraction = (clientX) => {
-    const bar = barRef.current
-    if (!bar) return
-    const rect = bar.getBoundingClientRect()
-    const newPct = Math.min(100, Math.max(0, ((clientX - rect.left) / rect.width) * 100))
-    onChange(newPct)
-  }
-  const onPointerDown = (e) => {
-    e.preventDefault()
-    handleInteraction(e.clientX)
-    const onMove = (ev) => handleInteraction(ev.clientX)
-    const onUp = () => { window.removeEventListener('pointermove', onMove); window.removeEventListener('pointerup', onUp) }
-    window.addEventListener('pointermove', onMove)
-    window.addEventListener('pointerup', onUp)
-  }
-  return (
-    <div ref={barRef} onPointerDown={onPointerDown} style={{ maxWidth, margin: '0.3rem auto 0.6rem', height: 20, borderRadius: 10, background: 'var(--color-border, #e0e0e0)', position: 'relative', cursor: 'pointer', touchAction: 'none' }}>
-      <div style={{ position: 'absolute', top: 7, left: 0, right: 0, height: 6, borderRadius: 3, background: 'linear-gradient(90deg, #4caf50, #ff9800, #f44336, #9c27b0)' }} />
-      <div style={{
-        position: 'absolute', top: 1, left: `calc(${pctToPos(pct)}% - 9px)`,
-        width: 18, height: 18, borderRadius: '50%',
-        background: '#fff', border: '2.5px solid var(--clr-accent, #e8864a)',
-        boxShadow: '0 1px 4px rgba(0,0,0,0.25)',
-        transition: 'left 0.3s ease',
-        pointerEvents: 'none'
-      }} />
-    </div>
-  )
-}
-
-function NumPad({ value, onChange, onSubmit, disabled, showDecimal, showSlash, showCaret, showX }) {
-  /**
-   * press(key): Handle numpad key press
-   * - '0'-'9': append to value
-   * - '±': toggle negative sign (add or remove from start)
-   * - '.': append decimal point (only if not already present)
-   * - '/': append slash for fractions (only if not already present)
-   * - '^': append caret for exponents (only if not already present)
-   * - 'x': append variable x
-   * - '⌫': delete last character (backspace)
-   */
-  const press = (key) => {
-    if (disabled) return
-    if (key === '⌫') {
-      onChange(value.slice(0, -1))
-    } else if (key === '±') {
-      onChange(value.startsWith('-') ? value.slice(1) : '-' + value)
-    } else if (key === '.') {
-      if (!value.includes('.')) onChange(value + '.')
-    } else if (key === '/') {
-      if (!value.includes('/')) onChange(value + '/')
-    } else if (key === '^') {
-      onChange(value + '^')
-    } else if (key === 'x') {
-      onChange(value + 'x')
-    } else {
-      onChange(value + key)
-    }
-  }
-
-  return (
-    <div className="numpad">
-      <div className="numpad-row">
-        {['1', '2', '3'].map((k) => (
-          <button key={k} type="button" className="numpad-key" onClick={() => press(k)} disabled={disabled}>{k}</button>
-        ))}
-      </div>
-      <div className="numpad-row">
-        {['4', '5', '6'].map((k) => (
-          <button key={k} type="button" className="numpad-key" onClick={() => press(k)} disabled={disabled}>{k}</button>
-        ))}
-      </div>
-      <div className="numpad-row">
-        {['7', '8', '9'].map((k) => (
-          <button key={k} type="button" className="numpad-key" onClick={() => press(k)} disabled={disabled}>{k}</button>
-        ))}
-      </div>
-      <div className="numpad-row">
-        <button type="button" className="numpad-key numpad-special" onClick={() => press('±')} disabled={disabled}>±</button>
-        <button type="button" className="numpad-key" onClick={() => press('0')} disabled={disabled}>0</button>
-        {showDecimal && <button type="button" className="numpad-key numpad-special" onClick={() => press('.')} disabled={disabled}>.</button>}
-        {showSlash && <button type="button" className="numpad-key numpad-special" onClick={() => press('/')} disabled={disabled}>/</button>}
-        {showCaret && <button type="button" className="numpad-key numpad-special" onClick={() => press('^')} disabled={disabled}>^</button>}
-        {showX && <button type="button" className="numpad-key numpad-special" onClick={() => press('x')} disabled={disabled}>x</button>}
-        <button type="button" className="numpad-key numpad-special" onClick={() => press('⌫')} disabled={disabled}>⌫</button>
-      </div>
-    </div>
-  )
-}
-
-/**
- * AdaptiveTablesApp Component
- * Implements an adaptive multiplication tables learning system with rolling-window algorithm.
- * Dynamically hides/shows reference table based on student performance.
- * Automatically advances to next table when student demonstrates mastery.
- *
- * === ADAPTATION ALGORITHM ===
- * Uses a rolling window of the last WINDOW (8) answers to evaluate performance:
- *
- * For the current window, calculates:
- *   - accuracy: % of correct answers
- *   - avgTime: average time per question in milliseconds
- *
- * State transitions:
- *   "learning" state (bad performance):
- *     - avgTime ≥ 6000ms OR accuracy < 70%
- *     - Action: Show the reference table, reset advancement counter
- *     - Purpose: Student needs help to avoid frustration
- *
- *   "comfortable" state (medium performance):
- *     - avgTime < 6000ms AND accuracy ≥ 70%
- *     - Action: Hide the table to build confidence, but keep status visible
- *     - Purpose: Student can do it, but might need occasional reference
- *
- *   "mastered" state (excellent performance):
- *     - avgTime < 3000ms AND accuracy ≥ 90%
- *     - First time: Hide table and start advancement counter
- *     - Each subsequent mastered answer (without table): +1 to advancement counter
- *     - When counter reaches ADVANCE_COUNT (5): Advance to next table (2→3→...→20)
- *     - Purpose: Student has internalized the pattern
- *
- * === PERSISTENCE ===
- * Current table progress saved to localStorage[tenali-tables-{studentName}]
- * Allows student to resume from last table on page reload
- *
- * @param {Object} props
- * @param {string} props.studentName - Student's name (used for localStorage key and display)
- */
-
-/**
- * ADAPTATION CONSTANTS
- * These control how aggressive the adaptive algorithm is and when advancement happens
- */
-const WINDOW = 8                   // Rolling window: analyze last 8 answers for each table
-const FAST_THRESH = 3000           // "Fast" speed threshold for mastery (ms)
-const MEDIUM_THRESH = 6000         // "Comfortable" speed threshold (ms)
-const ADVANCE_COUNT = 5            // How many consecutive "mastered without table" answers → advance to next table
-
-function AdaptiveTablesApp({ studentName }) {
-  // localStorage key for this student's progress: "tenali-tables-{studentName}"
-  const storageKey = `tenali-tables-${studentName}`
-
-  // === QUIZ FLOW STATE ===
-  // Phases: 'setup' (choose starting table) → 'playing' (answering questions) → 'finished' (mastered all)
-  const [phase, setPhase] = useState('setup')
-
-  // Current multiplication table (2–20). Loaded from localStorage if student has previous progress.
-  const [currentTable, setCurrentTable] = useState(() => {
-    try {
-      const saved = JSON.parse(localStorage.getItem(storageKey))
-      if (saved && saved.currentTable >= 2) return saved.currentTable
-    } catch { }
-    return 2  // Default to 2× table for new students
-  })
-
-  // Starting table selected by student in setup phase (used if restarting)
-  const [startTable, setStartTable] = useState(currentTable)
-
-  // === QUIZ RUNTIME STATE ===
-  // Current question object: {table, multiplier, answer}
-  const [question, setQuestion] = useState(null)
-  // User's text input (answer they're typing)
-  const [answer, setAnswer] = useState('')
-  // Feedback message shown after submission ("Correct! 3 × 4 = 12" or show correct answer)
-  const [feedback, setFeedback] = useState('')
-  // Boolean: is the current answer correct? (null until revealed)
-  const [isCorrect, setIsCorrect] = useState(null)
-  // Boolean: has the answer been revealed? (locks input, shows feedback)
-  const [revealed, setRevealed] = useState(false)
-  // Question counter (1, 2, 3, ...)
-  const [questionNum, setQuestionNum] = useState(0)
-  // Score: number of correct answers in this session
-  const [score, setScore] = useState(0)
-  // Timestamp when current question was generated (used to calc response time)
-  const [startTime, setStartTime] = useState(null)
-  // Array of all results this session: {q, yourAnswer, correct, time, table}
-  const [results, setResults] = useState([])
-
-  // === ADAPTIVE ALGORITHM STATE ===
-  // Rolling window of recent answers: [{correct: bool, timeMs: number}, ...] (max length WINDOW)
-  const [recentWindow, setRecentWindow] = useState([])
-  // Boolean: should the reference table (2×1, 2×2, ..., 2×10) be shown?
-  const [showTable, setShowTable] = useState(true)
-  // Counter: how many consecutive "mastered without table" answers? When ≥ ADVANCE_COUNT, advance.
-  const [masteredWithout, setMasteredWithout] = useState(0)
-  // Status message shown below header: "Learning — table shown", "Mastered! (3/5 to advance)", etc.
-  const [statusMsg, setStatusMsg] = useState('')
-
-  // Ref to the answer input field (for focus management)
-  const inputRef = useRef(null)
-  // Ref to the "advance to next question" function (used by useAutoAdvance)
-  const advanceFnRef = useRef(null)
-
-  /**
-   * save(tbl): Persist current table progress to localStorage
-   * Allows student to resume from same table if page is reloaded
-   */
-  const save = (tbl) => {
-    try { localStorage.setItem(storageKey, JSON.stringify({ currentTable: tbl })) } catch { }
-  }
-
-  /**
-   * generateQuestion(tbl): Create a new multiplication question
-   * Generates random multiplier (1-10), returns {table, multiplier, answer}
-   */
-  const generateQuestion = (tbl) => {
-    const multiplier = Math.floor(Math.random() * 10) + 1
-    return { table: tbl, multiplier, answer: tbl * multiplier }
-  }
-
-  /**
-   * beginPractice(): Transition from setup → playing phase
-   * Initializes all quiz state and generates first question
-   * Sets phase to 'playing' with chosen startTable and resets adaptive state
-   */
-  const beginPractice = () => {
-    const tbl = startTable
-    setCurrentTable(tbl)
-    save(tbl)  // Persist choice to localStorage
-    setPhase('playing')  // Move to playing phase
-    // Reset all quiz counters and state
-    setQuestionNum(0)
-    setScore(0)
-    setResults([])
-    setRecentWindow([])  // Clear adaptive window
-    setShowTable(true)   // Start by showing the reference table
-    setMasteredWithout(0)  // Reset advancement counter
-    setStatusMsg('Learning — table shown')
-    // Generate and display first question
-    const q = generateQuestion(tbl)
-    setQuestion(q)
-    setAnswer('')
-    setFeedback('')
-    setIsCorrect(null)
-    setRevealed(false)
-    setStartTime(Date.now())
-    setQuestionNum(1)  // First question
-    setTimeout(() => inputRef.current?.focus(), 50)  // Focus input field
-  }
-
-  /**
-   * nextQuestion(tbl?): Advance to the next question
-   * Generates new question for table (or currentTable if not specified)
-   * Clears previous feedback and resets input state
-   */
-  const nextQuestion = (tbl) => {
-    const table = tbl || currentTable
-    const q = generateQuestion(table)
-    setQuestion(q)
-    setAnswer('')
-    setFeedback('')
-    setIsCorrect(null)
-    setRevealed(false)
-    setStartTime(Date.now())
-    setQuestionNum(n => n + 1)
-    setTimeout(() => inputRef.current?.focus(), 50)
-  }
-
-  // Update the advance function ref so useAutoAdvance can call it
-  advanceFnRef.current = () => {
-    nextQuestion()
-  }
-
-  // Auto-advance after correct answer (after AUTO_ADVANCE_MS delay)
-  useAutoAdvance(revealed, advanceFnRef, isCorrect)
-  useProgressSubmit(revealed, isCorrect, 'addition', question?.id)
-  useProgressSubmit(revealed, isCorrect, 'balance-scale', question?.id)
-
-  // Keyboard shortcut: Enter key advances to next question after wrong answer
-  // (Auto-advance via useAutoAdvance handles correct answers)
-  useEffect(() => {
-    if (!revealed || isCorrect) return  // Only listen when wrong answer is revealed
-    const handleKey = (e) => {
-      if (e.key === 'Enter') { e.preventDefault(); nextQuestion() }
-    }
-    window.addEventListener('keydown', handleKey)
-    return () => window.removeEventListener('keydown', handleKey)
-  }, [revealed, isCorrect, currentTable])
-
-  /**
-   * evaluate(window): Analyze rolling window to determine student's mastery level
-   *
-   * Window must have ≥3 answers to be meaningful; otherwise return default "learning"
-   *
-   * Calculates:
-   *   - accuracy: (correct answers / total answers in window)
-   *   - avgTime: average response time in milliseconds
-   *
-   * Returns classification object: {level, avgTime, accuracy}
-   *   level: "mastered" | "comfortable" | "learning"
-   *
-   * Thresholds:
-   *   - "mastered": avgTime < 3000ms AND accuracy ≥ 90%
-   *   - "comfortable": avgTime < 6000ms AND accuracy ≥ 70%
-   *   - "learning": anything else (student needs the table or more practice)
-   */
-  const evaluate = (window) => {
-    // Not enough data yet; assume learning
-    if (window.length < 3) return { level: 'learning', avgTime: Infinity, accuracy: 0 }
-
-    // Calculate accuracy: what % of recent answers were correct?
-    const accuracy = window.filter(r => r.correct).length / window.length
-
-    // Calculate average response time in ms
-    const avgTime = window.reduce((s, r) => s + r.timeMs, 0) / window.length
-
-    // Determine mastery level based on speed and accuracy thresholds
-    if (avgTime < FAST_THRESH && accuracy >= 0.9) return { level: 'mastered', avgTime, accuracy }
-    if (avgTime < MEDIUM_THRESH && accuracy >= 0.7) return { level: 'comfortable', avgTime, accuracy }
-    return { level: 'learning', avgTime, accuracy }
-  }
-
-  /**
-   * handleSubmit(e): Process user's answer submission
-   * This is the CORE ADAPTATION LOGIC where all decisions are made
-   *
-   * Flow:
-   * 1. Validate answer (must be numeric)
-   * 2. Score the answer (correct/incorrect)
-   * 3. Add to rolling window
-   * 4. Evaluate rolling window to determine new mastery level
-   * 5. Adapt (show/hide table, advance tables, update status)
-   */
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    if (revealed || !question) return
-
-    // Parse user's answer and compare to correct answer
-    const userAns = parseInt(answer, 10)
-    const correct = userAns === question.answer
-    const elapsed = Date.now() - startTime  // Time taken for this question
-
-    // Reveal the correctness
-    setIsCorrect(correct)
-    setRevealed(true)
-    if (correct) setScore(s => s + 1)
-
-    // Generate feedback message with an encouraging speed cue.
-    // Old labels ("ok" / "slow") were too negative — students learning their
-    // tables for the first time felt scolded. Replace with affirmative cues
-    // that point toward the next milestone (under 5s, under 3s) and tell the
-    // student to keep going.
-    const speedCue = elapsed < FAST_THRESH
-      ? 'lightning fast 🚀'
-      : elapsed < MEDIUM_THRESH
-        ? "almost there — you'll be under 3s soon!"
-        : "you'll soon be under 5s, keep going!"
-    const fb = correct
-      ? `Correct! ${question.table} × ${question.multiplier} = ${question.answer} (${(elapsed / 1000).toFixed(1)}s — ${speedCue})`
-      : `${question.table} × ${question.multiplier} = ${question.answer} (you said ${userAns || '?'})`
-    setFeedback(fb)
-
-    // Record result for later display in results table
-    setResults(r => [...r, {
-      q: `${question.table} × ${question.multiplier}`,
-      yourAnswer: answer || '?',
-      correct: question.answer,
-      isCorrect: correct,
-      time: (elapsed / 1000).toFixed(1),
-      table: question.table
-    }])
-
-    // === ADAPTATION: UPDATE ROLLING WINDOW ===
-    // Keep only the last WINDOW answers; discard older ones
-    const newWindow = [...recentWindow, { correct, timeMs: elapsed }].slice(-WINDOW)
-    setRecentWindow(newWindow)
-
-    // === ADAPTATION: EVALUATE PERFORMANCE ===
-    // Analyze the rolling window to determine mastery level
-    const { level, avgTime, accuracy } = evaluate(newWindow)
-
-    // === ADAPTATION: DECISION TREE ===
-    // Different actions based on current level and whether table is shown
-
-    if (level === 'mastered' && !showTable) {
-      // CASE: Student is fast & accurate WITHOUT the table
-      // Action: Count this toward advancement threshold
-      const newCount = masteredWithout + 1
-      setMasteredWithout(newCount)
-
-      if (newCount >= ADVANCE_COUNT) {
-        // THRESHOLD REACHED: Student is ready for next table!
-        const nextTbl = currentTable + 1
-        if (nextTbl <= 20) {
-          // Advance to next table (2→3, 3→4, ..., 19→20)
-          setCurrentTable(nextTbl)
-          save(nextTbl)  // Persist to localStorage
-          setRecentWindow([])  // Clear window for fresh evaluation on new table
-          setShowTable(true)   // Show table for new level (student learns it first)
-          setMasteredWithout(0)  // Reset counter
-          setStatusMsg(`Great! Moving to ${nextTbl}× table`)
-          // Proceed to next question with new table
-          setTimeout(() => nextQuestion(nextTbl), AUTO_ADVANCE_MS)
-          return  // Skip normal auto-advance; we're explicitly calling nextQuestion
-        } else {
-          // nextTbl > 20: Student has finished all tables!
-          setPhase('finished')
-          return
-        }
-      }
-      // Not yet at threshold; show progress toward advancement
-      setStatusMsg(`Mastered! (${newCount}/${ADVANCE_COUNT} to advance) — avg ${(avgTime / 1000).toFixed(1)}s`)
-
-    } else if (level === 'mastered' && showTable) {
-      // CASE: Student is fast & accurate WITH the table
-      // Action: Hide the table (student doesn't need it) and challenge them to prove it without
-      setShowTable(false)
-      setMasteredWithout(0)  // Reset counter; next answered without table will start count-up
-      setStatusMsg(`Fast & accurate — table hidden! Prove it without help.`)
-
-    } else if (level === 'comfortable') {
-      // CASE: Student is doing okay (70-90% accuracy, 3-6s avg time)
-      // Action: Hide table to encourage independence, but don't push too hard yet
-      if (showTable) {
-        setShowTable(false)
-        setStatusMsg(`Getting comfortable — table hidden. Avg ${(avgTime / 1000).toFixed(1)}s`)
-      } else {
-        // Table already hidden; just update status
-        setStatusMsg(`Comfortable — avg ${(avgTime / 1000).toFixed(1)}s, ${Math.round(accuracy * 100)}% correct`)
-      }
-      setMasteredWithout(0)  // Reset advancement counter (not ready yet)
-
-    } else {
-      // CASE: Student is still building speed (< 70% accuracy or > 6s avg time).
-      // Action: Make sure the table is on screen so they can lean on it; reset
-      // the advancement counter. Phrasing is intentionally encouraging — early
-      // learners shouldn't be told they're "slow" or "need practice".
-      if (!showTable) {
-        setShowTable(true)
-        setStatusMsg(`No worries — bringing the table back to help. You've got this!`)
-      } else {
-        setStatusMsg(`Keep going — every try is making you faster 💪`)
-      }
-      setMasteredWithout(0)  // Reset; student's not ready to advance
-    }
-  }
-
-  const handleSolve = () => {
-    if (!question || revealed) return
-    setIsCorrect(false)
-    setRevealed(true)
-    setFeedback(`Solution: ${question.table} × ${question.multiplier} = ${question.answer}`)
-  }
-
-  /**
-   * renderTable(): Render the visual reference multiplication table
-   * Shows all 10 multiples (e.g., "2 × 1 = 2", "2 × 2 = 4", ..., "2 × 10 = 20")
-   * Only rendered when showTable === true
-   */
-  const renderTable = () => (
-    <div className="ref-table">
-      <div className="ref-table-title">{currentTable} × Table</div>
-      <div className="ref-table-rows">
-        {Array.from({ length: 10 }, (_, i) => i + 1).map(m => (
-          <div key={m} className="ref-table-row">
-            <span>{currentTable} × {m}</span>
-            <span>= {currentTable * m}</span>
-          </div>
-        ))}
-      </div>
-    </div>
-  )
-
-  // ========== RENDER: SETUP PHASE ==========
-  // Allow student to choose which table to start from (2–20)
-  if (phase === 'setup') {
-    return (
-      <div className="app-shell">
-        <div className="card">
-          <h1>{studentName}'s Tables</h1>
-          <div className="welcome-box">
-            <p className="welcome-text">Which table would you like to start from?</p>
-            <div className="checkbox-group" style={{ marginBottom: '24px' }}>
-              {Array.from({ length: 19 }, (_, i) => i + 2).map(n => (
-                <label key={n} className={`checkbox-pill${startTable === n ? ' active' : ''}`}>
-                  <input type="radio" name="startTable" checked={startTable === n}
-                    onChange={() => setStartTable(n)} />
-                  {n}×
-                </label>
-              ))}
-            </div>
-            <button onClick={beginPractice}>Start Practice</button>
-          </div>
-        </div>
-      </div>
-    )
-  }
-
-  // ========== RENDER: FINISHED PHASE ==========
-  // Student has mastered all tables up to 20×
-  if (phase === 'finished') {
-    return (
-      <div className="app-shell">
-        <div className="card">
-          <h1>Congratulations, {studentName}!</h1>
-          <div className="welcome-box">
-            <p className="welcome-text">You've mastered all tables up to 20×!</p>
-            <div className="final-score">{score} correct out of {questionNum}</div>
-            <button onClick={() => setPhase('setup')}>Start Over</button>
-          </div>
-        </div>
-      </div>
-    )
-  }
-
-  // ========== RENDER: PLAYING PHASE ==========
-  // Main quiz interface: show current table (if applicable), question, input, and reference table (if applicable)
-  return (
-    <div className="app-shell">
-      <div className="card">
-        <div className="header-row">
-          <button className="back-button" onClick={() => setPhase('setup')}>← Change Table</button>
-        </div>
-        <h1>{studentName}'s Tables</h1>
-        <div className="top-mini-row">
-          <span className="score-pill">Score {score}</span>
-          <span className="progress-pill">Q {questionNum}</span>
-          <span className="timer-pill">{currentTable}× table</span>
-        </div>
-        {statusMsg && (
-          <p style={{ textAlign: 'center', fontSize: '0.85rem', color: 'var(--clr-text-soft)', margin: '4px 0 8px', fontWeight: 500 }}>
-            {statusMsg}
-          </p>
-        )}
-
-        <div className={showTable ? 'tables-layout' : ''}>
-          {showTable && renderTable()}
-          <div className="tables-quiz-area">
-            {question && (
-              <>
-                <div className="question-box">
-                  {question.table} × {question.multiplier} = ?
-                </div>
-                <form onSubmit={handleSubmit}>
-                  <input
-                    ref={inputRef}
-                    className="answer-input"
-                    type="text"
-                    inputMode="numeric"
-                    value={answer}
-                    onChange={e => { if (/^-?\d*$/.test(e.target.value)) setAnswer(e.target.value) }}
-                    placeholder="?"
-                    disabled={revealed}
-                    autoFocus
-                  />
-                  {!revealed && (
-                    <div className="button-row">
-                      <button type="submit" disabled={!answer}>Check</button>
-                    </div>
-                  )}
-                </form>
-                {renderFeedback(feedback, isCorrect)}
-                {!revealed && (
-                  <div className="button-row">
-                    <button onClick={handleSolve} disabled={!answer} style={{ background: 'transparent', border: '1px solid var(--clr-accent)', color: 'var(--clr-accent)' }}>Solve</button>
-                  </div>
-                )}
-                {revealed && (
-                  <div className="button-row">
-                    <button onClick={() => nextQuestion()}>Next</button>
-                  </div>
-                )}
-              </>
-            )}
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-/* ── Scaffolded Tables App (Taittiriya) ──────────────────── */
-/**
- * ScaffoldedTablesApp Component
- * A scaffolded multiplication quiz designed for a specific student.
- *
- * KEY DESIGN:
- *   - Starts by displaying 3 reference multiplication tables alongside the quiz
- *   - As the student answers faster, tables are removed one at a time
- *   - If the student makes errors after table removal, tables are restored
- *   - Fixed 30 questions per session with progress tracking
- *   - Remembers performance across sessions via localStorage
- *   - Shows average time, score, and per-question results at the end
- *
- * Scaffolding Logic:
- *   - 3 tables shown initially (current table + two neighbors)
- *   - After 5 consecutive fast+correct answers → remove one table
- *   - After 3 errors in the rolling window of 8 → restore one table
- *   - Tables are removed from the outside in (neighbors first, then current)
- *   - Tables are restored from inside out (current first, then neighbors)
- *
- * @param {Object} props
- * @param {string} props.studentName - Student's display name
- */
-function ScaffoldedTablesApp({ studentName, defaultTable = 2 }) {
-  const storageKey = `tenali-scaffold-${studentName}`
-
-  // ── Constants ────────────────────────────────────────────────────────
-  const FAST_MS = 5000                 // "Fast" answer threshold (ms)
-  const LEVEL_STREAK = 5              // Fast+correct streak to unlock next level
-  const MASTERY_STREAK = 10           // Consecutive correct+fast in Level 5 to master table
-  const TOTAL_LEVELS = 5
-
-  // ── App State ────────────────────────────────────────────────────────
-  // 'choosing' → 'playing' → 'finished'
-  const [appPhase, setAppPhase] = useState('choosing')
-  const [currentTable, setCurrentTable] = useState(null)
-
-  // Stable celebration emoji — picked once when the "MASTERED" screen
-  // mounts so the emoji doesn't flicker between 🎉 / 🏆 / ⭐ / 🌟 / 🎊 on
-  // every unrelated re-render (timer ticks, level transitions, etc.).
-  const [masteryEmoji] = useState(
-    () => ['🎉', '🏆', '⭐', '🌟', '🎊'][Math.floor(Math.random() * 5)]
-  )
-
-  // ── Level:
-  // 1 = show answer (13×2=26, student types 26)
-  // 2 = partial table (5 rows, left or right column only)
-  // 3 = shuffled full table (5 rows)
-  // 4 = products only (13,26,39...) + reverse Q (13×?=39)
-  // 5 = no table at all
-  const [level, setLevel] = useState(1)
-
-  // ── Quiz Runtime State ───────────────────────────────────────────────
-  const [question, setQuestion] = useState(null)
-  const [answer, setAnswer] = useState('')
-  const [feedback, setFeedback] = useState('')
-  const [isCorrect, setIsCorrect] = useState(null)
-  const [revealed, setRevealed] = useState(false)
-  const [questionNum, setQuestionNum] = useState(0)
-  const [score, setScore] = useState(0)
-  const [startTime, setStartTime] = useState(null)
-  const [results, setResults] = useState([])
-  const [fastStreak, setFastStreak] = useState(0)
-  const [statusMsg, setStatusMsg] = useState('')
-  const [shuffledRows, setShuffledRows] = useState([])
-  const [mastered, setMastered] = useState(false)
-  // Level 1: answer opacity (dims over time, disappears on typing)
-  const [answerOpacity, setAnswerOpacity] = useState(1)
-  const [hasTyped, setHasTyped] = useState(false)
-
-  // ── Promotion Prompt State ─────────────────────────────────────────────
-  const [promotionPrompt, setPromotionPrompt] = useState(null)
-
-  // ── Celebration State ──────────────────────────────────────────────────
-  const [showCelebration, setShowCelebration] = useState(false)
-
-  // ── Timing tracker for spaced repetition ─────────────────────────────
-  // { [multiplier]: { totalTime: ms, count: n } }
-  const timingRef = useRef({})
-
-  const recordTiming = (multiplier, elapsed) => {
-    const t = timingRef.current
-    if (!t[multiplier]) t[multiplier] = { totalTime: 0, count: 0 }
-    t[multiplier].totalTime += elapsed
-    t[multiplier].count += 1
-  }
-
-  const getSlowMultipliers = () => {
-    const t = timingRef.current
-    const entries = Object.entries(t).filter(([, v]) => v.count > 0)
-    if (entries.length < 2) return [] // need enough data
-    const totalTime = entries.reduce((s, [, v]) => s + v.totalTime, 0)
-    const totalCount = entries.reduce((s, [, v]) => s + v.count, 0)
-    const avgTime = totalTime / totalCount
-    return entries
-      .filter(([, v]) => (v.totalTime / v.count) > avgTime)
-      .map(([m]) => parseInt(m, 10))
-  }
-
-  // ── Refs ──────────────────────────────────────────────────────────────
-  const inputRef = useRef(null)
-  const advanceFnRef = useRef(null)
-  const celebrationRef = useRef(null)
-
-  /**
-   * shuffleArray: Fisher-Yates shuffle
-   */
-  const shuffleArray = (arr) => {
-    const a = [...arr]
-    for (let i = a.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [a[i], a[j]] = [a[j], a[i]]
-    }
-    return a
-  }
-
-  /**
-   * generateNewShuffledRows(mustInclude): Create shuffled multipliers 1-10,
-   * guaranteeing mustInclude is in the first 5 if provided
-   */
-  const generateNewShuffledRows = (mustInclude) => {
-    const all = shuffleArray(Array.from({ length: 10 }, (_, i) => i + 1))
-    if (mustInclude && !all.slice(0, 5).includes(mustInclude)) {
-      // Swap mustInclude into the first 5
-      const idx = all.indexOf(mustInclude)
-      const swapIdx = Math.floor(Math.random() * 5)
-        ;[all[swapIdx], all[idx]] = [all[idx], all[swapIdx]]
-    }
-    return all
-  }
-
-  /**
-   * pickMultiplier(): Pick a multiplier, biased toward slow ones
-   * 60% chance to pick from slow multipliers (if any), 40% fully random
-   */
-  const pickMultiplier = () => {
-    const slow = getSlowMultipliers()
-    if (slow.length > 0 && Math.random() < 0.6) {
-      return slow[Math.floor(Math.random() * slow.length)]
-    }
-    return Math.floor(Math.random() * 10) + 1
-  }
-
-  /**
-   * generateQuestion(tbl, lvl): Create a question appropriate for the level
-   * Level 1,2,3,5: normal → "13 × 3 = ?" answer = 39
-   * Level 4: reverse → "13 × ? = 39" answer = 3 (student finds the multiplier)
-   * Biased toward multipliers the student is slower on.
-   */
-  const generateQuestion = (tbl, lvl) => {
-    const multiplier = pickMultiplier()
-    const product = tbl * multiplier
-    if (lvl === 4) {
-      return { table: tbl, multiplier, product, answer: multiplier, reverse: true }
-    }
-    return { table: tbl, multiplier, product, answer: product, reverse: false }
-  }
-
-  /**
-   * selectTable(tbl): User picks a table from the chooser screen
-   */
-  const selectTable = (tbl) => {
-    setCurrentTable(tbl)
-    setAppPhase('playing')
-    setLevel(1)
-    setQuestionNum(1)
-    setScore(0)
-    setResults([])
-    setFastStreak(0)
-    setMastered(false)
-    setPromotionPrompt(null)
-    setHasTyped(false)
-    setAnswerOpacity(1)
-    timingRef.current = {} // reset timing history for new table
-    setStatusMsg('Level 1: See the answer, then type it!')
-    const q = generateQuestion(tbl, 1)
-    setQuestion(q)
-    setAnswer('')
-    setFeedback('')
-    setIsCorrect(null)
-    setRevealed(false)
-    setStartTime(Date.now())
-    setShuffledRows(generateNewShuffledRows(q.multiplier))
-    setTimeout(() => inputRef.current?.focus(), 50)
-  }
-
-  /**
-   * nextQuestion(): Advance to the next question
-   */
-  const nextQuestion = () => {
-    if (mastered) {
-      setAppPhase('finished')
-      return
-    }
-    const q = generateQuestion(currentTable, level)
-    setQuestion(q)
-    setAnswer('')
-    setFeedback('')
-    setIsCorrect(null)
-    setRevealed(false)
-    setHasTyped(false)
-    setAnswerOpacity(1)
-    setStartTime(Date.now())
-    setQuestionNum(n => n + 1)
-    // Reshuffle for levels that show partial/shuffled tables
-    if (level === 2 || level === 3) {
-      setShuffledRows(generateNewShuffledRows(q.multiplier))
-    }
-    setTimeout(() => inputRef.current?.focus(), 50)
-  }
-
-  // Level 1: dim the answer gradually over 3 seconds
-  useEffect(() => {
-    if (level !== 1 || !question || revealed || hasTyped) return
-    setAnswerOpacity(1)
-    const interval = setInterval(() => {
-      setAnswerOpacity(prev => {
-        const next = prev - 0.05
-        if (next <= 0) { clearInterval(interval); return 0 }
-        return next
-      })
-    }, 150) // 20 steps × 150ms = 3 seconds to fully dim
-    return () => clearInterval(interval)
-  }, [level, question, revealed, hasTyped])
-
-  // Don't auto-advance when promotion prompt is showing
-  advanceFnRef.current = () => { if (!promotionPrompt) nextQuestion() }
-  useAutoAdvance(revealed, advanceFnRef, isCorrect)
-
-  // Enter key accepts promotion when prompt is showing
-  useEffect(() => {
-    if (!promotionPrompt) return
-    const handleKey = (e) => {
-      if (e.key === 'Enter') { e.preventDefault(); acceptPromotion() }
-    }
-    window.addEventListener('keydown', handleKey)
-    return () => window.removeEventListener('keydown', handleKey)
-  }, [promotionPrompt])
-
-  useEffect(() => {
-    if (!revealed || isCorrect || promotionPrompt) return
-    const handleKey = (e) => {
-      if (e.key === 'Enter') { e.preventDefault(); nextQuestion() }
-    }
-    window.addEventListener('keydown', handleKey)
-    return () => window.removeEventListener('keydown', handleKey)
-  }, [revealed, isCorrect, questionNum, promotionPrompt])
-
-  /**
-   * handleSubmit(e): Process answer and level progression
-   *
-   * L1 → L2: After LEVEL_STREAK consecutive fast+correct
-   * L2 → L3: After LEVEL_STREAK consecutive fast+correct
-   * L3 → L4: After LEVEL_STREAK consecutive fast+correct
-   * L4 mastery: After MASTERY_STREAK consecutive fast+correct
-   */
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    if (revealed || !question) return
-
-    const userAns = parseInt(answer, 10)
-    const correct = userAns === question.answer
-    const elapsed = Date.now() - startTime
-    const fast = elapsed < FAST_MS
-
-    // Record timing for spaced repetition (track actual multiplier regardless of question type)
-    recordTiming(question.multiplier, elapsed)
-
-    setIsCorrect(correct)
-    setRevealed(true)
-    if (correct) setScore(s => s + 1)
-
-    // Build feedback string
-    const qStr = question.reverse
-      ? `${question.table} × ${question.answer} = ${question.product}`
-      : `${question.table} × ${question.multiplier} = ${question.product}`
-    const fb = correct
-      ? `Correct! ${qStr} (${(elapsed / 1000).toFixed(1)}s)`
-      : `${qStr} (you said ${userAns || '?'})`
-    setFeedback(fb)
-
-    const promptStr = question.reverse
-      ? `${question.table} × ? = ${question.product}`
-      : `${question.table} × ${question.multiplier}`
-    setResults(r => [...r, {
-      prompt: promptStr,
-      userAnswer: answer || '?',
-      correctAnswer: String(question.answer),
-      correct,
-      time: (elapsed / 1000).toFixed(1)
-    }])
-
-    // ── LEVEL PROGRESSION LOGIC ──────────────────────────────────────
-    if (correct && fast) {
-      const newStreak = fastStreak + 1
-      setFastStreak(newStreak)
-
-      if (level < 5) {
-        if (newStreak >= LEVEL_STREAK) {
-          setPromotionPrompt({ from: level, to: level + 1 })
-          setStatusMsg('You\'re ready to level up!')
-        } else {
-          setStatusMsg(`Level ${level}: Streak ${newStreak}/${LEVEL_STREAK}`)
-        }
-      } else {
-        // Level 5
-        if (newStreak >= MASTERY_STREAK) {
-          setPromotionPrompt({ from: 5, to: 'mastered' })
-          setStatusMsg('You\'re ready to level up!')
-        } else {
-          setStatusMsg(`Level 5: ${newStreak}/${MASTERY_STREAK} to master!`)
-        }
-      }
-    } else {
-      setFastStreak(0)
-      if (!correct) {
-        setStatusMsg(`Not quite — ${level <= 4 ? 'check the reference and have another go!' : 'keep going, you\'ve got this 💪'}`)
-      } else {
-        // Correct, but didn't beat the fast threshold. Encourage rather than
-        // tag the answer as "slow" — point at the next milestone and remind
-        // the student that every attempt is making them faster.
-        setStatusMsg(`Correct! ${(elapsed / 1000).toFixed(1)}s — you'll soon be under ${FAST_MS / 1000}s, keep going 🚀`)
-      }
-    }
-  }
-
-  /**
-   * Level descriptions for promotion prompts
-   */
-  const levelInfo = {
-    2: { title: 'Half Table', desc: 'Only 5 rows shown — half the table to work with!' },
-    3: { title: 'Shuffled Tables', desc: 'Full equations but shuffled randomly each time.' },
-    4: { title: 'Reverse Challenge', desc: 'Just the products (13, 26, 39...) shown. You answer: 13 × ? = 39' },
-    5: { title: 'No Table!', desc: 'No reference at all — answer from memory!' },
-    mastered: { title: 'Table Mastered!', desc: 'You can see your results or keep practicing.' }
-  }
-
-  const acceptPromotion = () => {
-    const promo = promotionPrompt
-    setPromotionPrompt(null)
-    if (promo.to === 'mastered') {
-      setMastered(true)
-      setShowCelebration(true)
-      setStatusMsg(`MASTERED! ${MASTERY_STREAK} in a row!`)
-      setAppPhase('finished')
-    } else {
-      setLevel(promo.to)
-      setFastStreak(0)
-      setHasTyped(false)
-      setAnswerOpacity(1)
-      const q = generateQuestion(currentTable, promo.to)
-      setQuestion(q)
-      if (promo.to === 2 || promo.to === 3) setShuffledRows(generateNewShuffledRows(q.multiplier))
-      setStatusMsg(`Level ${promo.to}: ${levelInfo[promo.to].title}`)
-      setAnswer('')
-      setFeedback('')
-      setIsCorrect(null)
-      setRevealed(false)
-      setStartTime(Date.now())
-      setQuestionNum(n => n + 1)
-      setTimeout(() => inputRef.current?.focus(), 50)
-    }
-  }
-
-  const declinePromotion = () => {
-    const promo = promotionPrompt
-    setPromotionPrompt(null)
-    setFastStreak(0)
-    setStatusMsg(`Staying at Level ${promo.from}. Keep practicing!`)
-    nextQuestion()
-  }
-
-  /**
-   * Confetti celebration effect — launches when student masters a table
-   */
-  useEffect(() => {
-    if (!showCelebration || !celebrationRef.current) return
-    const canvas = celebrationRef.current
-    const ctx = canvas.getContext('2d')
-    canvas.width = window.innerWidth
-    canvas.height = window.innerHeight
-    const colors = ['#ff6b6b', '#feca57', '#48dbfb', '#ff9ff3', '#54a0ff', '#5f27cd', '#01a3a4', '#f368e0', '#ff9f43', '#00d2d3']
-    const confetti = Array.from({ length: 150 }, () => ({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height - canvas.height,
-      w: Math.random() * 12 + 6,
-      h: Math.random() * 8 + 4,
-      color: colors[Math.floor(Math.random() * colors.length)],
-      vx: (Math.random() - 0.5) * 4,
-      vy: Math.random() * 3 + 2,
-      rot: Math.random() * 360,
-      rotSpeed: (Math.random() - 0.5) * 10
-    }))
-    let frame
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-      let allDone = true
-      confetti.forEach(c => {
-        c.x += c.vx
-        c.y += c.vy
-        c.rot += c.rotSpeed
-        c.vy += 0.05
-        if (c.y < canvas.height + 50) allDone = false
-        ctx.save()
-        ctx.translate(c.x, c.y)
-        ctx.rotate((c.rot * Math.PI) / 180)
-        ctx.fillStyle = c.color
-        ctx.fillRect(-c.w / 2, -c.h / 2, c.w, c.h)
-        ctx.restore()
-      })
-      if (!allDone) frame = requestAnimationFrame(animate)
-    }
-    animate()
-    return () => { if (frame) cancelAnimationFrame(frame) }
-  }, [showCelebration, appPhase])
-
-  /**
-   * renderRefTable(): Render ordered reference table (Phase 1)
-   */
-  const renderRefTable = () => (
-    <div className="ref-table">
-      <div className="ref-table-title">{currentTable} × Table</div>
-      <div className="ref-table-rows">
-        {Array.from({ length: 10 }, (_, i) => i + 1).map(m => (
-          <div key={m} className="ref-table-row">
-            <span>{currentTable} × {m}</span>
-            <span>= {currentTable * m}</span>
-          </div>
-        ))}
-      </div>
-    </div>
-  )
-
-  /**
-   * renderShuffledRefTable(): Render shuffled reference table (Phase 2)
-   */
-  const renderShuffledRefTable = () => (
-    <div className="ref-table">
-      <div className="ref-table-title">{currentTable} × Table (shuffled)</div>
-      <div className="ref-table-rows">
-        {shuffledRows.map(m => (
-          <div key={m} className="ref-table-row">
-            <span>{currentTable} × {m}</span>
-            <span>= {currentTable * m}</span>
-          </div>
-        ))}
-      </div>
-    </div>
-  )
-
-  const computeAvgTime = () => {
-    if (results.length === 0) return '0.0'
-    const totalTime = results.reduce((sum, r) => sum + parseFloat(r.time), 0)
-    return (totalTime / results.length).toFixed(1)
-  }
-
-  // ══════════ RENDER: TABLE CHOOSER ══════════
-  if (appPhase === 'choosing') {
-    return (
-      <div className="app-shell">
-        <div className="card">
-          <h1>Tenali's Tables Desk</h1>
-          <p style={{ textAlign: 'center', color: 'var(--clr-text-soft)', margin: '0.5rem 0 1.5rem' }}>
-            Pick a table to practice:
-          </p>
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(4, 1fr)',
-            gap: '0.75rem',
-            maxWidth: '320px',
-            margin: '0 auto'
-          }}>
-            {Array.from({ length: 18 }, (_, i) => i + 2).map(n => (
-              <button
-                key={n}
-                onClick={() => selectTable(n)}
-                style={{
-                  fontSize: '1.5rem',
-                  fontWeight: 700,
-                  padding: '1rem',
-                  borderRadius: '12px',
-                  border: '2px solid var(--clr-accent)',
-                  background: 'var(--clr-surface)',
-                  color: 'var(--clr-accent)',
-                  cursor: 'pointer',
-                  transition: 'all 0.2s ease'
-                }}
-                onMouseEnter={e => { e.target.style.background = 'var(--clr-accent)'; e.target.style.color = '#fff' }}
-                onMouseLeave={e => { e.target.style.background = 'var(--clr-surface)'; e.target.style.color = 'var(--clr-accent)' }}
-              >
-                {n}
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
-    )
-  }
-
-  // ══════════ RENDER: FINISHED (MASTERED) ══════════
-  if (appPhase === 'finished') {
-    const nextTable = currentTable < 19 ? currentTable + 1 : null
-    return (
-      <div className="app-shell">
-        {showCelebration && (
-          <canvas
-            ref={celebrationRef}
-            style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 9999 }}
-          />
-        )}
-        <div className="card">
-          <h1 style={{ fontSize: '2rem' }}>
-            {studentName} MASTERED {currentTable}x!
-          </h1>
-          <div className="welcome-box">
-            <p style={{ fontSize: '3rem', margin: '0.5rem 0' }}>
-              {masteryEmoji}
-            </p>
-            <p className="welcome-text" style={{ fontSize: '1.3rem', color: 'var(--clr-accent)' }}>
-              Fantastic work! You nailed {MASTERY_STREAK} in a row!
-            </p>
-            <p className="final-score">Score: {score}/{questionNum}</p>
-            <p style={{ fontSize: '1.1rem', margin: '0.5rem 0', color: 'var(--clr-accent)' }}>
-              Average time: {computeAvgTime()}s per question
-            </p>
-            {nextTable && (
-              <p style={{ fontSize: '1.1rem', margin: '1rem 0 0.5rem', fontWeight: 600 }}>
-                Ready to try the {nextTable}x table next?
-              </p>
-            )}
-            <div className="results-table" style={{ marginTop: '1rem', maxHeight: '250px', overflowY: 'auto' }}>
-              <table>
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Question</th>
-                    <th>Your Answer</th>
-                    <th>Correct</th>
-                    <th>Time</th>
-                    <th>Result</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {results.map((r, i) => (
-                    <tr key={i} className={r.correct ? 'result-correct' : 'result-wrong'}>
-                      <td>{i + 1}</td>
-                      <td>{r.prompt}</td>
-                      <td>{r.userAnswer}</td>
-                      <td>{r.correctAnswer}</td>
-                      <td>{r.time}s</td>
-                      <td>{r.correct ? '✓' : '✗'}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-            <div className="button-row" style={{ marginTop: '1rem', gap: '0.5rem', display: 'flex', justifyContent: 'center' }}>
-              {nextTable && (
-                <button onClick={() => { setShowCelebration(false); selectTable(nextTable) }}>
-                  Start {nextTable}x Table
-                </button>
-              )}
-              <button
-                onClick={() => { setShowCelebration(false); setAppPhase('choosing') }}
-                style={{ background: 'transparent', border: '1px solid var(--clr-accent)', color: 'var(--clr-accent)' }}
-              >
-                Pick Another Table
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    )
-  }
-
-  // ══════════ RENDER: PLAYING ══════════
-  return (
-    <div className="app-shell">
-      {showCelebration && (
-        <canvas
-          ref={celebrationRef}
-          style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 9999 }}
-        />
-      )}
-      <div className="card" style={{ padding: '0.75rem', maxWidth: '400px' }}>
-        {/* Compact header row */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-          <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--clr-text-soft)' }}>
-            {currentTable}x | Q{questionNum} | {score} correct
-          </span>
-          <span style={{
-            fontSize: '0.7rem', fontWeight: 700, padding: '2px 8px', borderRadius: '8px',
-            background: level === 5 ? 'var(--clr-accent)' : 'var(--clr-surface)',
-            color: level === 5 ? '#fff' : 'var(--clr-text-soft)',
-            border: '1px solid var(--clr-border)'
-          }}>
-            Level {level}/{TOTAL_LEVELS}
-          </span>
-        </div>
-
-        {/* Promotion prompt */}
-        {promotionPrompt && (
-          <div style={{
-            textAlign: 'center', padding: '1.5rem 1rem', margin: '0.5rem 0',
-            borderRadius: '12px', background: 'var(--clr-surface)', border: '2px solid var(--clr-accent)'
-          }}>
-            <p style={{ fontSize: '1.5rem', margin: '0 0 0.3rem' }}>
-              {promotionPrompt.to === 'mastered' ? '🏆' : '🎉'}
-            </p>
-            <p style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--clr-text)', margin: '0 0 0.3rem' }}>
-              {promotionPrompt.to === 'mastered'
-                ? `${MASTERY_STREAK} in a row! You mastered it!`
-                : `Ready for Level ${promotionPrompt.to}?`}
-            </p>
-            <p style={{ fontSize: '0.95rem', fontWeight: 600, color: 'var(--clr-accent)', margin: '0 0 0.2rem' }}>
-              {levelInfo[promotionPrompt.to]?.title}
-            </p>
-            <p style={{ fontSize: '0.85rem', color: 'var(--clr-text-soft)', margin: '0 0 1rem' }}>
-              {levelInfo[promotionPrompt.to]?.desc}
-            </p>
-            <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'center' }}>
-              <button onClick={acceptPromotion} style={{ padding: '0.6rem 1.2rem', fontSize: '1rem', fontWeight: 700 }}>
-                {promotionPrompt.to === 'mastered' ? 'See Results' : 'Level Up!'}
-              </button>
-              <button onClick={declinePromotion} style={{
-                padding: '0.6rem 1.2rem', fontSize: '1rem', background: 'transparent',
-                border: '1px solid var(--clr-accent)', color: 'var(--clr-accent)'
-              }}>
-                {promotionPrompt.to === 'mastered' ? 'Keep Practicing' : 'Stay Here'}
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* Question — on top, big */}
-        {!promotionPrompt && question && (
-          <div style={{
-            textAlign: 'center', fontSize: '2rem', fontWeight: 800, padding: '0.5rem 0',
-            color: 'var(--clr-text)', fontFamily: 'var(--font-display)'
-          }}>
-            {level === 1
-              ? <>{question.table} × {question.multiplier} = <span style={{ opacity: answerOpacity, transition: 'opacity 0.15s' }}>{question.product}</span></>
-              : question.reverse
-                ? <>{question.table} × <span style={{ color: 'var(--clr-accent)' }}>?</span> = {question.product}</>
-                : <>{question.table} × {question.multiplier} = <span style={{ color: 'var(--clr-accent)' }}>?</span></>
-            }
-          </div>
-        )}
-
-        {/* Reference table — varies by level */}
-        {!promotionPrompt && level >= 2 && level <= 4 && (() => {
-          const pad = (n) => String(n).padStart(String(currentTable * 10).length, '\u2007')
-
-          // Level 4: products only
-          if (level === 4) {
-            const products = Array.from({ length: 10 }, (_, i) => currentTable * (i + 1))
-            return (
-              <div style={{
-                margin: '0.4rem 0', padding: '0.5rem 0.8rem', borderRadius: '8px',
-                background: 'var(--clr-surface)', border: '1px solid var(--clr-border)', textAlign: 'center'
-              }}>
-                <div style={{ fontSize: '0.7rem', color: 'var(--clr-text-soft)', marginBottom: '4px', fontWeight: 600 }}>
-                  {currentTable}x products
-                </div>
-                <div style={{
-                  display: 'flex', flexWrap: 'wrap', gap: '6px', justifyContent: 'center',
-                  fontSize: '1.1rem', fontFamily: 'monospace', fontWeight: 700, color: 'var(--clr-text)'
-                }}>
-                  {products.map((p, i) => (
-                    <span key={i} style={{
-                      padding: '2px 8px', borderRadius: '6px',
-                      background: 'var(--clr-bg)', border: '1px solid var(--clr-border)'
-                    }}>{p}</span>
-                  ))}
-                </div>
-              </div>
-            )
-          }
-
-          // Level 2: half table — 5 complete rows in a single column
-          if (level === 2) {
-            const rows = shuffledRows.slice(0, 5)
-            return (
-              <div style={{
-                margin: '0.4rem 0', padding: '0.6rem 0.8rem', borderRadius: '8px',
-                background: 'var(--clr-surface)', border: '1px solid var(--clr-border)'
-              }}>
-                <div style={{
-                  display: 'flex', flexDirection: 'column', gap: '4px',
-                  fontSize: '1.05rem', fontFamily: 'monospace', fontWeight: 600,
-                  alignItems: 'center'
-                }}>
-                  {rows.map(m => (
-                    <div key={m} style={{ display: 'flex', color: 'var(--clr-text)', whiteSpace: 'pre' }}>
-                      <span style={{ minWidth: '4.5ch', textAlign: 'right' }}>{currentTable} × {String(m).padStart(2, '\u2007')}</span>
-                      <span style={{ color: 'var(--clr-text)', fontWeight: 700, marginLeft: '0.4ch' }}> = {pad(currentTable * m)}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )
-          }
-
-          // Level 3: shuffled full table (5 rows, both sides)
-          const rows = shuffledRows.slice(0, 5)
-          return (
-            <div style={{
-              margin: '0.4rem 0', padding: '0.6rem 0.8rem', borderRadius: '8px',
-              background: 'var(--clr-surface)', border: '1px solid var(--clr-border)'
-            }}>
-              <div style={{ textAlign: 'center', fontSize: '0.75rem', color: 'var(--clr-text-soft)', marginBottom: '4px', fontWeight: 600 }}>shuffled</div>
-              <div style={{
-                display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4px 1.5rem',
-                fontSize: '1.05rem', fontFamily: 'monospace', fontWeight: 600
-              }}>
-                {rows.map(m => (
-                  <div key={m} style={{ display: 'flex', color: 'var(--clr-text)', whiteSpace: 'pre' }}>
-                    <span style={{ minWidth: '4.5ch', textAlign: 'right' }}>{currentTable} × {String(m).padStart(2, '\u2007')}</span>
-                    <span style={{ color: 'var(--clr-text)', fontWeight: 700, marginLeft: '0.4ch' }}> = {pad(currentTable * m)}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )
-        })()}
-
-        {/* Answer input */}
-        {!promotionPrompt && question && (
-          <div style={{ marginTop: '0.4rem' }}>
-            <form onSubmit={handleSubmit}>
-              <input
-                ref={inputRef}
-                className="answer-input"
-                type="text"
-                inputMode="numeric"
-                value={answer}
-                onChange={e => {
-                  if (/^-?\d*$/.test(e.target.value)) {
-                    setAnswer(e.target.value)
-                    if (level === 1 && !hasTyped && e.target.value) {
-                      setHasTyped(true)
-                      setAnswerOpacity(0)
-                    }
-                  }
-                }}
-                placeholder="?"
-                disabled={revealed}
-                autoFocus
-                style={{ fontSize: '1.5rem', textAlign: 'center', width: '100%', padding: '0.6rem' }}
-              />
-              {!revealed && (
-                <div className="button-row" style={{ marginTop: '0.4rem' }}>
-                  <button type="submit" disabled={!answer} style={{ width: '100%', padding: '0.6rem' }}>Check</button>
-                </div>
-              )}
-            </form>
-            {renderFeedback(feedback, isCorrect)}
-            {revealed && !mastered && (
-              <div className="button-row" style={{ marginTop: '0.3rem' }}>
-                <button onClick={() => nextQuestion()} style={{ width: '100%', padding: '0.6rem' }}>Next</button>
-              </div>
-            )}
-            {revealed && mastered && (
-              <div className="button-row" style={{ marginTop: '0.3rem' }}>
-                <button onClick={() => nextQuestion()} style={{ width: '100%', padding: '0.6rem' }}>See Results</button>
-              </div>
-            )}
-          </div>
-        )}
-
-        {/* Status message */}
-        {!promotionPrompt && statusMsg && (
-          <p style={{ textAlign: 'center', fontSize: '0.75rem', color: 'var(--clr-text-soft)', margin: '0.5rem 0 0', fontWeight: 500 }}>
-            {statusMsg}
-          </p>
-        )}
-
-        <div style={{ textAlign: 'center', marginTop: '0.75rem' }}>
-          <button
-            onClick={() => setAppPhase('choosing')}
-            style={{ background: 'transparent', border: 'none', color: 'var(--clr-text-soft)', fontSize: '0.75rem', padding: '0.3rem', cursor: 'pointer', textDecoration: 'underline' }}
-          >
-            Change table
-          </button>
-        </div>
-      </div>
-    </div>
-  )
-}
 
 /* ── Yazdan's 10-Level Tables App ──────────────────────────── */
 /**
@@ -3080,7 +1028,7 @@ function YazdanTablesApp({ studentName }) {
                 style={{ fontSize: '1.5rem', textAlign: 'center', width: '100%', padding: '0.6rem' }} />
               {!revealed && <div className="button-row" style={{ marginTop: '0.4rem' }}><button type="submit" disabled={!answer} style={{ width: '100%', padding: '0.6rem' }}>Check</button></div>}
             </form>
-            {renderFeedback(feedback, isCorrect)}
+            <FeedbackDisplay feedback={feedback} isCorrect={isCorrect} />
             {revealed && <div className="button-row" style={{ marginTop: '0.3rem' }}><button onClick={advance} style={{ width: '100%', padding: '0.6rem' }}>{round >= maxRounds ? 'Continue' : 'Next'}</button></div>}
           </>
         )}
@@ -3115,7 +1063,7 @@ function YazdanTablesApp({ studentName }) {
                 style={{ fontSize: '1.5rem', textAlign: 'center', width: '100%', padding: '0.6rem' }} />
               {!revealed && <div className="button-row" style={{ marginTop: '0.4rem' }}><button type="submit" disabled={!answer} style={{ width: '100%', padding: '0.6rem' }}>Check</button></div>}
             </form>
-            {renderFeedback(feedback, isCorrect)}
+            <FeedbackDisplay feedback={feedback} isCorrect={isCorrect} />
             {revealed && <div className="button-row" style={{ marginTop: '0.3rem' }}><button onClick={advance} style={{ width: '100%', padding: '0.6rem' }}>{round >= maxRounds ? 'Continue' : 'Next'}</button></div>}
           </>
         )}
@@ -3144,7 +1092,7 @@ function YazdanTablesApp({ studentName }) {
                 )
               })}
             </div>
-            {renderFeedback(feedback, isCorrect)}
+            <FeedbackDisplay feedback={feedback} isCorrect={isCorrect} />
             {revealed && <div className="button-row" style={{ marginTop: '0.3rem' }}><button onClick={advance} style={{ width: '100%', padding: '0.6rem' }}>{round >= maxRounds ? 'Continue' : 'Next'}</button></div>}
           </>
         )}
@@ -3208,7 +1156,7 @@ function YazdanTablesApp({ studentName }) {
                 <button onClick={handleMatchSubmit} style={{ width: '100%', padding: '0.6rem' }}>Check Matches</button>
               </div>
             )}
-            {renderFeedback(feedback, isCorrect)}
+            <FeedbackDisplay feedback={feedback} isCorrect={isCorrect} />
             {matchRevealed && <div className="button-row" style={{ marginTop: '0.3rem' }}><button onClick={advance} style={{ width: '100%', padding: '0.6rem' }}>{round >= maxRounds ? 'Continue' : 'Next'}</button></div>}
           </>
         )}
@@ -3844,7 +1792,7 @@ function JatinTablesApp({ studentName }) {
               </form>
             )}
 
-            {renderFeedback(feedback, isCorrect)}
+            <FeedbackDisplay feedback={feedback} isCorrect={isCorrect} />
             {revealed && <div className="button-row" style={{ marginTop: '0.3rem' }}><button onClick={advance} style={{ width: '100%', padding: '0.6rem' }}>{round >= maxRounds ? 'Continue' : 'Next'}</button></div>}
           </>
         )}
@@ -4445,7 +2393,7 @@ function LakshyaTablesApp({ studentName }) {
               </form>
             )}
 
-            {renderFeedback(feedback, isCorrect)}
+            <FeedbackDisplay feedback={feedback} isCorrect={isCorrect} />
             {revealed && <div className="button-row" style={{ marginTop: '0.3rem' }}><button onClick={advance} style={{ width: '100%', padding: '0.6rem' }}>{round >= maxRounds ? 'Continue' : 'Next'}</button></div>}
           </>
         )}
@@ -4855,10 +2803,10 @@ function AdaptiveMixedApp({ studentName }) {
         e.preventDefault(); setAnswer(prev => prev + 'x')
       } else if (e.key === '^') {
         e.preventDefault(); setAnswer(prev => prev + '^')
-    } else if (e.key === 'Enter') {
-      e.preventDefault()
-      handleSubmit()
-    } else if (e.key === 'Backspace') {
+      } else if (e.key === 'Enter') {
+        e.preventDefault()
+        handleSubmit()
+      } else if (e.key === 'Backspace') {
         e.preventDefault(); setAnswer(prev => prev.slice(0, -1))
       }
     }
@@ -4971,7 +2919,7 @@ function AdaptiveMixedApp({ studentName }) {
                   </div>
                 )}
               </form>
-              {renderFeedback(feedback, isCorrect)}
+              <FeedbackDisplay feedback={feedback} isCorrect={isCorrect} />
               {!revealed && (
                 <div className="button-row">
                   <button onClick={handleSolve} disabled={!answer.trim()} style={{ background: 'transparent', border: '1px solid var(--clr-accent)', color: 'var(--clr-accent)' }}>Solve</button>
@@ -41455,7 +39403,7 @@ function ComicAdditionApp({ onBack }) {
 
         {revealed && (
           <div style={{ marginTop: 20 }}>
-            {renderFeedback(feedback, isCorrect)}
+            <FeedbackDisplay feedback={feedback} isCorrect={isCorrect} />
           </div>
         )}
 
@@ -41627,7 +39575,7 @@ function DragDropCountingApp({ onBack }) {
 
         {revealed && (
           <div style={{ marginTop: 20 }}>
-            {renderFeedback(feedback, isCorrect)}
+            <FeedbackDisplay feedback={feedback} isCorrect={isCorrect} />
           </div>
         )}
       </div>
@@ -41895,7 +39843,7 @@ function DartBoardApp({ onBack }) {
 
         {revealed && feedback && (
           <div style={{ marginTop: 20 }}>
-            {renderFeedback(feedback, isCorrect)}
+            <FeedbackDisplay feedback={feedback} isCorrect={isCorrect} />
           </div>
         )}
       </div>
@@ -42167,7 +40115,7 @@ function BalanceScaleApp({ onBack }) {
 
       {revealed && (
         <div style={{ marginTop: 20 }}>
-          {renderFeedback(feedback, isCorrect)}
+          <FeedbackDisplay feedback={feedback} isCorrect={isCorrect} />
         </div>
       )}
     </QuizLayout>
@@ -42945,7 +40893,7 @@ function App() {
     return (<>
       <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>{theme === 'dark' ? '☀️' : '🌙'}</button>
       <div className="app-shell"><div className="card">
-        <GymApp onBack={() => { window.location.href = withBase('/tenth') }} />
+        <Gym onBack={() => { window.location.href = withBase('/tenth') }} />
       </div></div>
     </>)
   }
@@ -43618,7 +41566,7 @@ function App() {
               <button onClick={loadQuestion}>Retry</button>
             </div>
           )}
-          {renderFeedback(feedback, isCorrect)}
+          <FeedbackDisplay feedback={feedback} isCorrect={isCorrect} />
           {explanation && <div style={{ margin: '16px auto', maxWidth: 600, padding: '16px 20px', borderRadius: 'var(--radius)', background: 'var(--clr-surface)', border: '1px solid var(--clr-accent)', textAlign: 'left', whiteSpace: 'pre-wrap', fontSize: '0.92rem', lineHeight: '1.6', color: 'var(--clr-text)' }}>
             <strong style={{ color: 'var(--clr-accent)', display: 'block', marginBottom: '8px', fontSize: '1rem' }}>Step-by-Step Explanation</strong>
             {explanation}
@@ -43666,7 +41614,7 @@ function App() {
       if (t === 'm1_ratio') return [showStep(1, `We have y = ${d.m}x`), showStep(2, `The ratio y:x means dividing y by x`), showStep(3, `y/x = ${d.m}x/x = ${d.m}`), showStep(4, `So the ratio is ${d.m}:1`), showResult(ans)].join('\n\n')
       if (t === 'm1_findk') return [showStep(1, `We know A = ${d.c} when B = ${d.b}`), showStep(2, `Since A = kB, substitute: ${d.c} = k × ${d.b}`), showStep(3, `k = ${d.c} ÷ ${d.b} = ${d.k}`), showResult(ans)].join('\n\n')
       if (t === 'm1_eval') return [showStep(1, `Ram saves ${d.m} times what Lakshman saves`), showStep(2, `Lakshman saves ${d.x}`), showStep(3, `Ram saves ${d.m} × ${d.x} = ${d.m * d.x}`), showResult(ans)].join('\n\n')
-      if (t === 'm1_compare') return [showStep(1, `First relationship: slope = ${d.m1}`), showStep(2, `Second relationship: slope = ${d.m2}`), showStep(3, `Ratio of slopes = ${d.m2} ÷ ${d.m1} = ${d.m2/d.m1}`), showResult(ans)].join('\n\n')
+      if (t === 'm1_compare') return [showStep(1, `First relationship: slope = ${d.m1}`), showStep(2, `Second relationship: slope = ${d.m2}`), showStep(3, `Ratio of slopes = ${d.m2} ÷ ${d.m1} = ${d.m2 / d.m1}`), showResult(ans)].join('\n\n')
       if (t === 'm1_origin') return [showStep(1, `For y = ${d.m}x, substitute x = 0`), showStep(2, `y = ${d.m} × 0 = 0`), showStep(3, `The point (0, 0) is the origin`), showResult(ans)].join('\n\n')
       if (t === 'm1_slope') return [showStep(1, `Points: (${d.x1},${d.y1}) and (${d.x2},${d.y2})`), showStep(2, `Slope = (y₂ - y₁) / (x₂ - x₁) = (${d.y2} - ${d.y1}) / (${d.x2} - ${d.x1})`), showStep(3, `= ${d.y2 - d.y1} / ${d.x2 - d.x1} = ${d.m}`), showResult(ans)].join('\n\n')
       if (t === 'm1_notprop') return [showStep(1, `y = ${d.m}x + ${d.b} has a y-intercept of ${d.b}`), showStep(2, `For proportionality, the line must pass through the origin (0,0)`), showStep(3, `This requires b = 0`), showResult(ans)].join('\n\n')
@@ -43678,10 +41626,10 @@ function App() {
       if (t === 'm2_collinear' || t === 'm2_check') return [showStep(1, `Check if all points satisfy the same line equation`), showStep(2, `Points (2,1), (3,2), (4,3) all satisfy y = x - 1`), showStep(3, `Slope between consecutive points is constant (= 1)`), showStep(4, `Therefore they are collinear`), showResult(ans)].join('\n\n')
       if (t === 'm2_next') return [showStep(1, `Pattern: (2,1), (3,2), (4,3)...`), showStep(2, `Each point increases x by 1 and y by 1`), showStep(3, `Next point: (4+1, 3+1) = (5, 4)`), showResult(ans)].join('\n\n')
       if (t === 'm2_equation') return [showStep(1, `Line through (2,1) and (3,2)`), showStep(2, `Slope = (2-1)/(3-2) = 1`), showStep(3, `Equation: y - 1 = 1(x - 2), so y = x - 1`), showResult(ans)].join('\n\n')
-      if (t === 'm2_slope2') return [showStep(1, `Points: (${d.x1},${d.y1}) and (${d.x1+1},${d.y1+d.m})`), showStep(2, `Slope = (${d.y1+d.m} - ${d.y1}) / (${d.x1+1} - ${d.x1}) = ${d.m} / 1 = ${d.m}`), showResult(ans)].join('\n\n')
+      if (t === 'm2_slope2') return [showStep(1, `Points: (${d.x1},${d.y1}) and (${d.x1 + 1},${d.y1 + d.m})`), showStep(2, `Slope = (${d.y1 + d.m} - ${d.y1}) / (${d.x1 + 1} - ${d.x1}) = ${d.m} / 1 = ${d.m}`), showResult(ans)].join('\n\n')
       if (t === 'm2_area') return [showStep(1, `Area = ½|x₁(y₂-y₃) + x₂(y₃-y₁) + x₃(y₁-y₂)|`), showStep(2, `= ½|${d.x1}(${d.y2}-${d.y3}) + ${d.x2}(${d.y3}-${d.y1}) + ${d.x3}(${d.y1}-${d.y2})|`), showStep(3, `= ½ × |${2 * (Number(ans))}| = ${ans}`), showResult(ans)].join('\n\n')
       if (t === 'm2_extend') return [showStep(1, `Points lie on line with slope m = ${d.m}`), showStep(2, `Slope = (y₂ - y₁) / (x₂ - x₁)`), showStep(3, `Slope = ${d.m}`), showResult(ans)].join('\n\n')
-      if (t === 'm2_perpslope') return [showStep(1, `Perpendicular slopes multiply to -1`), showStep(2, `m₁ × m₂ = -1`), showStep(3, `m₂ = -1 / ${d.m} = ${(-1/d.m).toFixed(2)}`), showResult(ans)].join('\n\n')
+      if (t === 'm2_perpslope') return [showStep(1, `Perpendicular slopes multiply to -1`), showStep(2, `m₁ × m₂ = -1`), showStep(3, `m₂ = -1 / ${d.m} = ${(-1 / d.m).toFixed(2)}`), showResult(ans)].join('\n\n')
     }
 
     if (t.startsWith('m3_')) {
@@ -43689,7 +41637,7 @@ function App() {
       if (t === 'm3_yval') return [showStep(1, `y = ${d.a}x`), showStep(2, `Substitute x = ${d.x}`), showStep(3, `y = ${d.a} × ${d.x} = ${d.a * d.x}`), showResult(ans)].join('\n\n')
       if (t === 'm3_not') return [showStep(1, `y = 2x + 1`), showStep(2, `At x = 0: y = 2(0) + 1 = 1`), showStep(3, `The line passes through (0, 1), not the origin (0, 0)`), showResult(ans)].join('\n\n')
       if (t === 'm3_intercept') return [showStep(1, `y = ${d.a}x + ${d.b}`), showStep(2, `For the line to pass through origin, y must equal 0 when x = 0`), showStep(3, `At x = 0: y = ${d.b}. For origin: ${d.b} must be 0`), showResult(ans)].join('\n\n')
-      if (t === 'm3_scalar') return [showStep(1, `Point (3, ${3*d.a}) and direction (1, ${d.a})`), showStep(2, `(3, ${3*d.a}) = 3 × (1, ${d.a})`), showStep(3, `Yes, it's a scalar multiple (scalar = 3)`), showResult(ans)].join('\n\n')
+      if (t === 'm3_scalar') return [showStep(1, `Point (3, ${3 * d.a}) and direction (1, ${d.a})`), showStep(2, `(3, ${3 * d.a}) = 3 × (1, ${d.a})`), showStep(3, `Yes, it's a scalar multiple (scalar = 3)`), showResult(ans)].join('\n\n')
       if (t === 'm3_intersect') return [showStep(1, `y = ${d.a1}x and y = ${d.a2}x`), showStep(2, `Set equal: ${d.a1}x = ${d.a2}x`), showStep(3, `(${d.a1} - ${d.a2})x = 0, so x = 0`), showStep(4, `y = ${d.a1}(0) = 0`), showResult(ans)].join('\n\n')
       if (t === 'm3_proportional') return [showStep(1, `y = ${d.a}x is in the form y = kx`), showStep(2, `The constant of proportionality is the coefficient of x`), showStep(3, `k = ${d.a}`), showResult(ans)].join('\n\n')
       if (t === 'm3_findx') return [showStep(1, `y = ${d.a}x and y = ${d.a * d.x}`), showStep(2, `${d.a * d.x} = ${d.a} × x`), showStep(3, `x = ${d.a * d.x} ÷ ${d.a} = ${d.x}`), showResult(ans)].join('\n\n')
@@ -43702,14 +41650,14 @@ function App() {
       if (t === 'm4_cross') return [showStep(1, `y = 3x + ${d.b}`), showStep(2, `The y-axis crossing is where x = 0`), showStep(3, `At x = 0: y = 3(0) + ${d.b} = ${d.b}`), showStep(4, `Crosses at (0, ${d.b})`), showResult(ans)].join('\n\n')
       if (t === 'm4_noshift') return [showStep(1, `y = ${d.m}x + 0 = ${d.m}x`), showStep(2, `No constant term means the line passes through (0, 0)`), showResult(ans)].join('\n\n')
       if (t === 'm4_parallel') return [showStep(1, `y = ${d.m}x + ${d.b1} and y = ${d.m}x + ${d.b2}`), showStep(2, `Same slope (${d.m}) means parallel lines`), showStep(3, `Distance between intercepts = ${d.b2} - ${d.b1} = ${d.b2 - d.b1}`), showResult(ans)].join('\n\n')
-      if (t === 'm4_frompts') return [showStep(1, `Line through (0, 3) and (${d.x}, ${d.m*d.x+3})`), showStep(2, `Slope = (${d.m*d.x+3} - 3) / (${d.x} - 0) = ${d.m*d.x} / ${d.x} = ${d.m}`), showResult(ans)].join('\n\n')
-      if (t === 'm4_compare') return [showStep(1, `y = ${d.m1}x + ${d.b} and y = ${d.m1}x + ${d.b+1}`), showStep(2, `Same slope, different intercepts`), showStep(3, `Difference in y at any x = ${d.b+1} - ${d.b} = 1`), showResult(ans)].join('\n\n')
+      if (t === 'm4_frompts') return [showStep(1, `Line through (0, 3) and (${d.x}, ${d.m * d.x + 3})`), showStep(2, `Slope = (${d.m * d.x + 3} - 3) / (${d.x} - 0) = ${d.m * d.x} / ${d.x} = ${d.m}`), showResult(ans)].join('\n\n')
+      if (t === 'm4_compare') return [showStep(1, `y = ${d.m1}x + ${d.b} and y = ${d.m1}x + ${d.b + 1}`), showStep(2, `Same slope, different intercepts`), showStep(3, `Difference in y at any x = ${d.b + 1} - ${d.b} = 1`), showResult(ans)].join('\n\n')
     }
 
     if (t.startsWith('m5_')) {
-      if (t === 'm5_steep') return [showStep(1, `Steepness depends on the absolute value of the slope`), showStep(2, `|${d.m+2}| > |${d.m}|`), showStep(3, `y = ${d.m+2}x is steeper`), showResult(ans)].join('\n\n')
+      if (t === 'm5_steep') return [showStep(1, `Steepness depends on the absolute value of the slope`), showStep(2, `|${d.m + 2}| > |${d.m}|`), showStep(3, `y = ${d.m + 2}x is steeper`), showResult(ans)].join('\n\n')
       if (t === 'm5_intercept' || t === 'm5_zero') return [showStep(1, `Setting a = 0 makes the slope zero`), showStep(2, `y = 0·x + b = ${d.b !== undefined ? d.b : 0}`), showStep(3, `This is a horizontal line at y = ${d.b !== undefined ? d.b : 0}`), showResult(ans)].join('\n\n')
-      if (t === 'm5_both') return [showStep(1, `y = ${d.m}x + ${d.b}`), showStep(2, `Substitute x = ${d.x}`), showStep(3, `y = ${d.m}(${d.x}) + ${d.b} = ${d.m*d.x + d.b}`), showResult(ans)].join('\n\n')
+      if (t === 'm5_both') return [showStep(1, `y = ${d.m}x + ${d.b}`), showStep(2, `Substitute x = ${d.x}`), showStep(3, `y = ${d.m}(${d.x}) + ${d.b} = ${d.m * d.x + d.b}`), showResult(ans)].join('\n\n')
       if (t === 'm5_negative') return [showStep(1, `A negative slope means as x increases...`), showStep(2, `...y decreases`), showStep(3, `The line goes downward from left to right`), showResult(ans)].join('\n\n')
       if (t === 'm5_perp') return [showStep(1, `Perpendicular lines have slopes that multiply to -1`), showStep(2, `m₁ × m₂ = -1`), showStep(3, `Product = -1`), showResult(ans)].join('\n\n')
       if (t === 'm5_model') return [showStep(1, `Taxi fare = base + rate × distance`), showStep(2, `= ${d.b} + ${d.m} × ${d.x}`), showStep(3, `= ${d.b} + ${d.m * d.x} = ${d.m * d.x + d.b}`), showResult(ans)].join('\n\n')
@@ -43729,8 +41677,8 @@ function App() {
     if (t.startsWith('m7_')) {
       if (t === 'm7_invert' || t === 'm7_formula') return [showStep(1, `f(x) = ${d.a}x, so y = ${d.a}x`), showStep(2, `To find f⁻¹, swap x and y: x = ${d.a}y`), showStep(3, `Solve for y: y = x/${d.a}`), showStep(4, `f⁻¹(${d.a * d.x}) = ${d.a * d.x}/${d.a} = ${d.x}`), showResult(ans)].join('\n\n')
       if (t === 'm7_oneone' || t === 'm7_injective') return [showStep(1, `f(x) = ${d.a}x + 2 is a linear function with non-zero slope`), showStep(2, `Every different x gives a different y`), showStep(3, `Therefore it is one-to-one (injective)`), showResult(ans)].join('\n\n')
-      if (t === 'm7_eval') return [showStep(1, `f(x) = ${d.a}x + ${d.b}`), showStep(2, `f(${d.x}) = ${d.a}(${d.x}) + ${d.b} = ${d.a*d.x + d.b}`), showResult(ans)].join('\n\n')
-      if (t === 'm7_inveq') return [showStep(1, `f(x) = ${d.a}x + ${d.b}`), showStep(2, `f⁻¹(y) = (y - ${d.b})/${d.a}`), showStep(3, `f⁻¹(${d.a*3+d.b}) = (${d.a*3+d.b} - ${d.b})/${d.a} = ${d.a*3}/${d.a} = 3`), showResult(ans)].join('\n\n')
+      if (t === 'm7_eval') return [showStep(1, `f(x) = ${d.a}x + ${d.b}`), showStep(2, `f(${d.x}) = ${d.a}(${d.x}) + ${d.b} = ${d.a * d.x + d.b}`), showResult(ans)].join('\n\n')
+      if (t === 'm7_inveq') return [showStep(1, `f(x) = ${d.a}x + ${d.b}`), showStep(2, `f⁻¹(y) = (y - ${d.b})/${d.a}`), showStep(3, `f⁻¹(${d.a * 3 + d.b}) = (${d.a * 3 + d.b} - ${d.b})/${d.a} = ${d.a * 3}/${d.a} = 3`), showResult(ans)].join('\n\n')
       if (t === 'm7_invformula') return [showStep(1, `f(x) = ${d.a}x + ${d.b}`), showStep(2, `Set y = ${d.a}x + ${d.b}`), showStep(3, `Solve for x: x = (y - ${d.b})/${d.a}`), showStep(4, `f⁻¹(y) = (y - ${d.b})/${d.a}`), showResult(ans)].join('\n\n')
       if (t === 'm7_identity') return [showStep(1, `By definition, f(f⁻¹(x)) = x for any invertible function`), showStep(2, `Applying f then f⁻¹ returns to the original value`), showResult(ans)].join('\n\n')
       if (t === 'm7_comp') return [showStep(1, `f(x) = ${d.a}x, g(x) = x/${d.a}`), showStep(2, `f(g(${d.x})) = f(${d.x}/${d.a}) = ${d.a} × (${d.x}/${d.a}) = ${d.x}`), showResult(ans)].join('\n\n')
@@ -43738,11 +41686,11 @@ function App() {
 
     if (t.startsWith('m8_')) {
       if (t === 'm8_square') return [showStep(1, `f(x) = x²`), showStep(2, `f(${d.x}) = ${d.x}² = ${d.x * d.x}`), showResult(ans)].join('\n\n')
-      if (t === 'm8_quad') return [showStep(1, `f(x) = x² - ${d.a}`), showStep(2, `f(${d.x}) = ${d.x}² - ${d.a} = ${d.x*d.x} - ${d.a} = ${d.x*d.x - d.a}`), showResult(ans)].join('\n\n')
+      if (t === 'm8_quad') return [showStep(1, `f(x) = x² - ${d.a}`), showStep(2, `f(${d.x}) = ${d.x}² - ${d.a} = ${d.x * d.x} - ${d.a} = ${d.x * d.x - d.a}`), showResult(ans)].join('\n\n')
       if (t === 'm8_fzero') return [showStep(1, `f(x) = x² - 9`), showStep(2, `f(3) = 3² - 9 = 9 - 9 = 0`), showResult(ans)].join('\n\n')
-      if (t === 'm8_invert' || t === 'm8_two') return [showStep(1, `f(x) = x² - ${d.a}`), showStep(2, `f(${d.x}) = f(${-d.x}) = ${d.x*d.x - d.a}`), showStep(3, `Two different inputs give the same output`), showStep(4, `Therefore not invertible over all reals`), showResult(ans)].join('\n\n')
+      if (t === 'm8_invert' || t === 'm8_two') return [showStep(1, `f(x) = x² - ${d.a}`), showStep(2, `f(${d.x}) = f(${-d.x}) = ${d.x * d.x - d.a}`), showStep(3, `Two different inputs give the same output`), showStep(4, `Therefore not invertible over all reals`), showResult(ans)].join('\n\n')
       if (t === 'm8_vertex') return [showStep(1, `f(x) = x² - ${d.a}`), showStep(2, `This is a parabola opening upward`), showStep(3, `Vertex is at x = 0 (the minimum point)`), showResult(ans)].join('\n\n')
-      if (t === 'm8_factored') return [showStep(1, `Discriminant = b² - 4ac = ${d.a}² - 4(1)(${d.b}) = ${d.a*d.a - 4*d.b}`), showStep(2, `If discriminant > 0: 2 roots, = 0: 1 root, < 0: 0 roots`), showStep(3, `Result: ${d.a*d.a - 4*d.b >= 0 ? (d.a*d.a - 4*d.b > 0 ? '2' : '1') : '0'} real roots`), showResult(ans)].join('\n\n')
+      if (t === 'm8_factored') return [showStep(1, `Discriminant = b² - 4ac = ${d.a}² - 4(1)(${d.b}) = ${d.a * d.a - 4 * d.b}`), showStep(2, `If discriminant > 0: 2 roots, = 0: 1 root, < 0: 0 roots`), showStep(3, `Result: ${d.a * d.a - 4 * d.b >= 0 ? (d.a * d.a - 4 * d.b > 0 ? '2' : '1') : '0'} real roots`), showResult(ans)].join('\n\n')
       if (t === 'm8_symmetry') return [showStep(1, `f(x) = x²`), showStep(2, `f(a) = a² and f(-a) = (-a) = a²`), showStep(3, `f(a) = f(-a) for all a → symmetric about the y-axis`), showResult(ans)].join('\n\n')
       if (t === 'm8_restrict') return [showStep(1, `f(x) = x² - ${d.a}, restricted to x ≥ 0`), showStep(2, `On this domain, every y-value has exactly one x-value`), showStep(3, `So it is invertible (on the restricted domain)`), showResult(ans)].join('\n\n')
     }
@@ -43753,8 +41701,8 @@ function App() {
       if (t === 'm9_both') return [showStep(1, `x² = ${d.x * d.x}`), showStep(2, `x = +${d.x} or x = -${d.x}`), showResult(ans)].join('\n\n')
       if (t === 'm9_fail') return [showStep(1, `A horizontal line at y = k intersects x² at two points`), showStep(2, `Both x and -x give the same y-value`), showStep(3, `This fails the horizontal line test → not invertible`), showResult(ans)].join('\n\n')
       if (t === 'm9_real') return [showStep(1, `x² + ${d.a} = 0`), showStep(2, `x² = -${d.a}`), showStep(3, `A negative number has no real square root`), showStep(4, `No real solutions`), showResult(ans)].join('\n\n')
-      if (t === 'm9_formula') return [showStep(1, `x² = ${d.a}`), showStep(2, `x = ±√${d.a} = ±${Math.round(Math.sqrt(d.a)*100)/100}`), showResult(ans)].join('\n\n')
-      if (t === 'm9_discrim') return [showStep(1, `x² + ${d.a}x + ${d.b} = 0`), showStep(2, `Discriminant = ${d.a}² - 4(1)(${d.b}) = ${d.a*d.a - 4*d.b}`), showStep(3, `${d.a*d.a - 4*d.b >= 0 ? 'Non-negative → real roots exist' : 'Negative → no real roots'}`), showResult(ans)].join('\n\n')
+      if (t === 'm9_formula') return [showStep(1, `x² = ${d.a}`), showStep(2, `x = ±√${d.a} = ±${Math.round(Math.sqrt(d.a) * 100) / 100}`), showResult(ans)].join('\n\n')
+      if (t === 'm9_discrim') return [showStep(1, `x² + ${d.a}x + ${d.b} = 0`), showStep(2, `Discriminant = ${d.a}² - 4(1)(${d.b}) = ${d.a * d.a - 4 * d.b}`), showStep(3, `${d.a * d.a - 4 * d.b >= 0 ? 'Non-negative → real roots exist' : 'Negative → no real roots'}`), showResult(ans)].join('\n\n')
     }
 
     if (t.startsWith('m10_')) {
@@ -43764,7 +41712,7 @@ function App() {
       if (t === 'm10_odd') return [showStep(1, `Odd-degree polynomials go to +∞ on one side and -∞ on the other`), showStep(2, `By the Intermediate Value Theorem, they must cross zero`), showStep(3, `Therefore at least one real root exists`), showResult(ans)].join('\n\n')
       if (t === 'm10_factor') return [showStep(1, `x³ - ${d.x}x = x(x² - ${d.x}) = x(x-1)(x+1) for x=1`), showStep(2, `Setting each factor to 0: x = 0, x = 1, x = -1`), showStep(3, `Three real roots`), showResult(ans)].join('\n\n')
       if (t === 'm10_complex') return [showStep(1, `x³ = 1 has one real root (x = 1)`), showStep(2, `By the Fundamental Theorem, a degree-3 polynomial has 3 roots total`), showStep(3, `So there are 3 roots (1 real + 2 complex)`), showResult(ans)].join('\n\n')
-      if (t === 'm10_compare') return [showStep(1, `x³ = ${d.x*d.x*d.x} has 1 real solution`), showStep(2, `x² = ${d.x*d.x} has 2 real solutions (±${d.x})`), showResult(ans)].join('\n\n')
+      if (t === 'm10_compare') return [showStep(1, `x³ = ${d.x * d.x * d.x} has 1 real solution`), showStep(2, `x² = ${d.x * d.x} has 2 real solutions (±${d.x})`), showResult(ans)].join('\n\n')
     }
 
     if (t.startsWith('m11_')) {
@@ -43789,11 +41737,11 @@ function App() {
     if (t.startsWith('m13_')) {
       if (t === 'm13_detdiag') return [showStep(1, `For a diagonal matrix, det = product of diagonal entries`), showStep(2, `det = ${d.a} × ${d.d} = ${d.a * d.d}`), showResult(ans)].join('\n\n')
       if (t === 'm13_zero') return [showStep(1, `A = [[1,2],[2,4]]`), showStep(2, `det = (1)(4) - (2)(2) = 4 - 4 = 0`), showStep(3, `Zero determinant → not invertible`), showResult(ans)].join('\n\n')
-      if (t === 'm13_prod') return [showStep(1, `For a diagonal matrix, all off-diagonal entries are 0`), showStep(2, `det = product of diagonal entries = ${d.a} × ${d.d} = ${d.a*d.d}`), showResult(ans)].join('\n\n')
-      if (t === 'm13_det' || t === 'm13_invert') return [showStep(1, `A = ${JSON.stringify(d.A)}`), showStep(2, `det = (${d.A[0][0]})(${d.A[1][1]}) - (${d.A[0][1]})(${d.A[1][0]})`), showStep(3, `= ${d.A[0][0]*d.A[1][1]} - ${d.A[0][1]*d.A[1][0]} = ${d.det}`), showStep(4, d.det !== 0 ? 'det ≠ 0 → invertible' : 'det = 0 → not invertible'), showResult(ans)].join('\n\n')
+      if (t === 'm13_prod') return [showStep(1, `For a diagonal matrix, all off-diagonal entries are 0`), showStep(2, `det = product of diagonal entries = ${d.a} × ${d.d} = ${d.a * d.d}`), showResult(ans)].join('\n\n')
+      if (t === 'm13_det' || t === 'm13_invert') return [showStep(1, `A = ${JSON.stringify(d.A)}`), showStep(2, `det = (${d.A[0][0]})(${d.A[1][1]}) - (${d.A[0][1]})(${d.A[1][0]})`), showStep(3, `= ${d.A[0][0] * d.A[1][1]} - ${d.A[0][1] * d.A[1][0]} = ${d.det}`), showStep(4, d.det !== 0 ? 'det ≠ 0 → invertible' : 'det = 0 → not invertible'), showResult(ans)].join('\n\n')
       if (t === 'm13_formula') return [showStep(1, `For A = [[a,b],[c,d]]`), showStep(2, `det(A) = ad - bc`), showResult(ans)].join('\n\n')
       if (t === 'm13_singular') return [showStep(1, `det = 0 means the matrix is singular`), showStep(2, `Singular matrices cannot be inverted`), showStep(3, `Ax = b has no solution for most b`), showResult(ans)].join('\n\n')
-      if (t === 'm13_inverse_det') return [showStep(1, `det(A) = ${d.det}`), showStep(2, `det(A⁻¹) = 1/det(A) = 1/${d.det}`), showStep(3, `= ${d.det !== 0 ? (1/d.det).toFixed(2) : 'undefined'}`), showResult(ans)].join('\n\n')
+      if (t === 'm13_inverse_det') return [showStep(1, `det(A) = ${d.det}`), showStep(2, `det(A⁻¹) = 1/det(A) = 1/${d.det}`), showStep(3, `= ${d.det !== 0 ? (1 / d.det).toFixed(2) : 'undefined'}`), showResult(ans)].join('\n\n')
       if (t === 'm13_connection') return [showStep(1, `det ≠ 0 ⟺ A is invertible ⟺ Ax = b has a unique solution`), showStep(2, `These three conditions are equivalent`), showResult(ans)].join('\n\n')
     }
 
@@ -43824,8 +41772,8 @@ function App() {
     if (t.startsWith('m16_')) {
       if (t === 'm16_count') return [showStep(1, `Count the equations in the system`), showStep(2, `There are 2 equations`), showResult(ans)].join('\n\n')
       if (t === 'm16_over') return [showStep(1, `More equations than unknowns = overdetermined`), showStep(2, `This typically means no exact solution`), showResult(ans)].join('\n\n')
-      if (t === 'm16_easy') return [showStep(1, `2A = ${2*d.x}`), showStep(2, `A = ${2*d.x} / 2 = ${d.x}`), showResult(ans)].join('\n\n')
-      if (t === 'm16_solve' || t === 'm16_verify') return [showStep(1, `System: 3A + C = ${3*d.x+d.y} and A + 2C = ${d.x+2*d.y}`), showStep(2, `From equation 1: C = ${3*d.x+d.y} - 3A`), showStep(3, `Substitute into equation 2 and solve`), showStep(4, `A = ${d.x}, C = ${d.y}`), showResult(ans)].join('\n\n')
+      if (t === 'm16_easy') return [showStep(1, `2A = ${2 * d.x}`), showStep(2, `A = ${2 * d.x} / 2 = ${d.x}`), showResult(ans)].join('\n\n')
+      if (t === 'm16_solve' || t === 'm16_verify') return [showStep(1, `System: 3A + C = ${3 * d.x + d.y} and A + 2C = ${d.x + 2 * d.y}`), showStep(2, `From equation 1: C = ${3 * d.x + d.y} - 3A`), showStep(3, `Substitute into equation 2 and solve`), showStep(4, `A = ${d.x}, C = ${d.y}`), showResult(ans)].join('\n\n')
       if (t === 'm16_leastsq') return [showStep(1, `When no exact solution exists for Ax = b`), showStep(2, `We find x̂ that minimizes ||Ax̂ - b||²`), showStep(3, `This is called the least squares method`), showResult(ans)].join('\n\n')
       if (t === 'm16_residual') return [showStep(1, `r = b - Ax̂ is the residual vector`), showStep(2, `It measures how far Ax̂ is from b`), showStep(3, `This is the error of the approximate solution`), showResult(ans)].join('\n\n')
       if (t === 'm16_normal') return [showStep(1, `To minimize ||Ax - b||², take derivative and set to 0`), showStep(2, `This gives: Aᵀ(Ax) = Aᵀb`), showStep(3, `AᵀAx = Aᵀb (the normal equation)`), showResult(ans)].join('\n\n')
@@ -44091,7 +42039,7 @@ function App() {
               <button onClick={loadQuestion}>Retry</button>
             </div>
           )}
-          {renderFeedback(feedback, isCorrect)}
+          <FeedbackDisplay feedback={feedback} isCorrect={isCorrect} />
           {explanation && <div style={{ margin: '16px auto', maxWidth: 600, padding: '16px 20px', borderRadius: 'var(--radius)', background: 'var(--clr-surface)', border: '1px solid var(--clr-accent)', textAlign: 'left', whiteSpace: 'pre-wrap', fontSize: '0.92rem', lineHeight: '1.6', color: 'var(--clr-text)' }}>
             <strong style={{ color: 'var(--clr-accent)', display: 'block', marginBottom: '8px', fontSize: '1rem' }}>Explanation</strong>
             {explanation}
@@ -44112,11 +42060,13 @@ function App() {
         </>}
         {finished && <div className="welcome-box">
           <p className="welcome-text">Quiz complete!</p>
-          {(() => { const pct = totalQ > 0 ? Math.round((score / totalQ) * 100) : 0; return (<>
-          <p className="final-score">Final score: {score}/{totalQ} ({pct}%)</p>
-          {pct >= 80 && <p style={{ fontSize: '0.95rem', color: 'var(--clr-correct)', fontWeight: 600 }}>Great job! You scored above 80%!</p>}
-          {isAdaptive && <p style={{ fontSize: '0.9rem', color: 'var(--clr-dim)' }}>Reached level: <strong style={{ color: ADAPT_COLORS[curAdaptLevel] }}>{ADAPT_LABELS[curAdaptLevel]}</strong></p>}
-          </>); })()}
+          {(() => {
+            const pct = totalQ > 0 ? Math.round((score / totalQ) * 100) : 0; return (<>
+              <p className="final-score">Final score: {score}/{totalQ} ({pct}%)</p>
+              {pct >= 80 && <p style={{ fontSize: '0.95rem', color: 'var(--clr-correct)', fontWeight: 600 }}>Great job! You scored above 80%!</p>}
+              {isAdaptive && <p style={{ fontSize: '0.9rem', color: 'var(--clr-dim)' }}>Reached level: <strong style={{ color: ADAPT_COLORS[curAdaptLevel] }}>{ADAPT_LABELS[curAdaptLevel]}</strong></p>}
+            </>);
+          })()}
           <ResultsTable results={results} />
           <div className="button-row">
             <button onClick={() => { setStarted(false); setFinished(false) }}>Play Again</button>
@@ -44284,298 +42234,298 @@ function App() {
 
     return (
       <>
-          <div style={{ display: 'flex', alignItems: 'center', marginBottom: '16px' }}>
-            <button className="back-button" onClick={onBack}>&larr;</button>
-            <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '1.5rem', margin: 0, flex: 1, textAlign: 'center', color: 'var(--clr-text)' }}>Math Riddles</h2>
-            <div style={{ width: 40 }} />
-          </div>
+        <div style={{ display: 'flex', alignItems: 'center', marginBottom: '16px' }}>
+          <button className="back-button" onClick={onBack}>&larr;</button>
+          <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '1.5rem', margin: 0, flex: 1, textAlign: 'center', color: 'var(--clr-text)' }}>Math Riddles</h2>
+          <div style={{ width: 40 }} />
+        </div>
 
-          {stage === 'setup' && (
-            <div className="welcome-box">
-              <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '1.8rem', color: 'var(--clr-text)', marginBottom: '8px' }}>Math Riddles</h2>
-              <p className="welcome-text">Pick a riddle type to begin!</p>
+        {stage === 'setup' && (
+          <div className="welcome-box">
+            <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '1.8rem', color: 'var(--clr-text)', marginBottom: '8px' }}>Math Riddles</h2>
+            <p className="welcome-text">Pick a riddle type to begin!</p>
 
-              {/* Flashcards for each riddle type */}
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '12px', margin: '16px 0' }}>
-                {[
-                  {
-                    type: 'find-rule',
-                    icon: '🔍',
-                    label: 'Find the Rule',
-                    color: 'var(--clr-accent)',
-                    desc: 'Study input → output pairs, spot the hidden formula, then apply it to a new input.',
-                    example: '3 → 8, 7 → 12  ⇒  9 → ?'
-                  },
-                  {
-                    type: 'sequence',
-                    icon: '🔢',
-                    label: 'Number Sequence',
-                    color: '#7c5cff',
-                    desc: 'Look at the pattern in a list of numbers and predict what comes next.',
-                    example: '2, 4, 8, 16, ?'
-                  },
-                  {
-                    type: 'logic',
-                    icon: '🧩',
-                    label: 'Logic Puzzle',
-                    color: '#ff8a5c',
-                    desc: 'Read a word problem, reason it through step by step to reach the answer.',
-                    example: 'If all Bloops are Razzies…'
-                  },
-                  {
-                    type: 'image',
-                    icon: '🖼️',
-                    label: 'Visual Puzzle',
-                    color: '#2bbf9c',
-                    desc: 'Decode shapes, patterns and images — pick the option that completes the picture.',
-                    example: 'Which piece fits the gap?'
-                  }
-                ].map((fc, i) => (
-                  <div key={i} onClick={() => selectType(fc.type)}
-                    style={{ background: selectedType === fc.type ? 'var(--clr-accent-soft)' : 'var(--clr-surface)', border: selectedType === fc.type ? `2px solid ${fc.color}` : '1px solid var(--clr-border)', borderTop: `3px solid ${fc.color}`, borderRadius: 'var(--radius)', padding: '14px 16px', textAlign: 'left', cursor: 'pointer', transition: 'transform 0.12s, box-shadow 0.12s' }}
-                    onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = '0 6px 18px rgba(0,0,0,0.25)' }}
-                    onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = 'none' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
-                      <span style={{ fontSize: '1.4rem' }}>{fc.icon}</span>
-                      <span style={{ fontFamily: 'var(--font-display)', fontSize: '1.05rem', color: fc.color, fontWeight: 700 }}>{fc.label}</span>
-                    </div>
-                    <p style={{ fontSize: '0.85rem', lineHeight: 1.45, color: 'var(--clr-text-soft)', margin: '0 0 8px' }}>{fc.desc}</p>
-                    <div style={{ fontSize: '0.82rem', fontStyle: 'italic', color: 'var(--clr-text)', background: 'var(--clr-input)', borderRadius: '8px', padding: '6px 8px' }}>{fc.example}</div>
-                    <div style={{ marginTop: '10px', fontSize: '0.78rem', fontWeight: 600, color: fc.color }}>{selectedType === fc.type ? '✓ Selected' : '▶ Select →'}</div>
+            {/* Flashcards for each riddle type */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '12px', margin: '16px 0' }}>
+              {[
+                {
+                  type: 'find-rule',
+                  icon: '🔍',
+                  label: 'Find the Rule',
+                  color: 'var(--clr-accent)',
+                  desc: 'Study input → output pairs, spot the hidden formula, then apply it to a new input.',
+                  example: '3 → 8, 7 → 12  ⇒  9 → ?'
+                },
+                {
+                  type: 'sequence',
+                  icon: '🔢',
+                  label: 'Number Sequence',
+                  color: '#7c5cff',
+                  desc: 'Look at the pattern in a list of numbers and predict what comes next.',
+                  example: '2, 4, 8, 16, ?'
+                },
+                {
+                  type: 'logic',
+                  icon: '🧩',
+                  label: 'Logic Puzzle',
+                  color: '#ff8a5c',
+                  desc: 'Read a word problem, reason it through step by step to reach the answer.',
+                  example: 'If all Bloops are Razzies…'
+                },
+                {
+                  type: 'image',
+                  icon: '🖼️',
+                  label: 'Visual Puzzle',
+                  color: '#2bbf9c',
+                  desc: 'Decode shapes, patterns and images — pick the option that completes the picture.',
+                  example: 'Which piece fits the gap?'
+                }
+              ].map((fc, i) => (
+                <div key={i} onClick={() => selectType(fc.type)}
+                  style={{ background: selectedType === fc.type ? 'var(--clr-accent-soft)' : 'var(--clr-surface)', border: selectedType === fc.type ? `2px solid ${fc.color}` : '1px solid var(--clr-border)', borderTop: `3px solid ${fc.color}`, borderRadius: 'var(--radius)', padding: '14px 16px', textAlign: 'left', cursor: 'pointer', transition: 'transform 0.12s, box-shadow 0.12s' }}
+                  onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = '0 6px 18px rgba(0,0,0,0.25)' }}
+                  onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = 'none' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
+                    <span style={{ fontSize: '1.4rem' }}>{fc.icon}</span>
+                    <span style={{ fontFamily: 'var(--font-display)', fontSize: '1.05rem', color: fc.color, fontWeight: 700 }}>{fc.label}</span>
                   </div>
-                ))}
-              </div>
+                  <p style={{ fontSize: '0.85rem', lineHeight: 1.45, color: 'var(--clr-text-soft)', margin: '0 0 8px' }}>{fc.desc}</p>
+                  <div style={{ fontSize: '0.82rem', fontStyle: 'italic', color: 'var(--clr-text)', background: 'var(--clr-input)', borderRadius: '8px', padding: '6px 8px' }}>{fc.example}</div>
+                  <div style={{ marginTop: '10px', fontSize: '0.78rem', fontWeight: 600, color: fc.color }}>{selectedType === fc.type ? '✓ Selected' : '▶ Select →'}</div>
+                </div>
+              ))}
+            </div>
 
-              {/* Options appear only after a type is selected */}
-              {selectedType && (
-                <div style={{ marginTop: '8px' }}>
-                  <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', flexWrap: 'wrap', margin: '12px 0' }}>
-                    {[{ v: 1, l: 'Easy' }, { v: 2, l: 'Medium' }, { v: 3, l: 'Hard' }, { v: 5, l: 'All' }].map(d => (
-                      <button key={d.v} className={`radio-pill${difficulty === d.v ? ' active' : ''}`} onClick={() => setDifficulty(d.v)}>{d.l}</button>
+            {/* Options appear only after a type is selected */}
+            {selectedType && (
+              <div style={{ marginTop: '8px' }}>
+                <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', flexWrap: 'wrap', margin: '12px 0' }}>
+                  {[{ v: 1, l: 'Easy' }, { v: 2, l: 'Medium' }, { v: 3, l: 'Hard' }, { v: 5, l: 'All' }].map(d => (
+                    <button key={d.v} className={`radio-pill${difficulty === d.v ? ' active' : ''}`} onClick={() => setDifficulty(d.v)}>{d.l}</button>
+                  ))}
+                </div>
+                <div className="question-count-row" style={{ marginTop: '12px' }}>
+                  <label className="question-count-label">How many riddles? (max {maxForType})</label>
+                  <input className="answer-input question-count-input" type="text" value={totalQuestions} onChange={e => {
+                    const v = e.target.value
+                    if (v === '') { setTotalQuestions(''); return }
+                    if (/^\d+$/.test(v)) { const n = Number(v); if (n >= 1 && n <= maxForType) setTotalQuestions(n); }
+                  }} onBlur={() => { if (totalQuestions === '' || Number(totalQuestions) < 1) setTotalQuestions(Math.min(15, maxForType)) }} />
+                </div>
+                <div className="button-row">
+                  <button onClick={() => startGameWithType(selectedType)}>Start Riddles</button>
+                  <button onClick={() => { setSelectedType(null); setRiddleType(null); setMaxForType(44); startGame() }} style={{ background: 'transparent', border: '1px solid var(--clr-text-soft)', color: 'var(--clr-text-soft)' }}>Mixed</button>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+
+        {stage === 'playing' && (
+          <>
+            <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', flexWrap: 'wrap', marginBottom: '12px' }}>
+              <div className="progress-pill center">Riddle {questionNumber}/{totalQuestions}</div>
+              {riddleType && <div className="progress-pill center" style={{ textTransform: 'capitalize' }}>{riddleType === 'image' ? 'Visual Puzzle' : riddleType.replace('-', ' ')}</div>}
+              <div className="score-pill">⭐ {score}/{total}</div>
+            </div>
+
+            {loading && <div style={{ textAlign: 'center', padding: '24px', color: 'var(--clr-text-soft)' }}>Loading riddle…</div>}
+
+            {!loading && question && (
+              <>
+                {/* Title */}
+                {question.title && <h3 style={{ fontFamily: 'var(--font-display)', textAlign: 'center', fontSize: '1.3rem', color: 'var(--clr-text)', margin: '0 0 12px' }}>{question.title}</h3>}
+
+                {/* Find Rule: Equation Table */}
+                {question.type === 'find-rule' && question.equations && (
+                  <div style={{ background: 'var(--clr-surface)', borderRadius: 'var(--radius)', border: '1px solid var(--clr-border)', padding: '16px 20px', margin: '0 auto 16px', maxWidth: 320 }}>
+                    {question.equations.map((eq, i) => (
+                      <div key={i} style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', borderBottom: i < question.equations.length - 1 ? '1px solid var(--clr-border)' : 'none', fontSize: '1.1rem' }}>
+                        <span style={{ color: 'var(--clr-text)' }}>{eq.input}</span>
+                        <span style={{ color: 'var(--clr-accent)', fontWeight: 600 }}>→</span>
+                        <span style={{ color: 'var(--clr-text)' }}>{eq.output}</span>
+                      </div>
+                    ))}
+                    <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', fontSize: '1.1rem', borderTop: '2px solid var(--clr-accent)', marginTop: '4px' }}>
+                      <span style={{ color: 'var(--clr-text)' }}>{question.question}</span>
+                      <span style={{ color: 'var(--clr-accent)', fontWeight: 600 }}>→</span>
+                      <span style={{ color: 'var(--clr-accent)', fontWeight: 700, fontStyle: 'italic' }}>?</span>
+                    </div>
+                  </div>
+                )}
+
+                {/* Sequence Type */}
+                {question.type === 'sequence' && question.sequence && (
+                  <div style={{ textAlign: 'center', margin: '0 auto 16px' }}>
+                    <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', flexWrap: 'wrap', margin: '0 0 8px' }}>
+                      {question.sequence.map((n, i) => (
+                        <span key={i} style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 48, height: 48, borderRadius: 'var(--radius)', background: 'var(--clr-surface)', border: '1px solid var(--clr-border)', fontSize: '1.1rem', fontWeight: 600, color: 'var(--clr-text)' }}>{n}</span>
+                      ))}
+                      <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 48, height: 48, borderRadius: 'var(--radius)', background: 'var(--clr-accent-soft)', border: '2px dashed var(--clr-accent)', fontSize: '1.2rem', fontWeight: 700, color: 'var(--clr-accent)' }}>?</span>
+                    </div>
+                    <p style={{ fontSize: '0.9rem', color: 'var(--clr-text-soft)', margin: 0 }}>{question.question}</p>
+                  </div>
+                )}
+
+                {/* Logic Type */}
+                {question.type === 'logic' && (
+                  <div className="question-box" style={{ textAlign: 'center', margin: '0 auto 16px', maxWidth: 480, padding: '20px', background: 'var(--clr-surface)', borderRadius: 'var(--radius)', border: '1px solid var(--clr-border)' }}>
+                    <p style={{ fontSize: '1.1rem', lineHeight: 1.6, color: 'var(--clr-text)', margin: 0 }}>{question.question}</p>
+                  </div>
+                )}
+
+                {/* Image Types */}
+                {(question.type === 'image-numpad' || question.type === 'image-option') && question.image && (
+                  <div style={{ textAlign: 'center', margin: '0 auto 16px' }}>
+                    <img
+                      src={withBase(question.image.startsWith('/') ? question.image : `/${question.image}`)}
+                      alt={question.title || 'Visual Riddle'}
+                      onError={(e) => {
+                        console.warn(`[Math Riddles] Failed to load riddle image: ${e.target.src}`);
+                      }}
+                      style={{ maxWidth: '100%', maxHeight: 280, width: 'auto', height: 'auto', objectFit: 'contain', borderRadius: 'var(--radius)', border: '1px solid var(--clr-border)', background: 'var(--clr-input)' }}
+                    />
+                  </div>
+                )}
+
+                {/* Answer Input */}
+                {!revealed && question.type !== 'image-option' && (
+                  <div style={{ textAlign: 'center', margin: '0 0 12px' }}>
+                    <input
+                      className="answer-input"
+                      type="text"
+                      value={answer}
+                      onChange={e => setAnswer(e.target.value)}
+                      onKeyDown={handleKeyDown}
+                      placeholder="Your answer"
+                      autoFocus
+                      style={{ maxWidth: 200, textAlign: 'center', fontSize: '1.3rem' }}
+                    />
+                  </div>
+                )}
+
+                {/* Option Buttons for image-option type */}
+                {!revealed && question.type === 'image-option' && question.options && (
+                  <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', flexWrap: 'wrap', margin: '0 0 12px' }}>
+                    {question.options.map((opt, i) => (
+                      <button
+                        key={i}
+                        onClick={() => setSelectedOption(opt)}
+                        style={{
+                          width: 64,
+                          height: 64,
+                          borderRadius: 'var(--radius)',
+                          border: selectedOption === opt ? '2px solid var(--clr-accent)' : '1.5px solid var(--clr-border)',
+                          background: selectedOption === opt ? 'var(--clr-accent-soft)' : 'var(--clr-input)',
+                          cursor: 'pointer',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          fontSize: question.optionImages ? '0' : '1.2rem',
+                          fontWeight: 600,
+                          color: 'var(--clr-text)',
+                          transition: 'all 0.15s',
+                          overflow: 'hidden'
+                        }}
+                      >
+                        {question.optionImages && question.optionImages[i] ? (
+                          <img
+                            src={withBase(question.optionImages[i].startsWith('/') ? question.optionImages[i] : `/${question.optionImages[i]}`)}
+                            alt={opt}
+                            style={{ width: '100%', height: '100%', objectFit: 'contain', padding: '4px' }}
+                          />
+                        ) : opt}
+                      </button>
                     ))}
                   </div>
-                  <div className="question-count-row" style={{ marginTop: '12px' }}>
-                    <label className="question-count-label">How many riddles? (max {maxForType})</label>
-                    <input className="answer-input question-count-input" type="text" value={totalQuestions} onChange={e => {
-                      const v = e.target.value
-                      if (v === '') { setTotalQuestions(''); return }
-                      if (/^\d+$/.test(v)) { const n = Number(v); if (n >= 1 && n <= maxForType) setTotalQuestions(n); }
-                    }} onBlur={() => { if (totalQuestions === '' || Number(totalQuestions) < 1) setTotalQuestions(Math.min(15, maxForType)) }} />
+                )}
+
+                {/* Numpad */}
+                {!revealed && (question.type !== 'image-option') && (
+                  <div className="numpad" style={{ maxWidth: 280, margin: '0 auto 12px' }}>
+                    {[['7', '8', '9'], ['4', '5', '6'], ['1', '2', '3']].map((row, ri) => (
+                      <div key={ri} className="numpad-row">
+                        {row.map(k => <button key={k} className="numpad-key" onClick={() => numpadPress(k)}>{k}</button>)}
+                      </div>
+                    ))}
+                    <div className="numpad-row">
+                      <button className="numpad-key numpad-special" onClick={() => numpadPress('±')}>±</button>
+                      <button className="numpad-key" onClick={() => numpadPress('0')}>0</button>
+                      <button className="numpad-key numpad-special" onClick={() => numpadPress('⌫')}>⌫</button>
+                    </div>
                   </div>
-                  <div className="button-row">
-                    <button onClick={() => startGameWithType(selectedType)}>Start Riddles</button>
-                    <button onClick={() => { setSelectedType(null); setRiddleType(null); setMaxForType(44); startGame() }} style={{ background: 'transparent', border: '1px solid var(--clr-text-soft)', color: 'var(--clr-text-soft)' }}>Mixed</button>
+                )}
+
+                {/* Feedback */}
+                {revealed && (
+                  <div className={`feedback ${isCorrect ? 'correct' : 'wrong'}`} style={{ marginBottom: '12px' }}>{feedback}</div>
+                )}
+
+                {/* Hint */}
+                {hintText && (
+                  <div className="feedback solve" style={{ marginBottom: '12px', textAlign: 'center' }}>💡 {hintText}</div>
+                )}
+
+                {/* Step-by-step solution (deep) */}
+                {solutionSteps && solutionSteps.length > 0 && (
+                  <div style={{ background: 'var(--clr-surface)', border: '1px solid var(--clr-accent)', borderRadius: 'var(--radius)', padding: '14px 18px', margin: '0 auto 14px', maxWidth: 460, textAlign: 'left' }}>
+                    <div style={{ fontFamily: 'var(--font-display)', fontSize: '1.05rem', color: 'var(--clr-accent)', fontWeight: 700, marginBottom: '8px', textAlign: 'center' }}>🔦 Step-by-Step Solution</div>
+                    {solutionSteps.map((step, i) => (
+                      <div key={i} style={{ display: 'flex', gap: '10px', padding: '6px 0', borderBottom: i < solutionSteps.length - 1 ? '1px solid var(--clr-border)' : 'none', fontSize: '0.92rem', lineHeight: 1.5, color: 'var(--clr-text)' }}>
+                        <span style={{ flexShrink: 0, width: 22, height: 22, borderRadius: '50%', background: 'var(--clr-accent)', color: '#fff', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.78rem', fontWeight: 700 }}>{i + 1}</span>
+                        <span>{step}</span>
+                      </div>
+                    ))}
                   </div>
+                )}
+
+                {/* Buttons */}
+                <div className="button-row">
+                  {!revealed ? (
+                    <>
+                      <button onClick={handleSubmit} disabled={question.type === 'image-option' ? !selectedOption : !answer.trim()}>Submit</button>
+                      <button onClick={handleSolve} style={{ background: 'transparent', border: '1px solid var(--clr-accent)', color: 'var(--clr-accent)' }}>Solve</button>
+                      {!hintUsed && <button onClick={handleHint} style={{ background: 'transparent', border: '1px solid var(--clr-text-soft)', color: 'var(--clr-text-soft)' }}>💡 Hint</button>}
+                    </>
+                  ) : (
+                    <button onClick={advance}>{questionNumber >= totalQuestions ? 'Finish' : 'Next Riddle'}</button>
+                  )}
                 </div>
-              )}
-            </div>
-          )}
 
-          {stage === 'playing' && (
-            <>
-              <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', flexWrap: 'wrap', marginBottom: '12px' }}>
-                <div className="progress-pill center">Riddle {questionNumber}/{totalQuestions}</div>
-                {riddleType && <div className="progress-pill center" style={{ textTransform: 'capitalize' }}>{riddleType === 'image' ? 'Visual Puzzle' : riddleType.replace('-', ' ')}</div>}
-                <div className="score-pill">⭐ {score}/{total}</div>
-              </div>
-
-              {loading && <div style={{ textAlign: 'center', padding: '24px', color: 'var(--clr-text-soft)' }}>Loading riddle…</div>}
-
-              {!loading && question && (
-                <>
-                  {/* Title */}
-                  {question.title && <h3 style={{ fontFamily: 'var(--font-display)', textAlign: 'center', fontSize: '1.3rem', color: 'var(--clr-text)', margin: '0 0 12px' }}>{question.title}</h3>}
-
-                  {/* Find Rule: Equation Table */}
-                  {question.type === 'find-rule' && question.equations && (
-                    <div style={{ background: 'var(--clr-surface)', borderRadius: 'var(--radius)', border: '1px solid var(--clr-border)', padding: '16px 20px', margin: '0 auto 16px', maxWidth: 320 }}>
-                      {question.equations.map((eq, i) => (
-                        <div key={i} style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', borderBottom: i < question.equations.length - 1 ? '1px solid var(--clr-border)' : 'none', fontSize: '1.1rem' }}>
-                          <span style={{ color: 'var(--clr-text)' }}>{eq.input}</span>
-                          <span style={{ color: 'var(--clr-accent)', fontWeight: 600 }}>→</span>
-                          <span style={{ color: 'var(--clr-text)' }}>{eq.output}</span>
-                        </div>
-                      ))}
-                      <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', fontSize: '1.1rem', borderTop: '2px solid var(--clr-accent)', marginTop: '4px' }}>
-                        <span style={{ color: 'var(--clr-text)' }}>{question.question}</span>
-                        <span style={{ color: 'var(--clr-accent)', fontWeight: 600 }}>→</span>
-                        <span style={{ color: 'var(--clr-accent)', fontWeight: 700, fontStyle: 'italic' }}>?</span>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Sequence Type */}
-                  {question.type === 'sequence' && question.sequence && (
-                    <div style={{ textAlign: 'center', margin: '0 auto 16px' }}>
-                      <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', flexWrap: 'wrap', margin: '0 0 8px' }}>
-                        {question.sequence.map((n, i) => (
-                          <span key={i} style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 48, height: 48, borderRadius: 'var(--radius)', background: 'var(--clr-surface)', border: '1px solid var(--clr-border)', fontSize: '1.1rem', fontWeight: 600, color: 'var(--clr-text)' }}>{n}</span>
+                {/* Results so far */}
+                {results.length > 0 && (
+                  <div style={{ marginTop: '16px' }}>
+                    <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.82rem' }}>
+                      <thead><tr style={{ color: 'var(--clr-text-soft)' }}><th style={{ textAlign: 'left', padding: '4px 8px' }}>#</th><th style={{ textAlign: 'left', padding: '4px 8px' }}>Riddle</th><th style={{ textAlign: 'center', padding: '4px 8px' }}>Your Answer</th><th style={{ textAlign: 'center', padding: '4px 8px' }}>Correct?</th></tr></thead>
+                      <tbody>
+                        {results.map((r, i) => (
+                          <tr key={i} style={{ borderTop: '1px solid var(--clr-border)' }}>
+                            <td style={{ padding: '4px 8px', color: 'var(--clr-text-soft)' }}>{i + 1}</td>
+                            <td style={{ padding: '4px 8px', color: 'var(--clr-text)' }}>{r.prompt}</td>
+                            <td style={{ padding: '4px 8px', textAlign: 'center', color: 'var(--clr-text)' }}>{r.userAnswer}</td>
+                            <td style={{ padding: '4px 8px', textAlign: 'center', color: r.correct ? 'var(--clr-correct)' : 'var(--clr-wrong)' }}>{r.correct ? '✓' : '✗'}</td>
+                          </tr>
                         ))}
-                        <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 48, height: 48, borderRadius: 'var(--radius)', background: 'var(--clr-accent-soft)', border: '2px dashed var(--clr-accent)', fontSize: '1.2rem', fontWeight: 700, color: 'var(--clr-accent)' }}>?</span>
-                      </div>
-                      <p style={{ fontSize: '0.9rem', color: 'var(--clr-text-soft)', margin: 0 }}>{question.question}</p>
-                    </div>
-                  )}
-
-                  {/* Logic Type */}
-                  {question.type === 'logic' && (
-                    <div className="question-box" style={{ textAlign: 'center', margin: '0 auto 16px', maxWidth: 480, padding: '20px', background: 'var(--clr-surface)', borderRadius: 'var(--radius)', border: '1px solid var(--clr-border)' }}>
-                      <p style={{ fontSize: '1.1rem', lineHeight: 1.6, color: 'var(--clr-text)', margin: 0 }}>{question.question}</p>
-                    </div>
-                  )}
-
-                  {/* Image Types */}
-                  {(question.type === 'image-numpad' || question.type === 'image-option') && question.image && (
-                    <div style={{ textAlign: 'center', margin: '0 auto 16px' }}>
-                      <img
-                        src={withBase(question.image.startsWith('/') ? question.image : `/${question.image}`)}
-                        alt={question.title || 'Visual Riddle'}
-                        onError={(e) => {
-                          console.warn(`[Math Riddles] Failed to load riddle image: ${e.target.src}`);
-                        }}
-                        style={{ maxWidth: '100%', maxHeight: 280, width: 'auto', height: 'auto', objectFit: 'contain', borderRadius: 'var(--radius)', border: '1px solid var(--clr-border)', background: 'var(--clr-input)' }}
-                      />
-                    </div>
-                  )}
-
-                  {/* Answer Input */}
-                  {!revealed && question.type !== 'image-option' && (
-                    <div style={{ textAlign: 'center', margin: '0 0 12px' }}>
-                      <input
-                        className="answer-input"
-                        type="text"
-                        value={answer}
-                        onChange={e => setAnswer(e.target.value)}
-                        onKeyDown={handleKeyDown}
-                        placeholder="Your answer"
-                        autoFocus
-                        style={{ maxWidth: 200, textAlign: 'center', fontSize: '1.3rem' }}
-                      />
-                    </div>
-                  )}
-
-                  {/* Option Buttons for image-option type */}
-                  {!revealed && question.type === 'image-option' && question.options && (
-                    <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', flexWrap: 'wrap', margin: '0 0 12px' }}>
-                      {question.options.map((opt, i) => (
-                        <button
-                          key={i}
-                          onClick={() => setSelectedOption(opt)}
-                          style={{
-                            width: 64,
-                            height: 64,
-                            borderRadius: 'var(--radius)',
-                            border: selectedOption === opt ? '2px solid var(--clr-accent)' : '1.5px solid var(--clr-border)',
-                            background: selectedOption === opt ? 'var(--clr-accent-soft)' : 'var(--clr-input)',
-                            cursor: 'pointer',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            fontSize: question.optionImages ? '0' : '1.2rem',
-                            fontWeight: 600,
-                            color: 'var(--clr-text)',
-                            transition: 'all 0.15s',
-                            overflow: 'hidden'
-                          }}
-                        >
-                          {question.optionImages && question.optionImages[i] ? (
-                            <img
-                              src={withBase(question.optionImages[i].startsWith('/') ? question.optionImages[i] : `/${question.optionImages[i]}`)}
-                              alt={opt}
-                              style={{ width: '100%', height: '100%', objectFit: 'contain', padding: '4px' }}
-                            />
-                          ) : opt}
-                        </button>
-                      ))}
-                    </div>
-                  )}
-
-                  {/* Numpad */}
-                  {!revealed && (question.type !== 'image-option') && (
-                    <div className="numpad" style={{ maxWidth: 280, margin: '0 auto 12px' }}>
-                      {[['7','8','9'],['4','5','6'],['1','2','3']].map((row, ri) => (
-                        <div key={ri} className="numpad-row">
-                          {row.map(k => <button key={k} className="numpad-key" onClick={() => numpadPress(k)}>{k}</button>)}
-                        </div>
-                      ))}
-                      <div className="numpad-row">
-                        <button className="numpad-key numpad-special" onClick={() => numpadPress('±')}>±</button>
-                        <button className="numpad-key" onClick={() => numpadPress('0')}>0</button>
-                        <button className="numpad-key numpad-special" onClick={() => numpadPress('⌫')}>⌫</button>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Feedback */}
-                  {revealed && (
-                    <div className={`feedback ${isCorrect ? 'correct' : 'wrong'}`} style={{ marginBottom: '12px' }}>{feedback}</div>
-                  )}
-
-                  {/* Hint */}
-                  {hintText && (
-                    <div className="feedback solve" style={{ marginBottom: '12px', textAlign: 'center' }}>💡 {hintText}</div>
-                  )}
-
-                  {/* Step-by-step solution (deep) */}
-                  {solutionSteps && solutionSteps.length > 0 && (
-                    <div style={{ background: 'var(--clr-surface)', border: '1px solid var(--clr-accent)', borderRadius: 'var(--radius)', padding: '14px 18px', margin: '0 auto 14px', maxWidth: 460, textAlign: 'left' }}>
-                      <div style={{ fontFamily: 'var(--font-display)', fontSize: '1.05rem', color: 'var(--clr-accent)', fontWeight: 700, marginBottom: '8px', textAlign: 'center' }}>🔦 Step-by-Step Solution</div>
-                      {solutionSteps.map((step, i) => (
-                        <div key={i} style={{ display: 'flex', gap: '10px', padding: '6px 0', borderBottom: i < solutionSteps.length - 1 ? '1px solid var(--clr-border)' : 'none', fontSize: '0.92rem', lineHeight: 1.5, color: 'var(--clr-text)' }}>
-                          <span style={{ flexShrink: 0, width: 22, height: 22, borderRadius: '50%', background: 'var(--clr-accent)', color: '#fff', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.78rem', fontWeight: 700 }}>{i + 1}</span>
-                          <span>{step}</span>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-
-                  {/* Buttons */}
-                  <div className="button-row">
-                    {!revealed ? (
-                      <>
-                        <button onClick={handleSubmit} disabled={question.type === 'image-option' ? !selectedOption : !answer.trim()}>Submit</button>
-                        <button onClick={handleSolve} style={{ background: 'transparent', border: '1px solid var(--clr-accent)', color: 'var(--clr-accent)' }}>Solve</button>
-                        {!hintUsed && <button onClick={handleHint} style={{ background: 'transparent', border: '1px solid var(--clr-text-soft)', color: 'var(--clr-text-soft)' }}>💡 Hint</button>}
-                      </>
-                    ) : (
-                      <button onClick={advance}>{questionNumber >= totalQuestions ? 'Finish' : 'Next Riddle'}</button>
-                    )}
+                      </tbody>
+                    </table>
                   </div>
+                )}
+              </>
+            )}
+          </>
+        )}
 
-                  {/* Results so far */}
-                  {results.length > 0 && (
-                    <div style={{ marginTop: '16px' }}>
-                      <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.82rem' }}>
-                        <thead><tr style={{ color: 'var(--clr-text-soft)' }}><th style={{ textAlign: 'left', padding: '4px 8px' }}>#</th><th style={{ textAlign: 'left', padding: '4px 8px' }}>Riddle</th><th style={{ textAlign: 'center', padding: '4px 8px' }}>Your Answer</th><th style={{ textAlign: 'center', padding: '4px 8px' }}>Correct?</th></tr></thead>
-                        <tbody>
-                          {results.map((r, i) => (
-                            <tr key={i} style={{ borderTop: '1px solid var(--clr-border)' }}>
-                              <td style={{ padding: '4px 8px', color: 'var(--clr-text-soft)' }}>{i + 1}</td>
-                              <td style={{ padding: '4px 8px', color: 'var(--clr-text)' }}>{r.prompt}</td>
-                              <td style={{ padding: '4px 8px', textAlign: 'center', color: 'var(--clr-text)' }}>{r.userAnswer}</td>
-                              <td style={{ padding: '4px 8px', textAlign: 'center', color: r.correct ? 'var(--clr-correct)' : 'var(--clr-wrong)' }}>{r.correct ? '✓' : '✗'}</td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </div>
-                  )}
-                </>
-              )}
-            </>
-          )}
-
-          {stage === 'finished' && (
-            <div className="welcome-box">
-              <div style={{ fontSize: '2rem', marginBottom: '8px' }}>{'⭐'.repeat(stars)}</div>
-              <p className="final-score">{score}/{total} Riddles Solved!</p>
-              <p className="welcome-text">Accuracy: {pct}% · Hints used: {hintUsed ? 'Yes' : 'No'}</p>
-              <div className="button-row">
-                <button onClick={() => { setStage('setup'); setRiddleType(null) }}>Play Again</button>
-                <button onClick={onBack} style={{ background: 'transparent', border: '1px solid var(--clr-accent)', color: 'var(--clr-accent)' }}>Back to Home</button>
-              </div>
+        {stage === 'finished' && (
+          <div className="welcome-box">
+            <div style={{ fontSize: '2rem', marginBottom: '8px' }}>{'⭐'.repeat(stars)}</div>
+            <p className="final-score">{score}/{total} Riddles Solved!</p>
+            <p className="welcome-text">Accuracy: {pct}% · Hints used: {hintUsed ? 'Yes' : 'No'}</p>
+            <div className="button-row">
+              <button onClick={() => { setStage('setup'); setRiddleType(null) }}>Play Again</button>
+              <button onClick={onBack} style={{ background: 'transparent', border: '1px solid var(--clr-accent)', color: 'var(--clr-accent)' }}>Back to Home</button>
             </div>
-          )}
+          </div>
+        )}
       </>
     )
   }
@@ -44586,21 +42536,21 @@ function App() {
     vachana: Vachana,          // Vachana Mathematical Literacy Lab
     linearalgebra: LinearAlgebraApp, // Linear Algebra Module 1
     missionquiz: MissionQuizApp, // Mission-specific Linear Algebra Quiz
-    'math-lab': MathLabHubApp,
+    'math-lab': MathLabHub,
     'visual-math-lab-redux': VisualMathLabRedux,
-    'mensuration-lab': MensurationLabApp,
-    'basic-arith-lab': BasicArithmeticLabApp,
+    'mensuration-lab': MensurationLab,
+    'basic-arith-lab': BasicArithmeticLab,
     geocraft: GeometryApp,
     battle: BattleApp,          // Live fastest-finger duels
     sudoku: SudokuApp,          // 9x9 Sudoku puzzle
 
     'comic-addition': ComicAdditionApp,
-    gk: GKApp,                    // General Knowledge
+    gk: GK,                    // General Knowledge
     addition: AdditionApp,         // Basic addition
-    'column-addition': ColumnAdditionApp, // Column Addition with carries
-    'column-multiplication': ColumnMultiplicationApp, // Column Multiplication with carries
-    'column-division': ColumnDivisionApp, // Column Division with long division steps
-    'column-subtraction': ColumnSubtractionApp, // Column Subtraction with borrows
+    'column-addition': ColumnAddition, // Column Addition with carries
+    'column-multiplication': ColumnMultiplication, // Column Multiplication with carries
+    'column-division': ColumnDivision, // Column Division with long division steps
+    'column-subtraction': ColumnSubtraction, // Column Subtraction with borrows
     quadratic: QuadraticApp,       // Quadratic substitution
     multiply: MultiplyApp,         // Multiplication tables
     'visual-math': VisualMathApp,  // Visual Math Lab (mult/div visual)
@@ -44679,20 +42629,20 @@ function App() {
     language: LanguageDashboard,   // Language Puzzles Dashboard
     randommix: RandomMixApp,       // Random Mix (adaptive)
     custom: CustomApp,             // Custom lesson builder
-    gym: GymApp,                   // Unified adaptive Gym — bundles all 7 below
+    gym: Gym,                   // Unified adaptive Gym — bundles all 7 below
     curiosity: CuriosityApp,       // Curiosity Mode — experiment with "what if" variations
     guess: GuessNumberApp,         // Binary magic — guess a number 0–31
     detective: EnhancedMathDetectiveApp, // Math Detective Agency — story-based mystery cases
     gymdecimals: GymDecimalsApp,   // Gym Decimals — signed decimal multiplication (MCQ)
-    funcgym: FuncGymApp,           // Functions Gym — polynomial evaluation (MCQ)
-    dotprodgym: DotProdGymApp,     // DotProducts Gym — 2D/3D dot products (MCQ)
-    fracaddgym: FracAddGymApp,     // Fractions-add-gym — add fractions (MCQ)
-    lineqgym: LinEqGymApp,         // LinearEquations-Gym — solve linear equations (MCQ)
-    indicesgym: IndicesGymApp,     // Indices-Gym — index laws (MCQ)
-    polygym: PolyGymApp,           // Polynomials Gym — arithmetic → monomial algebra (MCQ)
+    funcgym: FuncGym,           // Functions Gym — polynomial evaluation (MCQ)
+    dotprodgym: DotProdGym,     // DotProducts Gym — 2D/3D dot products (MCQ)
+    fracaddgym: FracAddGym,     // Fractions-add-gym — add fractions (MCQ)
+    lineqgym: LinEqGym,         // LinearEquations-Gym — solve linear equations (MCQ)
+    indicesgym: IndicesGym,     // Indices-Gym — index laws (MCQ)
+    polygym: PolyGym,           // Polynomials Gym — arithmetic → monomial algebra (MCQ)
     treasurehunt: TreasureHuntApp, // Treasure Hunt — solve & seek grid game
     // matrixmystics mode removed — Matrix Mystics content now embedded in LinearAlgebraApp's mission quiz
-    trackProgress: ProgressTrackerApp,
+    trackProgress: ProgressTracker,
     riddle: RiddleApp,              // Math Riddles
     'water-jug-lab': WaterJugLab,
     'equation-crafting-lab': EquationCraftingLab,
@@ -44841,13 +42791,13 @@ function App() {
 
   // ========== LEARN / TEST GATEWAY ==========
   const [learningPhase, setLearningPhase] = useState(() => {
-  try {
-    const params = new URLSearchParams(window.location.search);
-    return params.get('mode') === 'angles' ? 'select' : null;
-  } catch {
-    return null;
-  }
-})
+    try {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('mode') === 'angles' ? 'select' : null;
+    } catch {
+      return null;
+    }
+  })
   const [learnData, setLearnData] = useState(null)
   const [revealedBlocks, setRevealedBlocks] = useState(1)
   const [blockStartTime, setBlockStartTime] = useState(Date.now())
@@ -45004,14 +42954,14 @@ function App() {
                 📖 Master the concepts before you test yourself!
               </p>
             </div>
-            
+
             <div className="learn-content-area" style={{ marginTop: 24 }}>
               <h2 style={mode === 'angles' ? { marginBottom: 24, fontSize: '1.5rem', textAlign: 'center', color: 'var(--clr-text)', fontWeight: '600' } : { marginBottom: 32, fontSize: '1.8rem', textAlign: 'center', color: 'var(--clr-text)', fontWeight: '700' }}>
                 {learnData.title}
               </h2>
-              
-              <div style={{ 
-                display: 'flex', 
+
+              <div style={{
+                display: 'flex',
                 flexDirection: 'column',
                 gap: '32px',
                 alignItems: 'center',
@@ -45065,22 +43015,22 @@ function App() {
                       backdropFilter: 'blur(10px)',
                       background: 'linear-gradient(145deg, var(--clr-bg) 0%, rgba(46, 160, 67, 0.05) 100%)'
                     }}
-                    onMouseOver={(e) => {
-                      if (mode === 'angles') return;
-                      e.currentTarget.style.transform = 'translateY(-6px) scale(1.02)';
-                      e.currentTarget.style.boxShadow = '0 20px 40px rgba(46, 160, 67, 0.15)';
-                      e.currentTarget.style.border = '2px solid var(--clr-accent, #2ea043)';
-                      const icon = e.currentTarget.querySelector('.block-icon-container');
-                      if(icon) icon.style.transform = 'rotate(8deg) scale(1.1)';
-                    }}
-                    onMouseOut={(e) => {
-                      if (mode === 'angles') return;
-                      e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                      e.currentTarget.style.boxShadow = '0 8px 30px rgba(0,0,0,0.06)';
-                      e.currentTarget.style.border = '2px solid rgba(46, 160, 67, 0.15)';
-                      const icon = e.currentTarget.querySelector('.block-icon-container');
-                      if(icon) icon.style.transform = 'rotate(-4deg) scale(1)';
-                    }}
+                      onMouseOver={(e) => {
+                        if (mode === 'angles') return;
+                        e.currentTarget.style.transform = 'translateY(-6px) scale(1.02)';
+                        e.currentTarget.style.boxShadow = '0 20px 40px rgba(46, 160, 67, 0.15)';
+                        e.currentTarget.style.border = '2px solid var(--clr-accent, #2ea043)';
+                        const icon = e.currentTarget.querySelector('.block-icon-container');
+                        if (icon) icon.style.transform = 'rotate(8deg) scale(1.1)';
+                      }}
+                      onMouseOut={(e) => {
+                        if (mode === 'angles') return;
+                        e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                        e.currentTarget.style.boxShadow = '0 8px 30px rgba(0,0,0,0.06)';
+                        e.currentTarget.style.border = '2px solid rgba(46, 160, 67, 0.15)';
+                        const icon = e.currentTarget.querySelector('.block-icon-container');
+                        if (icon) icon.style.transform = 'rotate(-4deg) scale(1)';
+                      }}
                     >
                       {mode !== 'angles' && (
                         <div className="block-icon-container" style={{
@@ -45104,33 +43054,35 @@ function App() {
                       )}
                       <div style={mode === 'angles' ? { width: '100%' } : { flex: 1, width: '100%', paddingTop: '8px' }}>
                         <h3 style={mode === 'angles' ? { margin: '0 0 12px 0', fontSize: '1.25rem', color: 'var(--clr-heading, var(--clr-text))', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '8px' } : { margin: '0 0 16px 0', fontSize: '1.5rem', color: 'var(--clr-accent, #2ea043)', fontWeight: '800', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                          {mode === 'angles' && <span style={{fontSize: '1.25rem'}}>{block.icon}</span>}
+                          {mode === 'angles' && <span style={{ fontSize: '1.25rem' }}>{block.icon}</span>}
                           {block.title}
                         </h3>
-                        
+
                         {block.visual && (
-  <LearningVisual visual={block.visual} />
-)}
+                          <LearningVisual visual={block.visual} />
+                        )}
 
                         {/* Safe: HTML rendered via dangerouslySetInnerHTML originates from trusted local learnContent JSON, not user input. */}
-                        <div 
-                          style={mode === 'angles' ? { whiteSpace: 'pre-wrap', opacity: 0.9, fontSize: '1rem', letterSpacing: '0', lineHeight: '1.75' } : { whiteSpace: 'pre-wrap', opacity: 0.95, fontSize: '1.1rem', letterSpacing: '0.2px' }} 
-                          dangerouslySetInnerHTML={{ __html: (() => {
-                            let html = block.content
-                              .replace(/\*\*(.*?)\*\*/g, mode === 'angles' ? '<strong>$1</strong>' : '<strong style="color: var(--clr-accent, #2ea043); font-weight: 800;">$1</strong>');
-                            if (mode === 'angles') {
-                              // Strip bullet markers and present as clean paragraphs
-                              html = html.replace(/•\s*/g, '');
-                            } else {
-                              html = html.replace(/•/g, '<span style="display: inline-block; transform: scale(1.2); margin-right: 8px;">👉</span>');
-                            }
-                            return html;
-                          })() }} 
+                        <div
+                          style={mode === 'angles' ? { whiteSpace: 'pre-wrap', opacity: 0.9, fontSize: '1rem', letterSpacing: '0', lineHeight: '1.75' } : { whiteSpace: 'pre-wrap', opacity: 0.95, fontSize: '1.1rem', letterSpacing: '0.2px' }}
+                          dangerouslySetInnerHTML={{
+                            __html: (() => {
+                              let html = block.content
+                                .replace(/\*\*(.*?)\*\*/g, mode === 'angles' ? '<strong>$1</strong>' : '<strong style="color: var(--clr-accent, #2ea043); font-weight: 800;">$1</strong>');
+                              if (mode === 'angles') {
+                                // Strip bullet markers and present as clean paragraphs
+                                html = html.replace(/•\s*/g, '');
+                              } else {
+                                html = html.replace(/•/g, '<span style="display: inline-block; transform: scale(1.2); margin-right: 8px;">👉</span>');
+                              }
+                              return html;
+                            })()
+                          }}
                         />
                       </div>
                     </div>
                     {idx === revealedBlocks - 1 && revealedBlocks < learnData.blocks.length && (
-                      <button 
+                      <button
                         onClick={() => {
                           const elapsed = Date.now() - blockStartTime;
                           const minTime = mode === 'angles' ? 40000 : 60000;
@@ -45164,7 +43116,7 @@ function App() {
                     )}
                     {/* Start Test button — appears inside the last block after all blocks are revealed */}
                     {idx === revealedBlocks - 1 && revealedBlocks === learnData.blocks.length && (
-                      <button 
+                      <button
                         onClick={() => {
                           const elapsed = Date.now() - blockStartTime;
                           const minTime = mode === 'angles' ? 40000 : 60000;
@@ -45200,7 +43152,7 @@ function App() {
                 ))}
               </div>
             </div>
-            
+
             {warningMessage && (
               <div style={{
                 position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
@@ -45219,7 +43171,7 @@ function App() {
                   <p style={{ fontSize: '1.1rem', lineHeight: '1.6', marginBottom: '24px', opacity: 0.9 }}>
                     {warningMessage}
                   </p>
-                  <button 
+                  <button
                     onClick={() => setWarningMessage(null)}
                     style={{
                       padding: '10px 24px', borderRadius: '8px', fontSize: '1rem',
@@ -45246,7 +43198,7 @@ function App() {
         <LandingPage
           onExplorePuzzles={() => {
             setCurrentView('puzzles');
-            try { window.history.replaceState({}, '', `${BASE}/?view=puzzles`); } catch (e) {}
+            try { window.history.replaceState({}, '', `${BASE}/?view=puzzles`); } catch (e) { }
           }}
           onSelectTopic={(topicKey) => {
             setCurrentView('puzzles');
@@ -45269,7 +43221,7 @@ function App() {
               } else {
                 window.history.replaceState({}, '', `${BASE}/`);
               }
-            } catch (e) {}
+            } catch (e) { }
           }}
           theme={theme}
           toggleTheme={toggleTheme}
@@ -45306,7 +43258,7 @@ function App() {
             topic={activeCure.topic}
             onCancel={() => setActiveCure(null)}
             onComplete={() => {
-              try { setMonsterLog(loadMonsterLog()); } catch {}
+              try { setMonsterLog(loadMonsterLog()); } catch { }
               setActiveCure(null);
               setHallOpen(true);
             }}
@@ -45336,7 +43288,7 @@ function App() {
                 } else {
                   window.history.replaceState({}, '', `${BASE}/`);
                 }
-              } catch (e) {}
+              } catch (e) { }
             }}
             theme={theme}
             toggleTheme={toggleTheme}
@@ -45458,4681 +43410,6 @@ function App() {
   );
 }
 
-function BadgeIcon({ type, size = 64, locked = false, level = '' }) {
-  const colorFilter = locked ? 'grayscale(1) opacity(0.55)' : 'none';
-
-  const badgeMap = {
-    'counting-critters': 'dino',
-    'arithmetic-basics': 'trophy',
-    'fraction-explorer': 'feast',
-    'geometry-master': 'wizard',
-    'division-detective': 'detective',
-    'time-traveler': 'rocket',
-    'data-detective': 'chest',
-    'algebra-alchemist': 'flask',
-    'pythagoras-path': 'shield',
-    'trig-treasure': 'crown'
-  };
-
-  const mappedType = badgeMap[type] || type;
-  const imagePath = mappedType === 'topic'
-    ? `/badges/topic_${(level && level !== 'locked') ? level : 'blue'}.png`
-    : `/badges/${mappedType}.png`;
-  const levelClass = level ? `badge-level-${level}` : '';
-
-  return (
-    <div
-      className={`badge-icon-container ${locked ? 'badge-locked' : 'badge-unlocked'} ${levelClass}`}
-      style={{
-        width: size,
-        height: size,
-        display: 'inline-flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        filter: colorFilter,
-        position: 'relative'
-      }}
-    >
-      <img
-        src={imagePath}
-        alt={type}
-        style={{
-          width: '85%',
-          height: '85%',
-          objectFit: 'contain',
-          display: 'block'
-        }}
-        onError={(e) => {
-          e.target.src = '/badges/trophy.png';
-        }}
-      />
-    </div>
-  );
-}
-
-const TOPIC_DISPLAY_NAMES = {
-  'decimals': 'Decimals',
-  'rounding': 'Rounding',
-  'addition': 'Addition',
-  'basicarith': 'Basic Arithmetic',
-  'fractionadd': 'Fraction Addition',
-  'ratio': 'Ratios & Proportions',
-  'angles': 'Angles',
-  'triangles': 'Triangles',
-  'multiply': 'Multiplication',
-  'hcflcm': 'HCF & LCM',
-  'sdt': 'Speed, Distance & Time',
-  'variation': 'Variation & Rates',
-  'stats': 'Statistics',
-  'prob': 'Probability',
-  'lineareq': 'Linear Equations',
-  'lineq': 'Line Equation',
-  'pythag': "Pythagoras' Theorem",
-  'polygons': 'Polygons',
-  'trig': 'Trigonometry',
-  'coordgeom': 'Coordinate Geometry',
-  'percent': 'Percentages'
-};
-
-const getTopicDisplayName = (key) => {
-  if (!key) return '';
-  return TOPIC_DISPLAY_NAMES[key] || (key.charAt(0).toUpperCase() + key.slice(1));
-};
-
-function AchievementCollections({ completedTopics = [], onSelectTopic }) {
-  const [data, setData] = useState(null)
-  const [selectedBook, setSelectedBook] = useState(null)
-  const [loading, setLoading] = useState(true)
-
-  const fetchCollections = async () => {
-    const token = localStorage.getItem('tenali-auth-token')
-    if (!token) return
-    try {
-      const r = await fetch(`${API}/api/collections/progress`, {
-        headers: { 'Authorization': `Bearer ${token}` }
-      })
-      if (r.ok) {
-        const res = await r.json()
-        setData(res.collections)
-      }
-    } catch (e) {
-      console.error(e)
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  useEffect(() => {
-    fetchCollections()
-  }, [])
-
-  if (loading) {
-    return <div className="loading-screen">Opening the Collector Bookshelf...</div>
-  }
-
-  return (
-    <div className="bookshelf-container">
-      <h2 className="bookshelf-title">My Collector Bookshelf</h2>
-      <p className="bookshelf-subtitle">Complete all topics in a book to earn a shiny Gold Album Badge!</p>
-
-      <div className="bookshelf-grid">
-        {data && data.map(book => {
-          const isDone = book.completed;
-          return (
-            <div key={book.collectionId} className={`book-card ${book.badgeType}-theme ${!isDone ? 'book-locked' : 'book-unlocked'}`} onClick={() => setSelectedBook(book)}>
-              {/* Central Large Badge Hero Section */}
-              <div className="book-badge-hero">
-                <div className="book-badge-aura" />
-                <div className="book-badge-icon">
-                  <BadgeIcon type={book.badgeType} size={180} locked={!isDone} level={isDone ? 'gold' : ''} />
-                </div>
-              </div>
-
-              {/* Card Details Section */}
-              <div className="book-details-body">
-                <h3 className="book-title">{book.name}</h3>
-                <div style={{ display: 'flex', justifyContent: 'center', margin: '6px 0 12px 0' }}>
-                  <span className="book-badge-difficulty">{book.difficulty}</span>
-                </div>
-                <p className="book-desc">
-                  {book.description}
-                  <span className="book-desc-modules">
-                    <br />
-                    <strong>Learning Modules:</strong> {book.topics.map(t => TOPIC_DISPLAY_NAMES[t.topicKey] || t.topicKey).join(', ')}
-                  </span>
-                </p>
-
-                <div className="book-progress-wrapper">
-                  <div className="book-progress-text">
-                    <span>Progress</span>
-                    <strong>{book.completedCount} / {book.totalTopics} ({book.percentage}%)</strong>
-                  </div>
-                  <div className="book-progress-bar-bg">
-                    <div className="book-progress-bar-fill" style={{ width: `${book.percentage}%` }}></div>
-                  </div>
-                </div>
-
-                {!isDone && book.nextTopic && (
-                  <button className="book-next-btn" onClick={(e) => {
-                    e.stopPropagation();
-                    if (typeof onSelectTopic === 'function') {
-                      onSelectTopic(book.nextTopic);
-                    }
-                  }}>
-                    Play Next: {getTopicDisplayName(book.nextTopic)}
-                  </button>
-                )}
-                {isDone && <div className="book-complete-tag">Completed</div>}
-              </div>
-            </div>
-          );
-        })}
-      </div>
-
-      {selectedBook && (
-        <div className="book-modal-overlay" onClick={() => setSelectedBook(null)}>
-          <div className="book-modal-content" onClick={e => e.stopPropagation()}>
-            <button className="book-modal-close" onClick={() => setSelectedBook(null)} aria-label="Close">✕</button>
-            <h2 className="book-modal-title">{selectedBook.name}</h2>
-            <p className="book-modal-desc">{selectedBook.description}</p>
-
-            <div className="book-pages">
-              <div className="book-page left-page">
-                <h3>Topics Checklist</h3>
-                <div className="topics-list-detailed">
-                  {selectedBook.topics.map(topic => {
-                    const level = getTopicBadgeLevel(topic.topicKey, completedTopics);
-                    const isStartedOrCompleted = level !== 'locked';
-                    return (
-                      <div key={topic.topicKey} className={`topic-row-check ${topic.completed ? 'completed' : isStartedOrCompleted ? 'completed' : 'locked'}`} onClick={() => {
-                        setSelectedBook(null);
-                        onSelectTopic(topic.topicKey);
-                      }}>
-                        <div style={{ display: 'flex', alignItems: 'center', marginRight: '4px' }}>
-                          <BadgeIcon type="trophy" level={level} size={32} locked={level === 'locked'} />
-                        </div>
-                        <div className="topic-text-info">
-                          <span className="topic-check-name">{getTopicDisplayName(topic.topicKey)}</span>
-                          <span className="topic-check-status">
-                            {level === 'gold' ? 'Gold Mastery!' : level === 'silver' ? 'Silver Complete!' : level === 'bronze' ? 'Bronze Complete!' : level === 'blue' ? 'Practice Started!' : 'Click to start practice'}
-                          </span>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-
-              <div className="book-page right-page">
-                <h3>Collection Badge</h3>
-                <div className="badge-showcase-large">
-                  <BadgeIcon type={selectedBook.badgeType} size={150} locked={!selectedBook.completed} level={selectedBook.completed ? 'gold' : ''} />
-                  <h4>{selectedBook.completed ? 'Unlocked' : 'Locked'}</h4>
-                  <p>{selectedBook.completed ? 'You earned the Gold Album Badge!' : 'Master all topics on the left to unlock!'}</p>
-                  {selectedBook.completed && (
-                    <div className="gold-ribbon-tag">ALBUM COMPLETED</div>
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
-
-function ProfileShowcase({ completedTopics = [], onSelectTopic }) {
-  const [profile, setProfile] = useState(null)
-  const [loading, setLoading] = useState(true)
-  const [collectionsProgress, setCollectionsProgress] = useState([])
-  const [selectedSection, setSelectedSection] = useState('bookshelf')
-  const [activeBadgeDetail, setActiveBadgeDetail] = useState(null)
-  const [dropdownOpen, setDropdownOpen] = useState(false)
-  const [sectionExpanded, setSectionExpanded] = useState(false)
-  const [showcaseExpanded, setShowcaseExpanded] = useState(true)
-
-  const dropdownRef = useRef(null)
-
-  // Dynamically compute the badges in the inventory based on collections progress and completed topics
-  const inventory = useMemo(() => {
-    const allBadges = [];
-    if (!collectionsProgress || collectionsProgress.length === 0) return [];
-
-    // A. Album Badges
-    collectionsProgress.forEach(col => {
-      allBadges.push({
-        badgeId: col.collectionId,
-        name: col.name,
-        badgeType: col.badgeType,
-        type: 'collection',
-        locked: !col.completed,
-        requirement: `Complete all topics in the "${col.name}" album.`,
-        description: col.description
-      })
-    })
-
-    // B. Topic Badges
-    const addedTopics = new Set()
-    collectionsProgress.forEach(col => {
-      col.topics.forEach(topic => {
-        if (!addedTopics.has(topic.topicKey)) {
-          addedTopics.add(topic.topicKey)
-          const level = getTopicBadgeLevel(topic.topicKey, completedTopics)
-          const topicName = getTopicDisplayName(topic.topicKey)
-          allBadges.push({
-            badgeId: topic.topicKey,
-            name: topicName,
-            badgeType: 'topic',
-            type: 'topic',
-            locked: level === 'locked',
-            requirement: `Complete Easy difficulty or start practice in the "${topicName}" quiz.`,
-            description: `Practice and master the "${topicName}" quiz to upgrade this badge from Blue to Gold!`
-          })
-        }
-      })
-    })
-
-    // C. Dynamically add custom topics not part of collections.json (e.g. Percentages)
-    if (completedTopics && Array.isArray(completedTopics)) {
-      completedTopics.forEach(tKey => {
-        const baseTopicKey = tKey.replace(/-(easy|medium|hard|gold|started|adaptive|extrahard)$/, '');
-        if (baseTopicKey && !addedTopics.has(baseTopicKey)) {
-          addedTopics.add(baseTopicKey);
-          const level = getTopicBadgeLevel(baseTopicKey, completedTopics);
-          if (level !== 'locked') {
-            const topicName = getTopicDisplayName(baseTopicKey);
-            allBadges.push({
-              badgeId: baseTopicKey,
-              name: topicName,
-              badgeType: 'topic',
-              type: 'topic',
-              locked: false,
-              requirement: `Complete Easy difficulty or start practice in the "${topicName}" quiz.`,
-              description: `Practice and master the "${topicName}" quiz to upgrade this badge from Blue to Gold!`
-            });
-          }
-        }
-      });
-    }
-
-    // D. Streak Badges
-    const userStreak = profile ? profile.streak : 0
-    const streaksConfig = [
-      { days: 3, id: 'streak_3', name: '3-Day Streak' },
-      { days: 7, id: 'streak_7', name: '7-Day Streak' },
-      { days: 15, id: 'streak_15', name: '15-Day Streak' },
-      { days: 30, id: 'streak_30', name: '30-Day Streak' }
-    ]
-    streaksConfig.forEach(s => {
-      allBadges.push({
-        badgeId: s.id,
-        name: s.name,
-        badgeType: s.id,
-        type: 'streak',
-        locked: userStreak < s.days,
-        requirement: `Maintain a consecutive active practice streak of at least ${s.days} days.`,
-        description: `Awarded for logging in and solving quizzes for ${s.days} consecutive days!`
-      })
-    })
-
-    return allBadges;
-  }, [collectionsProgress, completedTopics, profile]);
-
-  // Close dropdown on click outside
-  useEffect(() => {
-    if (!dropdownOpen) return
-    const handleOutsideClick = (e) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-        setDropdownOpen(false)
-      }
-    }
-    document.addEventListener('mousedown', handleOutsideClick)
-    return () => document.removeEventListener('mousedown', handleOutsideClick)
-  }, [dropdownOpen])
-
-  const fetchProfileAndBadges = async () => {
-    const token = localStorage.getItem('tenali-auth-token')
-    if (!token) return
-    try {
-      // 1. Fetch Profile Info
-      const profileRes = await fetch(`${API}/api/profile/showcase`, {
-        headers: { 'Authorization': `Bearer ${token}` }
-      })
-      let profileData = null
-      if (profileRes.ok) {
-        profileData = await profileRes.json()
-        setProfile(profileData)
-      }
-
-      // 2. Fetch Collections Progress to build the full badge inventory
-      const progressRes = await fetch(`${API}/api/collections/progress`, {
-        headers: { 'Authorization': `Bearer ${token}` }
-      })
-      if (progressRes.ok) {
-        const progressData = await progressRes.json()
-        setCollectionsProgress(progressData.collections || [])
-      }
-    } catch (e) {
-      console.error('Failed to load profile details & badges:', e)
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  useEffect(() => {
-    fetchProfileAndBadges()
-  }, [])
-
-  const unlockedBadges = useMemo(() => {
-    const rawUnlocked = inventory.filter(b => !b.locked);
-    const getSortScore = (badge) => {
-      if (badge.type === 'collection') return 1;
-      if (badge.type === 'topic') {
-        const lvl = getTopicBadgeLevel(badge.badgeId, completedTopics);
-        if (lvl === 'gold')   return 2;
-        if (lvl === 'silver') return 4;
-        if (lvl === 'bronze') return 5;
-        if (lvl === 'blue')   return 6;
-      }
-      if (badge.type === 'streak') return 3;
-      return 7;
-    };
-    return [...rawUnlocked].sort((a, b) => {
-      const diff = getSortScore(a) - getSortScore(b);
-      if (diff !== 0) return diff;
-      return a.name.localeCompare(b.name);
-    });
-  }, [inventory, completedTopics]);
-
-  if (loading) {
-    return <div className="loading-screen">Opening Profile Showcase...</div>
-  }
-
-  const lockedTopics = inventory.filter(b => b.type === 'topic' && (b.locked || getTopicBadgeLevel(b.badgeId, completedTopics) !== 'gold'))
-  const lockedStreaks = inventory.filter(b => b.type === 'streak' && b.locked)
-
-  return (
-    <div className="profile-container">
-      <h2 className="profile-title">{profile ? profile.username.toUpperCase() : 'STUDENT'}'S CORNER</h2>
-
-      {/* Gamified Stats Section */}
-      <div className="gamified-stats-section" style={{ marginBottom: '32px' }}>
-        {/* Streak Pod */}
-        <div className="dashboard-stat-pod streak-pod">
-          <div className="fire-flame-wrapper">🔥</div>
-          <span className="dashboard-stat-val">{profile ? profile.streak : 0}</span>
-          <span className="dashboard-stat-lbl">Day Streak</span>
-        </div>
-
-        {/* Topics Mastered Pod */}
-        <div className="dashboard-stat-pod mastery-pod">
-          <div className="stat-icon-wrapper">👑</div>
-          <span className="dashboard-stat-val">{profile ? profile.masteryCount : 0}</span>
-          <span className="dashboard-stat-lbl">Topics Mastered</span>
-        </div>
-
-        {/* Questions Solved Pod */}
-        <div className="dashboard-stat-pod solved-pod">
-          <div className="stat-icon-wrapper">⭐</div>
-          <span className="dashboard-stat-val">{profile ? profile.totalSolved : 0}</span>
-          <span className="dashboard-stat-lbl">Solved Questions</span>
-        </div>
-      </div>
-
-      {/* My Badges Cabinet Section */}
-      <div className="my-badges-section">
-        <button
-          className={`collapsible-header-btn ${!showcaseExpanded ? 'collapsed' : ''}`}
-          onClick={() => setShowcaseExpanded(!showcaseExpanded)}
-          type="button"
-        >
-          <span style={{ fontSize: '1.3rem', fontWeight: 800, fontFamily: 'var(--font-display)' }}>My Badges Showcase</span>
-          <span className="collapsible-chevron" style={{ transform: showcaseExpanded ? 'rotate(180deg)' : 'rotate(0deg)', display: 'inline-block' }}>▼</span>
-        </button>
-
-        {showcaseExpanded && (
-          <div style={{ marginTop: '20px' }}>
-            {unlockedBadges.length === 0 ? (
-              <div className="empty-badges-card">
-                <span style={{ fontSize: '2.5rem' }}>🏆</span>
-                <p>You haven't unlocked any badges yet. Start solving quizzes to earn your first badge!</p>
-              </div>
-            ) : (
-              <div className="unlocked-badges-grid">
-                {unlockedBadges.map(badge => {
-                  const itemLevel = badge.type === 'collection'
-                    ? 'gold'
-                    : badge.type === 'topic'
-                      ? getTopicBadgeLevel(badge.badgeId, completedTopics)
-                      : '';
-                  return (
-                    <div
-                      key={badge.badgeId}
-                      className={`unlocked-badge-card level-${itemLevel}`}
-                      title={`${badge.name}: ${badge.description}`}
-                      onClick={() => setActiveBadgeDetail({ ...badge, level: itemLevel, isLocked: false })}
-                    >
-                      <div className="unlocked-badge-aura" />
-                      <BadgeIcon
-                        type={badge.badgeType}
-                        size={64}
-                        level={itemLevel}
-                      />
-                      <span className="unlocked-badge-name">{badge.name}</span>
-                      <span className="unlocked-badge-type-tag">{badge.type}</span>
-                    </div>
-                  )
-                })}
-              </div>
-            )}
-          </div>
-        )}
-      </div>
-
-      {/* Badges Yet to Receive Collapsible Section */}
-      <div className="yet-to-receive-section" style={{ marginTop: '32px' }}>
-        <button
-          className={`collapsible-header-btn ${!sectionExpanded ? 'collapsed' : ''}`}
-          onClick={() => setSectionExpanded(!sectionExpanded)}
-          type="button"
-        >
-          <span style={{ fontSize: '1.3rem', fontWeight: 800, fontFamily: 'var(--font-display)' }}>Badges Yet to Receive</span>
-          <span className="collapsible-chevron" style={{ transform: sectionExpanded ? 'rotate(180deg)' : 'rotate(0deg)', display: 'inline-block' }}>▼</span>
-        </button>
-
-        {sectionExpanded && (
-          <div className="collapsible-content-wrapper" style={{ marginTop: '20px' }}>
-            {/* Custom Interactive Dropdown Menu */}
-            <div className="yet-to-receive-dropdown-container" ref={dropdownRef}>
-              <button
-                className={`yet-to-receive-trigger ${dropdownOpen ? 'open' : ''}`}
-                onClick={() => setDropdownOpen(!dropdownOpen)}
-                type="button"
-              >
-                <div className="trigger-content">
-                  <div className="trigger-text-wrapper">
-                    <span className="trigger-lbl">Show Category</span>
-                    <span className="trigger-val">
-                      {selectedSection === 'bookshelf' && '📚 Collector Bookshelf'}
-                      {selectedSection === 'mastery' && '👑 Topic Mastery'}
-                      {selectedSection === 'streaks' && '🔥 Daily Check-in'}
-                    </span>
-                  </div>
-                </div>
-                <span className="trigger-chevron">{dropdownOpen ? '▲' : '▼'}</span>
-              </button>
-
-              {dropdownOpen && (
-                <div className="yet-to-receive-dropdown-menu">
-                  <button
-                    className={`menu-item ${selectedSection === 'bookshelf' ? 'active' : ''}`}
-                    onClick={() => { setSelectedSection('bookshelf'); setDropdownOpen(false); }}
-                    type="button"
-                  >
-                    <span className="item-icon">📚</span>
-                    <div className="item-text">
-                      <strong>Collector Bookshelf</strong>
-                      <span>Progress through albums and unlock custom visual books</span>
-                    </div>
-                  </button>
-                  <button
-                    className={`menu-item ${selectedSection === 'mastery' ? 'active' : ''}`}
-                    onClick={() => { setSelectedSection('mastery'); setDropdownOpen(false); }}
-                    type="button"
-                  >
-                    <span className="item-icon">👑</span>
-                    <div className="item-text">
-                      <strong>Topic Mastery</strong>
-                      <span>Master math topics to upgrade your badges from blue to gold</span>
-                    </div>
-                  </button>
-                  <button
-                    className={`menu-item ${selectedSection === 'streaks' ? 'active' : ''}`}
-                    onClick={() => { setSelectedSection('streaks'); setDropdownOpen(false); }}
-                    type="button"
-                  >
-                    <span className="item-icon">🔥</span>
-                    <div className="item-text">
-                      <strong>Daily Check-in</strong>
-                      <span>Solve quizzes consecutively to earn streak milestones</span>
-                    </div>
-                  </button>
-                </div>
-              )}
-            </div>
-
-            {/* Display Active Shelf Section */}
-            {selectedSection === 'bookshelf' ? (
-              <AchievementCollections completedTopics={completedTopics} onSelectTopic={onSelectTopic} />
-            ) : (
-              <div className="unlocked-badges-grid">
-                {selectedSection === 'mastery' && (
-                  <>
-                    {lockedTopics.length === 0 ? (
-                      <div className="empty-section-card" style={{ gridColumn: '1 / -1', width: '100%', textAlign: 'center', padding: '32px' }}>
-                        🎉 Awesome! You have unlocked Gold Mastery on all topics!
-                      </div>
-                    ) : (
-                      lockedTopics.map(item => {
-                        const itemLevel = getTopicBadgeLevel(item.badgeId, completedTopics);
-                        return (
-                          <div
-                            key={item.badgeId}
-                            className={`unlocked-badge-card locked-badge-card level-${itemLevel}`}
-                            title={`${item.name}: ${item.requirement}`}
-                            onClick={() => setActiveBadgeDetail({ ...item, level: itemLevel, isLocked: true })}
-                          >
-                            <div className="badge-lock-overlay-icon">🔒</div>
-                            <BadgeIcon type={item.badgeType} size={64} level={itemLevel} locked={true} />
-                            <span className="unlocked-badge-name">{item.name}</span>
-                            <span className="unlocked-badge-type-tag">{item.type}</span>
-                          </div>
-                        );
-                      })
-                    )}
-                  </>
-                )}
-
-                {selectedSection === 'streaks' && (
-                  <>
-                    {lockedStreaks.length === 0 ? (
-                      <div className="empty-section-card" style={{ gridColumn: '1 / -1', width: '100%', textAlign: 'center', padding: '32px' }}>
-                        🎉 Outstanding! You have unlocked all streak milestone badges!
-                      </div>
-                    ) : (
-                      lockedStreaks.map(item => (
-                        <div
-                          key={item.badgeId}
-                          className="unlocked-badge-card locked-badge-card"
-                          title={`${item.name}: ${item.requirement}`}
-                          onClick={() => setActiveBadgeDetail({ ...item, level: '', isLocked: true })}
-                        >
-                          <div className="badge-lock-overlay-icon">🔒</div>
-                          <BadgeIcon type={item.badgeType} size={64} locked={true} />
-                          <span className="unlocked-badge-name">{item.name}</span>
-                          <span className="unlocked-badge-type-tag">{item.type}</span>
-                        </div>
-                      ))
-                    )}
-                  </>
-                )}
-              </div>
-            )}
-          </div>
-        )}
-      </div>
-
-      <div className="profile-timeline-section" style={{ marginTop: '32px' }}>
-        <h3>Journey Milestones</h3>
-        <div className="timeline-trail">
-          {profile && profile.timeline && profile.timeline.map((item, idx) => {
-            const dateStr = new Date(item.date).toLocaleDateString('en-IN', {
-              day: 'numeric',
-              month: 'short',
-              year: 'numeric'
-            });
-            return (
-              <div key={idx} className="timeline-node">
-                <div className="timeline-marker">
-                  {item.type === 'system' ? '●' : '★'}
-                </div>
-                <div className="timeline-info">
-                  <span className="timeline-date">{dateStr}</span>
-                  <strong className="timeline-event">{item.event}</strong>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* Interactive Badge Detail Overlay */}
-      {activeBadgeDetail && (
-        <div className="badge-detail-overlay" onClick={() => setActiveBadgeDetail(null)}>
-          <div className="badge-detail-modal" onClick={e => e.stopPropagation()}>
-            <button className="badge-detail-close" onClick={() => setActiveBadgeDetail(null)} aria-label="Close">✕</button>
-
-            <div className="badge-detail-hero">
-              <div className={`badge-detail-aura level-${activeBadgeDetail.level}`} style={{ background: activeBadgeDetail.isLocked ? '#e11d48' : '' }} />
-              <BadgeIcon
-                type={activeBadgeDetail.badgeType}
-                size={110}
-                level={activeBadgeDetail.level}
-                locked={activeBadgeDetail.isLocked}
-              />
-              {activeBadgeDetail.isLocked && (
-                <div style={{ position: 'absolute', fontSize: '2.5rem', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', textShadow: '0 4px 8px rgba(0,0,0,0.5)' }}>🔒</div>
-              )}
-            </div>
-
-            <h2 className="badge-detail-title">{activeBadgeDetail.name}</h2>
-            <span className="badge-detail-tag" style={{ background: activeBadgeDetail.isLocked ? 'rgba(225, 29, 72, 0.15)' : '', borderColor: activeBadgeDetail.isLocked ? '#e11d48' : '', color: activeBadgeDetail.isLocked ? '#f43f5e' : '' }}>
-              {activeBadgeDetail.isLocked ? 'Locked ' : ''}{activeBadgeDetail.type} Badge
-            </span>
-
-            <p className="badge-detail-desc">{activeBadgeDetail.description}</p>
-
-            {activeBadgeDetail.isLocked ? (
-              <div className="badge-detail-requirement">
-                <strong>How to Unlock:</strong>
-                <p style={{ marginBottom: activeBadgeDetail.type === 'topic' ? '14px' : '0' }}>{activeBadgeDetail.requirement}</p>
-                {activeBadgeDetail.type === 'topic' && (
-                  <button
-                    className="book-next-btn"
-                    style={{ width: '100%', display: 'block' }}
-                    onClick={() => {
-                      setActiveBadgeDetail(null);
-                      onSelectTopic(activeBadgeDetail.badgeId);
-                    }}
-                  >
-                    Go Practice: {activeBadgeDetail.name}
-                  </button>
-                )}
-              </div>
-            ) : (
-              <div className="badge-detail-requirement">
-                <strong>Achievement Requirement:</strong>
-                <p>{activeBadgeDetail.requirement}</p>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
-    </div>
-  )
-}
-
-/**
- * MathLabHubApp Component
- * A picker screen for the three visual labs: Visual Math Lab, Mensuration Lab,
- * and Addition (Balance Scale / Counting Apples).
- * Selecting a lab renders it inline; back button returns to this picker.
- */
-function MathLabHubApp({ onBack }) {
-  const [selectedActivities, setSelectedActivities] = useState([])
-  const [stage, setStage] = useState('choose')
-  const [difficulty, setDifficulty] = useState('easy')
-  const [numQuestions, setNumQuestions] = useState('5')
-
-  const labs = [
-    {
-      key: 'visual-math-lab-redux',
-      icon: '🎮',
-      name: 'Multiplication & division',
-      subtitle: 'Multiplication & Division',
-      desc: 'Practice multiplication and division through interactive visual puzzles',
-      accentVar: 'var(--clr-accent)',
-      accentAlpha: 'var(--clr-accent-soft)',
-    },
-    {
-      key: 'mensuration-lab',
-      icon: '🔷',
-      name: 'Mensuration Lab',
-      subtitle: 'Geometry & Shape Puzzles',
-      desc: 'Explore area, perimeter and volume through animated shape challenges',
-      accentVar: 'var(--clr-correct)',
-      accentAlpha: 'var(--clr-correct-bg)',
-    },
-    {
-      key: 'addition',
-      icon: '🍎',
-      name: 'Addition',
-      subtitle: 'Balance Scale & Counting Apples',
-      desc: 'Practice addition using visual balance scales and counting objects',
-      accentVar: 'var(--clr-accent)',
-      accentAlpha: 'var(--clr-accent-soft)',
-    },
-  ]
-
-  const selected = labs.find(lab => selectedActivities.includes(lab.key))
-  const selectedSet = useMemo(() => new Set(selectedActivities), [selectedActivities])
-  const selectedLabels = useMemo(() => selectedActivities
-    .map(key => labs.find(lab => lab.key === key)?.name)
-    .filter(Boolean), [selectedActivities])
-
-  const endpointMap = {
-    'visual-math-lab-redux': '/visual-math-lab-redux',
-    'mensuration-lab': '/mensuration-lab',
-    addition: '/addition-api',
-  }
-
-  const chooseLab = (lab) => {
-    const labKey = lab.key
-    setSelectedActivities(prev => prev.includes(labKey) ? prev.filter((item) => item !== labKey) : [...prev, labKey])
-  }
-
-  const mapAdditionDifficulty = (difficulty) => {
-    if (difficulty === 'hard') return 3
-    if (difficulty === 'medium') return 2
-    return 1
-  }
-
-  const updateNumQuestions = (value) => {
-    if (value === '' || /^\d+$/.test(value)) {
-      setNumQuestions(value)
-    }
-  }
-
-  if (stage === 'playing' && selectedActivities.length > 0) {
-    return (
-      <MixedLabApp
-        onBack={() => setStage('config')}
-        selectedActivities={selectedActivities}
-        initialDifficulty={difficulty}
-        initialNumQuestions={numQuestions}
-      />
-    )
-  }
-
-  if (stage === 'config' && selectedActivities.length > 0) {
-    const quickCounts = ['5', '10', '15', '20']
-
-    return (
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
-        <div style={{
-          background: 'var(--clr-card)',
-          border: '1px solid var(--clr-border)',
-          borderRadius: 'var(--radius)',
-          padding: '40px 36px',
-          width: '100%',
-          maxWidth: '500px',
-          boxSizing: 'border-box',
-          textAlign: 'center',
-        }}>
-          {/* Back button */}
-          <div style={{ textAlign: 'left', marginBottom: '24px' }}>
-            <button
-              onClick={() => setStage('choose')}
-              style={{
-                background: 'var(--clr-surface)',
-                border: '1px solid var(--clr-border)',
-                borderRadius: '8px',
-                padding: '6px 14px',
-                cursor: 'pointer',
-                color: 'var(--clr-text-soft)',
-                fontFamily: 'var(--font-body)',
-                fontSize: '0.85rem',
-              }}
-            >← Back</button>
-          </div>
-
-          {/* Title */}
-          <h1 style={{ margin: '0 0 6px', fontSize: 'clamp(1.8rem, 3.8vw, 2.4rem)', fontWeight: 700, color: 'var(--clr-text)', fontFamily: 'var(--font-display)' }}>
-            Visual Learning Universe
-          </h1>
-          <p style={{ margin: '0 0 28px', color: 'var(--clr-text-soft)', fontSize: '0.9rem', fontFamily: 'var(--font-body)' }}>
-            Customize your quiz
-          </p>
-
-          {/* Selected Labs pills */}
-          <div style={{ marginBottom: '24px' }}>
-            <p style={{ margin: '0 0 10px', fontSize: '0.85rem', color: 'var(--clr-text-soft)', fontFamily: 'var(--font-body)' }}>
-              Selected Labs:
-            </p>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', justifyContent: 'center' }}>
-              {selectedLabels.map((label) => (
-                <span key={label} style={{
-                  padding: '6px 14px',
-                  borderRadius: '20px',
-                  background: 'var(--clr-accent)',
-                  color: '#fff',
-                  fontFamily: 'var(--font-body)',
-                  fontSize: '0.85rem',
-                  fontWeight: 600,
-                }}>
-                  {label}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          {/* Difficulty */}
-          <div style={{ marginBottom: '24px' }}>
-            <p style={{ margin: '0 0 10px', fontSize: '0.85rem', color: 'var(--clr-text-soft)', fontFamily: 'var(--font-body)' }}>
-              Select Difficulty:
-            </p>
-            <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', justifyContent: 'center' }}>
-              {[
-                { key: 'easy', label: 'Easy' },
-                { key: 'medium', label: 'Medium' },
-                { key: 'hard', label: 'Hard' },
-              ].map(({ key, label }) => (
-                <button key={key} onClick={() => setDifficulty(key)} style={{
-                  background: difficulty === key ? 'var(--clr-accent)' : 'transparent',
-                  color: difficulty === key ? '#fff' : 'var(--clr-text)',
-                  border: `1.5px solid ${difficulty === key ? 'var(--clr-accent)' : 'var(--clr-border)'}`,
-                  borderRadius: '20px',
-                  padding: '8px 20px',
-                  cursor: 'pointer',
-                  fontWeight: 600,
-                  fontFamily: 'var(--font-body)',
-                  fontSize: '0.9rem',
-                  transition: 'all var(--transition)',
-                }}>
-                  {label}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Question count */}
-          <div style={{ marginBottom: '28px' }}>
-            <p style={{ margin: '0 0 10px', fontSize: '0.85rem', color: 'var(--clr-text-soft)', fontFamily: 'var(--font-body)' }}>
-              How many questions? (max 20)
-            </p>
-            <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', justifyContent: 'center', marginBottom: '12px' }}>
-              {quickCounts.map(count => (
-                <button key={count} onClick={() => setNumQuestions(count)} style={{
-                  background: numQuestions === count ? 'var(--clr-accent)' : 'transparent',
-                  color: numQuestions === count ? '#fff' : 'var(--clr-text)',
-                  border: `1.5px solid ${numQuestions === count ? 'var(--clr-accent)' : 'var(--clr-border)'}`,
-                  borderRadius: '20px',
-                  padding: '8px 18px',
-                  cursor: 'pointer',
-                  fontWeight: 600,
-                  fontFamily: 'var(--font-body)',
-                  fontSize: '0.9rem',
-                  transition: 'all var(--transition)',
-                }}>
-                  {count}
-                </button>
-              ))}
-            </div>
-            <input
-              type="text"
-              value={numQuestions}
-              onChange={e => { const v = e.target.value; if (v === '' || /^\d+$/.test(v)) setNumQuestions(v) }}
-              style={{
-                width: '80px',
-                padding: '10px',
-                borderRadius: '8px',
-                border: '1.5px solid var(--clr-border)',
-                background: 'var(--clr-surface)',
-                color: 'var(--clr-text)',
-                fontFamily: 'var(--font-body)',
-                fontSize: '1rem',
-                textAlign: 'center',
-              }}
-              onFocus={e => e.currentTarget.style.setProperty('border-color', 'var(--clr-accent)')}
-              onBlur={e => e.currentTarget.style.setProperty('border-color', 'var(--clr-border)')}
-            />
-          </div>
-
-          {/* Start button */}
-          <button
-            onClick={() => setStage('playing')}
-            style={{
-              background: 'var(--clr-accent)',
-              border: 'none',
-              borderRadius: '12px',
-              padding: '14px 40px',
-              color: '#fff',
-              cursor: 'pointer',
-              fontSize: '1rem',
-              fontWeight: 800,
-              fontFamily: 'var(--font-body)',
-              transition: 'all var(--transition)',
-            }}
-            onMouseEnter={e => {
-              e.currentTarget.style.setProperty('transform', 'translateY(-2px)');
-              e.currentTarget.style.setProperty('box-shadow', '0 8px 20px rgba(240,140,70,0.35)');
-            }}
-            onMouseLeave={e => {
-              e.currentTarget.style.setProperty('transform', 'translateY(0)');
-              e.currentTarget.style.setProperty('box-shadow', 'none');
-            }}
-          >
-            Start Quiz
-          </button>
-        </div>
-      </div>
-    )
-  }
-
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
-      {/* Back button row */}
-      <div style={{ alignSelf: 'flex-start', marginBottom: '20px' }}>
-        <button
-          onClick={onBack}
-          style={{
-            background: 'var(--clr-surface)',
-            border: '1px solid var(--clr-border)',
-            borderRadius: '8px',
-            padding: '6px 14px',
-            cursor: 'pointer',
-            color: 'var(--clr-text-soft)',
-            fontFamily: 'var(--font-body)',
-            fontSize: '0.85rem',
-          }}
-          onMouseEnter={e => e.currentTarget.style.setProperty('background', 'var(--clr-hover-strong)')}
-          onMouseLeave={e => e.currentTarget.style.setProperty('background', 'var(--clr-surface)')}
-        >
-          ← Back
-        </button>
-      </div>
-
-      {/* Centered title */}
-      <div style={{ textAlign: 'center', marginBottom: '28px' }}>
-        <h1 style={{
-          margin: '0 0 6px', fontSize: 'clamp(1.8rem, 3.8vw, 2.4rem)', fontWeight: 700,
-          color: 'var(--clr-text)', fontFamily: 'var(--font-display)',
-        }}>
-          Visual Learning Universe
-        </h1>
-        <p style={{ margin: 0, fontSize: '0.88rem', color: 'var(--clr-text-soft)', fontFamily: 'var(--font-body)' }}>
-          Choose a lab to explore
-        </p>
-      </div>
-
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
-        gap: '16px',
-        width: '100%',
-        boxSizing: 'border-box',
-      }}>
-        {labs.map(lab => (
-          <button
-            key={lab.key}
-            onClick={() => chooseLab(lab)}
-            className="menu-card featured"
-            style={{
-              width: '100%',
-              height: 'auto',
-              minHeight: '160px',
-              borderColor: selectedSet.has(lab.key) ? 'var(--clr-accent)' : 'var(--clr-border)',
-              background: selectedSet.has(lab.key) ? 'var(--clr-surface)' : 'var(--clr-card)',
-              boxShadow: selectedSet.has(lab.key) ? '0 0 0 2px var(--clr-accent)' : undefined,
-              padding: '18px 14px',
-              gap: '6px',
-            }}
-          >
-            <span className="menu-title" style={{ fontSize: '0.95rem' }}>{lab.name}</span>
-            <span className="menu-subtitle" style={{ color: 'var(--clr-accent)', fontSize: '0.75rem', fontWeight: 600 }}>{lab.subtitle}</span>
-            <span className="menu-subtitle" style={{ fontSize: '0.72rem', marginTop: '2px', lineHeight: 1.4 }}>{lab.desc}</span>
-            {selectedSet.has(lab.key) && (
-              <span style={{
-                position: 'absolute', top: '10px', right: '10px',
-                background: 'var(--clr-accent)', color: '#fff',
-                width: '20px', height: '20px', borderRadius: '50%',
-                display: 'grid', placeItems: 'center',
-                fontSize: '0.7rem', fontWeight: 'bold',
-              }}>✓</span>
-            )}
-          </button>
-        ))}
-      </div>
-
-      <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap', marginTop: '20px' }}>
-        <button
-          onClick={() => selectedActivities.length > 0 && setStage('config')}
-          disabled={selectedActivities.length === 0}
-          style={{
-            background: selectedActivities.length ? 'var(--clr-accent)' : 'var(--clr-card)',
-            border: 'none',
-            borderRadius: '16px',
-            padding: '14px 24px',
-            color: selectedActivities.length ? '#fff' : 'var(--clr-text-soft)',
-            cursor: selectedActivities.length ? 'pointer' : 'not-allowed',
-            fontSize: '0.95rem',
-            fontWeight: 700,
-            fontFamily: 'var(--font-body)',
-          }}
-        >
-          Continue
-        </button>
-        <span style={{ color: selectedActivities.length ? 'var(--clr-text-soft)' : '#f85149', fontSize: '0.88rem' }}>
-          {selectedActivities.length ? 'Continue with the selected activities.' : 'Please select at least one activity.'}
-        </span>
-      </div>
-    </div>
-  )
-}
-
-function MixedLabApp({ onBack, selectedActivities, initialDifficulty, initialNumQuestions }) {
-  const title = 'Visual Learning Universe'
-  const subtitle = 'Mixed activity quiz'
-  const [difficulty, setDifficulty] = useState(initialDifficulty || 'easy')
-  const [numQuestions, setNumQuestions] = useState(initialNumQuestions || '5')
-  const [started, setStarted] = useState(true)
-  const [finished, setFinished] = useState(false)
-  const [question, setQuestion] = useState(null)
-  const [answer, setAnswer] = useState('')
-  const [score, setScore] = useState(0)
-  const [questionNumber, setQuestionNumber] = useState(0)
-  const [totalQ, setTotalQ] = useState(Number(initialNumQuestions) || 5)
-  const [feedback, setFeedback] = useState('')
-  const [isCorrect, setIsCorrect] = useState(null)
-  const [loading, setLoading] = useState(false)
-  const [revealed, setRevealed] = useState(false)
-  const [results, setResults] = useState([])
-  const timer = useTimer()
-
-  const [additionMode, setAdditionMode] = useState('counting') // 'counting' or 'scale'
-  const [sourceItems, setSourceItems] = useState([])
-  const [targetItems, setTargetItems] = useState([])
-  const [rightBlocks, setRightBlocks] = useState([])
-  const [bankBlocks, setBankBlocks] = useState([])
-
-  const handleDragStart = (e, item, sourceZone) => {
-    e.dataTransfer.setData('text/plain', JSON.stringify({ item, sourceZone }))
-    e.currentTarget.classList.add('dragging')
-  }
-
-  const handleDragEnd = (e) => {
-    e.currentTarget.classList.remove('dragging')
-  }
-
-  const handleDragOver = (e) => {
-    e.preventDefault()
-  }
-
-  const handleDropCounting = (e, targetZone) => {
-    e.preventDefault()
-    if (revealed) return
-    try {
-      const data = JSON.parse(e.dataTransfer.getData('text/plain'))
-      if (data.sourceZone === targetZone) return
-      const { item, sourceZone } = data
-
-      if (sourceZone === 'source' && targetZone === 'target') {
-        setSourceItems(prev => prev.filter(i => i.id !== item.id))
-        setTargetItems(prev => [...prev, item])
-      } else if (sourceZone === 'target' && targetZone === 'source') {
-        setTargetItems(prev => prev.filter(i => i.id !== item.id))
-        setSourceItems(prev => [...prev, item])
-      }
-    } catch (err) { }
-  }
-
-  const handleDropScale = (e, targetZone) => {
-    e.preventDefault()
-    if (revealed) return
-    try {
-      const data = JSON.parse(e.dataTransfer.getData('text/plain'))
-      if (data.sourceZone === targetZone) return
-      const { item, sourceZone } = data
-
-      if (sourceZone === 'bank' && targetZone === 'right') {
-        setBankBlocks(prev => prev.filter(i => i.id !== item.id))
-        setRightBlocks(prev => [...prev, item])
-      } else if (sourceZone === 'right' && targetZone === 'bank') {
-        setRightBlocks(prev => prev.filter(i => i.id !== item.id))
-        setBankBlocks(prev => [...prev, item])
-      }
-    } catch (err) { }
-  }
-
-  const seenIdsRef = useRef(new Set())
-  const countsRef = useRef(selectedActivities.reduce((acc, key) => ({ ...acc, [key]: 0 }), {}))
-  const fetchingRef = useRef(false)
-  // Prefetch cache: holds the next question already fetched in background
-  const prefetchRef = useRef(null)
-
-  // Relative paths only — the `${API}` base is applied once at each fetch site
-  // (below). Including it here too caused a double `/summership` prefix under
-  // subpath deploys, so requests 404'd to index.html and broke question loading.
-  const endpoints = {
-    'visual-math-lab-redux': `/api/visual-math-lab-redux`,
-    'mensuration-lab': `/api/mensuration-lab`,
-    addition: `/addition-api`,
-  }
-
-  const chooseActivityKey = () => {
-    if (selectedActivities.length === 1) return selectedActivities[0]
-    const keys = [...selectedActivities]
-    keys.sort((a, b) => (countsRef.current[a] || 0) - (countsRef.current[b] || 0))
-    const minCount = countsRef.current[keys[0]]
-    const candidates = keys.filter(k => (countsRef.current[k] || 0) === minCount)
-    return candidates[Math.floor(Math.random() * candidates.length)]
-  }
-
-
-  const fetchQuestionFromActivity = async (activityKey) => {
-    try {
-      if (activityKey === 'addition') {
-        // Decide mode here so numbers can be generated with mode-correct limits
-        const mode = Math.random() > 0.5 ? 'counting' : 'scale'
-        let a, b
-        if (mode === 'counting') {
-          // Counting apples — keep sum small so it's visually manageable
-          //   easy: 2–12, medium: 15–35, hard: 15–50
-          const maxSum = difficulty === 'hard' ? 50 : difficulty === 'medium' ? 35 : 12
-          const minSum = difficulty === 'medium' || difficulty === 'hard' ? 15 : 2
-          const total = Math.floor(Math.random() * (maxSum - minSum + 1)) + minSum
-          a = Math.floor(Math.random() * (total - 1)) + 1
-          b = total - a
-        } else {
-          // Balance scale — numbers can go up to 1499
-          const maxVal = difficulty === 'hard' ? 1499 : difficulty === 'medium' ? 499 : 49
-          a = Math.floor(Math.random() * maxVal) + 1
-          b = Math.floor(Math.random() * maxVal) + 1
-        }
-        const total = a + b
-        const id = `add-${a}-${b}-${Date.now()}`
-        return { id, a, b, answer: String(total), activityKey, additionMode: mode }
-      }
-      const res = await fetch(`${API}${endpoints[activityKey]}/generate?difficulty=${difficulty}`)
-      if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`)
-      const data = await res.json()
-      return { ...data, activityKey }
-    } catch (err) {
-      console.error(`Error in fetchQuestionFromActivity for ${activityKey}:`, err)
-      return null
-    }
-  }
-
-
-  const customGenerate = useCallback(async () => {
-    const maxAttempts = 12
-    let questionData = null
-
-    for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
-      const activityKey = chooseActivityKey()
-      const candidate = await fetchQuestionFromActivity(activityKey)
-      if (!candidate || !candidate.id) continue
-      if (seenIdsRef.current.has(candidate.id)) continue
-      seenIdsRef.current.add(candidate.id)
-      countsRef.current[activityKey] = (countsRef.current[activityKey] || 0) + 1
-      questionData = candidate
-      break
-    }
-
-    if (!questionData) {
-      const activityKey = selectedActivities[Math.floor(Math.random() * selectedActivities.length)]
-      const candidate = await fetchQuestionFromActivity(activityKey)
-      if (candidate && candidate.id) {
-        seenIdsRef.current.add(candidate.id)
-        countsRef.current[activityKey] = (countsRef.current[activityKey] || 0) + 1
-        questionData = candidate
-      }
-    }
-
-    return questionData
-  }, [difficulty, selectedActivities])
-
-  const customCheck = async ({ question: q, finalAns, solve }) => {
-    const endpoint = endpoints[q.activityKey] || '/addition-api'
-    if (q.activityKey === 'addition') {
-      // Check locally — answer is simply a + b
-      const correct = solve ? false : Number(finalAns) === Number(q.a) + Number(q.b)
-      const solution = `${q.a} + ${q.b} = ${Number(q.a) + Number(q.b)}`
-      const correctAnswer = String(Number(q.a) + Number(q.b))
-      return { correct, solution, correctAnswer }
-    }
-    const res = await fetch(`${API}${endpoint}/check`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ answerOption: solve ? '' : finalAns, expected: q.answer, solve: solve || false })
-    })
-    return res.json()
-  }
-
-
-  const startQuiz = () => {
-    const count = Math.max(1, Math.min(20, Number(numQuestions) || 5))
-    setTotalQ(count)
-    setStarted(true)
-    setFinished(false)
-    setScore(0)
-    setQuestionNumber(0)
-    setResults([])
-    seenIdsRef.current = new Set()
-    countsRef.current = selectedActivities.reduce((acc, key) => ({ ...acc, [key]: 0 }), {})
-    fetchingRef.current = false
-    prefetchRef.current = null
-  }
-
-  const fetchQuestion = async () => {
-    if (fetchingRef.current) return
-    fetchingRef.current = true
-    if (questionNumber >= totalQ) {
-      fetchingRef.current = false
-      setFinished(true)
-      timer.reset()
-      return
-    }
-    setLoading(true)
-    setFeedback('')
-    setAnswer('')
-    setRevealed(false)
-    setIsCorrect(null)
-    try {
-      // Use prefetched question if available, otherwise fetch now
-      let data = prefetchRef.current
-      prefetchRef.current = null
-      if (!data) {
-        data = await customGenerate()
-      }
-      
-      // Fallback if no question generated
-      if (!data) {
-        throw new Error("No question data returned from generation");
-      }
-      
-      setQuestion(data)
-      if (data.activityKey === 'addition') {
-        // Mode was decided at generation time so numbers already match it
-        const mode = data.additionMode || 'counting';
-        setAdditionMode(mode);
-        const targetTotal = Number(data.a) + Number(data.b);
-        if (mode === 'counting') {
-          // Give a few extra apples beyond the exact answer (so it's not an obvious count-all)
-          // but never go beyond difficulty caps
-          const extra = difficulty === 'easy' ? 2 : difficulty === 'medium' ? 4 : 6;
-          const totalApples = targetTotal + extra;
-          const initialItems = Array.from({ length: totalApples }, (_, i) => ({ id: `apple-${i}`, icon: '🍎' }));
-          setSourceItems(initialItems);
-          setTargetItems([]);
-        } else {
-          let initBank = [];
-          if (difficulty === 'easy') {
-            if (targetTotal >= 10) {
-              const numTens = Math.floor(targetTotal / 10) + 2;
-              const numOnes = Math.max(12, (targetTotal % 10) + 5);
-              for (let i = 0; i < numTens; i++) {
-                initBank.push({ id: `bank-10-${i}-${Math.random()}`, val: 10 });
-              }
-              for (let i = 0; i < numOnes; i++) {
-                initBank.push({ id: `bank-1-${i}-${Math.random()}`, val: 1 });
-              }
-            } else {
-              initBank = Array.from({ length: Math.max(15, targetTotal + 2) }, (_, i) => ({ id: `bank-1-${i}-${Math.random()}`, val: 1 }));
-            }
-          } else {
-            initBank = createDynamicWeightBank(targetTotal);
-          }
-          setBankBlocks(initBank);
-          setRightBlocks([]);
-        }
-      }
-      setQuestionNumber(n => n + 1)
-    } catch (err) {
-      console.error("Error fetching question in MathLab:", err)
-      // Fallback: Generate a local addition question so the quiz doesn't freeze
-      const fallbackA = Math.floor(Math.random() * (difficulty === 'hard' ? 30 : difficulty === 'medium' ? 15 : 8)) + 2;
-      const fallbackB = Math.floor(Math.random() * (difficulty === 'hard' ? 20 : difficulty === 'medium' ? 10 : 5)) + 1;
-      const total = fallbackA + fallbackB;
-      const fallbackData = {
-        id: `fallback-add-${fallbackA}-${fallbackB}-${Date.now()}`,
-        a: fallbackA,
-        b: fallbackB,
-        answer: String(total),
-        activityKey: 'addition',
-        additionMode: 'counting',
-        prompt: `What is ${fallbackA} + ${fallbackB}?`
-      }
-      setQuestion(fallbackData)
-      setAdditionMode('counting')
-      const totalApples = total + (difficulty === 'easy' ? 2 : difficulty === 'medium' ? 4 : 6);
-      setSourceItems(Array.from({ length: totalApples }, (_, i) => ({ id: `apple-${i}`, icon: '🍎' })));
-      setTargetItems([]);
-      setQuestionNumber(n => n + 1)
-    } finally {
-      setLoading(false)
-      fetchingRef.current = false
-      timer.start()
-    }
-    // Silently prefetch the next question in the background
-    customGenerate().then(next => { if (next) prefetchRef.current = next }).catch(() => { })
-  }
-
-  useEffect(() => {
-    if (started && !finished && questionNumber === 0) {
-      fetchQuestion()
-    }
-  }, [started, finished, questionNumber])
-
-  const formatMathLabAnswer = (qObj, ans) => {
-    if (!qObj) return ans
-    if (qObj.activityKey === 'addition') {
-      return `${qObj.a} + ${qObj.b} = ${ans}`
-    }
-    if (qObj.activityKey === 'visual-math-lab-redux') {
-      switch (qObj.template) {
-        case 'plant_arrays': return `${qObj.rows} × ${qObj.cols} = ${ans}`
-        case 'frog_jumps': return `${qObj.jumps} × ${qObj.step} = ${ans}`
-        case 'candy_sharing': return `${qObj.total} ÷ ${qObj.boxes} = ${ans}`
-        case 'equal_groups': return `${qObj.groups} × ${qObj.itemsPerGroup} = ${ans}`
-        case 'picture_multi': return `${qObj.n} × ${qObj.count} = ${ans}`
-        case 'math_machine': return `${qObj.input} × ${qObj.multiplier} = ${ans}`
-        default: return ans
-      }
-    }
-    if (qObj.activityKey === 'mensuration-lab') {
-      if (qObj.template === 'area_grid') {
-        return `${qObj.w} × ${qObj.h} = ${ans}`
-      }
-      if (qObj.template === 'perimeter_blocks') {
-        return `2 × (${qObj.w} + ${qObj.h}) = ${ans}`
-      }
-    }
-    return ans
-  }
-
-  const submitAns = async (optAns) => {
-    if (!question || revealed) return
-    let finalAns = optAns !== undefined ? optAns : answer
-    if (question.activityKey === 'addition') {
-      if (additionMode === 'counting') {
-        finalAns = String(targetItems.length)
-      } else if (additionMode === 'scale') {
-        const rightTotal = rightBlocks.reduce((acc, b) => acc + b.val, 0)
-        finalAns = String(rightTotal)
-      }
-    }
-    const timeTaken = timer.stop()
-    setAnswer(finalAns)
-    const data = await customCheck({ question, finalAns, solve: false })
-    setIsCorrect(data.correct)
-    if (data.correct) setScore(s => s + 1)
-    const ansString = formatMathLabAnswer(question, data.correctAnswer)
-    const explanationText = question.hint ? ` (${question.hint})` : ''
-    setFeedback(data.correct
-      ? `Correct! The answer is ${ansString}.${explanationText}`
-      : `Incorrect. The correct answer is ${ansString}.${explanationText}`
-    )
-    setResults(prev => [...prev, {
-      question: question.activityKey === 'addition'
-        ? (question.additionMode === 'counting'
-          ? `🍎 What is ${question.a} + ${question.b}?`
-          : `⚖️ What is ${question.a} + ${question.b}?`)
-        : question.prompt,
-      userAnswer: String(finalAns),
-      correctAnswer: String(ansString),
-      correct: data.correct,
-      time: timeTaken
-    }])
-    setRevealed(true)
-  }
-
-  const handleSolve = async () => {
-    if (revealed || !question) return
-    const timeTaken = timer.stop()
-    const data = await customCheck({ question, finalAns: '', solve: true })
-    setIsCorrect(false)
-    const ansString = formatMathLabAnswer(question, data.correctAnswer)
-    setFeedback(`Solution: ${ansString}`)
-    setResults(prev => [...prev, {
-      question: question.activityKey === 'addition'
-        ? (question.additionMode === 'counting'
-          ? `🍎 What is ${question.a} + ${question.b}?`
-          : `⚖️ What is ${question.a} + ${question.b}?`)
-        : question.prompt,
-      userAnswer: '—',
-      correctAnswer: String(ansString),
-      correct: false,
-      time: timeTaken
-    }])
-    if (question.activityKey === 'addition') {
-      if (additionMode === 'counting') {
-        const totalNeeded = Number(data.correctAnswer)
-        const allApples = [...sourceItems, ...targetItems]
-        setTargetItems(allApples.slice(0, totalNeeded))
-        setSourceItems(allApples.slice(totalNeeded))
-      } else if (additionMode === 'scale') {
-        let remainder = Number(data.correctAnswer)
-        let correctBlocks = []
-        let blockId = 0
-        const denom = difficulty === 'easy' ? [1] : (difficulty === 'medium' ? [50, 10, 5, 1] : [500, 100, 50, 10, 5, 1])
-        for (const d of denom) {
-          const count = Math.floor(remainder / d)
-          for (let k = 0; k < count; k++) {
-            correctBlocks.push({ id: `solve-block-${d}-${blockId++}`, val: d })
-          }
-          remainder %= d
-        }
-        setRightBlocks(correctBlocks)
-        setBankBlocks([])
-      }
-    }
-    setRevealed(true)
-  }
-
-  const handleSubmitOrNext = () => {
-    if (!revealed) {
-      submitAns()
-    } else {
-      fetchQuestion()
-    }
-  }
-
-  const advanceRef = useRef(() => { })
-  advanceRef.current = () => fetchQuestion()
-  useAutoAdvance(revealed, advanceRef, isCorrect)
-  useProgressSubmit(revealed, isCorrect, 'mixed-math-lab', question?.id)
-
-  const renderMensurationCustom = (q, ans, setAns, submitAns, revealed) => {
-    // ── COUNT SIDES / SHAPE NAME ──────────────────────────────────────────
-    if (q.template === 'count_sides' || q.template === 'shape_name') {
-      const sides = q.sides;
-      const color = q.color || '#FF6B6B';
-      const pts = Array.from({ length: sides }).map((_, i) => {
-        const angle = (i * 2 * Math.PI / sides) - Math.PI / 2;
-        return `${50 + 40 * Math.cos(angle)},${50 + 40 * Math.sin(angle)}`;
-      }).join(' ');
-      return (
-        <div className="men-canvas">
-          <div className="men-shape-wrapper">
-            <svg viewBox="0 0 100 100" className="men-shape-svg">
-              <defs>
-                <linearGradient id={`sg${sides}`} x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor={color} stopOpacity="0.9" />
-                  <stop offset="100%" stopColor={color} stopOpacity="0.5" />
-                </linearGradient>
-              </defs>
-              <polygon points={pts} fill={`url(#sg${sides})`} stroke="white" strokeWidth="3" />
-              {Array.from({ length: sides }).map((_, i) => {
-                const angle = (i * 2 * Math.PI / sides) - Math.PI / 2;
-                return <circle key={i} cx={50 + 40 * Math.cos(angle)} cy={50 + 40 * Math.sin(angle)} r="3.5" fill="white" opacity="0.9" />;
-              })}
-            </svg>
-          </div>
-          <div className="men-options-grid">
-            {q.options?.map(opt => (
-              <button key={opt} className={`men-choice-btn ${ans === opt ? 'selected' : ''}`}
-                onClick={() => !revealed && setAns(opt)} disabled={revealed}>
-                {opt}{revealed && String(opt) === String(q.answer) && <span className="men-correct-tick"> ✓</span>}
-              </button>
-            ))}
-          </div>
-        </div>
-      );
-    }
-
-    // ── AREA GRID (interactive tap-to-count) ─────────────────────────────
-    if (q.template === 'area_grid') {
-      const counted = (typeof ans === 'string' && ans.startsWith('[')) ? JSON.parse(ans) : []; const setCounted = (updater) => { const next = typeof updater === 'function' ? updater(counted) : updater; setAns(JSON.stringify(next)); };
-
-      const allCount = q.w * q.h;
-      const handleCellClick = (idx) => {
-        if (revealed) return;
-        setCounted(prev => {
-          const next = prev.includes(idx) ? prev.filter(i => i !== idx) : [...prev, idx];
-          if (next.length === allCount) setTimeout(() => setAns(String(allCount)), 100);
-          return next;
-        });
-      };
-      return (
-        <div className="men-canvas" style={{ flexDirection: 'column', gap: '16px' }}>
-          <p className="men-canvas-tip">👆 Tap each square to count it!</p>
-          <div className="men-grid-wrap" style={{ gridTemplateColumns: `repeat(${q.w}, 1fr)` }}>
-            {Array.from({ length: allCount }).map((_, i) => (
-              <div key={i}
-                className={`men-grid-cell ${counted.includes(i) ? 'counted' : ''} ${revealed ? 'revealed' : ''}`}
-                onClick={() => handleCellClick(i)}>
-                {(counted.includes(i) || revealed) ? '✓' : ''}
-              </div>
-            ))}
-          </div>
-          <div className="men-cell-count-pill">
-            {revealed ? `✅ Area = ${q.answer} sq units` : `${counted.length} / ${allCount} counted`}
-          </div>
-        </div>
-      );
-    }
-
-    // ── PERIMETER BLOCKS (animated walking dot) ───────────────────────────
-    if (q.template === 'perimeter_blocks') {
-      const cellPx = 44;
-      const svgW = (q.w + 2) * cellPx;
-      const svgH = (q.h + 2) * cellPx;
-      const ox = cellPx; const oy = cellPx;
-      const rw = q.w * cellPx; const rh = q.h * cellPx;
-      return (
-        <div className="men-canvas" style={{ flexDirection: 'column', gap: '16px' }}>
-          <svg width={svgW} height={svgH} style={{ maxWidth: '100%' }}>
-            <defs>
-              <pattern id="gridP" width={cellPx} height={cellPx} patternUnits="userSpaceOnUse">
-                <path d={`M ${cellPx} 0 L 0 0 0 ${cellPx}`} fill="none" stroke="#E2E8F0" strokeWidth="1" />
-              </pattern>
-            </defs>
-            <rect x={ox} y={oy} width={rw} height={rh} fill="url(#gridP)" />
-            <rect x={ox} y={oy} width={rw} height={rh} fill="rgba(232,134,74,0.08)" stroke="#e8864a" strokeWidth="3" rx="4" />
-            <text x={ox + rw / 2} y={oy - 10} textAnchor="middle" fill="#e8864a" fontWeight="bold" fontSize="14">{q.w} units</text>
-            <text x={ox + rw + 16} y={oy + rh / 2 + 5} textAnchor="middle" fill="#e8864a" fontWeight="bold" fontSize="14"
-              transform={`rotate(90 ${ox + rw + 16} ${oy + rh / 2 + 5})`}>{q.h} units</text>
-            {revealed
-              ? <rect x={ox} y={oy} width={rw} height={rh} fill="none" stroke="#48BB78" strokeWidth="4" rx="4" strokeDasharray="10 4" />
-              : <circle r="7" fill="#FF7E67">
-                <animateMotion dur={`${(q.w + q.h) * 0.4}s`} repeatCount="indefinite"
-                  path={`M ${ox},${oy} L ${ox + rw},${oy} L ${ox + rw},${oy + rh} L ${ox},${oy + rh} Z`} />
-              </circle>
-            }
-          </svg>
-          <div className="men-options-grid">
-            {q.options?.map(opt => (
-              <button key={opt} className={`men-choice-btn ${ans === opt ? 'selected' : ''}`}
-                onClick={() => !revealed && setAns(opt)} disabled={revealed}>
-                {opt}{revealed && String(opt) === String(q.answer) && <span className="men-correct-tick"> ✓</span>}
-              </button>
-            ))}
-          </div>
-        </div>
-      );
-    }
-
-    // ── COMPARE AREA ──────────────────────────────────────────────────────
-    if (q.template === 'compare_area') {
-      const scale = 36;
-      return (
-        <div className="men-canvas" style={{ flexDirection: 'column', gap: '20px' }}>
-          <div style={{ display: 'flex', gap: '30px', justifyContent: 'center', flexWrap: 'wrap', alignItems: 'flex-end' }}>
-            {[q.shape1, q.shape2].map((sh, idx) => (
-              <div key={idx} style={{ textAlign: 'center' }}>
-                <div style={{
-                  width: `${sh.w * scale}px`, height: `${sh.h * scale}px`,
-                  background: sh.color || '#FF7E67', opacity: 0.85, borderRadius: '10px',
-                  boxShadow: `0 8px 20px ${sh.color || '#FF7E67'}55`,
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  color: 'white', fontWeight: 800, fontSize: '1.2rem', fontFamily: 'Quicksand'
-                }}>{sh.w}×{sh.h}</div>
-                <div style={{ marginTop: '10px', fontWeight: 800, fontSize: '1.4rem', color: sh.color, fontFamily: 'Quicksand' }}>Shape {sh.label}</div>
-                <div style={{ fontSize: '0.95rem', color: '#718096', fontFamily: 'Nunito' }}>
-                  {revealed ? `Area = ${sh.w * sh.h}` : `${sh.w} × ${sh.h} = ?`}
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="men-options-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)', maxWidth: '440px' }}>
-            {q.options?.map(opt => (
-              <button key={opt} className={`men-choice-btn ${ans === opt ? 'selected' : ''}`}
-                onClick={() => !revealed && setAns(opt)} disabled={revealed}>
-                {opt}{revealed && opt === q.answer && <span className="men-correct-tick"> ✓</span>}
-              </button>
-            ))}
-          </div>
-        </div>
-      );
-    }
-
-    // ── RECT VS SQUARE ────────────────────────────────────────────────────
-    if (q.template === 'rect_vs_square') {
-      const isSquare = q.w === q.h;
-      const scale = Math.min(45, 200 / Math.max(q.w, q.h));
-      const rw = q.w * scale; const rh = q.h * scale;
-      const ox = (280 - rw) / 2; const oy = (220 - rh) / 2;
-      return (
-        <div className="men-canvas" style={{ flexDirection: 'column', gap: '20px' }}>
-          <svg width="280" height="220" style={{ overflow: 'visible' }}>
-            <defs>
-              <linearGradient id="rectGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#F6D365" /><stop offset="100%" stopColor="#FDA085" />
-              </linearGradient>
-            </defs>
-            <rect x={ox} y={oy} width={rw} height={rh} fill="url(#rectGrad)" rx="8" className="men-rect-pulse" />
-            <text x={ox + rw / 2} y={oy - 12} textAnchor="middle" fill="#E2E8F0" fontWeight="bold" fontSize="18">{q.w}</text>
-            <text x={ox + rw + 16} y={oy + rh / 2 + 6} textAnchor="middle" fill="#E2E8F0" fontWeight="bold" fontSize="18">{q.h}</text>
-            {isSquare && [
-              `M ${ox + 8} ${oy} L ${ox + 8} ${oy + 8} L ${ox} ${oy + 8}`,
-              `M ${ox + rw - 8} ${oy} L ${ox + rw - 8} ${oy + 8} L ${ox + rw} ${oy + 8}`,
-              `M ${ox + rw - 8} ${oy + rh} L ${ox + rw - 8} ${oy + rh - 8} L ${ox + rw} ${oy + rh - 8}`,
-              `M ${ox + 8} ${oy + rh} L ${ox + 8} ${oy + rh - 8} L ${ox} ${oy + rh - 8}`
-            ].map((d, i) => <path key={i} d={d} fill="none" stroke="white" strokeWidth="2" />)}
-          </svg>
-          <div className="men-options-grid" style={{ gridTemplateColumns: 'repeat(2, 1fr)', maxWidth: '340px' }}>
-            {q.options?.map(opt => (
-              <button key={opt} className={`men-choice-btn ${ans === opt ? 'selected' : ''}`}
-                onClick={() => !revealed && setAns(opt)} disabled={revealed}>
-                {opt === 'Square' ? '⬛' : '▬'} {opt}
-                {revealed && opt === q.answer && <span className="men-correct-tick"> ✓</span>}
-              </button>
-            ))}
-          </div>
-        </div>
-      );
-    }
-
-    // ── TRIANGLE AREA ──────────────────────────────────────────────────────
-    if (q.template === 'triangle_area') {
-      const scale = Math.min(45, 200 / Math.max(q.base, q.height));
-      const bPx = q.base * scale; const hPx = q.height * scale;
-      const svgW = bPx + 80; const svgH = hPx + 70;
-      const ox = 40; const oy = 30;
-      const pts = `${ox},${oy + hPx} ${ox + bPx / 2},${oy} ${ox + bPx},${oy + hPx}`;
-      return (
-        <div className="men-canvas" style={{ flexDirection: 'column', gap: '20px' }}>
-          <svg width={svgW} height={svgH} style={{ maxWidth: '100%', overflow: 'visible' }}>
-            <defs>
-              <linearGradient id="triGrd" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#F6D365" /><stop offset="100%" stopColor="#FDA085" />
-              </linearGradient>
-            </defs>
-            <polygon points={pts} fill="url(#triGrd)" stroke="white" strokeWidth="3" className="men-rect-pulse" />
-            <line x1={ox + bPx / 2} y1={oy} x2={ox + bPx / 2} y2={oy + hPx} stroke="#2D2520" strokeWidth="2.5" strokeDasharray="5 3" opacity="0.85" />
-            <path d={`M ${ox + bPx / 2 - 7} ${oy + hPx} L ${ox + bPx / 2 - 7} ${oy + hPx - 7} L ${ox + bPx / 2} ${oy + hPx - 7}`} fill="none" stroke="#2D2520" strokeWidth="1.5" opacity="0.85" />
-            {/* Height Label Pill */}
-            <rect x={ox + bPx / 2 + 8} y={oy + hPx / 2 - 12} width="52" height="22" rx="6" fill="#2D2520" stroke="#4A4038" strokeWidth="1.5" />
-            <text x={ox + bPx / 2 + 34} y={oy + hPx / 2 + 4} textAnchor="middle" fill="#F4F1ED" fontWeight="bold" fontSize="13">h={q.height}</text>
-            {/* Base Label Pill */}
-            <rect x={ox + bPx / 2 - 38} y={oy + hPx + 14} width="76" height="22" rx="6" fill="#2D2520" stroke="#4A4038" strokeWidth="1.5" />
-            <text x={ox + bPx / 2} y={oy + hPx + 30} textAnchor="middle" fill="#F4F1ED" fontWeight="bold" fontSize="13">base={q.base}</text>
-          </svg>
-          <div className="men-options-grid">
-            {q.options?.map(opt => (
-              <button key={opt} className={`men-choice-btn ${ans === opt ? 'selected' : ''}`}
-                onClick={() => !revealed && setAns(opt)} disabled={revealed}>
-                {opt}{revealed && String(opt) === String(q.answer) && <span className="men-correct-tick"> ✓</span>}
-              </button>
-            ))}
-          </div>
-        </div>
-      );
-    }
-
-    // ── ANGLE TYPE ─────────────────────────────────────────────────────────
-    if (q.template === 'angle_type') {
-      const deg = q.degrees;
-      const rad = (deg * Math.PI) / 180;
-      const r = 90; const cx = 110; const cy = 120;
-      const x2 = cx + r * Math.cos(-rad); const y2 = cy + r * Math.sin(-rad);
-      const arcR = 50;
-      const ax = cx + arcR * Math.cos(-rad); const ay = cy + arcR * Math.sin(-rad);
-      const largeArc = deg > 180 ? 1 : 0;
-      const arcColor = deg < 90 ? '#48BB78' : deg === 90 ? '#4ECDC4' : '#FF7E67';
-      return (
-        <div className="men-canvas" style={{ flexDirection: 'column', gap: '20px' }}>
-          <svg width="220" height="160" style={{ overflow: 'visible' }}>
-            <line x1={cx} y1={cy} x2={cx + r} y2={cy} stroke="#988D84" strokeWidth="4.5" strokeLinecap="round" />
-            <line x1={cx} y1={cy} x2={x2} y2={y2} stroke="#F08C46" strokeWidth="4.5" strokeLinecap="round" />
-            <path d={`M ${cx + arcR} ${cy} A ${arcR} ${arcR} 0 ${largeArc} 0 ${ax} ${ay}`} fill="none" stroke={arcColor} strokeWidth="5" />
-            <text x={cx + arcR + 20} y={cy - 16} fill={arcColor} fontWeight="bold" fontSize="28">{deg}°</text>
-            {deg === 90 && <rect x={cx} y={cy - 20} width="20" height="20" fill="none" stroke="#4ECDC4" strokeWidth="3" />}
-            <circle cx={cx} cy={cy} r="5" fill="#2D3748" />
-          </svg>
-          <div className="men-options-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)', maxWidth: '400px' }}>
-            {q.options?.map(opt => {
-              const icons = { Acute: '🔺', Right: '📐', Obtuse: '🔻' };
-              return (
-                <button key={opt} className={`men-choice-btn ${ans === opt ? 'selected' : ''}`}
-                  onClick={() => !revealed && setAns(opt)} disabled={revealed}>
-                  {icons[opt]} {opt}{revealed && opt === q.answer && <span className="men-correct-tick"> ✓</span>}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-      );
-    }
-
-    // ── CIRCLE ─────────────────────────────────────────────────────────────
-    if (q.template === 'circle_q') {
-      const r = q.radius;
-      const rPx = Math.min(55, 160 / (r * 2 + 4)) * r;
-      const cx = 110; const cy = 110;
-      return (
-        <div className="men-canvas" style={{ flexDirection: 'column', gap: '20px' }}>
-          <svg width="220" height="220" style={{ overflow: 'visible' }}>
-            <defs>
-              <radialGradient id="circGrd" cx="40%" cy="35%">
-                <stop offset="0%" stopColor="#ffaa7b" /><stop offset="100%" stopColor="#e8864a" />
-              </radialGradient>
-            </defs>
-            <circle cx={cx} cy={cy} r={rPx} fill="url(#circGrd)" opacity="0.85" />
-            <line x1={cx} y1={cy} x2={cx + rPx} y2={cy} stroke="white" strokeWidth="2.5" strokeDasharray="6 3" />
-            <text x={cx + rPx / 2} y={cy - 8} textAnchor="middle" fill="white" fontWeight="bold" fontSize="14">r={r}</text>
-            <circle cx={cx} cy={cy} r="5" fill="white" />
-            {q.subtype === 'circumference' &&
-              <circle cx={cx} cy={cy} r={rPx + 8} fill="none" stroke="#FDA085" strokeWidth="3"
-                strokeDasharray="15 8" className="men-circle-spin" />}
-          </svg>
-          <div className="men-options-grid">
-            {q.options?.map(opt => (
-              <button key={opt} className={`men-choice-btn ${ans === opt ? 'selected' : ''}`}
-                onClick={() => !revealed && setAns(opt)} disabled={revealed}>
-                {opt}{revealed && String(opt) === String(q.answer) && <span className="men-correct-tick"> ✓</span>}
-              </button>
-            ))}
-          </div>
-        </div>
-      );
-    }
-
-    // ── MISSING SIDE ───────────────────────────────────────────────────────
-    if (q.template === 'missing_side') {
-      return (
-        <div className="men-canvas" style={{ flexDirection: 'column', gap: '20px' }}>
-          {q.subtype === 'rect_missing' ? (
-            <svg width="180" height="140" style={{ overflow: 'visible' }}>
-              <defs>
-                <linearGradient id="misGrd" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#F6D365" /><stop offset="100%" stopColor="#FDA085" />
-                </linearGradient>
-              </defs>
-              <rect x="20" y="20" width="140" height="100" fill="url(#misGrd)" rx="8" opacity="0.8" />
-              <text x="90" y="75" textAnchor="middle" fill="white" fontWeight="bold" fontSize="18">Area={q.area}</text>
-              <text x="90" y="12" textAnchor="middle" fill="#FF7E67" fontWeight="bold" fontSize="16">? units</text>
-              {/* Rectangle Known Side Label */}
-              <text x="172" y="75" textAnchor="middle" fill="#E2E8F0" fontWeight="bold" fontSize="16" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.6)' }}>{q.knownSide}</text>
-            </svg>
-          ) : (
-            <svg width="140" height="140" style={{ overflow: 'visible' }}>
-              <rect x="20" y="20" width="100" height="100" fill="none" stroke="#e8864a" strokeWidth="3" strokeDasharray="8 4" rx="6" />
-              {[['70', '12'], ['133', '75'], ['70', '133'], ['7', '75']].map(([x, y], i) => (
-                <g key={i}>
-                  <circle cx={x} cy={parseInt(y) - 4} r="10" fill="#2D2520" stroke="#4A4038" strokeWidth="1" />
-                  <text x={x} y={y} textAnchor="middle" fill="#FF7E67" fontWeight="bold" fontSize="13">?</text>
-                </g>
-              ))}
-              {/* Square Perimeter Label Pill */}
-              <rect x="34" y="67" width="72" height="22" rx="6" fill="#2D2520" stroke="#4A4038" strokeWidth="1.5" />
-              <text x="70" y="83" textAnchor="middle" fill="#F4F1ED" fontWeight="bold" fontSize="13">P={q.perim}</text>
-            </svg>
-          )}
-          <div className="men-options-grid">
-            {q.options?.map(opt => (
-              <button key={opt} className={`men-choice-btn ${ans === opt ? 'selected' : ''}`}
-                onClick={() => !revealed && setAns(opt)} disabled={revealed}>
-                {opt}{revealed && String(opt) === String(q.answer) && <span className="men-correct-tick"> ✓</span>}
-              </button>
-            ))}
-          </div>
-        </div>
-      );
-    }
-
-    return null;
-  }
-
-  const renderMixedQuestionContent = () => {
-    if (!question || loading) return null;
-
-    if (question.activityKey === 'mensuration-lab') {
-      return (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
-          {renderMensurationCustom(question, answer, setAnswer, submitAns, revealed)}
-        </div>
-      );
-    }
-
-    if (question.activityKey === 'visual-math-lab-redux') {
-      const props = { q: question, ans: answer, setAns: setAnswer, submitAns, revealed };
-      let visualElement = null;
-      if (question.template === 'frog_jumps') visualElement = <FrogJumpTemplate {...props} />;
-      else if (question.template === 'math_machine') visualElement = <MathMachineTemplate {...props} />;
-      else if (question.template === 'plant_arrays') visualElement = <PlantArrayTemplate {...props} />;
-      else if (question.template === 'candy_sharing') visualElement = <CandySharingTemplate {...props} />;
-      else if (question.template === 'equal_groups') visualElement = <EqualGroupsTemplate {...props} />;
-      else if (question.template === 'picture_multi') visualElement = <PictureMultiTemplate {...props} />;
-
-      return (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px', width: '100%', padding: '15px 0' }}>
-          {visualElement}
-          <AnswerInput ans={answer} setAns={setAnswer} submitAns={submitAns}
-            revealed={revealed} correctAnswer={formatMathLabAnswer(question, question.answer)} shake={false} options={question.options} />
-        </div>
-      );
-    }
-
-    if (question.activityKey === 'addition') {
-      if (additionMode === 'counting') {
-        return (
-          <div className="dnd-container" style={{ margin: '15px 0', width: '100%' }}>
-            <h3 style={{ textAlign: 'center', margin: '0 0 10px 0' }}>
-              Put {question.a} + {question.b} apples in the basket!
-            </h3>
-
-            <div
-              className="dnd-source"
-              onDragOver={handleDragOver}
-              onDrop={(e) => handleDropCounting(e, 'source')}
-              style={{ minHeight: '100px', padding: '15px', borderRadius: '10px' }}
-            >
-              {sourceItems.map(item => (
-                <div
-                  key={item.id}
-                  className="dnd-item"
-                  draggable={!revealed}
-                  onDragStart={(e) => handleDragStart(e, item, 'source')}
-                  onDragEnd={handleDragEnd}
-                  onClick={() => { if (!revealed) { setTargetItems(prev => [...prev, item]); setSourceItems(prev => prev.filter(i => i.id !== item.id)); } }}
-                  style={{ fontSize: '2.2rem', width: '44px', height: '44px', cursor: revealed ? 'default' : 'pointer' }}
-                >
-                  {item.icon}
-                </div>
-              ))}
-            </div>
-
-            <div
-              className="dnd-target"
-              onDragOver={handleDragOver}
-              onDrop={(e) => handleDropCounting(e, 'target')}
-              style={{ minHeight: '120px', padding: '20px', borderRadius: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}
-            >
-              <div style={{ fontSize: '0.95rem', fontWeight: 600, color: 'var(--clr-accent)', marginBottom: '8px' }}>
-                🍎 Basket (Total: {targetItems.length})
-              </div>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', justifyContent: 'center' }}>
-                {targetItems.map(item => (
-                  <div
-                    key={item.id}
-                    className="dnd-item"
-                    draggable={!revealed}
-                    onDragStart={(e) => handleDragStart(e, item, 'target')}
-                    onDragEnd={handleDragEnd}
-                    onClick={() => !revealed && (setSourceItems(prev => [...prev, item]), setTargetItems(prev => prev.filter(i => i.id !== item.id)))}
-                    style={{ fontSize: '2.2rem', width: '44px', height: '44px', cursor: revealed ? 'default' : 'pointer' }}
-                  >
-                    {item.icon}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        );
-      } else if (additionMode === 'scale') {
-        const targetTotal = Number(question.a) + Number(question.b)
-        const rTotal = rightBlocks.reduce((acc, b) => acc + b.val, 0)
-        const diff = rTotal - targetTotal
-        const scaleFactor = difficulty === 'easy' ? 3 : (difficulty === 'medium' ? 0.3 : 0.03)
-        let rotation = diff * scaleFactor
-        if (rotation > 20) rotation = 20
-        if (rotation < -20) rotation = -20
-        const panRotation = -rotation
-
-        return (
-          <div style={{ margin: '15px 0', width: '100%' }}>
-
-
-            {/* ── Scale (tall container so blocks never overflow upward) ── */}
-            <div className="scale-container" style={{ height: '360px', overflow: 'visible' }}>
-              <div className="scale-beam" style={{ transform: `rotate(${rotation}deg)` }}>
-
-                <div className="scale-pan left" style={{ transform: `rotate(${panRotation}deg)`, height: '140px', width: '140px', overflow: 'visible' }}>
-                  <div
-                    className="weight-block"
-                    style={{
-                      background: '#34495e',
-                      borderColor: '#2c3e50',
-                      width: '56px',
-                      height: '56px',
-                      cursor: 'default',
-                      borderRadius: '10px'
-                    }}
-                  >
-                    {targetTotal}
-                  </div>
-                </div>
-
-                <div
-                  className="scale-pan right"
-                  style={{
-                    transform: `rotate(${panRotation}deg)`,
-                    height: '140px',
-                    width: rightBlocks.length > 12 ? '170px' : (rightBlocks.length > 8 ? '150px' : '140px'),
-                    overflow: 'visible',
-                    gap: rightBlocks.length > 12 ? '2px' : '4px',
-                    padding: rightBlocks.length > 12 ? '6px' : '12px',
-                    paddingBottom: rightBlocks.length > 12 ? '14px' : '20px'
-                  }}
-                  onDragOver={handleDragOver}
-                  onDrop={(e) => handleDropScale(e, 'right')}
-                >
-                  {rightBlocks.map(b => {
-                    const blockCount = rightBlocks.length;
-                    let size = '32px';
-                    if (blockCount > 12) {
-                      size = '22px';
-                    } else if (blockCount > 8) {
-                      size = '26px';
-                    }
-                    const fontSize = blockCount > 12 ? '0.7rem' : (blockCount > 8 ? '0.8rem' : '0.95rem');
-                    return (
-                      <div
-                        key={b.id}
-                        className={`weight-block val-${b.val}`}
-                        draggable={!revealed}
-                        onDragStart={(e) => handleDragStart(e, b, 'right')}
-                        onDragEnd={handleDragEnd}
-                        onClick={() => !revealed && (setBankBlocks(prev => [...prev, b]), setRightBlocks(prev => prev.filter(x => x.id !== b.id)))}
-                        style={{
-                          width: size,
-                          height: size,
-                          fontSize: fontSize,
-                          cursor: revealed ? 'default' : 'pointer',
-                          borderRadius: blockCount > 8 ? '4px' : '8px'
-                        }}
-                      >
-                        {b.val}
-                      </div>
-                    );
-                  })}
-                </div>
-
-              </div>
-              <div className="scale-fulcrum" style={{ borderBottomWidth: '60px', borderLeftWidth: '35px', borderRightWidth: '35px' }}></div>
-            </div>
-
-            <div
-              className="weight-bank"
-              onDragOver={handleDragOver}
-              onDrop={(e) => handleDropScale(e, 'bank')}
-              style={{ padding: '15px', marginTop: '20px', minHeight: '80px', gap: '8px' }}
-            >
-              {bankBlocks.map(b => (
-                <div
-                  key={b.id}
-                  className={`weight-block val-${b.val}`}
-                  draggable={!revealed}
-                  onDragStart={(e) => handleDragStart(e, b, 'bank')}
-                  onDragEnd={handleDragEnd}
-                  onClick={() => !revealed && (setRightBlocks(prev => [...prev, b]), setBankBlocks(prev => prev.filter(x => x.id !== b.id)))}
-                  style={{ width: b.val >= 100 ? '42px' : '32px', height: b.val >= 100 ? '42px' : '32px', fontSize: b.val >= 100 ? '0.85rem' : '0.95rem', cursor: revealed ? 'default' : 'pointer' }}
-                >
-                  {b.val}
-                </div>
-              ))}
-            </div>
-            <div style={{ textAlign: 'center', marginTop: '8px', fontSize: '1rem', color: 'var(--clr-text)' }}>
-              Right Side Total Weight: <strong>{rTotal}</strong>
-            </div>
-          </div>
-        );
-      }
-    }
-
-    return (
-      <>
-        {question.options && (
-          <div className="emoji-container" style={{ gap: '15px' }}>
-            {question.options.map(opt => (
-              <button key={opt} className={`kid-btn-choice ${answer === String(opt) ? 'selected' : ''}`} onClick={() => !revealed && setAnswer(String(opt))} disabled={revealed}>
-                {opt}
-              </button>
-            ))}
-          </div>
-        )}
-        {!question.options && (
-          <div style={{ textAlign: 'center', marginBottom: '30px' }}>
-            <input type="text" className="fun-input"
-              value={answer} onChange={e => !revealed && setAnswer(e.target.value)}
-              onKeyDown={e => { if (e.key === 'Enter') handleSubmitOrNext(); }}
-              placeholder="?" disabled={revealed} autoFocus />
-          </div>
-        )}
-      </>
-    );
-  }
-
-  return (
-    <QuizLayout title={title} subtitle={subtitle} onBack={onBack} timer={started && !finished ? timer : null}>
-      {!started && !finished && <div className="welcome-box">
-        <p className="welcome-text">Start your mixed Visual Learning Universe quiz.</p>
-        <div className="question-count-row">
-          <label className="question-count-label">How many questions? (max 20)</label>
-          <input className="answer-input question-count-input" type="text" value={numQuestions} onChange={e => { const v = e.target.value; if (v === '' || (/^\d+$/.test(v) && Number(v) <= 20)) setNumQuestions(v) }} />
-        </div>
-        <div className="button-row"><button onClick={startQuiz}>Start Quiz</button></div>
-      </div>}
-      {started && !finished && <>
-        <div className="progress-pill center">Question {questionNumber}/{totalQ}</div>
-        <div className="question-box">{loading || !question ? 'Loading question…' : question.prompt}</div>
-        {renderMixedQuestionContent()}
-        {renderFeedback(feedback, isCorrect)}
-        <div className="button-row" style={{ marginTop: '30px' }}>
-          {!revealed ? (
-            <div style={{ display: 'flex', gap: '10px', width: '100%' }}>
-              <button className="kid-btn-primary" onClick={handleSolve} style={{ flex: 1, opacity: 0.75 }}>Show Answer</button>
-              <button className="kid-btn-primary" onClick={() => submitAns()} disabled={loading || (question?.activityKey === 'addition' && additionMode === 'counting' && targetItems.length === 0) || (question?.activityKey === 'addition' && additionMode === 'scale' && rightBlocks.length === 0) || (question?.activityKey !== 'addition' && !answer && !question?.options)} style={{ flex: 1 }}>Submit</button>
-            </div>
-          ) : (
-            <button className="kid-btn-primary" onClick={handleSubmitOrNext}>{questionNumber >= totalQ ? 'Finish Lab 🏁' : 'Next Question ➡️'}</button>
-          )}
-        </div>
-        {results.length > 0 && <ResultsTable results={results} />}
-      </>}
-      {finished && <div className="welcome-box">
-        <p className="welcome-text">Quiz complete.</p>
-        <p className="final-score">Final score: {score}/{totalQ}</p>
-        <ResultsTable results={results} />
-        <button className="kid-btn-primary" style={{ marginTop: '20px' }} onClick={onBack}>Play Again</button>
-      </div>}
-    </QuizLayout>
-  )
-}
-
-/**
- * GKApp Component (General Knowledge Quiz)
- * Multiple-choice General Knowledge questions fetched from backend API.
- * Questions are randomly selected and not repeated (excludeIds parameter).
- * Questions continue indefinitely until user chooses to go back.
- *
- * @param {Object} props
- * @param {Function} props.onBack - Callback to return to home menu
- */
-function GKApp({ onBack, markTopicCompleted, isGoalMode = false }) {
-  // Current question object: {id, question, options: [A, B, C, D], ...}
-  const [question, setQuestion] = useState(null)
-  // User's selected option: 'A', 'B', 'C', or 'D'
-  const [selected, setSelected] = useState('')
-  // Feedback message shown after submission
-  const [feedback, setFeedback] = useState('')
-  // Is the selected answer correct?
-  const [isCorrect, setIsCorrect] = useState(null)
-  // Is a question being fetched from the API?
-  const [loading, setLoading] = useState(false)
-  // Total correct answers so far
-  const [score, setScore] = useState(0)
-  // Has the answer been revealed (showing feedback)?
-  const [revealed, setRevealed] = useState(false)
-  // Question counter (1, 2, 3, ...)
-  const [questionNumber, setQuestionNumber] = useState(0)
-  // All result objects from this session
-  const [results, setResults] = useState([])
-  // Persist seen GK question IDs in localStorage to avoid repeats across sessions
-  const GK_SEEN_KEY = 'tenali_gk_seen'
-  const loadGKSeen = () => { try { return JSON.parse(localStorage.getItem(GK_SEEN_KEY) || '[]') } catch { return [] } }
-  const saveGKSeen = (ids) => { try { localStorage.setItem(GK_SEEN_KEY, JSON.stringify(ids)) } catch { } }
-  const [seenIds, setSeenIds] = useState(loadGKSeen)
-  // Number of questions to answer (as string for input field)
-  const [numQuestions, setNumQuestions] = useState(String(DEFAULT_TOTAL))
-  // Total questions to answer
-  const [totalQ, setTotalQ] = useState(DEFAULT_TOTAL)
-  // Quiz started flag
-  const [started, setStarted] = useState(false)
-  // Quiz finished flag
-  const [finished, setFinished] = useState(false)
-  const [sessionGoal, setSessionGoal] = useState(isGoalMode ? 'speed' : 'standard')
-  useEffect(() => {
-    if (!isGoalMode) {
-      setSessionGoal('standard');
-    }
-  }, [isGoalMode]);
-  // Timer for tracking response time per question
-  const timer = useTimer()
-  const { hintsUsedCount, xpBreakdown, bonusLoading } = useQuizHintsAndXp('gk', finished, score, totalQ, typeof isCorrect !== 'undefined' ? (isCorrect || false) : false, results);
-  // Guard ref: prevents double-fetch from React StrictMode concurrent effect invocations
-  const fetchingRef = useRef(false)
-  // Tracks the in-flight question fetch so unmounting can cancel it — the
-  // fetchingRef guard above already stops a second overlapping call from
-  // starting, but nothing previously stopped a pending fetch's setState
-  // calls from firing after the component unmounts.
-  const questionAbortRef = useRef(null)
-  useEffect(() => () => questionAbortRef.current?.abort(), [])
-
-  /**
-   * loadQuestion(excludeIds?): Fetch next GK question from API
-   * Excludes previously seen questions to avoid repetition (persisted in localStorage)
-   * Stops if total questions reached
-   */
-  const loadQuestion = async (excludeIds) => {
-    if (fetchingRef.current) return
-    fetchingRef.current = true
-    if (questionNumber >= totalQ) {
-      fetchingRef.current = false
-      setFinished(true)
-      {
-        const pass = score / totalQ >= 0.8
-        if (pass && typeof markTopicCompleted === 'function') {
-          markTopicCompleted('gk', 'easy')
-        }
-      }
-      timer.reset()
-      return
-    }
-    setLoading(true)
-    setSelected('')
-    setFeedback('')
-    setIsCorrect(null)
-    setRevealed(false)
-    const controller = new AbortController()
-    questionAbortRef.current = controller
-    try {
-      const ids = excludeIds || seenIds
-      const excludeParam = ids.length ? `?exclude=${ids.join(',')}` : ''
-      const res = await fetch(`${API}/gk-api/question${excludeParam}`, { signal: controller.signal })
-      const data = await res.json()
-      setQuestion(data)
-      // Track this question ID so we don't ask it again (persist to localStorage)
-      const newSeen = [...ids, data.id]
-      setSeenIds(newSeen)
-      saveGKSeen(newSeen)
-      setQuestionNumber((n) => n + 1)
-      timer.start()
-    } catch (e) {
-      if (e.name === 'AbortError') return
-      console.error('Failed to load GK question:', e)
-    } finally {
-      setLoading(false)
-      fetchingRef.current = false
-    }
-  }
-
-  /**
-   * startQuiz(): Initialize GK quiz with question count
-   * Keeps existing seenIds from localStorage (only resets session state)
-   */
-  const startQuiz = () => {
-    const count = Math.max(1, Math.min(100, Number(numQuestions) || DEFAULT_TOTAL))
-    setTotalQ(count)
-    setStarted(true)
-    setFinished(false)
-    setScore(0)
-    setQuestionNumber(0)
-    setResults([])
-    fetchingRef.current = false
-  }
-
-  // Load first question only if started
-  useEffect(() => {
-    if (started && !finished && questionNumber === 0) {
-      loadQuestion(seenIds)
-    }
-  }, [started, finished, questionNumber])
-
-  /**
-   * submitGK(option): Submit selected answer and check correctness with API
-   * Receives the feedback (correct answer + explanation) from backend
-   */
-  const submitGK = async (option) => {
-    if (!question || revealed) return
-    const timeTaken = timer.stop()
-    setSelected(option)
-    // POST to backend API to check the answer
-    const res = await fetch(`${API}/gk-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  id: question.id, answerOption: option, sessionGoal }) })
-    const data = await res.json()
-    setIsCorrect(data.correct)
-    if (data.correct) setScore((s) => s + 1);
-    // Show feedback with explanation
-    (() => {
-        const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
-        if (data.correct) {
-          setFeedback(`Correct! The answer is ${data.correctAnswer}) ${data.correctAnswerText}`.slice(0,-1) + _ci + `Correct! The answer is ${data.correctAnswer}) ${data.correctAnswerText}`.slice(-1))
-        } else if (sessionGoal === 'perfect') {
-          setFeedback(`Incorrect. The correct answer is ${data.correctAnswer}) ${data.correctAnswerText}` + ' ❌ Perfect Solve ended.')
-          setFinished(true); timer.reset()
-        } else {
-          setFeedback(`Incorrect. The correct answer is ${data.correctAnswer}) ${data.correctAnswerText}`)
-        }
-      })()
-    // Record result for display
-    setResults((prev) => [...prev, {
-      question: question.question.length > 50 ? question.question.slice(0, 50) + '…' : question.question,
-      userAnswer: option,
-      correctAnswer: `${data.correctAnswer}) ${data.correctAnswerText}`,
-      correct: data.correct,
-      time: timeTaken,
-    }])
-    setRevealed(true)
-  }
-
-  /**
-   * handleSubmitOrNext(): Toggle between submit and next question
-   * If not revealed: submit the selected answer
-   * If revealed: load the next question
-   */
-  const handleSubmitOrNext = async () => {
-    if (!question) return
-    if (!revealed) { if (selected) submitGK(selected); return }
-    await loadQuestion()
-  }
-
-  /**
-   * handleSolve(): Get the solution without submitting an answer
-   * Fetches the correct answer from the API with solve: true flag
-   */
-  const handleSolve = async () => {
-    if (revealed) return
-    const timeTaken = timer.stop()
-    // POST to backend API with solve flag to get the solution
-    const res = await fetch(`${API}/gk-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  id: question.id, answerOption: '', solve: true, sessionGoal }) })
-    const data = await res.json()
-    setIsCorrect(false)
-    const display = data.correctAnswer || ''
-    const displayText = `${display}) ${data.correctAnswerText || ''}`
-    const explanation = data.explanation || ''
-    setFeedback(`Solution: ${displayText}${explanation ? '\n' + explanation : ''}`)
-    setResults((prev) => [...prev, {
-      question: question.question.length > 50 ? question.question.slice(0, 50) + '…' : question.question,
-      userAnswer: '—',
-      correctAnswer: displayText,
-      correct: false,
-      time: timeTaken,
-    }])
-    setRevealed(true)
-  }
-
-  // Auto-advance after correct answer
-  const advanceRef = useRef(() => { })
-  advanceRef.current = () => loadQuestion()
-  useAutoAdvance(revealed, advanceRef, isCorrect)
-  useProgressSubmit(revealed, isCorrect, 'gk', question?.id)
-
-  // Keyboard shortcuts: 1-4 or a-d instantly select and submit answer; Enter for submit/next
-  const submitGKRef = useRef(submitGK)
-  submitGKRef.current = submitGK
-  const handleNextRef = useRef(handleSubmitOrNext)
-  handleNextRef.current = handleSubmitOrNext
-
-  useEffect(() => {
-    const onKeyDown = (event) => {
-      // Enter: submit or next
-      if (event.key === 'Enter') { event.preventDefault(); handleNextRef.current(); return }
-      // Only allow number/letter shortcuts when not already revealed, loading, or no question
-      if (revealed || loading || !question) return
-      // Map 1-4 and a-d to A-D options
-      const keyMap = { '1': 'A', '2': 'B', '3': 'C', '4': 'D', 'a': 'A', 'b': 'B', 'c': 'C', 'd': 'D' }
-      const letter = keyMap[event.key.toLowerCase()]
-      // Only allow if this option exists for this question
-      if (letter && question.options.length >= ['A', 'B', 'C', 'D'].indexOf(letter) + 1) {
-        event.preventDefault()
-        submitGKRef.current(letter)  // Instantly select and submit
-      }
-    }
-    window.addEventListener('keydown', onKeyDown)
-    return () => window.removeEventListener('keydown', onKeyDown)
-  }, [revealed, loading, question])
-
-  return (
-    <QuizLayout title="General Knowledge" subtitle="Random question picker" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
-      {!started && !finished && <div className="welcome-box">
-        <p className="welcome-text">Test your general knowledge with random questions!</p>
-
-        {isGoalMode && (
-        <>
-          <p className="welcome-text" style={{ marginTop: '14px', fontSize: '0.92rem', fontWeight: 700, marginBottom: '6px' }}>Practice Goal:</p>
-                  <div className="checkbox-group" style={{ marginBottom: '12px' }}>
-                    {[
-                                            { key: 'speed', label: '⚡ Speed Run' },
-                      { key: 'perfect', label: '🎯 Perfect Solve' },
-                      { key: 'revision', label: '🔄 Revision' }
-                    ].map(g => (
-                      <label key={g.key} className={`checkbox-pill${sessionGoal === g.key ? ' active' : ''}`}
-                        style={sessionGoal === g.key ? (
-                          g.key === 'speed' ? { background: 'rgba(255,179,0,0.18)', borderColor: '#ffb300', color: '#ffb300' } :
-                          g.key === 'perfect' ? { background: 'rgba(244,67,54,0.18)', borderColor: '#f44336', color: '#f44336' } :
-                          g.key === 'revision' ? { background: 'rgba(33,150,243,0.18)', borderColor: '#2196f3', color: '#2196f3' } : {}
-                        ) : {}}>
-                        <input type="radio" name="gkapp-goal" checked={sessionGoal === g.key} onChange={() => {
-                          setSessionGoal(g.key)
-                          
-                        }} />
-                        {g.label}
-                      </label>
-                    ))}
-                  </div>
-                  {sessionGoal === 'speed' && (
-                    <p style={{ fontSize: '0.82rem', color: '#ffb300', marginBottom: '8px' }}>
-                      ⚡ Easy 5s · Medium 10s · Hard 15s · Extra Hard 20s · Adaptive 10s. Double coins for correct!
-                    </p>
-                  )}
-                  {sessionGoal === 'perfect' && (
-                    <p style={{ fontSize: '0.82rem', color: '#f44336', marginBottom: '8px' }}>
-                      🎯 One wrong answer ends the quiz. No timer shown. Can you go flawless?
-                    </p>
-                  )}
-                  {sessionGoal === 'revision' && (
-                    <p style={{ fontSize: '0.82rem', color: '#2196f3', marginBottom: '8px' }}>
-                      🔄 Focuses on topics you previously answered incorrectly.
-                    </p>
-                  )}
-        </>
-      )}
-        <div className="question-count-row">
-          <label className="question-count-label">How many questions? (max 100)</label>
-          <input className="answer-input question-count-input" type="text" value={numQuestions} onChange={e => { const v = e.target.value; if (v === '' || (/^\d+$/.test(v) && Number(v) <= 100)) setNumQuestions(v) }} />
-        </div>
-        <div className="button-row"><button onClick={startQuiz}>Start Quiz</button></div>
-      </div>}
-      {started && !finished && <>
-        <div className="progress-pill center">Question {questionNumber}/{totalQ}</div>
-        <div className="question-box">{loading || !question ? 'Loading question…' : <GlossaryText text={question.question} />}</div>
-        {question && (
-          <div className="options-list">
-            {question.options.map((option, idx) => {
-              const letter = ['A', 'B', 'C', 'D'][idx]
-              return (
-                <label key={letter} className={`option-card ${selected === letter ? 'selected' : ''}`}>
-                  <input type="radio" name="gk" checked={selected === letter} onChange={() => !revealed && setSelected(letter)} disabled={revealed} />
-                  <span><strong>{letter})</strong> {option}</span>
-                </label>
-              )
-            })}
-          </div>
-        )}
-        {renderFeedback(feedback, isCorrect)}
-        <div className="button-row">
-          {!revealed ? <>
-            <button onClick={handleSubmitOrNext} disabled={loading || !selected}>Submit</button>
-            <button onClick={handleSolve} style={{ background: 'transparent', border: '1px solid var(--clr-accent)', color: 'var(--clr-accent)' }}>Solve</button>
-          </> : <button onClick={handleSubmitOrNext}>{questionNumber >= totalQ ? 'Finish Quiz' : 'Next Question'}</button>}
-        </div>
-        {results.length > 0 && <ResultsTable results={results} />}
-      </>}
-      {finished && <div className="welcome-box">
-        <p className="welcome-text">Quiz complete!</p>
-        <p className="final-score">Final score: {score}/{totalQ}</p>
-        <ResultsTable results={results} />
-        <button onClick={() => { setStarted(false); setFinished(false) }}>Play Again</button>
-      </div>}
-    <HintModal concept={'gk'} questionId={question?.id || 'unknown'} questionData={question} revealed={revealed} hintsUsedCount={hintsUsedCount} xpBreakdown={xpBreakdown} bonusLoading={bonusLoading} />
-</QuizLayout>
-  )
-}
-
-/**
- * ColumnAdditionApp Component
- * Vertical column addition with manual carry input.
- * Numbers are stacked like on paper; user fills answer digits + carry digits.
- */
-function ColumnAdditionApp({ onBack, initialDifficulty, initialNumQuestions, initialStarted, isGoalMode = false }) {
-  const [difficulty, setDifficulty] = useState(initialDifficulty || 'easy')
-  const [numQuestions, setNumQuestions] = useState(initialNumQuestions || String(DEFAULT_TOTAL))
-  const [started, setStarted] = useState(initialStarted || false)
-  const [finished, setFinished] = useState(false)
-  const [question, setQuestion] = useState(null)
-  const [score, setScore] = useState(0)
-  const [questionNumber, setQuestionNumber] = useState(0)
-  const [totalQ, setTotalQ] = useState(DEFAULT_TOTAL)
-  const [feedback, setFeedback] = useState('')
-  const [isCorrect, setIsCorrect] = useState(null)
-  const [loading, setLoading] = useState(false)
-  const [revealed, setRevealed] = useState(false)
-  const [results, setResults] = useState([])
-  const timer = useTimer()
-  const [sessionGoal, setSessionGoal] = useState(isGoalMode ? 'speed' : 'standard')
-
-  const [answerInputs, setAnswerInputs] = useState([])
-  const [carryInputs, setCarryInputs] = useState([])
-  const [correctAnswerDigits, setCorrectAnswerDigits] = useState(null)
-  const [correctCarryDigits, setCorrectCarryDigits] = useState(null)
-  const answerRefs = useRef([])
-  const carryRefs = useRef([])
-  const advanceTimerRef = useRef(null)
-  // Tracks the in-flight question fetch so a newer fetchQuestion() call (or
-  // unmount) can cancel a still-pending older one — see makeQuizApp's
-  // loadQuestion() for the same pattern and the race it prevents.
-  const questionAbortRef = useRef(null)
-  useEffect(() => () => questionAbortRef.current?.abort(), [])
-
-  useEffect(() => { if (!isGoalMode) setSessionGoal('standard') }, [isGoalMode])
-
-  const startQuiz = async () => {
-    const q = Number(numQuestions) || DEFAULT_TOTAL
-    setTotalQ(q); setScore(0); setQuestionNumber(1); setResults([])
-    setFinished(false); setStarted(true); setFeedback(''); setIsCorrect(null); setRevealed(false)
-    setCorrectAnswerDigits(null); setCorrectCarryDigits(null)
-    timer.reset(); timer.start()
-    await fetchQuestion()
-  }
-
-  const fetchQuestion = async (diff) => {
-    questionAbortRef.current?.abort()
-    const controller = new AbortController()
-    questionAbortRef.current = controller
-
-    setLoading(true)
-    try {
-      const r = await fetch(`${API}/column-addition-api/question?difficulty=${diff || difficulty}`, { signal: controller.signal })
-      const data = await r.json()
-      setQuestion(data)
-      setAnswerInputs(new Array(data.answerDigits.length).fill(''))
-      setCarryInputs(new Array(data.carries.length).fill(''))
-      setCorrectAnswerDigits(null); setCorrectCarryDigits(null)
-      setTimeout(() => { if (answerRefs.current[data.answerDigits.length - 1]) answerRefs.current[data.answerDigits.length - 1].focus() }, 100)
-    } catch (e) {
-      if (e.name === 'AbortError') return
-      console.error('Fetch column addition question failed:', e)
-    }
-    setLoading(false)
-  }
-
-  const handleInput = (idx, val, isCarry) => {
-    if (revealed) return
-    if (val !== '' && !/^\d$/.test(val)) return
-    const setter = isCarry ? setCarryInputs : setAnswerInputs
-    const arr = isCarry ? carryInputs : answerInputs
-    const next = [...arr]; next[idx] = val; setter(next)
-
-    // Paper-addition focus flow on digit entry:
-    // answer[ansLen-1] -> carry[ansLen-2] -> answer[ansLen-2] -> carry[ansLen-3] -> ...
-    if (!val) return
-    if (!isCarry && idx > 0 && carryRefs.current[idx - 1]) {
-      carryRefs.current[idx - 1].focus()
-    } else if (!isCarry && idx === 0) {
-      // Leftmost answer: nothing more to fill, stay
-    } else if (isCarry && answerRefs.current[idx]) {
-      answerRefs.current[idx].focus()
-    }
-  }
-
-  const focusAnswer = (i) => { if (answerRefs.current[i]) answerRefs.current[i].focus() }
-  const focusCarry = (i) => { if (carryRefs.current[i]) carryRefs.current[i].focus() }
-
-  const handleKeyDown = (idx, e, isCarry) => {
-
-    if (e.key === 'Backspace') {
-      if (e.currentTarget.value) return
-      e.preventDefault()
-      // Paper-flow reverse navigation:
-      //   answer[i] previous = carry[i]        (the box above, if visible)
-      //   carry[i]  previous = answer[i+1]     (next-right answer digit)
-      if (!isCarry) {
-        if (idx < carryInputs.length - 1 && carryRefs.current[idx]) {
-          carryRefs.current[idx].focus()
-        }
-      } else {
-        if (idx < answerInputs.length - 1 && answerRefs.current[idx + 1]) {
-          answerRefs.current[idx + 1].focus()
-        }
-      }
-      return
-    }
-
-    if (e.key === 'ArrowUp') {
-      e.preventDefault()
-      if (!isCarry && idx < carryInputs.length - 1) focusCarry(idx)
-      else if (isCarry) focusAnswer(idx)
-      return
-    }
-
-    if (e.key === 'ArrowDown') {
-      e.preventDefault()
-      if (isCarry) focusAnswer(idx)
-      else if (idx < carryInputs.length - 1) focusCarry(idx)
-      return
-    }
-
-    if (e.key === 'ArrowLeft') {
-      e.preventDefault()
-      if (!isCarry) {
-        if (idx > 0) focusAnswer(idx - 1)
-      } else {
-        if (idx > 0) focusCarry(idx - 1)
-        else if (idx === 0) focusAnswer(0)
-      }
-      return
-    }
-
-    if (e.key === 'ArrowRight') {
-      e.preventDefault()
-      if (!isCarry) {
-        if (idx < answerInputs.length - 1) focusAnswer(idx + 1)
-      } else {
-        if (idx < carryInputs.length - 2) focusCarry(idx + 1)
-        else if (idx === carryInputs.length - 2) focusAnswer(idx + 1)
-      }
-      return
-    }
-  }
-
-  const handleSubmit = async () => {
-    if (revealed || loading || !question) return
-    timer.stop()
-    const userAnswer = answerInputs.map(v => v === '' ? null : Number(v))
-    const userCarries = carryInputs.map(v => v === '' ? 0 : Number(v))
-    try {
-      const r = await fetch(`${API}/column-addition-api/check`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' },
-        body: JSON.stringify({ a: question.a, b: question.b, userAnswer, userCarries, sessionGoal })
-      })
-      const data = await r.json()
-      setCorrectAnswerDigits(data.answerDigits)
-      setCorrectCarryDigits(data.correctCarries)
-      setIsCorrect(data.correct); setRevealed(true)
-
-      let explanation = ''
-      try {
-        const sr = await fetch(`${API}/column-addition-api/check`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' },
-          body: JSON.stringify({ a: question.a, b: question.b, userAnswer: [], userCarries: [], solve: true })
-        })
-        const sd = await sr.json()
-        explanation = sd.explanation || ''
-      } catch (_) {}
-
-      const resultLine = data.correct ? '✓ Correct!' : `✗ ${data.message || 'Incorrect'}`
-      setFeedback(explanation ? `${resultLine}\n\n— Step-by-step solution —\n${explanation}` : resultLine)
-      const userCarriesStr = carryInputs.filter(v => v !== '').join(', ') || '—'
-      const correctCarriesStr = (data.correctCarries || []).filter(v => v !== 0 && v !== null && v !== '').join(', ') || '—'
-      setResults(prev => [...prev, { question: `${question.a} + ${question.b}`, userAnswer: Number(userAnswer.filter(v => v !== null).join('')) || '', correct: data.correct, correctAnswer: data.correctAnswer, time: timer.elapsed, userCarries: userCarriesStr, correctCarries: correctCarriesStr }])
-      if (data.correct) setScore(s => s + 1)
-    } catch (e) { console.error('Check failed:', e); setFeedback('Error checking answer') }
-  }
-
-  const handleSolve = async () => {
-    if (revealed || loading || !question) return
-    timer.stop()
-    try {
-      const r = await fetch(`${API}/column-addition-api/check`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' },
-        body: JSON.stringify({ a: question.a, b: question.b, userAnswer: [], userCarries: [], solve: true })
-      })
-      const data = await r.json()
-      setCorrectAnswerDigits(data.answerDigits)
-      setCorrectCarryDigits(data.correctCarries)
-      setIsCorrect(false); setRevealed(true)
-      setAnswerInputs(data.answerDigits ? data.answerDigits.map(String) : question.answerDigits.map(String))
-      setCarryInputs(data.correctCarries ? data.correctCarries.map(String) : question.carries.map(String))
-      setFeedback(data.explanation || 'Solved — study the carries above each column.')
-      const correctCarriesStr = (data.correctCarries || []).filter(v => v !== 0 && v !== null && v !== '').join(', ') || '—'
-      setResults(prev => [...prev, { question: `${question.a} + ${question.b}`, userAnswer: data.correctAnswer, correct: false, correctAnswer: data.correctAnswer, time: timer.elapsed, userCarries: '—', correctCarries: correctCarriesStr }])
-    } catch (e) {
-      console.error('Solve failed:', e)
-      setCorrectAnswerDigits(question.answerDigits)
-      setCorrectCarryDigits(question.carries)
-      setRevealed(true); setIsCorrect(false)
-      setAnswerInputs(question.answerDigits.map(String))
-      setCarryInputs(question.carries.map(String))
-      setFeedback('Solved — study the carries above each column.')
-      setResults(prev => [...prev, { question: `${question.a} + ${question.b}`, userAnswer: question.answer, correct: false, correctAnswer: question.answer, time: timer.elapsed }])
-    }
-  }
-
-  const advanceQuestion = () => {
-    if (advanceTimerRef.current) { clearTimeout(advanceTimerRef.current); advanceTimerRef.current = null }
-    setRevealed(false); setIsCorrect(null); setFeedback(''); setAnswerInputs([]); setCarryInputs([])
-    setCorrectAnswerDigits(null); setCorrectCarryDigits(null)
-    if (questionNumber >= totalQ) { setFinished(true); timer.stop() }
-    else { setQuestionNumber(qn => qn + 1); timer.reset(); timer.start(); fetchQuestion() }
-  }
-
-  const diffLabels = { easy: 'Easy — 1 digit', medium: 'Medium — 2 digits', hard: 'Hard — 3 digits', extrahard: 'Extra Hard — 4 digits' }
-
-  if (!started && !finished) {
-    return (
-      <div style={{ minHeight: '100vh', background: 'var(--clr-bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px', fontFamily: 'Inter, sans-serif' }}>
-        <div style={{ background: 'var(--clr-card)', border: '1.5px solid var(--clr-border)', borderRadius: '28px', boxShadow: '0 20px 40px rgba(0,0,0,.45)', padding: '48px 40px', maxWidth: '720px', width: '100%', textAlign: 'center', position: 'relative' }}>
-          <button onClick={onBack} style={{ position: 'absolute', top: '24px', left: '24px', background: 'transparent', border: '1px solid var(--clr-border)', borderRadius: '6px', padding: '6px 14px', color: 'var(--clr-text-soft)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer' }}>← Home</button>
-          <h1 style={{ fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 700, fontSize: '48px', color: 'var(--clr-text)', margin: '0 0 12px', lineHeight: 1.1 }}>Column Addition</h1>
-          <p style={{ color: 'var(--clr-text-soft)', fontSize: '0.9rem', margin: '0 0 24px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>Add numbers vertically with carrying</p>
-          <div style={{ marginBottom: '24px' }}>
-            <h3 style={{ color: 'var(--clr-text)', fontSize: '0.9rem', margin: '0 0 16px', fontFamily: 'Inter, sans-serif', fontWeight: 700 }}>Select Difficulty:</h3>
-            <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
-              {['easy', 'medium', 'hard', 'extrahard'].map(d => (
-                <button key={d} onClick={() => setDifficulty(d)} style={{ background: difficulty === d ? 'var(--clr-accent)' : 'transparent', border: difficulty === d ? '1px solid var(--clr-accent)' : '1px solid var(--clr-border)', borderRadius: '50px', padding: '8px 16px', color: difficulty === d ? '#FFF' : 'var(--clr-text-soft)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer' }}>{diffLabels[d]}</button>
-              ))}
-            </div>
-          </div>
-          <div style={{ marginBottom: '32px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <label style={{ color: 'var(--clr-text-soft)', fontSize: '0.85rem', margin: '0 0 12px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>How many questions? (max 100)</label>
-            <input type="text" value={numQuestions} onChange={(e) => { const v = e.target.value; if (v === '' || (/^\d+$/.test(v) && Number(v) <= 100)) setNumQuestions(v) }} style={{ background: 'var(--clr-input)', border: '1px solid var(--clr-border)', borderRadius: '6px', padding: '10px', color: 'var(--clr-text)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem', width: '100px', textAlign: 'center', outline: 'none' }} placeholder={String(DEFAULT_TOTAL)} />
-          </div>
-          <button onClick={startQuiz} style={{ background: 'var(--clr-accent)', border: 'none', borderRadius: '6px', padding: '10px 24px', color: '#FFF', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer' }}>Start Quiz</button>
-        </div>
-      </div>
-    )
-  }
-
-  const ansLen = question ? question.answerDigits.length : 1
-  const opLen = question ? question.digits : 1
-
-  return (
-    <QuizLayout title="Column Addition" onBack={onBack} timer={timer}>
-      {started && !finished && <>
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem', marginBottom: '0.3rem' }}>
-          <div className="progress-pill center">Question {questionNumber}/{totalQ}</div>
-        </div>
-        {loading || !question ? <div className="question-box">Loading question…</div> : (
-          <>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '16px 0', fontFamily: '"Courier New", monospace', fontSize: '1.8rem', fontWeight: 700 }}>
-              {/* Carry row: ansLen columns, skip last (ones=always 0), show boxes at [0..ansLen-2] */}
-              <div style={{ display: 'flex', gap: '4px', marginBottom: '4px' }}>
-                <span style={{ width: '44px' }} />
-                {question.carries.map((c, i) => {
-                  if (i === question.carries.length - 1) return <span key={i} style={{ width: '40px' }} />
-                  const correct = revealed && correctCarryDigits ? String(correctCarryDigits[i]) : '';
-                  const isRight = revealed && correct !== '' && String(carryInputs[i] || '') === correct;
-                  const isWrong = revealed && correct !== '' && !isRight;
-                  const shown = revealed ? correct : carryInputs[i] || '';
-                  return (
-                    <input key={i} ref={el => carryRefs.current[i] = el} type="text" maxLength={1}
-                      value={shown}
-                      onChange={e => handleInput(i, e.target.value, true)}
-                      onKeyDown={e => handleKeyDown(i, e, true)}
-                      disabled={revealed}
-                      style={{ width: '40px', height: '36px', textAlign: 'center', fontSize: '1rem', fontWeight: 700, background: isRight ? 'var(--clr-correct-bg)' : isWrong ? 'var(--clr-wrong-bg)' : 'var(--clr-input)', border: `2px solid ${isRight ? 'var(--clr-correct)' : isWrong ? 'var(--clr-wrong)' : 'var(--clr-border)'}`, borderRadius: '8px', color: isRight ? 'var(--clr-correct)' : isWrong ? 'var(--clr-wrong)' : 'var(--clr-text)', fontFamily: '"Courier New", monospace', outline: 'none' }}
-                    />
-                  )
-                })}
-              </div>
-              {/* First number: right-aligned in ansLen columns */}
-              <div style={{ display: 'flex', gap: '4px', marginBottom: '2px' }}>
-                <span style={{ width: '44px' }} />
-                {question.aDigits.map((d, i) => (
-                  <span key={i} style={{ width: '40px', height: '48px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--clr-text)' }}>{d !== null ? d : ''}</span>
-                ))}
-              </div>
-              {/* Second number: right-aligned in ansLen columns */}
-              <div style={{ display: 'flex', gap: '4px', marginBottom: '4px' }}>
-                <span style={{ width: '44px', textAlign: 'center', color: 'var(--clr-text-soft)', fontSize: '1.4rem' }}>+</span>
-                {question.bDigits.map((d, i) => (
-                  <span key={i} style={{ width: '40px', height: '48px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--clr-text)' }}>{d !== null ? d : ''}</span>
-                ))}
-              </div>
-              {/* Line separator: full width of answer */}
-              <div style={{ display: 'flex', gap: '4px' }}>
-                <span style={{ width: '44px' }} />
-                <div style={{ width: `${ansLen * 44}px`, height: '3px', background: 'var(--clr-border)', borderRadius: '2px' }} />
-              </div>
-              {/* Answer row: ansLen input boxes */}
-              <div style={{ display: 'flex', gap: '4px', marginTop: '8px' }}>
-                <span style={{ width: '44px' }} />
-                {question.answerDigits.map((d, i) => {
-                  const correctDigit = revealed && correctAnswerDigits ? String(correctAnswerDigits[i]) : '';
-                  const isRight = revealed && correctDigit !== '' && String(answerInputs[i] || '') === correctDigit;
-                  const isWrong = revealed && correctDigit !== '' && !isRight;
-                  const shown = revealed ? correctDigit : answerInputs[i] || '';
-                  return (
-                    <input key={i} ref={el => answerRefs.current[i] = el} type="text" maxLength={1}
-                      value={shown}
-                      onChange={e => handleInput(i, e.target.value, false)}
-                      onKeyDown={e => handleKeyDown(i, e, false)}
-                      disabled={revealed}
-                      style={{ width: '40px', height: '48px', textAlign: 'center', fontSize: '1.4rem', fontWeight: 700, background: isRight ? 'var(--clr-correct-bg)' : isWrong ? 'var(--clr-wrong-bg)' : 'var(--clr-input)', border: `2px solid ${isRight ? 'var(--clr-correct)' : isWrong ? 'var(--clr-wrong)' : 'var(--clr-border)'}`, borderRadius: '8px', color: isRight ? 'var(--clr-correct)' : isWrong ? 'var(--clr-wrong)' : 'var(--clr-text)', fontFamily: '"Courier New", monospace', outline: 'none' }}
-                    />
-                  )
-                })}
-              </div>
-            </div>
-            {feedback && (
-              <div style={{
-                textAlign: 'left', padding: '12px 16px', borderRadius: '8px', margin: '8px 0',
-                background: isCorrect ? 'rgba(92, 184, 122, 0.25)' : 'rgba(224, 90, 74, 0.25)',
-                color: isCorrect ? 'var(--clr-correct)' : 'var(--clr-wrong)',
-                fontWeight: 600, fontSize: '0.9rem',
-                whiteSpace: 'pre-line', lineHeight: '1.6',
-                maxHeight: '300px', overflowY: 'auto',
-                border: isCorrect ? '2px solid var(--clr-correct)' : '2px solid var(--clr-wrong)'
-              }}>{feedback}</div>
-            )}
-            <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', margin: '12px 0', flexWrap: 'wrap' }}>
-              {!revealed && <button onClick={handleSubmit} disabled={loading} style={{ background: 'var(--clr-accent)', border: 'none', borderRadius: '8px', padding: '10px 24px', color: '#FFF', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer' }}>Submit</button>}
-              {!revealed && <button onClick={handleSolve} disabled={loading} style={{ background: 'transparent', border: '1px solid var(--clr-border)', borderRadius: '8px', padding: '10px 24px', color: 'var(--clr-text-soft)', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer' }}>Solve</button>}
-              {revealed && <button onClick={advanceQuestion} style={{ background: 'var(--clr-accent)', border: 'none', borderRadius: '8px', padding: '10px 24px', color: '#FFF', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer' }}>Next Question →</button>}
-            </div>
-          </>
-        )}
-        {results.length > 0 && <ResultsTable results={results} />}
-      </>}
-      {finished && (
-        <div style={{ textAlign: 'center', padding: '24px' }}>
-          <h2 style={{ color: 'var(--clr-text)', marginBottom: '16px' }}>Score: {score}/{totalQ}</h2>
-          <ResultsTable results={results} />
-          <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', marginTop: '24px' }}>
-            <button onClick={() => { setStarted(false); setFinished(false) }} style={{ background: 'var(--clr-accent)', border: 'none', borderRadius: '8px', padding: '10px 24px', color: '#FFF', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer' }}>Play Again</button>
-          </div>
-        </div>
-      )}
-    </QuizLayout>
-  )
-}
-
-function ColumnMultiplicationApp({ onBack, initialDifficulty, initialNumQuestions, initialStarted, isGoalMode = false }) {
-  const [difficulty, setDifficulty] = useState(initialDifficulty || 'easy')
-  const [numQuestions, setNumQuestions] = useState(initialNumQuestions || String(DEFAULT_TOTAL))
-  const [started, setStarted] = useState(initialStarted || false)
-  const [finished, setFinished] = useState(false)
-  const [question, setQuestion] = useState(null)
-  const [score, setScore] = useState(0)
-  const [questionNumber, setQuestionNumber] = useState(0)
-  const [totalQ, setTotalQ] = useState(DEFAULT_TOTAL)
-  const [feedback, setFeedback] = useState('')
-  const [isCorrect, setIsCorrect] = useState(null)
-  const [loading, setLoading] = useState(false)
-  const [revealed, setRevealed] = useState(false)
-  const [results, setResults] = useState([])
-  const timer = useTimer()
-  const [sessionGoal, setSessionGoal] = useState(isGoalMode ? 'speed' : 'standard')
-  const [showHelp, setShowHelp] = useState(false)
-
-  const [answerInputs, setAnswerInputs] = useState([])
-  const [carryInputs, setCarryInputs] = useState([])
-  const [correctAnswerDigits, setCorrectAnswerDigits] = useState(null)
-  const [correctCarryDigits, setCorrectCarryDigits] = useState(null)
-  const answerRefs = useRef([])
-  const carryRefs = useRef([])
-  const advanceTimerRef = useRef(null)
-  // Tracks the in-flight question fetch so a newer fetchQuestion() call (or
-  // unmount) can cancel a still-pending older one — see makeQuizApp's
-  // loadQuestion() for the same pattern and the race it prevents.
-  const questionAbortRef = useRef(null)
-  useEffect(() => () => questionAbortRef.current?.abort(), [])
-
-  const [isMulti, setIsMulti] = useState(false)
-  const [currentPP, setCurrentPP] = useState(0)
-  const [ppInputs, setPpInputs] = useState([])
-  const [ppCarryInputs, setPpCarryInputs] = useState([])
-  const ppRefs = useRef([])
-  const ppCarryRefs = useRef([])
-  const [correctPPDigits, setCorrectPPDigits] = useState(null)
-  const [correctPPCarries, setCorrectPPCarries] = useState(null)
-
-  const COL = 36
-  const GAP = 3
-  const LEFT_MARGIN = 40
-
-  useEffect(() => { if (!isGoalMode) setSessionGoal('standard') }, [isGoalMode])
-
-  const startQuiz = async () => {
-    const q = Number(numQuestions) || DEFAULT_TOTAL
-    setTotalQ(q); setScore(0); setQuestionNumber(1); setResults([])
-    setFinished(false); setStarted(true); setFeedback(''); setIsCorrect(null); setRevealed(false)
-    setCorrectAnswerDigits(null); setCorrectCarryDigits(null)
-    setCorrectPPDigits(null); setCorrectPPCarries(null)
-    setIsMulti(false); setCurrentPP(0); setPpInputs([]); setPpCarryInputs([])
-    timer.reset(); timer.start()
-    await fetchQuestion()
-  }
-
-  const fetchQuestion = async (diff) => {
-    questionAbortRef.current?.abort()
-    const controller = new AbortController()
-    questionAbortRef.current = controller
-
-    setLoading(true)
-    try {
-      const r = await fetch(`${API}/column-multiplication-api/question?difficulty=${diff || difficulty}`, { signal: controller.signal })
-      const data = await r.json()
-      setQuestion(data)
-      const multi = !!data.multiDigitMultiplier
-      setIsMulti(multi)
-
-      setAnswerInputs(new Array(data.answerDigits.length).fill(''))
-      setCorrectAnswerDigits(null); setCorrectCarryDigits(null)
-      setCorrectPPDigits(null); setCorrectPPCarries(null)
-
-      if (multi) {
-        setCarryInputs([])
-        setCurrentPP(0)
-        setPpInputs(data.partialProducts.map(pp => pp.digits.map(d => d === null ? null : '')))
-        setPpCarryInputs(data.partialProducts.map(pp => pp.carries.map(c => c === null ? null : '')))
-        setTimeout(() => {
-          for (let j = data.answerDigits.length - 1; j >= 0; j--) {
-            if (ppCarryRefs.current[0]?.[j]) { ppCarryRefs.current[0][j].focus(); return }
-          }
-        }, 100)
-      } else {
-        setCarryInputs(new Array(data.carries.length).fill(''))
-        setPpInputs([]); setPpCarryInputs([])
-        setTimeout(() => {
-          const lastIdx = data.answerDigits.length - 1
-          if (answerRefs.current[lastIdx]) answerRefs.current[lastIdx].focus()
-        }, 100)
-      }
-    } catch (e) {
-      if (e.name === 'AbortError') return
-      console.error('Fetch column multiplication question failed:', e)
-    }
-    setLoading(false)
-  }
-
-  const handleSingleInput = (idx, val, isCarry) => {
-    if (revealed) return
-    if (val !== '' && !/^\d{1,2}$/.test(val)) return
-    const setter = isCarry ? setCarryInputs : setAnswerInputs
-    const arr = isCarry ? carryInputs : answerInputs
-    const next = [...arr]; next[idx] = val; setter(next)
-    if (!val) return
-    if (!isCarry && idx > 0 && carryRefs.current[idx - 1]) {
-      carryRefs.current[idx - 1].focus()
-    } else if (isCarry && answerRefs.current[idx]) {
-      answerRefs.current[idx].focus()
-    }
-  }
-
-  const handleMultiPpInput = (ppIdx, colIdx, val) => {
-    if (revealed || ppIdx !== currentPP) return
-    if (val !== '' && !/^\d{1,2}$/.test(val)) return
-    const next = ppInputs.map(row => [...row])
-    if (next[ppIdx][colIdx] === null) return
-    next[ppIdx][colIdx] = val
-    setPpInputs(next)
-    if (!val) return
-    const carries = question.partialProducts[ppIdx].carries
-    const shift = question.bDigits.length - 1 - ppIdx
-    const trailingCol = question.answerDigits.length - 1 - shift
-    for (let j = colIdx - 1; j >= 0; j--) {
-      if (carries[j] !== null && j !== trailingCol && ppCarryRefs.current[ppIdx]?.[j]) {
-        ppCarryRefs.current[ppIdx][j].focus()
-        return
-      }
-    }
-    checkAndAdvancePP(next)
-  }
-
-  const checkAndAdvancePP = (updatedPPInputs) => {
-    const pp = question.partialProducts
-    const idx = currentPP
-    const digits = pp[idx].digits
-    const allFilled = digits.every((d, j) => d === null || (updatedPPInputs[idx][j] !== '' && updatedPPInputs[idx][j] !== null && updatedPPInputs[idx][j] !== undefined))
-    if (!allFilled) return
-    if (idx < pp.length - 1) {
-      setTimeout(() => {
-        setCurrentPP(idx + 1)
-        setTimeout(() => {
-          const ansLen = question.answerDigits.length
-          for (let j = ansLen - 1; j >= 0; j--) {
-            if (ppCarryRefs.current[idx + 1]?.[j]) { ppCarryRefs.current[idx + 1][j].focus(); return }
-          }
-        }, 50)
-      }, 400)
-    } else {
-      setCurrentPP(pp.length)
-      setTimeout(() => {
-        const lastIdx = question.answerDigits.length - 1
-        if (answerRefs.current[lastIdx]) answerRefs.current[lastIdx].focus()
-      }, 100)
-    }
-  }
-
-  const handleMultiPpCarryInput = (ppIdx, colIdx, val) => {
-    if (revealed) return
-    if (val !== '' && !/^\d{1,2}$/.test(val)) return
-    const next = ppCarryInputs.map(row => [...row])
-    if (next[ppIdx][colIdx] === null) return
-    next[ppIdx][colIdx] = val
-    setPpCarryInputs(next)
-    if (!val) return
-    const digits = question.partialProducts[ppIdx].digits
-    if (digits[colIdx] !== null && ppRefs.current[ppIdx]?.[colIdx]) {
-      ppRefs.current[ppIdx][colIdx].focus()
-      return
-    }
-    const carries = question.partialProducts[ppIdx].carries
-    const shift = question.bDigits.length - 1 - ppIdx
-    const trailingCol = question.answerDigits.length - 1 - shift
-    for (let j = colIdx - 1; j >= 0; j--) {
-      if (carries[j] !== null && j !== trailingCol && ppCarryRefs.current[ppIdx]?.[j]) {
-        ppCarryRefs.current[ppIdx][j].focus()
-        return
-      }
-    }
-  }
-
-  const focusAnswer = (i) => { if (answerRefs.current[i]) answerRefs.current[i].focus() }
-  const focusCarry = (i) => { if (carryRefs.current[i]) carryRefs.current[i].focus() }
-  const focusPp = (ppIdx, colIdx) => { if (ppRefs.current[ppIdx] && ppRefs.current[ppIdx][colIdx]) ppRefs.current[ppIdx][colIdx].focus() }
-  const focusPpCarry = (ppIdx, colIdx) => { if (ppCarryRefs.current[ppIdx] && ppCarryRefs.current[ppIdx][colIdx]) ppCarryRefs.current[ppIdx][colIdx].focus() }
-
-  const handleSingleKeyDown = (idx, e, isCarry) => {
-    if (e.key === 'Backspace') {
-      if (e.currentTarget.value) return
-      e.preventDefault()
-      if (!isCarry) {
-        if (idx < carryInputs.length - 1 && carryRefs.current[idx]) carryRefs.current[idx].focus()
-      } else {
-        if (idx < answerInputs.length - 1 && answerRefs.current[idx + 1]) answerRefs.current[idx + 1].focus()
-      }
-      return
-    }
-    if (e.key === 'ArrowUp') {
-      e.preventDefault()
-      if (!isCarry && idx < carryInputs.length - 1 && carryRefs.current[idx]) focusCarry(idx)
-      else if (isCarry) focusAnswer(idx)
-      return
-    }
-    if (e.key === 'ArrowDown') {
-      e.preventDefault()
-      if (isCarry) focusAnswer(idx)
-      else if (idx < carryInputs.length - 1 && carryRefs.current[idx]) focusCarry(idx)
-      return
-    }
-    if (e.key === 'ArrowLeft') {
-      e.preventDefault()
-      if (!isCarry) { if (idx > 0) focusAnswer(idx - 1) }
-      else { if (idx > 0) focusCarry(idx - 1); else if (idx === 0) focusAnswer(0) }
-      return
-    }
-    if (e.key === 'ArrowRight') {
-      e.preventDefault()
-      if (!isCarry) { if (idx < answerInputs.length - 1) focusAnswer(idx + 1) }
-      else { if (idx < answerInputs.length - 1) focusAnswer(idx + 1) }
-      return
-    }
-  }
-
-  const handleMultiKeyDown = (e, { isCarry, isAnswer, isPp, ppIdx, colIdx }) => {
-    if (revealed) return
-
-    if (e.key === 'Backspace') {
-      if (e.currentTarget.value) return
-      e.preventDefault()
-      if (isCarry) {
-        for (let j = colIdx - 1; j >= 0; j--) {
-          if (ppCarryRefs.current[ppIdx]?.[j]) { ppCarryRefs.current[ppIdx][j].focus(); return }
-        }
-      } else if (isPp) {
-        for (let j = colIdx - 1; j >= 0; j--) {
-          if (ppRefs.current[ppIdx]?.[j]) { ppRefs.current[ppIdx][j].focus(); return }
-        }
-        for (let j = question.answerDigits.length - 1; j >= 0; j--) {
-          if (ppCarryRefs.current[ppIdx]?.[j]) { ppCarryRefs.current[ppIdx][j].focus(); return }
-        }
-      }
-      return
-    }
-    if (e.key === 'ArrowLeft') {
-      e.preventDefault()
-      if (isCarry) {
-        for (let j = colIdx - 1; j >= 0; j--) { if (ppCarryRefs.current[ppIdx]?.[j]) { ppCarryRefs.current[ppIdx][j].focus(); return } }
-      } else if (isPp) {
-        for (let j = colIdx - 1; j >= 0; j--) { if (ppRefs.current[ppIdx]?.[j]) { ppRefs.current[ppIdx][j].focus(); return } }
-      }
-      return
-    }
-    if (e.key === 'ArrowRight') {
-      e.preventDefault()
-      const max = question.answerDigits.length
-      if (isCarry) {
-        for (let j = colIdx + 1; j < max; j++) { if (ppCarryRefs.current[ppIdx]?.[j]) { ppCarryRefs.current[ppIdx][j].focus(); return } }
-      } else if (isPp) {
-        for (let j = colIdx + 1; j < max; j++) { if (ppRefs.current[ppIdx]?.[j]) { ppRefs.current[ppIdx][j].focus(); return } }
-      }
-      return
-    }
-    if (e.key === 'ArrowDown') {
-      e.preventDefault()
-      if (isCarry) {
-        if (ppRefs.current[ppIdx]?.[colIdx]) { ppRefs.current[ppIdx][colIdx].focus(); return }
-      } else if (isPp) {
-        if (currentPP >= question.partialProducts.length) {
-          const lastIdx = question.answerDigits.length - 1
-          if (answerRefs.current[lastIdx]) answerRefs.current[lastIdx].focus()
-        }
-      }
-      return
-    }
-    if (e.key === 'ArrowUp') {
-      e.preventDefault()
-      if (isPp) {
-        if (ppCarryRefs.current[ppIdx]?.[colIdx]) { ppCarryRefs.current[ppIdx][colIdx].focus(); return }
-      }
-      return
-    }
-    if (e.key === 'Tab') {
-      e.preventDefault()
-      if (currentPP < question.partialProducts.length - 1) {
-        const nextPP = currentPP + 1
-        for (let j = question.answerDigits.length - 1; j >= 0; j--) {
-          if (ppCarryRefs.current[nextPP]?.[j]) { ppCarryRefs.current[nextPP][j].focus(); return }
-        }
-      } else {
-        const lastIdx = question.answerDigits.length - 1
-        if (answerRefs.current[lastIdx]) answerRefs.current[lastIdx].focus()
-      }
-    }
-  }
-
-  const handleAnswerKeyDown = (idx, e) => {
-    const ansLen = question.answerDigits.length
-    if (e.key === 'Backspace') {
-      if (e.currentTarget.value) return
-      e.preventDefault()
-      if (idx > 0) { focusAnswer(idx - 1); return }
-      if (isMulti && question.partialProducts.length > 0) {
-        const lastPp = question.partialProducts.length - 1
-        for (let j = question.partialProducts[lastPp].digits.length - 1; j >= 0; j--) {
-          if (ppRefs.current[lastPp] && ppRefs.current[lastPp][j]) { ppRefs.current[lastPp][j].focus(); return }
-        }
-      }
-      return
-    }
-    if (e.key === 'ArrowLeft') {
-      e.preventDefault()
-      if (idx > 0) focusAnswer(idx - 1)
-      return
-    }
-    if (e.key === 'ArrowRight') {
-      e.preventDefault()
-      if (idx < ansLen - 1) focusAnswer(idx + 1)
-      return
-    }
-    if (e.key === 'ArrowUp') {
-      e.preventDefault()
-      if (isMulti && question.partialProducts.length > 0) {
-        const lastPp = question.partialProducts.length - 1
-        for (let j = question.partialProducts[lastPp].digits.length - 1; j >= 0; j--) {
-          if (ppRefs.current[lastPp] && ppRefs.current[lastPp][j]) { ppRefs.current[lastPp][j].focus(); return }
-        }
-      }
-      return
-    }
-    if (e.key === 'ArrowDown') {
-      e.preventDefault()
-      return
-    }
-  }
-
-  const handleAnswerInput = (idx, val) => {
-    if (revealed) return
-    if (val !== '' && !/^\d{1,2}$/.test(val)) return
-    const next = [...answerInputs]; next[idx] = val; setAnswerInputs(next)
-    if (!val) return
-    if (idx > 0) focusAnswer(idx - 1)
-  }
-
-  const handleSubmit = async () => {
-    if (revealed || loading || !question) return
-    if (isMulti && currentPP < (question.partialProducts?.length || 0)) {
-      setFeedback('Complete all partial products before submitting.')
-      return
-    }
-    timer.stop()
-    try {
-      let body
-      if (isMulti) {
-        const userAnswer = answerInputs.map(v => v === '' ? null : Number(v))
-        const userPartialProducts = ppInputs.map(row => row.map(v => v === '' || v === null ? null : Number(v)))
-        const userCarries = ppCarryInputs.map(row => row.map(v => v === '' || v === null ? null : Number(v)))
-        body = JSON.stringify({ a: question.a, b: question.b, userAnswer, userPartialProducts, userCarries, sessionGoal })
-      } else {
-        const userAnswer = answerInputs.map(v => v === '' ? null : Number(v))
-        const userCarries = carryInputs.map(v => v === '' ? '' : v)
-        body = JSON.stringify({ a: question.a, b: question.b, userAnswer, userCarries, sessionGoal })
-      }
-      const r = await fetch(`${API}/column-multiplication-api/check`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' },
-        body
-      })
-      const data = await r.json()
-      setCorrectAnswerDigits(data.answerDigits)
-      if (isMulti) {
-        setCorrectCarryDigits(null)
-        setCorrectPPDigits(data.partialProducts ? data.partialProducts.map(pp => pp.digits) : null)
-        setCorrectPPCarries(data.partialProducts ? data.partialProducts.map(pp => pp.carries) : null)
-      } else {
-        setCorrectCarryDigits(data.correctCarries)
-        setCorrectPPDigits(null); setCorrectPPCarries(null)
-      }
-      setIsCorrect(data.correct); setRevealed(true)
-      let explanation = ''
-      try {
-        const sr = await fetch(`${API}/column-multiplication-api/check`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' },
-          body: JSON.stringify({ a: question.a, b: question.b, userAnswer: [], userCarries: [], userPartialProducts: [], solve: true })
-        })
-        const sd = await sr.json()
-        explanation = sd.explanation || ''
-      } catch (_) {}
-      const resultLine = data.correct ? '✓ Correct!' : `✗ ${data.message || 'Incorrect'}`
-      setFeedback(explanation ? `${resultLine}\n\n— Step-by-step solution —\n${explanation}` : resultLine)
-      const ansVal = isMulti ? Number(answerInputs.filter(v => v !== '' && v !== null).join('') || '') : Number(answerInputs.filter(v => v !== null).join('')) || ''
-      let userCarriesStr = '—', correctCarriesStr = '—'
-      if (isMulti) {
-        const uc = ppCarryInputs.flat().filter(v => v !== '' && v !== null)
-        const cc = data.partialProducts ? data.partialProducts.flatMap(pp => (pp.carries || []).filter(v => v !== null && v !== 0)) : []
-        userCarriesStr = uc.length ? uc.join(', ') : '—'
-        correctCarriesStr = cc.length ? cc.join(', ') : '—'
-      } else {
-        userCarriesStr = carryInputs.filter(v => v !== '').join(', ') || '—'
-        correctCarriesStr = (data.correctCarries || []).filter(v => v !== 0 && v !== null && v !== '').join(', ') || '—'
-      }
-      setResults(prev => [...prev, { question: `${question.a} × ${question.b}`, userAnswer: ansVal, correct: data.correct, correctAnswer: data.correctAnswer, time: timer.elapsed, userCarries: userCarriesStr, correctCarries: correctCarriesStr }])
-      if (data.correct) setScore(s => s + 1)
-    } catch (e) { console.error('Check failed:', e); setFeedback('Error checking answer') }
-  }
-
-  const handleSolve = async () => {
-    if (revealed || loading || !question) return
-    timer.stop()
-    try {
-      const r = await fetch(`${API}/column-multiplication-api/check`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' },
-        body: JSON.stringify({ a: question.a, b: question.b, userAnswer: [], userCarries: [], userPartialProducts: [], solve: true })
-      })
-      const data = await r.json()
-      setCorrectAnswerDigits(data.answerDigits)
-      setIsCorrect(false); setRevealed(true)
-      setAnswerInputs(data.answerDigits ? data.answerDigits.map(String) : question.answerDigits.map(String))
-      if (isMulti) {
-        setCorrectCarryDigits(null)
-        const correctPP = data.partialProducts ? data.partialProducts.map(pp => pp.digits) : (question.partialProducts || []).map(pp => pp.digits)
-        const correctPC = data.partialProducts ? data.partialProducts.map(pp => pp.carries) : (question.partialProducts || []).map(pp => pp.carries)
-        setCorrectPPDigits(correctPP)
-        setCorrectPPCarries(correctPC)
-        const filledPP = correctPP.map(row => row.map(d => d === null ? null : String(d)))
-        const filledPC = correctPC.map(row => row.map(c => c === null ? null : String(c)))
-        setPpInputs(filledPP)
-        setPpCarryInputs(filledPC)
-        setCarryInputs([])
-      } else {
-        setCorrectCarryDigits(data.correctCarries || question.carries)
-        setCorrectPPDigits(null); setCorrectPPCarries(null)
-        setCarryInputs((data.correctCarries || question.carries).map(String))
-        setPpInputs([]); setPpCarryInputs([])
-      }
-      setFeedback(data.explanation || (isMulti ? 'Solved — study the partial products and carries.' : 'Solved — study the carries above each column.'))
-      const solveCC = isMulti
-        ? (data.partialProducts ? data.partialProducts.flatMap(pp => (pp.carries || []).filter(v => v !== null && v !== 0)) : []).join(', ') || '—'
-        : (data.correctCarries || []).filter(v => v !== 0 && v !== null && v !== '').join(', ') || '—'
-      setResults(prev => [...prev, { question: `${question.a} × ${question.b}`, userAnswer: data.correctAnswer, correct: false, correctAnswer: data.correctAnswer, time: timer.elapsed, userCarries: '—', correctCarries: solveCC }])
-    } catch (e) {
-      console.error('Solve failed:', e)
-      setCorrectAnswerDigits(question.answerDigits)
-      setIsCorrect(false); setRevealed(true)
-      setAnswerInputs(question.answerDigits.map(String))
-      if (isMulti && question.partialProducts) {
-        setCorrectPPDigits(question.partialProducts.map(pp => pp.digits))
-        setCorrectPPCarries(question.partialProducts.map(pp => pp.carries))
-        setPpInputs(question.partialProducts.map(pp => pp.digits.map(d => d === null ? null : String(d))))
-        setPpCarryInputs(question.partialProducts.map(pp => pp.carries.map(c => c === null ? null : String(c))))
-      } else {
-        setCorrectCarryDigits(question.carries)
-        setCarryInputs(question.carries.map(String))
-      }
-      setFeedback(isMulti ? 'Solved — study the partial products and carries.' : 'Solved — study the carries above each column.')
-      const fallbackCC = isMulti
-        ? (question.partialProducts || []).flatMap(pp => (pp.carries || []).filter(v => v !== null && v !== 0)).join(', ') || '—'
-        : (question.carries || []).filter(v => v !== 0 && v !== null && v !== '').join(', ') || '—'
-      setResults(prev => [...prev, { question: `${question.a} × ${question.b}`, userAnswer: question.answer, correct: false, correctAnswer: question.answer, time: timer.elapsed, userCarries: '—', correctCarries: fallbackCC }])
-    }
-  }
-
-  const advanceQuestion = () => {
-    if (advanceTimerRef.current) { clearTimeout(advanceTimerRef.current); advanceTimerRef.current = null }
-    setRevealed(false); setIsCorrect(null); setFeedback(''); setAnswerInputs([]); setCarryInputs([])
-    setCorrectAnswerDigits(null); setCorrectCarryDigits(null)
-    setCorrectPPDigits(null); setCorrectPPCarries(null)
-    setIsMulti(false); setCurrentPP(0); setPpInputs([]); setPpCarryInputs([])
-    if (questionNumber >= totalQ) { setFinished(true); timer.stop() }
-    else { setQuestionNumber(qn => qn + 1); timer.reset(); timer.start(); fetchQuestion() }
-  }
-
-  const diffLabels = {
-    easy: 'Easy — 1 × 1 digit',
-    medium: 'Medium — 1 × 2 digits',
-    hard: 'Hard — 2 × 2 digits',
-    extrahard: 'Extra Hard — 3×3 / 4×3 digits'
-  }
-
-  const inputStyle = (isRight, isWrong) => ({
-    width: `${COL}px`, height: '38px', textAlign: 'center', fontSize: '1rem', fontWeight: 700,
-    background: isRight ? 'var(--clr-correct-bg)' : isWrong ? 'var(--clr-wrong-bg)' : 'var(--clr-input)',
-    border: `2px solid ${isRight ? 'var(--clr-correct)' : isWrong ? 'var(--clr-wrong)' : 'var(--clr-border)'}`,
-    borderRadius: '8px', color: isRight ? 'var(--clr-correct)' : isWrong ? 'var(--clr-wrong)' : 'var(--clr-text)',
-    fontFamily: '"Courier New", monospace', outline: 'none'
-  })
-
-  if (!started && !finished) {
-    return (
-      <div style={{ minHeight: '100vh', background: 'var(--clr-bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px', fontFamily: 'Inter, sans-serif' }}>
-        <div style={{ background: 'var(--clr-card)', border: '1.5px solid var(--clr-border)', borderRadius: '28px', boxShadow: '0 20px 40px rgba(0,0,0,.45)', padding: '48px 40px', maxWidth: '720px', width: '100%', textAlign: 'center', position: 'relative' }}>
-          <button onClick={onBack} style={{ position: 'absolute', top: '24px', left: '24px', background: 'transparent', border: '1px solid var(--clr-border)', borderRadius: '6px', padding: '6px 14px', color: 'var(--clr-text-soft)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer' }}>← Home</button>
-          <h1 style={{ fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 700, fontSize: '48px', color: 'var(--clr-text)', margin: '0 0 12px', lineHeight: 1.1 }}>Column Multiplication</h1>
-          <p style={{ color: 'var(--clr-text-soft)', fontSize: '0.9rem', margin: '0 0 24px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>Multiply vertically with carrying</p>
-
-          {/* Help toggle */}
-          <div style={{ marginBottom: '20px' }}>
-            <button onClick={() => setShowHelp(h => !h)} style={{ background: showHelp ? 'var(--clr-input)' : 'transparent', border: '1px solid var(--clr-border)', borderRadius: '50px', padding: '6px 16px', color: 'var(--clr-accent)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.8rem', cursor: 'pointer' }}>{showHelp ? '✕ Close' : '? How to play'}</button>
-          </div>
-
-          {showHelp && (
-            <div style={{ textAlign: 'left', background: 'var(--clr-surface)', border: '1px solid var(--clr-border)', borderRadius: '16px', padding: '28px 28px', marginBottom: '24px', maxWidth: '580px', margin: '0 auto 24px' }}>
-              <h3 style={{ color: 'var(--clr-accent)', fontSize: '1.05rem', margin: '0 0 20px', fontFamily: 'Inter, sans-serif', fontWeight: 700, textAlign: 'center' }}>How Column Multiplication Works</h3>
-
-              {/* Step 1 */}
-              <div style={{ display: 'flex', gap: '14px', marginBottom: '18px', alignItems: 'flex-start' }}>
-                <div style={{ minWidth: '28px', height: '28px', borderRadius: '50%', background: 'var(--clr-accent)', color: '#FFF', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 700, fontFamily: 'Inter, sans-serif' }}>1</div>
-                <div style={{ flex: 1 }}>
-                  <div style={{ color: 'var(--clr-text)', fontSize: '0.85rem', fontWeight: 600, fontFamily: 'Inter, sans-serif', marginBottom: '6px' }}>Multiply by the rightmost digit first</div>
-                  <div style={{ color: 'var(--clr-text-soft)', fontSize: '0.82rem', fontFamily: 'Inter, sans-serif', lineHeight: '1.5', marginBottom: '10px' }}>Take the <strong style={{ color: 'var(--clr-accent)' }}>rightmost digit</strong> of the multiplier and multiply it by each digit of the top number. Write carries above and products below the line.</div>
-                  <div style={{ background: 'var(--clr-card)', borderRadius: '10px', padding: '14px 16px', fontFamily: '"Courier New", monospace', fontSize: '1.1rem', fontWeight: 700, lineHeight: '1.6', textAlign: 'center' }}>
-                    <div style={{ fontSize: '0.7rem', color: 'var(--clr-accent)', fontFamily: 'Inter, sans-serif', marginBottom: '2px' }}>Step 1: multiply by 9</div>
-                    <div>31</div>
-                    <div style={{ color: 'var(--clr-text-soft)', fontSize: '0.9rem' }}>× <span style={{ color: 'var(--clr-accent)', border: '1.5px solid var(--clr-accent)', borderRadius: '4px', padding: '0 3px' }}>4</span>9</div>
-                    <div style={{ width: '60px', height: '2px', background: 'var(--clr-border)', margin: '4px auto' }} />
-                    <div style={{ color: 'var(--clr-accent)' }}>_ _</div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Step 2 */}
-              <div style={{ display: 'flex', gap: '14px', marginBottom: '18px', alignItems: 'flex-start' }}>
-                <div style={{ minWidth: '28px', height: '28px', borderRadius: '50%', background: 'var(--clr-accent)', color: '#FFF', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 700, fontFamily: 'Inter, sans-serif' }}>2</div>
-                <div style={{ flex: 1 }}>
-                  <div style={{ color: 'var(--clr-text)', fontSize: '0.85rem', fontWeight: 600, fontFamily: 'Inter, sans-serif', marginBottom: '6px' }}>Move to the next digit (shift left)</div>
-                  <div style={{ color: 'var(--clr-text-soft)', fontSize: '0.82rem', fontFamily: 'Inter, sans-serif', lineHeight: '1.5', marginBottom: '10px' }}>Multiply by the <strong style={{ color: 'var(--clr-text)' }}>next digit</strong> to the left. The result shifts one place to the left. The app highlights which digit you're working on.</div>
-                  <div style={{ background: 'var(--clr-card)', borderRadius: '10px', padding: '14px 16px', fontFamily: '"Courier New", monospace', fontSize: '1.1rem', fontWeight: 700, lineHeight: '1.6', textAlign: 'center' }}>
-                    <div style={{ fontSize: '0.7rem', color: 'var(--clr-text)', fontFamily: 'Inter, sans-serif', marginBottom: '2px' }}>Step 2: multiply by 4</div>
-                    <div>31</div>
-                    <div style={{ color: 'var(--clr-text-soft)', fontSize: '0.9rem' }}>× <span style={{ color: 'var(--clr-text)', border: '1.5px solid var(--clr-text)', borderRadius: '4px', padding: '0 3px' }}>4</span>9</div>
-                    <div style={{ width: '60px', height: '2px', background: 'var(--clr-border)', margin: '4px auto' }} />
-                    <div>2 7 9</div>
-                    <div style={{ color: 'var(--clr-accent)' }}>1 2 4 _</div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Step 3 */}
-              <div style={{ display: 'flex', gap: '14px', marginBottom: '18px', alignItems: 'flex-start' }}>
-                <div style={{ minWidth: '28px', height: '28px', borderRadius: '50%', background: 'var(--clr-accent)', color: '#FFF', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 700, fontFamily: 'Inter, sans-serif' }}>3</div>
-                <div style={{ flex: 1 }}>
-                  <div style={{ color: 'var(--clr-text)', fontSize: '0.85rem', fontWeight: 600, fontFamily: 'Inter, sans-serif', marginBottom: '6px' }}>Add all partial products for the final answer</div>
-                  <div style={{ color: 'var(--clr-text-soft)', fontSize: '0.82rem', fontFamily: 'Inter, sans-serif', lineHeight: '1.5' }}>After all partial products are entered, add them up to get the final answer. Work right to left, carrying as needed.</div>
-                </div>
-              </div>
-
-              {/* Keyboard shortcuts */}
-              <div style={{ borderTop: '1px solid var(--clr-border)', paddingTop: '14px', marginTop: '14px' }}>
-                <div style={{ color: 'var(--clr-text)', fontSize: '0.82rem', fontWeight: 600, fontFamily: 'Inter, sans-serif', marginBottom: '8px' }}>Keyboard shortcuts:</div>
-                <div style={{ color: 'var(--clr-text-soft)', fontSize: '0.78rem', fontFamily: 'Inter, sans-serif', lineHeight: '1.7' }}>
-                  <strong>↑ / ↓</strong> — move between carry and digit rows &nbsp;&nbsp;
-                  <strong>← / →</strong> — move between columns &nbsp;&nbsp;
-                  <strong>Tab</strong> — jump to next partial product<br />
-                  <strong>Backspace</strong> — clear and move back
-                </div>
-              </div>
-            </div>
-          )}
-
-          <div style={{ marginBottom: '24px' }}>
-            <h3 style={{ color: 'var(--clr-text)', fontSize: '0.9rem', margin: '0 0 16px', fontFamily: 'Inter, sans-serif', fontWeight: 700 }}>Select Difficulty:</h3>
-            <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
-              {['easy', 'medium', 'hard', 'extrahard'].map(d => (
-                <button key={d} onClick={() => setDifficulty(d)} style={{ background: difficulty === d ? 'var(--clr-accent)' : 'transparent', border: difficulty === d ? '1px solid var(--clr-accent)' : '1px solid var(--clr-border)', borderRadius: '50px', padding: '8px 16px', color: difficulty === d ? '#FFF' : 'var(--clr-text-soft)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer' }}>{diffLabels[d]}</button>
-              ))}
-            </div>
-          </div>
-          <div style={{ marginBottom: '32px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <label style={{ color: 'var(--clr-text-soft)', fontSize: '0.85rem', margin: '0 0 12px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>How many questions? (max 100)</label>
-            <input type="text" value={numQuestions} onChange={(e) => { const v = e.target.value; if (v === '' || (/^\d+$/.test(v) && Number(v) <= 100)) setNumQuestions(v) }} style={{ background: 'var(--clr-input)', border: '1px solid var(--clr-border)', borderRadius: '6px', padding: '10px', color: 'var(--clr-text)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem', width: '100px', textAlign: 'center', outline: 'none' }} placeholder={String(DEFAULT_TOTAL)} />
-          </div>
-          <button onClick={startQuiz} style={{ background: 'var(--clr-accent)', border: 'none', borderRadius: '6px', padding: '10px 24px', color: '#FFF', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer' }}>Start Quiz</button>
-        </div>
-      </div>
-    )
-  }
-
-  const ansLen = question ? question.answerDigits.length : 1
-
-  const renderSingleDigit = () => (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '16px 0', fontFamily: '"Courier New", monospace', fontSize: '1.8rem', fontWeight: 700 }}>
-      <div style={{ display: 'flex', gap: `${GAP}px`, marginBottom: '4px' }}>
-        <span style={{ width: `${LEFT_MARGIN}px` }} />
-        {question.carries.map((c, i) => {
-          if (i === question.carries.length - 1) return <span key={i} style={{ width: `${COL}px` }} />
-          const correct = revealed && correctCarryDigits ? String(correctCarryDigits[i]) : ''
-          const isRight = revealed && correct !== '' && String(carryInputs[i] || '') === correct
-          const isWrong = revealed && correct !== '' && !isRight
-          const shown = revealed ? correct : carryInputs[i] || ''
-          return (
-            <input key={i} ref={el => carryRefs.current[i] = el} type="text" maxLength={1}
-              value={shown}
-              onChange={e => handleSingleInput(i, e.target.value, true)}
-              onKeyDown={e => handleSingleKeyDown(i, e, true)}
-              disabled={revealed}
-              style={inputStyle(isRight, isWrong)}
-            />
-          )
-        })}
-      </div>
-      <div style={{ display: 'flex', gap: `${GAP}px`, marginBottom: '2px' }}>
-        <span style={{ width: `${LEFT_MARGIN}px` }} />
-        {question.aDigits.map((d, i) => (
-          <span key={i} style={{ width: `${COL}px`, height: '42px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--clr-text)', fontSize: '1.4rem' }}>{d !== null ? d : ''}</span>
-        ))}
-      </div>
-      <div style={{ display: 'flex', gap: `${GAP}px`, marginBottom: '4px' }}>
-        <span style={{ width: `${LEFT_MARGIN}px`, textAlign: 'center', color: 'var(--clr-text-soft)', fontSize: '1.4rem' }}>×</span>
-        {question.aDigits.map((_, i) => (
-          <span key={i} style={{ width: `${COL}px`, height: '42px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: i === question.aDigits.length - 1 ? 'var(--clr-text)' : 'transparent', fontSize: '1.4rem' }}>{i === question.aDigits.length - 1 ? question.b : ''}</span>
-        ))}
-      </div>
-      <div style={{ display: 'flex', gap: `${GAP}px` }}>
-        <span style={{ width: `${LEFT_MARGIN}px` }} />
-        <div style={{ width: `${ansLen * (COL + GAP) - GAP}px`, height: '3px', background: 'var(--clr-border)', borderRadius: '2px' }} />
-      </div>
-      <div style={{ display: 'flex', gap: `${GAP}px`, marginTop: '8px' }}>
-        <span style={{ width: `${LEFT_MARGIN}px` }} />
-        {question.answerDigits.map((d, i) => {
-          const correctDigit = revealed && correctAnswerDigits ? String(correctAnswerDigits[i]) : ''
-          const isRight = revealed && correctDigit !== '' && String(answerInputs[i] || '') === correctDigit
-          const isWrong = revealed && correctDigit !== '' && !isRight
-          const shown = revealed ? correctDigit : answerInputs[i] || ''
-          return (
-            <input key={i} ref={el => answerRefs.current[i] = el} type="text" maxLength={1}
-              value={shown}
-              onChange={e => handleAnswerInput(i, e.target.value)}
-              onKeyDown={e => handleAnswerKeyDown(i, e)}
-              disabled={revealed}
-              style={{ ...inputStyle(isRight, isWrong), width: `${COL}px`, height: '42px', fontSize: '1.4rem' }}
-            />
-          )
-        })}
-      </div>
-    </div>
-  )
-
-  const renderMultiDigit = () => {
-    const pp = question.partialProducts
-    const allDone = currentPP >= pp.length
-    const ansLen = question.answerDigits.length
-    const padCount = ansLen - question.aDigits.length
-    const paddedADigits = [...Array(padCount).fill(null), ...question.aDigits]
-    const bPadCount = ansLen - (question.bDigits ? question.bDigits.length : 0)
-    const paddedBDigits = [...Array(Math.max(0, bPadCount)).fill(null), ...(question.bDigits || [])]
-    const shift = allDone ? 0 : currentPP
-    const trailingCol = allDone ? -1 : ansLen - 1 - shift
-
-    const isPpRight = (ppIdx, j) => {
-      if (!revealed || !correctPPDigits) return false
-      const correct = correctPPDigits[ppIdx][j]
-      if (correct === null || correct === undefined) return false
-      const user = ppInputs[ppIdx] && ppInputs[ppIdx][j]
-      return user !== null && user !== undefined && String(user) === String(correct)
-    }
-    const isPpWrong = (ppIdx, j) => {
-      if (!revealed || !correctPPDigits) return false
-      const correct = correctPPDigits[ppIdx][j]
-      if (correct === null || correct === undefined) return false
-      const user = ppInputs[ppIdx] && ppInputs[ppIdx][j]
-      return (user !== null && user !== undefined && user !== '' && String(user) !== String(correct))
-    }
-    const ppCorrectVal = (ppIdx, j) => {
-      if (!revealed || !correctPPDigits) return ''
-      const v = correctPPDigits[ppIdx][j]
-      return v !== null && v !== undefined ? String(v) : ''
-    }
-
-    const emptyCell = (key) => <div key={key} style={{ width: `${COL}px` }} />
-    const rowGap = { display: 'flex', gap: `${GAP}px` }
-    const labelSpan = <span style={{ width: `${LEFT_MARGIN}px` }} />
-    const labelX = <span style={{ width: `${LEFT_MARGIN}px`, textAlign: 'center', color: 'var(--clr-text-soft)', fontSize: '1.4rem' }}>×</span>
-    const digitDisplay = (d, i, extra) => (
-      <div key={i} style={{ width: `${COL}px`, height: '42px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--clr-text)', fontSize: '1.4rem', ...extra }}>
-        {d !== null ? d : ''}
-      </div>
-    )
-
-    return (
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '12px 0', fontFamily: '"Courier New", monospace', fontWeight: 700 }}>
-
-        {/* Carry row above multiplicand (currentPP only) */}
-        {!allDone && (
-          <div style={{ ...rowGap, marginBottom: '2px' }}>
-            {labelSpan}
-            {paddedADigits.map((_, m) => {
-              const carryCol = m - shift
-              const carries = pp[currentPP].carries
-              if (carryCol < 0 || carryCol >= carries.length || carries[carryCol] === null || carryCol === trailingCol) {
-                return emptyCell(m)
-              }
-              const val = revealed
-                ? (correctPPCarries && correctPPCarries[currentPP] && correctPPCarries[currentPP][carryCol] != null ? String(correctPPCarries[currentPP][carryCol]) : '')
-                : (ppCarryInputs[currentPP] && ppCarryInputs[currentPP][carryCol]) || ''
-              return (
-                <div key={m} style={{ width: `${COL}px` }}>
-                  <input
-                    ref={el => { if (!ppCarryRefs.current[currentPP]) ppCarryRefs.current[currentPP] = []; ppCarryRefs.current[currentPP][carryCol] = el }}
-                    type="text" inputMode="numeric" maxLength={2}
-                    value={val}
-                    onChange={e => handleMultiPpCarryInput(currentPP, carryCol, e.target.value)}
-                    onKeyDown={e => handleMultiKeyDown(e, { isCarry: true, ppIdx: currentPP, colIdx: carryCol })}
-                    disabled={revealed}
-                    style={{ width: `${COL}px`, height: '38px', textAlign: 'center', fontSize: '1rem', fontWeight: 700,
-                      background: 'var(--clr-input)', border: '2px solid var(--clr-border)', borderRadius: '8px',
-                      color: 'var(--clr-text)', fontFamily: '"Courier New", monospace', outline: 'none' }}
-                  />
-                </div>
-              )
-            })}
-          </div>
-        )}
-
-        {/* Multiplicand row */}
-        <div style={{ ...rowGap, marginBottom: '2px' }}>
-          {labelSpan}
-          {paddedADigits.map((d, i) => digitDisplay(d, i))}
-        </div>
-
-        {/* Multiplier row */}
-        <div style={{ ...rowGap, marginBottom: '4px' }}>
-          {labelX}
-          {paddedBDigits.map((d, i) => {
-            const activeMIdx = !allDone && d !== null && (paddedBDigits.length - 1 - i) === currentPP
-            return (
-              <div key={i} style={{ width: `${COL}px`, height: '42px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: activeMIdx ? 'var(--clr-accent)' : 'var(--clr-text)', fontSize: '1.4rem', fontWeight: activeMIdx ? 900 : 700, background: activeMIdx ? 'var(--clr-accent-bg, rgba(79,140,255,0.12))' : 'transparent', borderRadius: activeMIdx ? '6px' : '0', border: activeMIdx ? '1.5px solid var(--clr-accent)' : 'none' }}>
-                {d !== null ? d : ''}
-              </div>
-            )
-          })}
-        </div>
-
-        {/* Step progress + operation hint */}
-        {!allDone && (
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '4px 0 6px' }}>
-            <div style={{ display: 'flex', gap: '6px', alignItems: 'center', marginBottom: '4px' }}>
-              {pp.map((_, i) => (
-                <div key={i} style={{ width: '10px', height: '10px', borderRadius: '50%', background: i < currentPP ? 'var(--clr-correct)' : i === currentPP ? 'var(--clr-accent)' : 'var(--clr-border)', transition: 'background 0.3s' }} />
-              ))}
-              <span style={{ fontSize: '0.72rem', color: 'var(--clr-text-soft)', fontFamily: 'Inter, sans-serif', fontWeight: 600, marginLeft: '4px' }}>Step {currentPP + 1} of {pp.length}</span>
-            </div>
-            <div style={{ fontSize: '0.78rem', color: 'var(--clr-accent)', fontFamily: '"Courier New", monospace', fontWeight: 700, background: 'var(--clr-accent-bg, rgba(79,140,255,0.08))', padding: '4px 14px', borderRadius: '8px', border: '1px solid var(--clr-accent)', opacity: 0.9 }}>
-              Now: {pp[currentPP].multiplierDigit} × {question.a} = ?
-            </div>
-          </div>
-        )}
-
-        {/* Separator line */}
-        <div style={rowGap}>
-          {labelSpan}
-          <div style={{ width: `${ansLen * (COL + GAP) - GAP}px`, height: '3px', background: 'var(--clr-border)', borderRadius: '2px' }} />
-        </div>
-
-        {/* Partial products */}
-        {pp.map((ppRow, idx) => {
-          if (idx > currentPP && !allDone) return null
-          const isActive = idx === currentPP && !allDone
-          const isDone = idx < currentPP
-
-          return (
-            <div key={idx} style={{ ...rowGap, marginTop: '6px', padding: isDone ? '2px 4px' : isActive ? '2px 4px' : '0', borderRadius: '8px', background: isDone ? 'var(--clr-correct-bg)' : 'transparent', borderLeft: isActive ? '3px solid var(--clr-accent)' : 'none' }}>
-              <span style={{ width: `${LEFT_MARGIN}px`, textAlign: 'center', color: 'var(--clr-text-soft)', fontSize: '1.4rem' }}>+</span>
-              {ppRow.digits.map((d, j) => {
-                if (d === null) return emptyCell(j)
-                if (isDone) {
-                  const val = ppInputs[idx]?.[j] ?? ''
-                  return <div key={j} style={{ width: `${COL}px`, height: '38px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1rem', fontWeight: 700, color: 'var(--clr-correct)' }}>{val}</div>
-                }
-                const isRight = isPpRight(idx, j)
-                const isWrong = isPpWrong(idx, j)
-                const shown = revealed ? ppCorrectVal(idx, j) : (ppInputs[idx] && ppInputs[idx][j]) || ''
-                return (
-                  <div key={j} style={{ width: `${COL}px` }}>
-                    <input
-                      ref={el => { if (!ppRefs.current[idx]) ppRefs.current[idx] = []; ppRefs.current[idx][j] = el }}
-                      type="text" inputMode="numeric" maxLength={1}
-                      value={shown}
-                      onChange={e => handleMultiPpInput(idx, j, e.target.value)}
-                      onKeyDown={e => handleMultiKeyDown(e, { isPp: true, ppIdx: idx, colIdx: j })}
-                      disabled={revealed}
-                      style={{ width: `${COL}px`, height: '38px', textAlign: 'center', fontSize: '1rem', fontWeight: 700,
-                        background: isRight ? 'var(--clr-correct-bg)' : isWrong ? 'var(--clr-wrong-bg)' : 'var(--clr-input)',
-                        border: `2px solid ${isRight ? 'var(--clr-correct)' : isWrong ? 'var(--clr-wrong)' : 'var(--clr-border)'}`,
-                        borderRadius: '8px', color: isRight ? 'var(--clr-correct)' : isWrong ? 'var(--clr-wrong)' : 'var(--clr-text)',
-                        fontFamily: '"Courier New", monospace', outline: 'none' }}
-                    />
-                  </div>
-                )
-              })}
-            </div>
-          )
-        })}
-
-        {/* Separator line before answer — always visible */}
-        <div style={{ ...rowGap, marginTop: '6px' }}>
-          {labelSpan}
-          <div style={{ width: `${ansLen * (COL + GAP) - GAP}px`, height: '3px', background: 'var(--clr-border)', borderRadius: '2px' }} />
-        </div>
-
-        {/* Answer row */}
-        <div style={{ ...rowGap, marginTop: '8px' }}>
-          {labelSpan}
-          {question.answerDigits.map((d, i) => {
-            const correctDigit = revealed && correctAnswerDigits ? String(correctAnswerDigits[i]) : ''
-            const isRight = revealed && correctDigit !== '' && String(answerInputs[i] || '') === correctDigit
-            const isWrong = revealed && correctDigit !== '' && !isRight
-            const shown = revealed ? correctDigit : answerInputs[i] || ''
-            return (
-              <input key={i} ref={el => answerRefs.current[i] = el} type="text" maxLength={1} value={shown}
-                onChange={e => handleAnswerInput(i, e.target.value)}
-                onKeyDown={e => handleAnswerKeyDown(i, e)}
-                disabled={revealed || !allDone}
-                style={Object.assign({ width: COL + 'px', height: '42px', textAlign: 'center', fontSize: '1.4rem', fontWeight: 700,
-                  background: isRight ? 'var(--clr-correct-bg)' : isWrong ? 'var(--clr-wrong-bg)' : 'var(--clr-input)',
-                  borderRadius: '8px', color: isRight ? 'var(--clr-correct)' : isWrong ? 'var(--clr-wrong)' : 'var(--clr-text)',
-                  fontFamily: '"Courier New", monospace', outline: 'none', opacity: allDone ? 1 : 0.5 },
-                  isRight ? { border: '2px solid var(--clr-correct)' } : isWrong ? { border: '2px solid var(--clr-wrong)' } : { border: '2px solid var(--clr-border)' })}
-              />
-            )
-          })}
-        </div>
-      </div>
-    )
-  }
-
-  return (
-    <QuizLayout title="Column Multiplication" onBack={onBack} timer={timer}>
-      {started && !finished && <>
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem', marginBottom: '0.3rem' }}>
-          <div className="progress-pill center">Question {questionNumber}/{totalQ}</div>
-        </div>
-        {loading || !question ? <div className="question-box">Loading question…</div> : (
-          <>
-            {isMulti ? renderMultiDigit() : renderSingleDigit()}
-            {feedback && (
-              <div style={{
-                textAlign: 'left', padding: '12px 16px', borderRadius: '8px', margin: '8px 0',
-                background: isCorrect ? 'rgba(92, 184, 122, 0.25)' : 'rgba(224, 90, 74, 0.25)',
-                color: isCorrect ? 'var(--clr-correct)' : 'var(--clr-wrong)',
-                fontWeight: 600, fontSize: '0.9rem',
-                whiteSpace: 'pre-line', lineHeight: '1.6',
-                maxHeight: '300px', overflowY: 'auto',
-                border: isCorrect ? '2px solid var(--clr-correct)' : '2px solid var(--clr-wrong)'
-              }}>{feedback}</div>
-            )}
-            <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', margin: '12px 0', flexWrap: 'wrap' }}>
-              {!revealed && <button onClick={handleSubmit} disabled={loading} style={{ background: 'var(--clr-accent)', border: 'none', borderRadius: '8px', padding: '10px 24px', color: '#FFF', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer' }}>Submit</button>}
-              {!revealed && <button onClick={handleSolve} disabled={loading} style={{ background: 'transparent', border: '1px solid var(--clr-border)', borderRadius: '8px', padding: '10px 24px', color: 'var(--clr-text-soft)', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer' }}>Solve</button>}
-              {revealed && <button onClick={advanceQuestion} style={{ background: 'var(--clr-accent)', border: 'none', borderRadius: '8px', padding: '10px 24px', color: '#FFF', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer' }}>Next Question →</button>}
-            </div>
-          </>
-        )}
-        {results.length > 0 && <ResultsTable results={results} />}
-      </>}
-      {finished && (
-        <div style={{ textAlign: 'center', padding: '24px' }}>
-          <h2 style={{ color: 'var(--clr-text)', marginBottom: '16px' }}>Score: {score}/{totalQ}</h2>
-          <ResultsTable results={results} />
-          <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', marginTop: '24px' }}>
-            <button onClick={() => { setStarted(false); setFinished(false) }} style={{ background: 'var(--clr-accent)', border: 'none', borderRadius: '8px', padding: '10px 24px', color: '#FFF', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer' }}>Play Again</button>
-          </div>
-        </div>
-      )}
-    </QuizLayout>
-  )
-}
-
-
-/**
- * ColumnDivisionApp Component
- * Paper-style long division: dividend ÷ divisor.
- * User fills quotient digits, products, and partial remainders step by step.
- */
-function ColumnDivisionApp({ onBack, initialDifficulty, initialNumQuestions, initialStarted, isGoalMode = false }) {
-  const [difficulty, setDifficulty] = useState(initialDifficulty || 'easy')
-  const [numQuestions, setNumQuestions] = useState(initialNumQuestions || String(DEFAULT_TOTAL))
-  const [started, setStarted] = useState(initialStarted || false)
-  const [finished, setFinished] = useState(false)
-  const [question, setQuestion] = useState(null)
-  const [score, setScore] = useState(0)
-  const [questionNumber, setQuestionNumber] = useState(0)
-  const [totalQ, setTotalQ] = useState(DEFAULT_TOTAL)
-  const [feedback, setFeedback] = useState('')
-  const [isCorrect, setIsCorrect] = useState(null)
-  const [loading, setLoading] = useState(false)
-  const [revealed, setRevealed] = useState(false)
-  const [results, setResults] = useState([])
-  const timer = useTimer()
-  const [sessionGoal, setSessionGoal] = useState(isGoalMode ? 'speed' : 'standard')
-  const [showHelp, setShowHelp] = useState(false)
-
-  const [quotientInputs, setQuotientInputs] = useState([])
-  const [productInputs, setProductInputs] = useState([])
-  const [remainderInputs, setRemainderInputs] = useState([])
-  const [solutionSteps, setSolutionSteps] = useState(null)
-  const [activeBorrows, setActiveBorrows] = useState(new Set())
-  const [borrowInputs, setBorrowInputs] = useState({})
-  const [hoveredBorrow, setHoveredBorrow] = useState(null)
-  const quotientRefs = useRef([])
-  const productRefs = useRef([])
-  const remainderRefs = useRef([])
-  const borrowRefs = useRef({})
-  const advanceTimerRef = useRef(null)
-  // Tracks the in-flight question fetch so a newer fetchQuestion() call (or
-  // unmount) can cancel a still-pending older one — see makeQuizApp's
-  // loadQuestion() for the same pattern and the race it prevents.
-  const questionAbortRef = useRef(null)
-  useEffect(() => () => questionAbortRef.current?.abort(), [])
-
-  const COL = 40
-  const BRACKET = 80
-
-  useEffect(() => { if (!isGoalMode) setSessionGoal('standard') }, [isGoalMode])
-
-  const startQuiz = async () => {
-    const q = Number(numQuestions) || DEFAULT_TOTAL
-    setTotalQ(q); setScore(0); setQuestionNumber(1); setResults([])
-    setFinished(false); setStarted(true); setFeedback(''); setIsCorrect(null); setRevealed(false)
-    timer.reset(); timer.start()
-    await fetchQuestion()
-  }
-
-  const fetchQuestion = async (diff) => {
-    questionAbortRef.current?.abort()
-    const controller = new AbortController()
-    questionAbortRef.current = controller
-
-    setLoading(true)
-    try {
-      const r = await fetch(`${API}/column-division-api/question?difficulty=${diff || difficulty}`, { signal: controller.signal })
-      const data = await r.json()
-      setQuestion(data)
-      setQuotientInputs(new Array(data.quotientDigits.length).fill(''))
-      setProductInputs(data.steps.map(s => new Array(String(s.product).length).fill('')))
-      setRemainderInputs(data.steps.map(s => new Array(Math.max(String(s.remainder).length, 1)).fill('')))
-      setBorrowInputs({})
-      setActiveBorrows(new Set())
-      setTimeout(() => { if (quotientRefs.current[0]) quotientRefs.current[0].focus() }, 100)
-    } catch (e) {
-      if (e.name === 'AbortError') return
-      console.error('Fetch column division question failed:', e)
-    }
-    setLoading(false)
-  }
-
-  const activateBorrow = (rowKey, col, isCurrentlyActive) => {
-    const key = `${rowKey}-${col}`
-    if (isCurrentlyActive) {
-      setActiveBorrows(prev => { const next = new Set(prev); next.delete(key); return next })
-      setBorrowInputs(prev => { const next = { ...prev }; delete next[key]; return next })
-    } else {
-      setActiveBorrows(prev => { const next = new Set(prev); next.add(key); return next })
-      setTimeout(() => { if (borrowRefs.current[key]) borrowRefs.current[key].focus() }, 50)
-    }
-  }
-
-  const hideAllBorrows = () => {
-    setActiveBorrows(new Set())
-  }
-
-  const handleBorrowInput = (rowKey, col, val) => {
-    if (revealed) return
-    if (val !== '' && !/^\d{1,2}$/.test(val)) return
-    const key = `${rowKey}-${col}`
-    setBorrowInputs(prev => ({ ...prev, [key]: val }))
-  }
-
-  const handleQuotientInput = (idx, val) => {
-    if (revealed) return
-    if (val !== '' && !/^\d$/.test(val)) return
-    const next = [...quotientInputs]; next[idx] = val; setQuotientInputs(next)
-    hideAllBorrows()
-    if (val && idx < quotientInputs.length - 1) {
-      if (quotientRefs.current[idx + 1]) quotientRefs.current[idx + 1].focus()
-    } else if (val && idx === quotientInputs.length - 1) {
-      if (productRefs.current[0] && productRefs.current[0][0]) productRefs.current[0][0].focus()
-    }
-  }
-
-  const handleProductInput = (stepIdx, digitIdx, val) => {
-    if (revealed) return
-    if (val !== '' && !/^\d$/.test(val)) return
-    const next = productInputs.map(r => [...r])
-    next[stepIdx] = [...next[stepIdx]]; next[stepIdx][digitIdx] = val
-    setProductInputs(next)
-    hideAllBorrows()
-    const digits = productInputs[stepIdx]
-    if (val && digitIdx < digits.length - 1) {
-      if (productRefs.current[stepIdx] && productRefs.current[stepIdx][digitIdx + 1]) productRefs.current[stepIdx][digitIdx + 1].focus()
-    } else if (val && digitIdx === digits.length - 1) {
-      if (remainderRefs.current[stepIdx] && remainderRefs.current[stepIdx][0]) remainderRefs.current[stepIdx][0].focus()
-    }
-  }
-
-  const handleRemainderInput = (stepIdx, digitIdx, val) => {
-    if (revealed) return
-    if (val !== '' && !/^\d$/.test(val)) return
-    const next = remainderInputs.map(r => [...r])
-    next[stepIdx] = [...next[stepIdx]]; next[stepIdx][digitIdx] = val
-    setRemainderInputs(next)
-    const digits = remainderInputs[stepIdx]
-    if (val && digitIdx < digits.length - 1) {
-      if (remainderRefs.current[stepIdx] && remainderRefs.current[stepIdx][digitIdx + 1]) remainderRefs.current[stepIdx][digitIdx + 1].focus()
-    } else if (val && digitIdx === digits.length - 1 && stepIdx < remainderInputs.length - 1) {
-      if (productRefs.current[stepIdx + 1] && productRefs.current[stepIdx + 1][0]) productRefs.current[stepIdx + 1][0].focus()
-    }
-  }
-
-  const handleKeyDown = (e, type, stepIdx, digitIdx) => {
-    if (e.key === 'Tab') {
-      e.preventDefault()
-      if (e.shiftKey) {
-        if (type === 'quotient' && digitIdx > 0) quotientRefs.current[digitIdx - 1]?.focus()
-        else if (type === 'product') {
-          if (digitIdx > 0) productRefs.current[stepIdx]?.[digitIdx - 1]?.focus()
-          else if (digitIdx === 0 && stepIdx > 0) { const lastR = remainderInputs[stepIdx - 1].length - 1; remainderRefs.current[stepIdx - 1]?.[lastR]?.focus() }
-          else if (digitIdx === 0 && stepIdx === 0) quotientRefs.current[quotientInputs.length - 1]?.focus()
-        }
-        else if (type === 'remainder') {
-          if (digitIdx > 0) remainderRefs.current[stepIdx]?.[digitIdx - 1]?.focus()
-          else if (digitIdx === 0) productRefs.current[stepIdx]?.[productInputs[stepIdx].length - 1]?.focus()
-        }
-      } else {
-        if (type === 'quotient' && digitIdx < quotientInputs.length - 1) quotientRefs.current[digitIdx + 1]?.focus()
-        else if (type === 'quotient' && digitIdx === quotientInputs.length - 1) productRefs.current[0]?.[0]?.focus()
-        else if (type === 'product') {
-          if (digitIdx < productInputs[stepIdx].length - 1) productRefs.current[stepIdx]?.[digitIdx + 1]?.focus()
-          else remainderRefs.current[stepIdx]?.[0]?.focus()
-        }
-        else if (type === 'remainder') {
-          if (digitIdx < remainderInputs[stepIdx].length - 1) remainderRefs.current[stepIdx]?.[digitIdx + 1]?.focus()
-          else if (stepIdx < remainderInputs.length - 1) productRefs.current[stepIdx + 1]?.[0]?.focus()
-        }
-      }
-    } else if (e.key === 'Backspace') {
-      if (e.currentTarget.value) return
-      e.preventDefault()
-      if (type === 'quotient' && digitIdx > 0 && quotientRefs.current[digitIdx - 1]) quotientRefs.current[digitIdx - 1].focus()
-      else if (type === 'product') {
-        if (digitIdx > 0 && productRefs.current[stepIdx] && productRefs.current[stepIdx][digitIdx - 1]) productRefs.current[stepIdx][digitIdx - 1].focus()
-        else if (digitIdx === 0 && stepIdx > 0 && remainderRefs.current[stepIdx - 1]) {
-          const lastR = remainderInputs[stepIdx - 1].length - 1
-          if (remainderRefs.current[stepIdx - 1][lastR]) remainderRefs.current[stepIdx - 1][lastR].focus()
-        } else if (digitIdx === 0 && stepIdx === 0 && quotientRefs.current[quotientInputs.length - 1]) quotientRefs.current[quotientInputs.length - 1].focus()
-      }
-      else if (type === 'remainder') {
-        if (digitIdx > 0 && remainderRefs.current[stepIdx] && remainderRefs.current[stepIdx][digitIdx - 1]) remainderRefs.current[stepIdx][digitIdx - 1].focus()
-        else if (digitIdx === 0 && productRefs.current[stepIdx] && productRefs.current[stepIdx][0]) productRefs.current[stepIdx][0].focus()
-      }
-    } else if (e.key === 'ArrowLeft') {
-      e.preventDefault()
-      if (type === 'quotient' && digitIdx > 0) quotientRefs.current[digitIdx - 1]?.focus()
-      else if (type === 'product') {
-        if (digitIdx > 0) productRefs.current[stepIdx]?.[digitIdx - 1]?.focus()
-        else if (digitIdx === 0 && stepIdx > 0) { const lastR = remainderInputs[stepIdx - 1].length - 1; remainderRefs.current[stepIdx - 1]?.[lastR]?.focus() }
-      }
-      else if (type === 'remainder') {
-        if (digitIdx > 0) remainderRefs.current[stepIdx]?.[digitIdx - 1]?.focus()
-        else if (digitIdx === 0) productRefs.current[stepIdx]?.[productInputs[stepIdx].length - 1]?.focus()
-      }
-    } else if (e.key === 'ArrowRight') {
-      e.preventDefault()
-      if (type === 'quotient' && digitIdx < quotientInputs.length - 1) quotientRefs.current[digitIdx + 1]?.focus()
-      else if (type === 'quotient' && digitIdx === quotientInputs.length - 1) productRefs.current[0]?.[0]?.focus()
-      else if (type === 'product') {
-        if (digitIdx < productInputs[stepIdx].length - 1) productRefs.current[stepIdx]?.[digitIdx + 1]?.focus()
-        else if (digitIdx === productInputs[stepIdx].length - 1) remainderRefs.current[stepIdx]?.[0]?.focus()
-      }
-      else if (type === 'remainder') {
-        if (digitIdx < remainderInputs[stepIdx].length - 1) remainderRefs.current[stepIdx]?.[digitIdx + 1]?.focus()
-        else if (digitIdx === remainderInputs[stepIdx].length - 1 && stepIdx < remainderInputs.length - 1) productRefs.current[stepIdx + 1]?.[0]?.focus()
-      }
-    }
-  }
-
-  const handleSubmit = async () => {
-    if (revealed || loading || !question) return
-    timer.stop()
-    const userQuotient = quotientInputs.map(v => v === '' ? null : Number(v))
-    const userProducts = productInputs.map(arr => arr.length === 0 ? 0 : arr.map(v => v === '' ? null : Number(v)).reduce((a, b) => a * 10 + (b || 0), 0))
-    const userRemainders = remainderInputs.map(arr => arr.length === 0 ? 0 : arr.map(v => v === '' ? null : Number(v)).reduce((a, b) => a * 10 + (b || 0), 0))
-    try {
-      const r = await fetch(`${API}/column-division-api/check`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' },
-        body: JSON.stringify({ dividend: question.dividend, divisor: question.divisor, userQuotient, userProducts, userRemainders, sessionGoal })
-      })
-      const data = await r.json()
-      setIsCorrect(data.correct); setRevealed(true)
-      let explanation = ''
-      let solSteps = null
-      try {
-        const sr = await fetch(`${API}/column-division-api/check`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' },
-          body: JSON.stringify({ dividend: question.dividend, divisor: question.divisor, solve: true })
-        })
-        const sd = await sr.json()
-        explanation = sd.explanation || ''
-        solSteps = sd.solutionSteps || null
-        if (!data.correct && sd.steps) {
-          setQuotientInputs(sd.quotientDigits.map(String))
-          setProductInputs(sd.steps.map(s => String(s.product).split('')))
-          setRemainderInputs(sd.steps.map(s => new Array(Math.max(String(s.remainder).length, 1)).fill(String(s.remainder).padStart(Math.max(String(s.remainder).length, 1), '0'))))
-        }
-      } catch (_) {}
-      setSolutionSteps(solSteps)
-      const resultLine = data.correct ? '\u2713 Correct!' : `\u2717 ${data.message || 'Incorrect'}`
-      setFeedback(resultLine)
-      setResults(prev => [...prev, { question: `${question.dividend} \u00f7 ${question.divisor}`, userAnswer: quotientInputs.filter(v => v).join('') || '\u2014', correct: data.correct, correctAnswer: data.answer, time: timer.elapsed, userCarries: quotientInputs.filter(v => v).join(''), correctCarries: question.quotientDigits.join('') }])
-      if (data.correct) setScore(s => s + 1)
-    } catch (e) { console.error('Check failed:', e); setFeedback('Error checking answer') }
-  }
-
-  const handleSolve = async () => {
-    if (revealed || loading || !question) return
-    timer.stop()
-    try {
-      const sr = await fetch(`${API}/column-division-api/check`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' },
-        body: JSON.stringify({ dividend: question.dividend, divisor: question.divisor, solve: true })
-      })
-      const sd = await sr.json()
-      setQuotientInputs(sd.quotientDigits.map(String))
-      setProductInputs(sd.steps.map(s => String(s.product).split('')))
-      setRemainderInputs(sd.steps.map(s => new Array(Math.max(String(s.remainder).length, 1)).fill(String(s.remainder).padStart(Math.max(String(s.remainder).length, 1), '0'))))
-      setIsCorrect(false); setRevealed(true)
-      setSolutionSteps(sd.solutionSteps || null)
-      setFeedback(sd.explanation || `Solved \u2014 ${question.dividend} \u00f7 ${question.divisor} = ${question.answer}`)
-      setResults(prev => [...prev, { question: `${question.dividend} \u00f7 ${question.divisor}`, userAnswer: '\u2014', correct: false, correctAnswer: question.answer, time: timer.elapsed, userCarries: '\u2014', correctCarries: question.quotientDigits.join('') }])
-    } catch (e) {
-      console.error('Solve failed:', e)
-      setQuotientInputs(question.quotientDigits.map(String))
-      setProductInputs(question.steps.map(s => String(s.product).split('')))
-      setRemainderInputs(question.steps.map(s => new Array(Math.max(String(s.remainder).length, 1)).fill(String(s.remainder).padStart(Math.max(String(s.remainder).length, 1), '0'))))
-      const fallbackSteps = question.steps.map((step, i) => ({
-        stepNum: i + 1, partialDividend: step.current, divisor: question.divisor,
-        quotientDigit: question.quotientDigits[i], product: step.product,
-        difference: step.current - step.product, remainder: step.remainder,
-        isLast: step.isLast, nextDigit: step.nextDigit,
-      }))
-      setSolutionSteps(fallbackSteps)
-      setIsCorrect(false); setRevealed(true)
-      setFeedback(`Solved \u2014 ${question.dividend} \u00f7 ${question.divisor} = ${question.answer}`)
-    }
-  }
-
-  const advanceQuestion = () => {
-    if (advanceTimerRef.current) { clearTimeout(advanceTimerRef.current); advanceTimerRef.current = null }
-    setRevealed(false); setIsCorrect(null); setFeedback(''); setSolutionSteps(null); setHoveredBorrow(null)
-    setActiveBorrows(new Set()); setBorrowInputs({})
-    setQuotientInputs([]); setProductInputs([]); setRemainderInputs([])
-    if (questionNumber >= totalQ) { setFinished(true); timer.stop() }
-    else { setQuestionNumber(qn => qn + 1); timer.reset(); timer.start(); fetchQuestion() }
-  }
-
-  const diffLabels = { easy: 'Easy (3\u00f71)', medium: 'Medium (4\u00f71)', hard: 'Hard (4\u00f72)', extrahard: 'XHard (5\u00f72)' }
-
-  if (!started && !finished) {
-    return (
-      <div style={{ minHeight: '100vh', background: 'var(--clr-bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px', fontFamily: 'Inter, sans-serif' }}>
-        <div style={{ background: 'var(--clr-card)', border: '1.5px solid var(--clr-border)', borderRadius: '28px', boxShadow: '0 20px 40px rgba(0,0,0,.45)', padding: '48px 40px', maxWidth: '720px', width: '100%', textAlign: 'center', position: 'relative' }}>
-          <button onClick={onBack} style={{ position: 'absolute', top: '24px', left: '24px', background: 'transparent', border: '1px solid var(--clr-border)', borderRadius: '6px', padding: '6px 14px', color: 'var(--clr-text-soft)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer' }}>{'\u2190'} Home</button>
-          <h1 style={{ fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 700, fontSize: '48px', color: 'var(--clr-text)', margin: '0 0 12px', lineHeight: 1.1 }}>Column Division</h1>
-          <p style={{ color: 'var(--clr-text-soft)', fontSize: '0.9rem', margin: '0 0 24px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>Paper-style long division with step-by-step work</p>
-
-          <div style={{ marginBottom: '20px' }}>
-            <button onClick={() => setShowHelp(h => !h)} style={{ background: showHelp ? 'var(--clr-input)' : 'transparent', border: '1px solid var(--clr-border)', borderRadius: '50px', padding: '6px 16px', color: 'var(--clr-accent)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.8rem', cursor: 'pointer' }}>{showHelp ? '\u2715 Close' : '? How to play'}</button>
-          </div>
-
-          {showHelp && (
-            <div style={{ textAlign: 'left', background: 'var(--clr-surface)', border: '1px solid var(--clr-border)', borderRadius: '16px', padding: '28px 28px', marginBottom: '24px', maxWidth: '580px', margin: '0 auto 24px' }}>
-              <h3 style={{ color: 'var(--clr-accent)', fontSize: '1.05rem', margin: '0 0 20px', fontFamily: 'Inter, sans-serif', fontWeight: 700, textAlign: 'center' }}>How Paper-Style Division Works</h3>
-              {[
-                { n: 1, title: 'Divide', desc: 'Find how many times the divisor goes into the current digits. Write that digit above the line.' },
-                { n: 2, title: 'Multiply', desc: 'Multiply the divisor \u00d7 quotient digit. Write the product below the current digits.' },
-                { n: 3, title: 'Subtract & bring down', desc: 'Subtract to get the remainder. Bring down the next dividend digit beside it.' },
-                { n: 4, title: 'Repeat', desc: 'Repeat until all digits are used. The final remainder is what\u2019s left.' },
-              ].map(({ n, title, desc }) => (
-                <div key={n} style={{ display: 'flex', gap: '14px', marginBottom: '16px', alignItems: 'flex-start' }}>
-                  <div style={{ minWidth: '28px', height: '28px', borderRadius: '50%', background: 'var(--clr-accent)', color: '#FFF', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 700, fontFamily: 'Inter, sans-serif' }}>{n}</div>
-                  <div style={{ flex: 1 }}>
-                    <div style={{ color: 'var(--clr-text)', fontSize: '0.85rem', fontWeight: 600, fontFamily: 'Inter, sans-serif', marginBottom: '4px' }}>{title}</div>
-                    <div style={{ color: 'var(--clr-text-soft)', fontSize: '0.82rem', fontFamily: 'Inter, sans-serif', lineHeight: '1.5' }}>{desc}</div>
-                  </div>
-                </div>
-              ))}
-              <div style={{ borderTop: '1px solid var(--clr-border)', paddingTop: '14px', marginTop: '14px' }}>
-                <div style={{ color: 'var(--clr-text)', fontSize: '0.82rem', fontWeight: 600, fontFamily: 'Inter, sans-serif', marginBottom: '8px' }}>Fill in each row:</div>
-                <div style={{ color: 'var(--clr-text-soft)', fontSize: '0.78rem', fontFamily: 'Inter, sans-serif', lineHeight: '1.7' }}>
-                  <strong>Quotient</strong> above the line, <strong>products</strong> below the working digits, <strong>remainders</strong> after each subtraction. Tab advances to the next field.
-                </div>
-              </div>
-            </div>
-          )}
-
-          <div style={{ marginBottom: '24px' }}>
-            <h3 style={{ color: 'var(--clr-text)', fontSize: '0.9rem', margin: '0 0 16px', fontFamily: 'Inter, sans-serif', fontWeight: 700 }}>Select Difficulty:</h3>
-            <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
-              {['easy', 'medium', 'hard', 'extrahard'].map(d => (
-                <button key={d} onClick={() => setDifficulty(d)} style={{ background: difficulty === d ? 'var(--clr-accent)' : 'transparent', border: difficulty === d ? '1px solid var(--clr-accent)' : '1px solid var(--clr-border)', borderRadius: '50px', padding: '8px 16px', color: difficulty === d ? '#FFF' : 'var(--clr-text-soft)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer' }}>{diffLabels[d]}</button>
-              ))}
-            </div>
-          </div>
-          <div style={{ marginBottom: '32px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <label style={{ color: 'var(--clr-text-soft)', fontSize: '0.85rem', margin: '0 0 12px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>How many questions? (max 100)</label>
-            <input type="text" value={numQuestions} onChange={(e) => { const v = e.target.value; if (v === '' || (/^\d+$/.test(v) && Number(v) <= 100)) setNumQuestions(v) }} style={{ background: 'var(--clr-input)', border: '1px solid var(--clr-border)', borderRadius: '6px', padding: '10px', color: 'var(--clr-text)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem', width: '100px', textAlign: 'center', outline: 'none' }} placeholder={String(DEFAULT_TOTAL)} />
-          </div>
-          <button onClick={startQuiz} style={{ background: 'var(--clr-accent)', border: 'none', borderRadius: '6px', padding: '10px 24px', color: '#FFF', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer' }}>Start Quiz</button>
-        </div>
-      </div>
-    )
-  }
-
-  const digitStyle = (isRight, isWrong, big) => ({
-    width: COL, height: big ? 44 : 38, textAlign: 'center', fontSize: big ? '1.3rem' : '1.05rem', fontWeight: 700,
-    background: isRight ? 'var(--clr-correct-bg)' : isWrong ? 'var(--clr-wrong-bg)' : 'var(--clr-input)',
-    border: `2px solid ${isRight ? 'var(--clr-correct)' : isWrong ? 'var(--clr-wrong)' : 'var(--clr-border)'}`,
-    borderRadius: 8, color: isRight ? 'var(--clr-correct)' : isWrong ? 'var(--clr-wrong)' : 'var(--clr-text)',
-    fontFamily: '"Courier New", monospace', outline: 'none',
-  })
-
-  const renderCell = (col, content) => (
-    <span key={col} style={{ width: COL, height: 44, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.1rem', fontWeight: 700, fontFamily: '"Courier New", monospace', color: 'var(--clr-text)' }}>
-      {content}
-    </span>
-  )
-
-  const BorrowRow = ({ rowKey, numCols }) => {
-    const hasAny = Array.from({ length: numCols }, (_, col) => activeBorrows.has(`${rowKey}-${col}`)).some(Boolean)
-    const hasHover = Array.from({ length: numCols }, (_, col) => hoveredBorrow === `${rowKey}-${col}`).some(Boolean)
-    if (!hasAny && !hasHover) return null
-    return (
-      <div style={{ display: 'flex', height: 32, alignItems: 'center' }}>
-        <div style={{ width: BRACKET, flexShrink: 0 }} />
-        {Array.from({ length: numCols }, (_, col) => {
-          const key = `${rowKey}-${col}`
-          const isActive = activeBorrows.has(key)
-          const isHovered = hoveredBorrow === key
-          const val = borrowInputs[key] || ''
-          return (
-            <div key={col} style={{ width: COL, flexShrink: 0, display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>
-              {(isActive || (isHovered && val)) ? (
-                <input ref={el => { borrowRefs.current[key] = el }}
-                  type="text" maxLength={2} readOnly={revealed}
-                  value={revealed ? val : val}
-                  onChange={e => handleBorrowInput(rowKey, col, e.target.value)}
-                  onKeyDown={e => {
-                    if (e.key === 'Enter' || e.key === 'Tab' || e.key === 'Escape') {
-                      e.preventDefault(); hideAllBorrows()
-                    }
-                  }}
-                  style={{ width: COL - 4, height: 28, textAlign: 'center', fontSize: '0.8rem', fontWeight: 700, background: 'var(--clr-input)', border: '1.5px dashed var(--clr-accent)', borderRadius: 6, color: 'var(--clr-accent)', fontFamily: '"Courier New", monospace', outline: 'none', padding: 0 }}
-                />
-              ) : null}
-            </div>
-          )
-        })}
-      </div>
-    )
-  }
-
-  return (
-    <QuizLayout title="Column Division" onBack={onBack} timer={timer}>
-      {started && !finished && <>
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem', marginBottom: '0.3rem' }}>
-          <div className="progress-pill center">Question {questionNumber}/{totalQ}</div>
-        </div>
-        {loading || !question ? <div className="question-box">Loading question\u2026</div> : (() => {
-          const numCols = question.dividendDigits.length
-          const qc = question.firstQuotientCol
-          const steps = question.steps
-
-          return (
-            <>
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', margin: '16px auto', fontFamily: '"Courier New", monospace', fontWeight: 700, maxWidth: 'fit-content' }}>
-
-                {/* === Quotient row === */}
-                <div style={{ display: 'flex', height: 44 }}>
-                  <div style={{ width: BRACKET, flexShrink: 0 }} />
-                  {Array.from({ length: numCols }, (_, col) => {
-                    const qIdx = col - qc
-                    if (qIdx >= 0 && qIdx < question.quotientDigits.length) {
-                      const correctDigit = String(question.quotientDigits[qIdx])
-                      const val = revealed ? correctDigit : (quotientInputs[qIdx] || '')
-                      const isR = revealed && val === correctDigit
-                      const isW = revealed && val !== correctDigit
-                      return (
-                        <input key={col} ref={el => quotientRefs.current[qIdx] = el} type="text" maxLength={1}
-                          value={val}
-                          onChange={e => handleQuotientInput(qIdx, e.target.value)}
-                          onKeyDown={e => handleKeyDown(e, 'quotient', qIdx, qIdx)}
-                          disabled={revealed}
-                          style={{ ...digitStyle(isR, isW, true), width: COL, flexShrink: 0 }}
-                        />
-                      )
-                    }
-                    return <span key={col} style={{ width: COL, flexShrink: 0 }} />
-                  })}
-                </div>
-
-                {/* === Vinculum line === */}
-                <div style={{ display: 'flex', height: 6 }}>
-                  <div style={{ width: BRACKET, flexShrink: 0 }} />
-                  <div style={{ width: numCols * COL, height: 3, background: 'var(--clr-text)', borderRadius: 2, marginTop: 1 }} />
-                </div>
-
-                {/* === Borrow row above dividend === */}
-                <BorrowRow rowKey="d" numCols={numCols} />
-
-                {/* === Divisor bracket + dividend (clickable for borrow) === */}
-                <div style={{ display: 'flex', height: 44, alignItems: 'center' }}>
-                  <div style={{ width: BRACKET, flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 2, paddingRight: 4 }}>
-                    <span style={{ fontSize: '1.2rem', color: 'var(--clr-text)' }}>{question.divisor}</span>
-                    <span style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--clr-text)', lineHeight: 1 }}>{')'}</span>
-                  </div>
-                  {question.dividendDigits.map((d, col) => {
-                    const key = `d-${col}`
-                    const struck = activeBorrows.has(key) || (revealed && borrowInputs[key])
-                    return (
-                      <span key={col}
-                        onClick={() => { if (!revealed) activateBorrow('d', col, activeBorrows.has(key)) }}
-                        onMouseEnter={() => { if (!activeBorrows.has(key) && borrowInputs[key]) setHoveredBorrow(key) }}
-                        onMouseLeave={() => setHoveredBorrow(null)}
-                        style={{
-                          width: COL, height: 44, display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-                          fontSize: '1.1rem', fontWeight: 700, fontFamily: '"Courier New", monospace',
-                          color: struck ? 'var(--clr-text-soft)' : 'var(--clr-text)',
-                          textDecoration: struck ? 'line-through' : 'none',
-                          opacity: struck ? 0.5 : 1,
-                          cursor: revealed ? 'default' : 'pointer',
-                          transition: 'all 0.15s ease', position: 'relative',
-                        }}>
-                        {d}
-                      </span>
-                    )
-                  })}
-                </div>
-
-                {/* === Steps: product, line, remainder === */}
-                {steps.map((step, j) => {
-                  const prodStr = String(step.product)
-                  const prodDigits = prodStr.split('')
-                  const prodRightCol = qc + j
-                  const prodLeftCol = prodRightCol - prodDigits.length + 1
-
-                  const isLast = j === steps.length - 1
-                  const remDigitCount = Math.max(String(step.remainder).length, 1)
-                  const remRightCol = qc + j
-                  const remStr = String(step.remainder).padStart(remDigitCount, '0')
-                  const remLeftCol = remRightCol - remDigitCount + 1
-                  const bdCol = isLast ? -1 : qc + j + 1
-
-                  return (
-                    <div key={j}>
-                      {/* Minus + Product row (bottom number — no borrow above) */}
-                      <div style={{ display: 'flex', height: 44, alignItems: 'center' }}>
-                        <div style={{ width: BRACKET, flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'flex-end', paddingRight: 4 }}>
-                          <span style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--clr-text-soft)' }}>{'\u2212'}</span>
-                        </div>
-                        {Array.from({ length: numCols }, (_, col) => {
-                          if (col >= prodLeftCol && col <= prodRightCol) {
-                            const dIdx = col - prodLeftCol
-                            const correctDigit = prodDigits[dIdx]
-                            const val = revealed ? correctDigit : (productInputs[j]?.[dIdx] || '')
-                            const isR = revealed && val === correctDigit
-                            const isW = revealed && val !== correctDigit
-                            return (
-                              <input key={col} ref={el => { if (!productRefs.current[j]) productRefs.current[j] = []; productRefs.current[j][dIdx] = el }}
-                                type="text" maxLength={1} value={val}
-                                onChange={e => handleProductInput(j, dIdx, e.target.value)}
-                                onKeyDown={e => handleKeyDown(e, 'product', j, dIdx)}
-                                disabled={revealed}
-                                style={{ ...digitStyle(isR, isW, false), width: COL, flexShrink: 0 }}
-                              />
-                            )
-                          }
-                          return <span key={col} style={{ width: COL, flexShrink: 0 }} />
-                        })}
-                      </div>
-
-                      {/* Full-width separator line */}
-                      <div style={{ display: 'flex', height: 6 }}>
-                        <div style={{ width: BRACKET, flexShrink: 0 }} />
-                        <div style={{ width: numCols * COL, height: 3, background: 'var(--clr-border)', borderRadius: 2, marginTop: 1 }} />
-                      </div>
-
-                      {/* Borrow row above remainder */}
-                      <BorrowRow rowKey={`r${j}`} numCols={numCols} />
-
-                      {/* Remainder row (user types) + brought-down digit (static) */}
-                      <div style={{ display: 'flex', height: 44, alignItems: 'center' }}>
-                        <div style={{ width: BRACKET, flexShrink: 0 }} />
-                        {Array.from({ length: numCols }, (_, col) => {
-                          if (col >= remLeftCol && col <= remRightCol) {
-                            const dIdx = col - remLeftCol
-                            const correctDigit = remStr[dIdx] || '0'
-                            const val = revealed ? correctDigit : (remainderInputs[j]?.[dIdx] || '')
-                            const isR = revealed && val === correctDigit
-                            const isW = revealed && val !== correctDigit
-                            return (
-                              <input key={col} ref={el => { if (!remainderRefs.current[j]) remainderRefs.current[j] = []; remainderRefs.current[j][dIdx] = el }}
-                                type="text" maxLength={1} value={val}
-                                onChange={e => handleRemainderInput(j, dIdx, e.target.value)}
-                                onKeyDown={e => handleKeyDown(e, 'remainder', j, dIdx)}
-                                onDoubleClick={() => { if (!revealed) activateBorrow(`r${j}`, col, activeBorrows.has(`r${j}-${col}`)) }}
-                                disabled={revealed}
-                                style={{ ...digitStyle(isR, isW, false), width: COL, flexShrink: 0 }}
-                              />
-                            )
-                          }
-                          if (!isLast && col === bdCol) {
-                            const bdDigit = question.dividendDigits[col]
-                            const correctDigit = String(bdDigit)
-                            const isR = revealed
-                            const bdKey = `r${j}-${col}`
-                            const bdStruck = activeBorrows.has(bdKey) || (revealed && borrowInputs[bdKey])
-                            return <span key={col}
-                              onClick={() => { if (!revealed) activateBorrow(`r${j}`, col, activeBorrows.has(bdKey)) }}
-                              onMouseEnter={() => { if (!activeBorrows.has(bdKey) && borrowInputs[bdKey]) setHoveredBorrow(bdKey) }}
-                              onMouseLeave={() => setHoveredBorrow(null)}
-                              style={{ width: COL, height: 38, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.05rem', fontWeight: 700, fontFamily: '"Courier New", monospace', color: bdStruck ? 'var(--clr-text-soft)' : 'var(--clr-accent)', opacity: bdStruck ? 0.5 : 0.7, textDecoration: bdStruck ? 'line-through' : 'none', cursor: revealed ? 'default' : 'pointer', transition: 'all 0.15s ease' }}>{bdDigit}</span>
-                          }
-                          return <span key={col} style={{ width: COL, flexShrink: 0 }} />
-                        })}
-                      </div>
-                    </div>
-                  )
-                })}
-              </div>
-
-              {feedback && (
-                <div style={{
-                  textAlign: 'left', padding: '12px 16px', borderRadius: '8px', margin: '8px 0',
-                  background: isCorrect ? 'rgba(92, 184, 122, 0.25)' : 'rgba(224, 90, 74, 0.25)',
-                  color: isCorrect ? 'var(--clr-correct)' : 'var(--clr-wrong)',
-                  fontWeight: 600, fontSize: '0.9rem',
-                  whiteSpace: 'pre-line', lineHeight: '1.6',
-                  border: isCorrect ? '2px solid var(--clr-correct)' : '2px solid var(--clr-wrong)'
-                }}>{feedback}</div>
-              )}
-
-              {/* Step-by-step solution panel */}
-              {solutionSteps && solutionSteps.length > 0 && (
-                <div style={{
-                  textAlign: 'left', borderRadius: '12px', margin: '8px 0',
-                  background: 'var(--clr-card)', border: '1.5px solid var(--clr-border)',
-                  overflow: 'hidden'
-                }}>
-                  <div style={{
-                    padding: '10px 16px', fontWeight: 700, fontSize: '0.95rem',
-                    color: 'var(--clr-text)', background: 'var(--clr-bg)',
-                    borderBottom: '1px solid var(--clr-border)', display: 'flex', alignItems: 'center', gap: 8
-                  }}>
-                    <span style={{ fontSize: '1.1rem' }}>{'\ud83d\udcdd'}</span>
-                    Step-by-Step Solution
-                  </div>
-                  <div style={{ padding: '8px 16px 12px' }}>
-                    {solutionSteps.map((s, i) => (
-                      <div key={i} style={{
-                        padding: '10px 0',
-                        borderBottom: i < solutionSteps.length - 1 ? '1px solid var(--clr-border)' : 'none'
-                      }}>
-                        <div style={{ fontWeight: 700, fontSize: '0.88rem', color: 'var(--clr-accent)', marginBottom: 6 }}>
-                          Step {s.stepNum}: {s.partialDividend} {'\u00f7'} {s.divisor}
-                        </div>
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: 3, fontSize: '0.85rem', color: 'var(--clr-text)', fontFamily: '"Courier New", monospace', paddingLeft: 12 }}>
-                          <div>
-                            <span style={{ color: 'var(--clr-text-soft)' }}>{s.quotientDigit} {'\u00d7'} {s.divisor} = </span>
-                            <span style={{ fontWeight: 700 }}>{s.product}</span>
-                          </div>
-                          <div>
-                            <span style={{ color: 'var(--clr-text-soft)' }}>{s.partialDividend} {'\u2212'} {s.product} = </span>
-                            <span style={{ fontWeight: 700 }}>{s.difference}</span>
-                          </div>
-                          {!s.isLast && s.nextDigit !== null && (
-                            <div style={{ color: 'var(--clr-text-soft)', fontStyle: 'italic', fontFamily: 'Inter, sans-serif' }}>
-                              Bring down <span style={{ fontWeight: 700, color: 'var(--clr-accent)', fontStyle: 'normal' }}>{s.nextDigit}</span> {'\u2192'} {s.remainder * 10 + s.nextDigit}
-                            </div>
-                          )}
-                          {s.isLast && (
-                            <div style={{ color: 'var(--clr-text-soft)', fontStyle: 'italic', fontFamily: 'Inter, sans-serif' }}>
-                              Remainder: <span style={{ fontWeight: 700, color: s.remainder > 0 ? 'var(--clr-accent)' : 'var(--clr-correct)', fontStyle: 'normal' }}>{s.remainder}</span>
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    ))}
-                    <div style={{
-                      marginTop: 10, padding: '8px 12px', borderRadius: '8px',
-                      background: 'var(--clr-bg)', fontWeight: 700, fontSize: '0.9rem',
-                      color: 'var(--clr-text)', textAlign: 'center'
-                    }}>
-                      {question.dividend} {'\u00f7'} {question.divisor} = {question.answer}{question.steps[question.steps.length - 1]?.remainder > 0 ? ` R${question.steps[question.steps.length - 1].remainder}` : ''}
-                    </div>
-                  </div>
-                </div>
-              )}
-              <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', margin: '12px 0', flexWrap: 'wrap' }}>
-                {!revealed && <button onClick={handleSubmit} disabled={loading} style={{ background: 'var(--clr-accent)', border: 'none', borderRadius: '8px', padding: '10px 24px', color: '#FFF', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer' }}>Submit</button>}
-                {!revealed && <button onClick={handleSolve} disabled={loading} style={{ background: 'transparent', border: '1px solid var(--clr-border)', borderRadius: '8px', padding: '10px 24px', color: 'var(--clr-text-soft)', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer' }}>Solve</button>}
-                {revealed && <button onClick={advanceQuestion} style={{ background: 'var(--clr-accent)', border: 'none', borderRadius: '8px', padding: '10px 24px', color: '#FFF', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer' }}>Next Question {'\u2192'}</button>}
-              </div>
-            </>
-          )
-        })()}
-        {results.length > 0 && <ResultsTable results={results} />}
-      </>}
-      {finished && (
-        <div style={{ textAlign: 'center', padding: '24px' }}>
-          <h2 style={{ color: 'var(--clr-text)', marginBottom: '16px' }}>Score: {score}/{totalQ}</h2>
-          <ResultsTable results={results} />
-          <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', marginTop: '24px' }}>
-            <button onClick={() => { setStarted(false); setFinished(false) }} style={{ background: 'var(--clr-accent)', border: 'none', borderRadius: '8px', padding: '10px 24px', color: '#FFF', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer' }}>Play Again</button>
-          </div>
-        </div>
-      )}
-    </QuizLayout>
-  )
-}
-
-
-/**
- * ColumnSubtractionApp Component
- * Vertical column subtraction: minuend − subtrahend.
- * User fills borrow boxes above each column + the difference digits below.
- */
-function ColumnSubtractionApp({ onBack, initialDifficulty, initialNumQuestions, initialStarted, isGoalMode = false }) {
-  const [difficulty, setDifficulty] = useState(initialDifficulty || 'easy')
-  const [numQuestions, setNumQuestions] = useState(initialNumQuestions || String(DEFAULT_TOTAL))
-  const [started, setStarted] = useState(initialStarted || false)
-  const [finished, setFinished] = useState(false)
-  const [question, setQuestion] = useState(null)
-  const [score, setScore] = useState(0)
-  const [questionNumber, setQuestionNumber] = useState(0)
-  const [totalQ, setTotalQ] = useState(DEFAULT_TOTAL)
-  const [feedback, setFeedback] = useState('')
-  const [isCorrect, setIsCorrect] = useState(null)
-  const [loading, setLoading] = useState(false)
-  const [revealed, setRevealed] = useState(false)
-  const [results, setResults] = useState([])
-  const timer = useTimer()
-  const [sessionGoal, setSessionGoal] = useState(isGoalMode ? 'speed' : 'standard')
-  const [showHelp, setShowHelp] = useState(false)
-
-  const [answerInputs, setAnswerInputs] = useState([])
-  const [borrowInputs, setBorrowInputs] = useState([])
-  const [correctAnswerDigits, setCorrectAnswerDigits] = useState(null)
-  const [correctBorrowDigits, setCorrectBorrowDigits] = useState(null)
-  const [activeBorrows, setActiveBorrows] = useState(new Set())
-  const answerRefs = useRef([])
-  const borrowRefs = useRef([])
-  const advanceTimerRef = useRef(null)
-  // Tracks the in-flight question fetch so a newer fetchQuestion() call (or
-  // unmount) can cancel a still-pending older one — see makeQuizApp's
-  // loadQuestion() for the same pattern and the race it prevents.
-  const questionAbortRef = useRef(null)
-  useEffect(() => () => questionAbortRef.current?.abort(), [])
-
-  useEffect(() => { if (!isGoalMode) setSessionGoal('standard') }, [isGoalMode])
-
-  const startQuiz = async () => {
-    const q = Number(numQuestions) || DEFAULT_TOTAL
-    setTotalQ(q); setScore(0); setQuestionNumber(1); setResults([])
-    setFinished(false); setStarted(true); setFeedback(''); setIsCorrect(null); setRevealed(false)
-    setCorrectAnswerDigits(null); setCorrectBorrowDigits(null); setActiveBorrows(new Set())
-    timer.reset(); timer.start();
-    await fetchQuestion()
-  }
-
-  const fetchQuestion = async (diff) => {
-    questionAbortRef.current?.abort()
-    const controller = new AbortController()
-    questionAbortRef.current = controller
-
-    setLoading(true)
-    try {
-      const r = await fetch(`${API}/column-subtraction-api/question?difficulty=${diff || difficulty}`, { signal: controller.signal })
-      const data = await r.json()
-      setQuestion(data)
-      setAnswerInputs(new Array(data.answerDigits.length).fill(''))
-      setBorrowInputs(new Array(data.borrows.length).fill(''))
-      setCorrectAnswerDigits(null); setCorrectBorrowDigits(null); setActiveBorrows(new Set())
-      setTimeout(() => {
-        const lastIdx = data.answerDigits.length - 1
-        if (answerRefs.current[lastIdx]) answerRefs.current[lastIdx].focus()
-      }, 100)
-    } catch (e) {
-      if (e.name === 'AbortError') return
-      console.error('Fetch column subtraction question failed:', e)
-    }
-    setLoading(false)
-  }
-
-  const activateBorrow = (idx, isCurrentlyActive) => {
-    if (isCurrentlyActive) {
-      setActiveBorrows(prev => { const next = new Set(prev); next.delete(idx); return next })
-      setBorrowInputs(prev => { const a = [...prev]; a[idx] = ''; return a })
-    } else {
-      setActiveBorrows(prev => { const next = new Set(prev); next.add(idx); return next })
-      setTimeout(() => { if (borrowRefs.current[idx]) borrowRefs.current[idx].focus() }, 50)
-    }
-  }
-
-  const handleInput = (idx, val, isBorrow) => {
-    if (revealed) return
-    if (val !== '' && !(isBorrow ? /^\d{1,2}$/.test(val) : /^\d$/.test(val))) return
-    const setter = isBorrow ? setBorrowInputs : setAnswerInputs
-    const arr = isBorrow ? borrowInputs : answerInputs
-    const next = [...arr]; next[idx] = val; setter(next)
-  }
-
-  const focusAnswer = (i) => { if (answerRefs.current[i]) answerRefs.current[i].focus() }
-  const focusBorrow = (i) => { if (borrowRefs.current[i]) borrowRefs.current[i].focus() }
-
-  const handleKeyDown = (idx, e, isBorrow) => {
-
-    if (e.key === 'Backspace') {
-      if (e.currentTarget.value) return
-      e.preventDefault()
-      if (isBorrow) {
-        focusAnswer(idx)
-      } else if (idx < answerInputs.length - 1) {
-        focusAnswer(idx + 1)
-      }
-      return
-    }
-
-    if (e.key === 'ArrowUp') {
-      e.preventDefault()
-      if (!isBorrow && activeBorrows.has(idx) && borrowRefs.current[idx]) focusBorrow(idx)
-      return
-    }
-    if (e.key === 'ArrowDown') {
-      e.preventDefault()
-      if (isBorrow) focusAnswer(idx)
-      return
-    }
-    if (e.key === 'ArrowLeft') {
-      e.preventDefault()
-      if (!isBorrow) { if (idx > 0) focusAnswer(idx - 1) }
-      else { focusAnswer(idx) }
-      return
-    }
-    if (e.key === 'ArrowRight') {
-      e.preventDefault()
-      if (!isBorrow) { if (idx < answerInputs.length - 1) focusAnswer(idx + 1) }
-      else { focusAnswer(idx) }
-      return
-    }
-  }
-
-  const handleSubmit = async () => {
-    if (revealed || loading || !question) return
-    timer.stop()
-    const userAnswer = answerInputs.map(v => v === '' ? null : Number(v))
-    const userBorrows = borrowInputs.map(v => v === '' ? '' : v)
-    try {
-      const r = await fetch(`${API}/column-subtraction-api/check`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' },
-        body: JSON.stringify({ a: question.a, b: question.b, userAnswer, userBorrows, sessionGoal })
-      })
-      const data = await r.json()
-      const allBorrows = new Set(activeBorrows)
-      if (data.correctBorrows && question.aDigits) {
-        data.correctBorrows.forEach((v, i) => { if (question.aDigits[i] != null && String(v) !== String(question.aDigits[i])) allBorrows.add(i) })
-      }
-      setCorrectAnswerDigits(data.answerDigits)
-      setCorrectBorrowDigits(data.correctBorrows)
-      setIsCorrect(data.correct); setRevealed(true); setActiveBorrows(allBorrows)
-      let explanation = ''
-      try {
-        const sr = await fetch(`${API}/column-subtraction-api/check`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' },
-          body: JSON.stringify({ a: question.a, b: question.b, userAnswer: [], userBorrows: [], solve: true })
-        })
-        const sd = await sr.json()
-        explanation = sd.explanation || ''
-      } catch (_) {}
-      const resultLine = data.correct ? '✓ Correct!' : `✗ ${data.message || 'Incorrect'}`
-      setFeedback(explanation ? `${resultLine}\n\n— Step-by-step solution —\n${explanation}` : resultLine)
-      const userBorrowsStr = borrowInputs.filter(v => v !== '').join(', ') || '—'
-      const correctBorrowsStr = (data.correctBorrows || []).filter(v => v !== null && v !== '').join(', ') || '—'
-      setResults(prev => [...prev, { question: `${question.a} − ${question.b}`, userAnswer: Number(userAnswer.filter(v => v !== null).join('')) || '', correct: data.correct, correctAnswer: data.correctAnswer, time: timer.elapsed, userCarries: userBorrowsStr, correctCarries: correctBorrowsStr }])
-      if (data.correct) setScore(s => s + 1)
-    } catch (e) { console.error('Check failed:', e); setFeedback('Error checking answer') }
-  }
-
-  const handleSolve = async () => {
-    if (revealed || loading || !question) return
-    timer.stop()
-    const allBorrows = new Set()
-    try {
-      const r = await fetch(`${API}/column-subtraction-api/check`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' },
-        body: JSON.stringify({ a: question.a, b: question.b, userAnswer: [], userBorrows: [], solve: true })
-      })
-      const data = await r.json()
-      if (data.correctBorrows && question.aDigits) {
-        data.correctBorrows.forEach((v, i) => { if (question.aDigits[i] != null && String(v) !== String(question.aDigits[i])) allBorrows.add(i) })
-      }
-      setCorrectAnswerDigits(data.answerDigits)
-      setCorrectBorrowDigits(data.correctBorrows)
-      setIsCorrect(false); setRevealed(true); setActiveBorrows(allBorrows)
-      setAnswerInputs(data.answerDigits ? data.answerDigits.map(String) : question.answerDigits.map(String))
-      setBorrowInputs(data.correctBorrows ? data.correctBorrows.map(String) : question.borrows.map(String))
-      setFeedback(data.explanation || 'Solved — study the borrows above each column.')
-      const solveBorrowStr = (data.correctBorrows || []).filter(v => v !== null && v !== '').join(', ') || '—'
-      setResults(prev => [...prev, { question: `${question.a} − ${question.b}`, userAnswer: data.correctAnswer, correct: false, correctAnswer: data.correctAnswer, time: timer.elapsed, userCarries: '—', correctCarries: solveBorrowStr }])
-    } catch (e) {
-      console.error('Solve failed:', e)
-      if (question.borrows && question.aDigits) {
-        question.borrows.forEach((v, i) => { if (question.aDigits[i] != null && String(v) !== String(question.aDigits[i])) allBorrows.add(i) })
-      }
-      setCorrectAnswerDigits(question.answerDigits)
-      setCorrectBorrowDigits(question.borrows)
-      setRevealed(true); setIsCorrect(false); setActiveBorrows(allBorrows)
-      setAnswerInputs(question.answerDigits.map(String))
-      setBorrowInputs(question.borrows.map(String))
-      setFeedback('Solved — study the borrows above each column.')
-      const fallbackBorrowStr = (question.borrows || []).filter(v => v !== null && v !== '').join(', ') || '—'
-      setResults(prev => [...prev, { question: `${question.a} − ${question.b}`, userAnswer: question.answer, correct: false, correctAnswer: question.answer, time: timer.elapsed, userCarries: '—', correctCarries: fallbackBorrowStr }])
-    }
-  }
-
-  const advanceQuestion = () => {
-    if (advanceTimerRef.current) { clearTimeout(advanceTimerRef.current); advanceTimerRef.current = null }
-    setRevealed(false); setIsCorrect(null); setFeedback(''); setCorrectAnswerDigits(null); setCorrectBorrowDigits(null); setActiveBorrows(new Set())
-    if (questionNumber >= totalQ) { setFinished(true); timer.stop() }
-    else { setQuestionNumber(qn => qn + 1); setAnswerInputs([]); setBorrowInputs([]); timer.reset(); timer.start(); fetchQuestion() }
-  }
-
-  const diffLabels = { easy: 'Easy — 2 digit', medium: 'Medium — 2 digit', hard: 'Hard — 3 digit', extrahard: 'Extra Hard — 4 digit' }
-
-  if (!started && !finished) {
-    return (
-      <div style={{ minHeight: '100vh', background: 'var(--clr-bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px', fontFamily: 'Inter, sans-serif' }}>
-        <div style={{ background: 'var(--clr-card)', border: '1.5px solid var(--clr-border)', borderRadius: '28px', boxShadow: '0 20px 40px rgba(0,0,0,.45)', padding: '48px 40px', maxWidth: '720px', width: '100%', textAlign: 'center', position: 'relative' }}>
-          <button onClick={onBack} style={{ position: 'absolute', top: '24px', left: '24px', background: 'transparent', border: '1px solid var(--clr-border)', borderRadius: '6px', padding: '6px 14px', color: 'var(--clr-text-soft)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer' }}>← Home</button>
-          <h1 style={{ fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 700, fontSize: '48px', color: 'var(--clr-text)', margin: '0 0 12px', lineHeight: 1.1 }}>Column Subtraction</h1>
-          <p style={{ color: 'var(--clr-text-soft)', fontSize: '0.9rem', margin: '0 0 24px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>Subtract vertically with borrowing</p>
-
-          {/* Help toggle */}
-          <div style={{ marginBottom: '20px' }}>
-            <button onClick={() => setShowHelp(h => !h)} style={{ background: showHelp ? 'var(--clr-input)' : 'transparent', border: '1px solid var(--clr-border)', borderRadius: '50px', padding: '6px 16px', color: 'var(--clr-accent)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.8rem', cursor: 'pointer' }}>{showHelp ? '✕ Close' : '? How to play'}</button>
-          </div>
-
-          {showHelp && (
-            <div style={{ textAlign: 'left', background: 'var(--clr-surface)', border: '1px solid var(--clr-border)', borderRadius: '16px', padding: '28px 28px', marginBottom: '24px', maxWidth: '580px', margin: '0 auto 24px' }}>
-              <h3 style={{ color: 'var(--clr-accent)', fontSize: '1.05rem', margin: '0 0 20px', fontFamily: 'Inter, sans-serif', fontWeight: 700, textAlign: 'center' }}>How Column Subtraction Works</h3>
-
-              {/* Step 1 */}
-              <div style={{ display: 'flex', gap: '14px', marginBottom: '18px', alignItems: 'flex-start' }}>
-                <div style={{ minWidth: '28px', height: '28px', borderRadius: '50%', background: 'var(--clr-accent)', color: '#FFF', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 700, fontFamily: 'Inter, sans-serif' }}>1</div>
-                <div style={{ flex: 1 }}>
-                  <div style={{ color: 'var(--clr-text)', fontSize: '0.85rem', fontWeight: 600, fontFamily: 'Inter, sans-serif', marginBottom: '6px' }}>See the problem</div>
-                  <div style={{ color: 'var(--clr-text-soft)', fontSize: '0.82rem', fontFamily: 'Inter, sans-serif', lineHeight: '1.5', marginBottom: '10px' }}>The problem appears vertically. Start from the <strong style={{ color: 'var(--clr-text)' }}>rightmost column</strong> and work left.</div>
-                  <div style={{ background: 'var(--clr-card)', borderRadius: '10px', padding: '14px 16px', fontFamily: '"Courier New", monospace', fontSize: '1.2rem', fontWeight: 700, lineHeight: '1.5', textAlign: 'center' }}>
-                    <div><span style={{ color: 'var(--clr-text)' }}>2</span><span style={{ color: 'var(--clr-text)' }}>3</span></div>
-                    <div><span style={{ color: 'var(--clr-text-soft)', fontSize: '0.9rem' }}>− </span><span style={{ color: 'var(--clr-text)' }}>1</span><span style={{ color: 'var(--clr-text)' }}>8</span></div>
-                    <div style={{ width: '80px', height: '2px', background: 'var(--clr-border)', margin: '4px auto' }} />
-                    <div><span style={{ color: 'var(--clr-text)' }}>_</span><span style={{ color: 'var(--clr-text)' }}>_</span></div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Step 2 */}
-              <div style={{ display: 'flex', gap: '14px', marginBottom: '18px', alignItems: 'flex-start' }}>
-                <div style={{ minWidth: '28px', height: '28px', borderRadius: '50%', background: 'var(--clr-accent)', color: '#FFF', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 700, fontFamily: 'Inter, sans-serif' }}>2</div>
-                <div style={{ flex: 1 }}>
-                  <div style={{ color: 'var(--clr-text)', fontSize: '0.85rem', fontWeight: 600, fontFamily: 'Inter, sans-serif', marginBottom: '6px' }}>Can't subtract? Click the top digit to borrow</div>
-                  <div style={{ color: 'var(--clr-text-soft)', fontSize: '0.82rem', fontFamily: 'Inter, sans-serif', lineHeight: '1.5', marginBottom: '10px' }}>3 − 8 is not possible, so click the <strong style={{ color: 'var(--clr-accent)' }}>3</strong> above. It gets a <span style={{ textDecoration: 'line-through', color: 'var(--clr-accent)' }}>strikethrough</span> and a box appears above it.</div>
-                  <div style={{ background: 'var(--clr-card)', borderRadius: '10px', padding: '14px 16px', fontFamily: '"Courier New", monospace', fontSize: '1.2rem', fontWeight: 700, lineHeight: '1.5', textAlign: 'center' }}>
-                    <div style={{ fontSize: '0.75rem', color: 'var(--clr-accent)', marginBottom: '2px', fontFamily: 'Inter, sans-serif', fontWeight: 600 }}>↑ box appears here</div>
-                    <div><span style={{ color: 'var(--clr-text-soft)', opacity: 0.5, textDecoration: 'line-through' }}>2</span><span style={{ color: 'var(--clr-accent)', border: '1.5px solid var(--clr-accent)', borderRadius: '4px', padding: '0 4px' }}>3</span></div>
-                    <div><span style={{ color: 'var(--clr-text-soft)', fontSize: '0.9rem' }}>− </span><span style={{ color: 'var(--clr-text)' }}>1</span><span style={{ color: 'var(--clr-text)' }}>8</span></div>
-                    <div style={{ width: '80px', height: '2px', background: 'var(--clr-border)', margin: '4px auto' }} />
-                    <div><span style={{ color: 'var(--clr-text)' }}>_</span><span style={{ color: 'var(--clr-text)' }}>_</span></div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Step 3 */}
-              <div style={{ display: 'flex', gap: '14px', marginBottom: '18px', alignItems: 'flex-start' }}>
-                <div style={{ minWidth: '28px', height: '28px', borderRadius: '50%', background: 'var(--clr-accent)', color: '#FFF', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 700, fontFamily: 'Inter, sans-serif' }}>3</div>
-                <div style={{ flex: 1 }}>
-                  <div style={{ color: 'var(--clr-text)', fontSize: '0.85rem', fontWeight: 600, fontFamily: 'Inter, sans-serif', marginBottom: '6px' }}>Type the converted value</div>
-                  <div style={{ color: 'var(--clr-text-soft)', fontSize: '0.82rem', fontFamily: 'Inter, sans-serif', lineHeight: '1.5', marginBottom: '10px' }}>3 becomes <strong style={{ color: 'var(--clr-text)' }}>13</strong> after borrowing. Type <strong style={{ color: 'var(--clr-text)' }}>13</strong> in the box. Now 13 − 8 = <strong style={{ color: 'var(--clr-text)' }}>5</strong>.</div>
-                  <div style={{ background: 'var(--clr-card)', borderRadius: '10px', padding: '14px 16px', fontFamily: '"Courier New", monospace', fontSize: '1.2rem', fontWeight: 700, lineHeight: '1.5', textAlign: 'center' }}>
-                    <div style={{ marginBottom: '2px' }}><span style={{ fontSize: '1.1rem', color: 'var(--clr-accent)', border: '1.5px solid var(--clr-accent)', borderRadius: '4px', padding: '2px 6px' }}>13</span></div>
-                    <div><span style={{ color: 'var(--clr-text-soft)', textDecoration: 'line-through', opacity: 0.5 }}>2</span><span style={{ color: 'var(--clr-text-soft)' }}>3</span></div>
-                    <div><span style={{ color: 'var(--clr-text-soft)', fontSize: '0.9rem' }}>− </span><span style={{ color: 'var(--clr-text)' }}>1</span><span style={{ color: 'var(--clr-text)' }}>8</span></div>
-                    <div style={{ width: '80px', height: '2px', background: 'var(--clr-border)', margin: '4px auto' }} />
-                    <div><span style={{ color: 'var(--clr-text)' }}>_</span><span style={{ color: 'var(--clr-correct)' }}>5</span></div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Step 4 */}
-              <div style={{ display: 'flex', gap: '14px', marginBottom: '18px', alignItems: 'flex-start' }}>
-                <div style={{ minWidth: '28px', height: '28px', borderRadius: '50%', background: 'var(--clr-accent)', color: '#FFF', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 700, fontFamily: 'Inter, sans-serif' }}>4</div>
-                <div style={{ flex: 1 }}>
-                  <div style={{ color: 'var(--clr-text)', fontSize: '0.85rem', fontWeight: 600, fontFamily: 'Inter, sans-serif', marginBottom: '6px' }}>Move left, subtract next column</div>
-                  <div style={{ color: 'var(--clr-text-soft)', fontSize: '0.82rem', fontFamily: 'Inter, sans-serif', lineHeight: '1.5', marginBottom: '10px' }}>The 2 became <strong style={{ color: 'var(--clr-text)' }}>1</strong> after lending. Now 1 − 1 = <strong style={{ color: 'var(--clr-text)' }}>0</strong>. Answer is <strong style={{ color: 'var(--clr-correct)' }}>05</strong> = 5. Correct!</div>
-                  <div style={{ background: 'var(--clr-card)', borderRadius: '10px', padding: '14px 16px', fontFamily: '"Courier New", monospace', fontSize: '1.2rem', fontWeight: 700, lineHeight: '1.5', textAlign: 'center' }}>
-                    <div style={{ marginBottom: '2px' }}><span style={{ fontSize: '1.1rem', color: 'var(--clr-text-soft)' }}>  </span></div>
-                    <div><span style={{ color: 'var(--clr-text-soft)', textDecoration: 'line-through', opacity: 0.5 }}>2</span><span style={{ color: 'var(--clr-text-soft)', textDecoration: 'line-through', opacity: 0.5 }}>3</span></div>
-                    <div><span style={{ color: 'var(--clr-text-soft)', fontSize: '0.9rem' }}>− </span><span style={{ color: 'var(--clr-text)' }}>1</span><span style={{ color: 'var(--clr-text)' }}>8</span></div>
-                    <div style={{ width: '80px', height: '2px', background: 'var(--clr-border)', margin: '4px auto' }} />
-                    <div><span style={{ color: 'var(--clr-correct)' }}>0</span><span style={{ color: 'var(--clr-correct)' }}>5</span></div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Navigation tips */}
-              <div style={{ background: 'var(--clr-card)', borderRadius: '10px', padding: '14px 18px', marginTop: '4px' }}>
-                <div style={{ color: 'var(--clr-text)', fontSize: '0.82rem', fontWeight: 600, fontFamily: 'Inter, sans-serif', marginBottom: '8px' }}>Keyboard shortcuts</div>
-                <div style={{ color: 'var(--clr-text-soft)', fontSize: '0.78rem', fontFamily: 'Inter, sans-serif', lineHeight: '1.8' }}>
-                  <div><span style={{ color: 'var(--clr-accent)', fontFamily: '"Courier New", monospace', background: 'var(--clr-input)', padding: '1px 6px', borderRadius: '3px', fontSize: '0.75rem' }}>← →</span> Move between answer digits</div>
-                  <div><span style={{ color: 'var(--clr-accent)', fontFamily: '"Courier New", monospace', background: 'var(--clr-input)', padding: '1px 6px', borderRadius: '3px', fontSize: '0.75rem' }}>↑ ↓</span> Jump between answer and borrow box</div>
-                  <div><span style={{ color: 'var(--clr-accent)', fontFamily: '"Courier New", monospace', background: 'var(--clr-input)', padding: '1px 6px', borderRadius: '3px', fontSize: '0.75rem' }}>Backspace</span> Clear and move right</div>
-                </div>
-                <div style={{ color: 'var(--clr-text-soft)', fontSize: '0.78rem', fontFamily: 'Inter, sans-serif', marginTop: '8px', lineHeight: '1.5' }}>Click a top digit again to <strong>cancel</strong> the borrow. If a column doesn't need borrowing, just fill the answer directly.</div>
-              </div>
-            </div>
-          )}
-          <div style={{ marginBottom: '24px' }}>
-            <h3 style={{ color: 'var(--clr-text)', fontSize: '0.9rem', margin: '0 0 16px', fontFamily: 'Inter, sans-serif', fontWeight: 700 }}>Select Difficulty:</h3>
-            <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
-              {['easy', 'medium', 'hard', 'extrahard'].map(d => (
-                <button key={d} onClick={() => setDifficulty(d)} style={{ background: difficulty === d ? 'var(--clr-accent)' : 'transparent', border: difficulty === d ? '1px solid var(--clr-accent)' : '1px solid var(--clr-border)', borderRadius: '50px', padding: '8px 16px', color: difficulty === d ? '#FFF' : 'var(--clr-text-soft)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer' }}>{diffLabels[d]}</button>
-              ))}
-            </div>
-          </div>
-          <div style={{ marginBottom: '32px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <label style={{ color: 'var(--clr-text-soft)', fontSize: '0.85rem', margin: '0 0 12px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>How many questions? (max 100)</label>
-            <input type="text" value={numQuestions} onChange={(e) => { const v = e.target.value; if (v === '' || (/^\d+$/.test(v) && Number(v) <= 100)) setNumQuestions(v) }} style={{ background: 'var(--clr-input)', border: '1px solid var(--clr-border)', borderRadius: '6px', padding: '10px', color: 'var(--clr-text)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem', width: '100px', textAlign: 'center', outline: 'none' }} placeholder={String(DEFAULT_TOTAL)} />
-          </div>
-          <button onClick={startQuiz} style={{ background: 'var(--clr-accent)', border: 'none', borderRadius: '6px', padding: '10px 24px', color: '#FFF', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer' }}>Start Quiz</button>
-        </div>
-      </div>
-    )
-  }
-
-  const ansLen = question ? question.answerDigits.length : 1
-
-  return (
-    <QuizLayout title="Column Subtraction" onBack={onBack} timer={timer}>
-      {started && !finished && <>
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem', marginBottom: '0.3rem' }}>
-          <div className="progress-pill center">Question {questionNumber}/{totalQ}</div>
-        </div>
-        {loading || !question ? <div className="question-box">Loading question…</div> : (
-          <>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '16px 0', fontFamily: '"Courier New", monospace', fontSize: '1.8rem', fontWeight: 700 }}>
-              {/* Borrow row: only visible for activated columns */}
-              <div style={{ display: 'flex', gap: '4px', marginBottom: '4px' }}>
-                <span style={{ width: '44px' }} />
-                {question.borrows.map((_, i) => {
-                  if (!activeBorrows.has(i) && !revealed) {
-                    return <span key={i} style={{ width: '40px', height: '36px' }} />
-                  }
-                  const correct = revealed && correctBorrowDigits ? String(correctBorrowDigits[i]) : '';
-                  const isOptional = question.aDigits && question.aDigits[i] != null && correct === String(question.aDigits[i]);
-                  const isRight = revealed && correct !== '' && (String(borrowInputs[i] || '') === correct || (isOptional && (!borrowInputs[i] || borrowInputs[i] === '')));
-                  const isWrong = revealed && correct !== '' && !isRight;
-                  const shown = revealed ? (isOptional && (!borrowInputs[i] || borrowInputs[i] === '') ? '' : correct) : (borrowInputs[i] || '');
-                  return (
-                    <input key={i} ref={el => borrowRefs.current[i] = el} type="text" maxLength={2}
-                      value={shown}
-                      onChange={e => handleInput(i, e.target.value, true)}
-                      onKeyDown={e => handleKeyDown(i, e, true)}
-                      disabled={revealed}
-                      style={{ width: '40px', height: '36px', textAlign: 'center', fontSize: '1rem', fontWeight: 700, background: revealed ? (isRight ? 'var(--clr-correct-bg)' : (isWrong ? 'var(--clr-wrong-bg)' : 'var(--clr-input)')) : 'var(--clr-input)', border: `2px solid ${revealed && isRight ? 'var(--clr-correct)' : (revealed && isWrong ? 'var(--clr-wrong)' : 'var(--clr-border)')}`, borderRadius: '8px', color: revealed && isRight ? 'var(--clr-correct)' : (revealed && isWrong ? 'var(--clr-wrong)' : 'var(--clr-text)'), fontFamily: '"Courier New", monospace', outline: 'none' }}
-                    />
-                  );
-                })}
-              </div>
-              {/* Minuend (top number) — click a digit to strikethrough and reveal borrow box */}
-              <div style={{ display: 'flex', gap: '4px', marginBottom: '2px' }}>
-                <span style={{ width: '44px' }} />
-                {question.aDigits.map((d, i) => {
-                  const struck = activeBorrows.has(i) || (revealed && correctBorrowDigits && question.aDigits[i] != null && String(correctBorrowDigits[i]) !== String(question.aDigits[i]));
-                  return (
-                    <span key={i}
-                      onClick={() => { if (!revealed && d != null) activateBorrow(i, activeBorrows.has(i)) }}
-                      style={{
-                        width: '40px', height: '48px', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        color: struck ? 'var(--clr-text-soft)' : 'var(--clr-text)',
-                        textDecoration: struck ? 'line-through' : 'none',
-                        cursor: revealed || d == null ? 'default' : 'pointer',
-                        opacity: struck ? 0.5 : 1,
-                        transition: 'all 0.15s ease',
-                      }}>
-                      {d !== null ? d : ''}
-                    </span>
-                  );
-                })}
-              </div>
-              {/* Subtrahend */}
-              <div style={{ display: 'flex', gap: '4px', marginBottom: '4px' }}>
-                <span style={{ width: '44px', textAlign: 'center', color: 'var(--clr-text-soft)', fontSize: '1.4rem' }}>−</span>
-                {question.bDigits.map((d, i) => (
-                  <span key={i} style={{ width: '40px', height: '48px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--clr-text)' }}>{d !== null ? d : ''}</span>
-                ))}
-              </div>
-              {/* Line */}
-              <div style={{ display: 'flex', gap: '4px' }}>
-                <span style={{ width: '44px' }} />
-                <div style={{ width: `${ansLen * 44}px`, height: '3px', background: 'var(--clr-border)', borderRadius: '2px' }} />
-              </div>
-              {/* Difference row */}
-              <div style={{ display: 'flex', gap: '4px', marginTop: '8px' }}>
-                <span style={{ width: '44px' }} />
-                {question.answerDigits.map((d, i) => {
-                  const correctDigit = revealed && correctAnswerDigits ? String(correctAnswerDigits[i]) : '';
-                  const isRight = revealed && correctDigit !== '' && String(answerInputs[i] || '') === correctDigit;
-                  const isWrong = revealed && correctDigit !== '' && !isRight;
-                  const shown = revealed ? correctDigit : answerInputs[i] || '';
-                  return (
-                    <input key={i} ref={el => answerRefs.current[i] = el} type="text" maxLength={1}
-                      value={shown}
-                      onChange={e => handleInput(i, e.target.value, false)}
-                      onKeyDown={e => handleKeyDown(i, e, false)}
-                      disabled={revealed}
-                      style={{ width: '40px', height: '48px', textAlign: 'center', fontSize: '1.4rem', fontWeight: 700, background: isRight ? 'var(--clr-correct-bg)' : isWrong ? 'var(--clr-wrong-bg)' : 'var(--clr-input)', border: `2px solid ${isRight ? 'var(--clr-correct)' : isWrong ? 'var(--clr-wrong)' : 'var(--clr-border)'}`, borderRadius: '8px', color: isRight ? 'var(--clr-correct)' : isWrong ? 'var(--clr-wrong)' : 'var(--clr-text)', fontFamily: '"Courier New", monospace', outline: 'none' }}
-                    />
-                  )
-                })}
-              </div>
-            </div>
-            {feedback && (
-              <div style={{
-                textAlign: 'left', padding: '12px 16px', borderRadius: '8px', margin: '8px 0',
-                background: isCorrect ? 'rgba(92, 184, 122, 0.25)' : 'rgba(224, 90, 74, 0.25)',
-                color: isCorrect ? 'var(--clr-correct)' : 'var(--clr-wrong)',
-                fontWeight: 600, fontSize: '0.9rem',
-                whiteSpace: 'pre-line', lineHeight: '1.6',
-                maxHeight: '300px', overflowY: 'auto',
-                border: isCorrect ? '2px solid var(--clr-correct)' : '2px solid var(--clr-wrong)'
-              }}>{feedback}</div>
-            )}
-            <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', margin: '12px 0', flexWrap: 'wrap' }}>
-              {!revealed && <button onClick={handleSubmit} disabled={loading} style={{ background: 'var(--clr-accent)', border: 'none', borderRadius: '8px', padding: '10px 24px', color: '#FFF', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer' }}>Submit</button>}
-              {!revealed && <button onClick={handleSolve} disabled={loading} style={{ background: 'transparent', border: '1px solid var(--clr-border)', borderRadius: '8px', padding: '10px 24px', color: 'var(--clr-text-soft)', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer' }}>Solve</button>}
-              {revealed && <button onClick={advanceQuestion} style={{ background: 'var(--clr-accent)', border: 'none', borderRadius: '8px', padding: '10px 24px', color: '#FFF', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer' }}>Next Question →</button>}
-            </div>
-          </>
-        )}
-        {results.length > 0 && <ResultsTable results={results} />}
-      </>}
-      {finished && (
-        <div style={{ textAlign: 'center', padding: '24px' }}>
-          <h2 style={{ color: 'var(--clr-text)', marginBottom: '16px' }}>Score: {score}/{totalQ}</h2>
-          <ResultsTable results={results} />
-          <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', marginTop: '24px' }}>
-            <button onClick={() => { setStarted(false); setFinished(false) }} style={{ background: 'var(--clr-accent)', border: 'none', borderRadius: '8px', padding: '10px 24px', color: '#FFF', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer' }}>Play Again</button>
-          </div>
-        </div>
-      )}
-    </QuizLayout>
-  )
-}
-
 /**
  * AdditionApp Component
  * Addition practice quiz with configurable difficulty (1-3 digits) and question count.
@@ -50228,13 +43505,13 @@ function AdditionApp({ onBack, completedTopics = [], goldMastery = [], markTopic
   /**
    * fetchQuestion(selectedDifficulty?): Fetch next addition question from API
    */
-  
+
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
-    try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
-    try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch(_) {}
+    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch (_) { }
+    try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch (_) { }
+    try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch (_) { }
     try {
       const r = await fetch(`${API}/addition-api/check`, {
         method: 'POST',
@@ -50243,12 +43520,12 @@ function AdditionApp({ onBack, completedTopics = [], goldMastery = [], markTopic
       })
       const d = await r.json()
       if (sessionGoal === 'perfect') {
-        try { setFinished(true); timer.reset() } catch(_) {}
+        try { setFinished(true); timer.reset() } catch (_) { }
       }
-    } catch(e) { console.error('handleTimeout error:', e) }
+    } catch (e) { console.error('handleTimeout error:', e) }
   }
 
-const fetchQuestion = async (selectedDifficulty = difficulty) => {
+  const fetchQuestion = async (selectedDifficulty = difficulty) => {
     questionAbortRef.current?.abort()
     const controller = new AbortController()
     questionAbortRef.current = controller
@@ -50817,7 +44094,7 @@ const fetchQuestion = async (selectedDifficulty = difficulty) => {
             </div>
           )
         })()}
-        {renderFeedback(feedback, isCorrect)}
+        <FeedbackDisplay feedback={feedback} isCorrect={isCorrect} />
 
         {/* Action Controls */}
         <div className="button-row">
@@ -51826,13 +45103,13 @@ function BasicArithApp({ onBack, completedTopics = [], goldMastery = [], markTop
    * fetchQuestion(): Fetch next arithmetic question
    * Generates random a op b = ? with specified difficulty and operation
    */
-  
+
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
-    try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
-    try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch(_) {}
+    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch (_) { }
+    try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch (_) { }
+    try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch (_) { }
     try {
       const r = await fetch(`${API}/basicarith-api/check`, {
         method: 'POST',
@@ -51841,12 +45118,12 @@ function BasicArithApp({ onBack, completedTopics = [], goldMastery = [], markTop
       })
       const d = await r.json()
       if (sessionGoal === 'perfect') {
-        try { setFinished(true); timer.reset() } catch(_) {}
+        try { setFinished(true); timer.reset() } catch (_) { }
       }
-    } catch(e) { console.error('handleTimeout error:', e) }
+    } catch (e) { console.error('handleTimeout error:', e) }
   }
 
-const fetchQuestion = async () => {
+  const fetchQuestion = async () => {
     questionAbortRef.current?.abort()
     const controller = new AbortController()
     questionAbortRef.current = controller
@@ -51933,14 +45210,14 @@ const fetchQuestion = async () => {
       if (answer === '') return
       const timeTaken = timer.stop()
       // POST to backend to validate answer for arithmetic operation: a op b
-      const res = await fetch(`${API}/basicarith-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  a: question.a, b: question.b, op: question.op, answer: Number(answer), sessionGoal }) })
+      const res = await fetch(`${API}/basicarith-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({ a: question.a, b: question.b, op: question.op, answer: Number(answer), sessionGoal }) })
       const data = await res.json()
       setIsCorrect(data.correct)
       if (data.correct) setScore(s => s + 1);
       (() => {
         const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
         if (data.correct) {
-          setFeedback(`Correct! ${question.prompt} = ${data.correctAnswer}`.slice(0,-1) + _ci + `Correct! ${question.prompt} = ${data.correctAnswer}`.slice(-1))
+          setFeedback(`Correct! ${question.prompt} = ${data.correctAnswer}`.slice(0, -1) + _ci + `Correct! ${question.prompt} = ${data.correctAnswer}`.slice(-1))
         } else if (sessionGoal === 'perfect') {
           setFeedback(`Incorrect. ${question.prompt} = ${data.correctAnswer}` + ' ❌ Perfect Solve ended.')
           setFinished(true); timer.reset()
@@ -51976,7 +45253,7 @@ const fetchQuestion = async () => {
     if (revealed) return
     const timeTaken = timer.stop()
     // POST to backend API with solve flag to get the solution
-    const res = await fetch(`${API}/basicarith-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  a: question.a, b: question.b, op: question.op, answer: '', solve: true, sessionGoal }) })
+    const res = await fetch(`${API}/basicarith-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({ a: question.a, b: question.b, op: question.op, answer: '', solve: true, sessionGoal }) })
     const data = await res.json()
     setIsCorrect(false)
     setFeedback(`Solution: ${question.prompt} = ${data.correctAnswer}`)
@@ -52028,46 +45305,46 @@ const fetchQuestion = async () => {
         </div>
 
         {isGoalMode && (
-        <>
-          <p className="welcome-text" style={{ marginTop: '14px', fontSize: '0.92rem', fontWeight: 700, marginBottom: '6px' }}>Practice Goal:</p>
-                  <div className="checkbox-group" style={{ marginBottom: '12px' }}>
-                    {[
-                                            { key: 'speed', label: '⚡ Speed Run' },
-                      { key: 'perfect', label: '🎯 Perfect Solve' },
-                      { key: 'revision', label: '🔄 Revision' }
-                    ].map(g => (
-                      <label key={g.key} className={`checkbox-pill${sessionGoal === g.key ? ' active' : ''}`}
-                        style={sessionGoal === g.key ? (
-                          g.key === 'speed' ? { background: 'rgba(255,179,0,0.18)', borderColor: '#ffb300', color: '#ffb300' } :
-                          g.key === 'perfect' ? { background: 'rgba(244,67,54,0.18)', borderColor: '#f44336', color: '#f44336' } :
-                          g.key === 'revision' ? { background: 'rgba(33,150,243,0.18)', borderColor: '#2196f3', color: '#2196f3' } : {}
-                        ) : {}}>
-                        <input type="radio" name="basicarithapp-goal" checked={sessionGoal === g.key} onChange={() => {
-                          setSessionGoal(g.key)
-                          
-                        }} />
-                        {g.label}
-                      </label>
-                    ))}
-                  </div>
-                  {isAdaptive && <p style={{ fontSize: '0.82rem', color: 'var(--clr-dim)', marginBottom: '8px' }}>Starts easy and smoothly adjusts to your level as you answer.</p>}
-                  {sessionGoal === 'speed' && (
-                    <p style={{ fontSize: '0.82rem', color: '#ffb300', marginBottom: '8px' }}>
-                      ⚡ Easy 5s · Medium 10s · Hard 15s · Extra Hard 20s · Adaptive 10s. Double coins for correct!
-                    </p>
-                  )}
-                  {sessionGoal === 'perfect' && (
-                    <p style={{ fontSize: '0.82rem', color: '#f44336', marginBottom: '8px' }}>
-                      🎯 One wrong answer ends the quiz. No timer shown. Can you go flawless?
-                    </p>
-                  )}
-                  {sessionGoal === 'revision' && (
-                    <p style={{ fontSize: '0.82rem', color: '#2196f3', marginBottom: '8px' }}>
-                      🔄 Focuses on topics you previously answered incorrectly.
-                    </p>
-                  )}
-        </>
-      )}
+          <>
+            <p className="welcome-text" style={{ marginTop: '14px', fontSize: '0.92rem', fontWeight: 700, marginBottom: '6px' }}>Practice Goal:</p>
+            <div className="checkbox-group" style={{ marginBottom: '12px' }}>
+              {[
+                { key: 'speed', label: '⚡ Speed Run' },
+                { key: 'perfect', label: '🎯 Perfect Solve' },
+                { key: 'revision', label: '🔄 Revision' }
+              ].map(g => (
+                <label key={g.key} className={`checkbox-pill${sessionGoal === g.key ? ' active' : ''}`}
+                  style={sessionGoal === g.key ? (
+                    g.key === 'speed' ? { background: 'rgba(255,179,0,0.18)', borderColor: '#ffb300', color: '#ffb300' } :
+                      g.key === 'perfect' ? { background: 'rgba(244,67,54,0.18)', borderColor: '#f44336', color: '#f44336' } :
+                        g.key === 'revision' ? { background: 'rgba(33,150,243,0.18)', borderColor: '#2196f3', color: '#2196f3' } : {}
+                  ) : {}}>
+                  <input type="radio" name="basicarithapp-goal" checked={sessionGoal === g.key} onChange={() => {
+                    setSessionGoal(g.key)
+
+                  }} />
+                  {g.label}
+                </label>
+              ))}
+            </div>
+            {isAdaptive && <p style={{ fontSize: '0.82rem', color: 'var(--clr-dim)', marginBottom: '8px' }}>Starts easy and smoothly adjusts to your level as you answer.</p>}
+            {sessionGoal === 'speed' && (
+              <p style={{ fontSize: '0.82rem', color: '#ffb300', marginBottom: '8px' }}>
+                ⚡ Easy 5s · Medium 10s · Hard 15s · Extra Hard 20s · Adaptive 10s. Double coins for correct!
+              </p>
+            )}
+            {sessionGoal === 'perfect' && (
+              <p style={{ fontSize: '0.82rem', color: '#f44336', marginBottom: '8px' }}>
+                🎯 One wrong answer ends the quiz. No timer shown. Can you go flawless?
+              </p>
+            )}
+            {sessionGoal === 'revision' && (
+              <p style={{ fontSize: '0.82rem', color: '#2196f3', marginBottom: '8px' }}>
+                🔄 Focuses on topics you previously answered incorrectly.
+              </p>
+            )}
+          </>
+        )}
         <div className="question-count-row">
           <label className="question-count-label">How many questions? (max 100)</label>
           <input className="answer-input question-count-input" type="text" value={numQuestions} onChange={e => { const v = e.target.value; if (v === '' || (/^\d+$/.test(v) && Number(v) <= 100)) setNumQuestions(v) }} />
@@ -52091,7 +45368,7 @@ const fetchQuestion = async () => {
         </div>
         <input className="answer-input" type="text" value={answer} onChange={e => { if (!revealed) { const v = e.target.value; if (v === '' || v === '-' || /^-?\d+$/.test(v)) setAnswer(v) } }} disabled={revealed} placeholder="Type your answer" />
         <NumPad value={answer} onChange={v => !revealed && setAnswer(v)} disabled={revealed} />
-        {renderFeedback(feedback, isCorrect)}
+        <FeedbackDisplay feedback={feedback} isCorrect={isCorrect} />
         <div className="button-row">
           {!revealed ? <>
             <button onClick={handleSubmitOrNext} disabled={loading || answer === ''}>Submit</button>
@@ -52173,13 +45450,13 @@ function QuadraticApp({ onBack, isGoalMode = false }) {
    * Returns: {a, b, c, x} with the actual answer pre-calculated server-side
    * Resets form state and starts timer for this question
    */
-  
+
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
-    try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
-    try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch(_) {}
+    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch (_) { }
+    try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch (_) { }
+    try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch (_) { }
     try {
       const r = await fetch(`${API}/quadratic-api/check`, {
         method: 'POST',
@@ -52188,12 +45465,12 @@ function QuadraticApp({ onBack, isGoalMode = false }) {
       })
       const d = await r.json()
       if (sessionGoal === 'perfect') {
-        try { setFinished(true); timer.reset() } catch(_) {}
+        try { setFinished(true); timer.reset() } catch (_) { }
       }
-    } catch(e) { console.error('handleTimeout error:', e) }
+    } catch (e) { console.error('handleTimeout error:', e) }
   }
 
-const fetchQuestion = async (selectedDifficulty = difficulty) => {
+  const fetchQuestion = async (selectedDifficulty = difficulty) => {
     setLoading(true)
     setAnswer('')
     setFeedback('')
@@ -52252,7 +45529,7 @@ const fetchQuestion = async (selectedDifficulty = difficulty) => {
       if (answer === '') return
       const timeTaken = timer.stop()
       // POST to backend to validate quadratic substitution answer
-      const res = await fetch(`${API}/quadratic-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  a: question.a, b: question.b, c: question.c, x: question.x, answer: Number(answer), sessionGoal }) })
+      const res = await fetch(`${API}/quadratic-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({ a: question.a, b: question.b, c: question.c, x: question.x, answer: Number(answer), sessionGoal }) })
       const data = await res.json()
       setIsCorrect(data.correct)
       if (data.correct) setScore((s) => s + 1)
@@ -52267,7 +45544,7 @@ const fetchQuestion = async (selectedDifficulty = difficulty) => {
       (() => {
         const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
         if (data.correct) {
-          setFeedback(`Correct!\n${reasoning}`.slice(0,-1) + _ci + `Correct!\n${reasoning}`.slice(-1))
+          setFeedback(`Correct!\n${reasoning}`.slice(0, -1) + _ci + `Correct!\n${reasoning}`.slice(-1))
         } else if (sessionGoal === 'perfect') {
           setFeedback(`Incorrect.\n${reasoning}` + ' ❌ Perfect Solve ended.')
           setFinished(true); timer.reset()
@@ -52309,7 +45586,7 @@ const fetchQuestion = async (selectedDifficulty = difficulty) => {
     if (revealed) return
     const timeTaken = timer.stop()
     // POST to backend API with solve flag to get the solution
-    const res = await fetch(`${API}/quadratic-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  a: question.a, b: question.b, c: question.c, x: question.x, answer: '', solve: true, sessionGoal }) })
+    const res = await fetch(`${API}/quadratic-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({ a: question.a, b: question.b, c: question.c, x: question.x, answer: '', solve: true, sessionGoal }) })
     const data = await res.json()
     setIsCorrect(false)
     // Generate step-by-step working for feedback
@@ -52359,46 +45636,46 @@ const fetchQuestion = async (selectedDifficulty = difficulty) => {
         </div>
 
         {isGoalMode && (
-        <>
-          <p className="welcome-text" style={{ marginTop: '14px', fontSize: '0.92rem', fontWeight: 700, marginBottom: '6px' }}>Practice Goal:</p>
-                  <div className="checkbox-group" style={{ marginBottom: '12px' }}>
-                    {[
-                                            { key: 'speed', label: '⚡ Speed Run' },
-                      { key: 'perfect', label: '🎯 Perfect Solve' },
-                      { key: 'revision', label: '🔄 Revision' }
-                    ].map(g => (
-                      <label key={g.key} className={`checkbox-pill${sessionGoal === g.key ? ' active' : ''}`}
-                        style={sessionGoal === g.key ? (
-                          g.key === 'speed' ? { background: 'rgba(255,179,0,0.18)', borderColor: '#ffb300', color: '#ffb300' } :
-                          g.key === 'perfect' ? { background: 'rgba(244,67,54,0.18)', borderColor: '#f44336', color: '#f44336' } :
-                          g.key === 'revision' ? { background: 'rgba(33,150,243,0.18)', borderColor: '#2196f3', color: '#2196f3' } : {}
-                        ) : {}}>
-                        <input type="radio" name="quadraticapp-goal" checked={sessionGoal === g.key} onChange={() => {
-                          setSessionGoal(g.key)
-                          
-                        }} />
-                        {g.label}
-                      </label>
-                    ))}
-                  </div>
-                  {isAdaptive && <p style={{ fontSize: '0.82rem', color: 'var(--clr-dim)', marginBottom: '8px' }}>Starts easy and smoothly adjusts to your level as you answer.</p>}
-                  {sessionGoal === 'speed' && (
-                    <p style={{ fontSize: '0.82rem', color: '#ffb300', marginBottom: '8px' }}>
-                      ⚡ Easy 5s · Medium 10s · Hard 15s · Extra Hard 20s · Adaptive 10s. Double coins for correct!
-                    </p>
-                  )}
-                  {sessionGoal === 'perfect' && (
-                    <p style={{ fontSize: '0.82rem', color: '#f44336', marginBottom: '8px' }}>
-                      🎯 One wrong answer ends the quiz. No timer shown. Can you go flawless?
-                    </p>
-                  )}
-                  {sessionGoal === 'revision' && (
-                    <p style={{ fontSize: '0.82rem', color: '#2196f3', marginBottom: '8px' }}>
-                      🔄 Focuses on topics you previously answered incorrectly.
-                    </p>
-                  )}
-        </>
-      )}
+          <>
+            <p className="welcome-text" style={{ marginTop: '14px', fontSize: '0.92rem', fontWeight: 700, marginBottom: '6px' }}>Practice Goal:</p>
+            <div className="checkbox-group" style={{ marginBottom: '12px' }}>
+              {[
+                { key: 'speed', label: '⚡ Speed Run' },
+                { key: 'perfect', label: '🎯 Perfect Solve' },
+                { key: 'revision', label: '🔄 Revision' }
+              ].map(g => (
+                <label key={g.key} className={`checkbox-pill${sessionGoal === g.key ? ' active' : ''}`}
+                  style={sessionGoal === g.key ? (
+                    g.key === 'speed' ? { background: 'rgba(255,179,0,0.18)', borderColor: '#ffb300', color: '#ffb300' } :
+                      g.key === 'perfect' ? { background: 'rgba(244,67,54,0.18)', borderColor: '#f44336', color: '#f44336' } :
+                        g.key === 'revision' ? { background: 'rgba(33,150,243,0.18)', borderColor: '#2196f3', color: '#2196f3' } : {}
+                  ) : {}}>
+                  <input type="radio" name="quadraticapp-goal" checked={sessionGoal === g.key} onChange={() => {
+                    setSessionGoal(g.key)
+
+                  }} />
+                  {g.label}
+                </label>
+              ))}
+            </div>
+            {isAdaptive && <p style={{ fontSize: '0.82rem', color: 'var(--clr-dim)', marginBottom: '8px' }}>Starts easy and smoothly adjusts to your level as you answer.</p>}
+            {sessionGoal === 'speed' && (
+              <p style={{ fontSize: '0.82rem', color: '#ffb300', marginBottom: '8px' }}>
+                ⚡ Easy 5s · Medium 10s · Hard 15s · Extra Hard 20s · Adaptive 10s. Double coins for correct!
+              </p>
+            )}
+            {sessionGoal === 'perfect' && (
+              <p style={{ fontSize: '0.82rem', color: '#f44336', marginBottom: '8px' }}>
+                🎯 One wrong answer ends the quiz. No timer shown. Can you go flawless?
+              </p>
+            )}
+            {sessionGoal === 'revision' && (
+              <p style={{ fontSize: '0.82rem', color: '#2196f3', marginBottom: '8px' }}>
+                🔄 Focuses on topics you previously answered incorrectly.
+              </p>
+            )}
+          </>
+        )}
         <div className="question-count-row">
           <label className="question-count-label">How many questions? (max 100)</label>
           <input className="answer-input question-count-input" type="text" value={numQuestions} onChange={(e) => { const v = e.target.value; if (v === '' || (/^\d+$/.test(v) && Number(v) <= 100)) setNumQuestions(v) }} placeholder={String(DEFAULT_TOTAL)} />
@@ -52421,7 +45698,7 @@ const fetchQuestion = async (selectedDifficulty = difficulty) => {
         </div>
         <input className="answer-input" type="text" value={answer} onChange={(e) => { if (!revealed) { const v = e.target.value; if (v === '' || v === '-' || /^-?\d+$/.test(v)) setAnswer(v) } }} disabled={revealed} placeholder="y = ?" />
         <NumPad value={answer} onChange={(v) => !revealed && setAnswer(v)} disabled={revealed} />
-        {renderFeedback(feedback, isCorrect)}
+        <FeedbackDisplay feedback={feedback} isCorrect={isCorrect} />
         <div className="button-row">
           {!revealed ? <>
             <button onClick={handleSubmitOrNext} disabled={loading || answer === ''}>Submit</button>
@@ -53554,31 +46831,31 @@ function MultiplyApp({ onBack, completedTopics = [], goldMastery = [], markTopic
           <p className="welcome-text">Choose your level</p>
           <KeyTerms topicKey="multiplication" />
 
-        {isGoalMode && (
-        <>
-          <p className="welcome-text" style={{ marginTop: '14px', fontSize: '0.92rem', fontWeight: 700, marginBottom: '6px' }}>Practice Goal:</p>
-                  <div className="checkbox-group" style={{ marginBottom: '12px' }}>
-                    {[
-                                            { key: 'speed', label: '⚡ Speed Run' },
-                      { key: 'perfect', label: '🎯 Perfect Solve' },
-                      { key: 'revision', label: '🔄 Revision' }
-                    ].map(g => (
-                      <label key={g.key} className={`checkbox-pill${sessionGoal === g.key ? ' active' : ''}`}
-                        style={sessionGoal === g.key ? (
-                          g.key === 'speed' ? { background: 'rgba(255,179,0,0.18)', borderColor: '#ffb300', color: '#ffb300' } :
-                          g.key === 'perfect' ? { background: 'rgba(244,67,54,0.18)', borderColor: '#f44336', color: '#f44336' } :
+          {isGoalMode && (
+            <>
+              <p className="welcome-text" style={{ marginTop: '14px', fontSize: '0.92rem', fontWeight: 700, marginBottom: '6px' }}>Practice Goal:</p>
+              <div className="checkbox-group" style={{ marginBottom: '12px' }}>
+                {[
+                  { key: 'speed', label: '⚡ Speed Run' },
+                  { key: 'perfect', label: '🎯 Perfect Solve' },
+                  { key: 'revision', label: '🔄 Revision' }
+                ].map(g => (
+                  <label key={g.key} className={`checkbox-pill${sessionGoal === g.key ? ' active' : ''}`}
+                    style={sessionGoal === g.key ? (
+                      g.key === 'speed' ? { background: 'rgba(255,179,0,0.18)', borderColor: '#ffb300', color: '#ffb300' } :
+                        g.key === 'perfect' ? { background: 'rgba(244,67,54,0.18)', borderColor: '#f44336', color: '#f44336' } :
                           g.key === 'revision' ? { background: 'rgba(33,150,243,0.18)', borderColor: '#2196f3', color: '#2196f3' } : {}
-                        ) : {}}>
-                        <input type="radio" name="multiplyapp-goal" checked={sessionGoal === g.key} onChange={() => {
-                          setSessionGoal(g.key)
-                          
-                        }} />
-                        {g.label}
-                      </label>
-                    ))}
-                  </div>
-        </>
-      )}
+                    ) : {}}>
+                    <input type="radio" name="multiplyapp-goal" checked={sessionGoal === g.key} onChange={() => {
+                      setSessionGoal(g.key)
+
+                    }} />
+                    {g.label}
+                  </label>
+                ))}
+              </div>
+            </>
+          )}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', margin: '12px 0' }}>
             <button onClick={startLevel1}>
               Level 1 — Guided Random Practice
@@ -53639,7 +46916,7 @@ function MultiplyApp({ onBack, completedTopics = [], goldMastery = [], markTopic
           onChange={(e) => { if (!revealed) { const v = e.target.value; if (v === '' || v === '-' || /^-?\d+$/.test(v)) setAnswer(v) } }}
           disabled={revealed} placeholder="Type your answer" autoFocus />
         <NumPad value={answer} onChange={(v) => !revealed && setAnswer(v)} disabled={revealed} />
-        {renderFeedback(feedback, isCorrect)}
+        <FeedbackDisplay feedback={feedback} isCorrect={isCorrect} />
         <div className="button-row">
           {!revealed ? <>
             <button onClick={() => level === 3 ? submitLevel3(answer) : handleSubmit()} disabled={answer === ''}>Submit</button>
@@ -53763,13 +47040,13 @@ function VocabApp({ onBack, isGoalMode = false }) {
    * loadQuestion(excludeIds?): Fetch next vocabulary question from backend
    * Persists seen IDs to localStorage for cross-session no-repeat
    */
-  
+
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
-    try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
-    try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch(_) {}
+    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch (_) { }
+    try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch (_) { }
+    try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch (_) { }
     try {
       const r = await fetch(`${API}/vocab-api/check`, {
         method: 'POST',
@@ -53778,12 +47055,12 @@ function VocabApp({ onBack, isGoalMode = false }) {
       })
       const d = await r.json()
       if (sessionGoal === 'perfect') {
-        try { setFinished(true); timer.reset() } catch(_) {}
+        try { setFinished(true); timer.reset() } catch (_) { }
       }
-    } catch(e) { console.error('handleTimeout error:', e) }
+    } catch (e) { console.error('handleTimeout error:', e) }
   }
 
-const loadQuestion = async (excludeIds) => {
+  const loadQuestion = async (excludeIds) => {
     setLoading(true)
     setSelected('')
     setFeedback('')
@@ -53834,22 +47111,22 @@ const loadQuestion = async (excludeIds) => {
     const timeTaken = timer.stop()
     setSelected(option)
     // POST to backend to validate the selected definition
-    const res = await fetch(`${API}/vocab-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  id: question.id, answerOption: option, sessionGoal }) })
+    const res = await fetch(`${API}/vocab-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({ id: question.id, answerOption: option, sessionGoal }) })
     const data = await res.json()
     setIsCorrect(data.correct)
     if (data.correct) setScore((s) => s + 1);
     // Show feedback with correct answer text
     (() => {
-        const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
-        if (data.correct) {
-          setFeedback(`Correct! "${data.correctAnswerText}"`.slice(0,-1) + _ci + `Correct! "${data.correctAnswerText}"`.slice(-1))
-        } else if (sessionGoal === 'perfect') {
-          setFeedback(`Incorrect. The right definition is: "${data.correctAnswerText}"` + ' ❌ Perfect Solve ended.')
-          setFinished(true); timer.reset()
-        } else {
-          setFeedback(`Incorrect. The right definition is: "${data.correctAnswerText}"`)
-        }
-      })()
+      const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
+      if (data.correct) {
+        setFeedback(`Correct! "${data.correctAnswerText}"`.slice(0, -1) + _ci + `Correct! "${data.correctAnswerText}"`.slice(-1))
+      } else if (sessionGoal === 'perfect') {
+        setFeedback(`Incorrect. The right definition is: "${data.correctAnswerText}"` + ' ❌ Perfect Solve ended.')
+        setFinished(true); timer.reset()
+      } else {
+        setFeedback(`Incorrect. The right definition is: "${data.correctAnswerText}"`)
+      }
+    })()
     // Extract the user's selected definition from options array
     const userDef = question.options[['A', 'B', 'C', 'D'].indexOf(option)]
     // Truncate long definitions to fit in results table
@@ -53890,7 +47167,7 @@ const loadQuestion = async (excludeIds) => {
     if (revealed) return
     const timeTaken = timer.stop()
     // POST to backend API with solve flag to get the solution
-    const res = await fetch(`${API}/vocab-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  id: question.id, answerOption: '', solve: true, sessionGoal }) })
+    const res = await fetch(`${API}/vocab-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({ id: question.id, answerOption: '', solve: true, sessionGoal }) })
     const data = await res.json()
     setIsCorrect(false)
     // Show feedback with correct answer text
@@ -53970,46 +47247,46 @@ const loadQuestion = async (excludeIds) => {
         </div>
 
         {isGoalMode && (
-        <>
-          <p className="welcome-text" style={{ marginTop: '14px', fontSize: '0.92rem', fontWeight: 700, marginBottom: '6px' }}>Practice Goal:</p>
-                  <div className="checkbox-group" style={{ marginBottom: '12px' }}>
-                    {[
-                                            { key: 'speed', label: '⚡ Speed Run' },
-                      { key: 'perfect', label: '🎯 Perfect Solve' },
-                      { key: 'revision', label: '🔄 Revision' }
-                    ].map(g => (
-                      <label key={g.key} className={`checkbox-pill${sessionGoal === g.key ? ' active' : ''}`}
-                        style={sessionGoal === g.key ? (
-                          g.key === 'speed' ? { background: 'rgba(255,179,0,0.18)', borderColor: '#ffb300', color: '#ffb300' } :
-                          g.key === 'perfect' ? { background: 'rgba(244,67,54,0.18)', borderColor: '#f44336', color: '#f44336' } :
-                          g.key === 'revision' ? { background: 'rgba(33,150,243,0.18)', borderColor: '#2196f3', color: '#2196f3' } : {}
-                        ) : {}}>
-                        <input type="radio" name="vocabapp-goal" checked={sessionGoal === g.key} onChange={() => {
-                          setSessionGoal(g.key)
-                          
-                        }} />
-                        {g.label}
-                      </label>
-                    ))}
-                  </div>
-                  {isAdaptive && <p style={{ fontSize: '0.82rem', color: 'var(--clr-dim)', marginBottom: '8px' }}>Starts easy and smoothly adjusts to your level as you answer.</p>}
-                  {sessionGoal === 'speed' && (
-                    <p style={{ fontSize: '0.82rem', color: '#ffb300', marginBottom: '8px' }}>
-                      ⚡ Easy 5s · Medium 10s · Hard 15s · Extra Hard 20s · Adaptive 10s. Double coins for correct!
-                    </p>
-                  )}
-                  {sessionGoal === 'perfect' && (
-                    <p style={{ fontSize: '0.82rem', color: '#f44336', marginBottom: '8px' }}>
-                      🎯 One wrong answer ends the quiz. No timer shown. Can you go flawless?
-                    </p>
-                  )}
-                  {sessionGoal === 'revision' && (
-                    <p style={{ fontSize: '0.82rem', color: '#2196f3', marginBottom: '8px' }}>
-                      🔄 Focuses on topics you previously answered incorrectly.
-                    </p>
-                  )}
-        </>
-      )}
+          <>
+            <p className="welcome-text" style={{ marginTop: '14px', fontSize: '0.92rem', fontWeight: 700, marginBottom: '6px' }}>Practice Goal:</p>
+            <div className="checkbox-group" style={{ marginBottom: '12px' }}>
+              {[
+                { key: 'speed', label: '⚡ Speed Run' },
+                { key: 'perfect', label: '🎯 Perfect Solve' },
+                { key: 'revision', label: '🔄 Revision' }
+              ].map(g => (
+                <label key={g.key} className={`checkbox-pill${sessionGoal === g.key ? ' active' : ''}`}
+                  style={sessionGoal === g.key ? (
+                    g.key === 'speed' ? { background: 'rgba(255,179,0,0.18)', borderColor: '#ffb300', color: '#ffb300' } :
+                      g.key === 'perfect' ? { background: 'rgba(244,67,54,0.18)', borderColor: '#f44336', color: '#f44336' } :
+                        g.key === 'revision' ? { background: 'rgba(33,150,243,0.18)', borderColor: '#2196f3', color: '#2196f3' } : {}
+                  ) : {}}>
+                  <input type="radio" name="vocabapp-goal" checked={sessionGoal === g.key} onChange={() => {
+                    setSessionGoal(g.key)
+
+                  }} />
+                  {g.label}
+                </label>
+              ))}
+            </div>
+            {isAdaptive && <p style={{ fontSize: '0.82rem', color: 'var(--clr-dim)', marginBottom: '8px' }}>Starts easy and smoothly adjusts to your level as you answer.</p>}
+            {sessionGoal === 'speed' && (
+              <p style={{ fontSize: '0.82rem', color: '#ffb300', marginBottom: '8px' }}>
+                ⚡ Easy 5s · Medium 10s · Hard 15s · Extra Hard 20s · Adaptive 10s. Double coins for correct!
+              </p>
+            )}
+            {sessionGoal === 'perfect' && (
+              <p style={{ fontSize: '0.82rem', color: '#f44336', marginBottom: '8px' }}>
+                🎯 One wrong answer ends the quiz. No timer shown. Can you go flawless?
+              </p>
+            )}
+            {sessionGoal === 'revision' && (
+              <p style={{ fontSize: '0.82rem', color: '#2196f3', marginBottom: '8px' }}>
+                🔄 Focuses on topics you previously answered incorrectly.
+              </p>
+            )}
+          </>
+        )}
         <div className="question-count-row">
           <label className="question-count-label">How many questions? (max 100)</label>
           <input className="answer-input question-count-input" type="text" value={numQuestions} onChange={(e) => { const v = e.target.value; if (v === '' || (/^\d+$/.test(v) && Number(v) <= 100)) setNumQuestions(v) }} placeholder={String(DEFAULT_TOTAL)} />
@@ -54036,7 +47313,7 @@ const loadQuestion = async (excludeIds) => {
             })}
           </div>
         )}
-        {renderFeedback(feedback, isCorrect)}
+        <FeedbackDisplay feedback={feedback} isCorrect={isCorrect} />
         <div className="button-row">
           {!revealed ? <>
             <button onClick={handleSubmitOrNext} disabled={loading || !selected}>Submit</button>
@@ -54116,15 +47393,15 @@ function FractionsPage(props) {
   if (learningPhase === 'learn') {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-        <FractionsLearnPage 
-          onStartTest={startQuizBelow} 
-          onBack={props.onBack} 
+        <FractionsLearnPage
+          onStartTest={startQuizBelow}
+          onBack={props.onBack}
         />
         {showQuizBelow && (
           <div ref={quizRef} className="fade-in" style={{ paddingBottom: '40px', marginTop: '20px' }}>
             <div style={{ textAlign: 'center', margin: '40px 0 20px', padding: '20px', borderTop: '2px dashed rgba(0,0,0,0.1)' }}>
-               <h2 style={{ color: 'var(--clr-text)', fontSize: '2rem' }}>📝 Fractions Quiz</h2>
-               <p style={{ color: 'var(--clr-text-soft)' }}>Your learning is above. Good luck on the test!</p>
+              <h2 style={{ color: 'var(--clr-text)', fontSize: '2rem' }}>📝 Fractions Quiz</h2>
+              <p style={{ color: 'var(--clr-text-soft)' }}>Your learning is above. Good luck on the test!</p>
             </div>
             <FractionAddApp {...props} onBack={props.onBack} />
           </div>
@@ -54213,17 +47490,17 @@ function makeMCQuizApp({ title, subtitle, apiPath, diffLabels, tip, adaptiveOnly
     const [loading, setLoading] = useState(false)
     const [loadError, setLoadError] = useState('')
     const [revealed, setRevealed] = useState(false)
-  const [sessionGoal, setSessionGoal] = useState(isGoalMode ? 'speed' : 'standard')
-  useEffect(() => {
-    if (!isGoalMode) {
-      setSessionGoal('standard');
-    }
-  }, [isGoalMode]);
+    const [sessionGoal, setSessionGoal] = useState(isGoalMode ? 'speed' : 'standard')
+    useEffect(() => {
+      if (!isGoalMode) {
+        setSessionGoal('standard');
+      }
+    }, [isGoalMode]);
     const [results, setResults] = useState([])
     const [correctOption, setCorrectOption] = useState('')
     const [questionSummary, setQuestionSummary] = useState({ easy: 0, medium: 0, hard: 0, extrahard: 0 })
     const timer = useTimer()
-  const { hintsUsedCount, xpBreakdown, bonusLoading } = useQuizHintsAndXp(apiPath.split('-')[0], finished, score, totalQ, typeof isCorrect !== 'undefined' ? (isCorrect || false) : false, results);
+    const { hintsUsedCount, xpBreakdown, bonusLoading } = useQuizHintsAndXp(apiPath.split('-')[0], finished, score, totalQ, typeof isCorrect !== 'undefined' ? (isCorrect || false) : false, results);
     const advanceFnRef = useRef(null)
     const adaptScoreRef = useRef(0)
     const submittedRef = useRef(false)
@@ -54448,15 +47725,15 @@ function makeMCQuizApp({ title, subtitle, apiPath, diffLabels, tip, adaptiveOnly
               <p className="welcome-text" style={{ marginTop: '14px', fontSize: '0.92rem', fontWeight: 700, marginBottom: '6px' }}>Practice Goal:</p>
               <div className="checkbox-group" style={{ marginBottom: '8px' }}>
                 {[
-                                    { key: 'speed',    label: '⚡ Speed Run' },
-                  { key: 'perfect',  label: '🎯 Perfect Solve' },
+                  { key: 'speed', label: '⚡ Speed Run' },
+                  { key: 'perfect', label: '🎯 Perfect Solve' },
                   { key: 'revision', label: '🔄 Revision' },
                 ].map(g => (
                   <label key={g.key} className={`checkbox-pill${sessionGoal === g.key ? ' active' : ''}`}
                     style={sessionGoal === g.key ? (
-                      g.key === 'speed'    ? { background: 'rgba(255,179,0,0.18)',  borderColor: '#ffb300', color: '#ffb300' } :
-                      g.key === 'perfect'  ? { background: 'rgba(244,67,54,0.18)',  borderColor: '#f44336', color: '#f44336' } :
-                      g.key === 'revision' ? { background: 'rgba(33,150,243,0.18)', borderColor: '#2196f3', color: '#2196f3' } : {}
+                      g.key === 'speed' ? { background: 'rgba(255,179,0,0.18)', borderColor: '#ffb300', color: '#ffb300' } :
+                        g.key === 'perfect' ? { background: 'rgba(244,67,54,0.18)', borderColor: '#f44336', color: '#f44336' } :
+                          g.key === 'revision' ? { background: 'rgba(33,150,243,0.18)', borderColor: '#2196f3', color: '#2196f3' } : {}
                     ) : {}}>
                     <input type="radio" name={`${apiPath}-goal`} checked={sessionGoal === g.key}
                       onChange={() => setSessionGoal(g.key)} />
@@ -54519,7 +47796,7 @@ function makeMCQuizApp({ title, subtitle, apiPath, diffLabels, tip, adaptiveOnly
               <button onClick={loadQuestion}>Retry</button>
             </div>
           )}
-          {renderFeedback(feedback, isCorrect)}
+          <FeedbackDisplay feedback={feedback} isCorrect={isCorrect} />
           <div className="button-row">
             {!revealed ? (
               <button onClick={handleSolve} disabled={loading} style={{ background: 'transparent', border: '1px solid var(--clr-accent)', color: 'var(--clr-accent)' }}>Solve</button>
@@ -54535,8 +47812,8 @@ function makeMCQuizApp({ title, subtitle, apiPath, diffLabels, tip, adaptiveOnly
           <ResultsTable results={results} />
           <button onClick={() => { setStarted(false); setFinished(false) }}>Play Again</button>
         </div>}
-      <HintModal concept={apiPath.split('-')[0]} questionId={question?.id || 'unknown'} questionData={question} revealed={revealed} hintsUsedCount={hintsUsedCount} xpBreakdown={xpBreakdown} bonusLoading={bonusLoading} />
-</QuizLayout>
+        <HintModal concept={apiPath.split('-')[0]} questionId={question?.id || 'unknown'} questionData={question} revealed={revealed} hintsUsedCount={hintsUsedCount} xpBreakdown={xpBreakdown} bonusLoading={bonusLoading} />
+      </QuizLayout>
     )
   }
 }
@@ -54908,15 +48185,15 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
     const [loadError, setLoadError] = useState('')
     const [revealed, setRevealed] = useState(false)
     const [revealedCorrectAnswer, setRevealedCorrectAnswer] = useState('')
-  const [sessionGoal, setSessionGoal] = useState(isGoalMode ? 'speed' : 'standard')
-  useEffect(() => {
-    if (!isGoalMode) {
-      setSessionGoal('standard');
-    }
-  }, [isGoalMode]);
+    const [sessionGoal, setSessionGoal] = useState(isGoalMode ? 'speed' : 'standard')
+    useEffect(() => {
+      if (!isGoalMode) {
+        setSessionGoal('standard');
+      }
+    }, [isGoalMode]);
     const [results, setResults] = useState([])
     const timer = useTimer()
-  const { hintsUsedCount, xpBreakdown, bonusLoading } = useQuizHintsAndXp(apiPath.split('-')[0], finished, score, totalQ, typeof isCorrect !== 'undefined' ? (isCorrect || false) : false, results);
+    const { hintsUsedCount, xpBreakdown, bonusLoading } = useQuizHintsAndXp(apiPath.split('-')[0], finished, score, totalQ, typeof isCorrect !== 'undefined' ? (isCorrect || false) : false, results);
     const advanceFnRef = useRef(null)
     // Keep a ref for adaptive score so loadQuestion always sees latest
     const adaptScoreRef = useRef(0)
@@ -55108,7 +48385,7 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
               ? Math.min(3, prev + 0.25)  // gentle climb on correct
               : Math.max(0, prev - 0.35)  // slightly steeper drop on wrong
             adaptScoreRef.current = next
-            
+
             // Check for promotion
             const newStage = Math.min(3, Math.max(0, Math.floor(next)))
             if (newStage > oldStage) {
@@ -55185,7 +48462,7 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
 
     if (!started && !finished) {
       return (
-      <div style={{ minHeight: '100vh', background: 'var(--clr-bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px', fontFamily: 'Inter, sans-serif' }}>
+        <div style={{ minHeight: '100vh', background: 'var(--clr-bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px', fontFamily: 'Inter, sans-serif' }}>
           <div style={{
             background: '#2D2520', border: '1.5px solid #4A4038', borderRadius: '28px',
             boxShadow: '0 20px 40px rgba(0,0,0,.45)', padding: '48px 40px', maxWidth: '720px', width: '100%',
@@ -55255,31 +48532,31 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
               Start Quiz
             </button>
           </div>
-        {isStage3Completed(topicKey, completedTopics) && (
-          <div className="transfer-cta-box" style={{ marginTop: '20px', padding: '16px', background: 'var(--clr-hover, rgba(255,255,255,0.03))', borderRadius: '10px', border: '1px solid var(--clr-border)', textAlign: 'center' }}>
-            <p style={{ margin: '0 0 12px', fontSize: '0.9rem', color: 'var(--clr-text-soft)', lineHeight: '1.4' }}>
-              {goldMastery.includes(topicKey) ? (
-                <>🥇 You have achieved Gold Mastery for this topic!</>
-              ) : (
-                <>🎉 You have completed Stage 3 Practice for this topic!</>
-              )}
-            </p>
-            <button
-              className="btn-transfer-cta"
-              onClick={() => {
-                if (setTransferTopic) setTransferTopic(topicKey)
-                if (setMode) setMode('transfer')
-              }}
-              style={{ width: '100%', padding: '10px', background: 'linear-gradient(135deg, #FFD700, #FFA500)', color: '#000', fontWeight: 'bold', border: 'none', borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
-            >
-              {goldMastery.includes(topicKey) ? (
-                <>🔄 Revisit Transfer Challenge (Stage 4) 🥇</>
-              ) : (
-                <>🚀 Start Transfer Challenge (Stage 4) 🥇</>
-              )}
-            </button>
-          </div>
-        )}
+          {isStage3Completed(topicKey, completedTopics) && (
+            <div className="transfer-cta-box" style={{ marginTop: '20px', padding: '16px', background: 'var(--clr-hover, rgba(255,255,255,0.03))', borderRadius: '10px', border: '1px solid var(--clr-border)', textAlign: 'center' }}>
+              <p style={{ margin: '0 0 12px', fontSize: '0.9rem', color: 'var(--clr-text-soft)', lineHeight: '1.4' }}>
+                {goldMastery.includes(topicKey) ? (
+                  <>🥇 You have achieved Gold Mastery for this topic!</>
+                ) : (
+                  <>🎉 You have completed Stage 3 Practice for this topic!</>
+                )}
+              </p>
+              <button
+                className="btn-transfer-cta"
+                onClick={() => {
+                  if (setTransferTopic) setTransferTopic(topicKey)
+                  if (setMode) setMode('transfer')
+                }}
+                style={{ width: '100%', padding: '10px', background: 'linear-gradient(135deg, #FFD700, #FFA500)', color: '#000', fontWeight: 'bold', border: 'none', borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
+              >
+                {goldMastery.includes(topicKey) ? (
+                  <>🔄 Revisit Transfer Challenge (Stage 4) 🥇</>
+                ) : (
+                  <>🚀 Start Transfer Challenge (Stage 4) 🥇</>
+                )}
+              </button>
+            </div>
+          )}
         </div>
       )
     }
@@ -55306,12 +48583,12 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
                   const isSelected = answer === letter
                   const isCorrectChoice = revealed && (letter === (revealedCorrectAnswer || question.answerOption))
                   const isWrongChoice = revealed && isSelected && !isCorrect
-                  
+
                   let cardClass = "mcq-option-card"
                   if (isSelected) cardClass += " selected"
                   if (isCorrectChoice) cardClass += " correct"
                   if (isWrongChoice) cardClass += " wrong"
-                  
+
                   return (
                     <div
                       key={letter}
@@ -55363,7 +48640,7 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
               <button onClick={loadQuestion}>Retry</button>
             </div>
           )}
-          {renderFeedback(feedback, isCorrect)}
+          <FeedbackDisplay feedback={feedback} isCorrect={isCorrect} />
           <div className="button-row">
             {!revealed ? <>
               <button onClick={handleSubmit} disabled={loading || !answer.trim()}>Submit</button>
@@ -55386,8 +48663,8 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
           <ResultsTable results={results} />
           <button onClick={() => { setStarted(false); setFinished(false) }}>Play Again</button>
         </div>}
-      <HintModal concept={apiPath.split('-')[0]} questionId={question?.id || 'unknown'} questionData={question} revealed={revealed} hintsUsedCount={hintsUsedCount} xpBreakdown={xpBreakdown} bonusLoading={bonusLoading} />
-</QuizLayout>
+        <HintModal concept={apiPath.split('-')[0]} questionId={question?.id || 'unknown'} questionData={question} revealed={revealed} hintsUsedCount={hintsUsedCount} xpBreakdown={xpBreakdown} bonusLoading={bonusLoading} />
+      </QuizLayout>
     )
   }
 }
@@ -55499,13 +48776,13 @@ function DotProdApp({ onBack, isGoalMode = false }) {
   const effectiveDiff = () => (isAdaptive) ? adaptiveLevel(adaptScoreRef.current) : difficulty
   const curAdaptLevel = adaptiveLevel(adaptScore)
 
-  
+
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
-    try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
-    try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch(_) {}
+    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch (_) { }
+    try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch (_) { }
+    try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch (_) { }
     try {
       const r = await fetch(`${API}/dotprod-api/check`, {
         method: 'POST',
@@ -55514,12 +48791,12 @@ function DotProdApp({ onBack, isGoalMode = false }) {
       })
       const d = await r.json()
       if (sessionGoal === 'perfect') {
-        try { setFinished(true); timer.reset() } catch(_) {}
+        try { setFinished(true); timer.reset() } catch (_) { }
       }
-    } catch(e) { console.error('handleTimeout error:', e) }
+    } catch (e) { console.error('handleTimeout error:', e) }
   }
 
-const loadQuestion = async () => {
+  const loadQuestion = async () => {
     setLoading(true)
     try {
       const diff = effectiveDiff()
@@ -55614,7 +48891,7 @@ const loadQuestion = async () => {
       (() => {
         const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
         if (data.correct) {
-          setFeedback(`Correct! ${data.display}`.slice(0,-1) + _ci + `Correct! ${data.display}`.slice(-1))
+          setFeedback(`Correct! ${data.display}`.slice(0, -1) + _ci + `Correct! ${data.display}`.slice(-1))
         } else if (sessionGoal === 'perfect') {
           setFeedback(`Incorrect. Answer: ${data.display}` + ' ❌ Perfect Solve ended.')
           setFinished(true); timer.reset()
@@ -55774,19 +49051,19 @@ const loadQuestion = async () => {
         <p className="welcome-text" style={{ marginTop: '14px', fontSize: '0.92rem', fontWeight: 700, marginBottom: '6px' }}>Practice Goal:</p>
         <div className="checkbox-group" style={{ marginBottom: '12px' }}>
           {[
-                        { key: 'speed', label: '⚡ Speed Run' },
+            { key: 'speed', label: '⚡ Speed Run' },
             { key: 'perfect', label: '🎯 Perfect Solve' },
             { key: 'revision', label: '🔄 Revision' }
           ].map(g => (
             <label key={g.key} className={`checkbox-pill${sessionGoal === g.key ? ' active' : ''}`}
               style={sessionGoal === g.key ? (
                 g.key === 'speed' ? { background: 'rgba(255,179,0,0.18)', borderColor: '#ffb300', color: '#ffb300' } :
-                g.key === 'perfect' ? { background: 'rgba(244,67,54,0.18)', borderColor: '#f44336', color: '#f44336' } :
-                g.key === 'revision' ? { background: 'rgba(33,150,243,0.18)', borderColor: '#2196f3', color: '#2196f3' } : {}
+                  g.key === 'perfect' ? { background: 'rgba(244,67,54,0.18)', borderColor: '#f44336', color: '#f44336' } :
+                    g.key === 'revision' ? { background: 'rgba(33,150,243,0.18)', borderColor: '#2196f3', color: '#2196f3' } : {}
               ) : {}}>
               <input type="radio" name="dotprodapp-goal" checked={sessionGoal === g.key} onChange={() => {
                 setSessionGoal(g.key)
-                
+
               }} />
               {g.label}
             </label>
@@ -55825,7 +49102,7 @@ const loadQuestion = async () => {
         {question && <div style={{ textAlign: 'center' }}>
           {renderQuestion()}
         </div>}
-        {renderFeedback(feedback, isCorrect)}
+        <FeedbackDisplay feedback={feedback} isCorrect={isCorrect} />
         <div className="button-row">
           {!revealed ? (
             <>
@@ -56059,7 +49336,7 @@ const GymDecimalsApp = makeMCQuizApp({
 // Functions Gym — evaluate degree-1/2/3 polynomials and simple linear
 // rationals at integer x. All multiplications stay within single-digit
 // times-tables.
-const FuncGymApp = makeMCQuizApp({
+const FuncGym = makeMCQuizApp({
   title: 'Functions Gym', subtitle: 'Evaluate small polynomials & rationals',
   apiPath: 'funcgym-api',
   adaptiveOnly: true,
@@ -56073,7 +49350,7 @@ const FuncGymApp = makeMCQuizApp({
 })
 
 // DotProducts Gym — 2D and 3D dot products with single-digit signed integers.
-const DotProdGymApp = makeMCQuizApp({
+const DotProdGym = makeMCQuizApp({
   title: 'DotProducts Gym', subtitle: 'a · b for 2- and 3-tuples (signed digits)',
   apiPath: 'dotprodgym-api',
   adaptiveOnly: true,
@@ -56087,7 +49364,7 @@ const DotProdGymApp = makeMCQuizApp({
 })
 
 // Fractions-add-gym — add two single-digit fractions, multiple choice.
-const FracAddGymApp = makeMCQuizApp({
+const FracAddGym = makeMCQuizApp({
   title: 'Fractions-add-gym', subtitle: 'Add single-digit fractions',
   apiPath: 'fracaddgym-api',
   adaptiveOnly: true,
@@ -56102,7 +49379,7 @@ const FracAddGymApp = makeMCQuizApp({
 
 // LinearEquations-Gym — solve ax+b=0 (and harder forms) where every division
 // stays inside single-digit times-tables.
-const LinEqGymApp = makeMCQuizApp({
+const LinEqGym = makeMCQuizApp({
   title: 'LinearEquations-Gym', subtitle: 'Solve linear equations with integer answers',
   apiPath: 'lineqgym-api',
   adaptiveOnly: true,
@@ -56116,7 +49393,7 @@ const LinEqGymApp = makeMCQuizApp({
 })
 
 // Indices-Gym — index laws (a^k · a^l = a^(k+l), a^k ÷ a^l = a^(k-l), etc.)
-const IndicesGymApp = makeMCQuizApp({
+const IndicesGym = makeMCQuizApp({
   title: 'Indices-Gym', subtitle: 'Apply index laws — multiply, divide, power',
   apiPath: 'indicesgym-api',
   adaptiveOnly: true,
@@ -56132,7 +49409,7 @@ const IndicesGymApp = makeMCQuizApp({
 // Polynomials Gym — progressive ladder from signed integer arithmetic up
 // through monomial × monomial. All multiplications stay within the
 // 9-times-tables (single-digit factors); additions can use larger numbers.
-const PolyGymApp = makeMCQuizApp({
+const PolyGym = makeMCQuizApp({
   title: 'Polynomials Gym', subtitle: 'Arithmetic → monomial algebra (single-digit ×)',
   apiPath: 'polygym-api',
   adaptiveOnly: true,
@@ -56198,622 +49475,7 @@ const GYM_MIN_SAMPLES = 4
 // Once a skill is done it is removed from the question rotation and the UI
 // shows a tick mark next to it on the live mastery dashboard.
 const GYM_DONE_THRESHOLD = 5
-// Routing thresholds for the gym-picker. The router stays on a skill for at
-// least GYM_MIN_STREAK questions, holds the student through a "remediation"
-// window after a mistake (until they get GYM_REMEDIATION_RUN consecutive
-// correct on the same gym), and force-rerolls past GYM_MAX_STREAK so no
-// single skill can hijack the whole session.
-const GYM_MIN_STREAK = 3
-const GYM_MAX_STREAK = 8
-const GYM_REMEDIATION_RUN = 2
 
-/**
- * isGymDone(stat) — has the student demonstrated mastery of this skill?
- * True when they've answered GYM_DONE_THRESHOLD or more questions correctly
- * at the `extrahard` band. Done skills are skipped by pickNextGym so the
- * student keeps focusing on the skills they haven't yet conquered.
- */
-function isGymDone(stat) {
-  return !!(stat && (stat.extrahardCorrect || 0) >= GYM_DONE_THRESHOLD)
-}
-
-/** Load the per-gym stats blob from localStorage. */
-function loadGymStats() {
-  try {
-    const raw = localStorage.getItem(GYM_STATS_KEY)
-    if (!raw) return {}
-    return JSON.parse(raw) || {}
-  } catch (e) { return {} }
-}
-
-/** Persist updated stats. Silent on storage failure. */
-function saveGymStats(stats) {
-  try { localStorage.setItem(GYM_STATS_KEY, JSON.stringify(stats)) } catch (e) { }
-}
-
-/**
- * Compute mastery ∈ [0, 1] for a single gym from its rolling stats.
- * 0 = struggling / new; 1 = comfortable & fast.
- *
- * Uses both accuracy and average response time so that a fast-but-sloppy or
- * accurate-but-glacial student doesn't get marked as mastered prematurely.
- */
-function gymMastery(stat) {
-  if (!stat || stat.total < GYM_MIN_SAMPLES) return 0
-  const accuracy = stat.correct / stat.total
-  const avgTime = stat.totalTime / stat.total
-  // Speed factor: 1 if avg ≤ GYM_FAST_AVG_S, decays to 0.4 by 18s.
-  const speedFactor = Math.max(0.4, Math.min(1, 1 - (avgTime - GYM_FAST_AVG_S) / 12))
-  return Math.max(0, Math.min(1, accuracy * speedFactor))
-}
-
-/** Map a gym's mastery score to the difficulty band we'll fetch from. */
-function gymDifficultyFor(mastery) {
-  if (mastery < 0.45) return 'easy'
-  if (mastery < 0.70) return 'medium'
-  if (mastery < 0.88) return 'hard'
-  return 'extrahard'
-}
-
-/**
- * Pick the next gym to test. The strategy is built around three rules,
- * roughly in priority order:
- *
- *   1. **Floor** — In the first GYM_MIN_STREAK questions on a gym, never
- *      switch. Students need a few reps to settle in.
- *
- *   2. **Remediation lock** — After a wrong answer (or a Solve), stay on
- *      the same gym until the student has GYM_REMEDIATION_RUN consecutive
- *      correct answers there. The intent is the opposite of "flee the
- *      mistake": a stumble means we should give them another chance to
- *      get it right, not move on. (Difficulty also adapts down via
- *      gymDifficultyFor, so the remediation questions are at an easier
- *      band, giving them a real shot at recovery.)
- *
- *   3. **Soft release → hard cap** — Once both rules above are satisfied,
- *      switching becomes possible. Probability of switching ramps linearly
- *      from 0.5 at GYM_MIN_STREAK to 0.85 at GYM_MAX_STREAK; past the cap
- *      the router force-rerolls. The re-roll is weighted random over
- *      not-done gyms with weight = max(0.1, 1 − mastery), so weak skills
- *      are favoured but mastered ones still re-appear at a low rate.
- *
- * Done skills (see isGymDone) are filtered out entirely. Returns the chosen
- * GYM_PUZZLE_TYPES entry, or null when every skill is done — the caller
- * (loadNext) treats null as a signal to end the workout.
- */
-function pickNextGym(stats, prevKey, streakLen, lastCorrect, consecCorrect) {
-  const candidates = GYM_PUZZLE_TYPES.filter(g => !isGymDone(stats[g.key]))
-  if (candidates.length === 0) return null
-  const prev = prevKey ? candidates.find(g => g.key === prevKey) : null
-  if (prev) {
-    // Rule 1 — floor: never switch in the first MIN_STREAK questions.
-    if (streakLen < GYM_MIN_STREAK) return prev
-    // Rule 2 — remediation lock: a wrong answer (or insufficient recovery)
-    // keeps us on the same gym so the student gets another chance.
-    if (!lastCorrect || consecCorrect < GYM_REMEDIATION_RUN) return prev
-    // Rule 3 — soft release with a linear-ramp probability of switching.
-    if (streakLen < GYM_MAX_STREAK) {
-      const t = (streakLen - GYM_MIN_STREAK) / (GYM_MAX_STREAK - GYM_MIN_STREAK)
-      const pSwitch = 0.5 + 0.35 * t
-      if (Math.random() > pSwitch) return prev
-    }
-    // Past MAX_STREAK we fall through to the weighted re-roll.
-  }
-  const weights = candidates.map(g => Math.max(0.1, 1 - gymMastery(stats[g.key])))
-  const total = weights.reduce((a, b) => a + b, 0)
-  let r = Math.random() * total
-  for (let i = 0; i < candidates.length; i++) {
-    r -= weights[i]
-    if (r <= 0) return candidates[i]
-  }
-  return candidates[candidates.length - 1]
-}
-
-/**
- * Update one gym's rolling stats with a new result. Returns a new stats blob
- * (immutable update) and persists it to localStorage as a side effect. The
- * `difficulty` arg lets us count correct extrahard answers separately, which
- * powers the "skill done" criterion (see GYM_DONE_THRESHOLD).
- */
-function updateGymStat(stats, gymKey, correct, timeSec, difficulty) {
-  const cur = stats[gymKey] || { correct: 0, total: 0, totalTime: 0, extrahardCorrect: 0 }
-  const isExtraHardWin = correct && difficulty === 'extrahard'
-  const next = {
-    ...stats,
-    [gymKey]: {
-      correct: cur.correct + (correct ? 1 : 0),
-      total: cur.total + 1,
-      totalTime: cur.totalTime + timeSec,
-      extrahardCorrect: (cur.extrahardCorrect || 0) + (isExtraHardWin ? 1 : 0),
-    },
-  }
-  saveGymStats(next)
-  return next
-}
-
-/**
- * GymApp — the unified Gym puzzle. Pulls together all six gym MCQ families
- * with adaptive selection and per-gym difficulty progression.
- */
-function GymApp({ onBack }) {
-  const [stats, setStats] = useState(() => loadGymStats())
-  const [phase, setPhase] = useState('setup')   // 'setup' | 'quiz' | 'finished'
-  const [numQuestions, setNumQuestions] = useState(String(DEFAULT_TOTAL))
-  const [totalQ, setTotalQ] = useState(DEFAULT_TOTAL)
-  const [questionNumber, setQuestionNumber] = useState(0)
-  const [score, setScore] = useState(0)
-  const [results, setResults] = useState([])
-  // Per-question state — mirrors makeMCQuizApp but tracks which gym sourced it.
-  const [question, setQuestion] = useState(null)
-  const [currentGym, setCurrentGym] = useState(null)
-  const [currentDifficulty, setCurrentDifficulty] = useState('easy')
-  const [selectedOption, setSelectedOption] = useState('')
-  const [correctOption, setCorrectOption] = useState('')
-  const [feedback, setFeedback] = useState('')
-  const [isCorrect, setIsCorrect] = useState(null)
-  const [revealed, setRevealed] = useState(false)
-  const [loading, setLoading] = useState(false)
-  const [loadError, setLoadError] = useState('')
-  const timer = useTimer()
-  const { hintsUsedCount, xpBreakdown, bonusLoading } = useQuizHintsAndXp('gym', finished, score, totalQ, typeof isCorrect !== 'undefined' ? (isCorrect || false) : false, results);
-  const sessionGoal = 'standard'
-  const isAdaptive = true
-  const handleTimeout = async () => {
-    if (revealed) return
-    setIsCorrect(false); setRevealed(true)
-    setFeedback('⏰ Time\'s up!')
-    setResults(prev => [...prev, {
-      question: `[${currentGym?.name || ''} · ${currentDifficulty}] ${question?.prompt || ''}`,
-      userAnswer: '—', correctAnswer: '', correct: false, time: 0,
-    }])
-    lastCorrectRef.current = false
-    consecCorrectRef.current = 0
-  }
-  const advanceFnRef = useRef(null)
-  const submittedRef = useRef(false)
-  const advancedRef = useRef(false)
-  // Streak state for the gym-router. Refs (not React state) so loadNext sees
-  // the latest values without depending on render timing.
-  const streakRef = useRef(0)
-  const lastCorrectRef = useRef(null)
-  // Number of consecutive correct answers on the current gym. Resets to 0 on
-  // any wrong answer or Solve. Drives the "remediation lock" in pickNextGym.
-  const consecCorrectRef = useRef(0)
-  // Manual-override channel for the "Practice" buttons in the live mastery
-  // dashboard. The ref drives loadNext (which reads it synchronously); the
-  // mirror state drives the UI so the row instantly shows "up next".
-  const requestedGymRef = useRef(null)
-  const [requestedKey, setRequestedKey] = useState(null)
-  const requestSkill = (gym) => {
-    if (!gym) return
-    requestedGymRef.current = gym
-    setRequestedKey(gym.key)
-  }
-
-  /**
-   * loadNext(): pick a gym (with streak-based stickiness, skipping any
-   * skills the student has already finished), fetch a question at that gym's
-   * mastery-derived difficulty, and reset per-question state. If every skill
-   * is done, ends the workout early.
-   */
-  const loadNext = async () => {
-    setLoading(true); setLoadError('')
-    // Manual override takes priority — if the student clicked "Practice" on
-    // a row, the next question must come from that gym (even if it's done).
-    let gym
-    if (requestedGymRef.current) {
-      gym = requestedGymRef.current
-      requestedGymRef.current = null
-      setRequestedKey(null)
-    } else {
-      gym = pickNextGym(stats, currentGym?.key, streakRef.current,
-        lastCorrectRef.current, consecCorrectRef.current)
-    }
-    if (!gym) {
-      // All six skills are done — end the workout regardless of question count.
-      setLoading(false)
-      setPhase('finished')
-      return
-    }
-    const difficulty = gymDifficultyFor(gymMastery(stats[gym.key]))
-    // Update streak: reset to 1 on a switch, increment when staying. A
-    // switch also resets the consecutive-correct counter for remediation.
-    if (currentGym && gym.key === currentGym.key) {
-      streakRef.current += 1
-    } else {
-      streakRef.current = 1
-      consecCorrectRef.current = 0
-    }
-    setCurrentGym(gym)
-    setCurrentDifficulty(difficulty)
-    try {
-      const r = await fetch(`${API}/${gym.api}/question?difficulty=${difficulty}`)
-      if (!r.ok) throw new Error(`Server returned ${r.status}`)
-      const data = await r.json()
-      if (!data || !Array.isArray(data.options) || data.options.length < 2) {
-        throw new Error('Question payload missing options array')
-      }
-      setQuestion(data)
-      setSelectedOption(''); setCorrectOption('')
-      setFeedback(''); setIsCorrect(null); setRevealed(false)
-      submittedRef.current = false; advancedRef.current = false
-      timer.start(sessionGoal, handleTimeout, getSpeedRunLimit(currentDifficulty ?? 'easy', isAdaptive ?? false))
-    } catch (e) {
-      console.error('Failed to load Gym question:', e)
-      setQuestion(null)
-      setLoadError(`Couldn't load a question (${e.message || 'unknown error'}). Tap Retry to try again.`)
-    }
-    setLoading(false)
-  }
-
-  const startQuiz = () => {
-    // No fixed question count — the workout ends when every skill is done
-    // (or when the student backs out). totalQ is kept as a generous safety
-    // cap so we don't loop forever in pathological cases.
-    setTotalQ(500); setScore(0); setResults([]); setQuestionNumber(1)
-    setPhase('quiz')
-    submittedRef.current = false; advancedRef.current = false
-    // Fresh routing state for the new session.
-    streakRef.current = 0
-    lastCorrectRef.current = null
-    consecCorrectRef.current = 0
-    requestedGymRef.current = null
-    setRequestedKey(null)
-    setCurrentGym(null)
-  }
-
-  // Load a fresh question whenever questionNumber advances (during quiz).
-  useEffect(() => { if (phase === 'quiz' && questionNumber > 0) loadNext() },
-    // We intentionally re-run whenever questionNumber changes; stats updates
-    // happen in a ref-like way via setStats so they don't trigger re-fetch.
-    [phase, questionNumber])
-
-  const advance = () => {
-    if (advancedRef.current) return
-    advancedRef.current = true
-    if (questionNumber >= totalQ) setPhase('finished')
-    else setQuestionNumber(n => n + 1)
-  }
-  advanceFnRef.current = advance
-  useAutoAdvance(revealed, advanceFnRef, isCorrect)
-
-  // Enter advances after a wrong answer (no auto-advance on wrong).
-  useEffect(() => {
-    if (phase !== 'quiz' || !revealed || isCorrect) return
-    const h = (e) => { if (e.key === 'Enter') { e.preventDefault(); advance() } }
-    window.addEventListener('keydown', h)
-    return () => window.removeEventListener('keydown', h)
-  }, [phase, revealed, isCorrect, questionNumber])
-
-  // 1-4 / a-d shortcuts to pick options.
-  useEffect(() => {
-    if (phase !== 'quiz') return
-    const onKey = (e) => {
-      if (revealed || loading || !question) return
-      const map = { '1': 'A', '2': 'B', '3': 'C', '4': 'D', 'a': 'A', 'b': 'B', 'c': 'C', 'd': 'D' }
-      const letter = map[e.key.toLowerCase()]
-      if (letter && question.options.find(o => o.option === letter)) {
-        e.preventDefault()
-        handleSelect(letter)
-      }
-    }
-    window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
-  }, [phase, revealed, loading, question])
-
-  const handleSelect = async (letter) => {
-    if (!question || revealed || !currentGym) return
-    if (submittedRef.current) return
-    submittedRef.current = true
-    setSelectedOption(letter)
-    const timeTaken = timer.stop()
-    try {
-      const r = await fetch(`${API}/${currentGym.api}/check`, {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...question, selectedOption: letter }),
-      })
-      const data = await r.json()
-      setIsCorrect(data.correct); setRevealed(true)
-      setCorrectOption(data.correctOption || '')
-      if (data.correct) setScore(s => s + 1)
-      const correctText = data.correctDisplay || (question.options.find(o => o.option === data.correctOption)?.text) || ''
-      setFeedback(data.correct
-        ? `Correct! [${currentGym.name}] ${correctText}`
-        : `Incorrect. [${currentGym.name}] Answer: ${data.correctOption}. ${correctText}`)
-      setResults(prev => [...prev, {
-        question: `[${currentGym.name} · ${currentDifficulty}] ${question.prompt}`,
-        userAnswer: letter,
-        correctAnswer: data.correctOption + (correctText ? `: ${correctText}` : ''),
-        correct: data.correct,
-        time: timeTaken,
-      }])
-      // Update mastery for the gym this question came from.
-      setStats(prev => updateGymStat(prev, currentGym.key, data.correct, timeTaken, currentDifficulty))
-      lastCorrectRef.current = !!data.correct
-      // Maintain the consecutive-correct counter that drives remediation:
-      // a correct answer extends the run, a wrong answer resets it.
-      consecCorrectRef.current = data.correct ? consecCorrectRef.current + 1 : 0
-    } catch (e) {
-      submittedRef.current = false
-      console.error('Failed to check Gym answer:', e)
-    }
-  }
-
-  const handleSolve = async () => {
-    if (!question || revealed || !currentGym) return
-    submittedRef.current = true
-    timer.stop()
-    try {
-      const r = await fetch(`${API}/${currentGym.api}/check`, {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...question, selectedOption: '', solve: true }),
-      })
-      const data = await r.json()
-      setIsCorrect(false); setRevealed(true)
-      setCorrectOption(data.correctOption || '')
-      const correctText = data.correctDisplay || (question.options.find(o => o.option === data.correctOption)?.text) || ''
-      const explanation = data.explanation || ''
-      setFeedback(`Solution [${currentGym.name}]: ${data.correctOption}${correctText ? ': ' + correctText : ''}${explanation ? '\n' + explanation : ''}`)
-      setResults(prev => [...prev, {
-        question: `[${currentGym.name} · ${currentDifficulty}] ${question.prompt}`,
-        userAnswer: '(solved)',
-        correctAnswer: data.correctOption + (correctText ? `: ${correctText}` : ''),
-        correct: false,
-        time: 0,
-      }])
-      // A "solve" still counts as an attempt, but credited as incorrect for mastery.
-      setStats(prev => updateGymStat(prev, currentGym.key, false, 0, currentDifficulty))
-      lastCorrectRef.current = false
-      // Solve = the student gave up on this question, so remediation
-      // restarts from zero (same as a wrong answer).
-      consecCorrectRef.current = 0
-    } catch (e) {
-      submittedRef.current = false
-      console.error('Failed to solve Gym question:', e)
-    }
-  }
-
-  const resetStats = () => {
-    saveGymStats({})
-    setStats({})
-    // Also wipe the in-flight routing state so the next question starts
-    // fresh (no leftover streak, remediation lock, or queued skill).
-    streakRef.current = 0
-    lastCorrectRef.current = null
-    consecCorrectRef.current = 0
-    requestedGymRef.current = null
-    setRequestedKey(null)
-  }
-  /**
-   * confirmReset — guards resetStats() behind a confirm() so a misclick
-   * during a session can't accidentally wipe accumulated mastery.
-   */
-  const confirmReset = () => {
-    if (window.confirm('Reset all gym progress? This wipes mastery, streaks, and completed skills on this browser. It cannot be undone.')) {
-      resetStats()
-    }
-  }
-
-  // Helper for the mastery dashboard rows.
-  const renderMasteryRow = (g) => {
-    const stat = stats[g.key]
-    const mastery = gymMastery(stat)
-    const diff = gymDifficultyFor(mastery)
-    const pct = Math.round(mastery * 100)
-    const samples = stat ? stat.total : 0
-    const acc = stat && stat.total ? Math.round((stat.correct / stat.total) * 100) : 0
-    const avg = stat && stat.total ? (stat.totalTime / stat.total).toFixed(1) : '—'
-    const colour = `hsl(${Math.round(mastery * 120)}, 60%, 45%)`
-    const done = isGymDone(stat)
-    const isCurrent = currentGym && currentGym.key === g.key && phase === 'quiz'
-    const isQueued = requestedKey === g.key && !isCurrent && phase === 'quiz'
-    // Action cell on the right end. Three mutually-exclusive states keep the
-    // column visually consistent at a fixed width:
-    //   • ACTIVE  — currently in play (read-only marker)
-    //   • UP NEXT — student has queued this skill via the Practice button
-    //   • Practice button — clickable, queues this skill as the next question
-    // On the setup/finished screens the cell is an empty placeholder of the
-    // same width so the rows stay perfectly aligned.
-    const ACTION_COL_W = 84
-    const renderActionCell = () => {
-      if (phase !== 'quiz') {
-        return <span style={{ minWidth: ACTION_COL_W, display: 'inline-block' }} />
-      }
-      if (isCurrent) {
-        return (
-          <span style={{
-            minWidth: ACTION_COL_W, textAlign: 'center', fontSize: '0.7rem',
-            fontWeight: 700, letterSpacing: '0.6px', color: 'var(--clr-accent)',
-            textTransform: 'uppercase',
-          }}>● Active</span>
-        )
-      }
-      if (isQueued) {
-        return (
-          <span style={{
-            minWidth: ACTION_COL_W, textAlign: 'center', fontSize: '0.7rem',
-            fontWeight: 700, letterSpacing: '0.6px', color: '#4caf50',
-            textTransform: 'uppercase',
-          }}>↑ Up next</span>
-        )
-      }
-      return (
-        <button
-          onClick={() => requestSkill(g)}
-          title={`Queue ${g.name} as the next question`}
-          style={{
-            minWidth: ACTION_COL_W, padding: '4px 10px', fontSize: '0.72rem',
-            fontWeight: 500, letterSpacing: '0.3px',
-            background: 'transparent', color: 'var(--clr-text-soft)',
-            border: '1px solid var(--clr-border)', borderRadius: 'var(--radius-sm)',
-            cursor: 'pointer', transition: 'all 150ms ease',
-          }}
-          onMouseEnter={e => {
-            e.currentTarget.style.background = 'var(--clr-accent-soft, rgba(255,165,0,0.10))'
-            e.currentTarget.style.color = 'var(--clr-accent)'
-            e.currentTarget.style.borderColor = 'var(--clr-accent)'
-          }}
-          onMouseLeave={e => {
-            e.currentTarget.style.background = 'transparent'
-            e.currentTarget.style.color = 'var(--clr-text-soft)'
-            e.currentTarget.style.borderColor = 'var(--clr-border)'
-          }}
-        >Practice</button>
-      )
-    }
-    return (
-      <div key={g.key} style={{
-        display: 'flex', alignItems: 'center', gap: 10, fontSize: '0.85rem', padding: '4px 6px',
-        opacity: done && !isCurrent && !isQueued ? 0.85 : 1,
-        background: isCurrent
-          ? 'var(--clr-accent-soft, rgba(255,165,0,0.08))'
-          : isQueued ? 'rgba(76,175,80,0.08)' : 'transparent',
-        borderRadius: 4,
-        transition: 'background 200ms ease',
-      }}>
-        <span style={{ minWidth: 18, textAlign: 'center', color: done ? '#4caf50' : 'var(--clr-text-soft)', fontWeight: 700 }}>
-          {done ? '✓' : (isCurrent ? '▸' : ' ')}
-        </span>
-        <span style={{ minWidth: 100, fontWeight: 500, textDecoration: done ? 'line-through' : 'none' }}>{g.name}</span>
-        <div style={{ flex: 1, height: 8, background: 'var(--clr-bg-soft, rgba(0,0,0,0.08))', borderRadius: 4, overflow: 'hidden' }}>
-          <div style={{ width: `${pct}%`, height: '100%', background: done ? '#4caf50' : colour, transition: 'width 250ms ease' }} />
-        </div>
-        <span style={{ minWidth: 38, textAlign: 'right', color: done ? '#4caf50' : colour, fontWeight: 600 }}>{pct}%</span>
-        {done ? (
-          <span className="progress-pill" style={{ background: '#4caf50', color: '#fff', fontSize: '0.72rem', padding: '2px 8px' }}>done</span>
-        ) : (
-          <span className="progress-pill" style={{ background: ADAPT_COLORS[diff], color: '#fff', fontSize: '0.72rem', padding: '2px 8px' }}>{diff}</span>
-        )}
-        <span style={{ minWidth: 110, color: 'var(--clr-text-soft)', fontSize: '0.78rem' }}>
-          {samples ? `${acc}% · ${avg}s · n=${samples}${(stat?.extrahardCorrect || 0) ? ` · X✓ ${stat.extrahardCorrect}/${GYM_DONE_THRESHOLD}` : ''}` : '— new —'}
-        </span>
-        {renderActionCell()}
-      </div>
-    )
-  }
-
-  return (
-    <QuizLayout title="Gym" subtitle="Adaptive cross-gym workout — 7 puzzles, one session" onBack={onBack} timer={phase === 'quiz' ? timer : null}>
-      {phase === 'setup' && (
-        <div className="welcome-box">
-          <p className="welcome-text">Cross-train across all seven gyms</p>
-          <p style={{ fontSize: '0.85rem', color: 'var(--clr-dim)', marginBottom: '8px' }}>
-            One adaptive session covering Decimals, Functions, Dot Products, Fractions, Linear Equations, Indices and Polynomials.
-            Each skill's difficulty rises with your mastery. The router holds a skill for at least {GYM_MIN_STREAK} questions,
-            stays on it after a mistake until you get {GYM_REMEDIATION_RUN} consecutive correct (so a stumble means
-            another shot, not a switch), and then leans toward switching as the streak grows. Click <strong>Practice</strong>
-            on any row to override the router and queue that skill next. A skill is marked done (✓) after {GYM_DONE_THRESHOLD}
-            correct extra-hard answers — the workout ends when all seven are done.
-          </p>
-          <div style={{ margin: '14px 0' }}>{GYM_PUZZLE_TYPES.map(renderMasteryRow)}</div>
-          <div className="button-row">
-            <button onClick={startQuiz}>Start Workout</button>
-            <button
-              onClick={confirmReset}
-              title="Wipe all locally-saved gym progress on this browser"
-              style={{ background: 'transparent', border: '1px solid var(--clr-text-soft)', color: 'var(--clr-text-soft)' }}
-            >Reset progress</button>
-          </div>
-        </div>
-      )}
-
-      {phase === 'quiz' && <>
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '0.3rem' }}>
-          <div className="progress-pill center">Question {questionNumber}</div>
-          {currentGym && <div className="progress-pill" style={{ background: 'var(--clr-accent)', color: '#fff' }}>{currentGym.name}</div>}
-          {currentDifficulty && <div className="progress-pill" style={{ background: ADAPT_COLORS[currentDifficulty], color: '#fff' }}>{currentDifficulty}</div>}
-          <div className="progress-pill" style={{ background: '#4caf50', color: '#fff' }}>
-            ✓ {GYM_PUZZLE_TYPES.filter(g => isGymDone(stats[g.key])).length}/{GYM_PUZZLE_TYPES.length}
-          </div>
-        </div>
-        {/* Live mastery dashboard — visible throughout the quiz so the student
-            can see which skills are still in play and which are done (✓).
-            The header carries a Reset progress link so the student can wipe
-            local progress at any time without leaving the workout. */}
-        <div style={{ margin: '6px 0 14px', padding: '10px 12px', border: '1px solid var(--clr-border)', borderRadius: 'var(--radius-sm)' }}>
-          <div style={{
-            display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-            marginBottom: 8, paddingBottom: 6, borderBottom: '1px solid var(--clr-border)',
-          }}>
-            <span style={{
-              fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.8px',
-              color: 'var(--clr-text-soft)', textTransform: 'uppercase',
-            }}>Skills · saved on this browser</span>
-            <button
-              onClick={confirmReset}
-              title="Wipe all locally-saved gym progress"
-              style={{
-                padding: '3px 10px', fontSize: '0.7rem', fontWeight: 600,
-                letterSpacing: '0.4px', textTransform: 'uppercase',
-                background: 'transparent', color: 'var(--clr-text-soft)',
-                border: '1px solid var(--clr-border)', borderRadius: 'var(--radius-sm)',
-                cursor: 'pointer', transition: 'all 150ms ease',
-              }}
-              onMouseEnter={e => {
-                e.currentTarget.style.background = 'rgba(244,67,54,0.10)'
-                e.currentTarget.style.color = '#f44336'
-                e.currentTarget.style.borderColor = '#f44336'
-              }}
-              onMouseLeave={e => {
-                e.currentTarget.style.background = 'transparent'
-                e.currentTarget.style.color = 'var(--clr-text-soft)'
-                e.currentTarget.style.borderColor = 'var(--clr-border)'
-              }}
-            >Reset progress</button>
-          </div>
-          {GYM_PUZZLE_TYPES.map(renderMasteryRow)}
-        </div>
-        {question && <div style={{ textAlign: 'center' }}>
-          <div className="question-prompt" style={{ fontSize: '1.3rem', margin: '8px 0 4px', lineHeight: '1.4' }}><GlossaryText text={question.prompt} /></div>
-          <div className="options-grid" style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', gap: '12px', marginTop: '40px' }}>
-            {question.options.map(opt => {
-              const isSelected = selectedOption === opt.option
-              const isCorrectOpt = revealed && correctOption === opt.option
-              const isWrongPick = revealed && isSelected && !isCorrect
-              return (
-                <button key={opt.option}
-                  className={`option-card ${isSelected ? 'selected' : ''} ${isCorrectOpt ? 'correct-option' : ''} ${isWrongPick ? 'wrong-option' : ''}`}
-                  onClick={() => !revealed && handleSelect(opt.option)}
-                  disabled={revealed}>
-                  <strong>{GYM_OPTION_LABEL[opt.option] || opt.option}.</strong> {opt.text}
-                </button>
-              )
-            })}
-          </div>
-        </div>}
-        {!question && loading && <div style={{ textAlign: 'center', padding: '24px', color: 'var(--clr-text-soft)' }}>Loading question…</div>}
-        {!question && !loading && loadError && (
-          <div style={{ textAlign: 'center', padding: '20px', color: 'var(--clr-wrong)', fontSize: '0.95rem' }}>
-            <div style={{ marginBottom: '10px' }}>{loadError}</div>
-            <button onClick={loadNext}>Retry</button>
-          </div>
-        )}
-        {renderFeedback(feedback, isCorrect)}
-        <div className="button-row">
-          {!revealed ? (
-            <button onClick={handleSolve} disabled={loading} style={{ background: 'transparent', border: '1px solid var(--clr-accent)', color: 'var(--clr-accent)' }}>Solve</button>
-          ) : (
-            <button onClick={advance}>Next Question</button>
-          )}
-        </div>
-        {results.length > 0 && <ResultsTable results={results} />}
-      </>}
-
-      {phase === 'finished' && (
-        <div className="welcome-box">
-          <p className="welcome-text">Workout complete!</p>
-          <p className="final-score">Final score: {score} correct over {results.length} questions</p>
-          <div style={{ margin: '14px 0', textAlign: 'left' }}>
-            <div style={{ fontSize: '0.85rem', color: 'var(--clr-text-soft)', marginBottom: 6 }}>Updated mastery:</div>
-            {GYM_PUZZLE_TYPES.map(renderMasteryRow)}
-          </div>
-          <ResultsTable results={results} />
-          <button onClick={() => setPhase('setup')}>Workout Again</button>
-        </div>
-      )}
-    </QuizLayout>
-  )
-}
 // ──────────────────────────── /Gym ─────────────────────────────
 
 const GSTApp = makeQuizApp({
@@ -56824,7 +49486,7 @@ const GSTApp = makeQuizApp({
 
 function GSTPage(props) {
   const [learningPhase, setLearningPhase] = useState('select'); // 'select', 'learn', 'test'
-  
+
   const [showQuizBelow, setShowQuizBelow] = useState(false);
   const quizRef = useRef(null);
 
@@ -56870,15 +49532,15 @@ function GSTPage(props) {
   if (learningPhase === 'learn') {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-        <GSTLearnPage 
-          onStartTest={startQuizBelow} 
-          onBack={props.onBack} 
+        <GSTLearnPage
+          onStartTest={startQuizBelow}
+          onBack={props.onBack}
         />
         {showQuizBelow && (
           <div ref={quizRef} className="fade-in" style={{ paddingBottom: '40px', marginTop: '20px' }}>
             <div style={{ textAlign: 'center', margin: '40px 0 20px', padding: '20px', borderTop: '2px dashed rgba(0,0,0,0.1)' }}>
-               <h2 style={{ color: 'var(--clr-text)', fontSize: '2rem' }}>📝 GST Quiz</h2>
-               <p style={{ color: 'var(--clr-text-soft)' }}>Your learning is above. Good luck on the test!</p>
+              <h2 style={{ color: 'var(--clr-text)', fontSize: '2rem' }}>📝 GST Quiz</h2>
+              <p style={{ color: 'var(--clr-text-soft)' }}>Your learning is above. Good luck on the test!</p>
             </div>
             <GSTApp {...props} onBack={props.onBack} />
           </div>
@@ -57597,13 +50259,13 @@ function SquaringApp({ onBack, isGoalMode = false }) {
   const effectiveDiff = () => (isAdaptive) ? adaptiveLevel(adaptScoreRef.current) : difficulty
   const curAdaptLevel = adaptiveLevel(adaptScore)
 
-  
+
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
-    try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
-    try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch(_) {}
+    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch (_) { }
+    try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch (_) { }
+    try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch (_) { }
     try {
       const r = await fetch(`${API}/squaring-api/check`, {
         method: 'POST',
@@ -57612,12 +50274,12 @@ function SquaringApp({ onBack, isGoalMode = false }) {
       })
       const d = await r.json()
       if (sessionGoal === 'perfect') {
-        try { setFinished(true); timer.reset() } catch(_) {}
+        try { setFinished(true); timer.reset() } catch (_) { }
       }
-    } catch(e) { console.error('handleTimeout error:', e) }
+    } catch (e) { console.error('handleTimeout error:', e) }
   }
 
-const loadQuestion = async () => {
+  const loadQuestion = async () => {
     setLoading(true)
     try {
       const diff = effectiveDiff()
@@ -57662,14 +50324,14 @@ const loadQuestion = async () => {
     const timeTaken = timer.stop()
     const userAnswer = `${valASq.trim()}|${valBSq.trim()}|${val2AB.trim()}|${valFinal.trim()}`
     try {
-      const r = await fetch(`${API}/squaring-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  ...question, userAnswer, sessionGoal }) })
+      const r = await fetch(`${API}/squaring-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({ ...question, userAnswer, sessionGoal }) })
       const data = await r.json()
       setIsCorrect(data.correct); setRevealed(true)
       if (data.correct) setScore(s => s + 1);
       (() => {
         const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
         if (data.correct) {
-          setFeedback(`Correct! ${question.n}² = ${question.answer}`.slice(0,-1) + _ci + `Correct! ${question.n}² = ${question.answer}`.slice(-1))
+          setFeedback(`Correct! ${question.n}² = ${question.answer}`.slice(0, -1) + _ci + `Correct! ${question.n}² = ${question.answer}`.slice(-1))
         } else if (sessionGoal === 'perfect') {
           setFeedback(`Incorrect. ${question.display}` + ' ❌ Perfect Solve ended.')
           setFinished(true); timer.reset()
@@ -57689,7 +50351,7 @@ const loadQuestion = async () => {
     submittedRef.current = true
     timer.stop()
     try {
-      const r = await fetch(`${API}/squaring-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  ...question, userAnswer: '', solve: true, sessionGoal }) })
+      const r = await fetch(`${API}/squaring-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({ ...question, userAnswer: '', solve: true, sessionGoal }) })
       const data = await r.json()
       setIsCorrect(false); setRevealed(true)
       const display = data.display || data.correctAnswer || data.answer || ''
@@ -57750,46 +50412,46 @@ const loadQuestion = async () => {
         </div>
 
         {isGoalMode && (
-        <>
-          <p className="welcome-text" style={{ marginTop: '14px', fontSize: '0.92rem', fontWeight: 700, marginBottom: '6px' }}>Practice Goal:</p>
-                  <div className="checkbox-group" style={{ marginBottom: '12px' }}>
-                    {[
-                                            { key: 'speed', label: '⚡ Speed Run' },
-                      { key: 'perfect', label: '🎯 Perfect Solve' },
-                      { key: 'revision', label: '🔄 Revision' }
-                    ].map(g => (
-                      <label key={g.key} className={`checkbox-pill${sessionGoal === g.key ? ' active' : ''}`}
-                        style={sessionGoal === g.key ? (
-                          g.key === 'speed' ? { background: 'rgba(255,179,0,0.18)', borderColor: '#ffb300', color: '#ffb300' } :
-                          g.key === 'perfect' ? { background: 'rgba(244,67,54,0.18)', borderColor: '#f44336', color: '#f44336' } :
-                          g.key === 'revision' ? { background: 'rgba(33,150,243,0.18)', borderColor: '#2196f3', color: '#2196f3' } : {}
-                        ) : {}}>
-                        <input type="radio" name="squaringapp-goal" checked={sessionGoal === g.key} onChange={() => {
-                          setSessionGoal(g.key)
-                          
-                        }} />
-                        {g.label}
-                      </label>
-                    ))}
-                  </div>
-                  {isAdaptive && <p style={{ fontSize: '0.82rem', color: 'var(--clr-dim)', marginBottom: '8px' }}>Starts easy and smoothly adjusts to your level as you answer.</p>}
-                  {sessionGoal === 'speed' && (
-                    <p style={{ fontSize: '0.82rem', color: '#ffb300', marginBottom: '8px' }}>
-                      ⚡ Easy 5s · Medium 10s · Hard 15s · Extra Hard 20s · Adaptive 10s. Double coins for correct!
-                    </p>
-                  )}
-                  {sessionGoal === 'perfect' && (
-                    <p style={{ fontSize: '0.82rem', color: '#f44336', marginBottom: '8px' }}>
-                      🎯 One wrong answer ends the quiz. No timer shown. Can you go flawless?
-                    </p>
-                  )}
-                  {sessionGoal === 'revision' && (
-                    <p style={{ fontSize: '0.82rem', color: '#2196f3', marginBottom: '8px' }}>
-                      🔄 Focuses on topics you previously answered incorrectly.
-                    </p>
-                  )}
-        </>
-      )}
+          <>
+            <p className="welcome-text" style={{ marginTop: '14px', fontSize: '0.92rem', fontWeight: 700, marginBottom: '6px' }}>Practice Goal:</p>
+            <div className="checkbox-group" style={{ marginBottom: '12px' }}>
+              {[
+                { key: 'speed', label: '⚡ Speed Run' },
+                { key: 'perfect', label: '🎯 Perfect Solve' },
+                { key: 'revision', label: '🔄 Revision' }
+              ].map(g => (
+                <label key={g.key} className={`checkbox-pill${sessionGoal === g.key ? ' active' : ''}`}
+                  style={sessionGoal === g.key ? (
+                    g.key === 'speed' ? { background: 'rgba(255,179,0,0.18)', borderColor: '#ffb300', color: '#ffb300' } :
+                      g.key === 'perfect' ? { background: 'rgba(244,67,54,0.18)', borderColor: '#f44336', color: '#f44336' } :
+                        g.key === 'revision' ? { background: 'rgba(33,150,243,0.18)', borderColor: '#2196f3', color: '#2196f3' } : {}
+                  ) : {}}>
+                  <input type="radio" name="squaringapp-goal" checked={sessionGoal === g.key} onChange={() => {
+                    setSessionGoal(g.key)
+
+                  }} />
+                  {g.label}
+                </label>
+              ))}
+            </div>
+            {isAdaptive && <p style={{ fontSize: '0.82rem', color: 'var(--clr-dim)', marginBottom: '8px' }}>Starts easy and smoothly adjusts to your level as you answer.</p>}
+            {sessionGoal === 'speed' && (
+              <p style={{ fontSize: '0.82rem', color: '#ffb300', marginBottom: '8px' }}>
+                ⚡ Easy 5s · Medium 10s · Hard 15s · Extra Hard 20s · Adaptive 10s. Double coins for correct!
+              </p>
+            )}
+            {sessionGoal === 'perfect' && (
+              <p style={{ fontSize: '0.82rem', color: '#f44336', marginBottom: '8px' }}>
+                🎯 One wrong answer ends the quiz. No timer shown. Can you go flawless?
+              </p>
+            )}
+            {sessionGoal === 'revision' && (
+              <p style={{ fontSize: '0.82rem', color: '#2196f3', marginBottom: '8px' }}>
+                🔄 Focuses on topics you previously answered incorrectly.
+              </p>
+            )}
+          </>
+        )}
         <div className="question-count-row">
           <label className="question-count-label">How many questions? (max 100)</label>
           <input className="answer-input question-count-input" type="text" value={numQuestions} onChange={e => { const v = e.target.value; if (v === '' || (/^\d+$/.test(v) && Number(v) <= 100)) setNumQuestions(v) }} />
@@ -57821,7 +50483,7 @@ const loadQuestion = async () => {
             {numInput(valFinal, setValFinal, refFinal, null, 'Answer', question.answer)}
           </div>
         </div>}
-        {renderFeedback(feedback, isCorrect)}
+        <FeedbackDisplay feedback={feedback} isCorrect={isCorrect} />
         <div className="button-row">
           {!revealed ? <>
             <button onClick={handleSubmit} disabled={loading || !question || !isComplete()}>Submit</button>
@@ -58383,43 +51045,43 @@ function RandomMixApp({ onBack, isGoalMode = false }) {
           </div>
 
           {isGoalMode && (
-        <>
-          <p className="welcome-text" style={{ marginTop: '14px', fontSize: '0.92rem', fontWeight: 700, marginBottom: '6px' }}>Practice Goal:</p>
-                    <div className="checkbox-group" style={{ marginBottom: '8px' }}>
-                      {[
-                                                { key: 'speed',    label: '⚡ Speed Run' },
-                        { key: 'perfect',  label: '🎯 Perfect Solve' },
-                        { key: 'revision', label: '🔄 Revision' },
-                      ].map(g => (
-                        <label key={g.key} className={`checkbox-pill${sessionGoal === g.key ? ' active' : ''}`}
-                          style={sessionGoal === g.key ? (
-                            g.key === 'speed'    ? { background: 'rgba(255,179,0,0.18)',  borderColor: '#ffb300', color: '#ffb300' } :
-                            g.key === 'perfect'  ? { background: 'rgba(244,67,54,0.18)',  borderColor: '#f44336', color: '#f44336' } :
-                            g.key === 'revision' ? { background: 'rgba(33,150,243,0.18)', borderColor: '#2196f3', color: '#2196f3' } : {}
-                          ) : {}}>
-                          <input type="radio" name="randommix-goal" checked={sessionGoal === g.key}
-                            onChange={() => setSessionGoal(g.key)} />
-                          {g.label}
-                        </label>
-                      ))}
-                    </div>
-                    {sessionGoal === 'speed' && (
-                      <p style={{ fontSize: '0.82rem', color: '#ffb300', marginBottom: '8px' }}>
-                        ⚡ Easy 5s · Medium 10s · Hard 15s · Extra Hard 20s · Adaptive 10s. Double coins for correct!
-                      </p>
-                    )}
-                    {sessionGoal === 'perfect' && (
-                      <p style={{ fontSize: '0.82rem', color: '#f44336', marginBottom: '8px' }}>
-                        🎯 One wrong answer ends the quiz. No timer shown. Can you go flawless?
-                      </p>
-                    )}
-                    {sessionGoal === 'revision' && (
-                      <p style={{ fontSize: '0.82rem', color: '#2196f3', marginBottom: '8px' }}>
-                        🔄 Focuses on topics you previously answered incorrectly.
-                      </p>
-                    )}
-        </>
-      )}
+            <>
+              <p className="welcome-text" style={{ marginTop: '14px', fontSize: '0.92rem', fontWeight: 700, marginBottom: '6px' }}>Practice Goal:</p>
+              <div className="checkbox-group" style={{ marginBottom: '8px' }}>
+                {[
+                  { key: 'speed', label: '⚡ Speed Run' },
+                  { key: 'perfect', label: '🎯 Perfect Solve' },
+                  { key: 'revision', label: '🔄 Revision' },
+                ].map(g => (
+                  <label key={g.key} className={`checkbox-pill${sessionGoal === g.key ? ' active' : ''}`}
+                    style={sessionGoal === g.key ? (
+                      g.key === 'speed' ? { background: 'rgba(255,179,0,0.18)', borderColor: '#ffb300', color: '#ffb300' } :
+                        g.key === 'perfect' ? { background: 'rgba(244,67,54,0.18)', borderColor: '#f44336', color: '#f44336' } :
+                          g.key === 'revision' ? { background: 'rgba(33,150,243,0.18)', borderColor: '#2196f3', color: '#2196f3' } : {}
+                    ) : {}}>
+                    <input type="radio" name="randommix-goal" checked={sessionGoal === g.key}
+                      onChange={() => setSessionGoal(g.key)} />
+                    {g.label}
+                  </label>
+                ))}
+              </div>
+              {sessionGoal === 'speed' && (
+                <p style={{ fontSize: '0.82rem', color: '#ffb300', marginBottom: '8px' }}>
+                  ⚡ Easy 5s · Medium 10s · Hard 15s · Extra Hard 20s · Adaptive 10s. Double coins for correct!
+                </p>
+              )}
+              {sessionGoal === 'perfect' && (
+                <p style={{ fontSize: '0.82rem', color: '#f44336', marginBottom: '8px' }}>
+                  🎯 One wrong answer ends the quiz. No timer shown. Can you go flawless?
+                </p>
+              )}
+              {sessionGoal === 'revision' && (
+                <p style={{ fontSize: '0.82rem', color: '#2196f3', marginBottom: '8px' }}>
+                  🔄 Focuses on topics you previously answered incorrectly.
+                </p>
+              )}
+            </>
+          )}
 
           <p style={{ color: 'var(--clr-dim)', fontSize: '0.82rem', marginBottom: '1rem', marginTop: '12px' }}>
             Starts at <strong style={{ color: '#4caf50' }}>Easy</strong>.
@@ -58431,8 +51093,8 @@ function RandomMixApp({ onBack, isGoalMode = false }) {
             <button onClick={startQuiz}>Start Random Mix</button>
           </div>
         </div>
-      <HintModal concept={'mix'} questionId={question?.id || 'unknown'} questionData={question} revealed={revealed} hintsUsedCount={hintsUsedCount} xpBreakdown={xpBreakdown} bonusLoading={bonusLoading} />
-</QuizLayout>
+        <HintModal concept={'mix'} questionId={question?.id || 'unknown'} questionData={question} revealed={revealed} hintsUsedCount={hintsUsedCount} xpBreakdown={xpBreakdown} bonusLoading={bonusLoading} />
+      </QuizLayout>
     )
   }
 
@@ -58556,7 +51218,7 @@ function RandomMixApp({ onBack, isGoalMode = false }) {
           </div>
           {reportAck && <div style={{ textAlign: 'center', fontSize: '0.82rem', color: 'var(--clr-accent)', margin: '6px 0', fontWeight: 500 }}>{reportAck}</div>}
 
-          {renderFeedback(feedback, isCorrect)}
+          <FeedbackDisplay feedback={feedback} isCorrect={isCorrect} />
 
           {revealed && isCorrect !== null && (
             <div style={{ fontSize: '0.8rem', color: 'var(--clr-dim)', marginTop: '0.3rem', textAlign: 'center' }}>
@@ -58611,13 +51273,13 @@ function SetsApp({ onBack, isGoalMode = false }) {
 
   const effectiveDiff = () => (isAdaptive) ? adaptiveLevel(adaptScoreRef.current) : difficulty
 
-  
+
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
-    try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
-    try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch(_) {}
+    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch (_) { }
+    try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch (_) { }
+    try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch (_) { }
     try {
       const r = await fetch(`${API}/sets-api/check`, {
         method: 'POST',
@@ -58626,12 +51288,12 @@ function SetsApp({ onBack, isGoalMode = false }) {
       })
       const d = await r.json()
       if (sessionGoal === 'perfect') {
-        try { setFinished(true); timer.reset() } catch(_) {}
+        try { setFinished(true); timer.reset() } catch (_) { }
       }
-    } catch(e) { console.error('handleTimeout error:', e) }
+    } catch (e) { console.error('handleTimeout error:', e) }
   }
 
-const loadQuestion = async () => {
+  const loadQuestion = async () => {
     setLoading(true)
     try {
       const r = await fetch(`${API}/sets-api/question?difficulty=${effectiveDiff()}&goal=${sessionGoal}`, { headers: { 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' } })
@@ -58681,7 +51343,7 @@ const loadQuestion = async () => {
       (() => {
         const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
         if (data.correct) {
-          setFeedback(`Correct! ${data.display}`.slice(0,-1) + _ci + `Correct! ${data.display}`.slice(-1))
+          setFeedback(`Correct! ${data.display}`.slice(0, -1) + _ci + `Correct! ${data.display}`.slice(-1))
         } else if (sessionGoal === 'perfect') {
           setFeedback(`Incorrect. Answer: ${data.display}` + ' ❌ Perfect Solve ended.')
           setFinished(true); timer.reset()
@@ -58701,7 +51363,7 @@ const loadQuestion = async () => {
     submittedRef.current = true
     timer.stop()
     try {
-      const r = await fetch(`${API}/sets-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  ...question, userAnswer: '', solve: true, sessionGoal }) })
+      const r = await fetch(`${API}/sets-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({ ...question, userAnswer: '', solve: true, sessionGoal }) })
       const data = await r.json()
       setIsCorrect(false); setRevealed(true)
       const display = data.display || data.correctAnswer || data.answer || ''
@@ -58738,46 +51400,46 @@ const loadQuestion = async () => {
         </div>
 
         {isGoalMode && (
-        <>
-          <p className="welcome-text" style={{ marginTop: '14px', fontSize: '0.92rem', fontWeight: 700, marginBottom: '6px' }}>Practice Goal:</p>
-                  <div className="checkbox-group" style={{ marginBottom: '12px' }}>
-                    {[
-                                            { key: 'speed', label: '⚡ Speed Run' },
-                      { key: 'perfect', label: '🎯 Perfect Solve' },
-                      { key: 'revision', label: '🔄 Revision' }
-                    ].map(g => (
-                      <label key={g.key} className={`checkbox-pill${sessionGoal === g.key ? ' active' : ''}`}
-                        style={sessionGoal === g.key ? (
-                          g.key === 'speed' ? { background: 'rgba(255,179,0,0.18)', borderColor: '#ffb300', color: '#ffb300' } :
-                          g.key === 'perfect' ? { background: 'rgba(244,67,54,0.18)', borderColor: '#f44336', color: '#f44336' } :
-                          g.key === 'revision' ? { background: 'rgba(33,150,243,0.18)', borderColor: '#2196f3', color: '#2196f3' } : {}
-                        ) : {}}>
-                        <input type="radio" name="setsapp-goal" checked={sessionGoal === g.key} onChange={() => {
-                          setSessionGoal(g.key)
-                          
-                        }} />
-                        {g.label}
-                      </label>
-                    ))}
-                  </div>
-                  {isAdaptive && <p style={{ fontSize: '0.82rem', color: 'var(--clr-dim)', marginBottom: '8px' }}>Starts easy and smoothly adjusts to your level as you answer.</p>}
-                  {sessionGoal === 'speed' && (
-                    <p style={{ fontSize: '0.82rem', color: '#ffb300', marginBottom: '8px' }}>
-                      ⚡ Easy 5s · Medium 10s · Hard 15s · Extra Hard 20s · Adaptive 10s. Double coins for correct!
-                    </p>
-                  )}
-                  {sessionGoal === 'perfect' && (
-                    <p style={{ fontSize: '0.82rem', color: '#f44336', marginBottom: '8px' }}>
-                      🎯 One wrong answer ends the quiz. No timer shown. Can you go flawless?
-                    </p>
-                  )}
-                  {sessionGoal === 'revision' && (
-                    <p style={{ fontSize: '0.82rem', color: '#2196f3', marginBottom: '8px' }}>
-                      🔄 Focuses on topics you previously answered incorrectly.
-                    </p>
-                  )}
-        </>
-      )}
+          <>
+            <p className="welcome-text" style={{ marginTop: '14px', fontSize: '0.92rem', fontWeight: 700, marginBottom: '6px' }}>Practice Goal:</p>
+            <div className="checkbox-group" style={{ marginBottom: '12px' }}>
+              {[
+                { key: 'speed', label: '⚡ Speed Run' },
+                { key: 'perfect', label: '🎯 Perfect Solve' },
+                { key: 'revision', label: '🔄 Revision' }
+              ].map(g => (
+                <label key={g.key} className={`checkbox-pill${sessionGoal === g.key ? ' active' : ''}`}
+                  style={sessionGoal === g.key ? (
+                    g.key === 'speed' ? { background: 'rgba(255,179,0,0.18)', borderColor: '#ffb300', color: '#ffb300' } :
+                      g.key === 'perfect' ? { background: 'rgba(244,67,54,0.18)', borderColor: '#f44336', color: '#f44336' } :
+                        g.key === 'revision' ? { background: 'rgba(33,150,243,0.18)', borderColor: '#2196f3', color: '#2196f3' } : {}
+                  ) : {}}>
+                  <input type="radio" name="setsapp-goal" checked={sessionGoal === g.key} onChange={() => {
+                    setSessionGoal(g.key)
+
+                  }} />
+                  {g.label}
+                </label>
+              ))}
+            </div>
+            {isAdaptive && <p style={{ fontSize: '0.82rem', color: 'var(--clr-dim)', marginBottom: '8px' }}>Starts easy and smoothly adjusts to your level as you answer.</p>}
+            {sessionGoal === 'speed' && (
+              <p style={{ fontSize: '0.82rem', color: '#ffb300', marginBottom: '8px' }}>
+                ⚡ Easy 5s · Medium 10s · Hard 15s · Extra Hard 20s · Adaptive 10s. Double coins for correct!
+              </p>
+            )}
+            {sessionGoal === 'perfect' && (
+              <p style={{ fontSize: '0.82rem', color: '#f44336', marginBottom: '8px' }}>
+                🎯 One wrong answer ends the quiz. No timer shown. Can you go flawless?
+              </p>
+            )}
+            {sessionGoal === 'revision' && (
+              <p style={{ fontSize: '0.82rem', color: '#2196f3', marginBottom: '8px' }}>
+                🔄 Focuses on topics you previously answered incorrectly.
+              </p>
+            )}
+          </>
+        )}
         <div className="question-count-row">
           <label className="question-count-label">How many questions? (max 100)</label>
           <input className="answer-input question-count-input" type="text" value={numQuestions} onChange={e => { const v = e.target.value; if (v === '' || (/^\d+$/.test(v) && Number(v) <= 100)) setNumQuestions(v) }} />
@@ -58794,7 +51456,7 @@ const loadQuestion = async () => {
           <div className="question-prompt" style={{ fontSize: '1.3rem', margin: '20px 0', lineHeight: '1.6' }}><GlossaryText text={question.prompt} /></div>
           <input className="answer-input" type="text" value={answer} onChange={e => { if (!revealed) setAnswer(e.target.value) }} disabled={revealed} placeholder={question.type === 'list' ? 'e.g. {1, 3, 5} or empty' : 'e.g. 12'} onKeyDown={handleKeyDown} autoFocus />
         </div>}
-        {renderFeedback(feedback, isCorrect)}
+        <FeedbackDisplay feedback={feedback} isCorrect={isCorrect} />
         <div className="button-row">
           {!revealed ? <>
             <button onClick={handleSubmit} disabled={loading || !answer.trim()}>Submit</button>
@@ -58810,8 +51472,8 @@ const loadQuestion = async () => {
         <ResultsTable results={results} />
         <button onClick={() => { setStarted(false); setFinished(false) }}>Play Again</button>
       </div>}
-    <HintModal concept={'sets'} questionId={question?.id || 'unknown'} questionData={question} revealed={revealed} hintsUsedCount={hintsUsedCount} xpBreakdown={xpBreakdown} bonusLoading={bonusLoading} />
-</QuizLayout>
+      <HintModal concept={'sets'} questionId={question?.id || 'unknown'} questionData={question} revealed={revealed} hintsUsedCount={hintsUsedCount} xpBreakdown={xpBreakdown} bonusLoading={bonusLoading} />
+    </QuizLayout>
   )
 }
 
@@ -58848,13 +51510,13 @@ function SequencesApp({ onBack, isGoalMode = false }) {
 
   const effectiveDiff = () => (isAdaptive) ? adaptiveLevel(adaptScoreRef.current) : difficulty
 
-  
+
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
-    try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
-    try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch(_) {}
+    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch (_) { }
+    try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch (_) { }
+    try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch (_) { }
     try {
       const r = await fetch(`${API}/sequences-api/check`, {
         method: 'POST',
@@ -58863,12 +51525,12 @@ function SequencesApp({ onBack, isGoalMode = false }) {
       })
       const d = await r.json()
       if (sessionGoal === 'perfect') {
-        try { setFinished(true); timer.reset() } catch(_) {}
+        try { setFinished(true); timer.reset() } catch (_) { }
       }
-    } catch(e) { console.error('handleTimeout error:', e) }
+    } catch (e) { console.error('handleTimeout error:', e) }
   }
 
-const loadQuestion = async () => {
+  const loadQuestion = async () => {
     setLoading(true)
     try {
       const r = await fetch(`${API}/sequences-api/question?difficulty=${effectiveDiff()}&goal=${sessionGoal}`, { headers: { 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' } })
@@ -58911,7 +51573,7 @@ const loadQuestion = async () => {
       (() => {
         const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
         if (data.correct) {
-          setFeedback(`Correct! Answer: ${data.display}`.slice(0,-1) + _ci + `Correct! Answer: ${data.display}`.slice(-1))
+          setFeedback(`Correct! Answer: ${data.display}`.slice(0, -1) + _ci + `Correct! Answer: ${data.display}`.slice(-1))
         } else if (sessionGoal === 'perfect') {
           setFeedback(`Incorrect. Answer: ${data.display}` + ' ❌ Perfect Solve ended.')
           setFinished(true); timer.reset()
@@ -58931,7 +51593,7 @@ const loadQuestion = async () => {
     submittedRef.current = true
     timer.stop()
     try {
-      const r = await fetch(`${API}/sequences-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  ...question, answer: '', solve: true, sessionGoal }) })
+      const r = await fetch(`${API}/sequences-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({ ...question, answer: '', solve: true, sessionGoal }) })
       const data = await r.json()
       setIsCorrect(false); setRevealed(true)
       const display = data.display || data.correctAnswer || data.answer || ''
@@ -58967,46 +51629,46 @@ const loadQuestion = async () => {
         </div>
 
         {isGoalMode && (
-        <>
-          <p className="welcome-text" style={{ marginTop: '14px', fontSize: '0.92rem', fontWeight: 700, marginBottom: '6px' }}>Practice Goal:</p>
-                  <div className="checkbox-group" style={{ marginBottom: '12px' }}>
-                    {[
-                                            { key: 'speed', label: '⚡ Speed Run' },
-                      { key: 'perfect', label: '🎯 Perfect Solve' },
-                      { key: 'revision', label: '🔄 Revision' }
-                    ].map(g => (
-                      <label key={g.key} className={`checkbox-pill${sessionGoal === g.key ? ' active' : ''}`}
-                        style={sessionGoal === g.key ? (
-                          g.key === 'speed' ? { background: 'rgba(255,179,0,0.18)', borderColor: '#ffb300', color: '#ffb300' } :
-                          g.key === 'perfect' ? { background: 'rgba(244,67,54,0.18)', borderColor: '#f44336', color: '#f44336' } :
-                          g.key === 'revision' ? { background: 'rgba(33,150,243,0.18)', borderColor: '#2196f3', color: '#2196f3' } : {}
-                        ) : {}}>
-                        <input type="radio" name="sequencesapp-goal" checked={sessionGoal === g.key} onChange={() => {
-                          setSessionGoal(g.key)
-                          
-                        }} />
-                        {g.label}
-                      </label>
-                    ))}
-                  </div>
-                  {isAdaptive && <p style={{ fontSize: '0.82rem', color: 'var(--clr-dim)', marginBottom: '8px' }}>Starts easy and smoothly adjusts to your level as you answer.</p>}
-                  {sessionGoal === 'speed' && (
-                    <p style={{ fontSize: '0.82rem', color: '#ffb300', marginBottom: '8px' }}>
-                      ⚡ Easy 5s · Medium 10s · Hard 15s · Extra Hard 20s · Adaptive 10s. Double coins for correct!
-                    </p>
-                  )}
-                  {sessionGoal === 'perfect' && (
-                    <p style={{ fontSize: '0.82rem', color: '#f44336', marginBottom: '8px' }}>
-                      🎯 One wrong answer ends the quiz. No timer shown. Can you go flawless?
-                    </p>
-                  )}
-                  {sessionGoal === 'revision' && (
-                    <p style={{ fontSize: '0.82rem', color: '#2196f3', marginBottom: '8px' }}>
-                      🔄 Focuses on topics you previously answered incorrectly.
-                    </p>
-                  )}
-        </>
-      )}
+          <>
+            <p className="welcome-text" style={{ marginTop: '14px', fontSize: '0.92rem', fontWeight: 700, marginBottom: '6px' }}>Practice Goal:</p>
+            <div className="checkbox-group" style={{ marginBottom: '12px' }}>
+              {[
+                { key: 'speed', label: '⚡ Speed Run' },
+                { key: 'perfect', label: '🎯 Perfect Solve' },
+                { key: 'revision', label: '🔄 Revision' }
+              ].map(g => (
+                <label key={g.key} className={`checkbox-pill${sessionGoal === g.key ? ' active' : ''}`}
+                  style={sessionGoal === g.key ? (
+                    g.key === 'speed' ? { background: 'rgba(255,179,0,0.18)', borderColor: '#ffb300', color: '#ffb300' } :
+                      g.key === 'perfect' ? { background: 'rgba(244,67,54,0.18)', borderColor: '#f44336', color: '#f44336' } :
+                        g.key === 'revision' ? { background: 'rgba(33,150,243,0.18)', borderColor: '#2196f3', color: '#2196f3' } : {}
+                  ) : {}}>
+                  <input type="radio" name="sequencesapp-goal" checked={sessionGoal === g.key} onChange={() => {
+                    setSessionGoal(g.key)
+
+                  }} />
+                  {g.label}
+                </label>
+              ))}
+            </div>
+            {isAdaptive && <p style={{ fontSize: '0.82rem', color: 'var(--clr-dim)', marginBottom: '8px' }}>Starts easy and smoothly adjusts to your level as you answer.</p>}
+            {sessionGoal === 'speed' && (
+              <p style={{ fontSize: '0.82rem', color: '#ffb300', marginBottom: '8px' }}>
+                ⚡ Easy 5s · Medium 10s · Hard 15s · Extra Hard 20s · Adaptive 10s. Double coins for correct!
+              </p>
+            )}
+            {sessionGoal === 'perfect' && (
+              <p style={{ fontSize: '0.82rem', color: '#f44336', marginBottom: '8px' }}>
+                🎯 One wrong answer ends the quiz. No timer shown. Can you go flawless?
+              </p>
+            )}
+            {sessionGoal === 'revision' && (
+              <p style={{ fontSize: '0.82rem', color: '#2196f3', marginBottom: '8px' }}>
+                🔄 Focuses on topics you previously answered incorrectly.
+              </p>
+            )}
+          </>
+        )}
         <div className="question-count-row">
           <label className="question-count-label">How many questions? (max 100)</label>
           <input className="answer-input question-count-input" type="text" value={numQuestions} onChange={e => { const v = e.target.value; if (v === '' || (/^\d+$/.test(v) && Number(v) <= 100)) setNumQuestions(v) }} />
@@ -59023,7 +51685,7 @@ const loadQuestion = async () => {
           <div className="question-prompt" style={{ fontSize: '1.4rem', margin: '20px 0' }}><GlossaryText text={question.prompt} /></div>
           <input className="answer-input" type="text" value={answer} onChange={e => { if (!revealed) setAnswer(e.target.value) }} disabled={revealed} placeholder="e.g. 42 or 3/4" onKeyDown={handleKeyDown} autoFocus />
         </div>}
-        {renderFeedback(feedback, isCorrect)}
+        <FeedbackDisplay feedback={feedback} isCorrect={isCorrect} />
         <div className="button-row">
           {!revealed ? <>
             <button onClick={handleSubmit} disabled={loading || !answer.trim()}>Submit</button>
@@ -59039,8 +51701,8 @@ const loadQuestion = async () => {
         <ResultsTable results={results} />
         <button onClick={() => { setStarted(false); setFinished(false) }}>Play Again</button>
       </div>}
-    <HintModal concept={'sequences'} questionId={question?.id || 'unknown'} questionData={question} revealed={revealed} hintsUsedCount={hintsUsedCount} xpBreakdown={xpBreakdown} bonusLoading={bonusLoading} />
-</QuizLayout>
+      <HintModal concept={'sequences'} questionId={question?.id || 'unknown'} questionData={question} revealed={revealed} hintsUsedCount={hintsUsedCount} xpBreakdown={xpBreakdown} bonusLoading={bonusLoading} />
+    </QuizLayout>
   )
 }
 
@@ -59088,13 +51750,13 @@ function RatioApp({ onBack, completedTopics = [], goldMastery = [], markTopicCom
 
   const effectiveDiff = () => (isAdaptive) ? adaptiveLevel(adaptScoreRef.current) : difficulty
 
-  
+
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
-    try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
-    try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch(_) {}
+    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch (_) { }
+    try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch (_) { }
+    try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch (_) { }
     try {
       const r = await fetch(`${API}/ratio-api/check`, {
         method: 'POST',
@@ -59103,12 +51765,12 @@ function RatioApp({ onBack, completedTopics = [], goldMastery = [], markTopicCom
       })
       const d = await r.json()
       if (sessionGoal === 'perfect') {
-        try { setFinished(true); timer.reset() } catch(_) {}
+        try { setFinished(true); timer.reset() } catch (_) { }
       }
-    } catch(e) { console.error('handleTimeout error:', e) }
+    } catch (e) { console.error('handleTimeout error:', e) }
   }
 
-const loadQuestion = async () => {
+  const loadQuestion = async () => {
     setLoading(true)
     try {
       const r = await fetch(`${API}/ratio-api/question?difficulty=${effectiveDiff()}&goal=${sessionGoal}`, { headers: { 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' } })
@@ -59165,7 +51827,7 @@ const loadQuestion = async () => {
       (() => {
         const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
         if (data.correct) {
-          setFeedback(`Correct! ${data.display}`.slice(0,-1) + _ci + `Correct! ${data.display}`.slice(-1))
+          setFeedback(`Correct! ${data.display}`.slice(0, -1) + _ci + `Correct! ${data.display}`.slice(-1))
         } else if (sessionGoal === 'perfect') {
           setFeedback(`Incorrect. Answer: ${data.display}` + ' ❌ Perfect Solve ended.')
           setFinished(true); timer.reset()
@@ -59185,7 +51847,7 @@ const loadQuestion = async () => {
     submittedRef.current = true
     timer.stop()
     try {
-      const r = await fetch(`${API}/ratio-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  ...question, answer: '', solve: true, sessionGoal }) })
+      const r = await fetch(`${API}/ratio-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({ ...question, answer: '', solve: true, sessionGoal }) })
       const data = await r.json()
       setIsCorrect(false); setRevealed(true)
       const display = data.display || data.correctAnswer || data.answer || ''
@@ -59223,46 +51885,46 @@ const loadQuestion = async () => {
         </div>
 
         {isGoalMode && (
-        <>
-          <p className="welcome-text" style={{ marginTop: '14px', fontSize: '0.92rem', fontWeight: 700, marginBottom: '6px' }}>Practice Goal:</p>
-                  <div className="checkbox-group" style={{ marginBottom: '12px' }}>
-                    {[
-                                            { key: 'speed', label: '⚡ Speed Run' },
-                      { key: 'perfect', label: '🎯 Perfect Solve' },
-                      { key: 'revision', label: '🔄 Revision' }
-                    ].map(g => (
-                      <label key={g.key} className={`checkbox-pill${sessionGoal === g.key ? ' active' : ''}`}
-                        style={sessionGoal === g.key ? (
-                          g.key === 'speed' ? { background: 'rgba(255,179,0,0.18)', borderColor: '#ffb300', color: '#ffb300' } :
-                          g.key === 'perfect' ? { background: 'rgba(244,67,54,0.18)', borderColor: '#f44336', color: '#f44336' } :
-                          g.key === 'revision' ? { background: 'rgba(33,150,243,0.18)', borderColor: '#2196f3', color: '#2196f3' } : {}
-                        ) : {}}>
-                        <input type="radio" name="ratioapp-goal" checked={sessionGoal === g.key} onChange={() => {
-                          setSessionGoal(g.key)
-                          
-                        }} />
-                        {g.label}
-                      </label>
-                    ))}
-                  </div>
-                  {isAdaptive && <p style={{ fontSize: '0.82rem', color: 'var(--clr-dim)', marginBottom: '8px' }}>Starts easy and smoothly adjusts to your level as you answer.</p>}
-                  {sessionGoal === 'speed' && (
-                    <p style={{ fontSize: '0.82rem', color: '#ffb300', marginBottom: '8px' }}>
-                      ⚡ Easy 5s · Medium 10s · Hard 15s · Extra Hard 20s · Adaptive 10s. Double coins for correct!
-                    </p>
-                  )}
-                  {sessionGoal === 'perfect' && (
-                    <p style={{ fontSize: '0.82rem', color: '#f44336', marginBottom: '8px' }}>
-                      🎯 One wrong answer ends the quiz. No timer shown. Can you go flawless?
-                    </p>
-                  )}
-                  {sessionGoal === 'revision' && (
-                    <p style={{ fontSize: '0.82rem', color: '#2196f3', marginBottom: '8px' }}>
-                      🔄 Focuses on topics you previously answered incorrectly.
-                    </p>
-                  )}
-        </>
-      )}
+          <>
+            <p className="welcome-text" style={{ marginTop: '14px', fontSize: '0.92rem', fontWeight: 700, marginBottom: '6px' }}>Practice Goal:</p>
+            <div className="checkbox-group" style={{ marginBottom: '12px' }}>
+              {[
+                { key: 'speed', label: '⚡ Speed Run' },
+                { key: 'perfect', label: '🎯 Perfect Solve' },
+                { key: 'revision', label: '🔄 Revision' }
+              ].map(g => (
+                <label key={g.key} className={`checkbox-pill${sessionGoal === g.key ? ' active' : ''}`}
+                  style={sessionGoal === g.key ? (
+                    g.key === 'speed' ? { background: 'rgba(255,179,0,0.18)', borderColor: '#ffb300', color: '#ffb300' } :
+                      g.key === 'perfect' ? { background: 'rgba(244,67,54,0.18)', borderColor: '#f44336', color: '#f44336' } :
+                        g.key === 'revision' ? { background: 'rgba(33,150,243,0.18)', borderColor: '#2196f3', color: '#2196f3' } : {}
+                  ) : {}}>
+                  <input type="radio" name="ratioapp-goal" checked={sessionGoal === g.key} onChange={() => {
+                    setSessionGoal(g.key)
+
+                  }} />
+                  {g.label}
+                </label>
+              ))}
+            </div>
+            {isAdaptive && <p style={{ fontSize: '0.82rem', color: 'var(--clr-dim)', marginBottom: '8px' }}>Starts easy and smoothly adjusts to your level as you answer.</p>}
+            {sessionGoal === 'speed' && (
+              <p style={{ fontSize: '0.82rem', color: '#ffb300', marginBottom: '8px' }}>
+                ⚡ Easy 5s · Medium 10s · Hard 15s · Extra Hard 20s · Adaptive 10s. Double coins for correct!
+              </p>
+            )}
+            {sessionGoal === 'perfect' && (
+              <p style={{ fontSize: '0.82rem', color: '#f44336', marginBottom: '8px' }}>
+                🎯 One wrong answer ends the quiz. No timer shown. Can you go flawless?
+              </p>
+            )}
+            {sessionGoal === 'revision' && (
+              <p style={{ fontSize: '0.82rem', color: '#2196f3', marginBottom: '8px' }}>
+                🔄 Focuses on topics you previously answered incorrectly.
+              </p>
+            )}
+          </>
+        )}
         <div className="question-count-row">
           <label className="question-count-label">How many questions? (max 100)</label>
           <input className="answer-input question-count-input" type="text" value={numQuestions} onChange={e => { const v = e.target.value; if (v === '' || (/^\d+$/.test(v) && Number(v) <= 100)) setNumQuestions(v) }} />
@@ -59304,7 +51966,7 @@ const loadQuestion = async () => {
           <div className="question-prompt" style={{ fontSize: '1.4rem', margin: '20px 0' }}><GlossaryText text={question.prompt} /></div>
           <input className="answer-input" type="text" value={answer} onChange={e => { if (!revealed) setAnswer(e.target.value) }} disabled={revealed} placeholder={placeholders[isAdaptive ? adaptiveLevel(adaptScore) : difficulty] || 'Type your answer'} onKeyDown={handleKeyDown} autoFocus />
         </div>}
-        {renderFeedback(feedback, isCorrect)}
+        <FeedbackDisplay feedback={feedback} isCorrect={isCorrect} />
         <div className="button-row">
           {!revealed ? <>
             <button onClick={handleSubmit} disabled={loading || !answer.trim()}>Submit</button>
@@ -59320,8 +51982,8 @@ const loadQuestion = async () => {
         <ResultsTable results={results} />
         <button onClick={() => { setStarted(false); setFinished(false) }}>Play Again</button>
       </div>}
-    <HintModal concept={'ratio'} questionId={question?.id || 'unknown'} questionData={question} revealed={revealed} hintsUsedCount={hintsUsedCount} xpBreakdown={xpBreakdown} bonusLoading={bonusLoading} />
-</QuizLayout>
+      <HintModal concept={'ratio'} questionId={question?.id || 'unknown'} questionData={question} revealed={revealed} hintsUsedCount={hintsUsedCount} xpBreakdown={xpBreakdown} bonusLoading={bonusLoading} />
+    </QuizLayout>
   )
 }
 
@@ -59617,7 +52279,7 @@ function PercentApp({
       setIsCorrectFirstTry(true);
       playSound('correct', soundEnabled);
       triggerConfetti();
-      
+
       setMascotExpression('cheering');
       setStarAnimating(correctCount);
       setTimeout(() => {
@@ -59632,7 +52294,7 @@ function PercentApp({
       setIsCorrectFirstTry(false);
       playSound('wrong', soundEnabled);
       setShake(true);
-      
+
       setMascotExpression('sad');
       setTimeout(() => setMascotExpression('idle'), 2000);
 
@@ -59703,7 +52365,7 @@ function PercentApp({
     if (isStepCorrect) {
       playSound('correct', soundEnabled);
       setStreak(prev => prev + 1);
-      
+
       setMascotExpression('cheering');
       setTimeout(() => setMascotExpression('idle'), 2000);
 
@@ -59717,7 +52379,7 @@ function PercentApp({
       }));
     } else {
       playSound('wrong', soundEnabled);
-      
+
       setMascotExpression('sad');
       setTimeout(() => setMascotExpression('idle'), 2000);
 
@@ -60370,13 +53032,13 @@ function IndicesApp({ onBack, isGoalMode = false }) {
 
   const effectiveDiff = () => (isAdaptive) ? adaptiveLevel(adaptScoreRef.current) : difficulty
 
-  
+
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
-    try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
-    try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch(_) {}
+    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch (_) { }
+    try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch (_) { }
+    try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch (_) { }
     try {
       const r = await fetch(`${API}/indices-api/check`, {
         method: 'POST',
@@ -60385,12 +53047,12 @@ function IndicesApp({ onBack, isGoalMode = false }) {
       })
       const d = await r.json()
       if (sessionGoal === 'perfect') {
-        try { setFinished(true); timer.reset() } catch(_) {}
+        try { setFinished(true); timer.reset() } catch (_) { }
       }
-    } catch(e) { console.error('handleTimeout error:', e) }
+    } catch (e) { console.error('handleTimeout error:', e) }
   }
 
-const loadQuestion = async () => {
+  const loadQuestion = async () => {
     setLoading(true)
     try {
       const r = await fetch(`${API}/indices-api/question?difficulty=${effectiveDiff()}&goal=${sessionGoal}`, { headers: { 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' } })
@@ -60451,7 +53113,7 @@ const loadQuestion = async () => {
       (() => {
         const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
         if (data.correct) {
-          setFeedback(`Correct! ${prompt} = ${data.display}`.slice(0,-1) + _ci + `Correct! ${prompt} = ${data.display}`.slice(-1))
+          setFeedback(`Correct! ${prompt} = ${data.display}`.slice(0, -1) + _ci + `Correct! ${prompt} = ${data.display}`.slice(-1))
         } else if (sessionGoal === 'perfect') {
           setFeedback(`Incorrect. ${prompt} = ${data.display}` + ' ❌ Perfect Solve ended.')
           setFinished(true); timer.reset()
@@ -60477,7 +53139,7 @@ const loadQuestion = async () => {
     if (!question || revealed) return
     timer.stop()
     try {
-      const r = await fetch(`${API}/indices-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  ...question, answer: '', solve: true, sessionGoal }) })
+      const r = await fetch(`${API}/indices-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({ ...question, answer: '', solve: true, sessionGoal }) })
       const data = await r.json()
       setIsCorrect(false); setRevealed(true)
       const display = data.display || data.correctAnswer || data.answer || ''
@@ -60522,46 +53184,46 @@ const loadQuestion = async () => {
         </div>
 
         {isGoalMode && (
-        <>
-          <p className="welcome-text" style={{ marginTop: '14px', fontSize: '0.92rem', fontWeight: 700, marginBottom: '6px' }}>Practice Goal:</p>
-                  <div className="checkbox-group" style={{ marginBottom: '12px' }}>
-                    {[
-                                            { key: 'speed', label: '⚡ Speed Run' },
-                      { key: 'perfect', label: '🎯 Perfect Solve' },
-                      { key: 'revision', label: '🔄 Revision' }
-                    ].map(g => (
-                      <label key={g.key} className={`checkbox-pill${sessionGoal === g.key ? ' active' : ''}`}
-                        style={sessionGoal === g.key ? (
-                          g.key === 'speed' ? { background: 'rgba(255,179,0,0.18)', borderColor: '#ffb300', color: '#ffb300' } :
-                          g.key === 'perfect' ? { background: 'rgba(244,67,54,0.18)', borderColor: '#f44336', color: '#f44336' } :
-                          g.key === 'revision' ? { background: 'rgba(33,150,243,0.18)', borderColor: '#2196f3', color: '#2196f3' } : {}
-                        ) : {}}>
-                        <input type="radio" name="indicesapp-goal" checked={sessionGoal === g.key} onChange={() => {
-                          setSessionGoal(g.key)
-                          
-                        }} />
-                        {g.label}
-                      </label>
-                    ))}
-                  </div>
-                  {isAdaptive && <p style={{ fontSize: '0.82rem', color: 'var(--clr-dim)', marginBottom: '8px' }}>Starts easy and smoothly adjusts to your level as you answer.</p>}
-                  {sessionGoal === 'speed' && (
-                    <p style={{ fontSize: '0.82rem', color: '#ffb300', marginBottom: '8px' }}>
-                      ⚡ Easy 5s · Medium 10s · Hard 15s · Extra Hard 20s · Adaptive 10s. Double coins for correct!
-                    </p>
-                  )}
-                  {sessionGoal === 'perfect' && (
-                    <p style={{ fontSize: '0.82rem', color: '#f44336', marginBottom: '8px' }}>
-                      🎯 One wrong answer ends the quiz. No timer shown. Can you go flawless?
-                    </p>
-                  )}
-                  {sessionGoal === 'revision' && (
-                    <p style={{ fontSize: '0.82rem', color: '#2196f3', marginBottom: '8px' }}>
-                      🔄 Focuses on topics you previously answered incorrectly.
-                    </p>
-                  )}
-        </>
-      )}
+          <>
+            <p className="welcome-text" style={{ marginTop: '14px', fontSize: '0.92rem', fontWeight: 700, marginBottom: '6px' }}>Practice Goal:</p>
+            <div className="checkbox-group" style={{ marginBottom: '12px' }}>
+              {[
+                { key: 'speed', label: '⚡ Speed Run' },
+                { key: 'perfect', label: '🎯 Perfect Solve' },
+                { key: 'revision', label: '🔄 Revision' }
+              ].map(g => (
+                <label key={g.key} className={`checkbox-pill${sessionGoal === g.key ? ' active' : ''}`}
+                  style={sessionGoal === g.key ? (
+                    g.key === 'speed' ? { background: 'rgba(255,179,0,0.18)', borderColor: '#ffb300', color: '#ffb300' } :
+                      g.key === 'perfect' ? { background: 'rgba(244,67,54,0.18)', borderColor: '#f44336', color: '#f44336' } :
+                        g.key === 'revision' ? { background: 'rgba(33,150,243,0.18)', borderColor: '#2196f3', color: '#2196f3' } : {}
+                  ) : {}}>
+                  <input type="radio" name="indicesapp-goal" checked={sessionGoal === g.key} onChange={() => {
+                    setSessionGoal(g.key)
+
+                  }} />
+                  {g.label}
+                </label>
+              ))}
+            </div>
+            {isAdaptive && <p style={{ fontSize: '0.82rem', color: 'var(--clr-dim)', marginBottom: '8px' }}>Starts easy and smoothly adjusts to your level as you answer.</p>}
+            {sessionGoal === 'speed' && (
+              <p style={{ fontSize: '0.82rem', color: '#ffb300', marginBottom: '8px' }}>
+                ⚡ Easy 5s · Medium 10s · Hard 15s · Extra Hard 20s · Adaptive 10s. Double coins for correct!
+              </p>
+            )}
+            {sessionGoal === 'perfect' && (
+              <p style={{ fontSize: '0.82rem', color: '#f44336', marginBottom: '8px' }}>
+                🎯 One wrong answer ends the quiz. No timer shown. Can you go flawless?
+              </p>
+            )}
+            {sessionGoal === 'revision' && (
+              <p style={{ fontSize: '0.82rem', color: '#2196f3', marginBottom: '8px' }}>
+                🔄 Focuses on topics you previously answered incorrectly.
+              </p>
+            )}
+          </>
+        )}
         <div className="question-count-row">
           <label className="question-count-label">How many questions? (max 100)</label>
           <input className="answer-input question-count-input" type="text" value={numQuestions} onChange={e => { const v = e.target.value; if (v === '' || (/^\d+$/.test(v) && Number(v) <= 100)) setNumQuestions(v) }} />
@@ -60591,7 +53253,7 @@ const loadQuestion = async () => {
             />
           </div>
         )}
-        {renderFeedback(feedback, isCorrect)}
+        <FeedbackDisplay feedback={feedback} isCorrect={isCorrect} />
         <div className="button-row">
           {!revealed ? (
             <>
@@ -60614,8 +53276,8 @@ const loadQuestion = async () => {
           <button onClick={() => { setStarted(false); setFinished(false) }}>Play Again</button>
         </div>
       )}
-    <HintModal concept={'indices'} questionId={question?.id || 'unknown'} questionData={question} revealed={revealed} hintsUsedCount={hintsUsedCount} xpBreakdown={xpBreakdown} bonusLoading={bonusLoading} />
-</QuizLayout>
+      <HintModal concept={'indices'} questionId={question?.id || 'unknown'} questionData={question} revealed={revealed} hintsUsedCount={hintsUsedCount} xpBreakdown={xpBreakdown} bonusLoading={bonusLoading} />
+    </QuizLayout>
   )
 }
 
@@ -60662,13 +53324,13 @@ function SurdsApp({ onBack, isGoalMode = false }) {
 
   const effectiveDiff = () => (isAdaptive) ? adaptiveLevel(adaptScoreRef.current) : difficulty
 
-  
+
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
-    try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
-    try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch(_) {}
+    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch (_) { }
+    try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch (_) { }
+    try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch (_) { }
     try {
       const r = await fetch(`${API}/surds-api/check`, {
         method: 'POST',
@@ -60677,12 +53339,12 @@ function SurdsApp({ onBack, isGoalMode = false }) {
       })
       const d = await r.json()
       if (sessionGoal === 'perfect') {
-        try { setFinished(true); timer.reset() } catch(_) {}
+        try { setFinished(true); timer.reset() } catch (_) { }
       }
-    } catch(e) { console.error('handleTimeout error:', e) }
+    } catch (e) { console.error('handleTimeout error:', e) }
   }
 
-const loadQuestion = async () => {
+  const loadQuestion = async () => {
     setLoading(true)
     try {
       const r = await fetch(`${API}/surds-api/question?difficulty=${effectiveDiff()}&goal=${sessionGoal}`, { headers: { 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' } })
@@ -60776,7 +53438,7 @@ const loadQuestion = async () => {
       (() => {
         const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
         if (data.correct) {
-          setFeedback(`Correct! ${prompt} = ${data.display}`.slice(0,-1) + _ci + `Correct! ${prompt} = ${data.display}`.slice(-1))
+          setFeedback(`Correct! ${prompt} = ${data.display}`.slice(0, -1) + _ci + `Correct! ${prompt} = ${data.display}`.slice(-1))
         } else if (sessionGoal === 'perfect') {
           setFeedback(`Incorrect. ${prompt} = ${data.display}` + ' ❌ Perfect Solve ended.')
           setFinished(true); timer.reset()
@@ -60803,7 +53465,7 @@ const loadQuestion = async () => {
     timer.stop()
     const prompt = getPrompt(question)
     try {
-      const r = await fetch(`${API}/surds-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  ...question, answer: '', solve: true, sessionGoal }) })
+      const r = await fetch(`${API}/surds-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({ ...question, answer: '', solve: true, sessionGoal }) })
       const data = await r.json()
       setIsCorrect(false); setRevealed(true)
       const display = data.display || data.correctAnswer || data.answer || ''
@@ -60848,46 +53510,46 @@ const loadQuestion = async () => {
         </div>
 
         {isGoalMode && (
-        <>
-          <p className="welcome-text" style={{ marginTop: '14px', fontSize: '0.92rem', fontWeight: 700, marginBottom: '6px' }}>Practice Goal:</p>
-                  <div className="checkbox-group" style={{ marginBottom: '12px' }}>
-                    {[
-                                            { key: 'speed', label: '⚡ Speed Run' },
-                      { key: 'perfect', label: '🎯 Perfect Solve' },
-                      { key: 'revision', label: '🔄 Revision' }
-                    ].map(g => (
-                      <label key={g.key} className={`checkbox-pill${sessionGoal === g.key ? ' active' : ''}`}
-                        style={sessionGoal === g.key ? (
-                          g.key === 'speed' ? { background: 'rgba(255,179,0,0.18)', borderColor: '#ffb300', color: '#ffb300' } :
-                          g.key === 'perfect' ? { background: 'rgba(244,67,54,0.18)', borderColor: '#f44336', color: '#f44336' } :
-                          g.key === 'revision' ? { background: 'rgba(33,150,243,0.18)', borderColor: '#2196f3', color: '#2196f3' } : {}
-                        ) : {}}>
-                        <input type="radio" name="surdsapp-goal" checked={sessionGoal === g.key} onChange={() => {
-                          setSessionGoal(g.key)
-                          
-                        }} />
-                        {g.label}
-                      </label>
-                    ))}
-                  </div>
-                  {isAdaptive && <p style={{ fontSize: '0.82rem', color: 'var(--clr-dim)', marginBottom: '8px' }}>Starts easy and smoothly adjusts to your level as you answer.</p>}
-                  {sessionGoal === 'speed' && (
-                    <p style={{ fontSize: '0.82rem', color: '#ffb300', marginBottom: '8px' }}>
-                      ⚡ Easy 5s · Medium 10s · Hard 15s · Extra Hard 20s · Adaptive 10s. Double coins for correct!
-                    </p>
-                  )}
-                  {sessionGoal === 'perfect' && (
-                    <p style={{ fontSize: '0.82rem', color: '#f44336', marginBottom: '8px' }}>
-                      🎯 One wrong answer ends the quiz. No timer shown. Can you go flawless?
-                    </p>
-                  )}
-                  {sessionGoal === 'revision' && (
-                    <p style={{ fontSize: '0.82rem', color: '#2196f3', marginBottom: '8px' }}>
-                      🔄 Focuses on topics you previously answered incorrectly.
-                    </p>
-                  )}
-        </>
-      )}
+          <>
+            <p className="welcome-text" style={{ marginTop: '14px', fontSize: '0.92rem', fontWeight: 700, marginBottom: '6px' }}>Practice Goal:</p>
+            <div className="checkbox-group" style={{ marginBottom: '12px' }}>
+              {[
+                { key: 'speed', label: '⚡ Speed Run' },
+                { key: 'perfect', label: '🎯 Perfect Solve' },
+                { key: 'revision', label: '🔄 Revision' }
+              ].map(g => (
+                <label key={g.key} className={`checkbox-pill${sessionGoal === g.key ? ' active' : ''}`}
+                  style={sessionGoal === g.key ? (
+                    g.key === 'speed' ? { background: 'rgba(255,179,0,0.18)', borderColor: '#ffb300', color: '#ffb300' } :
+                      g.key === 'perfect' ? { background: 'rgba(244,67,54,0.18)', borderColor: '#f44336', color: '#f44336' } :
+                        g.key === 'revision' ? { background: 'rgba(33,150,243,0.18)', borderColor: '#2196f3', color: '#2196f3' } : {}
+                  ) : {}}>
+                  <input type="radio" name="surdsapp-goal" checked={sessionGoal === g.key} onChange={() => {
+                    setSessionGoal(g.key)
+
+                  }} />
+                  {g.label}
+                </label>
+              ))}
+            </div>
+            {isAdaptive && <p style={{ fontSize: '0.82rem', color: 'var(--clr-dim)', marginBottom: '8px' }}>Starts easy and smoothly adjusts to your level as you answer.</p>}
+            {sessionGoal === 'speed' && (
+              <p style={{ fontSize: '0.82rem', color: '#ffb300', marginBottom: '8px' }}>
+                ⚡ Easy 5s · Medium 10s · Hard 15s · Extra Hard 20s · Adaptive 10s. Double coins for correct!
+              </p>
+            )}
+            {sessionGoal === 'perfect' && (
+              <p style={{ fontSize: '0.82rem', color: '#f44336', marginBottom: '8px' }}>
+                🎯 One wrong answer ends the quiz. No timer shown. Can you go flawless?
+              </p>
+            )}
+            {sessionGoal === 'revision' && (
+              <p style={{ fontSize: '0.82rem', color: '#2196f3', marginBottom: '8px' }}>
+                🔄 Focuses on topics you previously answered incorrectly.
+              </p>
+            )}
+          </>
+        )}
         <div className="question-count-row">
           <label className="question-count-label">How many questions? (max 100)</label>
           <input className="answer-input question-count-input" type="text" value={numQuestions} onChange={e => { const v = e.target.value; if (v === '' || (/^\d+$/.test(v) && Number(v) <= 100)) setNumQuestions(v) }} />
@@ -60916,7 +53578,7 @@ const loadQuestion = async () => {
             />
           </div>
         )}
-        {renderFeedback(feedback, isCorrect)}
+        <FeedbackDisplay feedback={feedback} isCorrect={isCorrect} />
         <div className="button-row">
           {!revealed ? (
             <>
@@ -60939,8 +53601,8 @@ const loadQuestion = async () => {
           <button onClick={() => { setStarted(false); setFinished(false) }}>Play Again</button>
         </div>
       )}
-    <HintModal concept={'surds'} questionId={question?.id || 'unknown'} questionData={question} revealed={revealed} hintsUsedCount={hintsUsedCount} xpBreakdown={xpBreakdown} bonusLoading={bonusLoading} />
-</QuizLayout>
+      <HintModal concept={'surds'} questionId={question?.id || 'unknown'} questionData={question} revealed={revealed} hintsUsedCount={hintsUsedCount} xpBreakdown={xpBreakdown} bonusLoading={bonusLoading} />
+    </QuizLayout>
   )
 }
 
@@ -61007,13 +53669,13 @@ function FractionAddApp({ onBack, completedTopics = [], goldMastery = [], markTo
    * loadQuestion(): Fetch a new fraction-add question from the API.
    * Updates question state and resets answer fields.
    */
-  
+
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
-    try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
-    try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch(_) {}
+    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch (_) { }
+    try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch (_) { }
+    try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch (_) { }
     try {
       const r = await fetch(`${API}/fractionadd-api/check`, {
         method: 'POST',
@@ -61022,12 +53684,12 @@ function FractionAddApp({ onBack, completedTopics = [], goldMastery = [], markTo
       })
       const d = await r.json()
       if (sessionGoal === 'perfect') {
-        try { setFinished(true); timer.reset() } catch(_) {}
+        try { setFinished(true); timer.reset() } catch (_) { }
       }
-    } catch(e) { console.error('handleTimeout error:', e) }
+    } catch (e) { console.error('handleTimeout error:', e) }
   }
 
-const loadQuestion = async () => {
+  const loadQuestion = async () => {
     setLoading(true)
     try {
       const diff = effectiveDiff()
@@ -61245,7 +53907,7 @@ const loadQuestion = async () => {
       (() => {
         const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
         if (data.correct) {
-          setFeedback(`Correct! ${prompt} = ${data.display}`.slice(0,-1) + _ci + `Correct! ${prompt} = ${data.display}`.slice(-1))
+          setFeedback(`Correct! ${prompt} = ${data.display}`.slice(0, -1) + _ci + `Correct! ${prompt} = ${data.display}`.slice(-1))
         } else if (sessionGoal === 'perfect') {
           setFeedback(`Incorrect. ${prompt} = ${data.display}` + ' ❌ Perfect Solve ended.')
           setFinished(true); timer.reset()
@@ -61321,7 +53983,7 @@ const loadQuestion = async () => {
       ? `${question.w1} ${question.n1}/${question.d1} ${op} ${question.w2} ${question.n2}/${question.d2}`
       : `${question.n1}/${question.d1} ${op} ${question.n2}/${question.d2}`
     try {
-      const r = await fetch(`${API}/fractionadd-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  ...question, ansNum: '', ansDen: '', solve: true, sessionGoal }) })
+      const r = await fetch(`${API}/fractionadd-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({ ...question, ansNum: '', ansDen: '', solve: true, sessionGoal }) })
       const data = await r.json()
       setIsCorrect(false); setRevealed(true)
       const display = data.display || data.correctAnswer || data.answer || ''
@@ -61392,46 +54054,46 @@ const loadQuestion = async () => {
         </div>
 
         {isGoalMode && (
-        <>
-          <p className="welcome-text" style={{ marginTop: '14px', fontSize: '0.92rem', fontWeight: 700, marginBottom: '6px' }}>Practice Goal:</p>
-                  <div className="checkbox-group" style={{ marginBottom: '12px' }}>
-                    {[
-                                            { key: 'speed', label: '⚡ Speed Run' },
-                      { key: 'perfect', label: '🎯 Perfect Solve' },
-                      { key: 'revision', label: '🔄 Revision' }
-                    ].map(g => (
-                      <label key={g.key} className={`checkbox-pill${sessionGoal === g.key ? ' active' : ''}`}
-                        style={sessionGoal === g.key ? (
-                          g.key === 'speed' ? { background: 'rgba(255,179,0,0.18)', borderColor: '#ffb300', color: '#ffb300' } :
-                          g.key === 'perfect' ? { background: 'rgba(244,67,54,0.18)', borderColor: '#f44336', color: '#f44336' } :
-                          g.key === 'revision' ? { background: 'rgba(33,150,243,0.18)', borderColor: '#2196f3', color: '#2196f3' } : {}
-                        ) : {}}>
-                        <input type="radio" name="fractionaddapp-goal" checked={sessionGoal === g.key} onChange={() => {
-                          setSessionGoal(g.key)
-                          
-                        }} />
-                        {g.label}
-                      </label>
-                    ))}
-                  </div>
-                  {isAdaptive && <p style={{ fontSize: '0.82rem', color: 'var(--clr-dim)', marginBottom: '8px' }}>Starts easy and smoothly adjusts to your level as you answer.</p>}
-                  {sessionGoal === 'speed' && (
-                    <p style={{ fontSize: '0.82rem', color: '#ffb300', marginBottom: '8px' }}>
-                      ⚡ Easy 5s · Medium 10s · Hard 15s · Extra Hard 20s · Adaptive 10s. Double coins for correct!
-                    </p>
-                  )}
-                  {sessionGoal === 'perfect' && (
-                    <p style={{ fontSize: '0.82rem', color: '#f44336', marginBottom: '8px' }}>
-                      🎯 One wrong answer ends the quiz. No timer shown. Can you go flawless?
-                    </p>
-                  )}
-                  {sessionGoal === 'revision' && (
-                    <p style={{ fontSize: '0.82rem', color: '#2196f3', marginBottom: '8px' }}>
-                      🔄 Focuses on topics you previously answered incorrectly.
-                    </p>
-                  )}
-        </>
-      )}
+          <>
+            <p className="welcome-text" style={{ marginTop: '14px', fontSize: '0.92rem', fontWeight: 700, marginBottom: '6px' }}>Practice Goal:</p>
+            <div className="checkbox-group" style={{ marginBottom: '12px' }}>
+              {[
+                { key: 'speed', label: '⚡ Speed Run' },
+                { key: 'perfect', label: '🎯 Perfect Solve' },
+                { key: 'revision', label: '🔄 Revision' }
+              ].map(g => (
+                <label key={g.key} className={`checkbox-pill${sessionGoal === g.key ? ' active' : ''}`}
+                  style={sessionGoal === g.key ? (
+                    g.key === 'speed' ? { background: 'rgba(255,179,0,0.18)', borderColor: '#ffb300', color: '#ffb300' } :
+                      g.key === 'perfect' ? { background: 'rgba(244,67,54,0.18)', borderColor: '#f44336', color: '#f44336' } :
+                        g.key === 'revision' ? { background: 'rgba(33,150,243,0.18)', borderColor: '#2196f3', color: '#2196f3' } : {}
+                  ) : {}}>
+                  <input type="radio" name="fractionaddapp-goal" checked={sessionGoal === g.key} onChange={() => {
+                    setSessionGoal(g.key)
+
+                  }} />
+                  {g.label}
+                </label>
+              ))}
+            </div>
+            {isAdaptive && <p style={{ fontSize: '0.82rem', color: 'var(--clr-dim)', marginBottom: '8px' }}>Starts easy and smoothly adjusts to your level as you answer.</p>}
+            {sessionGoal === 'speed' && (
+              <p style={{ fontSize: '0.82rem', color: '#ffb300', marginBottom: '8px' }}>
+                ⚡ Easy 5s · Medium 10s · Hard 15s · Extra Hard 20s · Adaptive 10s. Double coins for correct!
+              </p>
+            )}
+            {sessionGoal === 'perfect' && (
+              <p style={{ fontSize: '0.82rem', color: '#f44336', marginBottom: '8px' }}>
+                🎯 One wrong answer ends the quiz. No timer shown. Can you go flawless?
+              </p>
+            )}
+            {sessionGoal === 'revision' && (
+              <p style={{ fontSize: '0.82rem', color: '#2196f3', marginBottom: '8px' }}>
+                🔄 Focuses on topics you previously answered incorrectly.
+              </p>
+            )}
+          </>
+        )}
         <div className="question-count-row">
           <label className="question-count-label">How many questions? (max 100)</label>
           <input className="answer-input question-count-input" type="text" value={numQuestions} onChange={e => { const v = e.target.value; if (v === '' || (/^\d+$/.test(v) && Number(v) <= 100)) setNumQuestions(v) }} />
@@ -61566,7 +54228,7 @@ const loadQuestion = async () => {
           )
         )}
 
-        {renderFeedback(feedback, isCorrect)}
+        <FeedbackDisplay feedback={feedback} isCorrect={isCorrect} />
 
         <div className="button-row">
           {!revealed ? (
@@ -61592,8 +54254,8 @@ const loadQuestion = async () => {
           <button onClick={() => { setStarted(false); setFinished(false) }}>Play Again</button>
         </div>
       )}
-    <HintModal concept={'fractionadd'} questionId={question?.id || 'unknown'} questionData={question} revealed={revealed} hintsUsedCount={hintsUsedCount} xpBreakdown={xpBreakdown} bonusLoading={bonusLoading} />
-</QuizLayout>
+      <HintModal concept={'fractionadd'} questionId={question?.id || 'unknown'} questionData={question} revealed={revealed} hintsUsedCount={hintsUsedCount} xpBreakdown={xpBreakdown} bonusLoading={bonusLoading} />
+    </QuizLayout>
   )
 }
 
@@ -61710,14 +54372,14 @@ function TwinHuntApp({ onBack, isGoalMode = false }) {
    *   6. Generate random scattered positions for each panel
    * Resets feedback/reveal and starts timer for the round
    */
-  
+
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
     if (typeof phase !== 'undefined' && phase === 'finished') return
-    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
-    try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
-    try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch(_) {}
+    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch (_) { }
+    try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch (_) { }
+    try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch (_) { }
     const timeTaken = timer.stop ? timer.stop() : 0
     const qPrompt = question ? (question.prompt || question.question || (question.n1 !== undefined ? `${question.n1} ${question.op || '+'} ${question.n2}` : 'Question')) : 'Question'
     try {
@@ -61732,9 +54394,9 @@ function TwinHuntApp({ onBack, isGoalMode = false }) {
         setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: corrAns, correct: false, time: timeTaken }])
       }
       if (sessionGoal === 'perfect') {
-        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch(_) {}
+        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch (_) { }
       }
-    } catch(e) {
+    } catch (e) {
       console.error('handleTimeout error:', e)
       if (typeof setResults === 'function') {
         setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: '—', correct: false, time: timeTaken }])
@@ -61742,7 +54404,7 @@ function TwinHuntApp({ onBack, isGoalMode = false }) {
     }
   }
 
-const generateRound = (n) => {
+  const generateRound = (n) => {
     // Shuffle symbol pool and select 2n-1 unique symbols
     const pool = [...TWIN_SYMBOLS].sort(() => Math.random() - 0.5)
     const common = pool[0]  // Symbol that will appear in both panels
@@ -61854,67 +54516,67 @@ const generateRound = (n) => {
         <div className="welcome-box">
           <p className="welcome-text">Two panels, one match. Tap the common object!</p>
 
-        {isGoalMode && (
-        <>
-          <p className="welcome-text" style={{ marginTop: '14px', fontSize: '0.92rem', fontWeight: 700, marginBottom: '6px' }}>Practice Goal:</p>
-                  <div className="checkbox-group" style={{ marginBottom: '12px' }}>
-                    {[
-                                            { key: 'speed', label: '⚡ Speed Run' },
-                      { key: 'perfect', label: '🎯 Perfect Solve' },
-                      { key: 'revision', label: '🔄 Revision' }
-                    ].map(g => (
-                      <label key={g.key} className={`checkbox-pill${sessionGoal === g.key ? ' active' : ''}`}
-                        style={sessionGoal === g.key ? (
-                          g.key === 'speed' ? { background: 'rgba(255,179,0,0.18)', borderColor: '#ffb300', color: '#ffb300' } :
-                          g.key === 'perfect' ? { background: 'rgba(244,67,54,0.18)', borderColor: '#f44336', color: '#f44336' } :
+          {isGoalMode && (
+            <>
+              <p className="welcome-text" style={{ marginTop: '14px', fontSize: '0.92rem', fontWeight: 700, marginBottom: '6px' }}>Practice Goal:</p>
+              <div className="checkbox-group" style={{ marginBottom: '12px' }}>
+                {[
+                  { key: 'speed', label: '⚡ Speed Run' },
+                  { key: 'perfect', label: '🎯 Perfect Solve' },
+                  { key: 'revision', label: '🔄 Revision' }
+                ].map(g => (
+                  <label key={g.key} className={`checkbox-pill${sessionGoal === g.key ? ' active' : ''}`}
+                    style={sessionGoal === g.key ? (
+                      g.key === 'speed' ? { background: 'rgba(255,179,0,0.18)', borderColor: '#ffb300', color: '#ffb300' } :
+                        g.key === 'perfect' ? { background: 'rgba(244,67,54,0.18)', borderColor: '#f44336', color: '#f44336' } :
                           g.key === 'revision' ? { background: 'rgba(33,150,243,0.18)', borderColor: '#2196f3', color: '#2196f3' } : {}
-                        ) : {}}>
-                        <input type="radio" name="twinhuntapp-goal" checked={sessionGoal === g.key} onChange={() => {
-                          setSessionGoal(g.key)
-                          
-                        }} />
-                        {g.label}
-                      </label>
-                    ))}
-                  </div>
-                  {sessionGoal === 'speed' && (
-                    <p style={{ fontSize: '0.82rem', color: '#ffb300', marginBottom: '8px' }}>
-                      ⚡ Easy 5s · Medium 10s · Hard 15s · Extra Hard 20s · Adaptive 10s. Double coins for correct!
-                    </p>
-                  )}
-                  {sessionGoal === 'perfect' && (
-                    <p style={{ fontSize: '0.82rem', color: '#f44336', marginBottom: '8px' }}>
-                      🎯 One wrong answer ends the quiz. No timer shown. Can you go flawless?
-                    </p>
-                  )}
-                  {sessionGoal === 'revision' && (
-                    <p style={{ fontSize: '0.82rem', color: '#2196f3', marginBottom: '8px' }}>
-                      🔄 Focuses on topics you previously answered incorrectly.
-                    </p>
-                  )}
-        </>
-      )}
+                    ) : {}}>
+                    <input type="radio" name="twinhuntapp-goal" checked={sessionGoal === g.key} onChange={() => {
+                      setSessionGoal(g.key)
+
+                    }} />
+                    {g.label}
+                  </label>
+                ))}
+              </div>
+              {sessionGoal === 'speed' && (
+                <p style={{ fontSize: '0.82rem', color: '#ffb300', marginBottom: '8px' }}>
+                  ⚡ Easy 5s · Medium 10s · Hard 15s · Extra Hard 20s · Adaptive 10s. Double coins for correct!
+                </p>
+              )}
+              {sessionGoal === 'perfect' && (
+                <p style={{ fontSize: '0.82rem', color: '#f44336', marginBottom: '8px' }}>
+                  🎯 One wrong answer ends the quiz. No timer shown. Can you go flawless?
+                </p>
+              )}
+              {sessionGoal === 'revision' && (
+                <p style={{ fontSize: '0.82rem', color: '#2196f3', marginBottom: '8px' }}>
+                  🔄 Focuses on topics you previously answered incorrectly.
+                </p>
+              )}
+            </>
+          )}
           <div className="question-count-row">
             <label className="question-count-label">Objects per panel</label>
             <input className="answer-input question-count-input" type="text" value={count}
               onChange={(e) => { const v = e.target.value; if (v === '' || /^\d+$/.test(v)) setCount(v) }}
               placeholder="5" />
           </div>
-        {sessionGoal === 'speed' && (
-          <p style={{ fontSize: '0.82rem', color: '#ffb300', marginBottom: '8px' }}>
-            ⚡ Easy 5s · Medium 10s · Hard 15s · Extra Hard 20s · Adaptive 10s. Double coins for correct!
-          </p>
-        )}
-        {sessionGoal === 'perfect' && (
-          <p style={{ fontSize: '0.82rem', color: '#f44336', marginBottom: '8px' }}>
-            🎯 One wrong answer ends the quiz. No timer shown. Can you go flawless?
-          </p>
-        )}
-        {sessionGoal === 'revision' && (
-          <p style={{ fontSize: '0.82rem', color: '#2196f3', marginBottom: '8px' }}>
-            🔄 Focuses on topics you previously answered incorrectly.
-          </p>
-        )}
+          {sessionGoal === 'speed' && (
+            <p style={{ fontSize: '0.82rem', color: '#ffb300', marginBottom: '8px' }}>
+              ⚡ Easy 5s · Medium 10s · Hard 15s · Extra Hard 20s · Adaptive 10s. Double coins for correct!
+            </p>
+          )}
+          {sessionGoal === 'perfect' && (
+            <p style={{ fontSize: '0.82rem', color: '#f44336', marginBottom: '8px' }}>
+              🎯 One wrong answer ends the quiz. No timer shown. Can you go flawless?
+            </p>
+          )}
+          {sessionGoal === 'revision' && (
+            <p style={{ fontSize: '0.82rem', color: '#2196f3', marginBottom: '8px' }}>
+              🔄 Focuses on topics you previously answered incorrectly.
+            </p>
+          )}
           <div className="question-count-row">
             <label className="question-count-label">How many rounds?</label>
             <input className="answer-input question-count-input" type="text" value={numRoundsInput}
@@ -61955,7 +54617,7 @@ const generateRound = (n) => {
             </div>
           </div>
         </div>
-        {renderFeedback(feedback, isCorrect)}
+        <FeedbackDisplay feedback={feedback} isCorrect={isCorrect} />
       </>}
       {finished && <div className="welcome-box">
         <p className="welcome-text">Game complete!</p>
@@ -62034,14 +54696,14 @@ function SqrtApp({ onBack, isGoalMode = false }) {
    * Returns: {q: radicand, prompt: "√n"}
    * Backend calculates sqrtRounded, floorAnswer, ceilAnswer for validation
    */
-  
+
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
     if (typeof phase !== 'undefined' && phase === 'finished') return
-    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
-    try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
-    try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch(_) {}
+    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch (_) { }
+    try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch (_) { }
+    try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch (_) { }
     const timeTaken = timer.stop ? timer.stop() : 0
     const qPrompt = question ? (question.prompt || question.question || (question.n1 !== undefined ? `${question.n1} ${question.op || '+'} ${question.n2}` : 'Question')) : 'Question'
     try {
@@ -62056,9 +54718,9 @@ function SqrtApp({ onBack, isGoalMode = false }) {
         setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: corrAns, correct: false, time: timeTaken }])
       }
       if (sessionGoal === 'perfect') {
-        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch(_) {}
+        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch (_) { }
       }
-    } catch(e) {
+    } catch (e) {
       console.error('handleTimeout error:', e)
       if (typeof setResults === 'function') {
         setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: '—', correct: false, time: timeTaken }])
@@ -62066,7 +54728,7 @@ function SqrtApp({ onBack, isGoalMode = false }) {
     }
   }
 
-const fetchQuestion = async (step) => {
+  const fetchQuestion = async (step) => {
     setLoading(true)
     setAnswer('')
     setFeedback('')
@@ -62128,23 +54790,23 @@ const fetchQuestion = async (step) => {
       if (answer === '') return
       const timeTaken = timer.stop()
       // POST to backend to validate square root answer
-      const res = await fetch(`${API}/sqrt-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  q: question.q, answer: Number(answer), sessionGoal }) })
+      const res = await fetch(`${API}/sqrt-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({ q: question.q, answer: Number(answer), sessionGoal }) })
       const data = await res.json()
       setIsCorrect(data.correct)
       if (data.correct) setScore((s) => s + 1)
       // Show floor and ceiling values for reference
       const reasoning = `√${question.q} = ${data.sqrtRounded}\n⌊${data.sqrtRounded}⌋ = ${data.floorAnswer}, ⌈${data.sqrtRounded}⌉ = ${data.ceilAnswer}`
-      (() => {
-        const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
-        if (data.correct) {
-          setFeedback(`Correct!\n${reasoning}`.slice(0,-1) + _ci + `Correct!\n${reasoning}`.slice(-1))
-        } else if (sessionGoal === 'perfect') {
-          setFeedback(`Incorrect.\n${reasoning}\nAcceptable answers: ${data.floorAnswer} or ${data.ceilAnswer}` + ' ❌ Perfect Solve ended.')
-          setFinished(true); timer.reset()
-        } else {
-          setFeedback(`Incorrect.\n${reasoning}\nAcceptable answers: ${data.floorAnswer} or ${data.ceilAnswer}`)
-        }
-      })()
+        (() => {
+          const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
+          if (data.correct) {
+            setFeedback(`Correct!\n${reasoning}`.slice(0, -1) + _ci + `Correct!\n${reasoning}`.slice(-1))
+          } else if (sessionGoal === 'perfect') {
+            setFeedback(`Incorrect.\n${reasoning}\nAcceptable answers: ${data.floorAnswer} or ${data.ceilAnswer}` + ' ❌ Perfect Solve ended.')
+            setFinished(true); timer.reset()
+          } else {
+            setFeedback(`Incorrect.\n${reasoning}\nAcceptable answers: ${data.floorAnswer} or ${data.ceilAnswer}`)
+          }
+        })()
       setResults((prev) => [...prev, {
         question: `√${question.q}`,
         userAnswer: answer,
@@ -62210,46 +54872,46 @@ const fetchQuestion = async (step) => {
         </div>
 
         {isGoalMode && (
-        <>
-          <p className="welcome-text" style={{ marginTop: '14px', fontSize: '0.92rem', fontWeight: 700, marginBottom: '6px' }}>Practice Goal:</p>
-                  <div className="checkbox-group" style={{ marginBottom: '12px' }}>
-                    {[
-                                            { key: 'speed', label: '⚡ Speed Run' },
-                      { key: 'perfect', label: '🎯 Perfect Solve' },
-                      { key: 'revision', label: '🔄 Revision' }
-                    ].map(g => (
-                      <label key={g.key} className={`checkbox-pill${sessionGoal === g.key ? ' active' : ''}`}
-                        style={sessionGoal === g.key ? (
-                          g.key === 'speed' ? { background: 'rgba(255,179,0,0.18)', borderColor: '#ffb300', color: '#ffb300' } :
-                          g.key === 'perfect' ? { background: 'rgba(244,67,54,0.18)', borderColor: '#f44336', color: '#f44336' } :
-                          g.key === 'revision' ? { background: 'rgba(33,150,243,0.18)', borderColor: '#2196f3', color: '#2196f3' } : {}
-                        ) : {}}>
-                        <input type="radio" name="sqrtapp-goal" checked={sessionGoal === g.key} onChange={() => {
-                          setSessionGoal(g.key)
-                          
-                        }} />
-                        {g.label}
-                      </label>
-                    ))}
-                  </div>
-                  {isAdaptive && <p style={{ fontSize: '0.82rem', color: 'var(--clr-dim)', marginBottom: '8px' }}>Starts easy and smoothly adjusts to your level as you answer.</p>}
-                  {sessionGoal === 'speed' && (
-                    <p style={{ fontSize: '0.82rem', color: '#ffb300', marginBottom: '8px' }}>
-                      ⚡ Easy 5s · Medium 10s · Hard 15s · Extra Hard 20s · Adaptive 10s. Double coins for correct!
-                    </p>
-                  )}
-                  {sessionGoal === 'perfect' && (
-                    <p style={{ fontSize: '0.82rem', color: '#f44336', marginBottom: '8px' }}>
-                      🎯 One wrong answer ends the quiz. No timer shown. Can you go flawless?
-                    </p>
-                  )}
-                  {sessionGoal === 'revision' && (
-                    <p style={{ fontSize: '0.82rem', color: '#2196f3', marginBottom: '8px' }}>
-                      🔄 Focuses on topics you previously answered incorrectly.
-                    </p>
-                  )}
-        </>
-      )}
+          <>
+            <p className="welcome-text" style={{ marginTop: '14px', fontSize: '0.92rem', fontWeight: 700, marginBottom: '6px' }}>Practice Goal:</p>
+            <div className="checkbox-group" style={{ marginBottom: '12px' }}>
+              {[
+                { key: 'speed', label: '⚡ Speed Run' },
+                { key: 'perfect', label: '🎯 Perfect Solve' },
+                { key: 'revision', label: '🔄 Revision' }
+              ].map(g => (
+                <label key={g.key} className={`checkbox-pill${sessionGoal === g.key ? ' active' : ''}`}
+                  style={sessionGoal === g.key ? (
+                    g.key === 'speed' ? { background: 'rgba(255,179,0,0.18)', borderColor: '#ffb300', color: '#ffb300' } :
+                      g.key === 'perfect' ? { background: 'rgba(244,67,54,0.18)', borderColor: '#f44336', color: '#f44336' } :
+                        g.key === 'revision' ? { background: 'rgba(33,150,243,0.18)', borderColor: '#2196f3', color: '#2196f3' } : {}
+                  ) : {}}>
+                  <input type="radio" name="sqrtapp-goal" checked={sessionGoal === g.key} onChange={() => {
+                    setSessionGoal(g.key)
+
+                  }} />
+                  {g.label}
+                </label>
+              ))}
+            </div>
+            {isAdaptive && <p style={{ fontSize: '0.82rem', color: 'var(--clr-dim)', marginBottom: '8px' }}>Starts easy and smoothly adjusts to your level as you answer.</p>}
+            {sessionGoal === 'speed' && (
+              <p style={{ fontSize: '0.82rem', color: '#ffb300', marginBottom: '8px' }}>
+                ⚡ Easy 5s · Medium 10s · Hard 15s · Extra Hard 20s · Adaptive 10s. Double coins for correct!
+              </p>
+            )}
+            {sessionGoal === 'perfect' && (
+              <p style={{ fontSize: '0.82rem', color: '#f44336', marginBottom: '8px' }}>
+                🎯 One wrong answer ends the quiz. No timer shown. Can you go flawless?
+              </p>
+            )}
+            {sessionGoal === 'revision' && (
+              <p style={{ fontSize: '0.82rem', color: '#2196f3', marginBottom: '8px' }}>
+                🔄 Focuses on topics you previously answered incorrectly.
+              </p>
+            )}
+          </>
+        )}
         <div className="question-count-row">
           <label className="question-count-label">How many questions? (max 100)</label>
           <input className="answer-input question-count-input" type="text" value={numQuestions} onChange={(e) => { const v = e.target.value; if (v === '' || (/^\d+$/.test(v) && Number(v) <= 100)) setNumQuestions(v) }} placeholder={String(DEFAULT_TOTAL)} />
@@ -62265,7 +54927,7 @@ const fetchQuestion = async (step) => {
         <div className="question-box">{loading || !question ? 'Loading question…' : `${question.prompt} = ?`}</div>
         <input className="answer-input" type="text" value={answer} onChange={(e) => { if (!revealed) { const v = e.target.value; if (v === '' || v === '-' || /^-?\d+$/.test(v)) setAnswer(v) } }} disabled={revealed} placeholder="Type your answer" />
         <NumPad value={answer} onChange={(v) => !revealed && setAnswer(v)} disabled={revealed} />
-        {renderFeedback(feedback, isCorrect)}
+        <FeedbackDisplay feedback={feedback} isCorrect={isCorrect} />
         <div className="button-row">
           {!revealed && <button onClick={handleSolve} disabled={loading || answer === ''} style={{ background: 'transparent', border: '1px solid var(--clr-accent)', color: 'var(--clr-accent)' }}>Solve</button>}
           <button onClick={handleSubmitOrNext} disabled={loading || (!revealed && answer === '')}>{revealed ? (questionNumber >= totalQ ? 'Finish Quiz' : 'Next Question') : 'Submit'}</button>
@@ -62279,8 +54941,8 @@ const fetchQuestion = async (step) => {
         <ResultsTable results={results} />
         <button onClick={() => { setStarted(false); setFinished(false) }}>Play Again</button>
       </div>}
-    <HintModal concept={'sqrt'} questionId={question?.id || 'unknown'} questionData={question} revealed={revealed} hintsUsedCount={hintsUsedCount} xpBreakdown={xpBreakdown} bonusLoading={bonusLoading} />
-</QuizLayout>
+      <HintModal concept={'sqrt'} questionId={question?.id || 'unknown'} questionData={question} revealed={revealed} hintsUsedCount={hintsUsedCount} xpBreakdown={xpBreakdown} bonusLoading={bonusLoading} />
+    </QuizLayout>
   )
 }
 
@@ -62368,14 +55030,14 @@ function PolyMulApp({ onBack, isGoalMode = false }) {
    * Returns: {p1, p2, p1Display, p2Display, productDisplay, resultDegree, correctCoeffs}
    * Initializes userCoeffs array with empty strings (one per degree)
    */
-  
+
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
     if (typeof phase !== 'undefined' && phase === 'finished') return
-    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
-    try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
-    try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch(_) {}
+    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch (_) { }
+    try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch (_) { }
+    try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch (_) { }
     const timeTaken = timer.stop ? timer.stop() : 0
     const qPrompt = question ? (question.prompt || question.question || (question.n1 !== undefined ? `${question.n1} ${question.op || '+'} ${question.n2}` : 'Question')) : 'Question'
     try {
@@ -62390,9 +55052,9 @@ function PolyMulApp({ onBack, isGoalMode = false }) {
         setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: corrAns, correct: false, time: timeTaken }])
       }
       if (sessionGoal === 'perfect') {
-        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch(_) {}
+        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch (_) { }
       }
-    } catch(e) {
+    } catch (e) {
       console.error('handleTimeout error:', e)
       if (typeof setResults === 'function') {
         setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: '—', correct: false, time: timeTaken }])
@@ -62400,7 +55062,7 @@ function PolyMulApp({ onBack, isGoalMode = false }) {
     }
   }
 
-const loadQuestion = async () => {
+  const loadQuestion = async () => {
     setLoading(true)
     setFeedback('')
     setIsCorrect(null)
@@ -62444,21 +55106,21 @@ const loadQuestion = async () => {
     // e.g. userCoeffs=['2','3'] => '3x + 2' (sent as userAnswer, read by Bracketeer classifier)
     const userAnswerStr = coeffsToPolyStr(userCoeffs)
     // POST to backend to validate polynomial multiplication result
-    const res = await fetch(`${API}/polymul-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  p1: question.p1, p2: question.p2, userCoeffs: userCoeffs.map(Number), userAnswer: userAnswerStr, sessionGoal }) })
+    const res = await fetch(`${API}/polymul-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({ p1: question.p1, p2: question.p2, userCoeffs: userCoeffs.map(Number), userAnswer: userAnswerStr, sessionGoal }) })
     const data = await res.json()
     setIsCorrect(data.correct)
     if (data.correct) setScore(s => s + 1);
     (() => {
-        const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
-        if (data.correct) {
-          setFeedback(`Correct! ${question.productDisplay}`.slice(0,-1) + _ci + `Correct! ${question.productDisplay}`.slice(-1))
-        } else if (sessionGoal === 'perfect') {
-          setFeedback(`Incorrect. Answer: ${data.correctDisplay}` + ' ❌ Perfect Solve ended.')
-          setFinished(true); timer.reset()
-        } else {
-          setFeedback(`Incorrect. Answer: ${data.correctDisplay}`)
-        }
-      })()
+      const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
+      if (data.correct) {
+        setFeedback(`Correct! ${question.productDisplay}`.slice(0, -1) + _ci + `Correct! ${question.productDisplay}`.slice(-1))
+      } else if (sessionGoal === 'perfect') {
+        setFeedback(`Incorrect. Answer: ${data.correctDisplay}` + ' ❌ Perfect Solve ended.')
+        setFinished(true); timer.reset()
+      } else {
+        setFeedback(`Incorrect. Answer: ${data.correctDisplay}`)
+      }
+    })()
     setResults(prev => [...prev, {
       question: `(${question.p1Display})(${question.p2Display})`,
       userAnswer: userCoeffs.join(', '),
@@ -62476,7 +55138,7 @@ const loadQuestion = async () => {
     if (!question || revealed) return
     timer.stop()
     try {
-      const r = await fetch(`${API}/polymul-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  p1: question.p1, p2: question.p2, userCoeffs: [], solve: true, sessionGoal }) })
+      const r = await fetch(`${API}/polymul-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({ p1: question.p1, p2: question.p2, userCoeffs: [], solve: true, sessionGoal }) })
       const data = await r.json()
       setIsCorrect(false); setRevealed(true)
       const display = data.correctDisplay || question.productDisplay || ''
@@ -62542,46 +55204,46 @@ const loadQuestion = async () => {
         </div>
 
         {isGoalMode && (
-        <>
-          <p className="welcome-text" style={{ marginTop: '14px', fontSize: '0.92rem', fontWeight: 700, marginBottom: '6px' }}>Practice Goal:</p>
-                  <div className="checkbox-group" style={{ marginBottom: '12px' }}>
-                    {[
-                                            { key: 'speed', label: '⚡ Speed Run' },
-                      { key: 'perfect', label: '🎯 Perfect Solve' },
-                      { key: 'revision', label: '🔄 Revision' }
-                    ].map(g => (
-                      <label key={g.key} className={`checkbox-pill${sessionGoal === g.key ? ' active' : ''}`}
-                        style={sessionGoal === g.key ? (
-                          g.key === 'speed' ? { background: 'rgba(255,179,0,0.18)', borderColor: '#ffb300', color: '#ffb300' } :
-                          g.key === 'perfect' ? { background: 'rgba(244,67,54,0.18)', borderColor: '#f44336', color: '#f44336' } :
-                          g.key === 'revision' ? { background: 'rgba(33,150,243,0.18)', borderColor: '#2196f3', color: '#2196f3' } : {}
-                        ) : {}}>
-                        <input type="radio" name="polymulapp-goal" checked={sessionGoal === g.key} onChange={() => {
-                          setSessionGoal(g.key)
-                          
-                        }} />
-                        {g.label}
-                      </label>
-                    ))}
-                  </div>
-                  {isAdaptive && <p style={{ fontSize: '0.82rem', color: 'var(--clr-dim)', marginBottom: '8px' }}>Starts easy and smoothly adjusts to your level as you answer.</p>}
-                  {sessionGoal === 'speed' && (
-                    <p style={{ fontSize: '0.82rem', color: '#ffb300', marginBottom: '8px' }}>
-                      ⚡ Easy 5s · Medium 10s · Hard 15s · Extra Hard 20s · Adaptive 10s. Double coins for correct!
-                    </p>
-                  )}
-                  {sessionGoal === 'perfect' && (
-                    <p style={{ fontSize: '0.82rem', color: '#f44336', marginBottom: '8px' }}>
-                      🎯 One wrong answer ends the quiz. No timer shown. Can you go flawless?
-                    </p>
-                  )}
-                  {sessionGoal === 'revision' && (
-                    <p style={{ fontSize: '0.82rem', color: '#2196f3', marginBottom: '8px' }}>
-                      🔄 Focuses on topics you previously answered incorrectly.
-                    </p>
-                  )}
-        </>
-      )}
+          <>
+            <p className="welcome-text" style={{ marginTop: '14px', fontSize: '0.92rem', fontWeight: 700, marginBottom: '6px' }}>Practice Goal:</p>
+            <div className="checkbox-group" style={{ marginBottom: '12px' }}>
+              {[
+                { key: 'speed', label: '⚡ Speed Run' },
+                { key: 'perfect', label: '🎯 Perfect Solve' },
+                { key: 'revision', label: '🔄 Revision' }
+              ].map(g => (
+                <label key={g.key} className={`checkbox-pill${sessionGoal === g.key ? ' active' : ''}`}
+                  style={sessionGoal === g.key ? (
+                    g.key === 'speed' ? { background: 'rgba(255,179,0,0.18)', borderColor: '#ffb300', color: '#ffb300' } :
+                      g.key === 'perfect' ? { background: 'rgba(244,67,54,0.18)', borderColor: '#f44336', color: '#f44336' } :
+                        g.key === 'revision' ? { background: 'rgba(33,150,243,0.18)', borderColor: '#2196f3', color: '#2196f3' } : {}
+                  ) : {}}>
+                  <input type="radio" name="polymulapp-goal" checked={sessionGoal === g.key} onChange={() => {
+                    setSessionGoal(g.key)
+
+                  }} />
+                  {g.label}
+                </label>
+              ))}
+            </div>
+            {isAdaptive && <p style={{ fontSize: '0.82rem', color: 'var(--clr-dim)', marginBottom: '8px' }}>Starts easy and smoothly adjusts to your level as you answer.</p>}
+            {sessionGoal === 'speed' && (
+              <p style={{ fontSize: '0.82rem', color: '#ffb300', marginBottom: '8px' }}>
+                ⚡ Easy 5s · Medium 10s · Hard 15s · Extra Hard 20s · Adaptive 10s. Double coins for correct!
+              </p>
+            )}
+            {sessionGoal === 'perfect' && (
+              <p style={{ fontSize: '0.82rem', color: '#f44336', marginBottom: '8px' }}>
+                🎯 One wrong answer ends the quiz. No timer shown. Can you go flawless?
+              </p>
+            )}
+            {sessionGoal === 'revision' && (
+              <p style={{ fontSize: '0.82rem', color: '#2196f3', marginBottom: '8px' }}>
+                🔄 Focuses on topics you previously answered incorrectly.
+              </p>
+            )}
+          </>
+        )}
         <div className="question-count-row">
           <label className="question-count-label">How many questions? (max 100)</label>
           <input className="answer-input question-count-input" type="text" value={numQuestions} onChange={e => { const v = e.target.value; if (v === '' || (/^\d+$/.test(v) && Number(v) <= 100)) setNumQuestions(v) }} />
@@ -62609,7 +55271,7 @@ const loadQuestion = async () => {
             ))}
           </div>
         </>}
-        {renderFeedback(feedback, isCorrect)}
+        <FeedbackDisplay feedback={feedback} isCorrect={isCorrect} />
         <div className="button-row">
           {!revealed ? <>
             <button onClick={handleSubmit} disabled={loading || userCoeffs.some(c => c === '')}>Submit</button>
@@ -62701,14 +55363,14 @@ function PolyFactorApp({ onBack, isGoalMode = false }) {
    * Returns: {a, b, c, display, factors: {p, q, r, s}, ...}
    * Resets all factor fields to empty and initializes timer
    */
-  
+
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
     if (typeof phase !== 'undefined' && phase === 'finished') return
-    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
-    try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
-    try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch(_) {}
+    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch (_) { }
+    try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch (_) { }
+    try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch (_) { }
     const timeTaken = timer.stop ? timer.stop() : 0
     const qPrompt = question ? (question.prompt || question.question || (question.n1 !== undefined ? `${question.n1} ${question.op || '+'} ${question.n2}` : 'Question')) : 'Question'
     try {
@@ -62723,9 +55385,9 @@ function PolyFactorApp({ onBack, isGoalMode = false }) {
         setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: corrAns, correct: false, time: timeTaken }])
       }
       if (sessionGoal === 'perfect') {
-        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch(_) {}
+        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch (_) { }
       }
-    } catch(e) {
+    } catch (e) {
       console.error('handleTimeout error:', e)
       if (typeof setResults === 'function') {
         setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: '—', correct: false, time: timeTaken }])
@@ -62733,7 +55395,7 @@ function PolyFactorApp({ onBack, isGoalMode = false }) {
     }
   }
 
-const loadQuestion = async () => {
+  const loadQuestion = async () => {
     setLoading(true)
     // Reset all four factor coefficient fields and feedback
     setUserP(''); setUserQ(''); setUserR(''); setUserS('')
@@ -62776,17 +55438,17 @@ const loadQuestion = async () => {
     if (!userP || !userQ || !userR || !userS) return
     const timeTaken = timer.stop()
     // POST to backend to validate factorization
-    const res = await fetch(`${API}/polyfactor-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  a: question.a, b: question.b, c: question.c, userP: Number(userP), userQ: Number(userQ), userR: Number(userR), userS: Number(userS), sessionGoal }) })
+    const res = await fetch(`${API}/polyfactor-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({ a: question.a, b: question.b, c: question.c, userP: Number(userP), userQ: Number(userQ), userR: Number(userR), userS: Number(userS), sessionGoal }) })
     const data = await res.json()
     setIsCorrect(data.correct)
     // Increment score if correct
     if (data.correct) setScore(s => s + 1)
     // Format feedback message using correct factors (p, q, r, s from question.factors)
     const { p, q, r, s } = question.factors
-    (() => {
+      (() => {
         const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
         if (data.correct) {
-          setFeedback(`Correct! (${p}x ${q >= 0 ? '+' : '−'} ${Math.abs(q)})(${r}x ${s >= 0 ? '+' : '−'} ${Math.abs(s)})`.slice(0,-1) + _ci + `Correct! (${p}x ${q >= 0 ? '+' : '−'} ${Math.abs(q)})(${r}x ${s >= 0 ? '+' : '−'} ${Math.abs(s)})`.slice(-1))
+          setFeedback(`Correct! (${p}x ${q >= 0 ? '+' : '−'} ${Math.abs(q)})(${r}x ${s >= 0 ? '+' : '−'} ${Math.abs(s)})`.slice(0, -1) + _ci + `Correct! (${p}x ${q >= 0 ? '+' : '−'} ${Math.abs(q)})(${r}x ${s >= 0 ? '+' : '−'} ${Math.abs(s)})`.slice(-1))
         } else if (sessionGoal === 'perfect') {
           setFeedback(`Incorrect. One factorization: (${p}x ${q >= 0 ? '+' : '−'} ${Math.abs(q)})(${r}x ${s >= 0 ? '+' : '−'} ${Math.abs(s)})` + ' ❌ Perfect Solve ended.')
           setFinished(true); timer.reset()
@@ -62851,8 +55513,8 @@ const loadQuestion = async () => {
   return (
     <QuizLayout title="Poly Factor" subtitle="Factor the quadratic into (px + q)(rx + s)" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
       {!started && !finished && <div className="welcome-box">
-          <p className="welcome-text">Factor ax² + bx + c into (px + q)(rx + s).</p>
-          <KeyTerms topicKey="polynomial-factorisation" />
+        <p className="welcome-text">Factor ax² + bx + c into (px + q)(rx + s).</p>
+        <KeyTerms topicKey="polynomial-factorisation" />
         <div className="checkbox-group" style={{ marginBottom: '12px' }}>
           {['easy', 'medium', 'hard', 'extrahard'].map(d => (
             <label key={d} className={`checkbox-pill${!isAdaptive && difficulty === d ? ' active' : ''}`}>
@@ -62867,46 +55529,46 @@ const loadQuestion = async () => {
         </div>
 
         {isGoalMode && (
-        <>
-          <p className="welcome-text" style={{ marginTop: '14px', fontSize: '0.92rem', fontWeight: 700, marginBottom: '6px' }}>Practice Goal:</p>
-                  <div className="checkbox-group" style={{ marginBottom: '12px' }}>
-                    {[
-                                            { key: 'speed', label: '⚡ Speed Run' },
-                      { key: 'perfect', label: '🎯 Perfect Solve' },
-                      { key: 'revision', label: '🔄 Revision' }
-                    ].map(g => (
-                      <label key={g.key} className={`checkbox-pill${sessionGoal === g.key ? ' active' : ''}`}
-                        style={sessionGoal === g.key ? (
-                          g.key === 'speed' ? { background: 'rgba(255,179,0,0.18)', borderColor: '#ffb300', color: '#ffb300' } :
-                          g.key === 'perfect' ? { background: 'rgba(244,67,54,0.18)', borderColor: '#f44336', color: '#f44336' } :
-                          g.key === 'revision' ? { background: 'rgba(33,150,243,0.18)', borderColor: '#2196f3', color: '#2196f3' } : {}
-                        ) : {}}>
-                        <input type="radio" name="polyfactorapp-goal" checked={sessionGoal === g.key} onChange={() => {
-                          setSessionGoal(g.key)
-                          
-                        }} />
-                        {g.label}
-                      </label>
-                    ))}
-                  </div>
-                  {isAdaptive && <p style={{ fontSize: '0.82rem', color: 'var(--clr-dim)', marginBottom: '8px' }}>Starts easy and smoothly adjusts to your level as you answer.</p>}
-                  {sessionGoal === 'speed' && (
-                    <p style={{ fontSize: '0.82rem', color: '#ffb300', marginBottom: '8px' }}>
-                      ⚡ Easy 5s · Medium 10s · Hard 15s · Extra Hard 20s · Adaptive 10s. Double coins for correct!
-                    </p>
-                  )}
-                  {sessionGoal === 'perfect' && (
-                    <p style={{ fontSize: '0.82rem', color: '#f44336', marginBottom: '8px' }}>
-                      🎯 One wrong answer ends the quiz. No timer shown. Can you go flawless?
-                    </p>
-                  )}
-                  {sessionGoal === 'revision' && (
-                    <p style={{ fontSize: '0.82rem', color: '#2196f3', marginBottom: '8px' }}>
-                      🔄 Focuses on topics you previously answered incorrectly.
-                    </p>
-                  )}
-        </>
-      )}
+          <>
+            <p className="welcome-text" style={{ marginTop: '14px', fontSize: '0.92rem', fontWeight: 700, marginBottom: '6px' }}>Practice Goal:</p>
+            <div className="checkbox-group" style={{ marginBottom: '12px' }}>
+              {[
+                { key: 'speed', label: '⚡ Speed Run' },
+                { key: 'perfect', label: '🎯 Perfect Solve' },
+                { key: 'revision', label: '🔄 Revision' }
+              ].map(g => (
+                <label key={g.key} className={`checkbox-pill${sessionGoal === g.key ? ' active' : ''}`}
+                  style={sessionGoal === g.key ? (
+                    g.key === 'speed' ? { background: 'rgba(255,179,0,0.18)', borderColor: '#ffb300', color: '#ffb300' } :
+                      g.key === 'perfect' ? { background: 'rgba(244,67,54,0.18)', borderColor: '#f44336', color: '#f44336' } :
+                        g.key === 'revision' ? { background: 'rgba(33,150,243,0.18)', borderColor: '#2196f3', color: '#2196f3' } : {}
+                  ) : {}}>
+                  <input type="radio" name="polyfactorapp-goal" checked={sessionGoal === g.key} onChange={() => {
+                    setSessionGoal(g.key)
+
+                  }} />
+                  {g.label}
+                </label>
+              ))}
+            </div>
+            {isAdaptive && <p style={{ fontSize: '0.82rem', color: 'var(--clr-dim)', marginBottom: '8px' }}>Starts easy and smoothly adjusts to your level as you answer.</p>}
+            {sessionGoal === 'speed' && (
+              <p style={{ fontSize: '0.82rem', color: '#ffb300', marginBottom: '8px' }}>
+                ⚡ Easy 5s · Medium 10s · Hard 15s · Extra Hard 20s · Adaptive 10s. Double coins for correct!
+              </p>
+            )}
+            {sessionGoal === 'perfect' && (
+              <p style={{ fontSize: '0.82rem', color: '#f44336', marginBottom: '8px' }}>
+                🎯 One wrong answer ends the quiz. No timer shown. Can you go flawless?
+              </p>
+            )}
+            {sessionGoal === 'revision' && (
+              <p style={{ fontSize: '0.82rem', color: '#2196f3', marginBottom: '8px' }}>
+                🔄 Focuses on topics you previously answered incorrectly.
+              </p>
+            )}
+          </>
+        )}
         <div className="question-count-row">
           <label className="question-count-label">How many questions? (max 100)</label>
           <input className="answer-input question-count-input" type="text" value={numQuestions} onChange={e => { const v = e.target.value; if (v === '' || (/^\d+$/.test(v) && Number(v) <= 100)) setNumQuestions(v) }} />
@@ -62933,7 +55595,7 @@ const loadQuestion = async () => {
             <span className="factor-group">)</span>
           </div>
         </>}
-        {renderFeedback(feedback, isCorrect)}
+        <FeedbackDisplay feedback={feedback} isCorrect={isCorrect} />
         <div className="button-row">
           {!revealed && <button onClick={handleSolve} disabled={loading} style={{ background: 'transparent', border: '1px solid var(--clr-accent)', color: 'var(--clr-accent)' }}>Solve</button>}
           <button onClick={revealed ? () => advanceFnRef.current() : handleSubmit} disabled={loading || (!revealed && (!userP || !userQ || !userR || !userS))}>
@@ -63016,14 +55678,14 @@ function PrimeFactorApp({ onBack, isGoalMode = false }) {
    * Initializes with number and sets remaining = number
    * Resets input fields and timer before starting
    */
-  
+
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
     if (typeof phase !== 'undefined' && phase === 'finished') return
-    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
-    try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
-    try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch(_) {}
+    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch (_) { }
+    try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch (_) { }
+    try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch (_) { }
     const timeTaken = timer.stop ? timer.stop() : 0
     const qPrompt = question ? (question.prompt || question.question || (question.n1 !== undefined ? `${question.n1} ${question.op || '+'} ${question.n2}` : 'Question')) : 'Question'
     try {
@@ -63038,9 +55700,9 @@ function PrimeFactorApp({ onBack, isGoalMode = false }) {
         setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: corrAns, correct: false, time: timeTaken }])
       }
       if (sessionGoal === 'perfect') {
-        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch(_) {}
+        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch (_) { }
       }
-    } catch(e) {
+    } catch (e) {
       console.error('handleTimeout error:', e)
       if (typeof setResults === 'function') {
         setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: '—', correct: false, time: timeTaken }])
@@ -63048,7 +55710,7 @@ function PrimeFactorApp({ onBack, isGoalMode = false }) {
     }
   }
 
-const loadQuestion = async () => {
+  const loadQuestion = async () => {
     // Reset feedback and UI state
     setFeedback(''); setIsCorrect(null); setRevealed(false)
     // Reset factor input fields
@@ -63207,8 +55869,8 @@ const loadQuestion = async () => {
   return (
     <QuizLayout title="Prime Factors" subtitle="Break the number into its prime factors" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
       {!started && !finished && <div className="welcome-box">
-          <p className="welcome-text">Enter prime factors one at a time. Watch the remaining number shrink!</p>
-          <KeyTerms topicKey="prime-factors" />
+        <p className="welcome-text">Enter prime factors one at a time. Watch the remaining number shrink!</p>
+        <KeyTerms topicKey="prime-factors" />
         <div className="checkbox-group" style={{ marginBottom: '12px' }}>
           {['easy', 'medium', 'hard', 'extrahard'].map(d => (
             <label key={d} className={`checkbox-pill${!isAdaptive && difficulty === d ? ' active' : ''}`}>
@@ -63223,46 +55885,46 @@ const loadQuestion = async () => {
         </div>
 
         {isGoalMode && (
-        <>
-          <p className="welcome-text" style={{ marginTop: '14px', fontSize: '0.92rem', fontWeight: 700, marginBottom: '6px' }}>Practice Goal:</p>
-                  <div className="checkbox-group" style={{ marginBottom: '12px' }}>
-                    {[
-                                            { key: 'speed', label: '⚡ Speed Run' },
-                      { key: 'perfect', label: '🎯 Perfect Solve' },
-                      { key: 'revision', label: '🔄 Revision' }
-                    ].map(g => (
-                      <label key={g.key} className={`checkbox-pill${sessionGoal === g.key ? ' active' : ''}`}
-                        style={sessionGoal === g.key ? (
-                          g.key === 'speed' ? { background: 'rgba(255,179,0,0.18)', borderColor: '#ffb300', color: '#ffb300' } :
-                          g.key === 'perfect' ? { background: 'rgba(244,67,54,0.18)', borderColor: '#f44336', color: '#f44336' } :
-                          g.key === 'revision' ? { background: 'rgba(33,150,243,0.18)', borderColor: '#2196f3', color: '#2196f3' } : {}
-                        ) : {}}>
-                        <input type="radio" name="primefactorapp-goal" checked={sessionGoal === g.key} onChange={() => {
-                          setSessionGoal(g.key)
-                          
-                        }} />
-                        {g.label}
-                      </label>
-                    ))}
-                  </div>
-                  {isAdaptive && <p style={{ fontSize: '0.82rem', color: 'var(--clr-dim)', marginBottom: '8px' }}>Starts easy and smoothly adjusts to your level as you answer.</p>}
-                  {sessionGoal === 'speed' && (
-                    <p style={{ fontSize: '0.82rem', color: '#ffb300', marginBottom: '8px' }}>
-                      ⚡ Easy 5s · Medium 10s · Hard 15s · Extra Hard 20s · Adaptive 10s. Double coins for correct!
-                    </p>
-                  )}
-                  {sessionGoal === 'perfect' && (
-                    <p style={{ fontSize: '0.82rem', color: '#f44336', marginBottom: '8px' }}>
-                      🎯 One wrong answer ends the quiz. No timer shown. Can you go flawless?
-                    </p>
-                  )}
-                  {sessionGoal === 'revision' && (
-                    <p style={{ fontSize: '0.82rem', color: '#2196f3', marginBottom: '8px' }}>
-                      🔄 Focuses on topics you previously answered incorrectly.
-                    </p>
-                  )}
-        </>
-      )}
+          <>
+            <p className="welcome-text" style={{ marginTop: '14px', fontSize: '0.92rem', fontWeight: 700, marginBottom: '6px' }}>Practice Goal:</p>
+            <div className="checkbox-group" style={{ marginBottom: '12px' }}>
+              {[
+                { key: 'speed', label: '⚡ Speed Run' },
+                { key: 'perfect', label: '🎯 Perfect Solve' },
+                { key: 'revision', label: '🔄 Revision' }
+              ].map(g => (
+                <label key={g.key} className={`checkbox-pill${sessionGoal === g.key ? ' active' : ''}`}
+                  style={sessionGoal === g.key ? (
+                    g.key === 'speed' ? { background: 'rgba(255,179,0,0.18)', borderColor: '#ffb300', color: '#ffb300' } :
+                      g.key === 'perfect' ? { background: 'rgba(244,67,54,0.18)', borderColor: '#f44336', color: '#f44336' } :
+                        g.key === 'revision' ? { background: 'rgba(33,150,243,0.18)', borderColor: '#2196f3', color: '#2196f3' } : {}
+                  ) : {}}>
+                  <input type="radio" name="primefactorapp-goal" checked={sessionGoal === g.key} onChange={() => {
+                    setSessionGoal(g.key)
+
+                  }} />
+                  {g.label}
+                </label>
+              ))}
+            </div>
+            {isAdaptive && <p style={{ fontSize: '0.82rem', color: 'var(--clr-dim)', marginBottom: '8px' }}>Starts easy and smoothly adjusts to your level as you answer.</p>}
+            {sessionGoal === 'speed' && (
+              <p style={{ fontSize: '0.82rem', color: '#ffb300', marginBottom: '8px' }}>
+                ⚡ Easy 5s · Medium 10s · Hard 15s · Extra Hard 20s · Adaptive 10s. Double coins for correct!
+              </p>
+            )}
+            {sessionGoal === 'perfect' && (
+              <p style={{ fontSize: '0.82rem', color: '#f44336', marginBottom: '8px' }}>
+                🎯 One wrong answer ends the quiz. No timer shown. Can you go flawless?
+              </p>
+            )}
+            {sessionGoal === 'revision' && (
+              <p style={{ fontSize: '0.82rem', color: '#2196f3', marginBottom: '8px' }}>
+                🔄 Focuses on topics you previously answered incorrectly.
+              </p>
+            )}
+          </>
+        )}
         <div className="question-count-row">
           <label className="question-count-label">How many questions? (max 100)</label>
           <input className="answer-input question-count-input" type="text" value={numQuestions} onChange={e => { const v = e.target.value; if (v === '' || (/^\d+$/.test(v) && Number(v) <= 100)) setNumQuestions(v) }} />
@@ -63287,7 +55949,7 @@ const loadQuestion = async () => {
           {inputError && !revealed && <div className="feedback wrong" style={{ fontSize: '0.9rem', padding: '6px 14px', marginTop: 4 }}>{inputError}</div>}
           <NumPad value={currentInput} onChange={setCurrentInput} onSubmit={addFactor} disabled={revealed || remaining <= 1} />
         </>}
-        {renderFeedback(feedback, isCorrect)}
+        <FeedbackDisplay feedback={feedback} isCorrect={isCorrect} />
         {revealed && <div className="button-row">
           <button onClick={() => advanceFnRef.current()}>{questionNumber >= totalQ ? 'Finish' : 'Next'}</button>
         </div>}
@@ -63375,14 +56037,14 @@ function QFormulaApp({ onBack, isGoalMode = false }) {
    *   - real_equal: r1 (one repeated root)
    *   - complex: realPart, imagPart (roots are a ± bi)
    */
-  
+
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
     if (typeof phase !== 'undefined' && phase === 'finished') return
-    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
-    try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
-    try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch(_) {}
+    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch (_) { }
+    try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch (_) { }
+    try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch (_) { }
     const timeTaken = timer.stop ? timer.stop() : 0
     const qPrompt = question ? (question.prompt || question.question || (question.n1 !== undefined ? `${question.n1} ${question.op || '+'} ${question.n2}` : 'Question')) : 'Question'
     try {
@@ -63397,9 +56059,9 @@ function QFormulaApp({ onBack, isGoalMode = false }) {
         setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: corrAns, correct: false, time: timeTaken }])
       }
       if (sessionGoal === 'perfect') {
-        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch(_) {}
+        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch (_) { }
       }
-    } catch(e) {
+    } catch (e) {
       console.error('handleTimeout error:', e)
       if (typeof setResults === 'function') {
         setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: '—', correct: false, time: timeTaken }])
@@ -63407,7 +56069,7 @@ function QFormulaApp({ onBack, isGoalMode = false }) {
     }
   }
 
-const loadQuestion = async () => {
+  const loadQuestion = async () => {
     setLoading(true)
     // Reset root input fields
     setUserR1(''); setUserR2('')
@@ -63449,7 +56111,7 @@ const loadQuestion = async () => {
     if (question.roots.type === 'complex' && !userR2) return
     const timeTaken = timer.stop()
     // POST to backend to validate roots
-    const res = await fetch(`${API}/qformula-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  a: question.a, b: question.b, c: question.c, userR1: Number(userR1), userR2: Number(userR2), userType: question.roots.type, sessionGoal }) })
+    const res = await fetch(`${API}/qformula-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({ a: question.a, b: question.b, c: question.c, userR1: Number(userR1), userR2: Number(userR2), userType: question.roots.type, sessionGoal }) })
     const data = await res.json()
     setIsCorrect(data.correct)
     if (data.correct) setScore(s => s + 1)
@@ -63458,10 +56120,10 @@ const loadQuestion = async () => {
     if (data.roots.type === 'real_distinct') correctStr = `Roots: ${data.roots.r1} and ${data.roots.r2}`
     else if (data.roots.type === 'real_equal') correctStr = `Root: ${data.roots.r1} (repeated)`
     else correctStr = `Roots: ${data.roots.realPart} ± ${data.roots.imagPart}i`
-    (() => {
+      (() => {
         const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
         if (data.correct) {
-          setFeedback(`Correct! ${correctStr}`.slice(0,-1) + _ci + `Correct! ${correctStr}`.slice(-1))
+          setFeedback(`Correct! ${correctStr}`.slice(0, -1) + _ci + `Correct! ${correctStr}`.slice(-1))
         } else if (sessionGoal === 'perfect') {
           setFeedback(`Incorrect. ${correctStr}` + ' ❌ Perfect Solve ended.')
           setFinished(true); timer.reset()
@@ -63529,8 +56191,8 @@ const loadQuestion = async () => {
   return (
     <QuizLayout title="Quadratic Formula" subtitle="Find the roots of ax² + bx + c = 0" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
       {!started && !finished && <div className="welcome-box">
-          <p className="welcome-text">Use the quadratic formula to find roots of ax² + bx + c = 0</p>
-          <KeyTerms topicKey="quadratic-formula" />
+        <p className="welcome-text">Use the quadratic formula to find roots of ax² + bx + c = 0</p>
+        <KeyTerms topicKey="quadratic-formula" />
         <div className="checkbox-group" style={{ marginBottom: '12px' }}>
           {['easy', 'medium', 'hard', 'extrahard'].map(d => (
             <label key={d} className={`checkbox-pill${!isAdaptive && difficulty === d ? ' active' : ''}`}>
@@ -63545,46 +56207,46 @@ const loadQuestion = async () => {
         </div>
 
         {isGoalMode && (
-        <>
-          <p className="welcome-text" style={{ marginTop: '14px', fontSize: '0.92rem', fontWeight: 700, marginBottom: '6px' }}>Practice Goal:</p>
-                  <div className="checkbox-group" style={{ marginBottom: '12px' }}>
-                    {[
-                                            { key: 'speed', label: '⚡ Speed Run' },
-                      { key: 'perfect', label: '🎯 Perfect Solve' },
-                      { key: 'revision', label: '🔄 Revision' }
-                    ].map(g => (
-                      <label key={g.key} className={`checkbox-pill${sessionGoal === g.key ? ' active' : ''}`}
-                        style={sessionGoal === g.key ? (
-                          g.key === 'speed' ? { background: 'rgba(255,179,0,0.18)', borderColor: '#ffb300', color: '#ffb300' } :
-                          g.key === 'perfect' ? { background: 'rgba(244,67,54,0.18)', borderColor: '#f44336', color: '#f44336' } :
-                          g.key === 'revision' ? { background: 'rgba(33,150,243,0.18)', borderColor: '#2196f3', color: '#2196f3' } : {}
-                        ) : {}}>
-                        <input type="radio" name="qformulaapp-goal" checked={sessionGoal === g.key} onChange={() => {
-                          setSessionGoal(g.key)
-                          
-                        }} />
-                        {g.label}
-                      </label>
-                    ))}
-                  </div>
-                  {isAdaptive && <p style={{ fontSize: '0.82rem', color: 'var(--clr-dim)', marginBottom: '8px' }}>Starts easy and smoothly adjusts to your level as you answer.</p>}
-                  {sessionGoal === 'speed' && (
-                    <p style={{ fontSize: '0.82rem', color: '#ffb300', marginBottom: '8px' }}>
-                      ⚡ Easy 5s · Medium 10s · Hard 15s · Extra Hard 20s · Adaptive 10s. Double coins for correct!
-                    </p>
-                  )}
-                  {sessionGoal === 'perfect' && (
-                    <p style={{ fontSize: '0.82rem', color: '#f44336', marginBottom: '8px' }}>
-                      🎯 One wrong answer ends the quiz. No timer shown. Can you go flawless?
-                    </p>
-                  )}
-                  {sessionGoal === 'revision' && (
-                    <p style={{ fontSize: '0.82rem', color: '#2196f3', marginBottom: '8px' }}>
-                      🔄 Focuses on topics you previously answered incorrectly.
-                    </p>
-                  )}
-        </>
-      )}
+          <>
+            <p className="welcome-text" style={{ marginTop: '14px', fontSize: '0.92rem', fontWeight: 700, marginBottom: '6px' }}>Practice Goal:</p>
+            <div className="checkbox-group" style={{ marginBottom: '12px' }}>
+              {[
+                { key: 'speed', label: '⚡ Speed Run' },
+                { key: 'perfect', label: '🎯 Perfect Solve' },
+                { key: 'revision', label: '🔄 Revision' }
+              ].map(g => (
+                <label key={g.key} className={`checkbox-pill${sessionGoal === g.key ? ' active' : ''}`}
+                  style={sessionGoal === g.key ? (
+                    g.key === 'speed' ? { background: 'rgba(255,179,0,0.18)', borderColor: '#ffb300', color: '#ffb300' } :
+                      g.key === 'perfect' ? { background: 'rgba(244,67,54,0.18)', borderColor: '#f44336', color: '#f44336' } :
+                        g.key === 'revision' ? { background: 'rgba(33,150,243,0.18)', borderColor: '#2196f3', color: '#2196f3' } : {}
+                  ) : {}}>
+                  <input type="radio" name="qformulaapp-goal" checked={sessionGoal === g.key} onChange={() => {
+                    setSessionGoal(g.key)
+
+                  }} />
+                  {g.label}
+                </label>
+              ))}
+            </div>
+            {isAdaptive && <p style={{ fontSize: '0.82rem', color: 'var(--clr-dim)', marginBottom: '8px' }}>Starts easy and smoothly adjusts to your level as you answer.</p>}
+            {sessionGoal === 'speed' && (
+              <p style={{ fontSize: '0.82rem', color: '#ffb300', marginBottom: '8px' }}>
+                ⚡ Easy 5s · Medium 10s · Hard 15s · Extra Hard 20s · Adaptive 10s. Double coins for correct!
+              </p>
+            )}
+            {sessionGoal === 'perfect' && (
+              <p style={{ fontSize: '0.82rem', color: '#f44336', marginBottom: '8px' }}>
+                🎯 One wrong answer ends the quiz. No timer shown. Can you go flawless?
+              </p>
+            )}
+            {sessionGoal === 'revision' && (
+              <p style={{ fontSize: '0.82rem', color: '#2196f3', marginBottom: '8px' }}>
+                🔄 Focuses on topics you previously answered incorrectly.
+              </p>
+            )}
+          </>
+        )}
         <div className="question-count-row">
           <label className="question-count-label">How many questions? (max 100)</label>
           <input className="answer-input question-count-input" type="text" value={numQuestions} onChange={e => { const v = e.target.value; if (v === '' || (/^\d+$/.test(v) && Number(v) <= 100)) setNumQuestions(v) }} />
@@ -63616,7 +56278,7 @@ const loadQuestion = async () => {
             </>}
           </div>
         </>}
-        {renderFeedback(feedback, isCorrect)}
+        <FeedbackDisplay feedback={feedback} isCorrect={isCorrect} />
         <div className="button-row">
           {!revealed && <button onClick={handleSolve} disabled={loading} style={{ background: 'transparent', border: '1px solid var(--clr-accent)', color: 'var(--clr-accent)' }}>Solve</button>}
           <button onClick={revealed ? () => advanceFnRef.current() : handleSubmit} disabled={loading || (!revealed && !userR1)}>
@@ -63711,14 +56373,14 @@ function SimulApp({ onBack, isGoalMode = false }) {
    *   - 2×2: ax + by = d (two equations, two unknowns)
    *   - 3×3: ax + by + cz = d (three equations, three unknowns)
    */
-  
+
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
     if (typeof phase !== 'undefined' && phase === 'finished') return
-    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
-    try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
-    try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch(_) {}
+    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch (_) { }
+    try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch (_) { }
+    try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch (_) { }
     const timeTaken = timer.stop ? timer.stop() : 0
     const qPrompt = question ? (question.prompt || question.question || (question.n1 !== undefined ? `${question.n1} ${question.op || '+'} ${question.n2}` : 'Question')) : 'Question'
     try {
@@ -63733,9 +56395,9 @@ function SimulApp({ onBack, isGoalMode = false }) {
         setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: corrAns, correct: false, time: timeTaken }])
       }
       if (sessionGoal === 'perfect') {
-        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch(_) {}
+        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch (_) { }
       }
-    } catch(e) {
+    } catch (e) {
       console.error('handleTimeout error:', e)
       if (typeof setResults === 'function') {
         setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: '—', correct: false, time: timeTaken }])
@@ -63743,7 +56405,7 @@ function SimulApp({ onBack, isGoalMode = false }) {
     }
   }
 
-const loadQuestion = async () => {
+  const loadQuestion = async () => {
     setLoading(true)
     // Reset solution input fields
     setUserX(''); setUserY(''); setUserZ('')
@@ -63796,7 +56458,7 @@ const loadQuestion = async () => {
       (() => {
         const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
         if (data.correct) {
-          setFeedback(`Correct! (x, y, z) = (${s.x}, ${s.y}, ${s.z})`.slice(0,-1) + _ci + `Correct! (x, y, z) = (${s.x}, ${s.y}, ${s.z})`.slice(-1))
+          setFeedback(`Correct! (x, y, z) = (${s.x}, ${s.y}, ${s.z})`.slice(0, -1) + _ci + `Correct! (x, y, z) = (${s.x}, ${s.y}, ${s.z})`.slice(-1))
         } else if (sessionGoal === 'perfect') {
           setFeedback(`Incorrect. (x, y, z) = (${s.x}, ${s.y}, ${s.z})` + ' ❌ Perfect Solve ended.')
           setFinished(true); timer.reset()
@@ -63809,7 +56471,7 @@ const loadQuestion = async () => {
       (() => {
         const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
         if (data.correct) {
-          setFeedback(`Correct! (x, y) = (${s.x}, ${s.y})`.slice(0,-1) + _ci + `Correct! (x, y) = (${s.x}, ${s.y})`.slice(-1))
+          setFeedback(`Correct! (x, y) = (${s.x}, ${s.y})`.slice(0, -1) + _ci + `Correct! (x, y) = (${s.x}, ${s.y})`.slice(-1))
         } else if (sessionGoal === 'perfect') {
           setFeedback(`Incorrect. (x, y) = (${s.x}, ${s.y})` + ' ❌ Perfect Solve ended.')
           setFinished(true); timer.reset()
@@ -63880,8 +56542,8 @@ const loadQuestion = async () => {
   return (
     <QuizLayout title="Simultaneous Eq." subtitle={`Solve ${isAdaptive ? 'adaptive' : (effectiveDiff() === 'easy' ? '2×2' : '3×3')} systems`} onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
       {!started && !finished && <div className="welcome-box">
-          <p className="welcome-text">Solve systems of linear equations</p>
-          <KeyTerms topicKey="simultaneous-equations" />
+        <p className="welcome-text">Solve systems of linear equations</p>
+        <KeyTerms topicKey="simultaneous-equations" />
         <div className="checkbox-group" style={{ marginBottom: '12px' }}>
           {['easy', 'medium', 'hard', 'extrahard'].map(d => (
             <label key={d} className={`checkbox-pill${!isAdaptive && difficulty === d ? ' active' : ''}`}>
@@ -63896,46 +56558,46 @@ const loadQuestion = async () => {
         </div>
 
         {isGoalMode && (
-        <>
-          <p className="welcome-text" style={{ marginTop: '14px', fontSize: '0.92rem', fontWeight: 700, marginBottom: '6px' }}>Practice Goal:</p>
-                  <div className="checkbox-group" style={{ marginBottom: '12px' }}>
-                    {[
-                                            { key: 'speed', label: '⚡ Speed Run' },
-                      { key: 'perfect', label: '🎯 Perfect Solve' },
-                      { key: 'revision', label: '🔄 Revision' }
-                    ].map(g => (
-                      <label key={g.key} className={`checkbox-pill${sessionGoal === g.key ? ' active' : ''}`}
-                        style={sessionGoal === g.key ? (
-                          g.key === 'speed' ? { background: 'rgba(255,179,0,0.18)', borderColor: '#ffb300', color: '#ffb300' } :
-                          g.key === 'perfect' ? { background: 'rgba(244,67,54,0.18)', borderColor: '#f44336', color: '#f44336' } :
-                          g.key === 'revision' ? { background: 'rgba(33,150,243,0.18)', borderColor: '#2196f3', color: '#2196f3' } : {}
-                        ) : {}}>
-                        <input type="radio" name="simulapp-goal" checked={sessionGoal === g.key} onChange={() => {
-                          setSessionGoal(g.key)
-                          
-                        }} />
-                        {g.label}
-                      </label>
-                    ))}
-                  </div>
-                  {isAdaptive && <p style={{ fontSize: '0.82rem', color: 'var(--clr-dim)', marginBottom: '8px' }}>Starts easy and smoothly adjusts to your level as you answer.</p>}
-                  {sessionGoal === 'speed' && (
-                    <p style={{ fontSize: '0.82rem', color: '#ffb300', marginBottom: '8px' }}>
-                      ⚡ Easy 5s · Medium 10s · Hard 15s · Extra Hard 20s · Adaptive 10s. Double coins for correct!
-                    </p>
-                  )}
-                  {sessionGoal === 'perfect' && (
-                    <p style={{ fontSize: '0.82rem', color: '#f44336', marginBottom: '8px' }}>
-                      🎯 One wrong answer ends the quiz. No timer shown. Can you go flawless?
-                    </p>
-                  )}
-                  {sessionGoal === 'revision' && (
-                    <p style={{ fontSize: '0.82rem', color: '#2196f3', marginBottom: '8px' }}>
-                      🔄 Focuses on topics you previously answered incorrectly.
-                    </p>
-                  )}
-        </>
-      )}
+          <>
+            <p className="welcome-text" style={{ marginTop: '14px', fontSize: '0.92rem', fontWeight: 700, marginBottom: '6px' }}>Practice Goal:</p>
+            <div className="checkbox-group" style={{ marginBottom: '12px' }}>
+              {[
+                { key: 'speed', label: '⚡ Speed Run' },
+                { key: 'perfect', label: '🎯 Perfect Solve' },
+                { key: 'revision', label: '🔄 Revision' }
+              ].map(g => (
+                <label key={g.key} className={`checkbox-pill${sessionGoal === g.key ? ' active' : ''}`}
+                  style={sessionGoal === g.key ? (
+                    g.key === 'speed' ? { background: 'rgba(255,179,0,0.18)', borderColor: '#ffb300', color: '#ffb300' } :
+                      g.key === 'perfect' ? { background: 'rgba(244,67,54,0.18)', borderColor: '#f44336', color: '#f44336' } :
+                        g.key === 'revision' ? { background: 'rgba(33,150,243,0.18)', borderColor: '#2196f3', color: '#2196f3' } : {}
+                  ) : {}}>
+                  <input type="radio" name="simulapp-goal" checked={sessionGoal === g.key} onChange={() => {
+                    setSessionGoal(g.key)
+
+                  }} />
+                  {g.label}
+                </label>
+              ))}
+            </div>
+            {isAdaptive && <p style={{ fontSize: '0.82rem', color: 'var(--clr-dim)', marginBottom: '8px' }}>Starts easy and smoothly adjusts to your level as you answer.</p>}
+            {sessionGoal === 'speed' && (
+              <p style={{ fontSize: '0.82rem', color: '#ffb300', marginBottom: '8px' }}>
+                ⚡ Easy 5s · Medium 10s · Hard 15s · Extra Hard 20s · Adaptive 10s. Double coins for correct!
+              </p>
+            )}
+            {sessionGoal === 'perfect' && (
+              <p style={{ fontSize: '0.82rem', color: '#f44336', marginBottom: '8px' }}>
+                🎯 One wrong answer ends the quiz. No timer shown. Can you go flawless?
+              </p>
+            )}
+            {sessionGoal === 'revision' && (
+              <p style={{ fontSize: '0.82rem', color: '#2196f3', marginBottom: '8px' }}>
+                🔄 Focuses on topics you previously answered incorrectly.
+              </p>
+            )}
+          </>
+        )}
         <div className="question-count-row">
           <label className="question-count-label">How many questions? (max 100)</label>
           <input className="answer-input question-count-input" type="text" value={numQuestions} onChange={e => { const v = e.target.value; if (v === '' || (/^\d+$/.test(v) && Number(v) <= 100)) setNumQuestions(v) }} />
@@ -63961,7 +56623,7 @@ const loadQuestion = async () => {
               <input className="answer-input coeff-input" type="text" value={userZ} onChange={valInput(setUserZ)} disabled={revealed} onKeyDown={e => { if (e.key === 'Enter') handleSubmit() }} /></div>}
           </div>
         </>}
-        {renderFeedback(feedback, isCorrect)}
+        <FeedbackDisplay feedback={feedback} isCorrect={isCorrect} />
         <div className="button-row">
           {!revealed && <button onClick={handleSolve} disabled={loading} style={{ background: 'transparent', border: '1px solid var(--clr-accent)', color: 'var(--clr-accent)' }}>Solve</button>}
           <button onClick={revealed ? () => advanceFnRef.current() : handleSubmit} disabled={loading || (!revealed && (!userX || !userY || (is3x3 && !userZ)))}>
@@ -64046,14 +56708,14 @@ function FuncEvalApp({ onBack, isGoalMode = false }) {
    * Endpoint: /funceval-api/question?difficulty={easy|medium|hard}
    * Returns: {formula: "2x + 3", vars: {x: 5}, answer: 13}
    */
-  
+
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
     if (typeof phase !== 'undefined' && phase === 'finished') return
-    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
-    try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
-    try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch(_) {}
+    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch (_) { }
+    try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch (_) { }
+    try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch (_) { }
     const timeTaken = timer.stop ? timer.stop() : 0
     const qPrompt = question ? (question.prompt || question.question || (question.n1 !== undefined ? `${question.n1} ${question.op || '+'} ${question.n2}` : 'Question')) : 'Question'
     try {
@@ -64068,9 +56730,9 @@ function FuncEvalApp({ onBack, isGoalMode = false }) {
         setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: corrAns, correct: false, time: timeTaken }])
       }
       if (sessionGoal === 'perfect') {
-        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch(_) {}
+        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch (_) { }
       }
-    } catch(e) {
+    } catch (e) {
       console.error('handleTimeout error:', e)
       if (typeof setResults === 'function') {
         setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: '—', correct: false, time: timeTaken }])
@@ -64078,7 +56740,7 @@ function FuncEvalApp({ onBack, isGoalMode = false }) {
     }
   }
 
-const loadQuestion = async () => {
+  const loadQuestion = async () => {
     setLoading(true)
     setAnswer('')
     setFeedback(''); setIsCorrect(null); setRevealed(false)
@@ -64113,16 +56775,16 @@ const loadQuestion = async () => {
     if (!question || revealed || !answer) return
     const timeTaken = timer.stop()
     // POST to backend to validate function evaluation
-    const res = await fetch(`${API}/funceval-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  answer: question.answer, userAnswer: Number(answer), sessionGoal }) })
+    const res = await fetch(`${API}/funceval-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({ answer: question.answer, userAnswer: Number(answer), sessionGoal }) })
     const data = await res.json()
     setIsCorrect(data.correct)
     if (data.correct) setScore(s => s + 1)
     // Format variable string for feedback (e.g., "x=2, y=3")
     const varStr = Object.entries(question.vars).map(([k, v]) => `${k}=${v}`).join(', ')
-    (() => {
+      (() => {
         const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
         if (data.correct) {
-          setFeedback(`Correct! f(${varStr}) = ${data.correctAnswer}`.slice(0,-1) + _ci + `Correct! f(${varStr}) = ${data.correctAnswer}`.slice(-1))
+          setFeedback(`Correct! f(${varStr}) = ${data.correctAnswer}`.slice(0, -1) + _ci + `Correct! f(${varStr}) = ${data.correctAnswer}`.slice(-1))
         } else if (sessionGoal === 'perfect') {
           setFeedback(`Incorrect. f(${varStr}) = ${data.correctAnswer}` + ' ❌ Perfect Solve ended.')
           setFinished(true); timer.reset()
@@ -64181,8 +56843,8 @@ const loadQuestion = async () => {
   return (
     <QuizLayout title="Functions" subtitle="Evaluate the function at the given values" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
       {!started && !finished && <div className="welcome-box">
-          <p className="welcome-text">Evaluate linear functions</p>
-          <KeyTerms topicKey="functions" />
+        <p className="welcome-text">Evaluate linear functions</p>
+        <KeyTerms topicKey="functions" />
         <div className="checkbox-group" style={{ marginBottom: '12px' }}>
           {['easy', 'medium', 'hard', 'extrahard'].map(d => (
             <label key={d} className={`checkbox-pill${!isAdaptive && difficulty === d ? ' active' : ''}`}>
@@ -64197,46 +56859,46 @@ const loadQuestion = async () => {
         </div>
 
         {isGoalMode && (
-        <>
-          <p className="welcome-text" style={{ marginTop: '14px', fontSize: '0.92rem', fontWeight: 700, marginBottom: '6px' }}>Practice Goal:</p>
-                  <div className="checkbox-group" style={{ marginBottom: '12px' }}>
-                    {[
-                                            { key: 'speed', label: '⚡ Speed Run' },
-                      { key: 'perfect', label: '🎯 Perfect Solve' },
-                      { key: 'revision', label: '🔄 Revision' }
-                    ].map(g => (
-                      <label key={g.key} className={`checkbox-pill${sessionGoal === g.key ? ' active' : ''}`}
-                        style={sessionGoal === g.key ? (
-                          g.key === 'speed' ? { background: 'rgba(255,179,0,0.18)', borderColor: '#ffb300', color: '#ffb300' } :
-                          g.key === 'perfect' ? { background: 'rgba(244,67,54,0.18)', borderColor: '#f44336', color: '#f44336' } :
-                          g.key === 'revision' ? { background: 'rgba(33,150,243,0.18)', borderColor: '#2196f3', color: '#2196f3' } : {}
-                        ) : {}}>
-                        <input type="radio" name="funcevalapp-goal" checked={sessionGoal === g.key} onChange={() => {
-                          setSessionGoal(g.key)
-                          
-                        }} />
-                        {g.label}
-                      </label>
-                    ))}
-                  </div>
-                  {isAdaptive && <p style={{ fontSize: '0.82rem', color: 'var(--clr-dim)', marginBottom: '8px' }}>Starts easy and smoothly adjusts to your level as you answer.</p>}
-                  {sessionGoal === 'speed' && (
-                    <p style={{ fontSize: '0.82rem', color: '#ffb300', marginBottom: '8px' }}>
-                      ⚡ Easy 5s · Medium 10s · Hard 15s · Extra Hard 20s · Adaptive 10s. Double coins for correct!
-                    </p>
-                  )}
-                  {sessionGoal === 'perfect' && (
-                    <p style={{ fontSize: '0.82rem', color: '#f44336', marginBottom: '8px' }}>
-                      🎯 One wrong answer ends the quiz. No timer shown. Can you go flawless?
-                    </p>
-                  )}
-                  {sessionGoal === 'revision' && (
-                    <p style={{ fontSize: '0.82rem', color: '#2196f3', marginBottom: '8px' }}>
-                      🔄 Focuses on topics you previously answered incorrectly.
-                    </p>
-                  )}
-        </>
-      )}
+          <>
+            <p className="welcome-text" style={{ marginTop: '14px', fontSize: '0.92rem', fontWeight: 700, marginBottom: '6px' }}>Practice Goal:</p>
+            <div className="checkbox-group" style={{ marginBottom: '12px' }}>
+              {[
+                { key: 'speed', label: '⚡ Speed Run' },
+                { key: 'perfect', label: '🎯 Perfect Solve' },
+                { key: 'revision', label: '🔄 Revision' }
+              ].map(g => (
+                <label key={g.key} className={`checkbox-pill${sessionGoal === g.key ? ' active' : ''}`}
+                  style={sessionGoal === g.key ? (
+                    g.key === 'speed' ? { background: 'rgba(255,179,0,0.18)', borderColor: '#ffb300', color: '#ffb300' } :
+                      g.key === 'perfect' ? { background: 'rgba(244,67,54,0.18)', borderColor: '#f44336', color: '#f44336' } :
+                        g.key === 'revision' ? { background: 'rgba(33,150,243,0.18)', borderColor: '#2196f3', color: '#2196f3' } : {}
+                  ) : {}}>
+                  <input type="radio" name="funcevalapp-goal" checked={sessionGoal === g.key} onChange={() => {
+                    setSessionGoal(g.key)
+
+                  }} />
+                  {g.label}
+                </label>
+              ))}
+            </div>
+            {isAdaptive && <p style={{ fontSize: '0.82rem', color: 'var(--clr-dim)', marginBottom: '8px' }}>Starts easy and smoothly adjusts to your level as you answer.</p>}
+            {sessionGoal === 'speed' && (
+              <p style={{ fontSize: '0.82rem', color: '#ffb300', marginBottom: '8px' }}>
+                ⚡ Easy 5s · Medium 10s · Hard 15s · Extra Hard 20s · Adaptive 10s. Double coins for correct!
+              </p>
+            )}
+            {sessionGoal === 'perfect' && (
+              <p style={{ fontSize: '0.82rem', color: '#f44336', marginBottom: '8px' }}>
+                🎯 One wrong answer ends the quiz. No timer shown. Can you go flawless?
+              </p>
+            )}
+            {sessionGoal === 'revision' && (
+              <p style={{ fontSize: '0.82rem', color: '#2196f3', marginBottom: '8px' }}>
+                🔄 Focuses on topics you previously answered incorrectly.
+              </p>
+            )}
+          </>
+        )}
         <div className="question-count-row">
           <label className="question-count-label">How many questions? (max 100)</label>
           <input className="answer-input question-count-input" type="text" value={numQuestions} onChange={e => { const v = e.target.value; if (v === '' || (/^\d+$/.test(v) && Number(v) <= 100)) setNumQuestions(v) }} />
@@ -64261,7 +56923,7 @@ const loadQuestion = async () => {
           </div>
           <NumPad value={answer} onChange={setAnswer} onSubmit={handleSubmit} disabled={revealed} />
         </>}
-        {renderFeedback(feedback, isCorrect)}
+        <FeedbackDisplay feedback={feedback} isCorrect={isCorrect} />
         <div className="button-row">
           {!revealed && <button onClick={handleSolve} disabled={loading} style={{ background: 'transparent', border: '1px solid var(--clr-accent)', color: 'var(--clr-accent)' }}>Solve</button>}
           <button onClick={revealed ? () => advanceFnRef.current() : handleSubmit} disabled={loading || (!revealed && !answer)}>
@@ -64277,8 +56939,8 @@ const loadQuestion = async () => {
         <ResultsTable results={results} />
         <button onClick={() => { setStarted(false); setFinished(false) }}>Play Again</button>
       </div>}
-    <HintModal concept={'funceval'} questionId={question?.id || 'unknown'} questionData={question} revealed={revealed} hintsUsedCount={hintsUsedCount} xpBreakdown={xpBreakdown} bonusLoading={bonusLoading} />
-</QuizLayout>
+      <HintModal concept={'funceval'} questionId={question?.id || 'unknown'} questionData={question} revealed={revealed} hintsUsedCount={hintsUsedCount} xpBreakdown={xpBreakdown} bonusLoading={bonusLoading} />
+    </QuizLayout>
   )
 }
 
@@ -64348,14 +57010,14 @@ function LineEqApp({ onBack, isGoalMode = false }) {
    * Endpoint: /lineq-api/question?difficulty={easy|medium|hard}
    * Returns: {x1, y1, x2, y2} - two points on the line
    */
-  
+
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
     if (typeof phase !== 'undefined' && phase === 'finished') return
-    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
-    try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
-    try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch(_) {}
+    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch (_) { }
+    try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch (_) { }
+    try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch (_) { }
     const timeTaken = timer.stop ? timer.stop() : 0
     const qPrompt = question ? (question.prompt || question.question || (question.n1 !== undefined ? `${question.n1} ${question.op || '+'} ${question.n2}` : 'Question')) : 'Question'
     try {
@@ -64370,9 +57032,9 @@ function LineEqApp({ onBack, isGoalMode = false }) {
         setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: corrAns, correct: false, time: timeTaken }])
       }
       if (sessionGoal === 'perfect') {
-        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch(_) {}
+        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch (_) { }
       }
-    } catch(e) {
+    } catch (e) {
       console.error('handleTimeout error:', e)
       if (typeof setResults === 'function') {
         setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: '—', correct: false, time: timeTaken }])
@@ -64380,7 +57042,7 @@ function LineEqApp({ onBack, isGoalMode = false }) {
     }
   }
 
-const loadQuestion = async () => {
+  const loadQuestion = async () => {
     setLoading(true)
     // Reset slope and intercept input fields
     setUserM(''); setUserC('')
@@ -64416,15 +57078,15 @@ const loadQuestion = async () => {
     if (!question || revealed || !userM || !userC) return
     const timeTaken = timer.stop()
     // POST to backend to validate line equation
-    const res = await fetch(`${API}/lineq-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  x1: question.x1, y1: question.y1, x2: question.x2, y2: question.y2, userM: Number(userM), userC: Number(userC), sessionGoal }) })
+    const res = await fetch(`${API}/lineq-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({ x1: question.x1, y1: question.y1, x2: question.x2, y2: question.y2, userM: Number(userM), userC: Number(userC), sessionGoal }) })
     const data = await res.json()
     setIsCorrect(data.correct)
     if (data.correct) setScore(s => s + 1)
-    // Format feedback message with correct m and c values
-    (() => {
+      // Format feedback message with correct m and c values
+      (() => {
         const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
         if (data.correct) {
-          setFeedback(`Correct! y = ${data.m}x ${data.c >= 0 ? '+' : '−'} ${Math.abs(data.c)}`.slice(0,-1) + _ci + `Correct! y = ${data.m}x ${data.c >= 0 ? '+' : '−'} ${Math.abs(data.c)}`.slice(-1))
+          setFeedback(`Correct! y = ${data.m}x ${data.c >= 0 ? '+' : '−'} ${Math.abs(data.c)}`.slice(0, -1) + _ci + `Correct! y = ${data.m}x ${data.c >= 0 ? '+' : '−'} ${Math.abs(data.c)}`.slice(-1))
         } else if (sessionGoal === 'perfect') {
           setFeedback(`Incorrect. y = ${data.m}x ${data.c >= 0 ? '+' : '−'} ${Math.abs(data.c)}` + ' ❌ Perfect Solve ended.')
           setFinished(true); timer.reset()
@@ -64487,8 +57149,8 @@ const loadQuestion = async () => {
   return (
     <QuizLayout title="Line Equation" subtitle="Find m and c in y = mx + c from two points" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
       {!started && !finished && <div className="welcome-box">
-          <p className="welcome-text">Given two points, find the slope m and intercept c.</p>
-          <KeyTerms topicKey="line-equation" />
+        <p className="welcome-text">Given two points, find the slope m and intercept c.</p>
+        <KeyTerms topicKey="line-equation" />
         <div className="checkbox-group" style={{ marginBottom: '12px' }}>
           {['easy', 'medium', 'hard', 'extrahard'].map(d => (
             <label key={d} className={`checkbox-pill${!isAdaptive && difficulty === d ? ' active' : ''}`}>
@@ -64503,46 +57165,46 @@ const loadQuestion = async () => {
         </div>
 
         {isGoalMode && (
-        <>
-          <p className="welcome-text" style={{ marginTop: '14px', fontSize: '0.92rem', fontWeight: 700, marginBottom: '6px' }}>Practice Goal:</p>
-                  <div className="checkbox-group" style={{ marginBottom: '12px' }}>
-                    {[
-                                            { key: 'speed', label: '⚡ Speed Run' },
-                      { key: 'perfect', label: '🎯 Perfect Solve' },
-                      { key: 'revision', label: '🔄 Revision' }
-                    ].map(g => (
-                      <label key={g.key} className={`checkbox-pill${sessionGoal === g.key ? ' active' : ''}`}
-                        style={sessionGoal === g.key ? (
-                          g.key === 'speed' ? { background: 'rgba(255,179,0,0.18)', borderColor: '#ffb300', color: '#ffb300' } :
-                          g.key === 'perfect' ? { background: 'rgba(244,67,54,0.18)', borderColor: '#f44336', color: '#f44336' } :
-                          g.key === 'revision' ? { background: 'rgba(33,150,243,0.18)', borderColor: '#2196f3', color: '#2196f3' } : {}
-                        ) : {}}>
-                        <input type="radio" name="lineeqapp-goal" checked={sessionGoal === g.key} onChange={() => {
-                          setSessionGoal(g.key)
-                          
-                        }} />
-                        {g.label}
-                      </label>
-                    ))}
-                  </div>
-                  {isAdaptive && <p style={{ fontSize: '0.82rem', color: 'var(--clr-dim)', marginBottom: '8px' }}>Starts easy and smoothly adjusts to your level as you answer.</p>}
-                  {sessionGoal === 'speed' && (
-                    <p style={{ fontSize: '0.82rem', color: '#ffb300', marginBottom: '8px' }}>
-                      ⚡ Easy 5s · Medium 10s · Hard 15s · Extra Hard 20s · Adaptive 10s. Double coins for correct!
-                    </p>
-                  )}
-                  {sessionGoal === 'perfect' && (
-                    <p style={{ fontSize: '0.82rem', color: '#f44336', marginBottom: '8px' }}>
-                      🎯 One wrong answer ends the quiz. No timer shown. Can you go flawless?
-                    </p>
-                  )}
-                  {sessionGoal === 'revision' && (
-                    <p style={{ fontSize: '0.82rem', color: '#2196f3', marginBottom: '8px' }}>
-                      🔄 Focuses on topics you previously answered incorrectly.
-                    </p>
-                  )}
-        </>
-      )}
+          <>
+            <p className="welcome-text" style={{ marginTop: '14px', fontSize: '0.92rem', fontWeight: 700, marginBottom: '6px' }}>Practice Goal:</p>
+            <div className="checkbox-group" style={{ marginBottom: '12px' }}>
+              {[
+                { key: 'speed', label: '⚡ Speed Run' },
+                { key: 'perfect', label: '🎯 Perfect Solve' },
+                { key: 'revision', label: '🔄 Revision' }
+              ].map(g => (
+                <label key={g.key} className={`checkbox-pill${sessionGoal === g.key ? ' active' : ''}`}
+                  style={sessionGoal === g.key ? (
+                    g.key === 'speed' ? { background: 'rgba(255,179,0,0.18)', borderColor: '#ffb300', color: '#ffb300' } :
+                      g.key === 'perfect' ? { background: 'rgba(244,67,54,0.18)', borderColor: '#f44336', color: '#f44336' } :
+                        g.key === 'revision' ? { background: 'rgba(33,150,243,0.18)', borderColor: '#2196f3', color: '#2196f3' } : {}
+                  ) : {}}>
+                  <input type="radio" name="lineeqapp-goal" checked={sessionGoal === g.key} onChange={() => {
+                    setSessionGoal(g.key)
+
+                  }} />
+                  {g.label}
+                </label>
+              ))}
+            </div>
+            {isAdaptive && <p style={{ fontSize: '0.82rem', color: 'var(--clr-dim)', marginBottom: '8px' }}>Starts easy and smoothly adjusts to your level as you answer.</p>}
+            {sessionGoal === 'speed' && (
+              <p style={{ fontSize: '0.82rem', color: '#ffb300', marginBottom: '8px' }}>
+                ⚡ Easy 5s · Medium 10s · Hard 15s · Extra Hard 20s · Adaptive 10s. Double coins for correct!
+              </p>
+            )}
+            {sessionGoal === 'perfect' && (
+              <p style={{ fontSize: '0.82rem', color: '#f44336', marginBottom: '8px' }}>
+                🎯 One wrong answer ends the quiz. No timer shown. Can you go flawless?
+              </p>
+            )}
+            {sessionGoal === 'revision' && (
+              <p style={{ fontSize: '0.82rem', color: '#2196f3', marginBottom: '8px' }}>
+                🔄 Focuses on topics you previously answered incorrectly.
+              </p>
+            )}
+          </>
+        )}
         <div className="question-count-row">
           <label className="question-count-label">How many questions? (max 100)</label>
           <input className="answer-input question-count-input" type="text" value={numQuestions} onChange={e => { const v = e.target.value; if (v === '' || (/^\d+$/.test(v) && Number(v) <= 100)) setNumQuestions(v) }} />
@@ -64568,7 +57230,7 @@ const loadQuestion = async () => {
               <input className="answer-input coeff-input" type="text" value={userC} onChange={valInput(setUserC)} disabled={revealed} onKeyDown={e => { if (e.key === 'Enter') handleSubmit() }} /></div>
           </div>
         </>}
-        {renderFeedback(feedback, isCorrect)}
+        <FeedbackDisplay feedback={feedback} isCorrect={isCorrect} />
         <div className="button-row">
           {!revealed && <button onClick={handleSolve} disabled={loading} style={{ background: 'transparent', border: '1px solid var(--clr-accent)', color: 'var(--clr-accent)' }}>Solve</button>}
           <button onClick={revealed ? () => advanceFnRef.current() : handleSubmit} disabled={loading || (!revealed && (!userM || !userC))}>
@@ -64931,13 +57593,13 @@ function CustomApp({ onBack, isGoalMode = false }) {
    *   - 'random': pick random puzzles from selected, questions appear in random order
    * Transition to 'quiz' phase and load first question
    */
-  
+
   const handleTimeout = async () => {
     if (revealed) return
     if (phase === 'finished') return
-    try { setIsCorrect(false) } catch(_) {}
-    try { setRevealed(true) } catch(_) {}
-    try { setFeedback("⏰ Time's up!") } catch(_) {}
+    try { setIsCorrect(false) } catch (_) { }
+    try { setRevealed(true) } catch (_) { }
+    try { setFeedback("⏰ Time's up!") } catch (_) { }
     const timeTaken = timer.stop ? timer.stop() : 0
     const qPrompt = question ? (question.prompt || question.question || (question.n1 !== undefined ? `${question.n1} ${question.op || '+'} ${question.n2}` : 'Question')) : 'Question'
     try {
@@ -64953,9 +57615,9 @@ function CustomApp({ onBack, isGoalMode = false }) {
         setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: corrAns, correct: false, time: timeTaken }])
       }
       if (sessionGoal === 'perfect') {
-        try { setPhase('finished'); timer.reset() } catch(_) {}
+        try { setPhase('finished'); timer.reset() } catch (_) { }
       }
-    } catch(e) {
+    } catch (e) {
       console.error('handleTimeout error:', e)
       if (typeof setResults === 'function') {
         setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: '—', correct: false, time: timeTaken }])
@@ -64963,7 +57625,7 @@ function CustomApp({ onBack, isGoalMode = false }) {
     }
   }
 
-const startQuiz = async () => {
+  const startQuiz = async () => {
     const count = numQuestions !== '' && Number(numQuestions) > 0 ? Number(numQuestions) : 20
     let questionPlan = []
     if (ordering === 'sequential') {
@@ -65057,140 +57719,140 @@ const startQuiz = async () => {
       case 'basicarith': {
         if (answer === '') return
         // POST to /basicarith-api/check: validate arithmetic answer
-        res = await fetch(`${API}/basicarith-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  a: question.a, b: question.b, op: question.op, answer: Number(answer), sessionGoal }) })
+        res = await fetch(`${API}/basicarith-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({ a: question.a, b: question.b, op: question.op, answer: Number(answer), sessionGoal }) })
         data = await res.json()
         correct = data.correct; correctDisplay = String(data.correctAnswer); userDisplay = answer;
         (() => {
-        const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
-        if (data.correct) {
-          setFeedback(`Correct! ${question.prompt} = ${data.correctAnswer}`.slice(0,-1) + _ci + `Correct! ${question.prompt} = ${data.correctAnswer}`.slice(-1))
-        } else if (sessionGoal === 'perfect') {
-          setFeedback(`Incorrect. ${question.prompt} = ${data.correctAnswer}` + ' ❌ Perfect Solve ended.')
-          setPhase('finished'); timer.reset()
-        } else {
-          setFeedback(`Incorrect. ${question.prompt} = ${data.correctAnswer}`)
-        }
-      })()
+          const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
+          if (data.correct) {
+            setFeedback(`Correct! ${question.prompt} = ${data.correctAnswer}`.slice(0, -1) + _ci + `Correct! ${question.prompt} = ${data.correctAnswer}`.slice(-1))
+          } else if (sessionGoal === 'perfect') {
+            setFeedback(`Incorrect. ${question.prompt} = ${data.correctAnswer}` + ' ❌ Perfect Solve ended.')
+            setPhase('finished'); timer.reset()
+          } else {
+            setFeedback(`Incorrect. ${question.prompt} = ${data.correctAnswer}`)
+          }
+        })()
         break
       }
       // ─────── Addition Puzzle ──────────────────────────────────
       case 'addition': {
         if (answer === '') return
         // POST to /addition-api/check: validate addition answer
-        res = await fetch(`${API}/addition-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  a: question.a, b: question.b, answer: Number(answer), sessionGoal }) })
+        res = await fetch(`${API}/addition-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({ a: question.a, b: question.b, answer: Number(answer), sessionGoal }) })
         data = await res.json()
         correct = data.correct; correctDisplay = String(data.correctAnswer); userDisplay = answer;
         (() => {
-        const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
-        if (data.correct) {
-          setFeedback(`Correct! ${question.a} + ${question.b} = ${data.correctAnswer}`.slice(0,-1) + _ci + `Correct! ${question.a} + ${question.b} = ${data.correctAnswer}`.slice(-1))
-        } else if (sessionGoal === 'perfect') {
-          setFeedback(`Incorrect. ${question.a} + ${question.b} = ${data.correctAnswer}` + ' ❌ Perfect Solve ended.')
-          setPhase('finished'); timer.reset()
-        } else {
-          setFeedback(`Incorrect. ${question.a} + ${question.b} = ${data.correctAnswer}`)
-        }
-      })()
+          const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
+          if (data.correct) {
+            setFeedback(`Correct! ${question.a} + ${question.b} = ${data.correctAnswer}`.slice(0, -1) + _ci + `Correct! ${question.a} + ${question.b} = ${data.correctAnswer}`.slice(-1))
+          } else if (sessionGoal === 'perfect') {
+            setFeedback(`Incorrect. ${question.a} + ${question.b} = ${data.correctAnswer}` + ' ❌ Perfect Solve ended.')
+            setPhase('finished'); timer.reset()
+          } else {
+            setFeedback(`Incorrect. ${question.a} + ${question.b} = ${data.correctAnswer}`)
+          }
+        })()
         break
       }
       // ─────── Quadratic Evaluation Puzzle ──────────────────────────────────
       case 'quadratic': {
         if (answer === '') return
         // POST to /quadratic-api/check: evaluate quadratic ax²+bx+c at given x
-        res = await fetch(`${API}/quadratic-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  a: question.a, b: question.b, c: question.c, x: question.x, answer: Number(answer), sessionGoal }) })
+        res = await fetch(`${API}/quadratic-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({ a: question.a, b: question.b, c: question.c, x: question.x, answer: Number(answer), sessionGoal }) })
         data = await res.json()
         correct = data.correct; correctDisplay = String(data.correctAnswer); userDisplay = answer;
         (() => {
-        const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
-        if (data.correct) {
-          setFeedback(`Correct! y = ${data.correctAnswer}`.slice(0,-1) + _ci + `Correct! y = ${data.correctAnswer}`.slice(-1))
-        } else if (sessionGoal === 'perfect') {
-          setFeedback(`Incorrect. y = ${data.correctAnswer}` + ' ❌ Perfect Solve ended.')
-          setPhase('finished'); timer.reset()
-        } else {
-          setFeedback(`Incorrect. y = ${data.correctAnswer}`)
-        }
-      })()
+          const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
+          if (data.correct) {
+            setFeedback(`Correct! y = ${data.correctAnswer}`.slice(0, -1) + _ci + `Correct! y = ${data.correctAnswer}`.slice(-1))
+          } else if (sessionGoal === 'perfect') {
+            setFeedback(`Incorrect. y = ${data.correctAnswer}` + ' ❌ Perfect Solve ended.')
+            setPhase('finished'); timer.reset()
+          } else {
+            setFeedback(`Incorrect. y = ${data.correctAnswer}`)
+          }
+        })()
         break
       }
       // ─────── Multiplication Table Puzzle ──────────────────────────────────
       case 'multiply': {
         if (answer === '') return
         // POST to /multiply-api/check: validate multiplication table answer
-        res = await fetch(`${API}/multiply-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  table: question.table, multiplier: question.multiplier, answer: Number(answer), sessionGoal }) })
+        res = await fetch(`${API}/multiply-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({ table: question.table, multiplier: question.multiplier, answer: Number(answer), sessionGoal }) })
         data = await res.json()
         correct = data.correct; correctDisplay = String(data.correctAnswer); userDisplay = answer;
         (() => {
-        const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
-        if (data.correct) {
-          setFeedback(`Correct! ${question.prompt} = ${data.correctAnswer}`.slice(0,-1) + _ci + `Correct! ${question.prompt} = ${data.correctAnswer}`.slice(-1))
-        } else if (sessionGoal === 'perfect') {
-          setFeedback(`Incorrect. ${question.prompt} = ${data.correctAnswer}` + ' ❌ Perfect Solve ended.')
-          setPhase('finished'); timer.reset()
-        } else {
-          setFeedback(`Incorrect. ${question.prompt} = ${data.correctAnswer}`)
-        }
-      })()
+          const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
+          if (data.correct) {
+            setFeedback(`Correct! ${question.prompt} = ${data.correctAnswer}`.slice(0, -1) + _ci + `Correct! ${question.prompt} = ${data.correctAnswer}`.slice(-1))
+          } else if (sessionGoal === 'perfect') {
+            setFeedback(`Incorrect. ${question.prompt} = ${data.correctAnswer}` + ' ❌ Perfect Solve ended.')
+            setPhase('finished'); timer.reset()
+          } else {
+            setFeedback(`Incorrect. ${question.prompt} = ${data.correctAnswer}`)
+          }
+        })()
         break
       }
       // ─────── Square Root Puzzle ──────────────────────────────────
       case 'sqrt': {
         if (answer === '') return
         // POST to /sqrt-api/check: validate square root floor/ceiling answer
-        res = await fetch(`${API}/sqrt-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  q: question.q, answer: Number(answer), sessionGoal }) })
+        res = await fetch(`${API}/sqrt-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({ q: question.q, answer: Number(answer), sessionGoal }) })
         data = await res.json()
         correct = data.correct; correctDisplay = `⌊${data.sqrtRounded}⌋=${data.floorAnswer} or ⌈${data.sqrtRounded}⌉=${data.ceilAnswer}`; userDisplay = answer;
         (() => {
-        const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
-        if (data.correct) {
-          setFeedback(`Correct! √${question.q} ≈ ${data.sqrtRounded}`.slice(0,-1) + _ci + `Correct! √${question.q} ≈ ${data.sqrtRounded}`.slice(-1))
-        } else if (sessionGoal === 'perfect') {
-          setFeedback(`Incorrect. √${question.q} ≈ ${data.sqrtRounded} → ${data.floorAnswer} or ${data.ceilAnswer}` + ' ❌ Perfect Solve ended.')
-          setPhase('finished'); timer.reset()
-        } else {
-          setFeedback(`Incorrect. √${question.q} ≈ ${data.sqrtRounded} → ${data.floorAnswer} or ${data.ceilAnswer}`)
-        }
-      })()
+          const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
+          if (data.correct) {
+            setFeedback(`Correct! √${question.q} ≈ ${data.sqrtRounded}`.slice(0, -1) + _ci + `Correct! √${question.q} ≈ ${data.sqrtRounded}`.slice(-1))
+          } else if (sessionGoal === 'perfect') {
+            setFeedback(`Incorrect. √${question.q} ≈ ${data.sqrtRounded} → ${data.floorAnswer} or ${data.ceilAnswer}` + ' ❌ Perfect Solve ended.')
+            setPhase('finished'); timer.reset()
+          } else {
+            setFeedback(`Incorrect. √${question.q} ≈ ${data.sqrtRounded} → ${data.floorAnswer} or ${data.ceilAnswer}`)
+          }
+        })()
         break
       }
       // ─────── Function Evaluation Puzzle ──────────────────────────────────
       case 'funceval': {
         if (answer === '') return
         // POST to /funceval-api/check: evaluate f(x,y,z,...) at given values
-        res = await fetch(`${API}/funceval-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  answer: question.answer, userAnswer: Number(answer), sessionGoal }) })
+        res = await fetch(`${API}/funceval-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({ answer: question.answer, userAnswer: Number(answer), sessionGoal }) })
         data = await res.json()
         correct = data.correct; correctDisplay = String(data.correctAnswer); userDisplay = answer;
         (() => {
-        const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
-        if (data.correct) {
-          setFeedback(`Correct! = ${data.correctAnswer}`.slice(0,-1) + _ci + `Correct! = ${data.correctAnswer}`.slice(-1))
-        } else if (sessionGoal === 'perfect') {
-          setFeedback(`Incorrect. = ${data.correctAnswer}` + ' ❌ Perfect Solve ended.')
-          setPhase('finished'); timer.reset()
-        } else {
-          setFeedback(`Incorrect. = ${data.correctAnswer}`)
-        }
-      })()
+          const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
+          if (data.correct) {
+            setFeedback(`Correct! = ${data.correctAnswer}`.slice(0, -1) + _ci + `Correct! = ${data.correctAnswer}`.slice(-1))
+          } else if (sessionGoal === 'perfect') {
+            setFeedback(`Incorrect. = ${data.correctAnswer}` + ' ❌ Perfect Solve ended.')
+            setPhase('finished'); timer.reset()
+          } else {
+            setFeedback(`Incorrect. = ${data.correctAnswer}`)
+          }
+        })()
         break
       }
       // ─────── Polynomial Multiply Puzzle ──────────────────────────────────
       case 'polymul': {
         if (userCoeffs.some(c => c === '')) return
         // POST to /polymul-api/check: validate polynomial multiplication result coefficients
-        res = await fetch(`${API}/polymul-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  p1: question.p1, p2: question.p2, userCoeffs: userCoeffs.map(Number), sessionGoal }) })
+        res = await fetch(`${API}/polymul-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({ p1: question.p1, p2: question.p2, userCoeffs: userCoeffs.map(Number), sessionGoal }) })
         data = await res.json()
         correct = data.correct; correctDisplay = data.correctDisplay; userDisplay = userCoeffs.join(', ');
         (() => {
-        const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
-        if (data.correct) {
-          setFeedback(`Correct! ${question.productDisplay}`.slice(0,-1) + _ci + `Correct! ${question.productDisplay}`.slice(-1))
-        } else if (sessionGoal === 'perfect') {
-          setFeedback(`Incorrect. Answer: ${data.correctDisplay}` + ' ❌ Perfect Solve ended.')
-          setPhase('finished'); timer.reset()
-        } else {
-          setFeedback(`Incorrect. Answer: ${data.correctDisplay}`)
-        }
-      })()
+          const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
+          if (data.correct) {
+            setFeedback(`Correct! ${question.productDisplay}`.slice(0, -1) + _ci + `Correct! ${question.productDisplay}`.slice(-1))
+          } else if (sessionGoal === 'perfect') {
+            setFeedback(`Incorrect. Answer: ${data.correctDisplay}` + ' ❌ Perfect Solve ended.')
+            setPhase('finished'); timer.reset()
+          } else {
+            setFeedback(`Incorrect. Answer: ${data.correctDisplay}`)
+          }
+        })()
         break
       }
       // ─────── Polynomial Factorization Puzzle ──────────────────────────────────
@@ -65198,7 +57860,7 @@ const startQuiz = async () => {
         const { p: up, q: uq, r: ur, s: us } = inputs
         if (!up || !uq || !ur || !us) return
         // POST to /polyfactor-api/check: validate polynomial factorization (px+q)(rx+s)
-        res = await fetch(`${API}/polyfactor-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  a: question.a, b: question.b, c: question.c, userP: Number(up), userQ: Number(uq), userR: Number(ur), userS: Number(us), sessionGoal }) })
+        res = await fetch(`${API}/polyfactor-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({ a: question.a, b: question.b, c: question.c, userP: Number(up), userQ: Number(uq), userR: Number(ur), userS: Number(us), sessionGoal }) })
         data = await res.json()
         const f = question.factors
         correct = data.correct; correctDisplay = `(${f.p}x${f.q >= 0 ? '+' : ''}${f.q})(${f.r}x${f.s >= 0 ? '+' : ''}${f.s})`; userDisplay = `(${up}x${Number(uq) >= 0 ? '+' : ''}${uq})(${ur}x${Number(us) >= 0 ? '+' : ''}${us})`
@@ -65210,20 +57872,20 @@ const startQuiz = async () => {
         const pf = (inputs.factors || '').split(/[,\s]+/).filter(Boolean).map(Number).sort((a, b) => a - b)
         if (pf.length === 0) return
         // POST to /primefactor-api/check: validate prime factorization (sorted list)
-        res = await fetch(`${API}/primefactor-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  number: question.number, userFactors: pf, sessionGoal }) })
+        res = await fetch(`${API}/primefactor-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({ number: question.number, userFactors: pf, sessionGoal }) })
         data = await res.json()
         correct = data.correct; correctDisplay = data.correctFactors.join(' × '); userDisplay = pf.join(' × ');
         (() => {
-        const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
-        if (data.correct) {
-          setFeedback(`Correct! ${question.number} = ${correctDisplay}`.slice(0,-1) + _ci + `Correct! ${question.number} = ${correctDisplay}`.slice(-1))
-        } else if (sessionGoal === 'perfect') {
-          setFeedback(`Incorrect. ${question.number} = ${correctDisplay}` + ' ❌ Perfect Solve ended.')
-          setPhase('finished'); timer.reset()
-        } else {
-          setFeedback(`Incorrect. ${question.number} = ${correctDisplay}`)
-        }
-      })()
+          const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
+          if (data.correct) {
+            setFeedback(`Correct! ${question.number} = ${correctDisplay}`.slice(0, -1) + _ci + `Correct! ${question.number} = ${correctDisplay}`.slice(-1))
+          } else if (sessionGoal === 'perfect') {
+            setFeedback(`Incorrect. ${question.number} = ${correctDisplay}` + ' ❌ Perfect Solve ended.')
+            setPhase('finished'); timer.reset()
+          } else {
+            setFeedback(`Incorrect. ${question.number} = ${correctDisplay}`)
+          }
+        })()
         break
       }
       // ─────── Quadratic Formula Puzzle ──────────────────────────────────
@@ -65232,7 +57894,7 @@ const startQuiz = async () => {
         if (question.roots.type === 'real_equal' && !r1) return
         if (question.roots.type !== 'real_equal' && (!r1 || !r2)) return
         // POST to /qformula-api/check: validate quadratic formula roots (type-dependent)
-        res = await fetch(`${API}/qformula-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  a: question.a, b: question.b, c: question.c, userR1: Number(r1), userR2: Number(r2 || 0), userType: question.roots.type, sessionGoal }) })
+        res = await fetch(`${API}/qformula-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({ a: question.a, b: question.b, c: question.c, userR1: Number(r1), userR2: Number(r2 || 0), userType: question.roots.type, sessionGoal }) })
         data = await res.json()
         correct = data.correct
         const rt = data.roots
@@ -65240,16 +57902,16 @@ const startQuiz = async () => {
         correctDisplay = rt.type === 'real_distinct' ? `r₁ = ${rt.r1}, r₂ = ${rt.r2}` : rt.type === 'real_equal' ? `r = ${rt.r1}` : `${rt.realPart} ± ${rt.imagPart}i`
         userDisplay = question.roots.type === 'real_equal' ? r1 : `${r1}, ${r2}`;
         (() => {
-        const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
-        if (data.correct) {
-          setFeedback(`Correct! ${correctDisplay}`.slice(0,-1) + _ci + `Correct! ${correctDisplay}`.slice(-1))
-        } else if (sessionGoal === 'perfect') {
-          setFeedback(`Incorrect. ${correctDisplay}` + ' ❌ Perfect Solve ended.')
-          setPhase('finished'); timer.reset()
-        } else {
-          setFeedback(`Incorrect. ${correctDisplay}`)
-        }
-      })()
+          const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
+          if (data.correct) {
+            setFeedback(`Correct! ${correctDisplay}`.slice(0, -1) + _ci + `Correct! ${correctDisplay}`.slice(-1))
+          } else if (sessionGoal === 'perfect') {
+            setFeedback(`Incorrect. ${correctDisplay}` + ' ❌ Perfect Solve ended.')
+            setPhase('finished'); timer.reset()
+          } else {
+            setFeedback(`Incorrect. ${correctDisplay}`)
+          }
+        })()
         break
       }
       // ─────── Simultaneous Equations Puzzle ──────────────────────────────────
@@ -65267,16 +57929,16 @@ const startQuiz = async () => {
         correctDisplay = question.size === 3 ? `(${s.x}, ${s.y}, ${s.z})` : `(${s.x}, ${s.y})`
         userDisplay = question.size === 3 ? `(${ux}, ${uy}, ${uz})` : `(${ux}, ${uy})`;
         (() => {
-        const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
-        if (data.correct) {
-          setFeedback(`Correct! ${correctDisplay}`.slice(0,-1) + _ci + `Correct! ${correctDisplay}`.slice(-1))
-        } else if (sessionGoal === 'perfect') {
-          setFeedback(`Incorrect. ${correctDisplay}` + ' ❌ Perfect Solve ended.')
-          setPhase('finished'); timer.reset()
-        } else {
-          setFeedback(`Incorrect. ${correctDisplay}`)
-        }
-      })()
+          const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
+          if (data.correct) {
+            setFeedback(`Correct! ${correctDisplay}`.slice(0, -1) + _ci + `Correct! ${correctDisplay}`.slice(-1))
+          } else if (sessionGoal === 'perfect') {
+            setFeedback(`Incorrect. ${correctDisplay}` + ' ❌ Perfect Solve ended.')
+            setPhase('finished'); timer.reset()
+          } else {
+            setFeedback(`Incorrect. ${correctDisplay}`)
+          }
+        })()
         break
       }
       // ─────── Line Equation Puzzle ──────────────────────────────────
@@ -65284,20 +57946,20 @@ const startQuiz = async () => {
         const { m, c } = inputs
         if (!m || !c) return
         // POST to /lineq-api/check: validate line equation y=mx+c from two points
-        res = await fetch(`${API}/lineq-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  x1: question.x1, y1: question.y1, x2: question.x2, y2: question.y2, userM: Number(m), userC: Number(c), sessionGoal }) })
+        res = await fetch(`${API}/lineq-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({ x1: question.x1, y1: question.y1, x2: question.x2, y2: question.y2, userM: Number(m), userC: Number(c), sessionGoal }) })
         data = await res.json()
         correct = data.correct; correctDisplay = `m = ${data.m}, c = ${data.c}`; userDisplay = `m = ${m}, c = ${c}`;
         (() => {
-        const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
-        if (data.correct) {
-          setFeedback(`Correct! ${correctDisplay}`.slice(0,-1) + _ci + `Correct! ${correctDisplay}`.slice(-1))
-        } else if (sessionGoal === 'perfect') {
-          setFeedback(`Incorrect. ${correctDisplay}` + ' ❌ Perfect Solve ended.')
-          setPhase('finished'); timer.reset()
-        } else {
-          setFeedback(`Incorrect. ${correctDisplay}`)
-        }
-      })()
+          const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
+          if (data.correct) {
+            setFeedback(`Correct! ${correctDisplay}`.slice(0, -1) + _ci + `Correct! ${correctDisplay}`.slice(-1))
+          } else if (sessionGoal === 'perfect') {
+            setFeedback(`Incorrect. ${correctDisplay}` + ' ❌ Perfect Solve ended.')
+            setPhase('finished'); timer.reset()
+          } else {
+            setFeedback(`Incorrect. ${correctDisplay}`)
+          }
+        })()
         break
       }
       // ─────── Fraction Addition Puzzle ──────────────────────────────────
@@ -65321,16 +57983,16 @@ const startQuiz = async () => {
         data = await res.json()
         correct = data.correct; correctDisplay = data.display; userDisplay = answer;
         (() => {
-        const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
-        if (data.correct) {
-          setFeedback(`Correct! = ${data.display}`.slice(0,-1) + _ci + `Correct! = ${data.display}`.slice(-1))
-        } else if (sessionGoal === 'perfect') {
-          setFeedback(`Incorrect. = ${data.display}` + ' ❌ Perfect Solve ended.')
-          setPhase('finished'); timer.reset()
-        } else {
-          setFeedback(`Incorrect. = ${data.display}`)
-        }
-      })()
+          const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
+          if (data.correct) {
+            setFeedback(`Correct! = ${data.display}`.slice(0, -1) + _ci + `Correct! = ${data.display}`.slice(-1))
+          } else if (sessionGoal === 'perfect') {
+            setFeedback(`Incorrect. = ${data.display}` + ' ❌ Perfect Solve ended.')
+            setPhase('finished'); timer.reset()
+          } else {
+            setFeedback(`Incorrect. = ${data.display}`)
+          }
+        })()
         break
       }
       // ─────── Surds Puzzle ──────────────────────────────────
@@ -65342,16 +58004,16 @@ const startQuiz = async () => {
         data = await res.json()
         correct = data.correct; correctDisplay = data.display; userDisplay = surdAnswer;
         (() => {
-        const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
-        if (data.correct) {
-          setFeedback(`Correct! = ${data.display}`.slice(0,-1) + _ci + `Correct! = ${data.display}`.slice(-1))
-        } else if (sessionGoal === 'perfect') {
-          setFeedback(`Incorrect. = ${data.display}` + ' ❌ Perfect Solve ended.')
-          setPhase('finished'); timer.reset()
-        } else {
-          setFeedback(`Incorrect. = ${data.display}`)
-        }
-      })()
+          const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
+          if (data.correct) {
+            setFeedback(`Correct! = ${data.display}`.slice(0, -1) + _ci + `Correct! = ${data.display}`.slice(-1))
+          } else if (sessionGoal === 'perfect') {
+            setFeedback(`Incorrect. = ${data.display}` + ' ❌ Perfect Solve ended.')
+            setPhase('finished'); timer.reset()
+          } else {
+            setFeedback(`Incorrect. = ${data.display}`)
+          }
+        })()
         break
       }
       // ─────── Indices Puzzle ──────────────────────────────────
@@ -65362,16 +58024,16 @@ const startQuiz = async () => {
         data = await res.json()
         correct = data.correct; correctDisplay = data.display; userDisplay = answer.trim();
         (() => {
-        const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
-        if (data.correct) {
-          setFeedback(`Correct! = ${data.display}`.slice(0,-1) + _ci + `Correct! = ${data.display}`.slice(-1))
-        } else if (sessionGoal === 'perfect') {
-          setFeedback(`Incorrect. = ${data.display}` + ' ❌ Perfect Solve ended.')
-          setPhase('finished'); timer.reset()
-        } else {
-          setFeedback(`Incorrect. = ${data.display}`)
-        }
-      })()
+          const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
+          if (data.correct) {
+            setFeedback(`Correct! = ${data.display}`.slice(0, -1) + _ci + `Correct! = ${data.display}`.slice(-1))
+          } else if (sessionGoal === 'perfect') {
+            setFeedback(`Incorrect. = ${data.display}` + ' ❌ Perfect Solve ended.')
+            setPhase('finished'); timer.reset()
+          } else {
+            setFeedback(`Incorrect. = ${data.display}`)
+          }
+        })()
         break
       }
       // ─────── Sequences & Series ──────────────────────────────────
@@ -65382,16 +58044,16 @@ const startQuiz = async () => {
         data = await res.json()
         correct = data.correct; correctDisplay = data.display; userDisplay = answer.trim();
         (() => {
-        const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
-        if (data.correct) {
-          setFeedback(`Correct! ${data.display}`.slice(0,-1) + _ci + `Correct! ${data.display}`.slice(-1))
-        } else if (sessionGoal === 'perfect') {
-          setFeedback(`Incorrect. Answer: ${data.display}` + ' ❌ Perfect Solve ended.')
-          setPhase('finished'); timer.reset()
-        } else {
-          setFeedback(`Incorrect. Answer: ${data.display}`)
-        }
-      })()
+          const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
+          if (data.correct) {
+            setFeedback(`Correct! ${data.display}`.slice(0, -1) + _ci + `Correct! ${data.display}`.slice(-1))
+          } else if (sessionGoal === 'perfect') {
+            setFeedback(`Incorrect. Answer: ${data.display}` + ' ❌ Perfect Solve ended.')
+            setPhase('finished'); timer.reset()
+          } else {
+            setFeedback(`Incorrect. Answer: ${data.display}`)
+          }
+        })()
         break
       }
       // ─────── Ratio & Proportion ──────────────────────────────────
@@ -65402,16 +58064,16 @@ const startQuiz = async () => {
         data = await res.json()
         correct = data.correct; correctDisplay = data.display; userDisplay = answer.trim();
         (() => {
-        const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
-        if (data.correct) {
-          setFeedback(`Correct! ${data.display}`.slice(0,-1) + _ci + `Correct! ${data.display}`.slice(-1))
-        } else if (sessionGoal === 'perfect') {
-          setFeedback(`Incorrect. Answer: ${data.display}` + ' ❌ Perfect Solve ended.')
-          setPhase('finished'); timer.reset()
-        } else {
-          setFeedback(`Incorrect. Answer: ${data.display}`)
-        }
-      })()
+          const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
+          if (data.correct) {
+            setFeedback(`Correct! ${data.display}`.slice(0, -1) + _ci + `Correct! ${data.display}`.slice(-1))
+          } else if (sessionGoal === 'perfect') {
+            setFeedback(`Incorrect. Answer: ${data.display}` + ' ❌ Perfect Solve ended.')
+            setPhase('finished'); timer.reset()
+          } else {
+            setFeedback(`Incorrect. Answer: ${data.display}`)
+          }
+        })()
         break
       }
       // ─────── Percentages ──────────────────────────────────
@@ -65422,16 +58084,16 @@ const startQuiz = async () => {
         data = await res.json()
         correct = data.correct; correctDisplay = data.display; userDisplay = answer.trim();
         (() => {
-        const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
-        if (data.correct) {
-          setFeedback(`Correct! ${data.display}`.slice(0,-1) + _ci + `Correct! ${data.display}`.slice(-1))
-        } else if (sessionGoal === 'perfect') {
-          setFeedback(`Incorrect. Answer: ${data.display}` + ' ❌ Perfect Solve ended.')
-          setPhase('finished'); timer.reset()
-        } else {
-          setFeedback(`Incorrect. Answer: ${data.display}`)
-        }
-      })()
+          const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
+          if (data.correct) {
+            setFeedback(`Correct! ${data.display}`.slice(0, -1) + _ci + `Correct! ${data.display}`.slice(-1))
+          } else if (sessionGoal === 'perfect') {
+            setFeedback(`Incorrect. Answer: ${data.display}` + ' ❌ Perfect Solve ended.')
+            setPhase('finished'); timer.reset()
+          } else {
+            setFeedback(`Incorrect. Answer: ${data.display}`)
+          }
+        })()
         break
       }
       // ─────── Sets ──────────────────────────────────
@@ -65442,16 +58104,16 @@ const startQuiz = async () => {
         data = await res.json()
         correct = data.correct; correctDisplay = data.display; userDisplay = answer.trim();
         (() => {
-        const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
-        if (data.correct) {
-          setFeedback(`Correct! ${data.display}`.slice(0,-1) + _ci + `Correct! ${data.display}`.slice(-1))
-        } else if (sessionGoal === 'perfect') {
-          setFeedback(`Incorrect. Answer: ${data.display}` + ' ❌ Perfect Solve ended.')
-          setPhase('finished'); timer.reset()
-        } else {
-          setFeedback(`Incorrect. Answer: ${data.display}`)
-        }
-      })()
+          const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
+          if (data.correct) {
+            setFeedback(`Correct! ${data.display}`.slice(0, -1) + _ci + `Correct! ${data.display}`.slice(-1))
+          } else if (sessionGoal === 'perfect') {
+            setFeedback(`Incorrect. Answer: ${data.display}` + ' ❌ Perfect Solve ended.')
+            setPhase('finished'); timer.reset()
+          } else {
+            setFeedback(`Incorrect. Answer: ${data.display}`)
+          }
+        })()
         break
       }
       // ─────── Generic API puzzles ──────────────────────────────────
@@ -65471,16 +58133,16 @@ const startQuiz = async () => {
         data = await res.json()
         correct = data.correct; correctDisplay = data.display; userDisplay = answer.trim();
         (() => {
-        const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
-        if (data.correct) {
-          setFeedback(`Correct! ${data.display}`.slice(0,-1) + _ci + `Correct! ${data.display}`.slice(-1))
-        } else if (sessionGoal === 'perfect') {
-          setFeedback(`Incorrect. Answer: ${data.display}` + ' ❌ Perfect Solve ended.')
-          setPhase('finished'); timer.reset()
-        } else {
-          setFeedback(`Incorrect. Answer: ${data.display}`)
-        }
-      })()
+          const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
+          if (data.correct) {
+            setFeedback(`Correct! ${data.display}`.slice(0, -1) + _ci + `Correct! ${data.display}`.slice(-1))
+          } else if (sessionGoal === 'perfect') {
+            setFeedback(`Incorrect. Answer: ${data.display}` + ' ❌ Perfect Solve ended.')
+            setPhase('finished'); timer.reset()
+          } else {
+            setFeedback(`Incorrect. Answer: ${data.display}`)
+          }
+        })()
         break
       }
       // ─────── Multiple Choice Puzzles (GK, Vocab) ──────────────────────────────────
@@ -65493,16 +58155,16 @@ const startQuiz = async () => {
         data = await res.json()
         correct = data.correct; correctDisplay = `${data.correctAnswer}: ${data.correctAnswerText}`; userDisplay = optionToUse;
         (() => {
-        const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
-        if (data.correct) {
-          setFeedback(`Correct! ${data.correctAnswerText}`.slice(0,-1) + _ci + `Correct! ${data.correctAnswerText}`.slice(-1))
-        } else if (sessionGoal === 'perfect') {
-          setFeedback(`Incorrect. ${data.correctAnswerText}` + ' ❌ Perfect Solve ended.')
-          setPhase('finished'); timer.reset()
-        } else {
-          setFeedback(`Incorrect. ${data.correctAnswerText}`)
-        }
-      })()
+          const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
+          if (data.correct) {
+            setFeedback(`Correct! ${data.correctAnswerText}`.slice(0, -1) + _ci + `Correct! ${data.correctAnswerText}`.slice(-1))
+          } else if (sessionGoal === 'perfect') {
+            setFeedback(`Incorrect. ${data.correctAnswerText}` + ' ❌ Perfect Solve ended.')
+            setPhase('finished'); timer.reset()
+          } else {
+            setFeedback(`Incorrect. ${data.correctAnswerText}`)
+          }
+        })()
         break
       }
       default: return
@@ -65815,43 +58477,43 @@ const startQuiz = async () => {
         </>}
 
         {isGoalMode && (
-        <>
-          <p className="welcome-text" style={{ marginTop: '14px', fontSize: '0.92rem', fontWeight: 700, marginBottom: '6px' }}>Practice Goal:</p>
-                  <div className="checkbox-group" style={{ marginBottom: '8px' }}>
-                    {[
-                                            { key: 'speed',    label: '⚡ Speed Run' },
-                      { key: 'perfect',  label: '🎯 Perfect Solve' },
-                      { key: 'revision', label: '🔄 Revision' },
-                    ].map(g => (
-                      <label key={g.key} className={`checkbox-pill${sessionGoal === g.key ? ' active' : ''}`}
-                        style={sessionGoal === g.key ? (
-                          g.key === 'speed'    ? { background: 'rgba(255,179,0,0.18)',  borderColor: '#ffb300', color: '#ffb300' } :
-                          g.key === 'perfect'  ? { background: 'rgba(244,67,54,0.18)',  borderColor: '#f44336', color: '#f44336' } :
-                          g.key === 'revision' ? { background: 'rgba(33,150,243,0.18)', borderColor: '#2196f3', color: '#2196f3' } : {}
-                        ) : {}}>
-                        <input type="radio" name="customapp-goal" checked={sessionGoal === g.key}
-                          onChange={() => setSessionGoal(g.key)} />
-                        {g.label}
-                      </label>
-                    ))}
-                  </div>
-                  {sessionGoal === 'speed' && (
-                    <p style={{ fontSize: '0.82rem', color: '#ffb300', marginBottom: '8px' }}>
-                      ⚡ Easy 5s · Medium 10s · Hard 15s · Extra Hard 20s · Adaptive 10s. Double coins for correct!
-                    </p>
-                  )}
-                  {sessionGoal === 'perfect' && (
-                    <p style={{ fontSize: '0.82rem', color: '#f44336', marginBottom: '8px' }}>
-                      🎯 One wrong answer ends the quiz. No timer shown. Can you go flawless?
-                    </p>
-                  )}
-                  {sessionGoal === 'revision' && (
-                    <p style={{ fontSize: '0.82rem', color: '#2196f3', marginBottom: '8px' }}>
-                      🔄 Focuses on topics you previously answered incorrectly.
-                    </p>
-                  )}
-        </>
-      )}
+          <>
+            <p className="welcome-text" style={{ marginTop: '14px', fontSize: '0.92rem', fontWeight: 700, marginBottom: '6px' }}>Practice Goal:</p>
+            <div className="checkbox-group" style={{ marginBottom: '8px' }}>
+              {[
+                { key: 'speed', label: '⚡ Speed Run' },
+                { key: 'perfect', label: '🎯 Perfect Solve' },
+                { key: 'revision', label: '🔄 Revision' },
+              ].map(g => (
+                <label key={g.key} className={`checkbox-pill${sessionGoal === g.key ? ' active' : ''}`}
+                  style={sessionGoal === g.key ? (
+                    g.key === 'speed' ? { background: 'rgba(255,179,0,0.18)', borderColor: '#ffb300', color: '#ffb300' } :
+                      g.key === 'perfect' ? { background: 'rgba(244,67,54,0.18)', borderColor: '#f44336', color: '#f44336' } :
+                        g.key === 'revision' ? { background: 'rgba(33,150,243,0.18)', borderColor: '#2196f3', color: '#2196f3' } : {}
+                  ) : {}}>
+                  <input type="radio" name="customapp-goal" checked={sessionGoal === g.key}
+                    onChange={() => setSessionGoal(g.key)} />
+                  {g.label}
+                </label>
+              ))}
+            </div>
+            {sessionGoal === 'speed' && (
+              <p style={{ fontSize: '0.82rem', color: '#ffb300', marginBottom: '8px' }}>
+                ⚡ Easy 5s · Medium 10s · Hard 15s · Extra Hard 20s · Adaptive 10s. Double coins for correct!
+              </p>
+            )}
+            {sessionGoal === 'perfect' && (
+              <p style={{ fontSize: '0.82rem', color: '#f44336', marginBottom: '8px' }}>
+                🎯 One wrong answer ends the quiz. No timer shown. Can you go flawless?
+              </p>
+            )}
+            {sessionGoal === 'revision' && (
+              <p style={{ fontSize: '0.82rem', color: '#2196f3', marginBottom: '8px' }}>
+                🔄 Focuses on topics you previously answered incorrectly.
+              </p>
+            )}
+          </>
+        )}
 
         <div className="question-count-row">
           <label className="question-count-label">How many questions? (max 100)</label>
@@ -65875,7 +58537,7 @@ const startQuiz = async () => {
         <div className="progress-pill center">Question {qIndex + 1}/{totalQ}</div>
         {renderQuestion()}
         {renderInputs()}
-        {renderFeedback(feedback, isCorrect)}
+        <FeedbackDisplay feedback={feedback} isCorrect={isCorrect} />
         <div className="button-row">
           {!revealed && <button onClick={handleSolve} disabled={loading} style={{ background: 'transparent', border: '1px solid var(--clr-accent)', color: 'var(--clr-accent)' }}>Solve</button>}
           <button onClick={revealed ? () => advanceRef.current() : handleSubmit} disabled={loading}>
@@ -67440,7 +60102,7 @@ function Tatsavit1App({ onBack, isGoalMode = false }) {
             : `✗ Correct answer: ${String.fromCharCode(65 + q.correctIndex)}) ${q.options[q.correctIndex]}`}
         </div>
       )}
-      {showSolve && renderFeedback(q.explanation, false)}
+      {showSolve && <FeedbackDisplay feedback={q.explanation} isCorrect={false} />}
       <div className="button-row" style={{ marginTop: 16 }}>
         {!revealed
           ? <button onClick={handleSubmit} disabled={selected === null}>Submit</button>
@@ -68402,7 +61064,7 @@ function RiyaApp({ onBack, isGoalMode = false }) {
           </div>
         )
       })()}
-      {showSolve && renderFeedback(q.explanation, false)}
+      {showSolve && <FeedbackDisplay feedback={q.explanation} isCorrect={false} />}
       <div className="button-row" style={{ marginTop: 16 }}>
         <button onClick={handleBack} disabled={quizIdx === 0}
           style={{
@@ -68896,1706 +61558,6 @@ function TatsavitLineApp({ onBack, isGoalMode = false }) {
   )
 }
 
-// The Vachana Literary Lab is now imported from its own directory to avoid bloating App.jsx.
-
-/**
- * QuizLayout Component
- * Wrapper layout for quiz apps (PolyFactorApp, PrimeFactorApp, QFormulaApp, etc.)
- * Provides consistent header with back button and title section
- * All quiz content is rendered via children prop
- *
- * @param {Object} props
- * @param {string} props.title - Main heading (e.g., "Prime Factors")
- * @param {string} props.subtitle - Subtitle/description
- * @param {Function} props.onBack - Callback when back button is clicked
- * @param {React.ReactNode} props.children - Quiz content to display
- */
-export function QuizLayout({ title, subtitle, onBack, children, timer, sessionGoal }) {
-  // Derive display values from the timer object
-  const isSpeed   = timer && (timer.mode === 'speed'   || sessionGoal === 'speed')
-  const isPerfect = sessionGoal === 'perfect'
-
-  // For speed mode: show remaining seconds with urgency colouring
-  const timerDisplay = (() => {
-    if (!timer) return null
-    if (isPerfect) return null // hide timer entirely for perfect solve
-    if (isSpeed) {
-      const left = timer.remaining ?? 0
-      const urgent = left <= 3
-      const warn   = left <= 5 && !urgent
-      const color  = urgent ? '#f44336' : warn ? '#ff9800' : '#4caf50'
-      return (
-        <div className="timer-pill" style={{
-          background: urgent ? 'rgba(244,67,54,0.15)' : warn ? 'rgba(255,152,0,0.15)' : undefined,
-          borderColor: color, color,
-          fontWeight: 700,
-          fontSize: '1rem',
-          minWidth: 56,
-          textAlign: 'center',
-          transition: 'color 0.3s, background 0.3s',
-          animation: urgent ? 'timerPulse 0.5s ease-in-out infinite alternate' : 'none',
-        }}>
-          ⚡ {left}s
-        </div>
-      )
-    }
-    // Standard / revision — count-up
-    return <div className="timer-pill">{timer.elapsed}s</div>
-  })()
-
-  // Goal mode badge
-  const goalBadge = (() => {
-    if (!sessionGoal || sessionGoal === 'standard') return null
-    const cfg = {
-      speed:    { label: '⚡ Speed Run',     bg: 'rgba(255,179,0,0.18)', border: '#ffb300', color: '#ffb300' },
-      perfect:  { label: '🎯 Perfect Solve', bg: 'rgba(244,67,54,0.18)', border: '#f44336', color: '#f44336' },
-      revision: { label: '🔄 Revision',      bg: 'rgba(33,150,243,0.18)', border: '#2196f3', color: '#2196f3' },
-    }[sessionGoal]
-    if (!cfg) return null
-    return (
-      <div style={{
-        display: 'inline-flex', alignItems: 'center', gap: 4,
-        padding: '2px 10px', borderRadius: 20, fontSize: '0.78rem', fontWeight: 600,
-        background: cfg.bg, border: `1.5px solid ${cfg.border}`, color: cfg.color,
-      }}>
-        {cfg.label}
-      </div>
-    )
-  })()
-
-  // Dynamically intercept children if finished and goal mode is active
-  const sessionGoalActive = sessionGoal && sessionGoal !== 'standard';
-  const processedChildren = React.Children.map(children, child => {
-    if (sessionGoalActive) {
-      return enhanceFinishedScreen(child, sessionGoal);
-    }
-    return child;
-  });
-
-  return (
-    <>
-      <div className="header-row">
-        <button className="back-button" onClick={onBack}>← Home</button>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          {goalBadge}
-          {timerDisplay}
-        </div>
-      </div>
-      <h1 style={{ fontSize: 'clamp(1.8rem, 3.8vw, 2.4rem)' }}>{title}</h1>
-      {subtitle && <p className="subtitle">{subtitle}</p>}
-      {processedChildren}
-      <QuizLayoutExtension children={children} />
-    </>
-  )
-}
-
-// ─── Learning Journey Core Components ───────────────────────────────────────
-
-const journeyFetch = async (path, options = {}) => {
-  const token = authGetToken();
-  const headers = {
-    'Content-Type': 'application/json',
-    ...options.headers,
-  };
-  if (token) {
-    headers['Authorization'] = `Bearer ${token}`;
-  }
-  const res = await fetch(`${API}${path}`, {
-    ...options,
-    headers,
-  });
-  if (!res.ok) {
-    const err = await res.json().catch(() => ({ error: 'Request failed' }));
-    throw new Error(err.error || `Request failed (HTTP ${res.status})`);
-  }
-  return res.json();
-};
-
-function LearningJourneyHome({ onSelectTopic, onBack }) {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
-
-  const loadProgress = async () => {
-    try {
-      setLoading(true);
-      const res = await journeyFetch('/api/learning-journey/progress');
-      setData(res);
-      setError('');
-    } catch (err) {
-      setError(err.message || 'Failed to load progress');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    loadProgress();
-  }, []);
-
-  if (loading) return <div style={{ textAlign: 'center', padding: '40px' }}><p>Loading your journey...</p></div>;
-  if (error) return <div style={{ textAlign: 'center', padding: '40px', color: 'red' }}><p>{error}</p><button onClick={loadProgress} className="submit-btn" style={{ width: 'auto' }}>Retry</button></div>;
-  if (!data) return null;
-
-  return (
-    <div style={{ padding: '16px' }}>
-      <div className="header-row" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
-        <button className="back-button" onClick={onBack}>← Main Menu</button>
-        <span style={{ fontSize: '1.25rem', fontWeight: 'bold', color: 'var(--clr-accent)' }}>⭐ Learning Journey</span>
-      </div>
-
-      <div style={{ background: 'var(--clr-hover-strong, rgba(255,255,255,0.03))', padding: '20px', borderRadius: '12px', border: '1px solid var(--clr-border)', marginBottom: '24px' }}>
-        <h3 style={{ marginTop: 0, marginBottom: '8px' }}>Overall Progress</h3>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-          <div style={{ flex: 1, height: '12px', background: 'var(--clr-border, #444)', borderRadius: '6px', overflow: 'hidden' }}>
-            <div style={{ width: `${data.overallProgressPercent}%`, height: '100%', background: 'linear-gradient(90deg, #ff7e5f, #feb47b)', borderRadius: '6px', transition: 'width 0.5s ease-in-out' }} />
-          </div>
-          <span style={{ fontWeight: 'bold', fontSize: '1.1rem' }}>{data.overallProgressPercent}% Completed</span>
-        </div>
-        <p style={{ margin: '8px 0 0 0', fontSize: '0.85rem', color: 'var(--clr-text-soft)' }}>
-          Completed {data.completedConcepts.length} concepts across {data.completedTopics.length} topics.
-        </p>
-      </div>
-
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '20px' }}>
-        {data.topics.map((t, idx) => {
-          if (!t) return null;
-          const completedCount = t.concepts.filter(c => c.state === 'completed').length;
-          const totalConcepts = t.concepts.length;
-
-          return (
-            <div
-              key={t.topicId}
-              style={{
-                position: 'relative',
-                background: 'var(--clr-surface, #1c1c1f)',
-                border: t.completed
-                  ? '1.5px solid var(--clr-correct, #26de81)'
-                  : (t.unlocked ? '1.5px solid var(--clr-accent, #feb47b)' : '1px solid var(--clr-border, #444)'),
-                borderRadius: '12px',
-                padding: '20px',
-                opacity: t.unlocked ? 1 : 0.5,
-                cursor: t.unlocked ? 'pointer' : 'not-allowed',
-                boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
-                transition: 'transform 0.2s, box-shadow 0.2s'
-              }}
-              onClick={() => {
-                if (t.unlocked) onSelectTopic(t.topicId);
-              }}
-              onMouseEnter={e => {
-                if (t.unlocked) {
-                  e.currentTarget.style.transform = 'translateY(-3px)';
-                  e.currentTarget.style.boxShadow = '0 6px 16px rgba(0,0,0,0.25)';
-                }
-              }}
-              onMouseLeave={e => {
-                e.currentTarget.style.transform = 'none';
-                e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
-              }}
-            >
-              {!t.unlocked && (
-                <div style={{ position: 'absolute', top: '16px', right: '16px', fontSize: '1.2rem' }}>🔒</div>
-              )}
-              {t.completed && (
-                <div style={{ position: 'absolute', top: '16px', right: '16px', color: 'var(--clr-correct, #26de81)', fontSize: '1.25rem', fontWeight: 'bold' }}>✓</div>
-              )}
-              <span style={{ fontSize: '0.8rem', color: 'var(--clr-accent)', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 'bold' }}>
-                Topic {idx + 1}
-              </span>
-              <h3 style={{ marginTop: '4px', marginBottom: '8px' }}>{t.topicId.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')}</h3>
-              
-              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', color: 'var(--clr-text-soft)', marginBottom: '12px' }}>
-                <span>Concepts</span>
-                <span>{completedCount} / {totalConcepts}</span>
-              </div>
-
-              {t.unlocked && (
-                <div style={{ marginTop: '16px', fontSize: '0.85rem' }}>
-                  {t.completed ? (
-                    <span style={{ color: 'var(--clr-correct, #26de81)', fontWeight: 'bold' }}>Checkpoint Cleared ({t.latestScore}%)</span>
-                  ) : t.checkpointEligible ? (
-                    <span style={{ color: 'orange', fontWeight: 'bold' }}>Checkpoint Ready</span>
-                  ) : (
-                    <span style={{ color: 'var(--clr-text-soft)' }}>Progressing ({Math.round((completedCount/totalConcepts)*100)}%)</span>
-                  )}
-                </div>
-              )}
-            </div>
-          );
-        })}
-      </div>
-    </div>
-  );
-}
-
-function LearningJourneyTopicView({ topicId, onPlayConcept, onStartCheckpoint, onBack }) {
-  const [progression, setProgression] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
-
-  const loadProgression = async () => {
-    try {
-      setLoading(true);
-      const res = await journeyFetch('/api/learning-journey/progress');
-      const topicProg = res.topics.find(t => t && t.topicId === topicId);
-      if (!topicProg) throw new Error('Topic progression not found');
-      setProgression(topicProg);
-      setError('');
-    } catch (err) {
-      setError(err.message || 'Failed to load progression');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    loadProgression();
-  }, [topicId]);
-
-  if (loading) return <div style={{ textAlign: 'center', padding: '40px' }}><p>Loading topic concepts...</p></div>;
-  if (error) return <div style={{ textAlign: 'center', padding: '40px', color: 'red' }}><p>{error}</p><button onClick={loadProgression} className="submit-btn" style={{ width: 'auto' }}>Retry</button></div>;
-  if (!progression) return null;
-
-  const displayName = topicId.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
-
-  return (
-    <div style={{ padding: '16px' }}>
-      <div className="header-row" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
-        <button className="back-button" onClick={onBack}>← Back to Journey</button>
-        <span style={{ fontWeight: 'bold', color: 'var(--clr-accent)' }}>Topic Path</span>
-      </div>
-
-      <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-        <h2 style={{ margin: 0 }}>{displayName}</h2>
-        <p className="subtitle">Complete each concept sequentially to unlock the Checkpoint gate.</p>
-      </div>
-
-      {/* Timeline Layout */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', maxWidth: '500px', margin: '0 auto', position: 'relative' }}>
-        {progression.concepts.map((concept, index) => {
-          const isCompleted = concept.state === 'completed';
-          const isNeedsRevision = concept.state === 'needs_revision';
-          const isPlayable = concept.state === 'playable' || isNeedsRevision;
-          const isLocked = concept.state === 'locked';
-
-          return (
-            <div key={concept.key} style={{ display: 'flex', gap: '16px', alignItems: 'center', position: 'relative' }}>
-              {/* Connector line */}
-              {index < progression.concepts.length - 1 && (
-                <div style={{
-                  position: 'absolute',
-                  left: '20px',
-                  top: '40px',
-                  width: '2px',
-                  height: 'calc(100% - 20px)',
-                  background: isCompleted || isNeedsRevision ? 'var(--clr-correct, #26de81)' : 'var(--clr-border, #444)',
-                  zIndex: 1
-                }} />
-              )}
-              {/* Circle Icon */}
-              <div style={{
-                width: '42px',
-                height: '42px',
-                borderRadius: '50%',
-                background: isCompleted
-                  ? 'var(--clr-correct, #26de81)'
-                  : (isNeedsRevision ? '#ff9f43' : (isPlayable ? 'var(--clr-accent, #feb47b)' : 'var(--clr-surface, #2c2c2f)')),
-                border: '2px solid ' + (isPlayable || isNeedsRevision ? '#fff' : 'var(--clr-border)'),
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontWeight: 'bold',
-                color: isCompleted || isNeedsRevision || isPlayable ? '#000' : 'var(--clr-text-soft)',
-                zIndex: 2,
-                fontSize: '1.1rem'
-              }}>
-                {isCompleted ? '✓' : (isNeedsRevision ? '↻' : (isLocked ? '🔒' : index + 1))}
-              </div>
-
-              {/* Card content */}
-              <div
-                style={{
-                  flex: 1,
-                  background: isNeedsRevision
-                    ? 'rgba(255, 159, 67, 0.08)'
-                    : (isPlayable ? 'var(--clr-hover-strong, rgba(255,255,255,0.06))' : 'var(--clr-surface, #1c1c1f)'),
-                  border: isNeedsRevision
-                    ? '1.5px dashed #ff9f43'
-                    : (isPlayable ? '1.5px solid var(--clr-accent)' : '1px solid var(--clr-border)'),
-                  borderRadius: '10px',
-                  padding: '12px 18px',
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  opacity: isLocked ? 0.6 : 1,
-                  cursor: isLocked ? 'not-allowed' : 'pointer',
-                  transition: 'background var(--transition)'
-                }}
-                onClick={() => {
-                  if (!isLocked) onPlayConcept(concept.key);
-                }}
-              >
-                <div>
-                  <h4 style={{ margin: 0, fontSize: '1.05rem' }}>{concept.name}</h4>
-                  <span style={{ fontSize: '0.78rem', color: isNeedsRevision ? '#ff9f43' : 'var(--clr-text-soft)' }}>
-                    {isNeedsRevision
-                      ? '⚠️ Revision Required'
-                      : (isCompleted ? 'Completed (Click to revise)' : (isPlayable ? 'Playable Now' : 'Locked'))}
-                  </span>
-                </div>
-                {!isLocked && (
-                  <span style={{ fontSize: '1.1rem', color: isNeedsRevision ? '#ff9f43' : (isPlayable ? 'var(--clr-accent)' : 'var(--clr-text-soft)') }}>▶</span>
-                )}
-              </div>
-            </div>
-          );
-        })}
-
-        {/* Checkpoint Gate node */}
-        <div style={{ display: 'flex', gap: '16px', alignItems: 'center', marginTop: '20px' }}>
-          <div style={{
-            width: '42px',
-            height: '42px',
-            borderRadius: '50%',
-            background: progression.completed
-              ? 'var(--clr-correct, #26de81)'
-              : (progression.checkpointEligible ? 'orange' : 'var(--clr-surface, #2c2c2f)'),
-            border: '2px solid var(--clr-border)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: progression.completed || progression.checkpointEligible ? '#000' : 'var(--clr-text-soft)',
-            zIndex: 2,
-            fontSize: '1.2rem',
-            fontWeight: 'bold'
-          }}>
-            🏁
-          </div>
-
-          <div
-            style={{
-              flex: 1,
-              background: 'var(--clr-surface, #1d1d20)',
-              border: progression.completed
-                ? '2px solid var(--clr-correct, #26de81)'
-                : (progression.checkpointEligible ? '2px solid orange' : '1px solid var(--clr-border)'),
-              borderRadius: '12px',
-              padding: '20px',
-              textAlign: 'center',
-              boxShadow: '0 4px 14px rgba(0,0,0,0.1)'
-            }}
-          >
-            <h4 style={{ margin: '0 0 8px 0', fontSize: '1.1rem' }}>Topic Checkpoint Quiz</h4>
-            <p style={{ margin: '0 0 16px 0', fontSize: '0.85rem', color: 'var(--clr-text-soft)' }}>
-              15 cumulative questions. Score 80%+ to clear the topic and unlock successor topics.
-            </p>
-
-            {progression.completed ? (
-              <div style={{ color: 'var(--clr-correct, #26de81)', fontWeight: 'bold', fontSize: '1.05rem' }}>
-                ✓ Cleared (Score: {progression.latestScore}%)
-              </div>
-            ) : progression.checkpointEligible ? (
-              <div>
-                {progression.latestScore !== null && (
-                  <div style={{ color: 'red', fontSize: '0.85rem', fontWeight: 'bold', marginBottom: '8px' }}>
-                    Failed Previous Attempt: {progression.latestScore}% (Required: 80%)
-                  </div>
-                )}
-                <button
-                  className="submit-btn"
-                  onClick={onStartCheckpoint}
-                  style={{ width: 'auto', padding: '10px 24px', background: 'orange', borderColor: 'orange', color: '#000', fontWeight: 'bold' }}
-                >
-                  Start Checkpoint Quiz
-                </button>
-              </div>
-            ) : (
-              <div style={{ fontSize: '0.85rem', color: 'var(--clr-text-soft)', fontStyle: 'italic' }}>
-                🔒 Locked (Complete all concepts above to unlock)
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function LearningJourneyCheckpointQuizView({ topicId, onBack }) {
-  const [quiz, setQuiz] = useState(null);
-  const [currentIdx, setCurrentIdx] = useState(0);
-  const [answers, setAnswers] = useState({});
-  const [result, setResult] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [submitting, setSubmitting] = useState(false);
-  const [error, setError] = useState('');
-  const celebrationRef = useRef(null);
-
-  const loadQuiz = async () => {
-    try {
-      setLoading(true);
-      const res = await journeyFetch(`/api/learning-journey/checkpoint/quiz?topicId=${topicId}`);
-      setQuiz(res);
-      setError('');
-      setAnswers({});
-      setResult(null);
-      setCurrentIdx(0);
-    } catch (err) {
-      setError(err.message || 'Failed to load quiz');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    loadQuiz();
-  }, [topicId]);
-
-  useEffect(() => {
-    if (!result || !result.passed || !celebrationRef.current) return;
-    const canvas = celebrationRef.current;
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    const colors = ['#ff6b6b', '#feca57', '#48dbfb', '#ff9ff3', '#54a0ff', '#5f27cd', '#01a3a4', '#f368e0', '#ff9f43', '#00d2d3'];
-    const confetti = Array.from({ length: 150 }, () => ({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height - canvas.height,
-      w: Math.random() * 12 + 6,
-      h: Math.random() * 8 + 4,
-      color: colors[Math.floor(Math.random() * colors.length)],
-      vx: (Math.random() - 0.5) * 4,
-      vy: Math.random() * 3 + 2,
-      rot: Math.random() * 360,
-      rotSpeed: (Math.random() - 0.5) * 10
-    }));
-    let frame;
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      let allDone = true;
-      confetti.forEach(c => {
-        c.x += c.vx;
-        c.y += c.vy;
-        c.rot += c.rotSpeed;
-        c.vy += 0.05;
-        if (c.y < canvas.height + 50) allDone = false;
-        ctx.save();
-        ctx.translate(c.x, c.y);
-        ctx.rotate((c.rot * Math.PI) / 180);
-        ctx.fillStyle = c.color;
-        ctx.fillRect(-c.w / 2, -c.h / 2, c.w, c.h);
-        ctx.restore();
-      });
-      if (!allDone) frame = requestAnimationFrame(animate);
-    };
-    animate();
-    return () => { if (frame) cancelAnimationFrame(frame); };
-  }, [result]);
-
-  const handleSelectAnswer = (ansVal) => {
-    const qId = quiz.questions[currentIdx].id;
-    setAnswers(prev => ({ ...prev, [qId]: ansVal }));
-  };
-
-  const handleSubmit = async () => {
-    try {
-      setSubmitting(true);
-      const res = await journeyFetch('/api/learning-journey/checkpoint/verify', {
-        method: 'POST',
-        body: JSON.stringify({ topicId, answers })
-      });
-      setResult(res);
-    } catch (err) {
-      alert(err.message || 'Verification failed');
-    } finally {
-      setSubmitting(false);
-    }
-  };
-
-  if (loading) return <div style={{ textAlign: 'center', padding: '40px' }}><p>Generating your checkpoint questions...</p></div>;
-  if (error) return <div style={{ textAlign: 'center', padding: '40px', color: 'red' }}><p>{error}</p><button onClick={loadQuiz} className="submit-btn" style={{ width: 'auto' }}>Retry</button></div>;
-  if (!quiz) return null;
-
-  const displayName = topicId.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
-
-  // Show grading results screen
-  if (result) {
-    return (
-      <div style={{ padding: '16px' }}>
-        {result.passed && (
-          <canvas
-            ref={celebrationRef}
-            style={{
-              position: 'fixed',
-              top: 0,
-              left: 0,
-              width: '100vw',
-              height: '100vh',
-              pointerEvents: 'none',
-              zIndex: 9999
-            }}
-          />
-        )}
-        <div style={{ textAlign: 'center', marginBottom: '24px' }}>
-          <h2 style={{ color: result.passed ? 'var(--clr-correct, #26de81)' : 'var(--clr-wrong, #eb5e55)' }}>
-            {result.passed ? '🎉 Checkpoint Passed!' : "Oh no, it's okay"}
-          </h2>
-          <h1 style={{ margin: '8px 0', fontSize: '3rem' }}>{result.scorePercent}%</h1>
-          <p className="subtitle">
-            Answered {result.correctCount} of {result.totalQuestions} questions correctly.
-          </p>
-          {!result.passed && (
-            <div style={{
-              marginTop: '16px',
-              padding: '12px 20px',
-              borderRadius: '8px',
-              background: 'var(--clr-wrong-light, rgba(235, 94, 85, 0.1))',
-              border: '1px solid var(--clr-wrong, #eb5e55)',
-              color: 'var(--clr-text)',
-              display: 'inline-block',
-              fontSize: '0.95rem',
-              maxWidth: '450px',
-              lineHeight: '1.5'
-            }}>
-              💡 <strong>Revise back old concepts and try again.</strong> You need 80% (12/15) to pass.
-            </div>
-          )}
-          {result.passed && (
-            <p className="subtitle" style={{ color: 'var(--clr-correct, #26de81)', marginTop: '8px' }}>
-              The next topic has been unlocked.
-            </p>
-          )}
-        </div>
-
-        <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', marginBottom: '32px' }}>
-          {result.passed ? (
-            <button onClick={onBack} className="submit-btn" style={{ width: 'auto', padding: '10px 24px' }}>
-              Continue Journey
-            </button>
-          ) : (
-            <>
-              <button onClick={loadQuiz} className="submit-btn" style={{ width: 'auto', padding: '10px 24px' }}>
-                Retry Checkpoint
-              </button>
-              <button onClick={onBack} className="submit-btn" style={{ width: 'auto', padding: '10px 24px', background: 'transparent', color: 'var(--clr-text)', border: '1px solid var(--clr-border)' }}>
-                Back to Concepts
-              </button>
-            </>
-          )}
-        </div>
-
-        <h3 style={{ borderBottom: '1px solid var(--clr-border)', paddingBottom: '8px', marginBottom: '16px' }}>Review Questions</h3>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-          {result.results.map((q, idx) => (
-            <div
-              key={q.id}
-              style={{
-                background: 'var(--clr-surface, #1c1c1f)',
-                border: '1px solid ' + (q.isCorrect ? 'var(--clr-correct, #26de81)' : 'red'),
-                borderRadius: '8px',
-                padding: '16px',
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center'
-              }}
-            >
-              <div>
-                <span style={{ fontSize: '0.85rem', color: 'var(--clr-accent)', fontWeight: 'bold' }}>Q{idx + 1}</span>
-                <p style={{ margin: '4px 0 0 0', fontWeight: 'bold' }}>{q.prompt}</p>
-                <div style={{ marginTop: '8px', fontSize: '0.9rem', display: 'flex', gap: '20px' }}>
-                  <span>Your answer: <strong style={{ color: q.isCorrect ? 'var(--clr-correct)' : 'red' }}>{q.userAnswer || '(blank)'}</strong></span>
-                  {!q.isCorrect && <span>Correct answer: <strong style={{ color: 'var(--clr-correct)' }}>{q.correctAnswer}</strong></span>}
-                </div>
-              </div>
-              <div style={{ fontSize: '1.5rem', color: q.isCorrect ? 'var(--clr-correct)' : 'red' }}>
-                {q.isCorrect ? '✓' : '✗'}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    );
-  }
-
-  const currentQ = quiz.questions[currentIdx];
-  const currentAnswerVal = answers[currentQ.id] || '';
-
-  return (
-    <div style={{ padding: '16px' }}>
-      <div className="header-row" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
-        <button className="back-button" onClick={onBack}>← Quit Checkpoint</button>
-        <span style={{ fontSize: '0.95rem', color: 'orange', fontWeight: 'bold' }}>🏁 {displayName} Checkpoint</span>
-      </div>
-
-      {/* Progress display */}
-      <div style={{ display: 'flex', justifyContent: 'center', gap: '6px', marginBottom: '20px' }}>
-        {quiz.questions.map((_, idx) => {
-          let dotColor = 'var(--clr-border, #444)';
-          if (idx === currentIdx) dotColor = 'orange';
-          else if (answers[quiz.questions[idx].id] !== undefined) dotColor = 'var(--clr-accent, #feb47b)';
-
-          return (
-            <div
-              key={idx}
-              style={{
-                width: '10px',
-                height: '10px',
-                borderRadius: '50%',
-                background: dotColor,
-                transition: 'background 0.2s'
-              }}
-            />
-          );
-        })}
-      </div>
-
-      <div style={{ textAlign: 'center', marginBottom: '24px' }}>
-        <span style={{ fontSize: '0.85rem', color: 'var(--clr-text-soft)', textTransform: 'uppercase', fontWeight: 'bold' }}>
-          Question {currentIdx + 1} of 15
-        </span>
-        <h2 style={{ marginTop: '8px', minHeight: '60px' }}>{currentQ.prompt}</h2>
-      </div>
-
-      <div style={{ maxWidth: '360px', margin: '0 auto 32px auto' }}>
-        <input
-          type="text"
-          value={currentAnswerVal}
-          onChange={(e) => handleSelectAnswer(e.target.value)}
-          placeholder="Type your answer here..."
-          autoFocus
-          style={{
-            width: '100%',
-            padding: '12px 16px',
-            fontSize: '1.2rem',
-            textAlign: 'center',
-            background: 'var(--clr-surface, #1c1c1f)',
-            border: '1.5px solid var(--clr-border)',
-            borderRadius: '8px',
-            color: 'var(--clr-text)',
-            outline: 'none',
-            fontFamily: 'monospace'
-          }}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter') {
-              if (currentIdx < 14) setCurrentIdx(currentIdx + 1);
-              else handleSubmit();
-            }
-          }}
-        />
-      </div>
-
-      <div style={{ display: 'flex', justifyContent: 'space-between', maxWidth: '360px', margin: '0 auto' }}>
-        <button
-          onClick={() => setCurrentIdx(prev => Math.max(0, prev - 1))}
-          disabled={currentIdx === 0}
-          className="back-button"
-          style={{ padding: '10px 20px', border: '1px solid var(--clr-border)', borderRadius: '6px', cursor: currentIdx === 0 ? 'not-allowed' : 'pointer' }}
-        >
-          ← Prev
-        </button>
-
-        {currentIdx < 14 ? (
-          <button
-            onClick={() => setCurrentIdx(prev => prev + 1)}
-            className="submit-btn"
-            style={{ width: 'auto', padding: '10px 24px' }}
-          >
-            Next →
-          </button>
-        ) : (
-          <button
-            onClick={handleSubmit}
-            disabled={submitting}
-            className="submit-btn"
-            style={{ width: 'auto', padding: '10px 24px', background: 'orange', borderColor: 'orange', color: '#000', fontWeight: 'bold' }}
-          >
-            {submitting ? 'Submitting...' : 'Finish Checkpoint'}
-          </button>
-        )}
-      </div>
-    </div>
-  );
-}
-
-// ─────────────────────────────────────────────────────────────────────────────
-// ProgressTrackerApp — Gym Quiz History Visualization
-// ─────────────────────────────────────────────────────────────────────────────
-function ProgressTrackerApp({ onBack }) {
-  const [selectedGym, setSelectedGym] = useState(SUPPORTED_GYMS[0])
-  const [page, setPage] = useState(0)
-  const [selectedPoint, setSelectedPoint] = useState(null)
-  const [allHistory, setAllHistory] = useState([])
-
-  useEffect(() => { setAllHistory(loadHistory()) }, [])
-
-  const gymRecords = useMemo(
-    () => allHistory.filter(r => r.gymName === selectedGym),
-    [allHistory, selectedGym]
-  )
-
-  const sortedRecords = useMemo(
-    () => [...gymRecords].sort((a, b) => new Date(b.date) - new Date(a.date)),
-    [gymRecords]
-  )
-
-  const totalSessions = gymRecords.length
-  const avgAccuracy = totalSessions > 0
-    ? parseFloat((gymRecords.reduce((s, r) => s + r.accuracy, 0) / totalSessions).toFixed(1))
-    : 0
-  const bestAccuracy = totalSessions > 0
-    ? parseFloat(Math.max(...gymRecords.map(r => r.accuracy)).toFixed(1))
-    : 0
-  const avgSpeed = totalSessions > 0
-    ? parseFloat((gymRecords.reduce((s, r) => s + (r.correctAnswers * 60) / r.timeTakenSeconds, 0) / totalSessions).toFixed(1))
-    : 0
-
-  const accelData = gymRecords
-    .slice()
-    .reverse()
-    .map((r, i) => ({ session: i + 1, accuracy: r.accuracy, record: r }))
-  const speedData = gymRecords
-    .slice()
-    .reverse()
-    .map((r, i) => {
-      const spd = r.timeTakenSeconds > 0 ? parseFloat(((r.correctAnswers * 60) / r.timeTakenSeconds).toFixed(1)) : 0
-      return { session: i + 1, speed: spd, record: r }
-    })
-
-  const yPadding = (min, max) => {
-    const range = max - min
-    return Math.max(1, range * 0.15)
-  }
-  const accelDomain = accelData.length > 0
-    ? [Math.max(0, Math.min(...accelData.map(d => d.accuracy)) - yPadding(Math.min(...accelData.map(d => d.accuracy)), Math.max(...accelData.map(d => d.accuracy)))),
-       Math.min(100, Math.max(...accelData.map(d => d.accuracy)) + yPadding(Math.min(...accelData.map(d => d.accuracy)), Math.max(...accelData.map(d => d.accuracy))))]
-    : [0, 100]
-  const speedMin = speedData.length > 0 ? Math.min(...speedData.map(d => d.speed)) : 0
-  const speedMax = speedData.length > 0 ? Math.max(...speedData.map(d => d.speed)) : 5
-  const speedDomain = [Math.max(0, speedMin - yPadding(speedMin, speedMax)), speedMax + yPadding(speedMin, speedMax)]
-
-  const makeChartOptions = (yLabel, ySuffix, yMin, yMax) => ({
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: { display: false },
-      tooltip: {
-        backgroundColor: 'var(--clr-surface)',
-        titleColor: 'var(--clr-text)',
-        bodyColor: 'var(--clr-text)',
-        borderColor: 'var(--clr-border)',
-        borderWidth: 1,
-        padding: 10,
-        displayColors: false,
-        callbacks: {
-          label: context => {
-            const value = context.parsed.y
-            return ySuffix ? `${value}${ySuffix}` : `${value}`
-          }
-        }
-      }
-    },
-    interaction: {
-      mode: 'index',
-      intersect: false
-    },
-    scales: {
-      x: {
-        title: { display: true, text: 'Session Number', color: 'var(--clr-dim)' },
-        ticks: { color: 'var(--clr-dim)', font: { size: 13 } },
-        grid: { color: 'rgba(0, 0, 0, 0.08)' }
-      },
-      y: {
-        min: yMin,
-        max: yMax,
-        title: { display: true, text: yLabel, color: 'var(--clr-dim)' },
-        ticks: { color: 'var(--clr-dim)', font: { size: 13 }, callback: v => ySuffix ? `${v}${ySuffix}` : `${v}` },
-        grid: { color: 'rgba(0, 0, 0, 0.08)' }
-      }
-    }
-  })
-
-  const accuracyChartData = {
-    labels: accelData.map(d => d.session),
-    datasets: [{
-      label: 'Accuracy (%)',
-      data: accelData.map(d => d.accuracy),
-      borderColor: '#4caf50',
-      backgroundColor: 'rgba(76, 175, 80, 0.2)',
-      pointRadius: 4,
-      pointHoverRadius: 6,
-      tension: 0.4,
-      fill: false
-    }]
-  }
-
-  const speedChartData = {
-    labels: speedData.map(d => d.session),
-    datasets: [{
-      label: 'Correct answers/min',
-      data: speedData.map(d => d.speed),
-      borderColor: '#2196f3',
-      backgroundColor: 'rgba(33, 150, 243, 0.2)',
-      pointRadius: 4,
-      pointHoverRadius: 6,
-      tension: 0.4,
-      fill: false
-    }]
-  }
-
-  const accuracyChartOptions = makeChartOptions('Accuracy (%)', '%', accelDomain[0], accelDomain[1])
-  const speedChartOptions = makeChartOptions('Correct answers/min', '', speedDomain[0], speedDomain[1])
-
-  const PAGE_SIZE = 20
-  const paginated = sortedRecords.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE)
-
-  const formatDate = (iso) => {
-    const d = new Date(iso)
-    const dd = String(d.getDate()).padStart(2, '0')
-    const mo = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][d.getMonth()]
-    const yy = d.getFullYear()
-    const hh = String(d.getHours()).padStart(2, '0')
-    const mm = String(d.getMinutes()).padStart(2, '0')
-    return `${dd}-${mo}-${yy} ${hh}:${mm}`
-  }
-
-  return (
-    <>
-      <div className="header-row">
-        <button className="back-button" onClick={onBack}>← Home</button>
-      </div>
-      <h1>Track Progress</h1>
-
-      <div style={{ marginBottom: 20 }}>
-        <label style={{ display: 'block', fontWeight: 600, marginBottom: 6 }}>Select Gym to Plot</label>
-        <select
-          value={selectedGym}
-          onChange={e => { setSelectedGym(e.target.value); setPage(0); setSelectedPoint(null) }}
-          style={{ width: '100%', padding: '8px 12px', borderRadius: 6, background: 'var(--clr-surface)', color: 'var(--clr-text)', border: '1px solid var(--clr-border)', fontSize: '0.95rem' }}
-        >
-          {SUPPORTED_GYMS.map(g => <option key={g} value={g}>{g}</option>)}
-        </select>
-      </div>
-
-      {totalSessions === 0 ? (
-        <div style={{ textAlign: 'center', padding: '3rem 1rem', color: 'var(--clr-dim)' }}>
-          <div style={{ fontSize: '1.1rem', marginBottom: 8 }}>No progress history available for this Gym yet.</div>
-          <div>Complete a quiz to start tracking progress.</div>
-        </div>
-      ) : (
-        <>
-          {/* Summary Stats */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: 12, marginBottom: 24 }}>
-            <div style={{ background: 'var(--clr-card)', border: '1px solid var(--clr-border)', borderRadius: 8, padding: '14px 16px', textAlign: 'center' }}>
-              <div style={{ fontSize: '0.8rem', color: 'var(--clr-dim)', marginBottom: 4 }}>Total Sessions</div>
-              <div style={{ fontSize: '1.5rem', fontWeight: 700 }}>{totalSessions}</div>
-            </div>
-            <div style={{ background: 'var(--clr-card)', border: '1px solid var(--clr-border)', borderRadius: 8, padding: '14px 16px', textAlign: 'center' }}>
-              <div style={{ fontSize: '0.8rem', color: 'var(--clr-dim)', marginBottom: 4 }}>Average Accuracy</div>
-              <div style={{ fontSize: '1.5rem', fontWeight: 700 }}>{avgAccuracy}%</div>
-            </div>
-            <div style={{ background: 'var(--clr-card)', border: '1px solid var(--clr-border)', borderRadius: 8, padding: '14px 16px', textAlign: 'center' }}>
-              <div style={{ fontSize: '0.8rem', color: 'var(--clr-dim)', marginBottom: 4 }}>Best Accuracy</div>
-              <div style={{ fontSize: '1.5rem', fontWeight: 700 }}>{bestAccuracy}%</div>
-            </div>
-            <div style={{ background: 'var(--clr-card)', border: '1px solid var(--clr-border)', borderRadius: 8, padding: '14px 16px', textAlign: 'center' }}>
-              <div style={{ fontSize: '0.8rem', color: 'var(--clr-dim)', marginBottom: 4 }}>Avg Speed</div>
-              <div style={{ fontSize: '1.5rem', fontWeight: 700 }}>{avgSpeed}/min</div>
-            </div>
-          </div>
-
-          {/* Accuracy Graph */}
-          <div style={{ background: 'var(--clr-card)', border: '1px solid var(--clr-border)', borderRadius: 10, padding: '16px', marginBottom: 16 }}>
-            <div style={{ fontSize: '1.05rem', fontWeight: 600, marginBottom: 12 }}>Accuracy vs Session Number</div>
-            <div style={{ width: '100%', height: 220 }}>
-              <Line data={accuracyChartData} options={accuracyChartOptions} />
-            </div>
-          </div>
-
-          {/* Speed Graph */}
-          <div style={{ background: 'var(--clr-card)', border: '1px solid var(--clr-border)', borderRadius: 10, padding: '16px', marginBottom: 16 }}>
-            <div style={{ fontSize: '1.05rem', fontWeight: 600, marginBottom: 12 }}>Speed vs Session Number</div>
-            <div style={{ width: '100%', height: 220 }}>
-              <Line data={speedChartData} options={speedChartOptions} />
-            </div>
-          </div>
-
-          {/* Session Table */}
-          <div style={{ overflowX: 'auto' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.88rem' }}>
-              <thead>
-                <tr style={{ background: 'var(--clr-card)', borderBottom: '2px solid var(--clr-border)' }}>
-                  <th style={{ padding: '8px 10px', textAlign: 'left', color: 'var(--clr-dim)' }}>Date</th>
-                  <th style={{ padding: '8px 10px', textAlign: 'center', color: 'var(--clr-dim)' }}>Easy</th>
-                  <th style={{ padding: '8px 10px', textAlign: 'center', color: 'var(--clr-dim)' }}>Medium</th>
-                  <th style={{ padding: '8px 10px', textAlign: 'center', color: 'var(--clr-dim)' }}>Hard</th>
-                  <th style={{ padding: '8px 10px', textAlign: 'center', color: 'var(--clr-dim)' }}>Total</th>
-                  <th style={{ padding: '8px 10px', textAlign: 'center', color: 'var(--clr-dim)' }}>Correct</th>
-                  <th style={{ padding: '8px 10px', textAlign: 'center', color: 'var(--clr-dim)' }}>Accuracy</th>
-                  <th style={{ padding: '8px 10px', textAlign: 'center', color: 'var(--clr-dim)' }}>Correct/min</th>
-                </tr>
-              </thead>
-              <tbody>
-                {paginated.map(r => {
-                  const spd = r.timeTakenSeconds > 0 ? parseFloat(((r.correctAnswers * 60) / r.timeTakenSeconds).toFixed(1)) : 0
-                  return (
-                    <tr key={r.id}
-                      onClick={() => setSelectedPoint({ record: r, session: sortedRecords.indexOf(r) + 1 })}
-                      style={{ borderBottom: '1px solid var(--clr-border)', cursor: 'pointer' }}>
-                      <td style={{ padding: '8px 10px' }}>{formatDate(r.date)}</td>
-                      <td style={{ padding: '8px 10px', textAlign: 'center' }}>{r.questionSummary?.easy || 0}</td>
-                      <td style={{ padding: '8px 10px', textAlign: 'center' }}>{r.questionSummary?.medium || 0}</td>
-                      <td style={{ padding: '8px 10px', textAlign: 'center' }}>{r.questionSummary?.hard || 0}</td>
-                      <td style={{ padding: '8px 10px', textAlign: 'center' }}>{r.totalQuestions}</td>
-                      <td style={{ padding: '8px 10px', textAlign: 'center' }}>{r.correctAnswers}</td>
-                      <td style={{ padding: '8px 10px', textAlign: 'center', fontWeight: 600, color: r.accuracy >= 80 ? '#4caf50' : r.accuracy >= 50 ? '#ff9800' : '#f44336' }}>{r.accuracy}%</td>
-                      <td style={{ padding: '8px 10px', textAlign: 'center' }}>{spd}</td>
-                    </tr>
-                  )
-                })}
-              </tbody>
-            </table>
-          </div>
-
-          {/* Pagination */}
-          {totalSessions > PAGE_SIZE && (
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 16, marginTop: 16 }}>
-              <button
-                onClick={() => setPage(p => Math.max(0, p - 1))}
-                disabled={page === 0}
-                style={{ padding: '6px 16px', borderRadius: 6, background: 'var(--clr-card)', border: '1px solid var(--clr-border)', color: 'var(--clr-text)', cursor: page === 0 ? 'not-allowed' : 'pointer', opacity: page === 0 ? 0.4 : 1 }}
-              >
-                Previous
-              </button>
-              <span style={{ color: 'var(--clr-dim)', fontSize: '0.9rem' }}>
-                Page {page + 1} of {Math.ceil(totalSessions / PAGE_SIZE)}
-              </span>
-              <button
-                onClick={() => setPage(p => Math.min(Math.ceil(totalSessions / PAGE_SIZE) - 1, p + 1))}
-                disabled={page >= Math.ceil(totalSessions / PAGE_SIZE) - 1}
-                style={{ padding: '6px 16px', borderRadius: 6, background: 'var(--clr-card)', border: '1px solid var(--clr-border)', color: 'var(--clr-text)', cursor: page >= Math.ceil(totalSessions / PAGE_SIZE) - 1 ? 'not-allowed' : 'pointer', opacity: page >= Math.ceil(totalSessions / PAGE_SIZE) - 1 ? 0.4 : 1 }}
-              >
-                Next
-              </button>
-            </div>
-          )}
-        </>
-      )}
-    </>
-  )
-}
-
-// Export main App component (entry point)
-
-
-// Named export so main.jsx can render the global hamburger menu next to <App />
-
-function GenericLabApp({ title, subtitle, endpoint, onBack, renderQuestionCustom, customGenerate, initialDifficulty, initialNumQuestions, initialStarted }) {
-  const [difficulty, setDifficulty] = useState(initialDifficulty || 'easy');
-  const [numQuestions, setNumQuestions] = useState(initialNumQuestions || '5');
-  const [started, setStarted] = useState(initialStarted || false);
-  const [finished, setFinished] = useState(false);
-  const [question, setQuestion] = useState(null);
-  const [answer, setAnswer] = useState('');
-  const [score, setScore] = useState(0);
-  const [questionNumber, setQuestionNumber] = useState(0);
-  const [totalQ, setTotalQ] = useState(5);
-  const [feedback, setFeedback] = useState('');
-  const [isCorrect, setIsCorrect] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [revealed, setRevealed] = useState(false);
-  const [results, setResults] = useState([]);
-  const timer = useTimer();
-  // Guard ref: prevents double-fetch from React StrictMode concurrent effect invocations
-  const fetchingRef = useRef(false);
-  // Prefetch cache: holds the next question already fetched silently in background
-  const prefetchRef = useRef(null);
-
-  const fetchQuestion = async () => {
-    if (fetchingRef.current) return;
-    fetchingRef.current = true;
-    if (questionNumber >= totalQ) {
-      fetchingRef.current = false;
-      setFinished(true);
-      timer.reset();
-      return;
-    }
-    setLoading(true);
-    setFeedback('');
-    setAnswer('');
-    setRevealed(false);
-    setIsCorrect(null);
-
-    // Use prefetched question if available for instant load, otherwise fetch now
-    let data = prefetchRef.current;
-    prefetchRef.current = null;
-    if (!data) {
-      data = customGenerate
-        ? await customGenerate()
-        : await (await fetch(`${API}${endpoint}/generate?difficulty=${difficulty}`)).json();
-    }
-    setQuestion(data);
-    setQuestionNumber(n => n + 1);
-    setLoading(false);
-    fetchingRef.current = false;
-    timer.start();
-    // Silently prefetch the next question in background while user answers
-    const doFetch = customGenerate
-      ? customGenerate
-      : () => fetch(`${API}${endpoint}/generate?difficulty=${difficulty}`).then(r => r.json());
-    doFetch().then(next => { if (next) prefetchRef.current = next; }).catch(() => { });
-  };
-
-  const startQuiz = () => {
-    setTotalQ(Number(numQuestions) || 5);
-    setStarted(true);
-    setFinished(false);
-    setScore(0);
-    setQuestionNumber(0);
-    setResults([]);
-    fetchingRef.current = false;
-    prefetchRef.current = null;
-    // Will trigger fetchQuestion via useEffect
-  };
-
-  useEffect(() => {
-    if (started && !finished && questionNumber === 0) {
-      fetchQuestion();
-    }
-  }, [started, finished, questionNumber]);
-
-  const submitAns = async (optAns) => {
-    if (!question || revealed) return;
-    const finalAns = optAns !== undefined ? optAns : answer;
-    const timeTaken = timer.stop();
-    setAnswer(finalAns);
-
-    const res = await fetch(`${API}${endpoint}/check`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ answerOption: finalAns, expected: question.answer })
-    });
-    const data = await res.json();
-
-    setIsCorrect(data.correct);
-    if (data.correct) setScore(s => s + 1);
-
-    const explanationText = question.hint ? ` (${question.hint})` : '';
-    setFeedback(data.correct
-      ? `Correct! The answer is ${data.correctAnswer}.${explanationText}`
-      : `Incorrect. The correct answer is ${data.correctAnswer}.${explanationText}`
-    );
-
-    setResults(prev => [...prev, {
-      question: question.prompt,
-      userAnswer: finalAns,
-      correctAnswer: data.correctAnswer,
-      correct: data.correct,
-      time: timeTaken
-    }]);
-    setRevealed(true);
-  };
-
-  const handleSolve = async () => {
-    if (revealed) return;
-    const timeTaken = timer.stop();
-    const res = await fetch(`${API}${endpoint}/check`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ answerOption: '', expected: question.answer, solve: true })
-    });
-    const data = await res.json();
-    setIsCorrect(false);
-    const explanationText = question.hint ? ` (${question.hint})` : '';
-    setFeedback(`Solution: ${data.correctAnswer}.${explanationText}`);
-    setResults(prev => [...prev, {
-      question: question.prompt,
-      userAnswer: '—',
-      correctAnswer: data.correctAnswer,
-      correct: false,
-      time: timeTaken
-    }]);
-    setRevealed(true);
-  };
-
-  const handleSubmitOrNext = () => {
-    if (!revealed) {
-      if (answer || question.options) submitAns();
-    } else {
-      fetchQuestion();
-    }
-  };
-
-  const advanceRef = useRef(() => { });
-  advanceRef.current = () => fetchQuestion();
-  useAutoAdvance(revealed, advanceRef, isCorrect);
-  useProgressSubmit(revealed, isCorrect, endpoint.split('/')[1], question?.id);
-
-  const C = {
-    bg: '#1A1A1A',
-    card: 'rgb(44, 38, 34)',
-    text: '#FFFFFF',
-    muted: '#A0A0A0',
-    orange: '#F97316',
-    orange2: '#EA580C',
-    border: '#333333'
-  };
-  const FONT = "'Nunito', sans-serif";
-
-  // Reusable Floating Background for the Dark Theme Start Screen
-  const BG_SYMS = ['×', '÷', '+', '=', '%', 'π', '√', '∑', '3', '5', '9'];
-  const itemsRef = useRef(Array.from({ length: 16 }, (_, i) => ({
-    id: i, sym: BG_SYMS[i % BG_SYMS.length],
-    x: Math.random() * 100, y: Math.random() * 100,
-    size: 11 + Math.random() * 18, delay: Math.random() * 8, dur: 12 + Math.random() * 10,
-  })));
-
-  if (!started && !finished) {
-    return (
-      <div style={{ minHeight: '100vh', background: '#181512', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px', fontFamily: 'Inter, sans-serif' }}>
-        <div style={{
-          background: '#2D2520', border: '1.5px solid #4A4038', borderRadius: '28px',
-          boxShadow: '0 20px 40px rgba(0,0,0,.45)', padding: '48px 40px', maxWidth: '720px', width: '100%',
-          textAlign: 'center', position: 'relative'
-        }}>
-          <button onClick={onBack} style={{
-            position: 'absolute', top: '24px', left: '24px', background: 'transparent',
-            border: '1px solid #5B5048', borderRadius: '6px', padding: '6px 14px',
-            color: '#A89C93', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer'
-          }}>← Home</button>
-
-          <h1 style={{ fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 700, fontSize: '48px', color: '#F4F1ED', margin: '0 0 12px', lineHeight: 1.1 }}>
-            {title.replace('🔷 ', '')}
-          </h1>
-          <p style={{ color: '#988D84', fontSize: '0.9rem', margin: '0 0 40px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>
-            {subtitle}
-          </p>
-          <p style={{ color: '#988D84', fontSize: '0.9rem', margin: '0 0 24px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>
-            Practice {title.toLowerCase().replace('🔷 ', '')}!
-          </p>
-
-          <div style={{ marginBottom: '24px' }}>
-            <h3 style={{ color: '#F4F1ED', fontSize: '0.9rem', margin: '0 0 16px', fontFamily: 'Inter, sans-serif', fontWeight: 700 }}>
-              Select Difficulty:
-            </h3>
-            <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '12px' }}>
-              {[['Easy', 'easy'], ['Medium', 'medium'], ['Hard', 'hard']].map(([lbl, val]) => (
-                <button key={val} onClick={() => setDifficulty(val)} style={{
-                  background: difficulty === val ? '#F08C46' : 'transparent',
-                  border: difficulty === val ? '1px solid #F08C46' : '1px solid #5B5048',
-                  borderRadius: '50px', padding: '8px 16px',
-                  color: difficulty === val ? '#FFF' : '#988D84', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer'
-                }}>
-                  {lbl}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div style={{ marginBottom: '32px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <label style={{ color: '#988D84', fontSize: '0.85rem', margin: '0 0 12px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>
-              How many questions?
-            </label>
-            <input type="text" value={numQuestions} onChange={(e) => { const v = e.target.value; if (v === '' || /^\d+$/.test(v)) setNumQuestions(v) }} style={{
-              background: '#463B34', border: '1px solid #5B5048', borderRadius: '6px',
-              padding: '10px', color: '#FFF', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem',
-              width: '100px', textAlign: 'center', outline: 'none'
-            }} placeholder="5" />
-          </div>
-
-          <button onClick={startQuiz} style={{
-            background: '#F08C46', border: 'none', borderRadius: '6px',
-            padding: '10px 24px', color: '#FFF', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer'
-          }}>
-            Start Quiz
-          </button>
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div className="kid-zone">
-      {started && !finished && (
-        <div className="kid-card">
-          <div className="kid-status-row">
-            <button className="kid-back-btn" onClick={onBack}>← Back</button>
-            <span>Question {questionNumber} of {totalQ}</span>
-            {timer && <div className="kid-timer">⏱️ {timer.elapsed}s</div>}
-          </div>
-          <div className="kid-progress-bar">
-            <div className="kid-progress-fill" style={{ width: `${(questionNumber / totalQ) * 100}%` }}></div>
-          </div>
-
-          <div className="question-box" style={{ fontSize: '1.8rem', margin: '20px 0', textAlign: 'center', fontFamily: 'Nunito, sans-serif' }}>
-            {loading || !question ? 'Loading...' : question.prompt}
-          </div>
-
-          {question && !loading && renderQuestionCustom && renderQuestionCustom(question, answer, setAnswer, submitAns, revealed)}
-
-          {question && !loading && !renderQuestionCustom && question.options && (
-            <div className="emoji-container" style={{ gap: '15px' }}>
-              {question.options.map(opt => (
-                <button key={opt} className={`kid-btn-choice ${answer === String(opt) ? 'selected' : ''}`} onClick={() => !revealed && setAnswer(String(opt))} disabled={revealed}>
-                  {opt}
-                </button>
-              ))}
-            </div>
-          )}
-
-          {question && !loading && !renderQuestionCustom && !question.options && (
-            <div style={{ textAlign: 'center', marginBottom: '30px' }}>
-              <input type="text" className="fun-input"
-                value={answer} onChange={e => !revealed && setAnswer(e.target.value)}
-                onKeyDown={e => { if (e.key === 'Enter') handleSubmitOrNext(); }}
-                placeholder="?" disabled={revealed} autoFocus />
-            </div>
-          )}
-
-          {renderFeedback(feedback, isCorrect)}
-          <div className="button-row" style={{ marginTop: '30px' }}>
-            {!revealed ? (
-              <div style={{ display: 'flex', gap: '10px', width: '100%' }}>
-                <button className="kid-btn-primary" onClick={handleSolve} style={{ flex: 1, opacity: 0.75 }}>Show Answer</button>
-                <button className="kid-btn-primary" onClick={() => submitAns()} disabled={loading || (!answer && !question?.options)} style={{ flex: 1 }}>Submit</button>
-              </div>
-            ) : (
-              <button className="kid-btn-primary" onClick={handleSubmitOrNext}>{questionNumber >= totalQ ? 'Finish Lab 🏁' : 'Next Question ➡️'}</button>
-            )}
-          </div>
-          {results.length > 0 && <ResultsTable results={results} />}
-        </div>
-      )}
-
-      {finished && (
-        <div className="kid-card" style={{ marginTop: '5vh', textAlign: 'center' }}>
-          <div className="bouncy-emoji" style={{ marginBottom: '20px' }}>🎉</div>
-          <h1 style={{ fontSize: '3rem' }}>Lab Complete!</h1>
-          <p style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--kid-success)' }}>Final score: {score} / {totalQ}</p>
-          <div style={{ marginTop: '30px' }}>
-            <ResultsTable results={results} />
-          </div>
-          <div className="button-row" style={{ marginTop: '30px' }}>
-            <button className="kid-btn-primary" onClick={() => { setStarted(false); setFinished(false); }}>Play Again 🔄</button>
-            <button className="kid-back-btn" onClick={onBack} style={{ marginLeft: '15px' }}>← Back to Home</button>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
-
-function BasicArithmeticLabApp({ onBack }) {
-  const renderCustom = (q, ans, setAns, submitAns, revealed) => {
-    if (q.template === 'missing_number' || q.template === 'greater_smaller') {
-      const parts = q.prompt.split(' ');
-      return (
-        <div className="math-bubble-row">
-          {parts.map((p, i) => {
-            if (p === '?' || p === '__') {
-              return (
-                <input key={i} type="text" className="fun-input"
-                  value={ans} onChange={e => !revealed && setAns(e.target.value)}
-                  placeholder="?" disabled={revealed} autoFocus />
-              );
-            }
-            if (['×', '÷', '+', '-', '=', '>', '<'].includes(p)) {
-              return <span key={i} className="math-bubble op">{p}</span>;
-            }
-            return <span key={i} className="math-bubble">{p}</span>;
-          })}
-        </div>
-      );
-    }
-    if (q.template === 'true_false') {
-      const eq = q.prompt.replace('Is ', '').replace(' ?', '').split(' ');
-      return (
-        <div style={{ textAlign: 'center' }}>
-          <div className="math-bubble-row" style={{ marginBottom: '10px' }}>
-            {eq.map((p, i) => {
-              if (['×', '÷', '+', '-', '='].includes(p)) return <span key={i} className="math-bubble op">{p}</span>;
-              return <span key={i} className="math-bubble">{p}</span>;
-            })}
-          </div>
-          <p style={{ fontSize: '2rem', fontFamily: 'Quicksand, sans-serif', color: 'var(--kid-secondary)' }}>True or False?</p>
-          <div className="emoji-container" style={{ gap: '20px' }}>
-            <button className={`kid-btn-choice ${ans === 'True' ? 'selected' : ''}`} onClick={() => !revealed && setAns('True')} disabled={revealed} style={{ fontSize: '2rem' }}>👍 True</button>
-            <button className={`kid-btn-choice ${ans === 'False' ? 'selected' : ''}`} onClick={() => !revealed && setAns('False')} disabled={revealed} style={{ fontSize: '2rem' }}>👎 False</button>
-          </div>
-        </div>
-      );
-    }
-    return (
-      <div style={{ textAlign: 'center', marginBottom: '30px' }}>
-        <p style={{ fontSize: '2.5rem', fontFamily: 'Quicksand, sans-serif', color: 'var(--kid-secondary)', lineHeight: 1.4 }}>{q.prompt}</p>
-        {!q.options && (
-          <input type="text" className="fun-input"
-            value={ans} onChange={e => !revealed && setAns(e.target.value)}
-            placeholder="?" disabled={revealed} autoFocus />
-        )}
-      </div>
-    );
-  };
-  return <GenericLabApp title="Origin" subtitle="Mixed multiplication & division templates" endpoint="/api/basic-arithmetic-lab" onBack={onBack} renderQuestionCustom={renderCustom} />;
-}
-
-
-function MensurationLabApp({ onBack, initialDifficulty, initialNumQuestions, initialStarted }) {
-  const renderCustom = (q, ans, setAns, submitAns, revealed) => {
-
-    // ── COUNT SIDES / SHAPE NAME ──────────────────────────────────────────
-    if (q.template === 'count_sides' || q.template === 'shape_name') {
-      const sides = q.sides;
-      const color = q.color || '#FF6B6B';
-      const pts = Array.from({ length: sides }).map((_, i) => {
-        const angle = (i * 2 * Math.PI / sides) - Math.PI / 2;
-        return `${50 + 40 * Math.cos(angle)},${50 + 40 * Math.sin(angle)}`;
-      }).join(' ');
-      return (
-        <div className="men-canvas">
-          <div className="men-shape-wrapper">
-            <svg viewBox="0 0 100 100" className="men-shape-svg">
-              <defs>
-                <linearGradient id={`sg${sides}`} x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor={color} stopOpacity="0.9" />
-                  <stop offset="100%" stopColor={color} stopOpacity="0.5" />
-                </linearGradient>
-              </defs>
-              <polygon points={pts} fill={`url(#sg${sides})`} stroke="white" strokeWidth="3" />
-              {Array.from({ length: sides }).map((_, i) => {
-                const angle = (i * 2 * Math.PI / sides) - Math.PI / 2;
-                return <circle key={i} cx={50 + 40 * Math.cos(angle)} cy={50 + 40 * Math.sin(angle)} r="3.5" fill="white" opacity="0.9" />;
-              })}
-            </svg>
-          </div>
-          <div className="men-options-grid">
-            {q.options?.map(opt => (
-              <button key={opt} className={`men-choice-btn ${ans === opt ? 'selected' : ''}`}
-                onClick={() => !revealed && setAns(opt)} disabled={revealed}>
-                {opt}{revealed && String(opt) === String(q.answer) && <span className="men-correct-tick"> ✓</span>}
-              </button>
-            ))}
-          </div>
-        </div>
-      );
-    }
-
-    // ── AREA GRID (interactive tap-to-count) ─────────────────────────────
-    if (q.template === 'area_grid') {
-      const counted = (typeof ans === 'string' && ans.startsWith('[')) ? JSON.parse(ans) : []; const setCounted = (updater) => { const next = typeof updater === 'function' ? updater(counted) : updater; setAns(JSON.stringify(next)); };
-
-      const allCount = q.w * q.h;
-      const handleCellClick = (idx) => {
-        if (revealed) return;
-        setCounted(prev => {
-          const next = prev.includes(idx) ? prev.filter(i => i !== idx) : [...prev, idx];
-          if (next.length === allCount) setTimeout(() => setAns(String(allCount)), 100);
-          return next;
-        });
-      };
-      return (
-        <div className="men-canvas" style={{ flexDirection: 'column', gap: '16px' }}>
-          <p className="men-canvas-tip">👆 Tap each square to count it!</p>
-          <div className="men-grid-wrap" style={{ gridTemplateColumns: `repeat(${q.w}, 1fr)` }}>
-            {Array.from({ length: allCount }).map((_, i) => (
-              <div key={i}
-                className={`men-grid-cell ${counted.includes(i) ? 'counted' : ''} ${revealed ? 'revealed' : ''}`}
-                onClick={() => handleCellClick(i)}>
-                {(counted.includes(i) || revealed) ? '✓' : ''}
-              </div>
-            ))}
-          </div>
-          <div className="men-cell-count-pill">
-            {revealed ? `✅ Area = ${q.answer} sq units` : `${counted.length} / ${allCount} counted`}
-          </div>
-        </div>
-      );
-    }
-
-    // ── PERIMETER BLOCKS (animated walking dot) ───────────────────────────
-    if (q.template === 'perimeter_blocks') {
-      const cellPx = 44;
-      const svgW = (q.w + 2) * cellPx;
-      const svgH = (q.h + 2) * cellPx;
-      const ox = cellPx; const oy = cellPx;
-      const rw = q.w * cellPx; const rh = q.h * cellPx;
-      return (
-        <div className="men-canvas" style={{ flexDirection: 'column', gap: '16px' }}>
-          <svg width={svgW} height={svgH} style={{ maxWidth: '100%' }}>
-            <defs>
-              <pattern id="gridP" width={cellPx} height={cellPx} patternUnits="userSpaceOnUse">
-                <path d={`M ${cellPx} 0 L 0 0 0 ${cellPx}`} fill="none" stroke="#E2E8F0" strokeWidth="1" />
-              </pattern>
-            </defs>
-            <rect x={ox} y={oy} width={rw} height={rh} fill="url(#gridP)" />
-            <rect x={ox} y={oy} width={rw} height={rh} fill="rgba(232,134,74,0.08)" stroke="#e8864a" strokeWidth="3" rx="4" />
-            <text x={ox + rw / 2} y={oy - 10} textAnchor="middle" fill="#e8864a" fontWeight="bold" fontSize="14">{q.w} units</text>
-            <text x={ox + rw + 16} y={oy + rh / 2 + 5} textAnchor="middle" fill="#e8864a" fontWeight="bold" fontSize="14"
-              transform={`rotate(90 ${ox + rw + 16} ${oy + rh / 2 + 5})`}>{q.h} units</text>
-            {revealed
-              ? <rect x={ox} y={oy} width={rw} height={rh} fill="none" stroke="#48BB78" strokeWidth="4" rx="4" strokeDasharray="10 4" />
-              : <circle r="7" fill="#FF7E67">
-                <animateMotion dur={`${(q.w + q.h) * 0.4}s`} repeatCount="indefinite"
-                  path={`M ${ox},${oy} L ${ox + rw},${oy} L ${ox + rw},${oy + rh} L ${ox},${oy + rh} Z`} />
-              </circle>
-            }
-          </svg>
-          <div className="men-options-grid">
-            {q.options?.map(opt => (
-              <button key={opt} className={`men-choice-btn ${ans === opt ? 'selected' : ''}`}
-                onClick={() => !revealed && setAns(opt)} disabled={revealed}>
-                {opt}{revealed && String(opt) === String(q.answer) && <span className="men-correct-tick"> ✓</span>}
-              </button>
-            ))}
-          </div>
-        </div>
-      );
-    }
-
-    // ── COMPARE AREA ──────────────────────────────────────────────────────
-    if (q.template === 'compare_area') {
-      const scale = 36;
-      return (
-        <div className="men-canvas" style={{ flexDirection: 'column', gap: '20px' }}>
-          <div style={{ display: 'flex', gap: '30px', justifyContent: 'center', flexWrap: 'wrap', alignItems: 'flex-end' }}>
-            {[q.shape1, q.shape2].map((sh, idx) => (
-              <div key={idx} style={{ textAlign: 'center' }}>
-                <div style={{
-                  width: `${sh.w * scale}px`, height: `${sh.h * scale}px`,
-                  background: sh.color || '#FF7E67', opacity: 0.85, borderRadius: '10px',
-                  boxShadow: `0 8px 20px ${sh.color || '#FF7E67'}55`,
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  color: 'white', fontWeight: 800, fontSize: '1.2rem', fontFamily: 'Quicksand'
-                }}>{sh.w}×{sh.h}</div>
-                <div style={{ marginTop: '10px', fontWeight: 800, fontSize: '1.4rem', color: sh.color, fontFamily: 'Quicksand' }}>Shape {sh.label}</div>
-                <div style={{ fontSize: '0.95rem', color: '#718096', fontFamily: 'Nunito' }}>
-                  {revealed ? `Area = ${sh.w * sh.h}` : `${sh.w} × ${sh.h} = ?`}
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="men-options-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)', maxWidth: '440px' }}>
-            {q.options?.map(opt => (
-              <button key={opt} className={`men-choice-btn ${ans === opt ? 'selected' : ''}`}
-                onClick={() => !revealed && setAns(opt)} disabled={revealed}>
-                {opt}{revealed && opt === q.answer && <span className="men-correct-tick"> ✓</span>}
-              </button>
-            ))}
-          </div>
-        </div>
-      );
-    }
-
-    // ── RECT VS SQUARE ────────────────────────────────────────────────────
-    if (q.template === 'rect_vs_square') {
-      const isSquare = q.w === q.h;
-      const scale = Math.min(45, 200 / Math.max(q.w, q.h));
-      const rw = q.w * scale; const rh = q.h * scale;
-      const ox = (280 - rw) / 2; const oy = (220 - rh) / 2;
-      return (
-        <div className="men-canvas" style={{ flexDirection: 'column', gap: '20px' }}>
-          <svg width="280" height="220" style={{ overflow: 'visible' }}>
-            <defs>
-              <linearGradient id="rectGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#F6D365" /><stop offset="100%" stopColor="#FDA085" />
-              </linearGradient>
-            </defs>
-            <rect x={ox} y={oy} width={rw} height={rh} fill="url(#rectGrad)" rx="8" className="men-rect-pulse" />
-            <text x={ox + rw / 2} y={oy - 12} textAnchor="middle" fill="#E2E8F0" fontWeight="bold" fontSize="18">{q.w}</text>
-            <text x={ox + rw + 16} y={oy + rh / 2 + 6} textAnchor="middle" fill="#E2E8F0" fontWeight="bold" fontSize="18">{q.h}</text>
-            {isSquare && [
-              `M ${ox + 8} ${oy} L ${ox + 8} ${oy + 8} L ${ox} ${oy + 8}`,
-              `M ${ox + rw - 8} ${oy} L ${ox + rw - 8} ${oy + 8} L ${ox + rw} ${oy + 8}`,
-              `M ${ox + rw - 8} ${oy + rh} L ${ox + rw - 8} ${oy + rh - 8} L ${ox + rw} ${oy + rh - 8}`,
-              `M ${ox + 8} ${oy + rh} L ${ox + 8} ${oy + rh - 8} L ${ox} ${oy + rh - 8}`
-            ].map((d, i) => <path key={i} d={d} fill="none" stroke="white" strokeWidth="2" />)}
-          </svg>
-          <div className="men-options-grid" style={{ gridTemplateColumns: 'repeat(2, 1fr)', maxWidth: '340px' }}>
-            {q.options?.map(opt => (
-              <button key={opt} className={`men-choice-btn ${ans === opt ? 'selected' : ''}`}
-                onClick={() => !revealed && setAns(opt)} disabled={revealed}>
-                {opt === 'Square' ? '⬛' : '▬'} {opt}
-                {revealed && opt === q.answer && <span className="men-correct-tick"> ✓</span>}
-              </button>
-            ))}
-          </div>
-        </div>
-      );
-    }
-
-    // ── TRIANGLE AREA ──────────────────────────────────────────────────────
-    if (q.template === 'triangle_area') {
-      const scale = Math.min(45, 200 / Math.max(q.base, q.height));
-      const bPx = q.base * scale; const hPx = q.height * scale;
-      const svgW = bPx + 80; const svgH = hPx + 70;
-      const ox = 40; const oy = 30;
-      const pts = `${ox},${oy + hPx} ${ox + bPx / 2},${oy} ${ox + bPx},${oy + hPx}`;
-      return (
-        <div className="men-canvas" style={{ flexDirection: 'column', gap: '20px' }}>
-          <svg width={svgW} height={svgH} style={{ maxWidth: '100%', overflow: 'visible' }}>
-            <defs>
-              <linearGradient id="triGrd" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#F6D365" /><stop offset="100%" stopColor="#FDA085" />
-              </linearGradient>
-            </defs>
-            <polygon points={pts} fill="url(#triGrd)" stroke="white" strokeWidth="3" className="men-rect-pulse" />
-            <line x1={ox + bPx / 2} y1={oy} x2={ox + bPx / 2} y2={oy + hPx} stroke="#2D2520" strokeWidth="2.5" strokeDasharray="5 3" opacity="0.85" />
-            <path d={`M ${ox + bPx / 2 - 7} ${oy + hPx} L ${ox + bPx / 2 - 7} ${oy + hPx - 7} L ${ox + bPx / 2} ${oy + hPx - 7}`} fill="none" stroke="#2D2520" strokeWidth="1.5" opacity="0.85" />
-            {/* Height Label Pill */}
-            <rect x={ox + bPx / 2 + 8} y={oy + hPx / 2 - 12} width="52" height="22" rx="6" fill="#2D2520" stroke="#4A4038" strokeWidth="1.5" />
-            <text x={ox + bPx / 2 + 34} y={oy + hPx / 2 + 4} textAnchor="middle" fill="#F4F1ED" fontWeight="bold" fontSize="13">h={q.height}</text>
-            {/* Base Label Pill */}
-            <rect x={ox + bPx / 2 - 38} y={oy + hPx + 14} width="76" height="22" rx="6" fill="#2D2520" stroke="#4A4038" strokeWidth="1.5" />
-            <text x={ox + bPx / 2} y={oy + hPx + 30} textAnchor="middle" fill="#F4F1ED" fontWeight="bold" fontSize="13">base={q.base}</text>
-          </svg>
-          <div className="men-options-grid">
-            {q.options?.map(opt => (
-              <button key={opt} className={`men-choice-btn ${ans === opt ? 'selected' : ''}`}
-                onClick={() => !revealed && setAns(opt)} disabled={revealed}>
-                {opt}{revealed && String(opt) === String(q.answer) && <span className="men-correct-tick"> ✓</span>}
-              </button>
-            ))}
-          </div>
-        </div>
-      );
-    }
-
-    // ── ANGLE TYPE ─────────────────────────────────────────────────────────
-    if (q.template === 'angle_type') {
-      const deg = q.degrees;
-      const rad = (deg * Math.PI) / 180;
-      const r = 90; const cx = 110; const cy = 120;
-      const x2 = cx + r * Math.cos(-rad); const y2 = cy + r * Math.sin(-rad);
-      const arcR = 50;
-      const ax = cx + arcR * Math.cos(-rad); const ay = cy + arcR * Math.sin(-rad);
-      const largeArc = deg > 180 ? 1 : 0;
-      const arcColor = deg < 90 ? '#48BB78' : deg === 90 ? '#4ECDC4' : '#FF7E67';
-      return (
-        <div className="men-canvas" style={{ flexDirection: 'column', gap: '20px' }}>
-          <svg width="220" height="160" style={{ overflow: 'visible' }}>
-            <line x1={cx} y1={cy} x2={cx + r} y2={cy} stroke="#988D84" strokeWidth="4.5" strokeLinecap="round" />
-            <line x1={cx} y1={cy} x2={x2} y2={y2} stroke="#F08C46" strokeWidth="4.5" strokeLinecap="round" />
-            <path d={`M ${cx + arcR} ${cy} A ${arcR} ${arcR} 0 ${largeArc} 0 ${ax} ${ay}`} fill="none" stroke={arcColor} strokeWidth="5" />
-            <text x={cx + arcR + 20} y={cy - 16} fill={arcColor} fontWeight="bold" fontSize="28">{deg}°</text>
-            {deg === 90 && <rect x={cx} y={cy - 20} width="20" height="20" fill="none" stroke="#4ECDC4" strokeWidth="3" />}
-            <circle cx={cx} cy={cy} r="5" fill="#2D3748" />
-          </svg>
-          <div className="men-options-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)', maxWidth: '400px' }}>
-            {q.options?.map(opt => {
-              const icons = { Acute: '🔺', Right: '📐', Obtuse: '🔻' };
-              return (
-                <button key={opt} className={`men-choice-btn ${ans === opt ? 'selected' : ''}`}
-                  onClick={() => !revealed && setAns(opt)} disabled={revealed}>
-                  {icons[opt]} {opt}{revealed && opt === q.answer && <span className="men-correct-tick"> ✓</span>}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-      );
-    }
-
-    // ── CIRCLE ─────────────────────────────────────────────────────────────
-    if (q.template === 'circle_q') {
-      const r = q.radius;
-      const rPx = Math.min(55, 160 / (r * 2 + 4)) * r;
-      const cx = 110; const cy = 110;
-      return (
-        <div className="men-canvas" style={{ flexDirection: 'column', gap: '20px' }}>
-          <svg width="220" height="220" style={{ overflow: 'visible' }}>
-            <defs>
-              <radialGradient id="circGrd" cx="40%" cy="35%">
-                <stop offset="0%" stopColor="#ffaa7b" /><stop offset="100%" stopColor="#e8864a" />
-              </radialGradient>
-            </defs>
-            <circle cx={cx} cy={cy} r={rPx} fill="url(#circGrd)" opacity="0.85" />
-            <line x1={cx} y1={cy} x2={cx + rPx} y2={cy} stroke="white" strokeWidth="2.5" strokeDasharray="6 3" />
-            <text x={cx + rPx / 2} y={cy - 8} textAnchor="middle" fill="white" fontWeight="bold" fontSize="14">r={r}</text>
-            <circle cx={cx} cy={cy} r="5" fill="white" />
-            {q.subtype === 'circumference' &&
-              <circle cx={cx} cy={cy} r={rPx + 8} fill="none" stroke="#FDA085" strokeWidth="3"
-                strokeDasharray="15 8" className="men-circle-spin" />}
-          </svg>
-          <div className="men-options-grid">
-            {q.options?.map(opt => (
-              <button key={opt} className={`men-choice-btn ${ans === opt ? 'selected' : ''}`}
-                onClick={() => !revealed && setAns(opt)} disabled={revealed}>
-                {opt}{revealed && String(opt) === String(q.answer) && <span className="men-correct-tick"> ✓</span>}
-              </button>
-            ))}
-          </div>
-        </div>
-      );
-    }
-
-    // ── MISSING SIDE ───────────────────────────────────────────────────────
-    if (q.template === 'missing_side') {
-      return (
-        <div className="men-canvas" style={{ flexDirection: 'column', gap: '20px' }}>
-          {q.subtype === 'rect_missing' ? (
-            <svg width="180" height="140" style={{ overflow: 'visible' }}>
-              <defs>
-                <linearGradient id="misGrd" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#F6D365" /><stop offset="100%" stopColor="#FDA085" />
-                </linearGradient>
-              </defs>
-              <rect x="20" y="20" width="140" height="100" fill="url(#misGrd)" rx="8" opacity="0.8" />
-              <text x="90" y="75" textAnchor="middle" fill="white" fontWeight="bold" fontSize="18">Area={q.area}</text>
-              <text x="90" y="12" textAnchor="middle" fill="#FF7E67" fontWeight="bold" fontSize="16">? units</text>
-              {/* Rectangle Known Side Label */}
-              <text x="172" y="75" textAnchor="middle" fill="#E2E8F0" fontWeight="bold" fontSize="16" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.6)' }}>{q.knownSide}</text>
-            </svg>
-          ) : (
-            <svg width="140" height="140" style={{ overflow: 'visible' }}>
-              <rect x="20" y="20" width="100" height="100" fill="none" stroke="#e8864a" strokeWidth="3" strokeDasharray="8 4" rx="6" />
-              {[['70', '12'], ['133', '75'], ['70', '133'], ['7', '75']].map(([x, y], i) => (
-                <g key={i}>
-                  <circle cx={x} cy={parseInt(y) - 4} r="10" fill="#2D2520" stroke="#4A4038" strokeWidth="1" />
-                  <text x={x} y={y} textAnchor="middle" fill="#FF7E67" fontWeight="bold" fontSize="13">?</text>
-                </g>
-              ))}
-              {/* Square Perimeter Label Pill */}
-              <rect x="34" y="67" width="72" height="22" rx="6" fill="#2D2520" stroke="#4A4038" strokeWidth="1.5" />
-              <text x="70" y="83" textAnchor="middle" fill="#F4F1ED" fontWeight="bold" fontSize="13">P={q.perim}</text>
-            </svg>
-          )}
-          <div className="men-options-grid">
-            {q.options?.map(opt => (
-              <button key={opt} className={`men-choice-btn ${ans === opt ? 'selected' : ''}`}
-                onClick={() => !revealed && setAns(opt)} disabled={revealed}>
-                {opt}{revealed && String(opt) === String(q.answer) && <span className="men-correct-tick"> ✓</span>}
-              </button>
-            ))}
-          </div>
-        </div>
-      );
-    }
-
-    return null;
-  };
-
-  return <GenericLabApp title="Mensuration" subtitle="Geometry & Shape Puzzles" endpoint="/api/mensuration-lab" onBack={onBack} renderQuestionCustom={renderCustom} initialDifficulty={initialDifficulty} initialNumQuestions={initialNumQuestions} initialStarted={initialStarted} />;
-}
-
-
-export function getLocalXp() {
-  try {
-    const val = localStorage.getItem('tenali_xp');
-    return val ? parseInt(val, 10) : 0;
-  } catch { return 0; }
-}
-
-export function setLocalXp(val) {
-  try { localStorage.setItem('tenali_xp', val.toString()); } catch {}
-  // dispatch event to sync UI if needed
-  window.dispatchEvent(new CustomEvent('tenali_xp_update', { detail: { xp: val } }));
-}
-
-export function changeXp(delta) {
-  const current = getLocalXp();
-  const next = Math.max(0, current + delta);
-  setLocalXp(next);
-  return next;
-}
-
 export default App
-export { AuthMenu }
+export { AuthMenu };
+
