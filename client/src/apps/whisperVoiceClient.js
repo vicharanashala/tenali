@@ -11,7 +11,9 @@
  * - Completely safe: fails silently if the server is offline, allowing native Web Speech to take over.
  */
 
-export const WHISPER_API_URL = 'http://localhost:5001';
+export const WHISPER_API_URL = (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_WHISPER_API_URL)
+  ? import.meta.env.VITE_WHISPER_API_URL.replace(/\/+$/, '')
+  : 'http://localhost:5001';
 
 /**
  * Checks if the local Whisper server is online and ready.

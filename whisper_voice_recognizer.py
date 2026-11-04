@@ -549,8 +549,8 @@ def main():
     parser.add_argument(
         "--port", "-p",
         type=int,
-        default=5001,
-        help="Port for the HTTP server (default: 5001)"
+        default=int(os.environ.get("PORT", 5001)),
+        help="Port for the HTTP server (default: 5001 or $PORT env)"
     )
     parser.add_argument(
         "--device", "-d",
