@@ -2106,3 +2106,20 @@
 .trace-btn-restart:hover {
   background: #312e81;
 }
+
+/* Whisper AI Live Badge */
+.whisper-live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(16, 185, 129, 0.22);
+  border: 1px solid rgba(52, 211, 153, 0.75);
+  color: #a7f3d0;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 9999px;
+  letter-spacing: 0.02em;
+  text-shadow: 0 0 6px rgba(52, 211, 153, 0.5);
+  user-select: none;
+}

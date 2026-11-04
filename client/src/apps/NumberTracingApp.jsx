@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import confetti from 'canvas-confetti';
 import { NUMBERS_INFO } from './numbers1To10Data.js';
+import { createWhisperStreamer, checkWhisperServerHealth } from './whisperVoiceClient.js';
 
 /**
  * NumberTracingApp — Minimal Tactile Learn & Trace Module
@@ -131,16 +132,16 @@ export const TRACING_CONFIG = {
 };
 
 const NUMBER_PATTERNS = {
-  1:  /\b(1|one|won|wan|van|when|run|first|ek|ondru|onnu|onru|un|uno)\b/i,
+  1:  /\b(1|one|won|wan|van|when|run|first|ek|ondru|onnu|onru|un|uno|bun|fun|done)\b/i,
   2:  /\b(2|two|to|too|tu|do|doo|second|rendu|erandu|irandu|dos)\b/i,
   3:  /\b(3|three|tree|free|thee|tri|third|teen|tin|moonu|moondru|tres)\b/i,
   4:  /\b(4|four|for|fore|far|ford|fourth|char|chaar|naalu|naangu|cuatro)\b/i,
-  5:  /\b(5|five|faiv|fai|fiv|fifth|panch|paanch|anju|aindhu|ainthu|cinco)\b/i,
+  5:  /\b(5|five|faiv|fai|fiv|fifth|panch|paanch|anju|aindhu|ainthu|cinco|bye|buy)\b/i,
   6:  /\b(6|six|siks|sex|sick|sixth|chhe|che|chha|aaru|seis)\b/i,
   7:  /\b(7|seven|sevn|sevan|seventh|saat|sat|yezhu|ezhu|siete)\b/i,
   8:  /\b(8|eight|ate|ait|eat|eighth|aath|ath|ettu|ocho)\b/i,
   9:  /\b(9|nine|nain|nin|night|ninth|nau|no|ombodhu|onpathu|onbathu|nueve)\b/i,
-  10: /\b(10|ten|tan|tin|den|tenth|das|dus|pathu|patthu|diez)\b/i
+  10: /\b(10|ten|tan|tin|den|tenth|das|dus|pathu|patthu|diez|dead)\b/i
 };
 
 function detectSpokenNumber(text, expectedTarget) {
@@ -184,6 +185,7 @@ export default function NumberTracingApp({
 
   const [heardWord, setHeardWord] = useState('');
   const [micActive, setMicActive] = useState(false);
+  const [whisperLive, setWhisperLive] = useState(false);
 
   // Demo animation state
   const [demoActive, setDemoActive] = useState(false);
@@ -196,6 +198,7 @@ export default function NumberTracingApp({
   const pathRef = useRef(null);
   const audioCtxRef = useRef(null);
   const speechRecRef = useRef(null);
+  const whisperStreamerRef = useRef(null);
   const stageRef = useRef('TRACING');
   const echoStepRef = useRef(1);
   const echoSubStateRef = useRef('ANNOUNCING_NUM');
@@ -334,9 +337,58 @@ export default function NumberTracingApp({
     setDemoHandPos({ target: 'none', x: 0, y: 0, pressing: false, itemIdx: 0 });
   }, [clearDemoTimers]);
 
+  // Whisper streaming audio integration
+  const handleWhisperNumber = useCallback((detectedNum, cleanText, rawText) => {
+    if (rawText) setHeardWord(rawText);
+    const now = Date.now();
+    if (now - lastMatchTimeRef.current < 280) return;
+
+    if (stageRef.current === 'ECHO_COUNT') {
+      if (echoSubStateRef.current === 'WAITING_KID') {
+        const expected = echoStepRef.current;
+        if (detectedNum === expected) {
+          lastMatchTimeRef.current = now;
+          echoSubStateRef.current = 'APP_SPEAKING';
+          onChildEchoed(detectedNum);
+        }
+      }
+    } else if (stageRef.current === 'SOLO_COUNT') {
+      lastMatchTimeRef.current = now;
+      handleSoloCountAttempt(detectedNum);
+    }
+  }, [onChildEchoed, handleSoloCountAttempt]);
+
+  const startWhisper = useCallback(() => {
+    if (!whisperStreamerRef.current) {
+      whisperStreamerRef.current = createWhisperStreamer({
+        onNumberDetected: handleWhisperNumber,
+        onTextHeard: (t) => {
+          if (t) setHeardWord(t);
+        },
+        onStatusChange: (active) => setWhisperLive(active)
+      });
+    }
+    whisperStreamerRef.current.start();
+  }, [handleWhisperNumber]);
+
+  const stopWhisper = useCallback(() => {
+    if (whisperStreamerRef.current) {
+      whisperStreamerRef.current.stop();
+      whisperStreamerRef.current = null;
+    }
+  }, []);
+
+  // Health check on mount
+  useEffect(() => {
+    checkWhisperServerHealth().then((isLive) => {
+      setWhisperLive(isLive);
+    });
+  }, []);
+
   // Switch/Reset Number
   const selectNumber = useCallback((n) => {
     clearDemoTimers();
+    stopWhisper();
     if (speechRecRef.current) {
       try { speechRecRef.current.abort(); } catch { /* ignore */ }
       speechRecRef.current = null;
@@ -359,10 +411,11 @@ export default function NumberTracingApp({
     setWrongAttemptFlash(false);
     setHeardWord('');
     speakNumber(n);
-  }, [clearDemoTimers, speakNumber]);
+  }, [clearDemoTimers, speakNumber, stopWhisper]);
 
   // Finish counting: Confetti, stars, strictly SILENT (no spoken words), advance to next number!
   const finishCountingAndAdvance = useCallback(() => {
+    stopWhisper();
     if (speechRecRef.current) {
       try { speechRecRef.current.abort(); } catch { /* ignore */ }
       speechRecRef.current = null;
@@ -437,7 +490,8 @@ export default function NumberTracingApp({
     setWrongAttemptFlash(false);
     setHeardWord('');
     lastMatchTimeRef.current = Date.now();
-  }, []);
+    startWhisper();
+  }, [startWhisper]);
 
   // Trigger one step in Echo Count (voice speaks, then waits for child repeat)
   const triggerEchoStep = useCallback((step) => {
@@ -562,6 +616,7 @@ export default function NumberTracingApp({
     setHeardWord('');
 
     ensureSpeechActive();
+    startWhisper();
 
     // Step 0: First say the target number itself (e.g. "Four")
     speakNumber(selectedNum);
@@ -573,7 +628,7 @@ export default function NumberTracingApp({
     }, 900);
 
     demoTimersRef.current.push(tStartEcho);
-  }, [selectedNum, speakNumber, playTone, ensureSpeechActive, triggerEchoStep]);
+  }, [selectedNum, speakNumber, playTone, ensureSpeechActive, startWhisper, triggerEchoStep]);
 
   // User Pointer Dragging along Path
   const handlePointerDown = (e) => {
@@ -829,6 +884,7 @@ export default function NumberTracingApp({
   useEffect(() => {
     return () => {
       clearDemoTimers();
+      stopWhisper();
       if (speechRecRef.current) {
         try { speechRecRef.current.abort(); } catch { /* ignore */ }
       }
@@ -836,7 +892,7 @@ export default function NumberTracingApp({
         window.speechSynthesis.cancel();
       }
     };
-  }, [clearDemoTimers]);
+  }, [clearDemoTimers, stopWhisper]);
 
   return (
     <div className="tenali-learn-trace-container">
@@ -1043,7 +1099,14 @@ export default function NumberTracingApp({
         {/* Right Column: Object Count & Minimal Interaction Studio */}
         <div className="trace-counter-panel">
           <div className="counter-panel-header">
-            <h3>{selectedNum} {config.objectName}s</h3>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <h3>{selectedNum} {config.objectName}s</h3>
+              {whisperLive && (
+                <span className="whisper-live-badge" title="Whisper AI Server Active (detects quiet whispers)">
+                  ⚡ Whisper AI
+                </span>
+              )}
+            </div>
             {stage === 'ECHO_COUNT' && (
               <div className="voice-mic-indicator app-count-mode">
                 <span className="voice-mic-dot active" />

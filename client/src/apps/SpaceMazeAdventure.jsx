@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import confetti from 'canvas-confetti';
+import { createWhisperStreamer, checkWhisperServerHealth } from './whisperVoiceClient.js';
 
 /**
  * SpaceMazeAdventure — Tenali Star Station Explorer
@@ -14,16 +15,16 @@ import confetti from 'canvas-confetti';
 
 // Comprehensive multilingual & phonetic number regex dictionary
 const NUMBER_PATTERNS = {
-  1:  /\b(1|one|won|wan|van|when|run|first|ek|ondru|onnu|onru|un|uno)\b/i,
+  1:  /\b(1|one|won|wan|van|when|run|first|ek|ondru|onnu|onru|un|uno|bun|fun|done)\b/i,
   2:  /\b(2|two|to|too|tu|do|doo|second|rendu|erandu|irandu|dos)\b/i,
   3:  /\b(3|three|tree|free|thee|tri|third|teen|tin|moonu|moondru|tres)\b/i,
   4:  /\b(4|four|for|fore|far|ford|fourth|char|chaar|naalu|naangu|cuatro)\b/i,
-  5:  /\b(5|five|faiv|fai|fiv|fifth|panch|paanch|anju|aindhu|ainthu|cinco)\b/i,
+  5:  /\b(5|five|faiv|fai|fiv|fifth|panch|paanch|anju|aindhu|ainthu|cinco|bye|buy)\b/i,
   6:  /\b(6|six|siks|sex|sick|sixth|chhe|che|chha|aaru|seis)\b/i,
   7:  /\b(7|seven|sevn|sevan|seventh|saat|sat|yezhu|ezhu|siete)\b/i,
   8:  /\b(8|eight|ate|ait|eat|eighth|aath|ath|ettu|ocho)\b/i,
   9:  /\b(9|nine|nain|nin|night|ninth|nau|no|ombodhu|onpathu|onbathu|nueve)\b/i,
-  10: /\b(10|ten|tan|tin|den|tenth|das|dus|pathu|patthu|diez)\b/i
+  10: /\b(10|ten|tan|tin|den|tenth|das|dus|pathu|patthu|diez|dead)\b/i
 };
 
 function checkTargetSpoken(text, targetNum) {
@@ -237,6 +238,7 @@ export default function SpaceMazeAdventure({
   const [micStatusText, setMicStatusText] = useState('Mic Ready');
   const [micState, setMicState] = useState('idle'); // 'idle' | 'listening' | 'error'
   const [heardWord, setHeardWord] = useState('Waiting to launch...');
+  const [whisperLive, setWhisperLive] = useState(false);
 
   // Victory celebration modal
   const [winModalOpen, setWinModalOpen] = useState(false);
@@ -244,6 +246,7 @@ export default function SpaceMazeAdventure({
   // Audio Context Ref
   const audioCtxRef = useRef(null);
   const speechRecRef = useRef(null);
+  const whisperStreamerRef = useRef(null);
   const isListeningRef = useRef(false);
   const isCountingPhaseRef = useRef(false);
   const targetStepRef = useRef(1);
@@ -366,10 +369,57 @@ export default function SpaceMazeAdventure({
   // Forward declaration of handleCountInput via ref
   const handleCountInputRef = useRef(null);
 
+  // Whisper streaming speech recognizer handler
+  const handleWhisperNumber = useCallback((detectedNum, cleanText, rawText) => {
+    if (rawText) setHeardWord(`"${rawText}" ⚡`);
+    if (!isCountingPhaseRef.current) return;
+    const currentTarget = targetStepRef.current;
+    if (detectedNum === currentTarget) {
+      const now = Date.now();
+      if (now - lastMatchTimeRef.current > 300) {
+        lastMatchTimeRef.current = now;
+        setHeardWord(`"${cleanText}" ⭐`);
+        if (handleCountInputRef.current) {
+          handleCountInputRef.current(currentTarget);
+        }
+      }
+    } else if (detectedNum !== null) {
+      setCountGuideText(`Heard "${detectedNum}" — Next is ${currentTarget}! ⭐`);
+    }
+  }, []);
+
+  const startWhisper = useCallback(() => {
+    if (!whisperStreamerRef.current) {
+      whisperStreamerRef.current = createWhisperStreamer({
+        onNumberDetected: handleWhisperNumber,
+        onTextHeard: (t) => {
+          if (t && isCountingPhaseRef.current) setHeardWord(`"${t}"`);
+        },
+        onStatusChange: (active) => setWhisperLive(active)
+      });
+    }
+    whisperStreamerRef.current.start();
+  }, [handleWhisperNumber]);
+
+  const stopWhisper = useCallback(() => {
+    if (whisperStreamerRef.current) {
+      whisperStreamerRef.current.stop();
+      whisperStreamerRef.current = null;
+    }
+  }, []);
+
+  // Health check on mount
+  useEffect(() => {
+    checkWhisperServerHealth().then((isLive) => {
+      setWhisperLive(isLive);
+    });
+  }, []);
+
   // Stop native speech recognition
   const stopSpeechRecognition = useCallback(() => {
     isListeningRef.current = false;
     clearTimeout(recognitionRestartTimeoutRef.current);
+    stopWhisper();
 
     if (speechRecRef.current) {
       try {
@@ -382,7 +432,7 @@ export default function SpaceMazeAdventure({
     setIsListening(false);
     setMicState('idle');
     setMicStatusText('Mic Idle (Tap to Speak)');
-  }, []);
+  }, [stopWhisper]);
 
   // Start native browser Speech Recognition with ultra-low latency (<50ms)
   const startSpeechRecognition = useCallback(() => {
@@ -619,7 +669,8 @@ export default function SpaceMazeAdventure({
 
     playChime(1);
     startSpeechRecognition();
-  }, [startSpeechRecognition, playChime]);
+    startWhisper();
+  }, [startSpeechRecognition, startWhisper, playChime]);
 
   // Smooth rocket flight along bezier tubes using BFS
   const flyRocketTo = useCallback((targetNode, callback) => {
@@ -856,6 +907,11 @@ export default function SpaceMazeAdventure({
               <span className={`mic-dot-indicator ${micState}`} />
               <span>{micStatusText}</span>
             </button>
+            {whisperLive && (
+              <span className="whisper-live-badge" title="Whisper AI Server Active (detects quiet whispers)">
+                ⚡ Whisper AI
+              </span>
+            )}
             {heardWord && heardWord !== 'Waiting to launch...' && (
               <span className="banner-heard-tag">Heard: <em>{heardWord}</em></span>
             )}
