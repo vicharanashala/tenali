@@ -305,20 +305,28 @@ export default function NumberTracingApp({
   }, []);
 
   // Compute live dot coordinates along the SVG path based on progress
-  const [dotPos, setDotPos] = useState({ x: activeStroke.start[0], y: activeStroke.start[1] });
+  const [dotPos, setDotPos] = useState(() => {
+    const start = (activeStroke && activeStroke.start) || [150, 55];
+    return { x: start[0], y: start[1] };
+  });
 
   useEffect(() => {
     if (pathRef.current) {
       try {
         const totalLen = pathRef.current.getTotalLength();
-        const pt = pathRef.current.getPointAtLength(totalLen * strokeProgress);
-        setDotPos({ x: pt.x, y: pt.y });
+        if (totalLen && !isNaN(totalLen)) {
+          const pt = pathRef.current.getPointAtLength(totalLen * strokeProgress);
+          if (pt && !isNaN(pt.x) && !isNaN(pt.y)) {
+            setDotPos({ x: pt.x, y: pt.y });
+            return;
+          }
+        }
       } catch {
-        setDotPos({ x: activeStroke.start[0], y: activeStroke.start[1] });
+        // Fallback
       }
-    } else {
-      setDotPos({ x: activeStroke.start[0], y: activeStroke.start[1] });
     }
+    const start = (activeStroke && activeStroke.start) || [150, 55];
+    setDotPos({ x: start[0], y: start[1] });
   }, [strokeProgress, activeStroke]);
 
   // Clear demo and transition timers
@@ -337,6 +345,10 @@ export default function NumberTracingApp({
     setDemoHandPos({ target: 'none', x: 0, y: 0, pressing: false, itemIdx: 0 });
   }, [clearDemoTimers]);
 
+  // Forward declarations via refs to eliminate Temporal Dead Zone ReferenceErrors on initial render
+  const onChildEchoedRef = useRef(null);
+  const handleSoloCountAttemptRef = useRef(null);
+
   // Whisper streaming audio integration
   const handleWhisperNumber = useCallback((detectedNum, cleanText, rawText) => {
     if (rawText) setHeardWord(rawText);
@@ -349,14 +361,18 @@ export default function NumberTracingApp({
         if (detectedNum === expected) {
           lastMatchTimeRef.current = now;
           echoSubStateRef.current = 'APP_SPEAKING';
-          onChildEchoed(detectedNum);
+          if (onChildEchoedRef.current) {
+            onChildEchoedRef.current(detectedNum);
+          }
         }
       }
     } else if (stageRef.current === 'SOLO_COUNT') {
       lastMatchTimeRef.current = now;
-      handleSoloCountAttempt(detectedNum);
+      if (handleSoloCountAttemptRef.current) {
+        handleSoloCountAttemptRef.current(detectedNum);
+      }
     }
-  }, [onChildEchoed, handleSoloCountAttempt]);
+  }, []);
 
   const startWhisper = useCallback(() => {
     if (!whisperStreamerRef.current) {
@@ -481,6 +497,11 @@ export default function NumberTracingApp({
     }
   }, [selectedNum, playChime, playWrongTone, finishCountingAndAdvance]);
 
+  // Sync ref
+  useEffect(() => {
+    handleSoloCountAttemptRef.current = handleSoloCountAttempt;
+  }, [handleSoloCountAttempt]);
+
   // Transition to Solo Count Stage (Child counts on their own)
   const startSoloCountStage = useCallback(() => {
     setStage('SOLO_COUNT');
@@ -536,6 +557,11 @@ export default function NumberTracingApp({
     }
   }, [selectedNum, playChime, triggerEchoStep, startSoloCountStage]);
 
+  // Sync ref
+  useEffect(() => {
+    onChildEchoedRef.current = onChildEchoed;
+  }, [onChildEchoed]);
+
   // Ensure speech recognition is active and processing callbacks
   const ensureSpeechActive = useCallback(() => {
     if (typeof window === 'undefined') return;
@@ -579,7 +605,9 @@ export default function NumberTracingApp({
                   if (spoken === expected) {
                     lastMatchTimeRef.current = now;
                     echoSubStateRef.current = 'APP_SPEAKING';
-                    onChildEchoed(spoken);
+                    if (onChildEchoedRef.current) {
+                      onChildEchoedRef.current(spoken);
+                    }
                     break;
                   }
                 }
@@ -588,7 +616,9 @@ export default function NumberTracingApp({
                 const spoken = detectSpokenNumber(cand, expected);
                 if (spoken !== null) {
                   lastMatchTimeRef.current = now;
-                  handleSoloCountAttempt(spoken);
+                  if (handleSoloCountAttemptRef.current) {
+                    handleSoloCountAttemptRef.current(spoken);
+                  }
                   break;
                 }
               }
@@ -603,7 +633,7 @@ export default function NumberTracingApp({
     } catch {
       // Speech recognition fallback
     }
-  }, [onChildEchoed, handleSoloCountAttempt]);
+  }, []);
 
   // Phase A: Echo Count (First say number e.g. 4, then voice says 1 child repeats 1, then 2...)
   const startEchoCountStage = useCallback(() => {
@@ -712,10 +742,14 @@ export default function NumberTracingApp({
     if (stage === 'ECHO_COUNT') {
       if (echoSubStateRef.current === 'WAITING_KID' && itemIdx === echoStepRef.current) {
         echoSubStateRef.current = 'APP_SPEAKING';
-        onChildEchoed(itemIdx);
+        if (onChildEchoedRef.current) {
+          onChildEchoedRef.current(itemIdx);
+        }
       }
     } else if (stage === 'SOLO_COUNT') {
-      handleSoloCountAttempt(itemIdx);
+      if (handleSoloCountAttemptRef.current) {
+        handleSoloCountAttemptRef.current(itemIdx);
+      }
     }
   };
 

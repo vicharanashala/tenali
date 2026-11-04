@@ -57,6 +57,57 @@ function ClickHandCursor({ isPressed = false, isContinuous = false }) {
   );
 }
 
+// Safety Error Boundary to completely eliminate black-screen failures
+class NumbersErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false, error: null };
+  }
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true, error };
+  }
+
+  componentDidCatch(error, errorInfo) {
+    console.error("Numbers1To10 ErrorBoundary caught:", error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div style={{
+          padding: '28px',
+          margin: '24px auto',
+          maxWidth: '560px',
+          textAlign: 'center',
+          background: 'rgba(30, 27, 75, 0.85)',
+          border: '2px solid rgba(244, 63, 94, 0.45)',
+          borderRadius: '20px',
+          color: '#f8fafc',
+          boxShadow: '0 12px 36px rgba(0,0,0,0.45)'
+        }}>
+          <div style={{ fontSize: '2.8rem', marginBottom: '10px' }}>🐰✨</div>
+          <h2 style={{ fontSize: '1.35rem', fontWeight: 700, margin: '0 0 8px 0', color: '#fb7185' }}>
+            Activity Loading Pause
+          </h2>
+          <p style={{ fontSize: '0.92rem', color: '#cbd5e1', marginBottom: '18px', lineHeight: 1.5 }}>
+            {this.state.error?.message || "A small issue occurred while starting the activity."}
+          </p>
+          <button
+            type="button"
+            className="numbers-btn-primary"
+            style={{ margin: '0 auto', display: 'inline-flex', padding: '10px 24px' }}
+            onClick={() => this.setState({ hasError: false, error: null })}
+          >
+            <span>🔄 Reload Activity</span>
+          </button>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
+
 export default function Numbers1To10App({
   onBack,
   completedTopics = [],
@@ -664,22 +715,24 @@ export default function Numbers1To10App({
         </button>
       </nav>
 
-      {/* ============================================================ */}
-      {/* TAB 1: LEARN & TRACE FOUNDATIONS                            */}
-      {/* ============================================================ */}
-      {activeTab === 'trace' && (
-        <NumberTracingApp
-          onAwardStars={awardStars}
-          markTopicCompleted={markTopicCompleted}
-          onNavigateMaze={() => { sfxClick(); setActiveTab('maze'); }}
-        />
-      )}
+      {/* Main Tab Workspaces wrapped in ErrorBoundary to prevent blank crashes */}
+      <NumbersErrorBoundary>
+        {/* ============================================================ */}
+        {/* TAB 1: LEARN & TRACE FOUNDATIONS                            */}
+        {/* ============================================================ */}
+        {activeTab === 'trace' && (
+          <NumberTracingApp
+            onAwardStars={awardStars}
+            markTopicCompleted={markTopicCompleted}
+            onNavigateMaze={() => { sfxClick(); setActiveTab('maze'); }}
+          />
+        )}
 
-      {/* ============================================================ */}
-      {/* TAB 1: HOPSCOTCH MAT ADVENTURE GAME                          */}
-      {/* ============================================================ */}
-      {activeTab === 'hopscotch' && (
-      <section className="numbers-card">
+        {/* ============================================================ */}
+        {/* TAB 2: HOPSCOTCH MAT ADVENTURE GAME                          */}
+        {/* ============================================================ */}
+        {activeTab === 'hopscotch' && (
+        <section className="numbers-card">
         {/* Compact Section Header */}
         <div className="numbers-section-header">
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
@@ -981,7 +1034,7 @@ export default function Numbers1To10App({
       )}
 
       {/* ============================================================ */}
-      {/* TAB 2: SPACE MAZE ADVENTURE GAME                             */}
+      {/* TAB 3: SPACE MAZE ADVENTURE GAME                             */}
       {/* ============================================================ */}
       {activeTab === 'maze' && (
         <SpaceMazeAdventure
@@ -990,6 +1043,7 @@ export default function Numbers1To10App({
           sfxTone={sfxTone}
         />
       )}
+      </NumbersErrorBoundary>
 
       {/* ============================================================ */}
       {/* MODAL: HOW TO PLAY TUTORIAL                                  */}
