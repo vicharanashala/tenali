@@ -5,5 +5,7 @@
  * All module logic, styles, activities, and voice recognition services
  * are organized inside ./numbers1To10/
  */
-export { default } from './numbers1To10/Numbers1To10App.jsx';
+import Numbers1To10App from './numbers1To10/Numbers1To10App.jsx';
+
+export default Numbers1To10App;
 export * from './numbers1To10/Numbers1To10App.jsx';
