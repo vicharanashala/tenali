@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import confetti from 'canvas-confetti';
-import { createWhisperStreamer, checkWhisperServerHealth } from './whisperVoiceClient.js';
+import { createWhisperStreamer, checkWhisperServerHealth } from './voiceRecognizer.js';
 
 /**
  * SpaceMazeAdventure — Tenali Star Station Explorer

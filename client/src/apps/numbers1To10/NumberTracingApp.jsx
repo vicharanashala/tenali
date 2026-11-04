@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import confetti from 'canvas-confetti';
 import { NUMBERS_INFO } from './numbers1To10Data.js';
-import { createWhisperStreamer, checkWhisperServerHealth } from './whisperVoiceClient.js';
+import { createWhisperStreamer, checkWhisperServerHealth } from './voiceRecognizer.js';
 
 /**
  * NumberTracingApp — Minimal Tactile Learn & Trace Module
