@@ -348,6 +348,7 @@ export default function NumberTracingApp({
   // Forward declarations via refs to eliminate Temporal Dead Zone ReferenceErrors on initial render
   const onChildEchoedRef = useRef(null);
   const handleSoloCountAttemptRef = useRef(null);
+  const ensureSpeechActiveRef = useRef(null);
 
   // Whisper streaming audio integration
   const handleWhisperNumber = useCallback((detectedNum, cleanText, rawText) => {
@@ -511,6 +512,10 @@ export default function NumberTracingApp({
     setWrongAttemptFlash(false);
     setHeardWord('');
     lastMatchTimeRef.current = Date.now();
+    // Start ultra-low-latency Web Speech (<50ms) + Whisper AI simultaneously
+    if (ensureSpeechActiveRef.current) {
+      ensureSpeechActiveRef.current();
+    }
     startWhisper();
   }, [startWhisper]);
 
@@ -634,6 +639,11 @@ export default function NumberTracingApp({
       // Speech recognition fallback
     }
   }, []);
+
+  // Sync ref
+  useEffect(() => {
+    ensureSpeechActiveRef.current = ensureSpeechActive;
+  }, [ensureSpeechActive]);
 
   // Phase A: Echo Count (First say number e.g. 4, then voice says 1 child repeats 1, then 2...)
   const startEchoCountStage = useCallback(() => {

@@ -177,7 +177,8 @@ export function createWhisperStreamer({ onNumberDetected, onTextHeard, onStatusC
         sampleBuffer.push(new Float32Array(channelData));
 
         const totalSamples = sampleBuffer.reduce((acc, curr) => acc + curr.length, 0);
-        const targetSampleCount = Math.round(audioContext.sampleRate * 1.8);
+        // Optimized to 0.75s for fast single-digit counting (~2.4x faster than 1.8s)
+        const targetSampleCount = Math.round(audioContext.sampleRate * 0.75);
 
         if (totalSamples >= targetSampleCount && !isSending) {
           const merged = new Float32Array(totalSamples);
@@ -223,7 +224,7 @@ export function createWhisperStreamer({ onNumberDetected, onTextHeard, onStatusC
                 if (raw && onTextHeard) onTextHeard(raw);
                 const detectedNumber = resolveTextToNumber(raw);
                 if (detectedNumber && onNumberDetected) {
-                  onNumberDetected(detectedNumber, raw, raw);
+                  onNumberDetected(detectedNumber, raw, raw, 'groq-whisper');
                 }
               }
             } else {
@@ -241,7 +242,7 @@ export function createWhisperStreamer({ onNumberDetected, onTextHeard, onStatusC
                   const raw = result.raw_text || result.text;
                   if (raw && onTextHeard) onTextHeard(raw);
                   if (result.number && onNumberDetected) {
-                    onNumberDetected(result.number, result.text, raw);
+                    onNumberDetected(result.number, result.text, raw, 'hf-whisper');
                   }
                 }
               }
@@ -255,7 +256,11 @@ export function createWhisperStreamer({ onNumberDetected, onTextHeard, onStatusC
       };
 
       mediaStreamSource.connect(scriptProcessor);
-      scriptProcessor.connect(audioContext.destination);
+      // Mute audio output to prevent microphone feedback echo
+      const muteGain = audioContext.createGain();
+      muteGain.gain.value = 0;
+      scriptProcessor.connect(muteGain);
+      muteGain.connect(audioContext.destination);
 
       return true;
     } catch {
