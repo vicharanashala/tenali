@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import confetti from 'canvas-confetti';
 import { NUMBERS_INFO } from './numbers1To10Data.js';
-import { createWhisperStreamer, checkWhisperServerHealth } from './voiceRecognizer.js';
+import { useVoiceRecognizer } from './voiceRecognizer.js';
 
 /**
  * NumberTracingApp — Minimal Tactile Learn & Trace Module
@@ -184,8 +184,6 @@ export default function NumberTracingApp({
   const [wrongAttemptFlash, setWrongAttemptFlash] = useState(false);
 
   const [heardWord, setHeardWord] = useState('');
-  const [micActive, setMicActive] = useState(false);
-  const [whisperLive, setWhisperLive] = useState(false);
 
   // Demo animation state
   const [demoActive, setDemoActive] = useState(false);
@@ -197,8 +195,6 @@ export default function NumberTracingApp({
   const svgRef = useRef(null);
   const pathRef = useRef(null);
   const audioCtxRef = useRef(null);
-  const speechRecRef = useRef(null);
-  const whisperStreamerRef = useRef(null);
   const stageRef = useRef('TRACING');
   const echoStepRef = useRef(1);
   const echoSubStateRef = useRef('ANNOUNCING_NUM');
@@ -348,10 +344,9 @@ export default function NumberTracingApp({
   // Forward declarations via refs to eliminate Temporal Dead Zone ReferenceErrors on initial render
   const onChildEchoedRef = useRef(null);
   const handleSoloCountAttemptRef = useRef(null);
-  const ensureSpeechActiveRef = useRef(null);
 
-  // Whisper streaming audio integration
-  const handleWhisperNumber = useCallback((detectedNum, cleanText, rawText) => {
+  // Unified voice recognition handler powered by Method 1: useVoiceRecognizer hook
+  const handleVoiceNumber = useCallback((detectedNum, cleanText, rawText) => {
     if (rawText) setHeardWord(rawText);
     const now = Date.now();
     if (now - lastMatchTimeRef.current < 280) return;
@@ -375,41 +370,22 @@ export default function NumberTracingApp({
     }
   }, []);
 
-  const startWhisper = useCallback(() => {
-    if (!whisperStreamerRef.current) {
-      whisperStreamerRef.current = createWhisperStreamer({
-        onNumberDetected: handleWhisperNumber,
-        onTextHeard: (t) => {
-          if (t) setHeardWord(t);
-        },
-        onStatusChange: (active) => setWhisperLive(active)
-      });
+  const {
+    isListening: micActive,
+    engine: voiceEngine,
+    start: startVoice,
+    stop: stopVoice
+  } = useVoiceRecognizer({
+    onNumberDetected: handleVoiceNumber,
+    onTextHeard: (t) => {
+      if (t) setHeardWord(t);
     }
-    whisperStreamerRef.current.start();
-  }, [handleWhisperNumber]);
-
-  const stopWhisper = useCallback(() => {
-    if (whisperStreamerRef.current) {
-      whisperStreamerRef.current.stop();
-      whisperStreamerRef.current = null;
-    }
-  }, []);
-
-  // Health check on mount
-  useEffect(() => {
-    checkWhisperServerHealth().then((isLive) => {
-      setWhisperLive(isLive);
-    });
-  }, []);
+  });
 
   // Switch/Reset Number
   const selectNumber = useCallback((n) => {
     clearDemoTimers();
-    stopWhisper();
-    if (speechRecRef.current) {
-      try { speechRecRef.current.abort(); } catch { /* ignore */ }
-      speechRecRef.current = null;
-    }
+    stopVoice();
     if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
       window.speechSynthesis.cancel();
     }
@@ -428,15 +404,11 @@ export default function NumberTracingApp({
     setWrongAttemptFlash(false);
     setHeardWord('');
     speakNumber(n);
-  }, [clearDemoTimers, speakNumber, stopWhisper]);
+  }, [clearDemoTimers, speakNumber, stopVoice]);
 
   // Finish counting: Confetti, stars, strictly SILENT (no spoken words), advance to next number!
   const finishCountingAndAdvance = useCallback(() => {
-    stopWhisper();
-    if (speechRecRef.current) {
-      try { speechRecRef.current.abort(); } catch { /* ignore */ }
-      speechRecRef.current = null;
-    }
+    stopVoice();
     if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
       window.speechSynthesis.cancel();
     }
@@ -512,12 +484,8 @@ export default function NumberTracingApp({
     setWrongAttemptFlash(false);
     setHeardWord('');
     lastMatchTimeRef.current = Date.now();
-    // Start ultra-low-latency Web Speech (<50ms) + Whisper AI simultaneously
-    if (ensureSpeechActiveRef.current) {
-      ensureSpeechActiveRef.current();
-    }
-    startWhisper();
-  }, [startWhisper]);
+    startVoice();
+  }, [startVoice]);
 
   // Trigger one step in Echo Count (voice speaks, then waits for child repeat)
   const triggerEchoStep = useCallback((step) => {
@@ -567,84 +535,6 @@ export default function NumberTracingApp({
     onChildEchoedRef.current = onChildEchoed;
   }, [onChildEchoed]);
 
-  // Ensure speech recognition is active and processing callbacks
-  const ensureSpeechActive = useCallback(() => {
-    if (typeof window === 'undefined') return;
-    const SpeechClass = window.SpeechRecognition || window.webkitSpeechRecognition;
-    if (!SpeechClass) return;
-
-    try {
-      if (!speechRecRef.current) {
-        const r = new SpeechClass();
-        speechRecRef.current = r;
-        r.continuous = true;
-        r.interimResults = true;
-        r.maxAlternatives = 8;
-        r.lang = (typeof navigator !== 'undefined' && navigator.language) ? navigator.language : 'en-US';
-
-        r.onstart = () => setMicActive(true);
-        r.onend = () => {
-          setMicActive(false);
-          if (stageRef.current === 'ECHO_COUNT' || stageRef.current === 'SOLO_COUNT') {
-            try { r.start(); } catch { /* ignore */ }
-          }
-        };
-        r.onerror = () => { /* ignore */ };
-
-        r.onresult = (ev) => {
-          for (let i = ev.resultIndex; i < ev.results.length; i++) {
-            const res = ev.results[i];
-            if (!res) continue;
-            const text = res[0] ? res[0].transcript : '';
-            if (text) setHeardWord(text.trim());
-
-            for (let a = 0; a < res.length; a++) {
-              const cand = res[a] ? res[a].transcript : '';
-              const now = Date.now();
-              if (now - lastMatchTimeRef.current < 280) continue;
-
-              if (stageRef.current === 'ECHO_COUNT') {
-                if (echoSubStateRef.current === 'WAITING_KID') {
-                  const expected = echoStepRef.current;
-                  const spoken = detectSpokenNumber(cand, expected);
-                  if (spoken === expected) {
-                    lastMatchTimeRef.current = now;
-                    echoSubStateRef.current = 'APP_SPEAKING';
-                    if (onChildEchoedRef.current) {
-                      onChildEchoedRef.current(spoken);
-                    }
-                    break;
-                  }
-                }
-              } else if (stageRef.current === 'SOLO_COUNT') {
-                const expected = soloCountStepRef.current;
-                const spoken = detectSpokenNumber(cand, expected);
-                if (spoken !== null) {
-                  lastMatchTimeRef.current = now;
-                  if (handleSoloCountAttemptRef.current) {
-                    handleSoloCountAttemptRef.current(spoken);
-                  }
-                  break;
-                }
-              }
-            }
-          }
-        };
-
-        r.start();
-      } else {
-        try { speechRecRef.current.start(); } catch { /* ignore */ }
-      }
-    } catch {
-      // Speech recognition fallback
-    }
-  }, []);
-
-  // Sync ref
-  useEffect(() => {
-    ensureSpeechActiveRef.current = ensureSpeechActive;
-  }, [ensureSpeechActive]);
-
   // Phase A: Echo Count (First say number e.g. 4, then voice says 1 child repeats 1, then 2...)
   const startEchoCountStage = useCallback(() => {
     setStage('ECHO_COUNT');
@@ -655,8 +545,7 @@ export default function NumberTracingApp({
     echoSubStateRef.current = 'ANNOUNCING_NUM';
     setHeardWord('');
 
-    ensureSpeechActive();
-    startWhisper();
+    startVoice();
 
     // Step 0: First say the target number itself (e.g. "Four")
     speakNumber(selectedNum);
@@ -668,7 +557,7 @@ export default function NumberTracingApp({
     }, 900);
 
     demoTimersRef.current.push(tStartEcho);
-  }, [selectedNum, speakNumber, playTone, ensureSpeechActive, startWhisper, triggerEchoStep]);
+  }, [selectedNum, speakNumber, playTone, startVoice, triggerEchoStep]);
 
   // User Pointer Dragging along Path
   const handlePointerDown = (e) => {
@@ -928,15 +817,12 @@ export default function NumberTracingApp({
   useEffect(() => {
     return () => {
       clearDemoTimers();
-      stopWhisper();
-      if (speechRecRef.current) {
-        try { speechRecRef.current.abort(); } catch { /* ignore */ }
-      }
+      stopVoice();
       if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
         window.speechSynthesis.cancel();
       }
     };
-  }, [clearDemoTimers, stopWhisper]);
+  }, [clearDemoTimers, stopVoice]);
 
   return (
     <div className="tenali-learn-trace-container">
@@ -1145,9 +1031,9 @@ export default function NumberTracingApp({
           <div className="counter-panel-header">
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <h3>{selectedNum} {config.objectName}s</h3>
-              {whisperLive && (
-                <span className="whisper-live-badge" title="Whisper AI Server Active (detects quiet whispers)">
-                  ⚡ Whisper AI
+              {micActive && (
+                <span className="whisper-live-badge" title="Active Voice Engine">
+                  {voiceEngine === 'whisper' ? '⚡ Whisper AI' : '🎤 Live Web Speech'}
                 </span>
               )}
             </div>
