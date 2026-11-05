@@ -10,12 +10,15 @@
  *   3. Native Browser Web Speech API (SpeechRecognition / webkitSpeechRecognition) as instant zero-network fallback.
  *
  * Features:
+ * - React hook `useVoiceRecognizer` & ready-to-render `<VoiceIndicator />` component for easy JSX integration.
  * - Pure JavaScript 16-bit 16kHz PCM WAV encoding (zero ffmpeg / external binary dependencies).
  * - Silence threshold gating to save bandwidth & compute.
  * - Comprehensive multi-lingual & phonetic homophone resolution for numbers 1 to 10
  *   (English, Tamil, Hindi, Spanish + common acoustic misrecognitions).
  * - Safe failover: if network or mic drops, gracefully degrades without crashing UI.
  */
+
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 
 export const GROQ_API_KEY = (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_GROQ_API_KEY)
   ? import.meta.env.VITE_GROQ_API_KEY.trim()
@@ -412,11 +415,140 @@ export function createVoiceRecognizer({
   return { start, stop };
 }
 
+/**
+ * useVoiceRecognizer — Idiomatic React Hook for JSX
+ *
+ * Connects any JSX component to the hybrid voice recognition service.
+ *
+ * @example
+ * const { isListening, engine, heardText, toggle } = useVoiceRecognizer({
+ *   onNumberDetected: (num) => console.log('Spoke number:', num)
+ * });
+ * return <button onClick={toggle}>{isListening ? 'Stop' : 'Start'}</button>;
+ */
+export function useVoiceRecognizer({
+  onNumberDetected,
+  onTextHeard,
+  autoStart = false,
+  language = 'en-US'
+} = {}) {
+  const [isListening, setIsListening] = useState(false);
+  const [engine, setEngine] = useState('idle'); // 'whisper' | 'native' | 'idle'
+  const [heardText, setHeardText] = useState('');
+  const recognizerRef = useRef(null);
+  const onNumberDetectedRef = useRef(onNumberDetected);
+  const onTextHeardRef = useRef(onTextHeard);
+
+  useEffect(() => {
+    onNumberDetectedRef.current = onNumberDetected;
+  }, [onNumberDetected]);
+
+  useEffect(() => {
+    onTextHeardRef.current = onTextHeard;
+  }, [onTextHeard]);
+
+  const start = useCallback(() => {
+    if (!recognizerRef.current) {
+      recognizerRef.current = createVoiceRecognizer({
+        onNumberDetected: (num, clean, raw) => {
+          onNumberDetectedRef.current?.(num, clean, raw);
+        },
+        onTextHeard: (text) => {
+          setHeardText(text);
+          onTextHeardRef.current?.(text);
+        },
+        onEngineChange: (eng) => setEngine(eng),
+        onStatusChange: (status) => setIsListening(status === 'listening'),
+        language
+      });
+    }
+    recognizerRef.current.start();
+  }, [language]);
+
+  const stop = useCallback(() => {
+    if (recognizerRef.current) {
+      recognizerRef.current.stop();
+      recognizerRef.current = null;
+    }
+    setIsListening(false);
+    setEngine('idle');
+  }, []);
+
+  const toggle = useCallback(() => {
+    if (isListening) stop();
+    else start();
+  }, [isListening, start, stop]);
+
+  useEffect(() => {
+    if (autoStart) {
+      start();
+    }
+    return () => {
+      if (recognizerRef.current) {
+        recognizerRef.current.stop();
+        recognizerRef.current = null;
+      }
+    };
+  }, [autoStart, start]);
+
+  return { isListening, engine, heardText, start, stop, toggle };
+}
+
+/**
+ * VoiceIndicator — Ready-to-render React Status Pill / Button (Pure JS, zero JSX tags)
+ */
+export function VoiceIndicator({ isListening, engine, heardText, onToggle, style }) {
+  return React.createElement(
+    'div',
+    {
+      className: 'tenali-voice-status-pill',
+      onClick: onToggle,
+      style: {
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: '8px',
+        padding: '6px 14px',
+        borderRadius: '999px',
+        fontSize: '0.86rem',
+        cursor: onToggle ? 'pointer' : 'default',
+        background: isListening ? 'rgba(16, 185, 129, 0.15)' : 'rgba(148, 163, 184, 0.15)',
+        border: `1px solid ${isListening ? 'rgba(16, 185, 129, 0.5)' : 'rgba(148, 163, 184, 0.3)'}`,
+        color: isListening ? '#34d399' : '#94a3b8',
+        userSelect: 'none',
+        ...style
+      },
+      title: isListening ? "Listening... click to pause" : "Click to activate mic"
+    },
+    React.createElement('span', {
+      style: {
+        width: '8px',
+        height: '8px',
+        borderRadius: '50%',
+        background: isListening ? '#10b981' : '#94a3b8',
+        boxShadow: isListening ? '0 0 8px #10b981' : 'none'
+      }
+    }),
+    React.createElement(
+      'span',
+      null,
+      isListening
+        ? heardText
+          ? `"${heardText}"`
+          : engine === 'whisper'
+          ? '⚡ Whisper AI'
+          : '🎤 Listening...'
+        : '🔇 Mic Off'
+    )
+  );
+}
+
 export default {
   resolveTextToNumber,
   checkWhisperServerHealth,
   createWhisperStreamer,
   createVoiceRecognizer,
+  useVoiceRecognizer,
+  VoiceIndicator,
   PHONETIC_MAP
 };
 
