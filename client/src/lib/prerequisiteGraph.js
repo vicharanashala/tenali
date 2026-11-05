@@ -229,6 +229,13 @@ edges.forEach(([src, tgt]) => {
   if (predecessors[tgt]) predecessors[tgt].add(src)
 })
 
+// successors[topic] = Set of topic keys this topic directly unlocks
+const successors = {}
+nodes.forEach(n => { successors[n.id] = new Set() })
+edges.forEach(([src, tgt]) => {
+  if (successors[src]) successors[src].add(tgt)
+})
+
 // ─── Public API ──────────────────────────────────────────────────────────
 
 /**
@@ -262,11 +269,38 @@ export function getTopicApiPath(topicKey) {
   return API_OVERRIDES[topicKey] || `${topicKey}-api`
 }
 
+// Reverse of getTopicApiPath: API path segment (e.g. "circle", "twinhunt")
+// -> topic key (e.g. "circleth", "spot"). Built lazily once. Anything that
+// naively does `apiPath.replace('-api', '')` instead of this will silently
+// break for the topics in API_OVERRIDES above, since their apiPath segment
+// doesn't match their topic key.
+let apiSegmentToTopic = null
+export function getTopicIdFromApiPath(apiPath) {
+  if (!apiSegmentToTopic) {
+    apiSegmentToTopic = {}
+    getAllTopicKeys().forEach((key) => {
+      const segment = getTopicApiPath(key).replace(/-api$/, '')
+      apiSegmentToTopic[segment] = key
+    })
+  }
+  const segment = (apiPath || '').replace(/-api$/, '')
+  return apiSegmentToTopic[segment] || segment
+}
+
 /**
  * Check if a topic has any prerequisites at all.
  */
 export function hasPrerequisites(topicKey) {
   return getPrerequisites(topicKey).length > 0
+}
+
+/**
+ * Get the topics that directly become available once this topic is done.
+ * @param {string} topicKey — e.g. 'ratio'
+ * @returns {string[]} — e.g. ['percent', 'sdt', 'similarity', 'trig']
+ */
+export function getUnlocks(topicKey) {
+  return successors[topicKey] ? [...successors[topicKey]] : []
 }
 
 /**
@@ -282,3 +316,4 @@ export function getAllTopicKeys() {
 export function getTopicCategory(topicKey) {
   return nodeMap[topicKey]?.cat || 'other'
 }
+
