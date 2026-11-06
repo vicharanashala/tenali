@@ -1,8 +1,16 @@
 # Backend server — kept for Render deployment (Express serves React frontend)
+#
+# NODE_VERSION is pinned to the release that includes the October 21, 2026
+# Node.js security fixes (CVE-2026-111497 and the TLS/DNS advisories in the
+# same release). It must match .nvmrc at the repository root — the runtime
+# floor test in server/__tests__/runtimeVersion.test.js fails if they drift.
 services:
   - type: web
     name: tenali
     env: node
-    buildCommand: npm install && cd client && npm install && npm run build
+    envVars:
+      - key: NODE_VERSION
+        value: 24.22.1
+    buildCommand: npm ci && cd client && npm ci && npm run build && cd ../server && npm ci --omit=dev
     startCommand: node server/index.js
     healthCheckPath: /api/health
