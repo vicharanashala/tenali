@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './LcmHcfApp.css';
+import WhyLearnThis from './components/WhyLearnThis';
 
 // Anchor /hcflcm-api fetches to the current sub-path so they reach
 // /summership/hcflcm-api on the sub-path deployment (where the route
@@ -1765,6 +1766,7 @@ export default function InteractiveLcmHcfApp({ onBack }) {
         <p style={{ color: 'var(--clr-text-soft)', marginBottom: '24px' }}>
           Embark on an age-adaptive mathematics journey. Select your level to begin!
         </p>
+        <WhyLearnThis topicId="hcflcm" />
 
         <div className="age-select-grid">
           <div className="age-card level-1" onClick={() => { setLevel(1); setCurrentStep(1); }}>
