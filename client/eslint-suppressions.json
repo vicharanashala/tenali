@@ -154,11 +154,6 @@
       "count": 1
     }
   },
-  "src/detective-app.jsx": {
-    "react-hooks/set-state-in-effect": {
-      "count": 1
-    }
-  },
   "src/hooks/useTimer.js": {
     "react-hooks/purity": {
       "count": 1
