@@ -22,3 +22,6 @@ server/_probe*.js
 *.bak.*
 __pycache__/
 *.pyc
+
+# Local npm backup files
+client/*.backup
