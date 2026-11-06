@@ -62280,6 +62280,11 @@ const generateRound = (n) => {
           </div>
         </div>
         {renderFeedback(feedback, isCorrect)}
+        {revealed && (
+          <button onClick={() => advanceRef.current()}>
+            {round >= totalRounds ? 'Finish' : 'Next Round'}
+          </button>
+        )}
       </>}
       {finished && <div className="welcome-box">
         <p className="welcome-text">Game complete!</p>
