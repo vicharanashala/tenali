@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import confetti from 'canvas-confetti';
-import SpaceMazeAdventure from './numbers1To10/SpaceMazeAdventure.jsx';
-import NumberTracingApp from './numbers1To10/NumberTracingApp.jsx';
-import './numbers1To10/Numbers1To10App.css';
+import SpaceMazeAdventure from './numbers1to10_voice/SpaceMazeAdventure.jsx';
+import NumberTracingApp from './numbers1to10_voice/NumberTracingApp.jsx';
+import './numbers1to10_voice/Numbers1To10App.css';
+import './numbers1to10_voice/PushToTalkButton.css';
 
 const NUMBER_WORDS = {
   1: 'One',

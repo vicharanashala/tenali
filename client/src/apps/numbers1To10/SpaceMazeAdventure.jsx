@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import confetti from 'canvas-confetti';
+import { fireConfetti } from './confettiHelper.js';
+import { useWhisperVoice, PushToTalkButton } from './index.js';
 
 /**
  * SpaceMazeAdventure — Tenali Star Station Explorer
@@ -43,33 +45,47 @@ function findAnySpokenNumber(text) {
   return null;
 }
 
-// Generate a random permutation of station numbers 1..N across nodes 1..N
-function generateShuffledStations(n) {
-  const nodes = Array.from({ length: n }, (_, i) => i + 1);
-
-  // Fisher-Yates shuffle
-  for (let i = nodes.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [nodes[i], nodes[j]] = [nodes[j], nodes[i]];
-  }
-
-  // Ensure it's not strictly identity if n > 1
-  let isIdentity = true;
-  for (let i = 0; i < n; i++) {
-    if (nodes[i] !== i + 1) {
-      isIdentity = false;
-      break;
-    }
-  }
-  if (isIdentity && n > 1) {
-    [nodes[0], nodes[1]] = [nodes[1], nodes[0]];
-  }
-
+// Default sequential stations 1..N across nodes 1..N
+// Station 1 is always next to the Start Pad, and Station N (or 10) is always next to Saturn!
+function generateSequentialStations(n) {
   const stationToNode = {};
   const nodeToStation = {};
-
   for (let s = 1; s <= n; s++) {
-    const nodeId = nodes[s - 1];
+    stationToNode[s] = s;
+    nodeToStation[s] = s;
+  }
+  return { stationToNode, nodeToStation };
+}
+
+// Jumble layout: Keeps Station 1 at Node 1 (next to Start Pad) and Station N at Node N (next to Saturn)
+function generateShuffledStations(n) {
+  const stationToNode = { 1: 1 };
+  const nodeToStation = { 1: 1 };
+
+  if (n <= 2) {
+    if (n === 2) {
+      stationToNode[2] = 2;
+      nodeToStation[2] = 2;
+    }
+    return { stationToNode, nodeToStation };
+  }
+
+  // Anchor N to Node N (next to Saturn)
+  stationToNode[n] = n;
+  nodeToStation[n] = n;
+
+  // Shuffle middle stations 2..(n-1)
+  const middleStations = [];
+  for (let i = 2; i < n; i++) middleStations.push(i);
+
+  for (let i = middleStations.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [middleStations[i], middleStations[j]] = [middleStations[j], middleStations[i]];
+  }
+
+  for (let idx = 0; idx < middleStations.length; idx++) {
+    const s = middleStations[idx];
+    const nodeId = idx + 2;
     stationToNode[s] = nodeId;
     nodeToStation[nodeId] = s;
   }
@@ -80,7 +96,7 @@ function generateShuffledStations(n) {
 // SVG Maze Node Coordinates
 const ALL_NODES = [
   [35, 270],  // Launch base (Node 0)
-  [105, 245], // St 1
+  [105, 245], // St 1 (next to Start Pad)
   [65, 175],  // St 2
   [55, 95],   // St 3
   [65, 30],   // St 4
@@ -89,10 +105,12 @@ const ALL_NODES = [
   [155, 205], // St 7
   [235, 245], // St 8
   [320, 60],  // St 9
-  [355, 180]  // St 10
+  [355, 180]  // St 10 (next to Saturn)
 ];
 
-const ALL_EDGES = [ [1, 2], [1, 7], [1, 8],
+const ALL_EDGES = [
+  [0, 1], // Start Pad (Node 0) to Pad 1 (Node 1)
+  [1, 2], [1, 7], [1, 8],
   [2, 3], [2, 7],
   [3, 4], [3, 5],
   [4, 5],
@@ -154,7 +172,6 @@ function findShortestPath(startNode, endNode, maxN) {
 
     for (let i = 0; i < ALL_EDGES.length; i++) {
       const edge = ALL_EDGES[i];
-      if (edge[0] === 0 || edge[1] === 0) continue;
       if (edge[0] > maxN || edge[1] > maxN) continue;
       let next = -1;
       if (edge[0] === curr) next = edge[1];
@@ -178,24 +195,10 @@ function findShortestPath(startNode, endNode, maxN) {
 }
 
 function getSaturnCoords(nodePos) {
-  if (!nodePos) return { x: 385, y: 28 };
+  if (!nodePos) return { x: 395, y: 156 };
   const [nx, ny] = nodePos;
-  let ox = 32;
-  let oy = -26;
-
-  if (nx > 330) {
-    ox = -34;
-  } else if (nx < 80) {
-    ox = 34;
-  }
-
-  if (ny < 60) {
-    oy = 30;
-  } else if (ny > 220) {
-    oy = -30;
-  }
-
-  return { x: nx + ox, y: ny + oy };
+  // Position Saturn directly next to Pad 10 on the upper right
+  return { x: Math.min(410, nx + 40), y: ny - 24 };
 }
 
 export default function SpaceMazeAdventure({
@@ -206,54 +209,55 @@ export default function SpaceMazeAdventure({
   // Game parameters & state
   const [stationCount, setStationCount] = useState(10); // N = 5 | 7 | 10
 
-  // Dynamic jumbled layout of stations across nodes
-  const [stationLayout, setStationLayout] = useState(() => generateShuffledStations(10));
-  // Jumbled ordering of stars around the orbiting rocket
-  const [starOrder, setStarOrder] = useState([]);
+  // Default sequential layout of stations across nodes (Pad 1 next to Start Pad, Pad 10 next to Saturn)
+  const [stationLayout, setStationLayout] = useState(() => generateSequentialStations(10));
+  // Jumbled ordering of stars around the orbiting rocket (starts with 1 star at Station 1)
+  const [starOrder, setStarOrder] = useState([1]);
 
-  // Station 1's node index
-  const initialStartNode = (stationLayout && stationLayout.stationToNode && stationLayout.stationToNode[1]) || 1;
-  const initialStartPos = ALL_NODES[initialStartNode] || ALL_NODES[1];
-
-  const [currentStationIdx, setCurrentStationIdx] = useState(initialStartNode);
-  const [expectedStation, setExpectedStation] = useState(1); // Next station number to visit (1..N)
+  // Rocket starts parked on START PAD (Node 0)
+  const [currentStationIdx, setCurrentStationIdx] = useState(0);
+  const [expectedStation, setExpectedStation] = useState(1); // Current/next station number (1..N)
   const [currentCountingStep, setCurrentCountingStep] = useState(1);
-  const [isCountingPhase, setIsCountingPhase] = useState(false);
+  const [isCountingPhase, setIsCountingPhase] = useState(false); // Waiting to launch to Pad 1!
   const [isFlying, setIsFlying] = useState(false);
 
-  // Rocket position
-  const [rocketPos, setRocketPos] = useState({ x: initialStartPos[0], y: initialStartPos[1] });
-  const [rocketStatus, setRocketStatus] = useState('⚡ Rocket Ready at Station 1 (Start)');
+  // Initial rocket position on Start Pad (Node 0)
+  const [rocketPos, setRocketPos] = useState({ x: ALL_NODES[0][0], y: ALL_NODES[0][1], angle: 0 });
+  const [rocketStatus, setRocketStatus] = useState('⚡ Rocket Ready on Start Pad');
 
   // UI feedback banners
   const [banner, setBanner] = useState({
-    text: '👉 Tap Station 1 to start countdown! 🚀',
-    type: 'normal' // 'normal' | 'error' | 'success' | 'counting'
+    text: '🚀 Rocket ready on Start Pad! Choose Pad 1 to launch!',
+    type: 'normal'
   });
-  const [countGuideText, setCountGuideText] = useState('Ready for countdown!');
+  const [countGuideText, setCountGuideText] = useState('Say or click: Pad 1 🚀');
 
   // Speech Recognition state
-  const [isListening, setIsListening] = useState(false);
-  const [micStatusText, setMicStatusText] = useState('Mic Ready');
-  const [micState, setMicState] = useState('idle'); // 'idle' | 'listening' | 'error'
-  const [heardWord, setHeardWord] = useState('Waiting to launch...');
+  const [heardWord, setHeardWord] = useState('Ready to launch...');
 
   // Victory celebration modal
   const [winModalOpen, setWinModalOpen] = useState(false);
 
-  // Audio Context Ref
+  // Audio Context Ref & State tracking refs
   const audioCtxRef = useRef(null);
-  const speechRecRef = useRef(null);
-  const isListeningRef = useRef(false);
+  const currentStationIdxRef = useRef(0);
   const isCountingPhaseRef = useRef(false);
+  const isFlyingRef = useRef(false);
   const targetStepRef = useRef(1);
   const expectedStationRef = useRef(1);
   const lastMatchTimeRef = useRef(0);
-  const recognitionRestartTimeoutRef = useRef(null);
   const tokenRef = useRef(0);
   const animFrameRef = useRef(null);
 
   // Sync refs to avoid stale closures
+  useEffect(() => {
+    currentStationIdxRef.current = currentStationIdx;
+  }, [currentStationIdx]);
+
+  useEffect(() => {
+    isFlyingRef.current = isFlying;
+  }, [isFlying]);
+
   useEffect(() => {
     targetStepRef.current = currentCountingStep;
   }, [currentCountingStep]);
@@ -340,193 +344,151 @@ export default function SpaceMazeAdventure({
     playTone(150, 'sawtooth', 0.2, 0.2);
   }, [playTone]);
 
-  // Text to speech
-  const speak = useCallback((text, callback) => {
-    if (typeof window === 'undefined' || !('speechSynthesis' in window)) {
-      if (callback) callback();
+  // Bulletproof Speech Synthesis for kids voice commands
+  const speakVoiceCommand = useCallback((phrase, onEnd) => {
+    if (typeof window === 'undefined') {
+      if (onEnd) onEnd();
       return;
-    }
-    window.speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(text);
-    u.rate = 1.05;
-    u.pitch = 1.15;
-    let finished = false;
-    const done = () => {
-      if (!finished) {
-        finished = true;
-        if (callback) callback();
-      }
-    };
-    u.onend = done;
-    u.onerror = done;
-    window.speechSynthesis.speak(u);
-    setTimeout(done, 2500);
-  }, []);
-
-  // Forward declaration of handleCountInput via ref
-  const handleCountInputRef = useRef(null);
-
-  // Stop native speech recognition
-  const stopSpeechRecognition = useCallback(() => {
-    isListeningRef.current = false;
-    clearTimeout(recognitionRestartTimeoutRef.current);
-
-    if (speechRecRef.current) {
-      try {
-        speechRecRef.current.abort();
-      } catch {
-        // Safe cleanup
-      }
-      speechRecRef.current = null;
-    }
-    setIsListening(false);
-    setMicState('idle');
-    setMicStatusText('Mic Idle (Tap to Speak)');
-  }, []);
-
-  // Start native browser Speech Recognition with ultra-low latency (<50ms)
-  const startSpeechRecognition = useCallback(() => {
-    if (typeof window === 'undefined') return;
-
-    const SpeechRecClass = window.SpeechRecognition || window.webkitSpeechRecognition;
-    if (!SpeechRecClass) {
-      setMicStatusText('Tap stars to count');
-      setMicState('error');
-      return;
-    }
-
-    // Stop existing instance if any
-    if (speechRecRef.current) {
-      try {
-        speechRecRef.current.abort();
-      } catch {
-        // Safe cleanup
-      }
-      speechRecRef.current = null;
     }
 
     try {
-      const r = new SpeechRecClass();
-      speechRecRef.current = r;
+      playTone(587.33, 'triangle', 0.14, 0.16);
+    } catch {}
 
-      r.continuous = true;
-      r.interimResults = true;
-      r.maxAlternatives = 8;
-      r.lang = (typeof navigator !== 'undefined' && navigator.language) ? navigator.language : 'en-US';
-
-      r.onstart = () => {
-        isListeningRef.current = true;
-        setIsListening(true);
-        setMicState('listening');
-        setMicStatusText(`Mic Live: Say '${targetStepRef.current}'`);
-      };
-
-      r.onspeechstart = () => {
-        setMicStatusText('Hearing you...');
-      };
-
-      r.onresult = (ev) => {
-        if (!isCountingPhaseRef.current) return;
-        const currentTarget = targetStepRef.current;
-        let latestText = '';
-
-        for (let i = ev.resultIndex; i < ev.results.length; i++) {
-          const res = ev.results[i];
-          if (!res) continue;
-
-          const topCandidate = res[0] ? res[0].transcript : '';
-          if (topCandidate) {
-            latestText = topCandidate.trim();
-          }
-
-          // Check all alternatives immediately for target number
-          for (let a = 0; a < res.length; a++) {
-            const cand = res[a] ? res[a].transcript : '';
-            if (checkTargetSpoken(cand, currentTarget)) {
-              const now = Date.now();
-              if (now - lastMatchTimeRef.current > 300) {
-                lastMatchTimeRef.current = now;
-                setHeardWord(`"${cand.trim()}" ⭐`);
-                if (handleCountInputRef.current) {
-                  handleCountInputRef.current(currentTarget);
-                }
-                return;
-              }
-            }
-          }
-        }
-
-        if (latestText) {
-          setHeardWord(`"${latestText}"`);
-          const otherNum = findAnySpokenNumber(latestText);
-          if (otherNum !== null && otherNum !== currentTarget) {
-            setCountGuideText(`Heard "${otherNum}" — Next is ${currentTarget}! ⭐`);
-          }
-        }
-      };
-
-      r.onerror = (ev) => {
-        if (ev.error === 'no-speech' || ev.error === 'aborted') {
-          return;
-        }
-        console.warn('Speech recognition warning:', ev.error);
-        if (ev.error === 'not-allowed' || ev.error === 'service-not-allowed') {
-          setMicStatusText('Mic Blocked (Tap to Allow)');
-          setMicState('error');
-          isListeningRef.current = false;
-          setIsListening(false);
-        }
-      };
-
-      r.onend = () => {
-        isListeningRef.current = false;
-        if (isCountingPhaseRef.current) {
-          clearTimeout(recognitionRestartTimeoutRef.current);
-          recognitionRestartTimeoutRef.current = setTimeout(() => {
-            if (isCountingPhaseRef.current) {
-              try {
-                r.start();
-              } catch {
-                // Ignore if restart fails
-              }
-            }
-          }, 80);
-        } else {
-          setIsListening(false);
-          setMicState('idle');
-          setMicStatusText('Mic Idle');
-        }
-      };
-
-      r.start();
-    } catch (err) {
-      console.warn('Speech recognition start failed:', err);
-      setMicStatusText('Tap stars to count');
-      setMicState('error');
+    if (!('speechSynthesis' in window)) {
+      if (onEnd) setTimeout(onEnd, 350);
+      return;
     }
-  }, []);
 
-  // Toggle mic on/off via user gesture
-  const toggleMic = useCallback(() => {
-    getAudioCtx();
-    if (isListening) {
-      stopSpeechRecognition();
+    try {
+      if (window.speechSynthesis.paused) {
+        window.speechSynthesis.resume();
+      }
+
+      window.speechSynthesis.cancel();
+
+      const tSpeak = setTimeout(() => {
+        try {
+          if (window.speechSynthesis.paused) {
+            window.speechSynthesis.resume();
+          }
+
+          const u = new SpeechSynthesisUtterance(phrase);
+          u.rate = 1.0;
+          u.pitch = 1.0;
+          u.lang = 'en-US';
+
+          const voices = window.speechSynthesis.getVoices();
+          if (voices && voices.length > 0) {
+            const enVoice = voices.find(v => v.lang === 'en-US' || v.lang === 'en-IN' || v.lang.startsWith('en')) || voices[0];
+            if (enVoice) {
+              u.voice = enVoice;
+            }
+          }
+
+          if (!window.__activeUtterances) window.__activeUtterances = [];
+          window.__activeUtterances.push(u);
+
+          let finished = false;
+          const cleanUp = () => {
+            if (finished) return;
+            finished = true;
+            if (window.__activeUtterances) {
+              window.__activeUtterances = window.__activeUtterances.filter(item => item !== u);
+            }
+            if (onEnd) onEnd();
+          };
+
+          u.onend = cleanUp;
+          u.onerror = cleanUp;
+
+          window.speechSynthesis.speak(u);
+          window.speechSynthesis.resume();
+
+          const durationEst = Math.max(1200, phrase.length * 95);
+          setTimeout(cleanUp, durationEst);
+        } catch {
+          if (onEnd) onEnd();
+        }
+      }, 40);
+    } catch {
+      if (onEnd) onEnd();
+    }
+  }, [playTone]);
+
+  const speak = speakVoiceCommand;
+
+  // Forward declaration of handleCountInput and onStationClick via refs
+  const handleCountInputRef = useRef(null);
+  const onStationClickRef = useRef(null);
+
+  // Voice recognition handler powered by useWhisperVoice hook
+  const handleMazeNumber = useCallback((detectedNum, cleanText, rawText) => {
+    if (detectedNum === null) return;
+    const now = Date.now();
+    if (now - lastMatchTimeRef.current < 280) return;
+    lastMatchTimeRef.current = now;
+
+    if (isCountingPhaseRef.current) {
+      const currentTarget = targetStepRef.current;
+      if (detectedNum === currentTarget) {
+        setHeardWord(`"${cleanText}" ⭐`);
+        if (handleCountInputRef.current) {
+          handleCountInputRef.current(currentTarget);
+        }
+      } else {
+        setCountGuideText(`Heard "${detectedNum}" — Next is ${currentTarget}! ⭐`);
+      }
     } else {
-      startSpeechRecognition();
+      const nextExpected = expectedStationRef.current;
+      if (detectedNum === nextExpected) {
+        setHeardWord(`"${cleanText}" 🚀`);
+        const targetNode = (stationLayout && stationLayout.stationToNode && stationLayout.stationToNode[nextExpected]) || nextExpected;
+        if (targetNode !== undefined && onStationClickRef.current) {
+          onStationClickRef.current(nextExpected, targetNode);
+        }
+      } else {
+        setBanner({
+          text: `👉 Heard "${detectedNum}". Say or tap Pad ${nextExpected} to launch! 🚀`,
+          type: 'normal'
+        });
+      }
     }
-  }, [getAudioCtx, isListening, startSpeechRecognition, stopSpeechRecognition]);
+  }, [stationLayout]);
+
+  const whisperVoice = useWhisperVoice({
+    onNumberDetected: handleMazeNumber,
+    onTextHeard: (t) => {
+      if (!t) return;
+      setHeardWord(`"${t}"`);
+      // If parked on Start Pad, words like "launch", "start", "go", "pad 1", "fly", "one" will trigger launch
+      if (currentStationIdxRef.current === 0 && !isFlyingRef.current && !isCountingPhaseRef.current) {
+        const clean = t.toLowerCase();
+        if (/\b(launch|start|go|fly|rocket|pad|one|1)\b/i.test(clean)) {
+          const targetNode = (stationLayout && stationLayout.stationToNode && stationLayout.stationToNode[1]) || 1;
+          if (onStationClickRef.current) {
+            onStationClickRef.current(1, targetNode);
+          }
+        }
+      }
+    }
+  });
 
   // Finish counting for a station
   const finishStationCounting = useCallback((stationK) => {
     setIsCountingPhase(false);
     isCountingPhaseRef.current = false;
-    stopSpeechRecognition();
+    if (whisperVoice.isRecording) {
+      whisperVoice.stopRecording();
+    }
     playSuccessChord();
+    fireConfetti({ particleCount: 50 + stationK * 8, spread: 75, origin: { y: 0.6 } });
 
     setCountGuideText(`🎉 Super! All ${stationK} stars collected!`);
 
     const nextStation = stationK + 1;
     setExpectedStation(nextStation);
+    expectedStationRef.current = nextStation;
 
     if (typeof onAwardStars === 'function') {
       onAwardStars(2);
@@ -534,33 +496,33 @@ export default function SpaceMazeAdventure({
 
     setTimeout(() => {
       if (nextStation > stationCount) {
-        // Game win!
+        // Game win! All stations reached at Saturn!
         setIsCountingPhase(false);
-        stopSpeechRecognition();
+        isCountingPhaseRef.current = false;
+        if (whisperVoice.isRecording) {
+          whisperVoice.stopRecording();
+        }
         playSuccessChord();
         setBanner({
-          text: `🎉 Mission Accomplished! All ${stationCount} Stations Completed! 🎉`,
+          text: `🎉 Mission Accomplished! All ${stationCount} Stations Completed at Saturn! 🪐🎉`,
           type: 'success'
         });
         setWinModalOpen(true);
         if (typeof onTopicComplete === 'function') {
           onTopicComplete('numbers-1-to-10');
         }
-        try {
-          confetti({ particleCount: 100, spread: 80, origin: { y: 0.5 } });
-        } catch {
-          // Fallback
-        }
-        speak(`Hooray! You reached all ${stationCount} stations and counted every star!`);
+        fireConfetti({ particleCount: 160, spread: 100, origin: { y: 0.5 } });
+        speak(`Hooray! You reached all ${stationCount} stations and counted every star at Saturn!`);
       } else {
         setBanner({
-          text: `👉 Find and click Station ${nextStation} on the maze to continue!`,
+          text: `👉 Great! Choose Pad ${nextStation} on the maze to launch rocket! 🚀`,
           type: 'normal'
         });
-        setCountGuideText('Ready for the next station!');
+        setCountGuideText(`Ready for Pad ${nextStation}!`);
+        speakVoiceCommand(`Fly to Pad ${nextStation}!`);
       }
     }, 1200);
-  }, [stopSpeechRecognition, playSuccessChord, speak, stationCount, onAwardStars, onTopicComplete]);
+  }, [whisperVoice, playSuccessChord, speakVoiceCommand, stationCount, onAwardStars, onTopicComplete]);
 
   // Handle count input (instant voice or star tap)
   const handleCountInput = useCallback((numberCounted) => {
@@ -576,7 +538,6 @@ export default function SpaceMazeAdventure({
           const nextStep = prevStep + 1;
           targetStepRef.current = nextStep;
           setCountGuideText(`Great! Next say or tap: ${nextStep}`);
-          setMicStatusText(`Listening: Say '${nextStep}'...`);
           return nextStep;
         } else {
           finishStationCounting(stationK);
@@ -611,125 +572,228 @@ export default function SpaceMazeAdventure({
     setStarOrder(stars);
 
     setBanner({
-      text: stationNum === 1 ? '🌟 Station 1: Count the 1 star!' : `🌟 Station ${stationNum}: Count the ${stationNum} stars from 1 to ${stationNum}!`,
+      text: stationNum === 1 ? '🌟 Pad 1: Count the 1 star to refuel!' : `🌟 Pad ${stationNum}: Count the ${stationNum} stars from 1 to ${stationNum}!`,
       type: 'counting'
     });
     setCountGuideText('Say out loud or tap: 1');
     setHeardWord('Listening...');
 
     playChime(1);
-    startSpeechRecognition();
-  }, [startSpeechRecognition, playChime]);
+    speakVoiceCommand(stationNum === 1 ? 'Count 1 star to launch!' : `Count ${stationNum} stars! Say 1!`);
+  }, [playChime, speakVoiceCommand]);
 
   // Smooth rocket flight along bezier tubes using BFS
   const flyRocketTo = useCallback((targetNode, callback) => {
-    setIsFlying(true);
-    setRocketStatus(`🚀 Flying to destination...`);
-    playSwoosh();
-
-    const path = findShortestPath(currentStationIdx, targetNode, stationCount);
-    let stepIndex = 0;
-    const stepDuration = 380;
-    let startTime = performance.now();
-    const myToken = tokenRef.current;
-
-    const frame = (now) => {
-      if (myToken !== tokenRef.current) return;
-      const elapsed = now - startTime;
-      const t = Math.min(elapsed / stepDuration, 1);
-      const fromNode = path[stepIndex];
-      const toNode = path[stepIndex + 1];
-
-      const pt = getBezierPoint(fromNode, toNode, t);
-      setRocketPos({ x: pt[0], y: pt[1] });
-
-      if (t < 1) {
-        animFrameRef.current = requestAnimationFrame(frame);
-      } else {
-        stepIndex++;
-        if (stepIndex < path.length - 1) {
-          startTime = performance.now();
-          playSwoosh();
-          animFrameRef.current = requestAnimationFrame(frame);
-        } else {
-          setCurrentStationIdx(targetNode);
-          setIsFlying(false);
-          setRocketStatus(`📍 Docked at Station`);
-          callback();
-        }
-      }
-    };
-
-    if (path.length < 2) {
-      setCurrentStationIdx(targetNode);
-      setIsFlying(false);
-      callback();
-    } else {
-      animFrameRef.current = requestAnimationFrame(frame);
-    }
-  }, [playSwoosh, currentStationIdx, stationCount]);
-
-  // Station Click Handler — checks clicked station number against expected station
-  const onStationClick = useCallback((stationNum, nodeId) => {
-    if (isFlying || isCountingPhase) return;
-    getAudioCtx();
-
-    if (stationNum !== expectedStation) {
-      playErrorSound();
-      setBanner({
-        text: `⚠️ That is Station ${stationNum}! Look for Station ${expectedStation}! 🔍`,
-        type: 'error'
-      });
-      speak(`Look for station number ${expectedStation}`);
-      setTimeout(() => {
-        setBanner({
-          text: `👉 Find and click Station ${expectedStation} on the maze!`,
-          type: 'normal'
-        });
-      }, 1500);
+    const startNode = currentStationIdxRef.current;
+    if (startNode === targetNode) {
+      if (callback) callback();
       return;
     }
 
-    flyRocketTo(nodeId, () => {
-      setupCountingPhaseForStation(stationNum, nodeId);
-    });
-  }, [isFlying, isCountingPhase, getAudioCtx, expectedStation, playErrorSound, speak, flyRocketTo, setupCountingPhaseForStation]);
+    if (animFrameRef.current) {
+      cancelAnimationFrame(animFrameRef.current);
+      animFrameRef.current = null;
+    }
 
-  // Reset Game with option to apply a new jumbled layout
+    setIsFlying(true);
+    isFlyingRef.current = true;
+    setRocketStatus(`🚀 Flying to Pad ${targetNode}...`);
+    playSwoosh();
+
+    const path = findShortestPath(startNode, targetNode, stationCount);
+    if (!path || path.length < 2) {
+      currentStationIdxRef.current = targetNode;
+      setCurrentStationIdx(targetNode);
+      setRocketPos({ x: ALL_NODES[targetNode][0], y: ALL_NODES[targetNode][1], angle: 0 });
+      setIsFlying(false);
+      isFlyingRef.current = false;
+      if (callback) callback();
+      return;
+    }
+
+    let stepIndex = 0;
+    const stepDuration = 600; // Smooth 600ms flight per hop
+    let startTime = null;
+    const myToken = tokenRef.current;
+
+    const frame = (now) => {
+      try {
+        if (myToken !== tokenRef.current) return;
+        const currentTime = (typeof now === 'number' && !isNaN(now)) ? now : performance.now();
+        if (startTime === null) startTime = currentTime;
+        const elapsed = Math.max(0, currentTime - startTime);
+        const rawT = Math.min(elapsed / stepDuration, 1);
+        const t = rawT < 0.5 ? 2 * rawT * rawT : -1 + (4 - 2 * rawT) * rawT;
+
+        const fromNode = path[stepIndex];
+        const toNode = path[stepIndex + 1];
+
+        const pt = getBezierPoint(fromNode, toNode, t);
+        const cp = controlPoints[edgeKey(Math.min(fromNode, toNode), Math.max(fromNode, toNode))] || [
+          (ALL_NODES[fromNode][0] + ALL_NODES[toNode][0]) / 2,
+          (ALL_NODES[fromNode][1] + ALL_NODES[toNode][1]) / 2
+        ];
+        const p0 = ALL_NODES[fromNode];
+        const p1 = ALL_NODES[toNode];
+        const dx = 2 * (1 - t) * (cp[0] - p0[0]) + 2 * t * (p1[0] - cp[0]);
+        const dy = 2 * (1 - t) * (cp[1] - p0[1]) + 2 * t * (p1[1] - cp[1]);
+        const flightAngle = Math.atan2(dy, dx) * (180 / Math.PI) + 45;
+
+        setRocketPos({ x: pt[0], y: pt[1], angle: flightAngle });
+
+        if (rawT < 1) {
+          animFrameRef.current = requestAnimationFrame(frame);
+        } else {
+          stepIndex++;
+          if (stepIndex < path.length - 1) {
+            startTime = performance.now();
+            playSwoosh();
+            animFrameRef.current = requestAnimationFrame(frame);
+          } else {
+            currentStationIdxRef.current = targetNode;
+            setCurrentStationIdx(targetNode);
+            setRocketPos({ x: ALL_NODES[targetNode][0], y: ALL_NODES[targetNode][1], angle: 0 });
+            setIsFlying(false);
+            isFlyingRef.current = false;
+            setRocketStatus(`📍 Docked at Pad ${targetNode}`);
+            if (callback) callback();
+          }
+        }
+      } catch (err) {
+        currentStationIdxRef.current = targetNode;
+        setCurrentStationIdx(targetNode);
+        setRocketPos({ x: ALL_NODES[targetNode][0], y: ALL_NODES[targetNode][1], angle: 0 });
+        setIsFlying(false);
+        isFlyingRef.current = false;
+        if (callback) callback();
+      }
+    };
+
+    animFrameRef.current = requestAnimationFrame(frame);
+  }, [playSwoosh, stationCount]);
+
+  // Station Click Handler — checks clicked station number against expected station
+  const onStationClick = useCallback((stationNum, nodeId) => {
+    if (isFlyingRef.current) return;
+    getAudioCtx();
+
+    const currNode = currentStationIdxRef.current;
+    const currStation = (stationLayout && stationLayout.nodeToStation && stationLayout.nodeToStation[currNode]) || currNode;
+
+    // SCENARIO 1: Rocket is on Start Pad (Node 0)
+    // Tapping Pad 1 or Start Pad or 0 launches to Pad 1!
+    if (currNode === 0) {
+      if (stationNum === 1 || nodeId === 1 || stationNum === 0 || nodeId === 0) {
+        const targetNode = (stationLayout && stationLayout.stationToNode && stationLayout.stationToNode[1]) || 1;
+        setExpectedStation(1);
+        expectedStationRef.current = 1;
+        flyRocketTo(targetNode, () => {
+          setupCountingPhaseForStation(1, targetNode);
+        });
+        return;
+      }
+    }
+
+    // SCENARIO 2: Rocket is already at Pad 1 or current station
+    // If the child taps the pad the rocket is on, advance to the NEXT pad!
+    if (nodeId === currNode || stationNum === currStation) {
+      const nextStation = currStation + 1;
+      if (nextStation <= stationCount) {
+        const nextNode = (stationLayout && stationLayout.stationToNode && stationLayout.stationToNode[nextStation]) || nextStation;
+        setExpectedStation(nextStation);
+        expectedStationRef.current = nextStation;
+        flyRocketTo(nextNode, () => {
+          setupCountingPhaseForStation(nextStation, nextNode);
+        });
+      } else {
+        // Reached Saturn!
+        finishStationCounting(stationCount);
+      }
+      return;
+    }
+
+    // SCENARIO 3: Child taps the expected target station (e.g. Pad 1, Pad 2, etc.)
+    const expected = expectedStationRef.current;
+    const expectedNode = (stationLayout && stationLayout.stationToNode && stationLayout.stationToNode[expected]) || expected;
+    if (stationNum === expected || nodeId === expectedNode) {
+      flyRocketTo(expectedNode, () => {
+        setupCountingPhaseForStation(expected, expectedNode);
+      });
+      return;
+    }
+
+    // SCENARIO 4: Child taps next station ahead
+    if (stationNum === currStation + 1) {
+      const nextStation = currStation + 1;
+      const targetNode = (stationLayout && stationLayout.stationToNode && stationLayout.stationToNode[nextStation]) || nodeId;
+      setExpectedStation(nextStation);
+      expectedStationRef.current = nextStation;
+      flyRocketTo(targetNode, () => {
+        setupCountingPhaseForStation(nextStation, targetNode);
+      });
+      return;
+    }
+
+    // Otherwise wrong pad:
+    playErrorSound();
+    const targetStation = currStation === 0 ? 1 : currStation + 1;
+    setBanner({
+      text: `⚠️ That is Pad ${stationNum}! Tap Pad ${targetStation} to launch! 🚀`,
+      type: 'error'
+    });
+    speakVoiceCommand(`Look for Pad ${targetStation}`);
+    setTimeout(() => {
+      setBanner({
+        text: `👉 Tap Pad ${targetStation} on the maze to launch rocket! 🚀`,
+        type: 'normal'
+      });
+    }, 1500);
+  }, [getAudioCtx, stationLayout, stationCount, playErrorSound, speakVoiceCommand, flyRocketTo, setupCountingPhaseForStation, finishStationCounting]);
+
+  useEffect(() => {
+    onStationClickRef.current = onStationClick;
+  }, [onStationClick]);
+
+  // Reset Game: Rocket starts on Start Pad (Node 0), Pad 1 is next to Start Pad, Pad 10 is next to Saturn
   const resetGame = useCallback((newLayout) => {
     tokenRef.current++;
     if (animFrameRef.current) {
       cancelAnimationFrame(animFrameRef.current);
     }
-    stopSpeechRecognition();
+    if (whisperVoice.isRecording) {
+      whisperVoice.stopRecording();
+    }
     setWinModalOpen(false);
 
-    // Apply provided layout or generate a fresh jumble
-    const layout = newLayout || generateShuffledStations(stationCount);
+    // Default sequential stations (Pad 1 next to Start Pad, Pad 10 next to Saturn)
+    const layout = newLayout || generateSequentialStations(stationCount);
     setStationLayout(layout);
 
-    const startNode = (layout && layout.stationToNode && layout.stationToNode[1]) || 1;
-    const startPos = ALL_NODES[startNode] || ALL_NODES[1];
-
     setExpectedStation(1);
-    setCurrentStationIdx(startNode);
+    expectedStationRef.current = 1;
+    setCurrentStationIdx(0); // Start on START PAD (Node 0)
+    currentStationIdxRef.current = 0;
     setCurrentCountingStep(1);
-    setIsCountingPhase(false);
+    targetStepRef.current = 1;
+    setIsCountingPhase(false); // Waiting to choose Pad 1!
+    isCountingPhaseRef.current = false;
     setIsFlying(false);
-    setStarOrder([]);
+    isFlyingRef.current = false;
+    setStarOrder([1]);
 
-    setRocketPos({ x: startPos[0], y: startPos[1] });
-    setRocketStatus('⚡ Rocket Ready at Station 1 (Start)');
+    setRocketPos({ x: ALL_NODES[0][0], y: ALL_NODES[0][1], angle: 0 });
+    setRocketStatus('⚡ Rocket Ready on Start Pad');
 
     setBanner({
-      text: '👉 Tap Station 1 to start countdown! 🚀',
+      text: '🚀 Rocket ready on Start Pad! Choose Pad 1 to launch!',
       type: 'normal'
     });
-    setCountGuideText('Ready for countdown!');
-    setHeardWord('Waiting to launch...');
+    setCountGuideText('Say or click: Pad 1 🚀');
+    setHeardWord('Ready to launch...');
 
-    speak('Tap Station 1 to start!');
-  }, [stopSpeechRecognition, speak, stationCount]);
+    playChime(1);
+    speakVoiceCommand("Let's launch to Pad One!");
+  }, [whisperVoice, playChime, stationCount, speakVoiceCommand]);
 
   // Quick jumble button handler
   const jumblePositions = useCallback(() => {
@@ -748,7 +812,9 @@ export default function SpaceMazeAdventure({
   // Cleanup on unmount
   useEffect(() => {
     return () => {
-      stopSpeechRecognition();
+      if (whisperVoice.isRecording) {
+        whisperVoice.stopRecording();
+      }
       if (animFrameRef.current) {
         cancelAnimationFrame(animFrameRef.current);
       }
@@ -756,7 +822,7 @@ export default function SpaceMazeAdventure({
         window.speechSynthesis.cancel();
       }
     };
-  }, [stopSpeechRecognition]);
+  }, [whisperVoice]);
 
   // Compute floating stars orbiting directly around the rocket at currentStationIdx
   const floatingStars = [];
@@ -842,25 +908,28 @@ export default function SpaceMazeAdventure({
       {/* Instructional Banner with Integrated Live Voice & Count Prompt */}
       <div className={`space-instruction-banner ${banner.type}`}>
         <div className="banner-title-text">{banner.text}</div>
-        {isCountingPhase && (
-          <div className="banner-counting-hud">
+        <div className="banner-counting-hud" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', flexWrap: 'wrap', marginTop: '8px' }}>
+          {isCountingPhase ? (
             <span className="banner-count-prompt">
-              Tap star or say out loud: <strong className="highlight-digit">{currentCountingStep}</strong>
+              Tap star or click mic to say: <strong className="highlight-digit">{currentCountingStep}</strong>
             </span>
-            <button
-              type="button"
-              className={`mic-status-pill ${micState}`}
-              onClick={toggleMic}
-              title="Click to toggle microphone"
-            >
-              <span className={`mic-dot-indicator ${micState}`} />
-              <span>{micStatusText}</span>
-            </button>
-            {heardWord && heardWord !== 'Waiting to launch...' && (
-              <span className="banner-heard-tag">Heard: <em>{heardWord}</em></span>
-            )}
-          </div>
-        )}
+          ) : (
+            <span className="banner-count-prompt">
+              Speak or tap: <strong className="highlight-digit">Station {expectedStation}</strong> 🚀
+            </span>
+          )}
+          <PushToTalkButton
+            whisperState={whisperVoice}
+            label={isCountingPhase ? `Click to Speak '${currentCountingStep}'` : `Click to Speak 'Station ${expectedStation}'`}
+          />
+          <span
+            className={`whisper-live-badge ${whisperVoice.serverOnline ? 'server-online' : ''}`}
+            title={whisperVoice.serverOnline ? "Python Whisper AI server connected at localhost:8000" : "In-browser speech recognition active"}
+            style={whisperVoice.serverOnline ? { borderColor: '#10b981', color: '#6ee7b7' } : undefined}
+          >
+            {whisperVoice.serverOnline ? '🟢 Whisper AI Server Active' : '✨ Whisper Indian Digits AI'}
+          </span>
+        </div>
       </div>
 
       {/* Mission Progress Tracker */}
@@ -1046,8 +1115,102 @@ export default function SpaceMazeAdventure({
           </g>
 
           
-          {/* Circular Docking Station Nodes 1 to N with Jumbled Number Labels */}
+          {/* Circular Docking Station Nodes with Start Pad and Station 1 to N */}
           <g id="stations-layer">
+            {/* Dedicated START PAD (Node 0) */}
+            <g
+              key="station-node-0"
+              className="space-docking-node start-pad-node"
+              onClick={() => onStationClick(1, 1)}
+              onPointerDown={() => onStationClick(1, 1)}
+              style={{ cursor: 'pointer' }}
+            >
+              {/* Generous touch target */}
+              <circle
+                cx={ALL_NODES[0][0]}
+                cy={ALL_NODES[0][1]}
+                r="36"
+                fill="#ffffff"
+                opacity="0.001"
+                style={{ cursor: 'pointer', pointerEvents: 'all' }}
+              />
+              {/* Launch Pad Base */}
+              <circle
+                cx={ALL_NODES[0][0]}
+                cy={ALL_NODES[0][1]}
+                r="25"
+                fill="#0f172a"
+                stroke={currentStationIdx === 0 ? '#38bdf8' : '#475569'}
+                strokeWidth="3.5"
+                strokeDasharray={currentStationIdx === 0 ? '5 2.5' : 'none'}
+              />
+              <circle
+                cx={ALL_NODES[0][0]}
+                cy={ALL_NODES[0][1]}
+                r="19"
+                fill={currentStationIdx === 0 ? '#0284c7' : '#1e293b'}
+                stroke="#38bdf8"
+                strokeWidth="1.5"
+              />
+              {/* Launch Pad Crosshairs */}
+              <line
+                x1={ALL_NODES[0][0] - 11}
+                y1={ALL_NODES[0][1]}
+                x2={ALL_NODES[0][0] + 11}
+                y2={ALL_NODES[0][1]}
+                stroke="#93c5fd"
+                strokeWidth="1.5"
+                opacity="0.85"
+                style={{ pointerEvents: 'none' }}
+              />
+              <line
+                x1={ALL_NODES[0][0]}
+                y1={ALL_NODES[0][1] - 11}
+                x2={ALL_NODES[0][0]}
+                y2={ALL_NODES[0][1] + 11}
+                stroke="#93c5fd"
+                strokeWidth="1.5"
+                opacity="0.85"
+                style={{ pointerEvents: 'none' }}
+              />
+              <circle
+                cx={ALL_NODES[0][0]}
+                cy={ALL_NODES[0][1]}
+                r="4.5"
+                fill="#facc15"
+                style={{ pointerEvents: 'none' }}
+              />
+              {/* START PAD Pill Label */}
+              <g
+                transform={`translate(${ALL_NODES[0][0]}, ${ALL_NODES[0][1] + 30})`}
+                onClick={() => onStationClick(1, 1)}
+                style={{ cursor: 'pointer' }}
+              >
+                <rect
+                  x="-34"
+                  y="-9"
+                  width="68"
+                  height="18"
+                  rx="9"
+                  fill="#0284c7"
+                  stroke="#38bdf8"
+                  strokeWidth="1.5"
+                />
+                <text
+                  x="0"
+                  y="3.5"
+                  textAnchor="middle"
+                  fontSize="8.5"
+                  fontWeight="900"
+                  fill="#ffffff"
+                  letterSpacing="0.5"
+                  style={{ pointerEvents: 'none' }}
+                >
+                  START PAD 🚀
+                </text>
+              </g>
+            </g>
+
             {Array.from({ length: stationCount }).map((_, idx) => {
               const nodeId = idx + 1;
               const pos = ALL_NODES[nodeId];
@@ -1085,8 +1248,18 @@ export default function SpaceMazeAdventure({
                   key={`station-node-${nodeId}`}
                   className="space-docking-node"
                   onClick={() => onStationClick(stationNum, nodeId)}
+                  onPointerDown={() => onStationClick(stationNum, nodeId)}
                   style={{ cursor: 'pointer' }}
                 >
+                  {/* Generous touch target */}
+                  <circle
+                    cx={pos[0]}
+                    cy={pos[1]}
+                    r="30"
+                    fill="#ffffff"
+                    opacity="0.001"
+                    style={{ cursor: 'pointer', pointerEvents: 'all' }}
+                  />
                   {/* Golden Saturn Orbital Ring on Station 10 Node */}
                   {isSaturnStation && (
                     <ellipse
@@ -1100,6 +1273,7 @@ export default function SpaceMazeAdventure({
                       strokeDasharray="4 2"
                       transform={`rotate(-25 ${pos[0]} ${pos[1]})`}
                       opacity="0.95"
+                      style={{ pointerEvents: 'none' }}
                     />
                   )}
 
@@ -1111,12 +1285,14 @@ export default function SpaceMazeAdventure({
                     stroke={outerStroke}
                     strokeWidth={outerWidth}
                     filter={isTarget ? 'url(#star-gold-glow)' : 'none'}
+                    style={{ cursor: 'pointer' }}
                   />
                   <circle
                     cx={pos[0]}
                     cy={pos[1]}
                     r="14"
                     fill={innerFill}
+                    style={{ cursor: 'pointer' }}
                   />
                   <text
                     x={pos[0]}
@@ -1125,18 +1301,53 @@ export default function SpaceMazeAdventure({
                     fontSize="15"
                     fontWeight="900"
                     fill={textFill}
-                    pointerEvents="none"
+                    style={{ pointerEvents: 'none' }}
                   >
                     {isCompleted ? '✓' : stationNum}
                   </text>
 
-                  {/* START Badge below Station 1 */}
-                  {isStartStation && (
-                    <g transform={`translate(${pos[0]}, ${pos[1] + badgeYOffset})`} pointerEvents="none">
+                  {/* "CHOOSE 1 🚀" Hint when on Start Pad */}
+                  {isStartStation && currentStationIdx === 0 && (
+                    <g
+                      transform={`translate(${pos[0]}, ${pos[1] - 26})`}
+                      onClick={() => onStationClick(1, nodeId)}
+                      style={{ cursor: 'pointer' }}
+                    >
                       <rect
-                        x="-24"
+                        x="-30"
                         y="-8"
-                        width="48"
+                        width="60"
+                        height="16"
+                        rx="8"
+                        fill="#f59e0b"
+                        stroke="#fde047"
+                        strokeWidth="1.5"
+                      />
+                      <text
+                        x="0"
+                        y="3.5"
+                        textAnchor="middle"
+                        fontSize="8.5"
+                        fontWeight="900"
+                        fill="#1e1b4b"
+                        style={{ pointerEvents: 'none' }}
+                      >
+                        CHOOSE 1 🚀
+                      </text>
+                    </g>
+                  )}
+
+                  {/* PAD 1 Label below Station 1 */}
+                  {isStartStation && currentStationIdx !== 0 && (
+                    <g
+                      transform={`translate(${pos[0]}, ${pos[1] + badgeYOffset})`}
+                      onClick={() => onStationClick(1, nodeId)}
+                      style={{ cursor: 'pointer' }}
+                    >
+                      <rect
+                        x="-22"
+                        y="-8"
+                        width="44"
                         height="15"
                         rx="7.5"
                         fill="#059669"
@@ -1150,8 +1361,9 @@ export default function SpaceMazeAdventure({
                         fontSize="8.5"
                         fontWeight="900"
                         fill="#ffffff"
+                        style={{ pointerEvents: 'none' }}
                       >
-                        START 🚀
+                        PAD 1 ⭐
                       </text>
                     </g>
                   )}
@@ -1187,16 +1399,71 @@ export default function SpaceMazeAdventure({
           </g>
 
           {/* Flying / Landed Rocket */}
-          <text
-            x={rocketPos.x}
-            y={rocketPos.y}
-            fontSize="28"
-            textAnchor="middle"
-            dominantBaseline="central"
-            className="space-maze-rocket"
+          <g
+            transform={`translate(${rocketPos.x}, ${rocketPos.y}) rotate(${rocketPos.angle || 0})`}
+            onClick={() => {
+              if (isFlyingRef.current) return;
+              const curr = currentStationIdxRef.current;
+              if (curr === 0) {
+                const targetNode = (stationLayout && stationLayout.stationToNode && stationLayout.stationToNode[1]) || 1;
+                onStationClick(1, targetNode);
+              } else {
+                // Tapping rocket advances to next station!
+                const next = curr + 1;
+                if (next <= stationCount) {
+                  const targetNode = (stationLayout && stationLayout.stationToNode && stationLayout.stationToNode[next]) || next;
+                  onStationClick(next, targetNode);
+                }
+              }
+            }}
+            onPointerDown={() => {
+              if (isFlyingRef.current) return;
+              const curr = currentStationIdxRef.current;
+              if (curr === 0) {
+                const targetNode = (stationLayout && stationLayout.stationToNode && stationLayout.stationToNode[1]) || 1;
+                onStationClick(1, targetNode);
+              } else {
+                const next = curr + 1;
+                if (next <= stationCount) {
+                  const targetNode = (stationLayout && stationLayout.stationToNode && stationLayout.stationToNode[next]) || next;
+                  onStationClick(next, targetNode);
+                }
+              }
+            }}
+            style={{ cursor: isFlying ? 'default' : 'pointer' }}
           >
-            🚀
-          </text>
+            {/* Thruster exhaust flame trail when flying */}
+            {isFlying && (
+              <circle
+                cx="-12"
+                cy="12"
+                r="7"
+                fill="#f97316"
+                filter="url(#star-gold-glow)"
+                opacity="0.9"
+                style={{ pointerEvents: 'none' }}
+              />
+            )}
+            <circle
+              cx="0"
+              cy="0"
+              r="28"
+              fill="#ffffff"
+              opacity="0.001"
+              style={{ cursor: 'pointer', pointerEvents: 'all' }}
+            />
+            <text
+              x="0"
+              y="0"
+              fontSize="28"
+              textAnchor="middle"
+              dominantBaseline="central"
+              className="space-maze-rocket"
+              style={{ pointerEvents: 'none' }}
+            >
+              🚀
+            </text>
+          </g>
 
           {/* Floating Stars Hovering Directly Around the Rocket */}
           <g id="floating-stars-over-rocket">
@@ -1280,3 +1547,5 @@ export default function SpaceMazeAdventure({
     </div>
   );
 }
+
+export { SpaceMazeAdventure };

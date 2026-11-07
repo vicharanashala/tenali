@@ -1905,6 +1905,28 @@
   box-shadow: inset 0 2px 12px rgba(0, 0, 0, 0.6);
   touch-action: none;
   position: relative;
+  transition: all 0.3s ease;
+}
+
+.trace-svg-board-box.is-green-glow {
+  border-color: #22c55e !important;
+  box-shadow: 0 0 35px rgba(34, 197, 94, 0.55), inset 0 0 25px rgba(34, 197, 94, 0.3) !important;
+}
+
+.trace-numeral-green-glow-pulse {
+  animation: traceNumeralPulse 1.2s infinite alternate ease-in-out;
+  transform-origin: center;
+}
+
+@keyframes traceNumeralPulse {
+  0% {
+    stroke-width: 32px;
+    filter: drop-shadow(0 0 10px #22c55e) drop-shadow(0 0 20px #4ade80);
+  }
+  100% {
+    stroke-width: 38px;
+    filter: drop-shadow(0 0 22px #4ade80) drop-shadow(0 0 40px #86efac);
+  }
 }
 
 .trace-svg-board {
@@ -2038,32 +2060,91 @@
 }
 
 .trace-item-bubble.is-target {
-  border-color: #fde047;
-  background: rgba(245, 158, 11, 0.25);
-  box-shadow: 0 0 18px rgba(245, 158, 11, 0.6);
-  transform: scale(1.08);
+  border-color: #fbbf24 !important;
+  background: radial-gradient(circle, rgba(251, 191, 36, 0.35) 0%, rgba(180, 83, 9, 0.7) 100%) !important;
+  box-shadow: 0 0 24px rgba(251, 191, 36, 0.9), 0 0 45px rgba(245, 158, 11, 0.6) !important;
+  transform: scale(1.14) !important;
+  animation: targetPulse 0.9s infinite alternate ease-in-out !important;
+  z-index: 2;
 }
 
-.trace-item-bubble.is-lit {
-  border-color: #4ade80;
-  background: rgba(34, 197, 94, 0.25);
-  box-shadow: 0 0 14px rgba(74, 222, 128, 0.5);
+@keyframes targetPulse {
+  0% {
+    box-shadow: 0 0 16px rgba(251, 191, 36, 0.75), 0 0 30px rgba(245, 158, 11, 0.45);
+    transform: scale(1.10);
+    border-color: #fbbf24;
+  }
+  100% {
+    box-shadow: 0 0 35px rgba(254, 240, 138, 1), 0 0 65px rgba(245, 158, 11, 0.9);
+    transform: scale(1.18);
+    border-color: #ffffff;
+  }
 }
 
-.object-emoji-render {
-  font-size: 2.1rem;
-  line-height: 1;
+.trace-item-bubble.is-target .object-num-tag {
+  color: #fef08a !important;
+  font-weight: 900 !important;
+  text-shadow: 0 0 12px #f59e0b !important;
 }
 
-.object-num-tag {
-  font-size: 0.85rem;
+.trace-item-bubble.is-target .object-emoji-render {
+  filter: drop-shadow(0 0 12px rgba(251, 191, 36, 0.95)) !important;
+}
+
+.trace-item-bubble.is-lit,
+.trace-item-bubble.is-green-glow {
+  border-color: #22c55e !important;
+  background: radial-gradient(circle, rgba(34, 197, 94, 0.45) 0%, rgba(20, 83, 45, 0.85) 100%) !important;
+  box-shadow: 0 0 25px #22c55e, 0 0 50px rgba(34, 197, 94, 0.7), inset 0 0 14px rgba(74, 222, 128, 0.7) !important;
+  transform: scale(1.10) !important;
+  animation: greenGlowPulse 1.3s infinite alternate ease-in-out;
+}
+
+@keyframes greenGlowPulse {
+  0% {
+    box-shadow: 0 0 20px #22c55e, 0 0 35px rgba(34, 197, 94, 0.5);
+    transform: scale(1.1);
+  }
+  100% {
+    box-shadow: 0 0 35px #4ade80, 0 0 60px rgba(74, 222, 128, 0.85);
+    transform: scale(1.16);
+  }
+}
+
+.trace-item-bubble.is-lit .object-num-tag,
+.trace-item-bubble.is-green-glow .object-num-tag {
+  color: #4ade80 !important;
+  font-weight: 900;
+  text-shadow: 0 0 8px #22c55e;
+}
+
+.trace-item-bubble.is-lit .object-emoji-render,
+.trace-item-bubble.is-green-glow .object-emoji-render {
+  filter: drop-shadow(0 0 10px rgba(74, 222, 128, 0.85));
+}
+
+/* Success Celebration Banner */
+.trace-success-banner {
+  background: linear-gradient(135deg, #15803d 0%, #16a34a 50%, #22c55e 100%) !important;
+  color: #ffffff !important;
+  padding: 14px 24px;
+  border-radius: 16px;
+  text-align: center;
+  font-size: 1.35rem;
   font-weight: 800;
-  color: #ede8e3;
-  margin-top: 3px;
+  margin-bottom: 16px;
+  box-shadow: 0 0 25px rgba(34, 197, 94, 0.7), inset 0 0 10px rgba(255, 255, 255, 0.4);
+  border: 2px solid #86efac;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  animation: traceBannerPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.trace-item-bubble.is-lit .object-num-tag {
-  color: #4ade80;
+@keyframes traceBannerPop {
+  0% { transform: scale(0.85); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
 }
 
 /* Actions Footer */
@@ -2105,4 +2186,21 @@
 
 .trace-btn-restart:hover {
   background: #312e81;
+}
+
+/* Whisper AI Live Badge */
+.whisper-live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(16, 185, 129, 0.22);
+  border: 1px solid rgba(52, 211, 153, 0.75);
+  color: #a7f3d0;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 9999px;
+  letter-spacing: 0.02em;
+  text-shadow: 0 0 6px rgba(52, 211, 153, 0.5);
+  user-select: none;
 }

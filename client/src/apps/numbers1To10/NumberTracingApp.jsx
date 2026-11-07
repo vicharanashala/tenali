@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import confetti from 'canvas-confetti';
+import { fireConfetti } from './confettiHelper.js';
 import { NUMBERS_INFO } from './numbers1To10Data.js';
+import { useWhisperVoice, PushToTalkButton } from './index.js';
 
 /**
  * NumberTracingApp — Minimal Tactile Learn & Trace Module
@@ -183,7 +185,9 @@ export default function NumberTracingApp({
   const [wrongAttemptFlash, setWrongAttemptFlash] = useState(false);
 
   const [heardWord, setHeardWord] = useState('');
-  const [micActive, setMicActive] = useState(false);
+  const [litCount, setLitCount] = useState(0);
+  const [isTraceGreenGlow, setIsTraceGreenGlow] = useState(false);
+  const [successBanner, setSuccessBanner] = useState('');
 
   // Demo animation state
   const [demoActive, setDemoActive] = useState(false);
@@ -195,14 +199,39 @@ export default function NumberTracingApp({
   const svgRef = useRef(null);
   const pathRef = useRef(null);
   const audioCtxRef = useRef(null);
-  const speechRecRef = useRef(null);
   const stageRef = useRef('TRACING');
+  const selectedNumRef = useRef(selectedNum);
   const echoStepRef = useRef(1);
   const echoSubStateRef = useRef('ANNOUNCING_NUM');
   const soloCountStepRef = useRef(1);
   const lastMatchTimeRef = useRef(0);
+  const onChildEchoedRef = useRef(null);
+  const handleSoloCountAttemptRef = useRef(null);
+  const whisperVoiceRef = useRef(null);
+  const strokeDoneRef = useRef(false);
+  const isDraggingRef = useRef(false);
+
+  // Pre-load and warm up browser SpeechSynthesis voices on mount
+  useEffect(() => {
+    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+      try {
+        window.speechSynthesis.getVoices();
+        const onVoices = () => {
+          try { window.speechSynthesis.getVoices(); } catch {}
+        };
+        window.speechSynthesis.onvoiceschanged = onVoices;
+        return () => {
+          window.speechSynthesis.onvoiceschanged = null;
+        };
+      } catch {}
+    }
+  }, []);
 
   // Keep refs in sync with state
+  useEffect(() => {
+    selectedNumRef.current = selectedNum;
+  }, [selectedNum]);
+
   useEffect(() => {
     stageRef.current = stage;
   }, [stage]);
@@ -286,20 +315,101 @@ export default function NumberTracingApp({
     });
   }, [playTone]);
 
-  // Clean, minimal speech: STRICTLY only speaks the number name itself ("One", "Two", etc.)
-  const speakNumber = useCallback((num) => {
-    if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
-    try {
-      window.speechSynthesis.cancel();
-      const word = NUMBER_WORDS[num] || String(num);
-      const u = new SpeechSynthesisUtterance(word);
-      u.rate = 1.0;
-      u.pitch = 1.15;
-      window.speechSynthesis.speak(u);
-    } catch {
-      // Fallback
+  // Spoken voice command for kids: clear, enthusiastic, auto-coordinates with microphone
+  const speakVoiceCommand = useCallback((phrase, onEnd) => {
+    if (typeof window === 'undefined') {
+      if (onEnd) onEnd();
+      return;
     }
-  }, []);
+
+    // Audible ear-con chime so the user always has instant auditory response
+    try {
+      playTone(587.33, 'triangle', 0.14, 0.16);
+    } catch {}
+
+    if (!('speechSynthesis' in window)) {
+      if (onEnd) setTimeout(onEnd, 350);
+      return;
+    }
+
+    try {
+      // 1. Temporarily pause mic so it does not hear the computer's voice
+      if (whisperVoiceRef.current && whisperVoiceRef.current.isRecording) {
+        try { whisperVoiceRef.current.stopRecording(); } catch (e) {}
+      }
+
+      // Resume if paused
+      if (window.speechSynthesis.paused) {
+        window.speechSynthesis.resume();
+      }
+
+      window.speechSynthesis.cancel();
+
+      // Delay by 40ms to let Chrome's cancel queue flush cleanly
+      const tSpeak = setTimeout(() => {
+        try {
+          if (window.speechSynthesis.paused) {
+            window.speechSynthesis.resume();
+          }
+
+          const u = new SpeechSynthesisUtterance(phrase);
+          u.rate = 1.0;
+          u.pitch = 1.0; // Standard pitch to prevent SAPI5 failure on Windows
+          u.lang = 'en-US';
+
+          // Assign voice if available
+          const voices = window.speechSynthesis.getVoices();
+          if (voices && voices.length > 0) {
+            const enVoice = voices.find(v => v.lang === 'en-US' || v.lang === 'en-IN' || v.lang.startsWith('en')) || voices[0];
+            if (enVoice) {
+              u.voice = enVoice;
+            }
+          }
+
+          // Anchor to window so V8 GC does not collect mid-speech
+          if (!window.__activeUtterances) window.__activeUtterances = [];
+          window.__activeUtterances.push(u);
+
+          let finished = false;
+          const cleanUp = () => {
+            if (finished) return;
+            finished = true;
+            if (window.__activeUtterances) {
+              window.__activeUtterances = window.__activeUtterances.filter(item => item !== u);
+            }
+            if (onEnd) onEnd();
+          };
+
+          u.onend = cleanUp;
+          u.onerror = (e) => {
+            console.warn('[speechSynthesis] utterance error:', e);
+            cleanUp();
+          };
+
+          window.speechSynthesis.speak(u);
+          window.speechSynthesis.resume();
+
+          // Safety fallback timer
+          const durationEst = Math.max(1200, phrase.length * 95);
+          const safetyTimer = setTimeout(cleanUp, durationEst);
+          demoTimersRef.current.push(safetyTimer);
+        } catch (innerErr) {
+          console.warn('[speechSynthesis] inner speak error:', innerErr);
+          if (onEnd) onEnd();
+        }
+      }, 40);
+
+      demoTimersRef.current.push(tSpeak);
+    } catch (err) {
+      console.warn('[speechSynthesis] outer speak error:', err);
+      if (onEnd) onEnd();
+    }
+  }, [playTone]);
+
+  const speakNumber = useCallback((num) => {
+    const word = NUMBER_WORDS[num] || String(num);
+    speakVoiceCommand(word);
+  }, [speakVoiceCommand]);
 
   // Compute live dot coordinates along the SVG path based on progress
   const [dotPos, setDotPos] = useState(() => {
@@ -339,118 +449,23 @@ export default function NumberTracingApp({
   const stopDemo = useCallback(() => {
     clearDemoTimers();
     setDemoActive(false);
+    setIsTraceGreenGlow(false);
     setDemoHandPos({ target: 'none', x: 0, y: 0, pressing: false, itemIdx: 0 });
   }, [clearDemoTimers]);
-
-  // Forward declarations via refs to eliminate Temporal Dead Zone ReferenceErrors on initial render
-  const onChildEchoedRef = useRef(null);
-  const handleSoloCountAttemptRef = useRef(null);
-
-  // Stop native browser speech recognition
-  const stopVoice = useCallback(() => {
-    if (speechRecRef.current) {
-      try {
-        speechRecRef.current.abort();
-      } catch {
-        /* ignore */
-      }
-      speechRecRef.current = null;
-    }
-    setMicActive(false);
-  }, []);
-
-  // Start native browser speech recognition (<50ms latency)
-  const startVoice = useCallback(() => {
-    if (typeof window === 'undefined') return;
-    const SpeechClass = window.SpeechRecognition || window.webkitSpeechRecognition;
-    if (!SpeechClass) return;
-
-    if (speechRecRef.current) {
-      try {
-        speechRecRef.current.abort();
-      } catch {
-        /* ignore */
-      }
-      speechRecRef.current = null;
-    }
-
-    try {
-      const rec = new SpeechClass();
-      speechRecRef.current = rec;
-      rec.continuous = true;
-      rec.interimResults = true;
-      rec.maxAlternatives = 8;
-      rec.lang = (typeof navigator !== 'undefined' && navigator.language) ? navigator.language : 'en-US';
-
-      rec.onstart = () => setMicActive(true);
-      rec.onend = () => {
-        setMicActive(false);
-        if (stageRef.current === 'ECHO_COUNT' || stageRef.current === 'SOLO_COUNT') {
-          try {
-            rec.start();
-          } catch {
-            /* ignore */
-          }
-        }
-      };
-      rec.onerror = () => { /* ignore */ };
-
-      rec.onresult = (ev) => {
-        for (let i = ev.resultIndex; i < ev.results.length; i++) {
-          const res = ev.results[i];
-          if (!res) continue;
-          const text = res[0] ? res[0].transcript : '';
-          if (text) setHeardWord(text.trim());
-
-          for (let a = 0; a < res.length; a++) {
-            const cand = res[a] ? res[a].transcript : '';
-            const now = Date.now();
-            if (now - lastMatchTimeRef.current < 280) continue;
-
-            if (stageRef.current === 'ECHO_COUNT') {
-              if (echoSubStateRef.current === 'WAITING_KID') {
-                const expected = echoStepRef.current;
-                const spoken = detectSpokenNumber(cand, expected);
-                if (spoken === expected) {
-                  lastMatchTimeRef.current = now;
-                  echoSubStateRef.current = 'APP_SPEAKING';
-                  if (onChildEchoedRef.current) {
-                    onChildEchoedRef.current(spoken);
-                  }
-                  break;
-                }
-              }
-            } else if (stageRef.current === 'SOLO_COUNT') {
-              const expected = soloCountStepRef.current;
-              const spoken = detectSpokenNumber(cand, expected);
-              if (spoken !== null) {
-                lastMatchTimeRef.current = now;
-                if (handleSoloCountAttemptRef.current) {
-                  handleSoloCountAttemptRef.current(spoken);
-                }
-                break;
-              }
-            }
-          }
-        }
-      };
-
-      rec.start();
-    } catch {
-      // Speech recognition fallback
-    }
-  }, []);
 
   // Switch/Reset Number
   const selectNumber = useCallback((n) => {
     clearDemoTimers();
-    stopVoice();
     if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
       window.speechSynthesis.cancel();
     }
+    strokeDoneRef.current = false;
+    isDraggingRef.current = false;
     setSelectedNum(n);
+    selectedNumRef.current = n;
     setStage('TRACING');
     stageRef.current = 'TRACING';
+    setIsTraceGreenGlow(false);
     setCurrentStrokeIdx(0);
     setStrokeProgress(0);
     setCompletedStrokes([]);
@@ -460,37 +475,110 @@ export default function NumberTracingApp({
     echoSubStateRef.current = 'ANNOUNCING_NUM';
     setSoloCountStep(1);
     soloCountStepRef.current = 1;
+    setLitCount(0);
     setWrongAttemptFlash(false);
     setHeardWord('');
-    speakNumber(n);
-  }, [clearDemoTimers, speakNumber, stopVoice]);
+    setSuccessBanner('');
+    const word = NUMBER_WORDS[n] || String(n);
+    speakVoiceCommand(`Let's trace Number ${word}!`);
+  }, [clearDemoTimers, speakVoiceCommand]);
 
-  // Finish counting: Confetti, stars, strictly SILENT (no spoken words), advance to next number!
-  const finishCountingAndAdvance = useCallback(() => {
-    stopVoice();
+  // Handle correct number: Count objects with glowing green & chimes, burst confetti, and auto-advance!
+  const handleVoiceSuccess = useCallback((targetNum) => {
+    clearDemoTimers();
     if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
       window.speechSynthesis.cancel();
     }
+
+    setSelectedNum(targetNum);
+    setLitCount(0);
+    const word = NUMBER_WORDS[targetNum] || String(targetNum);
+    setSuccessBanner(`🎉 Correct! That's ${word} (${targetNum})! ⭐`);
+    setCompletedNumbers((prev) => new Set([...prev, targetNum]));
+
+    getAudioCtx();
+
+    // Sequentially count each object from 1 to targetNum with bright green glow and audio!
+    for (let i = 1; i <= targetNum; i++) {
+      const timer = setTimeout(() => {
+        setLitCount(i);
+        playChime(i);
+        speakNumber(i);
+
+        // When all objects have been counted with green glow:
+        if (i === targetNum) {
+          const celebrTimer = setTimeout(() => {
+            playSuccessChord();
+            // Burst massive celebration confetti!
+            fireConfetti({
+              particleCount: 100 + targetNum * 10,
+              spread: 90,
+              origin: { y: 0.6 }
+            });
+
+            if (typeof onAwardStars === 'function') {
+              onAwardStars(2);
+            }
+
+            // Auto-advance to the next number after celebration
+            const advanceTimer = setTimeout(() => {
+              setSuccessBanner('');
+              if (targetNum < 10) {
+                selectNumber(targetNum + 1);
+              } else {
+                setStage('COMPLETED');
+                stageRef.current = 'COMPLETED';
+                if (typeof markTopicCompleted === 'function') {
+                  markTopicCompleted('numbers-1-to-10');
+                }
+                if (typeof onNavigateMaze === 'function') {
+                  onNavigateMaze();
+                }
+              }
+            }, 1800);
+            demoTimersRef.current.push(advanceTimer);
+          }, 450);
+          demoTimersRef.current.push(celebrTimer);
+        }
+      }, i * 650);
+      demoTimersRef.current.push(timer);
+    }
+  }, [clearDemoTimers, speakNumber, getAudioCtx, playChime, playSuccessChord, selectNumber, onAwardStars, markTopicCompleted, onNavigateMaze]);
+
+  // Finish counting: Confetti, stars, celebration banner, seamlessly transition to next number!
+  const finishCountingAndAdvance = useCallback(() => {
+    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+    }
+    const currentNum = selectedNumRef.current;
     setStage('COMPLETED');
     stageRef.current = 'COMPLETED';
+    setLitCount(currentNum);
+
+    const word = NUMBER_WORDS[currentNum] || String(currentNum);
+    setSuccessBanner(`🎉 Super! You counted all ${currentNum} ${config.objectName}s! ⭐`);
+
     playSuccessChord();
+    fireConfetti({
+      particleCount: 110 + currentNum * 10,
+      spread: 90,
+      origin: { y: 0.6 }
+    });
 
-    try {
-      confetti({ particleCount: 85, spread: 75, origin: { y: 0.6 } });
-    } catch {
-      // Safe fallback
-    }
-
-    setCompletedNumbers((prev) => new Set([...prev, selectedNum]));
+    setCompletedNumbers((prev) => new Set([...prev, currentNum]));
 
     if (typeof onAwardStars === 'function') {
       onAwardStars(2);
     }
 
-    // After counting don't say anything, automatically move to next number
+    // Voice command after counting!
+    speakVoiceCommand(`Super! You counted all ${word} ${config.objectName}s!`);
+
+    // Auto-advance seamlessly to the next number!
     const t = setTimeout(() => {
-      if (selectedNum < 10) {
-        selectNumber(selectedNum + 1);
+      setSuccessBanner('');
+      if (currentNum < 10) {
+        selectNumber(currentNum + 1);
       } else {
         if (typeof markTopicCompleted === 'function') {
           markTopicCompleted('numbers-1-to-10');
@@ -499,17 +587,19 @@ export default function NumberTracingApp({
           onNavigateMaze();
         }
       }
-    }, 1200);
+    }, 1800);
 
     demoTimersRef.current.push(t);
-  }, [selectedNum, playSuccessChord, onAwardStars, markTopicCompleted, onNavigateMaze, selectNumber]);
+  }, [config.objectName, playSuccessChord, onAwardStars, markTopicCompleted, onNavigateMaze, selectNumber, speakVoiceCommand]);
 
-  // Handle Solo Counting Attempt (Child counts on their own 1..N; restart on wrong count)
+  // Handle Solo Counting Attempt (Child counts on their own 1..N; gentle reset on miscount with no penalty)
   const handleSoloCountAttempt = useCallback((spokenNum) => {
     const target = soloCountStepRef.current;
     if (spokenNum === target) {
       // Correct number in solo sequence!
       playChime(target);
+      setLitCount(target); // Lights up object in green with checkmark badge
+
       if (target < selectedNum) {
         const nextTarget = target + 1;
         soloCountStepRef.current = nextTarget;
@@ -519,10 +609,11 @@ export default function NumberTracingApp({
         finishCountingAndAdvance();
       }
     } else {
-      // Counted wrong! Restart counting for this number alone
+      // Miscounted: No penalty! Gentle sound plays, reset only this number to 1 to try again with confidence
       playWrongTone();
       soloCountStepRef.current = 1;
       setSoloCountStep(1);
+      setLitCount(0);
       setWrongAttemptFlash(true);
       const tFlash = setTimeout(() => setWrongAttemptFlash(false), 900);
       demoTimersRef.current.push(tFlash);
@@ -534,27 +625,29 @@ export default function NumberTracingApp({
     handleSoloCountAttemptRef.current = handleSoloCountAttempt;
   }, [handleSoloCountAttempt]);
 
-  // Transition to Solo Count Stage (Child counts on their own)
+  // Transition to Step 3: Solo Count Stage (Child counts on their own 1..N)
   const startSoloCountStage = useCallback(() => {
     setStage('SOLO_COUNT');
     stageRef.current = 'SOLO_COUNT';
     setSoloCountStep(1);
     soloCountStepRef.current = 1;
+    setLitCount(0);
     setWrongAttemptFlash(false);
     setHeardWord('');
     lastMatchTimeRef.current = Date.now();
-    startVoice();
-  }, [startVoice]);
+    playSuccessChord();
+  }, [playSuccessChord]);
 
-  // Trigger one step in Echo Count (voice speaks, then waits for child repeat)
+  // Trigger one step in Echo Count (voice speaks cleanly, waits for child repeat)
   const triggerEchoStep = useCallback((step) => {
     setEchoStep(step);
     echoStepRef.current = step;
     setEchoSubState('APP_SPEAKING');
     echoSubStateRef.current = 'APP_SPEAKING';
+    // Do NOT setLitCount here! Item 1 should not turn green or get a tick until child repeats it!
 
     speakNumber(step);
-    playTone(523.25, 'triangle', 0.18, 0.2);
+    playChime(step);
 
     const tWait = setTimeout(() => {
       setEchoSubState('WAITING_KID');
@@ -563,73 +656,164 @@ export default function NumberTracingApp({
     }, 650);
 
     demoTimersRef.current.push(tWait);
-  }, [speakNumber, playTone]);
+  }, [speakNumber, playChime]);
 
-  // When child repeats the step in Echo Count
+  // When child counts a step via mic or tap
   const onChildEchoed = useCallback((spokenNum) => {
     const currentStep = echoStepRef.current;
+    const currentTarget = selectedNumRef.current;
     if (spokenNum !== currentStep) return;
 
     playChime(currentStep);
+    // CHILD SPOKE IT! Object turns glowing green with checkmark!
+    setLitCount(currentStep);
 
-    if (currentStep < selectedNum) {
+    if (currentStep < currentTarget) {
       const nextStep = currentStep + 1;
+      // Next object starts glowing immediately!
       setEchoStep(nextStep);
       echoStepRef.current = nextStep;
+      setEchoSubState('WAITING_KID');
+      echoSubStateRef.current = 'WAITING_KID';
+      setSuccessBanner(`✓ "${NUMBER_WORDS[currentStep]}"! Now say "${NUMBER_WORDS[nextStep]}"! 🎙️`);
+
       const tNext = setTimeout(() => {
-        triggerEchoStep(nextStep);
-      }, 700);
+        speakVoiceCommand(`Say ${NUMBER_WORDS[nextStep]}!`, () => {
+          if (whisperVoiceRef.current && !whisperVoiceRef.current.isRecording && stageRef.current === 'ECHO_COUNT') {
+            whisperVoiceRef.current.startRecording();
+          }
+        });
+        playTone(520, 'sine', 0.12, 0.15);
+      }, 350);
       demoTimersRef.current.push(tNext);
     } else {
-      // Child successfully repeated all numbers! Now count on their own
-      const tSolo = setTimeout(() => {
-        startSoloCountStage();
-      }, 900);
-      demoTimersRef.current.push(tSolo);
+      // Child successfully counted all objects! All objects glow green!
+      setSuccessBanner(`🎉 Perfect! Counted all ${currentTarget} ${config.objectName}s! ⭐`);
+      const tFinish = setTimeout(() => {
+        finishCountingAndAdvance();
+      }, 700);
+      demoTimersRef.current.push(tFinish);
     }
-  }, [selectedNum, playChime, triggerEchoStep, startSoloCountStage]);
+  }, [config.objectName, playChime, speakVoiceCommand, playTone, finishCountingAndAdvance]);
 
   // Sync ref
   useEffect(() => {
     onChildEchoedRef.current = onChildEchoed;
   }, [onChildEchoed]);
 
-  // Phase A: Echo Count (First say number e.g. 4, then voice says 1 child repeats 1, then 2...)
+  // Step 2: Count Objects one by one (First object glows immediately!)
   const startEchoCountStage = useCallback(() => {
     setStage('ECHO_COUNT');
     stageRef.current = 'ECHO_COUNT';
     setEchoStep(1);
     echoStepRef.current = 1;
-    setEchoSubState('ANNOUNCING_NUM');
-    echoSubStateRef.current = 'ANNOUNCING_NUM';
+    setEchoSubState('WAITING_KID');
+    echoSubStateRef.current = 'WAITING_KID';
+    setLitCount(0); // Count starts at 0! Object 1 is NOT green yet; it is glowing as the target!
     setHeardWord('');
+    setSuccessBanner(`🔢 Say "One"! 🎙️`);
 
-    startVoice();
+    playTone(520, 'sine', 0.15, 0.18);
+    speakVoiceCommand(`Now count the ${config.objectName}s! Say One!`, () => {
+      if (whisperVoiceRef.current && !whisperVoiceRef.current.isRecording && stageRef.current === 'ECHO_COUNT') {
+        whisperVoiceRef.current.startRecording();
+      }
+    });
+  }, [config.objectName, speakVoiceCommand, playTone]);
 
-    // Step 0: First say the target number itself (e.g. "Four")
-    speakNumber(selectedNum);
-    playTone(440, 'triangle', 0.25, 0.2);
+  // Step 1 Complete: Numeral Voice Recognition Celebration & Start Counting!
+  // Triggered ONLY after the child SAYS the right number!
+  const triggerNumeralVoiceSuccess = useCallback(() => {
+    clearDemoTimers();
+    setIsTraceGreenGlow(true);
+    setCompletedStrokes(config.strokes.map((_, i) => i));
+    setStrokeProgress(1);
 
-    // After 900ms, start step 1 of call & response
-    const tStartEcho = setTimeout(() => {
-      triggerEchoStep(1);
-    }, 900);
+    const currentNum = selectedNumRef.current;
 
-    demoTimersRef.current.push(tStartEcho);
-  }, [selectedNum, speakNumber, playTone, startVoice, triggerEchoStep]);
+    // Immediately start object counting so the FIRST OBJECT GLOWS RIGHT AWAY!
+    setStage('ECHO_COUNT');
+    stageRef.current = 'ECHO_COUNT';
+    setEchoStep(1);
+    echoStepRef.current = 1;
+    setEchoSubState('WAITING_KID');
+    echoSubStateRef.current = 'WAITING_KID';
+    setLitCount(0); // Object 1 is NOT green yet; it is glowing as the active target!
+    setSuccessBanner(`🔢 Count: Say "One"! 🎙️`);
+
+    playSuccessChord();
+    fireConfetti({
+      particleCount: 85,
+      spread: 75,
+      origin: { y: 0.6 }
+    });
+
+    // Voice command: instruct to count the objects!
+    speakVoiceCommand(`Correct! Now count the ${config.objectName}s! Say One!`, () => {
+      // Automatically open mic for counting step 1!
+      if (whisperVoiceRef.current && !whisperVoiceRef.current.isRecording && stageRef.current === 'ECHO_COUNT') {
+        whisperVoiceRef.current.startRecording();
+      }
+    });
+  }, [config.strokes, config.objectName, playSuccessChord, speakVoiceCommand, clearDemoTimers]);
+
+  // Unified voice recognition handler powered by useWhisperVoice hook
+  const handleVoiceNumber = useCallback((detectedNum, cleanText, rawText) => {
+    if (rawText) setHeardWord(rawText);
+    const now = Date.now();
+    if (now - lastMatchTimeRef.current < 280) return;
+
+    if (detectedNum >= 1 && detectedNum <= 10) {
+      lastMatchTimeRef.current = now;
+
+      if (stageRef.current === 'ECHO_COUNT') {
+        const expected = echoStepRef.current;
+        if (detectedNum === expected) {
+          echoSubStateRef.current = 'APP_SPEAKING';
+          setLitCount(detectedNum);
+          if (onChildEchoedRef.current) {
+            onChildEchoedRef.current(detectedNum);
+          }
+        }
+      } else if (stageRef.current === 'SOLO_COUNT') {
+        if (handleSoloCountAttemptRef.current) {
+          handleSoloCountAttemptRef.current(detectedNum);
+        }
+      } else if (stageRef.current === 'TRACING') {
+        // Child spoke the number: trigger green numeral trace glow, confetti, & object counting!
+        if (detectedNum === selectedNumRef.current) {
+          triggerNumeralVoiceSuccess();
+        }
+      }
+    }
+  }, [triggerNumeralVoiceSuccess]);
+
+  const whisperVoice = useWhisperVoice({
+    onNumberDetected: (num, rawText) => {
+      handleVoiceNumber(num, String(num), rawText);
+    },
+    onTextHeard: (t) => {
+      if (t) setHeardWord(t);
+    }
+  });
+  whisperVoiceRef.current = whisperVoice;
 
   // User Pointer Dragging along Path
   const handlePointerDown = (e) => {
     if (demoActive) stopDemo();
-    if (stage !== 'TRACING') return;
+    if (stage !== 'TRACING' || strokeDoneRef.current) return;
+    isDraggingRef.current = true;
     setIsDragging(true);
     e.target.setPointerCapture(e.pointerId);
     getAudioCtx();
+    if (typeof window !== 'undefined' && 'speechSynthesis' in window && window.speechSynthesis.paused) {
+      window.speechSynthesis.resume();
+    }
     playTone(480, 'sine', 0.08, 0.12);
   };
 
   const handlePointerMove = (e) => {
-    if (!isDragging || !svgRef.current || !pathRef.current || stage !== 'TRACING') return;
+    if (!isDraggingRef.current || !svgRef.current || !pathRef.current || stage !== 'TRACING' || strokeDoneRef.current) return;
 
     const svgRect = svgRef.current.getBoundingClientRect();
     const svgX = ((e.clientX - svgRect.left) / svgRect.width) * 300;
@@ -660,20 +844,31 @@ export default function NumberTracingApp({
       setStrokeProgress(newProgress);
 
       if (newProgress >= 0.94) {
-        setStrokeProgress(1);
+        if (strokeDoneRef.current) return;
+        isDraggingRef.current = false;
         setIsDragging(false);
+        setStrokeProgress(1);
         playChime(currentStrokeIdx + 1);
 
         const newCompleted = [...completedStrokes, currentStrokeIdx];
         setCompletedStrokes(newCompleted);
 
         if (newCompleted.length >= config.strokes.length) {
-          playSuccessChord();
-          // Move to Echo Count Stage (voice says 1, child repeats 1, then 2...)
-          const t = setTimeout(() => {
-            startEchoCountStage();
-          }, 450);
-          demoTimersRef.current.push(t);
+          // Tracing completed! Do NOT show confetti or green glow yet (those show when saying the number)
+          strokeDoneRef.current = true;
+          setCompletedStrokes(newCompleted);
+          setStrokeProgress(1);
+          playChime(config.strokes.length);
+          const currentNum = selectedNumRef.current;
+          const word = NUMBER_WORDS[currentNum] || String(currentNum);
+          setSuccessBanner(`🎙️ Say "${word}"!`);
+
+          // Voice command after tracing!
+          speakVoiceCommand(`Great! Now say ${word}!`, () => {
+            if (whisperVoiceRef.current && !whisperVoiceRef.current.isRecording && stageRef.current === 'TRACING') {
+              whisperVoiceRef.current.startRecording();
+            }
+          });
         } else {
           // Advance to next stroke (e.g. stroke 2 in number 4)
           const nextIdx = currentStrokeIdx + 1;
@@ -685,6 +880,7 @@ export default function NumberTracingApp({
   };
 
   const handlePointerUp = (e) => {
+    isDraggingRef.current = false;
     setIsDragging(false);
     try {
       e.target.releasePointerCapture(e.pointerId);
@@ -698,11 +894,13 @@ export default function NumberTracingApp({
     if (demoActive) stopDemo();
     getAudioCtx();
     if (stage === 'ECHO_COUNT') {
-      if (echoSubStateRef.current === 'WAITING_KID' && itemIdx === echoStepRef.current) {
+      if (itemIdx === echoStepRef.current) {
         echoSubStateRef.current = 'APP_SPEAKING';
         if (onChildEchoedRef.current) {
           onChildEchoedRef.current(itemIdx);
         }
+      } else {
+        playTone(320, 'sine', 0.1, 0.1);
       }
     } else if (stage === 'SOLO_COUNT') {
       if (handleSoloCountAttemptRef.current) {
@@ -876,12 +1074,14 @@ export default function NumberTracingApp({
   useEffect(() => {
     return () => {
       clearDemoTimers();
-      stopVoice();
+      if (whisperVoice.isRecording) {
+        whisperVoice.stopRecording();
+      }
       if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
         window.speechSynthesis.cancel();
       }
     };
-  }, [clearDemoTimers, stopVoice]);
+  }, [clearDemoTimers, whisperVoice]);
 
   return (
     <div className="tenali-learn-trace-container">
@@ -915,6 +1115,87 @@ export default function NumberTracingApp({
         </button>
       </header>
 
+      {/* Push-to-Talk Whisper Neural Speech HUD */}
+      <div className="voice-universal-hud" style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        flexWrap: 'wrap',
+        gap: '12px',
+        padding: '10px 16px',
+        margin: '8px 0 14px 0',
+        borderRadius: '14px',
+        background: 'rgba(30, 41, 59, 0.75)',
+        border: '1px solid rgba(148, 163, 184, 0.25)'
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
+          <PushToTalkButton
+            whisperState={whisperVoice}
+            label={
+              stage === 'ECHO_COUNT'
+                ? `Click to Speak "${NUMBER_WORDS[echoStep]}" (${echoStep}/${selectedNum})`
+                : stage === 'SOLO_COUNT'
+                ? `Click to Count "${NUMBER_WORDS[soloCountStep]}" (${soloCountStep}/${selectedNum})`
+                : `Click to Speak "${NUMBER_WORDS[selectedNum]}"`
+            }
+          />
+
+          <span
+            className={`whisper-live-badge ${whisperVoice.serverOnline ? 'server-online' : ''}`}
+            title={whisperVoice.serverOnline ? "Python Whisper AI server connected at localhost:8000" : "In-browser speech recognition active"}
+            style={whisperVoice.serverOnline ? { borderColor: '#10b981', color: '#6ee7b7' } : undefined}
+          >
+            {whisperVoice.serverOnline ? '🟢 Whisper AI Server Active' : '✨ Whisper Indian Digits AI'}
+          </span>
+        </div>
+
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.9rem' }}>
+          {heardWord ? (
+            <span style={{ color: '#fde047', fontWeight: 600 }}>
+              🗣️ Heard: <em>"{heardWord}"</em> ⭐
+            </span>
+          ) : (
+            <span style={{ color: '#94a3b8', fontStyle: 'italic' }}>
+              {stage === 'TRACING'
+                ? (completedStrokes.length >= config.strokes.length
+                    ? `✍️ Tracing done! Click mic to say "${NUMBER_WORDS[selectedNum]}"!`
+                    : '💡 Trace numeral along arrows, or click mic to speak!')
+                : stage === 'ECHO_COUNT'
+                ? `💡 Say "${NUMBER_WORDS[echoStep]}" to count the glowing object! (${echoStep}/${selectedNum})`
+                : `💡 Count on your own: ${soloCountStep} / ${selectedNum} (no penalty on stumble!)`}
+            </span>
+          )}
+        </div>
+      </div>
+
+      {/* Celebration Success Banner */}
+      {successBanner && (
+        <div
+          className="trace-success-banner"
+          style={{
+            background: 'linear-gradient(135deg, #15803d 0%, #16a34a 50%, #22c55e 100%)',
+            color: '#ffffff',
+            padding: '14px 24px',
+            borderRadius: '16px',
+            textAlign: 'center',
+            fontSize: '1.35rem',
+            fontWeight: 800,
+            marginBottom: '16px',
+            boxShadow: '0 0 25px rgba(34, 197, 94, 0.7), inset 0 0 10px rgba(255, 255, 255, 0.4)',
+            border: '2px solid #86efac',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '12px',
+            animation: 'fadeIn 0.3s ease-out'
+          }}
+        >
+          <span style={{ fontSize: '1.6rem' }}>🎉</span>
+          <span>{successBanner}</span>
+          <span style={{ fontSize: '1.6rem' }}>⭐</span>
+        </div>
+      )}
+
       {/* Main Interactive Learning Workspace (2-Column) */}
       <div className="trace-card-grid">
         {/* Left Column: Hollow Cartoon Numeral & Guided Tracing Track */}
@@ -925,20 +1206,22 @@ export default function NumberTracingApp({
             </span>
             <span className="stroke-progress-indicator">
               {stage === 'TRACING'
-                ? `Stroke ${currentStrokeIdx + 1} of ${config.strokes.length}`
+                ? (completedStrokes.length >= config.strokes.length
+                    ? `1️⃣ 🎙️ Now Click Mic to Say "${NUMBER_WORDS[selectedNum]}"`
+                    : `1️⃣ Trace Stroke ${currentStrokeIdx + 1} of ${config.strokes.length}`)
                 : stage === 'ECHO_COUNT'
-                ? '🗣️ Repeat after me'
+                ? `2️⃣ 🗣️ Repeat: "${NUMBER_WORDS[echoStep]}"`
                 : stage === 'SOLO_COUNT'
-                ? '🌟 Count on your own!'
+                ? `3️⃣ 🌟 Solo Count (${soloCountStep}/${selectedNum})`
                 : '✓ Great Job!'}
             </span>
           </div>
 
-          <div className="trace-svg-board-box">
+          <div className={`trace-svg-board-box ${isTraceGreenGlow ? 'is-green-glow' : ''}`}>
             <svg
               ref={svgRef}
               viewBox="0 0 300 300"
-              className="trace-svg-board"
+              className={`trace-svg-board ${isTraceGreenGlow ? 'is-green-glow' : ''}`}
               onPointerMove={handlePointerMove}
               onPointerUp={handlePointerUp}
               onPointerCancel={handlePointerUp}
@@ -955,6 +1238,30 @@ export default function NumberTracingApp({
                   <stop offset="0%" stopColor="#38bdf8" />
                   <stop offset="100%" stopColor="#818cf8" />
                 </linearGradient>
+                <linearGradient id="trace-success-green-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#86efac" />
+                  <stop offset="50%" stopColor="#22c55e" />
+                  <stop offset="100%" stopColor="#15803d" />
+                </linearGradient>
+                <filter id="numeral-super-glow" x="-40%" y="-40%" width="180%" height="180%">
+                  <feGaussianBlur stdDeviation="5" result="blur" />
+                  <feMerge>
+                    <feMergeNode in="blur" />
+                    <feMergeNode in="blur" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+                <marker
+                  id="guide-arrow-marker"
+                  viewBox="0 0 10 10"
+                  refX="5"
+                  refY="5"
+                  markerWidth="4"
+                  markerHeight="4"
+                  orient="auto"
+                >
+                  <path d="M 0 2 L 7 5 L 0 8 z" fill="#fde047" />
+                </marker>
               </defs>
 
               {/* 1. Hollow Outer Cartoon Numeral Tube Background */}
@@ -976,7 +1283,7 @@ export default function NumberTracingApp({
                   key={`border-${s.id}`}
                   d={s.path}
                   fill="none"
-                  stroke="#4338ca"
+                  stroke={isTraceGreenGlow ? "#15803d" : "#4338ca"}
                   strokeWidth="38"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -985,7 +1292,7 @@ export default function NumberTracingApp({
 
               {/* 3. Completed / Active Stroke Fill */}
               {config.strokes.map((s, idx) => {
-                const isFinished = completedStrokes.includes(idx);
+                const isFinished = completedStrokes.includes(idx) || isTraceGreenGlow;
                 const isCurrent = idx === currentStrokeIdx && stage === 'TRACING';
                 if (!isFinished && !isCurrent) return null;
 
@@ -994,11 +1301,13 @@ export default function NumberTracingApp({
                     key={`fill-${s.id}`}
                     d={s.path}
                     fill="none"
-                    stroke="url(#trace-fill-grad)"
-                    strokeWidth="28"
+                    stroke={isTraceGreenGlow ? "url(#trace-success-green-grad)" : "url(#trace-fill-grad)"}
+                    strokeWidth={isTraceGreenGlow ? "36" : "28"}
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    opacity={isFinished ? 1 : 0.95}
+                    filter={isTraceGreenGlow ? "url(#numeral-super-glow)" : undefined}
+                    className={isTraceGreenGlow ? "trace-numeral-green-glow-pulse" : undefined}
+                    opacity={1}
                   />
                 );
               })}
@@ -1012,23 +1321,28 @@ export default function NumberTracingApp({
                 strokeWidth="1"
               />
 
-              {/* 5. Inner Dashed Guidance Track */}
-              {config.strokes.map((s, idx) => (
-                <path
-                  key={`dash-${s.id}`}
-                  d={s.path}
-                  fill="none"
-                  stroke="#fde047"
-                  strokeWidth="3.5"
-                  strokeDasharray="8 8"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  opacity={completedStrokes.includes(idx) ? 0.3 : 0.9}
-                />
-              ))}
+              {/* 5. Inner Dashed Guidance Track with Directional Guides */}
+              {config.strokes.map((s, idx) => {
+                const isActive = idx === currentStrokeIdx && stage === 'TRACING';
+                return (
+                  <path
+                    key={`dash-${s.id}`}
+                    d={s.path}
+                    fill="none"
+                    stroke={isActive ? '#fde047' : '#94a3b8'}
+                    strokeWidth="3.5"
+                    strokeDasharray="8 8"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    markerMid={isActive ? 'url(#guide-arrow-marker)' : 'none'}
+                    markerEnd={isActive ? 'url(#guide-arrow-marker)' : 'none'}
+                    opacity={completedStrokes.includes(idx) ? 0.3 : 0.95}
+                  />
+                );
+              })}
 
-              {/* 6. Glowing Green Start Dot / Slider at Starting Point */}
-              {stage === 'TRACING' && (
+              {/* 6. Glowing Green Start Dot / Slider with Directional Hint */}
+              {stage === 'TRACING' && completedStrokes.length < config.strokes.length && (
                 <g
                   transform={`translate(${dotPos.x}, ${dotPos.y})`}
                   onPointerDown={handlePointerDown}
@@ -1051,6 +1365,19 @@ export default function NumberTracingApp({
                     filter="url(#green-radar-glow)"
                   />
                   <circle r="5" fill="#fef08a" />
+                  {strokeProgress === 0 && (
+                    <text
+                      x="0"
+                      y="-22"
+                      textAnchor="middle"
+                      fontSize="10"
+                      fontWeight="900"
+                      fill="#a3e635"
+                      style={{ filter: 'drop-shadow(0 0 4px #000)' }}
+                    >
+                      START ⬇️
+                    </text>
+                  )}
                 </g>
               )}
             </svg>
@@ -1070,7 +1397,7 @@ export default function NumberTracingApp({
             )}
 
             {/* Continuous Hand Tap Hint on initial idle */}
-            {!demoActive && stage === 'TRACING' && strokeProgress === 0 && (
+            {!demoActive && stage === 'TRACING' && strokeProgress === 0 && completedStrokes.length < config.strokes.length && (
               <div
                 style={{
                   position: 'absolute',
@@ -1088,28 +1415,29 @@ export default function NumberTracingApp({
         {/* Right Column: Object Count & Minimal Interaction Studio */}
         <div className="trace-counter-panel">
           <div className="counter-panel-header">
-            <h3>{selectedNum} {config.objectName}s</h3>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <h3>{selectedNum} {config.objectName}s</h3>
+              <span className="whisper-live-badge" title="Neural Speech Recognition via Whisper AI">
+                ✨ Whisper AI
+              </span>
+            </div>
             {stage === 'ECHO_COUNT' && (
               <div className="voice-mic-indicator app-count-mode">
                 <span className="voice-mic-dot active" />
                 <span>
-                  {echoSubState === 'ANNOUNCING_NUM'
-                    ? `🔊 Number ${selectedNum}`
-                    : echoSubState === 'APP_SPEAKING'
-                    ? `🔊 Listen: "${NUMBER_WORDS[echoStep]}"`
-                    : `🎤 Repeat: "${NUMBER_WORDS[echoStep]}"`}
+                  {`🎤 Say: "${NUMBER_WORDS[echoStep]}" (${echoStep}/${selectedNum})`}
                 </span>
               </div>
             )}
             {stage === 'SOLO_COUNT' && (
               <div className={`voice-mic-indicator ${wrongAttemptFlash ? 'wrong-count-mode' : 'kid-count-mode'}`}>
-                <span className={`voice-mic-dot ${micActive ? 'active' : ''}`} />
+                <span className={`voice-mic-dot ${whisperVoice.isRecording ? 'active' : ''}`} />
                 <span>
                   {wrongAttemptFlash
                     ? `🔄 Try again from 1`
                     : heardWord
                     ? `"${heardWord}"`
-                    : `🎤 Count on your own: ${soloCountStep} / ${selectedNum}`}
+                    : `🎤 Hold button to count: ${soloCountStep} / ${selectedNum}`}
                 </span>
               </div>
             )}
@@ -1123,27 +1451,50 @@ export default function NumberTracingApp({
               let isTarget = false;
 
               if (stage === 'ECHO_COUNT') {
-                isLit = itemNum < echoStep;
-                isTarget = itemNum === echoStep;
+                isLit = itemNum <= litCount;
+                isTarget = itemNum === echoStep && !isLit;
               } else if (stage === 'SOLO_COUNT') {
-                isLit = itemNum < soloCountStep;
-                isTarget = itemNum === soloCountStep;
+                isLit = itemNum <= litCount;
+                isTarget = itemNum === soloCountStep && !isLit;
               } else if (stage === 'COMPLETED') {
                 isLit = true;
+              } else {
+                isLit = false;
               }
 
               return (
                 <div
                   key={`obj-${itemNum}`}
-                  className={`trace-item-bubble ${isLit ? 'is-lit' : ''} ${isTarget ? 'is-target' : ''}`}
+                  className={`trace-item-bubble ${isLit ? 'is-lit is-green-glow' : ''} ${isTarget ? 'is-target' : ''}`}
                   onClick={() => handleObjectTap(itemNum)}
                   style={{
-                    cursor: (stage === 'ECHO_COUNT' || stage === 'SOLO_COUNT') ? 'pointer' : 'default',
+                    cursor: 'pointer',
                     position: 'relative'
                   }}
                 >
                   <span className="object-emoji-render">{config.objectEmoji}</span>
                   <span className="object-num-tag">{itemNum}</span>
+
+                  {isLit && (
+                    <span className="object-check-badge" style={{
+                      position: 'absolute',
+                      top: '-6px',
+                      right: '-6px',
+                      background: '#22c55e',
+                      color: '#ffffff',
+                      borderRadius: '50%',
+                      width: '20px',
+                      height: '20px',
+                      fontSize: '11px',
+                      fontWeight: 'bold',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      boxShadow: '0 0 10px #22c55e'
+                    }}>
+                      ✓
+                    </span>
+                  )}
 
                   {/* Hand Cursor during Counting Demo */}
                   {demoActive && demoHandPos.target === 'item' && demoHandPos.itemIdx === itemNum && (
@@ -1181,3 +1532,5 @@ export default function NumberTracingApp({
     </div>
   );
 }
+
+export { NumberTracingApp };
