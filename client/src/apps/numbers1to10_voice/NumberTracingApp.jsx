@@ -1142,10 +1142,10 @@ export default function NumberTracingApp({
 
           <span
             className={`whisper-live-badge ${whisperVoice.serverOnline ? 'server-online' : ''}`}
-            title={whisperVoice.serverOnline ? "Python Whisper AI server connected at localhost:8000" : "In-browser speech recognition active"}
+            title={whisperVoice.serverOnline ? "Whisper Indian Digits AI Connected" : "Whisper Indian Digits AI (gradient-queen/whisper-tiny-indian-digits-final)"}
             style={whisperVoice.serverOnline ? { borderColor: '#10b981', color: '#6ee7b7' } : undefined}
           >
-            {whisperVoice.serverOnline ? '🟢 Whisper AI Server Active' : '✨ Whisper Indian Digits AI'}
+            {whisperVoice.serverOnline ? '🟢 Whisper Indian Digits Active' : '✨ Whisper Indian Digits AI'}
           </span>
         </div>
 

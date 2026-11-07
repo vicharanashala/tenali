@@ -39,17 +39,26 @@ function encodeWAV(samples, sampleRate = 16000) {
 }
 
 /**
- * useWhisperVoice
+ * Determine the Whisper API base URL.
+ * 1. Checks VITE_WHISPER_API_URL (e.g. Hugging Face Spaces or custom cloud endpoint)
+ * 2. If running on localhost / 127.0.0.1, defaults to http://localhost:8000
+ * 3. Otherwise defaults to empty string (relative /api path)
+ */
+function getWhisperBaseUrl() {
+  if (typeof import.meta !== 'undefined' && import.meta.env?.VITE_WHISPER_API_URL) {
+    return import.meta.env.VITE_WHISPER_API_URL.replace(/\/+$/, '');
+  }
+  if (typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
+    return 'http://localhost:8000';
+  }
+  return '';
+}
+
+/**
+ * useWhisperVoice (Pure Whisper Neural Speech Hook — NO WebKit)
  *
- * Click-to-Speak & Real-Time Neural Speech hook for NumberTracingApp & SpaceMazeAdventure.
- *
- * Features:
- * 1. 1st Click: Opens mic, begins real-time speech listening & 16kHz PCM audio capture.
- * 2. Real-Time Detection: Automatically detects spoken numbers (1-10) with zero latency
- *    as soon as child speaks, without requiring a second click!
- * 3. 2nd Click (optional): Stops mic, transcribes with Whisper neural API (http://localhost:8000/api/recognize)
- *    and resolves Indian English accents / regional digits (1-10).
- * 4. Automatic health detection of Python Whisper server.
+ * Dedicated to `gradient-queen/whisper-tiny-indian-digits-final`.
+ * Captures 16kHz audio from mic and performs neural transcription strictly via Whisper.
  */
 export function useWhisperVoice({
   onNumberDetected,
@@ -65,9 +74,6 @@ export function useWhisperVoice({
   const [serverOnline, setServerOnline] = useState(false);
 
   const recorderRef = useRef(null);
-  const speechRecognitionRef = useRef(null);
-  const liveSpeechRef = useRef('');
-  const liveDigitRef = useRef(null);
   const onNumberDetectedRef = useRef(onNumberDetected);
   const onTextHeardRef = useRef(onTextHeard);
   const isRecordingRef = useRef(false);
@@ -87,14 +93,13 @@ export function useWhisperVoice({
     isRecordingRef.current = isRecording;
   }, [isRecording]);
 
-  // Check Python Whisper server health on mount & periodically (only on localhost)
+  // Periodic health check for Whisper backend
   useEffect(() => {
     let isMounted = true;
-    const isLocalhost = typeof window !== 'undefined' && 
-      (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+    const baseUrl = getWhisperBaseUrl();
 
-    if (!isLocalhost) {
-      // On Vercel / production: 100% client-side Web Speech API + phonetic resolver
+    // If no endpoint is configured and we are not on localhost, mark offline to avoid noisy fetch errors
+    if (!baseUrl && typeof window !== 'undefined' && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
       setServerOnline(false);
       serverOnlineRef.current = false;
       return;
@@ -103,16 +108,9 @@ export function useWhisperVoice({
     const checkServerHealth = async () => {
       try {
         const controller = new AbortController();
-        const tid = setTimeout(() => controller.abort(), 1500);
-        let res = null;
-        try {
-          res = await fetch('http://localhost:8000/api/health', {
-            method: 'GET',
-            signal: controller.signal
-          });
-        } catch {
-          // Localhost offline
-        }
+        const tid = setTimeout(() => controller.abort(), 2000);
+        const healthUrl = baseUrl ? `${baseUrl}/api/health` : '/api/health';
+        const res = await fetch(healthUrl, { method: 'GET', signal: controller.signal });
         clearTimeout(tid);
         if (isMounted) {
           const isOk = Boolean(res && res.ok);
@@ -147,14 +145,11 @@ export function useWhisperVoice({
       if (recorderRef.current) {
         try { recorderRef.current.stop(); } catch (e) {}
       }
-      if (speechRecognitionRef.current) {
-        try { speechRecognitionRef.current.stop(); } catch (e) {}
-      }
     };
   }, []);
 
   /**
-   * Click to Stop Recording & Recognize Number
+   * Stop Recording & Transcribe with Whisper
    */
   const stopRecording = useCallback(async () => {
     if (!isRecordingRef.current) return;
@@ -169,98 +164,77 @@ export function useWhisperVoice({
     try {
       setIsTranscribing(true);
 
-      // Stop recorder and retrieve PCM samples
       let audioChunk = null;
       if (recorderRef.current) {
         audioChunk = recorderRef.current.stop();
       }
 
-      let recognizedRaw = '';
-      let detectedNumber = null;
-
-      // 1. Try Python Whisper server ONLY if server was confirmed online
-      if (serverOnlineRef.current && audioChunk && audioChunk.length >= 800) {
-        try {
-          const wavBlob = encodeWAV(audioChunk, 16000);
-          const formData = new FormData();
-          formData.append('file', wavBlob, 'recording.wav');
-
-          const controller = new AbortController();
-          const timeoutId = setTimeout(() => controller.abort(), 3000);
-
-          let response = null;
-          try {
-            response = await fetch('http://localhost:8000/api/recognize', {
-              method: 'POST',
-              body: formData,
-              signal: controller.signal
-            });
-          } catch {
-            response = null;
-          }
-          clearTimeout(timeoutId);
-
-          if (response && response.ok) {
-            const data = await response.json();
-            recognizedRaw = data.raw || data.text || '';
-            if (data.digit) {
-              detectedNumber = Number(data.digit);
-            }
-          }
-        } catch (netErr) {
-          // Fallback seamlessly to browser speech recognition
-        }
+      if (!audioChunk || audioChunk.length < 800) {
+        setErrorMessage('No speech recorded. Please hold the mic and speak.');
+        setIsTranscribing(false);
+        return;
       }
 
-      // 2. Fallback to browser live speech if server didn't resolve digit
-      if (!detectedNumber) {
-        if (!liveSpeechRef.current && !liveDigitRef.current) {
-          // Graceful window in case speech recognizer is finishing
-          await new Promise((r) => setTimeout(r, 250));
-        }
+      const wavBlob = encodeWAV(audioChunk, 16000);
+      const formData = new FormData();
+      formData.append('file', wavBlob, 'recording.wav');
 
-        if (liveDigitRef.current) {
-          detectedNumber = liveDigitRef.current;
-        } else {
-          const textToResolve = recognizedRaw || liveSpeechRef.current;
-          detectedNumber = resolveTextToNumber(textToResolve);
-        }
+      const baseUrl = getWhisperBaseUrl();
+      const recognizeUrl = baseUrl ? `${baseUrl}/api/recognize` : '/api/recognize';
 
-        if (!recognizedRaw && liveSpeechRef.current) {
-          recognizedRaw = liveSpeechRef.current;
-        }
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 12000);
+
+      const response = await fetch(recognizeUrl, {
+        method: 'POST',
+        body: formData,
+        signal: controller.signal
+      });
+      clearTimeout(timeoutId);
+
+      if (!response.ok) {
+        throw new Error(`Whisper AI server responded with ${response.status}`);
       }
 
-      // Stop speech recognition instance
-      if (speechRecognitionRef.current) {
-        try {
-          speechRecognitionRef.current.stop();
-        } catch (e) {}
+      const data = await response.json();
+      const rawText = data.raw || data.text || '';
+      let detectedDigit = data.digit ? Number(data.digit) : null;
+
+      // Verify with phonetic resolver as well
+      if (!detectedDigit && rawText) {
+        detectedDigit = resolveTextToNumber(rawText);
       }
 
-      const finalDisplay = recognizedRaw || (detectedNumber ? String(detectedNumber) : '');
-      setHeardText(finalDisplay);
+      setServerOnline(true);
+      serverOnlineRef.current = true;
 
-      if (finalDisplay && onTextHeardRef.current) {
-        onTextHeardRef.current(finalDisplay);
+      const display = rawText || (detectedDigit ? String(detectedDigit) : '');
+      setHeardText(display);
+
+      if (display && onTextHeardRef.current) {
+        onTextHeardRef.current(display);
       }
 
-      if (detectedNumber !== null && detectedNumber >= 1 && detectedNumber <= 10) {
-        setLastDetectedNumber(detectedNumber);
+      if (detectedDigit !== null && detectedDigit >= 1 && detectedDigit <= 10) {
+        setLastDetectedNumber(detectedDigit);
         setErrorMessage('');
         if (onNumberDetectedRef.current) {
-          onNumberDetectedRef.current(detectedNumber, finalDisplay);
+          onNumberDetectedRef.current(detectedDigit, display);
         }
       } else {
-        if (finalDisplay) {
-          setErrorMessage(`Heard "${finalDisplay}", but did not match a number (1-10).`);
+        if (display) {
+          setErrorMessage(`Whisper heard "${display}", but did not match a number (1-10).`);
         } else {
-          setErrorMessage('No speech detected. Please speak closer to the mic.');
+          setErrorMessage('Whisper detected no speech. Please speak closer to the mic.');
         }
       }
     } catch (err) {
-      console.error('[useWhisperVoice] Recognition error:', err);
-      setErrorMessage('Speech recognition error. Please try again.');
+      console.error('[useWhisperVoice] Whisper inference error:', err);
+      setErrorMessage(
+        serverOnlineRef.current
+          ? 'Whisper recognition error. Please try again.'
+          : 'Whisper AI Server offline. Please connect your Whisper backend.'
+      );
     } finally {
       setIsTranscribing(false);
     }
@@ -269,15 +243,13 @@ export function useWhisperVoice({
   stopRecordingRef.current = stopRecording;
 
   /**
-   * Click to Start Recording
+   * Start Recording (Pure Whisper, No WebKit)
    */
   const startRecording = useCallback(async () => {
     if (isRecordingRef.current || isTranscribing) return;
     setErrorMessage('');
     setHeardText('');
     setLastDetectedNumber(null);
-    liveSpeechRef.current = '';
-    liveDigitRef.current = null;
 
     try {
       if (!recorderRef.current) {
@@ -287,75 +259,20 @@ export function useWhisperVoice({
       setIsRecording(true);
       isRecordingRef.current = true;
 
-      // Start browser native speech recognition with real-time interim & continuous results
-      const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
-      if (SpeechRec) {
-        try {
-          const rec = new SpeechRec();
-          rec.lang = 'en-IN';
-          rec.continuous = true;
-          rec.interimResults = true;
-          rec.maxAlternatives = 8;
-
-          rec.onresult = (ev) => {
-            for (let i = ev.resultIndex; i < ev.results.length; i++) {
-              const res = ev.results[i];
-              if (!res) continue;
-              const transcript = res[0]?.transcript || '';
-              if (transcript) {
-                const clean = transcript.trim();
-                liveSpeechRef.current = clean;
-                setHeardText(clean);
-                const num = resolveTextToNumber(clean);
-                if (num) {
-                  liveDigitRef.current = num;
-                  setLastDetectedNumber(num);
-                  setErrorMessage('');
-
-                  // Instant zero-latency trigger!
-                  if (onNumberDetectedRef.current) {
-                    onNumberDetectedRef.current(num, clean);
-                  }
-
-                  // Automatically close recording after 450ms
-                  setTimeout(() => {
-                    if (isRecordingRef.current && stopRecordingRef.current) {
-                      stopRecordingRef.current();
-                    }
-                  }, 450);
-                }
-              }
-            }
-          };
-
-          rec.onerror = (e) => {
-            console.warn('[useWhisperVoice] Speech recognition event:', e.error);
-          };
-
-          rec.start();
-          speechRecognitionRef.current = rec;
-        } catch (e) {
-          console.warn('[useWhisperVoice] SpeechRec init:', e);
-        }
-      }
-
-      // Automatically stop after 7 seconds if no speech is detected
+      // Auto-stop after 3.8 seconds so child doesn't have to tap stop manually
       if (autoStopTimerRef.current) clearTimeout(autoStopTimerRef.current);
       autoStopTimerRef.current = setTimeout(() => {
         if (isRecordingRef.current && stopRecordingRef.current) {
           stopRecordingRef.current();
         }
-      }, 7000);
+      }, 3800);
 
     } catch (err) {
       console.warn('[useWhisperVoice] Mic start error:', err);
-      setErrorMessage(err.message || 'Microphone access denied. Please allow mic permissions in your browser.');
+      setErrorMessage(err.message || 'Microphone access denied. Please allow mic permissions.');
     }
   }, [isTranscribing]);
 
-  /**
-   * Click-to-toggle helper
-   */
   const toggleRecording = useCallback(() => {
     if (isRecordingRef.current) {
       stopRecording();
@@ -365,7 +282,6 @@ export function useWhisperVoice({
   }, [startRecording, stopRecording]);
 
   return {
-    ready: true,
     modelStatus,
     loadingProgress,
     isRecording,
