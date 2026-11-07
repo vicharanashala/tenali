@@ -38,20 +38,18 @@ function encodeWAV(samples, sampleRate = 16000) {
   return new Blob([buffer], { type: 'audio/wav' });
 }
 
+export const HUGGINGFACE_WHISPER_SPACE_URL = 'https://gradient-queen-whisper-indian-digits.hf.space';
+
 /**
  * Determine the Whisper API base URL.
- * 1. Checks VITE_WHISPER_API_URL (e.g. Hugging Face Spaces or custom cloud endpoint)
- * 2. If running on localhost / 127.0.0.1, defaults to http://localhost:8000
- * 3. Otherwise defaults to empty string (relative /api path)
+ * Defaults to the user's Hugging Face Space:
+ * https://gradient-queen-whisper-indian-digits.hf.space
  */
 function getWhisperBaseUrl() {
   if (typeof import.meta !== 'undefined' && import.meta.env?.VITE_WHISPER_API_URL) {
     return import.meta.env.VITE_WHISPER_API_URL.replace(/\/+$/, '');
   }
-  if (typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
-    return 'http://localhost:8000';
-  }
-  return '';
+  return HUGGINGFACE_WHISPER_SPACE_URL;
 }
 
 /**
@@ -98,24 +96,38 @@ export function useWhisperVoice({
     let isMounted = true;
     const baseUrl = getWhisperBaseUrl();
 
-    // If no endpoint is configured and we are not on localhost, mark offline to avoid noisy fetch errors
-    if (!baseUrl && typeof window !== 'undefined' && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
-      setServerOnline(false);
-      serverOnlineRef.current = false;
-      return;
-    }
-
     const checkServerHealth = async () => {
       try {
         const controller = new AbortController();
-        const tid = setTimeout(() => controller.abort(), 2000);
-        const healthUrl = baseUrl ? `${baseUrl}/api/health` : '/api/health';
-        const res = await fetch(healthUrl, { method: 'GET', signal: controller.signal });
+        const tid = setTimeout(() => controller.abort(), 4000);
+        let ok = false;
+
+        // Try /api/health
+        try {
+          const r1 = await fetch(`${baseUrl}/api/health`, { method: 'GET', signal: controller.signal });
+          if (r1.ok) ok = true;
+        } catch (e) {}
+
+        // Try /health
+        if (!ok) {
+          try {
+            const r2 = await fetch(`${baseUrl}/health`, { method: 'GET', signal: controller.signal });
+            if (r2.ok) ok = true;
+          } catch (e) {}
+        }
+
+        // Try local server if on localhost
+        if (!ok && typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
+          try {
+            const r3 = await fetch('http://localhost:8000/api/health', { method: 'GET', signal: controller.signal });
+            if (r3.ok) ok = true;
+          } catch (e) {}
+        }
+
         clearTimeout(tid);
         if (isMounted) {
-          const isOk = Boolean(res && res.ok);
-          setServerOnline(isOk);
-          serverOnlineRef.current = isOk;
+          setServerOnline(ok);
+          serverOnlineRef.current = ok;
         }
       } catch (e) {
         if (isMounted) {
@@ -126,7 +138,7 @@ export function useWhisperVoice({
     };
 
     checkServerHealth();
-    const interval = setInterval(checkServerHealth, 8000);
+    const interval = setInterval(checkServerHealth, 10000);
 
     return () => {
       isMounted = false;
@@ -180,27 +192,78 @@ export function useWhisperVoice({
       formData.append('file', wavBlob, 'recording.wav');
 
       const baseUrl = getWhisperBaseUrl();
-      const recognizeUrl = baseUrl ? `${baseUrl}/api/recognize` : '/api/recognize';
-
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 12000);
+      // Allow up to 30s in case Hugging Face Space is spinning up from sleep
+      const timeoutId = setTimeout(() => controller.abort(), 30000);
 
-      const response = await fetch(recognizeUrl, {
-        method: 'POST',
-        body: formData,
-        signal: controller.signal
-      });
-      clearTimeout(timeoutId);
+      let response = null;
+      let data = null;
 
-      if (!response.ok) {
-        throw new Error(`Whisper AI server responded with ${response.status}`);
+      // 1. Try Hugging Face Space /api/recognize with FormData (server.py format)
+      try {
+        const resp1 = await fetch(`${baseUrl}/api/recognize`, {
+          method: 'POST',
+          body: formData,
+          signal: controller.signal
+        });
+        if (resp1.ok) {
+          response = resp1;
+          data = await resp1.json();
+        }
+      } catch (err1) {
+        // Fall through to next endpoint
       }
 
-      const data = await response.json();
-      const rawText = data.raw || data.text || '';
-      let detectedDigit = data.digit ? Number(data.digit) : null;
+      // 2. Try Hugging Face Space /transcribe with raw wavBlob (app.py format)
+      if (!data) {
+        try {
+          const resp2 = await fetch(`${baseUrl}/transcribe`, {
+            method: 'POST',
+            body: wavBlob,
+            headers: {
+              'Content-Type': 'audio/wav'
+            },
+            signal: controller.signal
+          });
+          if (resp2.ok) {
+            response = resp2;
+            data = await resp2.json();
+          }
+        } catch (err2) {
+          // Fall through to next endpoint
+        }
+      }
 
-      // Verify with phonetic resolver as well
+      // 3. Fallback: try localhost:8000/api/recognize if on localhost
+      if (!data && typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
+        try {
+          const resp3 = await fetch('http://localhost:8000/api/recognize', {
+            method: 'POST',
+            body: formData,
+            signal: controller.signal
+          });
+          if (resp3.ok) {
+            response = resp3;
+            data = await resp3.json();
+          }
+        } catch (err3) {}
+      }
+
+      clearTimeout(timeoutId);
+
+      if (!data) {
+        throw new Error('Whisper Space did not return a valid response');
+      }
+
+      const rawText = data.raw || data.raw_text || data.text || '';
+      let detectedDigit = null;
+      if (data.digit !== undefined && data.digit !== null) {
+        detectedDigit = Number(data.digit);
+      } else if (data.number !== undefined && data.number !== null) {
+        detectedDigit = Number(data.number);
+      }
+
+      // Verify with phonetic resolver if rawText exists
       if (!detectedDigit && rawText) {
         detectedDigit = resolveTextToNumber(rawText);
       }
@@ -230,11 +293,12 @@ export function useWhisperVoice({
       }
     } catch (err) {
       console.error('[useWhisperVoice] Whisper inference error:', err);
-      setErrorMessage(
-        serverOnlineRef.current
-          ? 'Whisper recognition error. Please try again.'
-          : 'Whisper AI Server offline. Please connect your Whisper backend.'
-      );
+      const isAbort = err.name === 'AbortError';
+      if (isAbort) {
+        setErrorMessage('Whisper Space is waking up. Please try again in a few seconds!');
+      } else {
+        setErrorMessage('Whisper recognition error. Please check your mic and try again.');
+      }
     } finally {
       setIsTranscribing(false);
     }
