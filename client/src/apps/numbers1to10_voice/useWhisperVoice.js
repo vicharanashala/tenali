@@ -87,15 +87,23 @@ export function useWhisperVoice({
     isRecordingRef.current = isRecording;
   }, [isRecording]);
 
-  // Check Python Whisper server health on mount & periodically
+  // Check Python Whisper server health on mount & periodically (only on localhost)
   useEffect(() => {
     let isMounted = true;
+    const isLocalhost = typeof window !== 'undefined' && 
+      (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+
+    if (!isLocalhost) {
+      // On Vercel / production: 100% client-side Web Speech API + phonetic resolver
+      setServerOnline(false);
+      serverOnlineRef.current = false;
+      return;
+    }
 
     const checkServerHealth = async () => {
       try {
         const controller = new AbortController();
         const tid = setTimeout(() => controller.abort(), 1500);
-        // Try localhost:8000 first, fallback to relative /api/health
         let res = null;
         try {
           res = await fetch('http://localhost:8000/api/health', {
@@ -103,14 +111,11 @@ export function useWhisperVoice({
             signal: controller.signal
           });
         } catch {
-          res = await fetch('/api/health', {
-            method: 'GET',
-            signal: controller.signal
-          });
+          // Localhost offline
         }
         clearTimeout(tid);
         if (isMounted) {
-          const isOk = res && res.ok;
+          const isOk = Boolean(res && res.ok);
           setServerOnline(isOk);
           serverOnlineRef.current = isOk;
         }
@@ -173,15 +178,15 @@ export function useWhisperVoice({
       let recognizedRaw = '';
       let detectedNumber = null;
 
-      // 1. Try Python Whisper server if available and has audio
-      if (audioChunk && audioChunk.length >= 800) {
+      // 1. Try Python Whisper server ONLY if server was confirmed online
+      if (serverOnlineRef.current && audioChunk && audioChunk.length >= 800) {
         try {
           const wavBlob = encodeWAV(audioChunk, 16000);
           const formData = new FormData();
           formData.append('file', wavBlob, 'recording.wav');
 
           const controller = new AbortController();
-          const timeoutId = setTimeout(() => controller.abort(), 8000);
+          const timeoutId = setTimeout(() => controller.abort(), 3000);
 
           let response = null;
           try {
@@ -191,11 +196,7 @@ export function useWhisperVoice({
               signal: controller.signal
             });
           } catch {
-            response = await fetch('/api/recognize', {
-              method: 'POST',
-              body: formData,
-              signal: controller.signal
-            });
+            response = null;
           }
           clearTimeout(timeoutId);
 
@@ -205,8 +206,6 @@ export function useWhisperVoice({
             if (data.digit) {
               detectedNumber = Number(data.digit);
             }
-            setServerOnline(true);
-            serverOnlineRef.current = true;
           }
         } catch (netErr) {
           // Fallback seamlessly to browser speech recognition
