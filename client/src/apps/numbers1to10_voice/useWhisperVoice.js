@@ -78,6 +78,7 @@ export function useWhisperVoice({
   const serverOnlineRef = useRef(false);
   const autoStopTimerRef = useRef(null);
   const stopRecordingRef = useRef(null);
+  const activeEndpointPrefixRef = useRef('');
 
   useEffect(() => {
     onNumberDetectedRef.current = onNumberDetected;
@@ -99,28 +100,36 @@ export function useWhisperVoice({
     const checkServerHealth = async () => {
       try {
         const controller = new AbortController();
-        const tid = setTimeout(() => controller.abort(), 4000);
+        const tid = setTimeout(() => controller.abort(), 6000);
         let ok = false;
 
         // Try /api/health
         try {
           const r1 = await fetch(`${baseUrl}/api/health`, { method: 'GET', signal: controller.signal });
-          if (r1.ok) ok = true;
+          if (r1.ok) {
+            ok = true;
+            activeEndpointPrefixRef.current = '/api';
+          }
         } catch (e) {}
 
         // Try /health
         if (!ok) {
           try {
             const r2 = await fetch(`${baseUrl}/health`, { method: 'GET', signal: controller.signal });
-            if (r2.ok) ok = true;
+            if (r2.ok) {
+              ok = true;
+              activeEndpointPrefixRef.current = '';
+            }
           } catch (e) {}
         }
 
-        // Try local server if on localhost
-        if (!ok && typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
+        // Try root /
+        if (!ok) {
           try {
-            const r3 = await fetch('http://localhost:8000/api/health', { method: 'GET', signal: controller.signal });
-            if (r3.ok) ok = true;
+            const r3 = await fetch(`${baseUrl}/`, { method: 'GET', signal: controller.signal });
+            if (r3.ok) {
+              ok = true;
+            }
           } catch (e) {}
         }
 
@@ -190,69 +199,97 @@ export function useWhisperVoice({
       const wavBlob = encodeWAV(audioChunk, 16000);
       const formData = new FormData();
       formData.append('file', wavBlob, 'recording.wav');
+      formData.append('audio', wavBlob, 'recording.wav');
 
       const baseUrl = getWhisperBaseUrl();
       const controller = new AbortController();
-      // Allow up to 30s in case Hugging Face Space is spinning up from sleep
-      const timeoutId = setTimeout(() => controller.abort(), 30000);
+      // Allow up to 35s in case Hugging Face Space is spinning up from sleep
+      const timeoutId = setTimeout(() => controller.abort(), 35000);
 
-      let response = null;
       let data = null;
+      let lastFailureDetail = '';
 
-      // 1. Try Hugging Face Space /api/recognize with FormData (server.py format)
-      try {
-        const resp1 = await fetch(`${baseUrl}/api/recognize`, {
-          method: 'POST',
-          body: formData,
-          signal: controller.signal
-        });
-        if (resp1.ok) {
-          response = resp1;
-          data = await resp1.json();
-        }
-      } catch (err1) {
-        // Fall through to next endpoint
-      }
-
-      // 2. Try Hugging Face Space /transcribe with raw wavBlob (app.py format)
-      if (!data) {
-        try {
-          const resp2 = await fetch(`${baseUrl}/transcribe`, {
-            method: 'POST',
-            body: wavBlob,
-            headers: {
-              'Content-Type': 'audio/wav'
-            },
-            signal: controller.signal
-          });
-          if (resp2.ok) {
-            response = resp2;
-            data = await resp2.json();
-          }
-        } catch (err2) {
-          // Fall through to next endpoint
-        }
-      }
-
-      // 3. Fallback: try localhost:8000/api/recognize if on localhost
-      if (!data && typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
-        try {
-          const resp3 = await fetch('http://localhost:8000/api/recognize', {
+      // Ordered list of candidate endpoint strategies
+      const attempts = [
+        // 1. /api/recognize with FormData (server.py standard)
+        async () => {
+          const res = await fetch(`${baseUrl}/api/recognize`, {
             method: 'POST',
             body: formData,
             signal: controller.signal
           });
-          if (resp3.ok) {
-            response = resp3;
-            data = await resp3.json();
+          if (res.ok) return await res.json();
+          const errTxt = await res.text().catch(() => '');
+          lastFailureDetail = `/api/recognize (${res.status} ${errTxt.slice(0, 80)})`;
+          return null;
+        },
+        // 2. /transcribe with raw wavBlob (whisper-service/app.py standard)
+        async () => {
+          const res = await fetch(`${baseUrl}/transcribe`, {
+            method: 'POST',
+            body: wavBlob,
+            headers: { 'Content-Type': 'audio/wav' },
+            signal: controller.signal
+          });
+          if (res.ok) return await res.json();
+          const errTxt = await res.text().catch(() => '');
+          lastFailureDetail = `/transcribe (${res.status} ${errTxt.slice(0, 80)})`;
+          return null;
+        },
+        // 3. /recognize with FormData
+        async () => {
+          const res = await fetch(`${baseUrl}/recognize`, {
+            method: 'POST',
+            body: formData,
+            signal: controller.signal
+          });
+          if (res.ok) return await res.json();
+          const errTxt = await res.text().catch(() => '');
+          lastFailureDetail = `/recognize (${res.status} ${errTxt.slice(0, 80)})`;
+          return null;
+        },
+        // 4. /transcribe with FormData
+        async () => {
+          const res = await fetch(`${baseUrl}/transcribe`, {
+            method: 'POST',
+            body: formData,
+            signal: controller.signal
+          });
+          if (res.ok) return await res.json();
+          const errTxt = await res.text().catch(() => '');
+          lastFailureDetail = `/transcribe (FormData) (${res.status} ${errTxt.slice(0, 80)})`;
+          return null;
+        },
+        // 5. Localhost fallback if on localhost
+        async () => {
+          if (typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
+            const res = await fetch('http://localhost:8000/api/recognize', {
+              method: 'POST',
+              body: formData,
+              signal: controller.signal
+            });
+            if (res.ok) return await res.json();
           }
-        } catch (err3) {}
+          return null;
+        }
+      ];
+
+      for (const attempt of attempts) {
+        try {
+          const resData = await attempt();
+          if (resData) {
+            data = resData;
+            break;
+          }
+        } catch (callErr) {
+          lastFailureDetail = callErr.message || String(callErr);
+        }
       }
 
       clearTimeout(timeoutId);
 
       if (!data) {
-        throw new Error('Whisper Space did not return a valid response');
+        throw new Error(lastFailureDetail || 'Whisper Space returned an unexpected error');
       }
 
       const rawText = data.raw || data.raw_text || data.text || '';
@@ -295,9 +332,9 @@ export function useWhisperVoice({
       console.error('[useWhisperVoice] Whisper inference error:', err);
       const isAbort = err.name === 'AbortError';
       if (isAbort) {
-        setErrorMessage('Whisper Space is waking up. Please try again in a few seconds!');
+        setErrorMessage('Whisper Space is waking up. Please try again in 10-15 seconds!');
       } else {
-        setErrorMessage('Whisper recognition error. Please check your mic and try again.');
+        setErrorMessage(`Whisper AI: ${err.message || 'Recognition error. Please try again.'}`);
       }
     } finally {
       setIsTranscribing(false);
