@@ -38,26 +38,18 @@ function encodeWAV(samples, sampleRate = 16000) {
   return new Blob([buffer], { type: 'audio/wav' });
 }
 
-export const HUGGINGFACE_WHISPER_SPACE_URL = 'https://gradient-queen-whisper-indian-digits.hf.space';
-
 /**
- * Determine the Whisper API base URL.
- * 1. Honors explicit VITE_WHISPER_API_URL if configured.
- * 2. Uses the same-origin proxy route `/whisper-service` (configured in Vite & vercel.json)
- *    to avoid cross-site CSRF/CORS 403 blocks from Hugging Face's SvelteKit frontend.
- */
-function getWhisperBaseUrl() {
-  if (typeof import.meta !== 'undefined' && import.meta.env?.VITE_WHISPER_API_URL) {
-    return import.meta.env.VITE_WHISPER_API_URL.replace(/\/+$/, '');
-  }
-  return '/whisper-service';
-}
-
-/**
- * useWhisperVoice (Pure Whisper Neural Speech Hook — NO WebKit)
+ * useWhisperVoice
  *
- * Dedicated to `gradient-queen/whisper-tiny-indian-digits-final`.
- * Captures 16kHz audio from mic and performs neural transcription strictly via Whisper.
+ * Click-to-Speak & Real-Time Neural Speech hook for NumberTracingApp & SpaceMazeAdventure.
+ *
+ * Features:
+ * 1. 1st Click: Opens mic, begins real-time speech listening & 16kHz PCM audio capture.
+ * 2. Real-Time Detection: Automatically detects spoken numbers (1-10) with zero latency
+ *    as soon as child speaks, without requiring a second click!
+ * 3. 2nd Click (optional): Stops mic, transcribes with Whisper neural API (http://localhost:8000/api/recognize)
+ *    and resolves Indian English accents / regional digits (1-10).
+ * 4. Automatic health detection of Python Whisper server.
  */
 export function useWhisperVoice({
   onNumberDetected,
@@ -73,6 +65,9 @@ export function useWhisperVoice({
   const [serverOnline, setServerOnline] = useState(false);
 
   const recorderRef = useRef(null);
+  const speechRecognitionRef = useRef(null);
+  const liveSpeechRef = useRef('');
+  const liveDigitRef = useRef(null);
   const onNumberDetectedRef = useRef(onNumberDetected);
   const onTextHeardRef = useRef(onTextHeard);
   const isRecordingRef = useRef(false);
@@ -92,43 +87,32 @@ export function useWhisperVoice({
     isRecordingRef.current = isRecording;
   }, [isRecording]);
 
-  // Periodic health check for Whisper backend
+  // Check Python Whisper server health on mount & periodically
   useEffect(() => {
     let isMounted = true;
-    const baseUrl = getWhisperBaseUrl();
 
     const checkServerHealth = async () => {
       try {
         const controller = new AbortController();
-        const tid = setTimeout(() => controller.abort(), 6000);
-        let ok = false;
-
-        const endpoints = [
-          `${baseUrl}/health`,
-          `${baseUrl}/api/health`,
-          `${HUGGINGFACE_WHISPER_SPACE_URL}/health`,
-          `${HUGGINGFACE_WHISPER_SPACE_URL}/api/health`,
-          `${baseUrl}/`
-        ];
-
-        for (const ep of endpoints) {
-          try {
-            const res = await fetch(ep, {
-              method: 'GET',
-              headers: { 'x-requested-with': 'XMLHttpRequest' },
-              signal: controller.signal
-            });
-            if (res.ok) {
-              ok = true;
-              break;
-            }
-          } catch (e) {}
+        const tid = setTimeout(() => controller.abort(), 1500);
+        // Try localhost:8000 first, fallback to relative /api/health
+        let res = null;
+        try {
+          res = await fetch('http://localhost:8000/api/health', {
+            method: 'GET',
+            signal: controller.signal
+          });
+        } catch {
+          res = await fetch('/api/health', {
+            method: 'GET',
+            signal: controller.signal
+          });
         }
-
         clearTimeout(tid);
         if (isMounted) {
-          setServerOnline(ok);
-          serverOnlineRef.current = ok;
+          const isOk = res && res.ok;
+          setServerOnline(isOk);
+          serverOnlineRef.current = isOk;
         }
       } catch (e) {
         if (isMounted) {
@@ -139,7 +123,7 @@ export function useWhisperVoice({
     };
 
     checkServerHealth();
-    const interval = setInterval(checkServerHealth, 10000);
+    const interval = setInterval(checkServerHealth, 8000);
 
     return () => {
       isMounted = false;
@@ -158,11 +142,14 @@ export function useWhisperVoice({
       if (recorderRef.current) {
         try { recorderRef.current.stop(); } catch (e) {}
       }
+      if (speechRecognitionRef.current) {
+        try { speechRecognitionRef.current.stop(); } catch (e) {}
+      }
     };
   }, []);
 
   /**
-   * Stop Recording & Transcribe with Whisper
+   * Click to Stop Recording & Recognize Number
    */
   const stopRecording = useCallback(async () => {
     if (!isRecordingRef.current) return;
@@ -177,176 +164,104 @@ export function useWhisperVoice({
     try {
       setIsTranscribing(true);
 
+      // Stop recorder and retrieve PCM samples
       let audioChunk = null;
       if (recorderRef.current) {
         audioChunk = recorderRef.current.stop();
       }
 
-      if (!audioChunk || audioChunk.length < 800) {
-        setErrorMessage('No speech recorded. Please hold the mic and speak.');
-        setIsTranscribing(false);
-        return;
-      }
+      let recognizedRaw = '';
+      let detectedNumber = null;
 
-      const wavBlob = encodeWAV(audioChunk, 16000);
-      const baseUrl = getWhisperBaseUrl();
-      const controller = new AbortController();
-      // Allow up to 35s in case Hugging Face Space is spinning up from sleep
-      const timeoutId = setTimeout(() => controller.abort(), 35000);
-
-      let data = null;
-      let lastFailureDetail = '';
-
-      // Ordered list of candidate endpoint strategies (raw binary WAV preferred to avoid CSRF blocks)
-      const attempts = [
-        // 1. Same-Origin Proxy: /transcribe with raw wavBlob (whisper-service/app.py standard)
-        async () => {
-          const res = await fetch(`${baseUrl}/transcribe`, {
-            method: 'POST',
-            body: wavBlob,
-            headers: {
-              'Content-Type': 'audio/wav',
-              'x-requested-with': 'XMLHttpRequest'
-            },
-            signal: controller.signal
-          });
-          if (res.ok) return await res.json();
-          const errTxt = await res.text().catch(() => '');
-          lastFailureDetail = `${baseUrl}/transcribe (${res.status} ${errTxt.slice(0, 80)})`;
-          return null;
-        },
-        // 2. Direct HF Space: /transcribe with raw wavBlob
-        async () => {
-          const res = await fetch(`${HUGGINGFACE_WHISPER_SPACE_URL}/transcribe`, {
-            method: 'POST',
-            body: wavBlob,
-            headers: {
-              'Content-Type': 'audio/wav',
-              'x-requested-with': 'XMLHttpRequest'
-            },
-            signal: controller.signal
-          });
-          if (res.ok) return await res.json();
-          const errTxt = await res.text().catch(() => '');
-          lastFailureDetail = `Direct /transcribe (${res.status} ${errTxt.slice(0, 80)})`;
-          return null;
-        },
-        // 3. Same-Origin Proxy: /api/recognize with FormData
-        async () => {
-          const formData = new FormData();
-          formData.append('file', wavBlob, 'recording.wav');
-          formData.append('audio', wavBlob, 'recording.wav');
-
-          const res = await fetch(`${baseUrl}/api/recognize`, {
-            method: 'POST',
-            body: formData,
-            headers: {
-              'x-requested-with': 'XMLHttpRequest'
-            },
-            signal: controller.signal
-          });
-          if (res.ok) return await res.json();
-          const errTxt = await res.text().catch(() => '');
-          lastFailureDetail = `${baseUrl}/api/recognize (${res.status} ${errTxt.slice(0, 80)})`;
-          return null;
-        },
-        // 4. Same-Origin Proxy: /recognize with FormData
-        async () => {
+      // 1. Try Python Whisper server if available and has audio
+      if (audioChunk && audioChunk.length >= 800) {
+        try {
+          const wavBlob = encodeWAV(audioChunk, 16000);
           const formData = new FormData();
           formData.append('file', wavBlob, 'recording.wav');
 
-          const res = await fetch(`${baseUrl}/recognize`, {
-            method: 'POST',
-            body: formData,
-            headers: {
-              'x-requested-with': 'XMLHttpRequest'
-            },
-            signal: controller.signal
-          });
-          if (res.ok) return await res.json();
-          const errTxt = await res.text().catch(() => '');
-          lastFailureDetail = `${baseUrl}/recognize (${res.status} ${errTxt.slice(0, 80)})`;
-          return null;
-        },
-        // 5. Local dev localhost fallback
-        async () => {
-          if (typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
-            const formData = new FormData();
-            formData.append('file', wavBlob, 'recording.wav');
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), 8000);
 
-            const res = await fetch('http://localhost:8000/api/recognize', {
+          let response = null;
+          try {
+            response = await fetch('http://localhost:8000/api/recognize', {
               method: 'POST',
               body: formData,
               signal: controller.signal
             });
-            if (res.ok) return await res.json();
+          } catch {
+            response = await fetch('/api/recognize', {
+              method: 'POST',
+              body: formData,
+              signal: controller.signal
+            });
           }
-          return null;
-        }
-      ];
+          clearTimeout(timeoutId);
 
-      for (const attempt of attempts) {
+          if (response && response.ok) {
+            const data = await response.json();
+            recognizedRaw = data.raw || data.text || '';
+            if (data.digit) {
+              detectedNumber = Number(data.digit);
+            }
+            setServerOnline(true);
+            serverOnlineRef.current = true;
+          }
+        } catch (netErr) {
+          // Fallback seamlessly to browser speech recognition
+        }
+      }
+
+      // 2. Fallback to browser live speech if server didn't resolve digit
+      if (!detectedNumber) {
+        if (!liveSpeechRef.current && !liveDigitRef.current) {
+          // Graceful window in case speech recognizer is finishing
+          await new Promise((r) => setTimeout(r, 250));
+        }
+
+        if (liveDigitRef.current) {
+          detectedNumber = liveDigitRef.current;
+        } else {
+          const textToResolve = recognizedRaw || liveSpeechRef.current;
+          detectedNumber = resolveTextToNumber(textToResolve);
+        }
+
+        if (!recognizedRaw && liveSpeechRef.current) {
+          recognizedRaw = liveSpeechRef.current;
+        }
+      }
+
+      // Stop speech recognition instance
+      if (speechRecognitionRef.current) {
         try {
-          const resData = await attempt();
-          if (resData) {
-            data = resData;
-            break;
-          }
-        } catch (callErr) {
-          lastFailureDetail = callErr.message || String(callErr);
-        }
+          speechRecognitionRef.current.stop();
+        } catch (e) {}
       }
 
-      clearTimeout(timeoutId);
+      const finalDisplay = recognizedRaw || (detectedNumber ? String(detectedNumber) : '');
+      setHeardText(finalDisplay);
 
-      if (!data) {
-        throw new Error(lastFailureDetail || 'Whisper Space returned an unexpected error');
+      if (finalDisplay && onTextHeardRef.current) {
+        onTextHeardRef.current(finalDisplay);
       }
 
-      const rawText = data.raw || data.raw_text || data.text || '';
-      let detectedDigit = null;
-      if (data.digit !== undefined && data.digit !== null) {
-        detectedDigit = Number(data.digit);
-      } else if (data.number !== undefined && data.number !== null) {
-        detectedDigit = Number(data.number);
-      }
-
-      // Verify with phonetic resolver if rawText exists
-      if (!detectedDigit && rawText) {
-        detectedDigit = resolveTextToNumber(rawText);
-      }
-
-      setServerOnline(true);
-      serverOnlineRef.current = true;
-
-      const display = rawText || (detectedDigit ? String(detectedDigit) : '');
-      setHeardText(display);
-
-      if (display && onTextHeardRef.current) {
-        onTextHeardRef.current(display);
-      }
-
-      if (detectedDigit !== null && detectedDigit >= 1 && detectedDigit <= 10) {
-        setLastDetectedNumber(detectedDigit);
+      if (detectedNumber !== null && detectedNumber >= 1 && detectedNumber <= 10) {
+        setLastDetectedNumber(detectedNumber);
         setErrorMessage('');
         if (onNumberDetectedRef.current) {
-          onNumberDetectedRef.current(detectedDigit, display);
+          onNumberDetectedRef.current(detectedNumber, finalDisplay);
         }
       } else {
-        if (display) {
-          setErrorMessage(`Whisper heard "${display}", but did not match a number (1-10).`);
+        if (finalDisplay) {
+          setErrorMessage(`Heard "${finalDisplay}", but did not match a number (1-10).`);
         } else {
-          setErrorMessage('Whisper detected no speech. Please speak closer to the mic.');
+          setErrorMessage('No speech detected. Please speak closer to the mic.');
         }
       }
     } catch (err) {
-      console.error('[useWhisperVoice] Whisper inference error:', err);
-      const isAbort = err.name === 'AbortError';
-      if (isAbort) {
-        setErrorMessage('Whisper Space is waking up. Please try again in 10-15 seconds!');
-      } else {
-        setErrorMessage(`Whisper AI: ${err.message || 'Recognition error. Please try again.'}`);
-      }
+      console.error('[useWhisperVoice] Recognition error:', err);
+      setErrorMessage('Speech recognition error. Please try again.');
     } finally {
       setIsTranscribing(false);
     }
@@ -355,13 +270,15 @@ export function useWhisperVoice({
   stopRecordingRef.current = stopRecording;
 
   /**
-   * Start Recording (Pure Whisper, No WebKit)
+   * Click to Start Recording
    */
   const startRecording = useCallback(async () => {
     if (isRecordingRef.current || isTranscribing) return;
     setErrorMessage('');
     setHeardText('');
     setLastDetectedNumber(null);
+    liveSpeechRef.current = '';
+    liveDigitRef.current = null;
 
     try {
       if (!recorderRef.current) {
@@ -371,20 +288,75 @@ export function useWhisperVoice({
       setIsRecording(true);
       isRecordingRef.current = true;
 
-      // Auto-stop after 3.8 seconds so child doesn't have to tap stop manually
+      // Start browser native speech recognition with real-time interim & continuous results
+      const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (SpeechRec) {
+        try {
+          const rec = new SpeechRec();
+          rec.lang = 'en-IN';
+          rec.continuous = true;
+          rec.interimResults = true;
+          rec.maxAlternatives = 8;
+
+          rec.onresult = (ev) => {
+            for (let i = ev.resultIndex; i < ev.results.length; i++) {
+              const res = ev.results[i];
+              if (!res) continue;
+              const transcript = res[0]?.transcript || '';
+              if (transcript) {
+                const clean = transcript.trim();
+                liveSpeechRef.current = clean;
+                setHeardText(clean);
+                const num = resolveTextToNumber(clean);
+                if (num) {
+                  liveDigitRef.current = num;
+                  setLastDetectedNumber(num);
+                  setErrorMessage('');
+
+                  // Instant zero-latency trigger!
+                  if (onNumberDetectedRef.current) {
+                    onNumberDetectedRef.current(num, clean);
+                  }
+
+                  // Automatically close recording after 450ms
+                  setTimeout(() => {
+                    if (isRecordingRef.current && stopRecordingRef.current) {
+                      stopRecordingRef.current();
+                    }
+                  }, 450);
+                }
+              }
+            }
+          };
+
+          rec.onerror = (e) => {
+            console.warn('[useWhisperVoice] Speech recognition event:', e.error);
+          };
+
+          rec.start();
+          speechRecognitionRef.current = rec;
+        } catch (e) {
+          console.warn('[useWhisperVoice] SpeechRec init:', e);
+        }
+      }
+
+      // Automatically stop after 7 seconds if no speech is detected
       if (autoStopTimerRef.current) clearTimeout(autoStopTimerRef.current);
       autoStopTimerRef.current = setTimeout(() => {
         if (isRecordingRef.current && stopRecordingRef.current) {
           stopRecordingRef.current();
         }
-      }, 3800);
+      }, 7000);
 
     } catch (err) {
       console.warn('[useWhisperVoice] Mic start error:', err);
-      setErrorMessage(err.message || 'Microphone access denied. Please allow mic permissions.');
+      setErrorMessage(err.message || 'Microphone access denied. Please allow mic permissions in your browser.');
     }
   }, [isTranscribing]);
 
+  /**
+   * Click-to-toggle helper
+   */
   const toggleRecording = useCallback(() => {
     if (isRecordingRef.current) {
       stopRecording();
@@ -394,6 +366,7 @@ export function useWhisperVoice({
   }, [startRecording, stopRecording]);
 
   return {
+    ready: true,
     modelStatus,
     loadingProgress,
     isRecording,

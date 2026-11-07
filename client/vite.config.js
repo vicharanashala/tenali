@@ -44,12 +44,6 @@ export default defineConfig({
     port: 5173,
     // API proxy configuration: Forward API requests to backend services
     proxy: {
-      // Whisper Speech Recognition Space proxy (avoids cross-site CORS/CSRF errors in local dev)
-      '/whisper-service': {
-        target: 'https://gradient-queen-whisper-indian-digits.hf.space',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/whisper-service/, '')
-      },
       // Primary API endpoint - routes to main quiz service
       '/api': { target: 'http://127.0.0.1:4000', changeOrigin: true },
       // Conceptual MCQ quiz API
