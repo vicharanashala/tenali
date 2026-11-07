@@ -4,7 +4,7 @@
       "count": 146
     },
     "no-undef": {
-      "count": 40
+      "count": 35
     },
     "no-unexpected-multiline": {
       "count": 5
@@ -22,7 +22,7 @@
       "count": 73
     },
     "react-hooks/purity": {
-      "count": 64
+      "count": 63
     },
     "react-hooks/refs": {
       "count": 78
@@ -235,11 +235,6 @@
     },
     "react-refresh/only-export-components": {
       "count": 6
-    }
-  },
-  "vite.config.js": {
-    "no-dupe-keys": {
-      "count": 25
     }
   }
 }
