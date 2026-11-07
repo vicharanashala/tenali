@@ -42,14 +42,15 @@ export const HUGGINGFACE_WHISPER_SPACE_URL = 'https://gradient-queen-whisper-ind
 
 /**
  * Determine the Whisper API base URL.
- * Defaults to the user's Hugging Face Space:
- * https://gradient-queen-whisper-indian-digits.hf.space
+ * 1. Honors explicit VITE_WHISPER_API_URL if configured.
+ * 2. Uses the same-origin proxy route `/whisper-service` (configured in Vite & vercel.json)
+ *    to avoid cross-site CSRF/CORS 403 blocks from Hugging Face's SvelteKit frontend.
  */
 function getWhisperBaseUrl() {
   if (typeof import.meta !== 'undefined' && import.meta.env?.VITE_WHISPER_API_URL) {
     return import.meta.env.VITE_WHISPER_API_URL.replace(/\/+$/, '');
   }
-  return HUGGINGFACE_WHISPER_SPACE_URL;
+  return '/whisper-service';
 }
 
 /**
@@ -78,7 +79,6 @@ export function useWhisperVoice({
   const serverOnlineRef = useRef(false);
   const autoStopTimerRef = useRef(null);
   const stopRecordingRef = useRef(null);
-  const activeEndpointPrefixRef = useRef('');
 
   useEffect(() => {
     onNumberDetectedRef.current = onNumberDetected;
@@ -103,32 +103,24 @@ export function useWhisperVoice({
         const tid = setTimeout(() => controller.abort(), 6000);
         let ok = false;
 
-        // Try /api/health
-        try {
-          const r1 = await fetch(`${baseUrl}/api/health`, { method: 'GET', signal: controller.signal });
-          if (r1.ok) {
-            ok = true;
-            activeEndpointPrefixRef.current = '/api';
-          }
-        } catch (e) {}
+        const endpoints = [
+          `${baseUrl}/health`,
+          `${baseUrl}/api/health`,
+          `${HUGGINGFACE_WHISPER_SPACE_URL}/health`,
+          `${HUGGINGFACE_WHISPER_SPACE_URL}/api/health`,
+          `${baseUrl}/`
+        ];
 
-        // Try /health
-        if (!ok) {
+        for (const ep of endpoints) {
           try {
-            const r2 = await fetch(`${baseUrl}/health`, { method: 'GET', signal: controller.signal });
-            if (r2.ok) {
+            const res = await fetch(ep, {
+              method: 'GET',
+              headers: { 'x-requested-with': 'XMLHttpRequest' },
+              signal: controller.signal
+            });
+            if (res.ok) {
               ok = true;
-              activeEndpointPrefixRef.current = '';
-            }
-          } catch (e) {}
-        }
-
-        // Try root /
-        if (!ok) {
-          try {
-            const r3 = await fetch(`${baseUrl}/`, { method: 'GET', signal: controller.signal });
-            if (r3.ok) {
-              ok = true;
+              break;
             }
           } catch (e) {}
         }
@@ -197,10 +189,6 @@ export function useWhisperVoice({
       }
 
       const wavBlob = encodeWAV(audioChunk, 16000);
-      const formData = new FormData();
-      formData.append('file', wavBlob, 'recording.wav');
-      formData.append('audio', wavBlob, 'recording.wav');
-
       const baseUrl = getWhisperBaseUrl();
       const controller = new AbortController();
       // Allow up to 35s in case Hugging Face Space is spinning up from sleep
@@ -209,60 +197,83 @@ export function useWhisperVoice({
       let data = null;
       let lastFailureDetail = '';
 
-      // Ordered list of candidate endpoint strategies
+      // Ordered list of candidate endpoint strategies (raw binary WAV preferred to avoid CSRF blocks)
       const attempts = [
-        // 1. /api/recognize with FormData (server.py standard)
-        async () => {
-          const res = await fetch(`${baseUrl}/api/recognize`, {
-            method: 'POST',
-            body: formData,
-            signal: controller.signal
-          });
-          if (res.ok) return await res.json();
-          const errTxt = await res.text().catch(() => '');
-          lastFailureDetail = `/api/recognize (${res.status} ${errTxt.slice(0, 80)})`;
-          return null;
-        },
-        // 2. /transcribe with raw wavBlob (whisper-service/app.py standard)
+        // 1. Same-Origin Proxy: /transcribe with raw wavBlob (whisper-service/app.py standard)
         async () => {
           const res = await fetch(`${baseUrl}/transcribe`, {
             method: 'POST',
             body: wavBlob,
-            headers: { 'Content-Type': 'audio/wav' },
+            headers: {
+              'Content-Type': 'audio/wav',
+              'x-requested-with': 'XMLHttpRequest'
+            },
             signal: controller.signal
           });
           if (res.ok) return await res.json();
           const errTxt = await res.text().catch(() => '');
-          lastFailureDetail = `/transcribe (${res.status} ${errTxt.slice(0, 80)})`;
+          lastFailureDetail = `${baseUrl}/transcribe (${res.status} ${errTxt.slice(0, 80)})`;
           return null;
         },
-        // 3. /recognize with FormData
+        // 2. Direct HF Space: /transcribe with raw wavBlob
         async () => {
+          const res = await fetch(`${HUGGINGFACE_WHISPER_SPACE_URL}/transcribe`, {
+            method: 'POST',
+            body: wavBlob,
+            headers: {
+              'Content-Type': 'audio/wav',
+              'x-requested-with': 'XMLHttpRequest'
+            },
+            signal: controller.signal
+          });
+          if (res.ok) return await res.json();
+          const errTxt = await res.text().catch(() => '');
+          lastFailureDetail = `Direct /transcribe (${res.status} ${errTxt.slice(0, 80)})`;
+          return null;
+        },
+        // 3. Same-Origin Proxy: /api/recognize with FormData
+        async () => {
+          const formData = new FormData();
+          formData.append('file', wavBlob, 'recording.wav');
+          formData.append('audio', wavBlob, 'recording.wav');
+
+          const res = await fetch(`${baseUrl}/api/recognize`, {
+            method: 'POST',
+            body: formData,
+            headers: {
+              'x-requested-with': 'XMLHttpRequest'
+            },
+            signal: controller.signal
+          });
+          if (res.ok) return await res.json();
+          const errTxt = await res.text().catch(() => '');
+          lastFailureDetail = `${baseUrl}/api/recognize (${res.status} ${errTxt.slice(0, 80)})`;
+          return null;
+        },
+        // 4. Same-Origin Proxy: /recognize with FormData
+        async () => {
+          const formData = new FormData();
+          formData.append('file', wavBlob, 'recording.wav');
+
           const res = await fetch(`${baseUrl}/recognize`, {
             method: 'POST',
             body: formData,
+            headers: {
+              'x-requested-with': 'XMLHttpRequest'
+            },
             signal: controller.signal
           });
           if (res.ok) return await res.json();
           const errTxt = await res.text().catch(() => '');
-          lastFailureDetail = `/recognize (${res.status} ${errTxt.slice(0, 80)})`;
+          lastFailureDetail = `${baseUrl}/recognize (${res.status} ${errTxt.slice(0, 80)})`;
           return null;
         },
-        // 4. /transcribe with FormData
-        async () => {
-          const res = await fetch(`${baseUrl}/transcribe`, {
-            method: 'POST',
-            body: formData,
-            signal: controller.signal
-          });
-          if (res.ok) return await res.json();
-          const errTxt = await res.text().catch(() => '');
-          lastFailureDetail = `/transcribe (FormData) (${res.status} ${errTxt.slice(0, 80)})`;
-          return null;
-        },
-        // 5. Localhost fallback if on localhost
+        // 5. Local dev localhost fallback
         async () => {
           if (typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
+            const formData = new FormData();
+            formData.append('file', wavBlob, 'recording.wav');
+
             const res = await fetch('http://localhost:8000/api/recognize', {
               method: 'POST',
               body: formData,
