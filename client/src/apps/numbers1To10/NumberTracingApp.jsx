@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import confetti from 'canvas-confetti';
 import { NUMBERS_INFO } from './numbers1To10Data.js';
-import { useVoiceRecognizer } from './voiceRecognizer.js';
 
 /**
  * NumberTracingApp — Minimal Tactile Learn & Trace Module
@@ -184,6 +183,7 @@ export default function NumberTracingApp({
   const [wrongAttemptFlash, setWrongAttemptFlash] = useState(false);
 
   const [heardWord, setHeardWord] = useState('');
+  const [micActive, setMicActive] = useState(false);
 
   // Demo animation state
   const [demoActive, setDemoActive] = useState(false);
@@ -195,6 +195,7 @@ export default function NumberTracingApp({
   const svgRef = useRef(null);
   const pathRef = useRef(null);
   const audioCtxRef = useRef(null);
+  const speechRecRef = useRef(null);
   const stageRef = useRef('TRACING');
   const echoStepRef = useRef(1);
   const echoSubStateRef = useRef('ANNOUNCING_NUM');
@@ -345,42 +346,100 @@ export default function NumberTracingApp({
   const onChildEchoedRef = useRef(null);
   const handleSoloCountAttemptRef = useRef(null);
 
-  // Unified voice recognition handler powered by Method 1: useVoiceRecognizer hook
-  const handleVoiceNumber = useCallback((detectedNum, cleanText, rawText) => {
-    if (rawText) setHeardWord(rawText);
-    const now = Date.now();
-    if (now - lastMatchTimeRef.current < 280) return;
-
-    if (stageRef.current === 'ECHO_COUNT') {
-      if (echoSubStateRef.current === 'WAITING_KID') {
-        const expected = echoStepRef.current;
-        if (detectedNum === expected) {
-          lastMatchTimeRef.current = now;
-          echoSubStateRef.current = 'APP_SPEAKING';
-          if (onChildEchoedRef.current) {
-            onChildEchoedRef.current(detectedNum);
-          }
-        }
+  // Stop native browser speech recognition
+  const stopVoice = useCallback(() => {
+    if (speechRecRef.current) {
+      try {
+        speechRecRef.current.abort();
+      } catch {
+        /* ignore */
       }
-    } else if (stageRef.current === 'SOLO_COUNT') {
-      lastMatchTimeRef.current = now;
-      if (handleSoloCountAttemptRef.current) {
-        handleSoloCountAttemptRef.current(detectedNum);
-      }
+      speechRecRef.current = null;
     }
+    setMicActive(false);
   }, []);
 
-  const {
-    isListening: micActive,
-    engine: voiceEngine,
-    start: startVoice,
-    stop: stopVoice
-  } = useVoiceRecognizer({
-    onNumberDetected: handleVoiceNumber,
-    onTextHeard: (t) => {
-      if (t) setHeardWord(t);
+  // Start native browser speech recognition (<50ms latency)
+  const startVoice = useCallback(() => {
+    if (typeof window === 'undefined') return;
+    const SpeechClass = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechClass) return;
+
+    if (speechRecRef.current) {
+      try {
+        speechRecRef.current.abort();
+      } catch {
+        /* ignore */
+      }
+      speechRecRef.current = null;
     }
-  });
+
+    try {
+      const rec = new SpeechClass();
+      speechRecRef.current = rec;
+      rec.continuous = true;
+      rec.interimResults = true;
+      rec.maxAlternatives = 8;
+      rec.lang = (typeof navigator !== 'undefined' && navigator.language) ? navigator.language : 'en-US';
+
+      rec.onstart = () => setMicActive(true);
+      rec.onend = () => {
+        setMicActive(false);
+        if (stageRef.current === 'ECHO_COUNT' || stageRef.current === 'SOLO_COUNT') {
+          try {
+            rec.start();
+          } catch {
+            /* ignore */
+          }
+        }
+      };
+      rec.onerror = () => { /* ignore */ };
+
+      rec.onresult = (ev) => {
+        for (let i = ev.resultIndex; i < ev.results.length; i++) {
+          const res = ev.results[i];
+          if (!res) continue;
+          const text = res[0] ? res[0].transcript : '';
+          if (text) setHeardWord(text.trim());
+
+          for (let a = 0; a < res.length; a++) {
+            const cand = res[a] ? res[a].transcript : '';
+            const now = Date.now();
+            if (now - lastMatchTimeRef.current < 280) continue;
+
+            if (stageRef.current === 'ECHO_COUNT') {
+              if (echoSubStateRef.current === 'WAITING_KID') {
+                const expected = echoStepRef.current;
+                const spoken = detectSpokenNumber(cand, expected);
+                if (spoken === expected) {
+                  lastMatchTimeRef.current = now;
+                  echoSubStateRef.current = 'APP_SPEAKING';
+                  if (onChildEchoedRef.current) {
+                    onChildEchoedRef.current(spoken);
+                  }
+                  break;
+                }
+              }
+            } else if (stageRef.current === 'SOLO_COUNT') {
+              const expected = soloCountStepRef.current;
+              const spoken = detectSpokenNumber(cand, expected);
+              if (spoken !== null) {
+                lastMatchTimeRef.current = now;
+                if (handleSoloCountAttemptRef.current) {
+                  handleSoloCountAttemptRef.current(spoken);
+                }
+                break;
+              }
+            }
+          }
+        }
+      };
+
+      rec.start();
+    } catch {
+      // Speech recognition fallback
+    }
+  }, []);
 
   // Switch/Reset Number
   const selectNumber = useCallback((n) => {
@@ -1029,14 +1088,7 @@ export default function NumberTracingApp({
         {/* Right Column: Object Count & Minimal Interaction Studio */}
         <div className="trace-counter-panel">
           <div className="counter-panel-header">
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <h3>{selectedNum} {config.objectName}s</h3>
-              {micActive && (
-                <span className="whisper-live-badge" title="Active Voice Engine">
-                  {voiceEngine === 'whisper' ? '⚡ Whisper AI' : '🎤 Live Web Speech'}
-                </span>
-              )}
-            </div>
+            <h3>{selectedNum} {config.objectName}s</h3>
             {stage === 'ECHO_COUNT' && (
               <div className="voice-mic-indicator app-count-mode">
                 <span className="voice-mic-dot active" />

@@ -9,4 +9,3 @@ export { default as NumberTracingApp } from './NumberTracingApp.jsx';
 export { default as SpaceMazeAdventure } from './SpaceMazeAdventure.jsx';
 export { default as Numbers1To10OtherActivities } from './Numbers1To10OtherActivities.jsx';
 export * from './numbers1To10Data.js';
-export * from './voiceRecognizer.js';

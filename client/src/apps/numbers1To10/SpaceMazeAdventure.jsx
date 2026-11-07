@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import confetti from 'canvas-confetti';
-import { createWhisperStreamer, checkWhisperServerHealth } from './voiceRecognizer.js';
 
 /**
  * SpaceMazeAdventure — Tenali Star Station Explorer
@@ -238,7 +237,6 @@ export default function SpaceMazeAdventure({
   const [micStatusText, setMicStatusText] = useState('Mic Ready');
   const [micState, setMicState] = useState('idle'); // 'idle' | 'listening' | 'error'
   const [heardWord, setHeardWord] = useState('Waiting to launch...');
-  const [whisperLive, setWhisperLive] = useState(false);
 
   // Victory celebration modal
   const [winModalOpen, setWinModalOpen] = useState(false);
@@ -246,7 +244,6 @@ export default function SpaceMazeAdventure({
   // Audio Context Ref
   const audioCtxRef = useRef(null);
   const speechRecRef = useRef(null);
-  const whisperStreamerRef = useRef(null);
   const isListeningRef = useRef(false);
   const isCountingPhaseRef = useRef(false);
   const targetStepRef = useRef(1);
@@ -369,57 +366,10 @@ export default function SpaceMazeAdventure({
   // Forward declaration of handleCountInput via ref
   const handleCountInputRef = useRef(null);
 
-  // Whisper streaming speech recognizer handler
-  const handleWhisperNumber = useCallback((detectedNum, cleanText, rawText) => {
-    if (rawText) setHeardWord(`"${rawText}" ⚡`);
-    if (!isCountingPhaseRef.current) return;
-    const currentTarget = targetStepRef.current;
-    if (detectedNum === currentTarget) {
-      const now = Date.now();
-      if (now - lastMatchTimeRef.current > 300) {
-        lastMatchTimeRef.current = now;
-        setHeardWord(`"${cleanText}" ⭐`);
-        if (handleCountInputRef.current) {
-          handleCountInputRef.current(currentTarget);
-        }
-      }
-    } else if (detectedNum !== null) {
-      setCountGuideText(`Heard "${detectedNum}" — Next is ${currentTarget}! ⭐`);
-    }
-  }, []);
-
-  const startWhisper = useCallback(() => {
-    if (!whisperStreamerRef.current) {
-      whisperStreamerRef.current = createWhisperStreamer({
-        onNumberDetected: handleWhisperNumber,
-        onTextHeard: (t) => {
-          if (t && isCountingPhaseRef.current) setHeardWord(`"${t}"`);
-        },
-        onStatusChange: (active) => setWhisperLive(active)
-      });
-    }
-    whisperStreamerRef.current.start();
-  }, [handleWhisperNumber]);
-
-  const stopWhisper = useCallback(() => {
-    if (whisperStreamerRef.current) {
-      whisperStreamerRef.current.stop();
-      whisperStreamerRef.current = null;
-    }
-  }, []);
-
-  // Health check on mount
-  useEffect(() => {
-    checkWhisperServerHealth().then((isLive) => {
-      setWhisperLive(isLive);
-    });
-  }, []);
-
   // Stop native speech recognition
   const stopSpeechRecognition = useCallback(() => {
     isListeningRef.current = false;
     clearTimeout(recognitionRestartTimeoutRef.current);
-    stopWhisper();
 
     if (speechRecRef.current) {
       try {
@@ -432,7 +382,7 @@ export default function SpaceMazeAdventure({
     setIsListening(false);
     setMicState('idle');
     setMicStatusText('Mic Idle (Tap to Speak)');
-  }, [stopWhisper]);
+  }, []);
 
   // Start native browser Speech Recognition with ultra-low latency (<50ms)
   const startSpeechRecognition = useCallback(() => {
@@ -669,8 +619,7 @@ export default function SpaceMazeAdventure({
 
     playChime(1);
     startSpeechRecognition();
-    startWhisper();
-  }, [startSpeechRecognition, startWhisper, playChime]);
+  }, [startSpeechRecognition, playChime]);
 
   // Smooth rocket flight along bezier tubes using BFS
   const flyRocketTo = useCallback((targetNode, callback) => {
@@ -907,11 +856,6 @@ export default function SpaceMazeAdventure({
               <span className={`mic-dot-indicator ${micState}`} />
               <span>{micStatusText}</span>
             </button>
-            {whisperLive && (
-              <span className="whisper-live-badge" title="Whisper AI Server Active (detects quiet whispers)">
-                ⚡ Whisper AI
-              </span>
-            )}
             {heardWord && heardWord !== 'Waiting to launch...' && (
               <span className="banner-heard-tag">Heard: <em>{heardWord}</em></span>
             )}
