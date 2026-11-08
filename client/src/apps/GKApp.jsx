@@ -248,7 +248,7 @@ function GKApp({ onBack, markTopicCompleted, isGoalMode = false }) {
                         ) : {}}>
                         <input type="radio" name="gkapp-goal" checked={sessionGoal === g.key} onChange={() => {
                           setSessionGoal(g.key)
-                          
+
                         }} />
                         {g.label}
                       </label>
