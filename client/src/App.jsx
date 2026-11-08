@@ -46,6 +46,7 @@ import GKApp from './apps/GKApp';
 import ColumnAdditionApp from './apps/ColumnAdditionApp';
 import ColumnMultiplicationApp from './apps/ColumnMultiplicationApp';
 import ColumnDivisionApp from './apps/ColumnDivisionApp';
+import ColumnSubtractionApp from './apps/ColumnSubtractionApp';
 window.React = React;
 console.log("React version:", React.version);
 import Home from './components/Home';
