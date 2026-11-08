@@ -19,9 +19,15 @@
 ---
 
 <!-- live-changelog:start -->
-### 📊 Total: 1200 commits · 95 active days · 61 unique authors
+### 📊 Total: 1201 commits · 96 active days · 61 unique authors
 
 > **📖 How to read this:** Each entry shows a clickable SHA, the author, and a one-line subject. Sub-bullets show the **exact files touched** with per-file `+additions −deletions`, the **total line stats**, and (when present) the **commit body** explaining what & why.
+
+#### 📅 2026-11-06  <sub>(1 commit)</sub>
+
+- 📝 [`61f0bc2c`](https://github.com/vicharanashala/tenali/commit/61f0bc2c190d5ccd288a9af2241e0c70e6023eeb) — **jgupta05072003-code** — add MIT license (#509)
+    - 📁 **1 file:** `LICENSE` `+21 −0`
+    - 📊 **`+21 −0`** · 1 file
 
 #### 📅 2026-10-28  <sub>(11 commits)</sub>
 
