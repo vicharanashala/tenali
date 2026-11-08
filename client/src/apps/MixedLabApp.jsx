@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback, useEffect } from 'react';
+﻿import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { QuizLayout, ResultsTable, useTimer, useAutoAdvance } from '../App';
 
 function MixedLabApp({ onBack, selectedActivities, initialDifficulty, initialNumQuestions }) {
@@ -81,7 +81,7 @@ function MixedLabApp({ onBack, selectedActivities, initialDifficulty, initialNum
   // Prefetch cache: holds the next question already fetched in background
   const prefetchRef = useRef(null)
 
-  // Relative paths only — the `${API}` base is applied once at each fetch site
+  // Relative paths only â€” the `${API}` base is applied once at each fetch site
   // (below). Including it here too caused a double `/summership` prefix under
   // subpath deploys, so requests 404'd to index.html and broke question loading.
   const endpoints = {
@@ -107,15 +107,15 @@ function MixedLabApp({ onBack, selectedActivities, initialDifficulty, initialNum
         const mode = Math.random() > 0.5 ? 'counting' : 'scale'
         let a, b
         if (mode === 'counting') {
-          // Counting apples — keep sum small so it's visually manageable
-          //   easy: 2–12, medium: 15–35, hard: 15–50
+          // Counting apples â€” keep sum small so it's visually manageable
+          //   easy: 2â€“12, medium: 15â€“35, hard: 15â€“50
           const maxSum = difficulty === 'hard' ? 50 : difficulty === 'medium' ? 35 : 12
           const minSum = difficulty === 'medium' || difficulty === 'hard' ? 15 : 2
           const total = Math.floor(Math.random() * (maxSum - minSum + 1)) + minSum
           a = Math.floor(Math.random() * (total - 1)) + 1
           b = total - a
         } else {
-          // Balance scale — numbers can go up to 1499
+          // Balance scale â€” numbers can go up to 1499
           const maxVal = difficulty === 'hard' ? 1499 : difficulty === 'medium' ? 499 : 49
           a = Math.floor(Math.random() * maxVal) + 1
           b = Math.floor(Math.random() * maxVal) + 1
@@ -166,7 +166,7 @@ function MixedLabApp({ onBack, selectedActivities, initialDifficulty, initialNum
   const customCheck = async ({ question: q, finalAns, solve }) => {
     const endpoint = endpoints[q.activityKey] || '/addition-api'
     if (q.activityKey === 'addition') {
-      // Check locally — answer is simply a + b
+      // Check locally â€” answer is simply a + b
       const correct = solve ? false : Number(finalAns) === Number(q.a) + Number(q.b)
       const solution = `${q.a} + ${q.b} = ${Number(q.a) + Number(q.b)}`
       const correctAnswer = String(Number(q.a) + Number(q.b))
@@ -216,12 +216,12 @@ function MixedLabApp({ onBack, selectedActivities, initialDifficulty, initialNum
       if (!data) {
         data = await customGenerate()
       }
-      
+
       // Fallback if no question generated
       if (!data) {
         throw new Error("No question data returned from generation");
       }
-      
+
       setQuestion(data)
       if (data.activityKey === 'addition') {
         // Mode was decided at generation time so numbers already match it
@@ -233,7 +233,7 @@ function MixedLabApp({ onBack, selectedActivities, initialDifficulty, initialNum
           // but never go beyond difficulty caps
           const extra = difficulty === 'easy' ? 2 : difficulty === 'medium' ? 4 : 6;
           const totalApples = targetTotal + extra;
-          const initialItems = Array.from({ length: totalApples }, (_, i) => ({ id: `apple-${i}`, icon: '🍎' }));
+          const initialItems = Array.from({ length: totalApples }, (_, i) => ({ id: `apple-${i}`, icon: 'ðŸŽ' }));
           setSourceItems(initialItems);
           setTargetItems([]);
         } else {
@@ -277,7 +277,7 @@ function MixedLabApp({ onBack, selectedActivities, initialDifficulty, initialNum
       setQuestion(fallbackData)
       setAdditionMode('counting')
       const totalApples = total + (difficulty === 'easy' ? 2 : difficulty === 'medium' ? 4 : 6);
-      setSourceItems(Array.from({ length: totalApples }, (_, i) => ({ id: `apple-${i}`, icon: '🍎' })));
+      setSourceItems(Array.from({ length: totalApples }, (_, i) => ({ id: `apple-${i}`, icon: 'ðŸŽ' })));
       setTargetItems([]);
       setQuestionNumber(n => n + 1)
     } finally {
@@ -302,21 +302,21 @@ function MixedLabApp({ onBack, selectedActivities, initialDifficulty, initialNum
     }
     if (qObj.activityKey === 'visual-math-lab-redux') {
       switch (qObj.template) {
-        case 'plant_arrays': return `${qObj.rows} × ${qObj.cols} = ${ans}`
-        case 'frog_jumps': return `${qObj.jumps} × ${qObj.step} = ${ans}`
-        case 'candy_sharing': return `${qObj.total} ÷ ${qObj.boxes} = ${ans}`
-        case 'equal_groups': return `${qObj.groups} × ${qObj.itemsPerGroup} = ${ans}`
-        case 'picture_multi': return `${qObj.n} × ${qObj.count} = ${ans}`
-        case 'math_machine': return `${qObj.input} × ${qObj.multiplier} = ${ans}`
+        case 'plant_arrays': return `${qObj.rows} Ã— ${qObj.cols} = ${ans}`
+        case 'frog_jumps': return `${qObj.jumps} Ã— ${qObj.step} = ${ans}`
+        case 'candy_sharing': return `${qObj.total} Ã· ${qObj.boxes} = ${ans}`
+        case 'equal_groups': return `${qObj.groups} Ã— ${qObj.itemsPerGroup} = ${ans}`
+        case 'picture_multi': return `${qObj.n} Ã— ${qObj.count} = ${ans}`
+        case 'math_machine': return `${qObj.input} Ã— ${qObj.multiplier} = ${ans}`
         default: return ans
       }
     }
     if (qObj.activityKey === 'mensuration-lab') {
       if (qObj.template === 'area_grid') {
-        return `${qObj.w} × ${qObj.h} = ${ans}`
+        return `${qObj.w} Ã— ${qObj.h} = ${ans}`
       }
       if (qObj.template === 'perimeter_blocks') {
-        return `2 × (${qObj.w} + ${qObj.h}) = ${ans}`
+        return `2 Ã— (${qObj.w} + ${qObj.h}) = ${ans}`
       }
     }
     return ans
@@ -347,8 +347,8 @@ function MixedLabApp({ onBack, selectedActivities, initialDifficulty, initialNum
     setResults(prev => [...prev, {
       question: question.activityKey === 'addition'
         ? (question.additionMode === 'counting'
-          ? `🍎 What is ${question.a} + ${question.b}?`
-          : `⚖️ What is ${question.a} + ${question.b}?`)
+          ? `ðŸŽ What is ${question.a} + ${question.b}?`
+          : `âš–ï¸ What is ${question.a} + ${question.b}?`)
         : question.prompt,
       userAnswer: String(finalAns),
       correctAnswer: String(ansString),
@@ -368,10 +368,10 @@ function MixedLabApp({ onBack, selectedActivities, initialDifficulty, initialNum
     setResults(prev => [...prev, {
       question: question.activityKey === 'addition'
         ? (question.additionMode === 'counting'
-          ? `🍎 What is ${question.a} + ${question.b}?`
-          : `⚖️ What is ${question.a} + ${question.b}?`)
+          ? `ðŸŽ What is ${question.a} + ${question.b}?`
+          : `âš–ï¸ What is ${question.a} + ${question.b}?`)
         : question.prompt,
-      userAnswer: '—',
+      userAnswer: 'â€”',
       correctAnswer: String(ansString),
       correct: false,
       time: timeTaken
@@ -415,7 +415,7 @@ function MixedLabApp({ onBack, selectedActivities, initialDifficulty, initialNum
   useProgressSubmit(revealed, isCorrect, 'mixed-math-lab', question?.id)
 
   const renderMensurationCustom = (q, ans, setAns, submitAns, revealed) => {
-    // ── COUNT SIDES / SHAPE NAME ──────────────────────────────────────────
+    // â”€â”€ COUNT SIDES / SHAPE NAME â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     if (q.template === 'count_sides' || q.template === 'shape_name') {
       const sides = q.sides;
       const color = q.color || '#FF6B6B';
@@ -444,7 +444,7 @@ function MixedLabApp({ onBack, selectedActivities, initialDifficulty, initialNum
             {q.options?.map(opt => (
               <button key={opt} className={`men-choice-btn ${ans === opt ? 'selected' : ''}`}
                 onClick={() => !revealed && setAns(opt)} disabled={revealed}>
-                {opt}{revealed && String(opt) === String(q.answer) && <span className="men-correct-tick"> ✓</span>}
+                {opt}{revealed && String(opt) === String(q.answer) && <span className="men-correct-tick"> âœ“</span>}
               </button>
             ))}
           </div>
@@ -452,7 +452,7 @@ function MixedLabApp({ onBack, selectedActivities, initialDifficulty, initialNum
       );
     }
 
-    // ── AREA GRID (interactive tap-to-count) ─────────────────────────────
+    // â”€â”€ AREA GRID (interactive tap-to-count) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     if (q.template === 'area_grid') {
       const counted = (typeof ans === 'string' && ans.startsWith('[')) ? JSON.parse(ans) : []; const setCounted = (updater) => { const next = typeof updater === 'function' ? updater(counted) : updater; setAns(JSON.stringify(next)); };
 
@@ -467,24 +467,24 @@ function MixedLabApp({ onBack, selectedActivities, initialDifficulty, initialNum
       };
       return (
         <div className="men-canvas" style={{ flexDirection: 'column', gap: '16px' }}>
-          <p className="men-canvas-tip">👆 Tap each square to count it!</p>
+          <p className="men-canvas-tip">ðŸ‘† Tap each square to count it!</p>
           <div className="men-grid-wrap" style={{ gridTemplateColumns: `repeat(${q.w}, 1fr)` }}>
             {Array.from({ length: allCount }).map((_, i) => (
               <div key={i}
                 className={`men-grid-cell ${counted.includes(i) ? 'counted' : ''} ${revealed ? 'revealed' : ''}`}
                 onClick={() => handleCellClick(i)}>
-                {(counted.includes(i) || revealed) ? '✓' : ''}
+                {(counted.includes(i) || revealed) ? 'âœ“' : ''}
               </div>
             ))}
           </div>
           <div className="men-cell-count-pill">
-            {revealed ? `✅ Area = ${q.answer} sq units` : `${counted.length} / ${allCount} counted`}
+            {revealed ? `âœ… Area = ${q.answer} sq units` : `${counted.length} / ${allCount} counted`}
           </div>
         </div>
       );
     }
 
-    // ── PERIMETER BLOCKS (animated walking dot) ───────────────────────────
+    // â”€â”€ PERIMETER BLOCKS (animated walking dot) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     if (q.template === 'perimeter_blocks') {
       const cellPx = 44;
       const svgW = (q.w + 2) * cellPx;
@@ -516,7 +516,7 @@ function MixedLabApp({ onBack, selectedActivities, initialDifficulty, initialNum
             {q.options?.map(opt => (
               <button key={opt} className={`men-choice-btn ${ans === opt ? 'selected' : ''}`}
                 onClick={() => !revealed && setAns(opt)} disabled={revealed}>
-                {opt}{revealed && String(opt) === String(q.answer) && <span className="men-correct-tick"> ✓</span>}
+                {opt}{revealed && String(opt) === String(q.answer) && <span className="men-correct-tick"> âœ“</span>}
               </button>
             ))}
           </div>
@@ -524,7 +524,7 @@ function MixedLabApp({ onBack, selectedActivities, initialDifficulty, initialNum
       );
     }
 
-    // ── COMPARE AREA ──────────────────────────────────────────────────────
+    // â”€â”€ COMPARE AREA â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     if (q.template === 'compare_area') {
       const scale = 36;
       return (
@@ -538,10 +538,10 @@ function MixedLabApp({ onBack, selectedActivities, initialDifficulty, initialNum
                   boxShadow: `0 8px 20px ${sh.color || '#FF7E67'}55`,
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   color: 'white', fontWeight: 800, fontSize: '1.2rem', fontFamily: 'Quicksand'
-                }}>{sh.w}×{sh.h}</div>
+                }}>{sh.w}Ã—{sh.h}</div>
                 <div style={{ marginTop: '10px', fontWeight: 800, fontSize: '1.4rem', color: sh.color, fontFamily: 'Quicksand' }}>Shape {sh.label}</div>
                 <div style={{ fontSize: '0.95rem', color: '#718096', fontFamily: 'Nunito' }}>
-                  {revealed ? `Area = ${sh.w * sh.h}` : `${sh.w} × ${sh.h} = ?`}
+                  {revealed ? `Area = ${sh.w * sh.h}` : `${sh.w} Ã— ${sh.h} = ?`}
                 </div>
               </div>
             ))}
@@ -550,7 +550,7 @@ function MixedLabApp({ onBack, selectedActivities, initialDifficulty, initialNum
             {q.options?.map(opt => (
               <button key={opt} className={`men-choice-btn ${ans === opt ? 'selected' : ''}`}
                 onClick={() => !revealed && setAns(opt)} disabled={revealed}>
-                {opt}{revealed && opt === q.answer && <span className="men-correct-tick"> ✓</span>}
+                {opt}{revealed && opt === q.answer && <span className="men-correct-tick"> âœ“</span>}
               </button>
             ))}
           </div>
@@ -558,7 +558,7 @@ function MixedLabApp({ onBack, selectedActivities, initialDifficulty, initialNum
       );
     }
 
-    // ── RECT VS SQUARE ────────────────────────────────────────────────────
+    // â”€â”€ RECT VS SQUARE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     if (q.template === 'rect_vs_square') {
       const isSquare = q.w === q.h;
       const scale = Math.min(45, 200 / Math.max(q.w, q.h));
@@ -586,8 +586,8 @@ function MixedLabApp({ onBack, selectedActivities, initialDifficulty, initialNum
             {q.options?.map(opt => (
               <button key={opt} className={`men-choice-btn ${ans === opt ? 'selected' : ''}`}
                 onClick={() => !revealed && setAns(opt)} disabled={revealed}>
-                {opt === 'Square' ? '⬛' : '▬'} {opt}
-                {revealed && opt === q.answer && <span className="men-correct-tick"> ✓</span>}
+                {opt === 'Square' ? 'â¬›' : 'â–¬'} {opt}
+                {revealed && opt === q.answer && <span className="men-correct-tick"> âœ“</span>}
               </button>
             ))}
           </div>
@@ -595,7 +595,7 @@ function MixedLabApp({ onBack, selectedActivities, initialDifficulty, initialNum
       );
     }
 
-    // ── TRIANGLE AREA ──────────────────────────────────────────────────────
+    // â”€â”€ TRIANGLE AREA â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     if (q.template === 'triangle_area') {
       const scale = Math.min(45, 200 / Math.max(q.base, q.height));
       const bPx = q.base * scale; const hPx = q.height * scale;
@@ -624,7 +624,7 @@ function MixedLabApp({ onBack, selectedActivities, initialDifficulty, initialNum
             {q.options?.map(opt => (
               <button key={opt} className={`men-choice-btn ${ans === opt ? 'selected' : ''}`}
                 onClick={() => !revealed && setAns(opt)} disabled={revealed}>
-                {opt}{revealed && String(opt) === String(q.answer) && <span className="men-correct-tick"> ✓</span>}
+                {opt}{revealed && String(opt) === String(q.answer) && <span className="men-correct-tick"> âœ“</span>}
               </button>
             ))}
           </div>
@@ -632,7 +632,7 @@ function MixedLabApp({ onBack, selectedActivities, initialDifficulty, initialNum
       );
     }
 
-    // ── ANGLE TYPE ─────────────────────────────────────────────────────────
+    // â”€â”€ ANGLE TYPE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     if (q.template === 'angle_type') {
       const deg = q.degrees;
       const rad = (deg * Math.PI) / 180;
@@ -648,17 +648,17 @@ function MixedLabApp({ onBack, selectedActivities, initialDifficulty, initialNum
             <line x1={cx} y1={cy} x2={cx + r} y2={cy} stroke="#988D84" strokeWidth="4.5" strokeLinecap="round" />
             <line x1={cx} y1={cy} x2={x2} y2={y2} stroke="#F08C46" strokeWidth="4.5" strokeLinecap="round" />
             <path d={`M ${cx + arcR} ${cy} A ${arcR} ${arcR} 0 ${largeArc} 0 ${ax} ${ay}`} fill="none" stroke={arcColor} strokeWidth="5" />
-            <text x={cx + arcR + 20} y={cy - 16} fill={arcColor} fontWeight="bold" fontSize="28">{deg}°</text>
+            <text x={cx + arcR + 20} y={cy - 16} fill={arcColor} fontWeight="bold" fontSize="28">{deg}Â°</text>
             {deg === 90 && <rect x={cx} y={cy - 20} width="20" height="20" fill="none" stroke="#4ECDC4" strokeWidth="3" />}
             <circle cx={cx} cy={cy} r="5" fill="#2D3748" />
           </svg>
           <div className="men-options-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)', maxWidth: '400px' }}>
             {q.options?.map(opt => {
-              const icons = { Acute: '🔺', Right: '📐', Obtuse: '🔻' };
+              const icons = { Acute: 'ðŸ”º', Right: 'ðŸ“', Obtuse: 'ðŸ”»' };
               return (
                 <button key={opt} className={`men-choice-btn ${ans === opt ? 'selected' : ''}`}
                   onClick={() => !revealed && setAns(opt)} disabled={revealed}>
-                  {icons[opt]} {opt}{revealed && opt === q.answer && <span className="men-correct-tick"> ✓</span>}
+                  {icons[opt]} {opt}{revealed && opt === q.answer && <span className="men-correct-tick"> âœ“</span>}
                 </button>
               );
             })}
@@ -667,7 +667,7 @@ function MixedLabApp({ onBack, selectedActivities, initialDifficulty, initialNum
       );
     }
 
-    // ── CIRCLE ─────────────────────────────────────────────────────────────
+    // â”€â”€ CIRCLE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     if (q.template === 'circle_q') {
       const r = q.radius;
       const rPx = Math.min(55, 160 / (r * 2 + 4)) * r;
@@ -692,7 +692,7 @@ function MixedLabApp({ onBack, selectedActivities, initialDifficulty, initialNum
             {q.options?.map(opt => (
               <button key={opt} className={`men-choice-btn ${ans === opt ? 'selected' : ''}`}
                 onClick={() => !revealed && setAns(opt)} disabled={revealed}>
-                {opt}{revealed && String(opt) === String(q.answer) && <span className="men-correct-tick"> ✓</span>}
+                {opt}{revealed && String(opt) === String(q.answer) && <span className="men-correct-tick"> âœ“</span>}
               </button>
             ))}
           </div>
@@ -700,7 +700,7 @@ function MixedLabApp({ onBack, selectedActivities, initialDifficulty, initialNum
       );
     }
 
-    // ── MISSING SIDE ───────────────────────────────────────────────────────
+    // â”€â”€ MISSING SIDE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     if (q.template === 'missing_side') {
       return (
         <div className="men-canvas" style={{ flexDirection: 'column', gap: '20px' }}>
@@ -735,7 +735,7 @@ function MixedLabApp({ onBack, selectedActivities, initialDifficulty, initialNum
             {q.options?.map(opt => (
               <button key={opt} className={`men-choice-btn ${ans === opt ? 'selected' : ''}`}
                 onClick={() => !revealed && setAns(opt)} disabled={revealed}>
-                {opt}{revealed && String(opt) === String(q.answer) && <span className="men-correct-tick"> ✓</span>}
+                {opt}{revealed && String(opt) === String(q.answer) && <span className="men-correct-tick"> âœ“</span>}
               </button>
             ))}
           </div>
@@ -812,7 +812,7 @@ function MixedLabApp({ onBack, selectedActivities, initialDifficulty, initialNum
               style={{ minHeight: '120px', padding: '20px', borderRadius: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}
             >
               <div style={{ fontSize: '0.95rem', fontWeight: 600, color: 'var(--clr-accent)', marginBottom: '8px' }}>
-                🍎 Basket (Total: {targetItems.length})
+                ðŸŽ Basket (Total: {targetItems.length})
               </div>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', justifyContent: 'center' }}>
                 {targetItems.map(item => (
@@ -846,7 +846,7 @@ function MixedLabApp({ onBack, selectedActivities, initialDifficulty, initialNum
           <div style={{ margin: '15px 0', width: '100%' }}>
 
 
-            {/* ── Scale (tall container so blocks never overflow upward) ── */}
+            {/* â”€â”€ Scale (tall container so blocks never overflow upward) â”€â”€ */}
             <div className="scale-container" style={{ height: '360px', overflow: 'visible' }}>
               <div className="scale-beam" style={{ transform: `rotate(${rotation}deg)` }}>
 
@@ -978,7 +978,7 @@ function MixedLabApp({ onBack, selectedActivities, initialDifficulty, initialNum
       </div>}
       {started && !finished && <>
         <div className="progress-pill center">Question {questionNumber}/{totalQ}</div>
-        <div className="question-box">{loading || !question ? 'Loading question…' : question.prompt}</div>
+        <div className="question-box">{loading || !question ? 'Loading questionâ€¦' : question.prompt}</div>
         {renderMixedQuestionContent()}
         {renderFeedback(feedback, isCorrect)}
         <div className="button-row" style={{ marginTop: '30px' }}>
@@ -988,7 +988,7 @@ function MixedLabApp({ onBack, selectedActivities, initialDifficulty, initialNum
               <button className="kid-btn-primary" onClick={() => submitAns()} disabled={loading || (question?.activityKey === 'addition' && additionMode === 'counting' && targetItems.length === 0) || (question?.activityKey === 'addition' && additionMode === 'scale' && rightBlocks.length === 0) || (question?.activityKey !== 'addition' && !answer && !question?.options)} style={{ flex: 1 }}>Submit</button>
             </div>
           ) : (
-            <button className="kid-btn-primary" onClick={handleSubmitOrNext}>{questionNumber >= totalQ ? 'Finish Lab 🏁' : 'Next Question ➡️'}</button>
+            <button className="kid-btn-primary" onClick={handleSubmitOrNext}>{questionNumber >= totalQ ? 'Finish Lab ðŸ' : 'Next Question âž¡ï¸'}</button>
           )}
         </div>
         {results.length > 0 && <ResultsTable results={results} />}
