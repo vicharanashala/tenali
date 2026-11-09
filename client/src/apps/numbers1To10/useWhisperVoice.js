@@ -42,6 +42,7 @@ export function useWhisperVoice({
   const autoStopTimerRef = useRef(null);
   const stopRecordingRef = useRef(null);
   const lastToggleTimeRef = useRef(0);
+  const lastWorkerErrorRef = useRef(null);
 
   useEffect(() => {
     onNumberDetectedRef.current = onNumberDetected;
@@ -74,12 +75,14 @@ export function useWhisperVoice({
           setLoadingProgress(100);
           setServerOnline(true);
         } else if (status === 'complete') {
+          console.info('[useWhisperVoice] Worker transcription result:', output);
           if (workerResolverRef.current) {
             workerResolverRef.current.resolve(output);
             workerResolverRef.current = null;
           }
         } else if (status === 'error') {
           console.warn('[useWhisperVoice] Worker error:', error);
+          lastWorkerErrorRef.current = error;
           if (workerResolverRef.current) {
             workerResolverRef.current.reject(new Error(error || 'Worker error'));
             workerResolverRef.current = null;
@@ -195,6 +198,7 @@ export function useWhisperVoice({
           }
         } catch (workerErr) {
           console.warn('[useWhisperVoice] In-browser worker failed:', workerErr);
+          lastWorkerErrorRef.current = workerErr?.message || String(workerErr);
         }
       }
 
@@ -240,8 +244,10 @@ export function useWhisperVoice({
         if (finalDisplay) {
           setErrorMessage(`Heard "${finalDisplay}", but did not match a number (1-10).`);
         } else {
-          // Provide precise diagnostics based on physical mic energy
-          if (stats.peakVolume < 0.003) {
+          // Provide precise diagnostics based on physical mic energy & worker status
+          if (lastWorkerErrorRef.current) {
+            setErrorMessage(`AI speech worker notice: ${lastWorkerErrorRef.current}`);
+          } else if (stats.peakVolume < 0.003) {
             setErrorMessage('Microphone appears muted or quiet. Please check system mic settings.');
           } else if (stats.durationMs < 400) {
             setErrorMessage('Recording was very short. Click mic, say the number, then stop.');
@@ -268,6 +274,7 @@ export function useWhisperVoice({
     setErrorMessage('');
     setHeardText('');
     setLastDetectedNumber(null);
+    lastWorkerErrorRef.current = null;
     liveSpeechRef.current = '';
     liveDigitRef.current = null;
 
@@ -301,20 +308,36 @@ export function useWhisperVoice({
             for (let i = ev.resultIndex; i < ev.results.length; i++) {
               const res = ev.results[i];
               if (!res) continue;
-              const transcript = res[0]?.transcript || '';
-              if (transcript) {
-                const clean = transcript.trim();
-                liveSpeechRef.current = clean;
-                setHeardText(clean);
-                const num = resolveTextToNumber(clean);
-                if (num) {
-                  liveDigitRef.current = num;
-                  setLastDetectedNumber(num);
+
+              let matchedNum = null;
+              let matchedText = '';
+
+              for (let a = 0; a < res.length; a++) {
+                const alt = res[a]?.transcript?.trim();
+                if (alt) {
+                  if (!matchedText) matchedText = alt;
+                  const num = resolveTextToNumber(alt);
+                  if (num) {
+                    matchedNum = num;
+                    matchedText = alt;
+                    break;
+                  }
+                }
+              }
+
+              if (matchedText) {
+                console.info('[useWhisperVoice] Native speech recognized:', matchedText, '-> number:', matchedNum);
+                liveSpeechRef.current = matchedText;
+                setHeardText(matchedText);
+
+                if (matchedNum) {
+                  liveDigitRef.current = matchedNum;
+                  setLastDetectedNumber(matchedNum);
                   setErrorMessage('');
 
                   // Instant zero-latency trigger!
                   if (onNumberDetectedRef.current) {
-                    onNumberDetectedRef.current(num, clean);
+                    onNumberDetectedRef.current(matchedNum, matchedText);
                   }
 
                   // Automatically close recording after 450ms

@@ -20,25 +20,37 @@ const TASK = 'automatic-speech-recognition';
 
 /**
  * Attempt to initialize the pipeline with WebGPU first, then gracefully fall back to WASM.
+ * Uses official Transformers.js whisper configuration:
+ * encoder_model (fp32) + decoder_model_merged (q4) for lightning-fast zero-error inference.
  */
 async function loadPipeline(task, modelId, progress_callback) {
+  const quantConfig = {
+    encoder_model: 'fp32',
+    decoder_model_merged: 'q4'
+  };
+
   try {
+    console.info(`[worker.js] Attempting WebGPU pipeline for ${modelId}...`);
     return await pipeline(task, modelId, {
       progress_callback,
-      dtype: 'q8',
+      dtype: quantConfig,
       device: 'webgpu'
     });
   } catch (gpuErr) {
-    const msg = gpuErr?.message || '';
-    if (msg.includes('404') || msg.includes('not found') || msg.includes('does not appear')) {
-      throw gpuErr;
-    }
     console.info(`[worker.js] WebGPU unavailable for ${modelId}, using WebAssembly (wasm):`, gpuErr?.message);
-    return await pipeline(task, modelId, {
-      progress_callback,
-      dtype: 'q8',
-      device: 'wasm'
-    });
+    try {
+      return await pipeline(task, modelId, {
+        progress_callback,
+        dtype: quantConfig,
+        device: 'wasm'
+      });
+    } catch (wasmErr) {
+      console.info(`[worker.js] Default pipeline fallback for ${modelId}:`, wasmErr?.message);
+      return await pipeline(task, modelId, {
+        progress_callback,
+        device: 'wasm'
+      });
+    }
   }
 }
 
@@ -50,14 +62,16 @@ class PipelineSingleton {
   static async getInstance(progress_callback = null) {
     if (this.instance === null) {
       try {
-        // Load verified community ONNX model first for instant zero-error availability
+        console.info(`[worker.js] Loading primary community model: ${FALLBACK_MODEL}...`);
         this.instance = await loadPipeline(this.task, FALLBACK_MODEL, progress_callback);
         this.model = FALLBACK_MODEL;
+        console.info(`[worker.js] Primary model loaded successfully!`);
       } catch (err) {
         console.warn(`[worker.js] Could not load ${FALLBACK_MODEL}, trying ${CUSTOM_MODEL}:`, err?.message);
         try {
           this.instance = await loadPipeline(this.task, CUSTOM_MODEL, progress_callback);
           this.model = CUSTOM_MODEL;
+          console.info(`[worker.js] Custom model loaded successfully!`);
         } catch (customErr) {
           console.error('[worker.js] Both model sources failed:', customErr);
           throw customErr;
@@ -96,12 +110,28 @@ self.addEventListener('message', async (event) => {
         throw new Error('No audio chunk provided for transcription.');
       }
 
+      let audioInput = audio;
+      if (!(audioInput instanceof Float32Array)) {
+        audioInput = new Float32Array(audioInput);
+      }
+
+      // Pad audio with silence to at least 0.5s (8000 samples at 16kHz) to ensure convolution kernel validity
+      if (audioInput.length < 8000) {
+        const padded = new Float32Array(8000);
+        padded.set(audioInput, 0);
+        audioInput = padded;
+      }
+
+      console.info(`[worker.js] Transcribing audio: ${audioInput.length} samples (${(audioInput.length / 16000).toFixed(2)}s)...`);
+
       const transcriber = await PipelineSingleton.getInstance();
-      const output = await transcriber(audio, {
+      const output = await transcriber(audioInput, {
         language: 'en',
         task: 'transcribe',
         return_timestamps: false
       });
+
+      console.info('[worker.js] Transcription complete:', output);
 
       self.postMessage({
         status: 'complete',
