@@ -11,6 +11,7 @@ export class AudioChunkRecorder {
   constructor(sampleRate = 16000) {
     this.targetSampleRate = sampleRate;
     this.audioContext = null;
+    this.actualSampleRate = 16000;
     this.mediaStream = null;
     this.sourceNode = null;
     this.processorNode = null;
@@ -45,9 +46,12 @@ export class AudioChunkRecorder {
     });
 
     const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-    this.audioContext = new AudioContextClass({
-      sampleRate: this.targetSampleRate
-    });
+    try {
+      this.audioContext = new AudioContextClass({ sampleRate: this.targetSampleRate });
+    } catch (e) {
+      this.audioContext = new AudioContextClass();
+    }
+    this.actualSampleRate = this.audioContext.sampleRate || 48000;
 
     // Chromium starts AudioContext in 'suspended' state; must explicitly resume!
     if (this.audioContext.state === 'suspended') {
@@ -145,7 +149,12 @@ export class AudioChunkRecorder {
     }
 
     this.recordedChunks = [];
-    return mergedBuffer;
+
+    // Ensure Whisper receives EXACTLY 16,000 Hz Float32Array mono
+    const downsampled = downsampleTo16000(mergedBuffer, this.actualSampleRate);
+
+    // Normalize peak volume so quiet microphones are crystal clear to Whisper
+    return normalizeAudio(downsampled);
   }
 
   /**
@@ -157,6 +166,56 @@ export class AudioChunkRecorder {
       durationMs: this.recordingDurationMs
     };
   }
+}
+
+/**
+ * Downsamples any PCM Float32Array from sourceSampleRate to 16000 Hz using linear interpolation.
+ *
+ * @param {Float32Array} buffer
+ * @param {number} sourceSampleRate
+ * @returns {Float32Array}
+ */
+export function downsampleTo16000(buffer, sourceSampleRate) {
+  if (!buffer || buffer.length === 0) return new Float32Array(0);
+  if (sourceSampleRate === 16000) return buffer;
+
+  const targetSampleRate = 16000;
+  const ratio = sourceSampleRate / targetSampleRate;
+  const newLength = Math.round(buffer.length / ratio);
+  const result = new Float32Array(newLength);
+
+  for (let i = 0; i < newLength; i++) {
+    const originIndex = i * ratio;
+    const indexLow = Math.floor(originIndex);
+    const indexHigh = Math.min(indexLow + 1, buffer.length - 1);
+    const weight = originIndex - indexLow;
+    result[i] = buffer[indexLow] * (1 - weight) + buffer[indexHigh] * weight;
+  }
+
+  return result;
+}
+
+/**
+ * Normalizes audio volume so Whisper receives clear signal without distortion.
+ *
+ * @param {Float32Array} buffer
+ * @returns {Float32Array}
+ */
+export function normalizeAudio(buffer) {
+  if (!buffer || buffer.length === 0) return buffer;
+  let maxVal = 0;
+  for (let i = 0; i < buffer.length; i++) {
+    const abs = Math.abs(buffer[i]);
+    if (abs > maxVal) maxVal = abs;
+  }
+  // If peak volume is quiet (between 0.01 and 0.8), boost to 0.9
+  if (maxVal > 0.01 && maxVal < 0.8) {
+    const gain = 0.9 / maxVal;
+    for (let i = 0; i < buffer.length; i++) {
+      buffer[i] *= gain;
+    }
+  }
+  return buffer;
 }
 
 export default AudioChunkRecorder;

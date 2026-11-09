@@ -41,6 +41,7 @@ export function useWhisperVoice({
   const isRecordingRef = useRef(false);
   const autoStopTimerRef = useRef(null);
   const stopRecordingRef = useRef(null);
+  const lastToggleTimeRef = useRef(0);
 
   useEffect(() => {
     onNumberDetectedRef.current = onNumberDetected;
@@ -176,8 +177,17 @@ export function useWhisperVoice({
           });
 
           const res = await workerPromise;
-          if (res && res.text) {
-            recognizedRaw = res.text.trim();
+          let extractedText = '';
+          if (typeof res === 'string') {
+            extractedText = res;
+          } else if (res && typeof res.text === 'string') {
+            extractedText = res.text;
+          } else if (Array.isArray(res) && res.length > 0) {
+            extractedText = typeof res[0] === 'string' ? res[0] : (res[0].text || '');
+          }
+
+          if (extractedText) {
+            recognizedRaw = extractedText.trim();
             const num = resolveTextToNumber(recognizedRaw);
             if (num) {
               detectedNumber = num;
@@ -277,9 +287,15 @@ export function useWhisperVoice({
         try {
           const rec = new SpeechRec();
           rec.lang = 'en-IN';
-          rec.continuous = true;
+          rec.continuous = false;
           rec.interimResults = true;
           rec.maxAlternatives = 8;
+
+          rec.onend = () => {
+            if (isRecordingRef.current) {
+              try { rec.start(); } catch (e) {}
+            }
+          };
 
           rec.onresult = (ev) => {
             for (let i = ev.resultIndex; i < ev.results.length; i++) {
@@ -338,9 +354,15 @@ export function useWhisperVoice({
   }, [isTranscribing]);
 
   /**
-   * Click-to-toggle helper
+   * Click-to-toggle helper with accidental double-click protection
    */
   const toggleRecording = useCallback(() => {
+    const now = Date.now();
+    if (now - lastToggleTimeRef.current < 500) {
+      return; // Protect against rapid double click/tap
+    }
+    lastToggleTimeRef.current = now;
+
     if (isRecordingRef.current) {
       stopRecording();
     } else {

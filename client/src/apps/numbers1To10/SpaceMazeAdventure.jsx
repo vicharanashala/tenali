@@ -474,6 +474,11 @@ export default function SpaceMazeAdventure({
     }
   });
 
+  const whisperVoiceRef = useRef(whisperVoice);
+  useEffect(() => {
+    whisperVoiceRef.current = whisperVoice;
+  }, [whisperVoice]);
+
   // Finish counting for a station
   const finishStationCounting = useCallback((stationK) => {
     setIsCountingPhase(false);
@@ -812,8 +817,8 @@ export default function SpaceMazeAdventure({
   // Cleanup on unmount
   useEffect(() => {
     return () => {
-      if (whisperVoice.isRecording) {
-        whisperVoice.stopRecording();
+      if (whisperVoiceRef.current && whisperVoiceRef.current.isRecording) {
+        try { whisperVoiceRef.current.stopRecording(); } catch (e) {}
       }
       if (animFrameRef.current) {
         cancelAnimationFrame(animFrameRef.current);
@@ -822,7 +827,7 @@ export default function SpaceMazeAdventure({
         window.speechSynthesis.cancel();
       }
     };
-  }, [whisperVoice]);
+  }, []);
 
   // Compute floating stars orbiting directly around the rocket at currentStationIdx
   const floatingStars = [];

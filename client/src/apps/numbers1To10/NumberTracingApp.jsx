@@ -1074,14 +1074,14 @@ export default function NumberTracingApp({
   useEffect(() => {
     return () => {
       clearDemoTimers();
-      if (whisperVoice.isRecording) {
-        whisperVoice.stopRecording();
+      if (whisperVoiceRef.current && whisperVoiceRef.current.isRecording) {
+        try { whisperVoiceRef.current.stopRecording(); } catch (e) {}
       }
       if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
         window.speechSynthesis.cancel();
       }
     };
-  }, [clearDemoTimers, whisperVoice]);
+  }, []);
 
   return (
     <div className="tenali-learn-trace-container">
