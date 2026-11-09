@@ -1,4 +1,5 @@
-﻿/**
+﻿import ComicAdditionApp from './apps/ComicAdditionApp'
+/**
  * @fileoverview Tenali - Educational Quiz Platform (React Frontend)
  *
  * This monolithic React application serves as the main frontend for Tenali, an adaptive
@@ -1253,7 +1254,7 @@ function DifficultySlider({ pct, onChange, maxWidth = 260 }) {
   )
 }
 
-function NumPad({ value, onChange, onSubmit, disabled, showDecimal, showSlash, showCaret, showX }) {
+export function NumPad({ value, onChange, onSubmit, disabled, showDecimal, showSlash, showCaret, showX }) {
   /**
    * press(key): Handle numpad key press
    * - '0'-'9': append to value
@@ -63467,5 +63468,6 @@ export function changeXp(delta) {
 
 export default App
 export { AuthMenu }
+
 
 

@@ -1,5 +1,43 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { QuizLayout, useAutoAdvance } from '../App';
+import React, { useEffect, useRef, useState } from 'react'
+import QuizLayout from '../components/QuizLayout'
+import NumPad from '../components/NumPad'
+import { useAutoAdvance } from '../hooks/useAutoAdvance'
+
+const API = import.meta.env.VITE_API_BASE_URL || ''
+
+function renderFeedback(feedback, isCorrect) {
+  if (!feedback) return null
+
+  const isSolve =
+    isCorrect === false && feedback.startsWith('Solution:')
+
+  if (!isSolve) {
+    return (
+      <div
+        className={`feedback ${isCorrect ? 'correct' : 'wrong'}`}
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '8px'
+        }}
+      >
+        <span>{feedback}</span>
+      </div>
+    )
+  }
+
+  const lines = feedback.split('\n')
+
+  return (
+    <div className="feedback wrong">
+      {lines.map((line, index) => (
+        <div key={index}>{line}</div>
+      ))}
+    </div>
+  )
+}
+
 
 function ComicAdditionApp({ onBack }) {
   const [started, setStarted] = useState(false)
