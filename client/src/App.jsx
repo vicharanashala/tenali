@@ -140,30 +140,10 @@ import { load as loadMonsterLog, getMonsterHealedState } from './monsters/monste
 import MonsterAvatar from './monsters/MonsterAvatar.jsx';
 import GeometryApp from './GeometryApp';
 import EquationSandboxApp from './lib/EquationSandboxApp.jsx';
-import QFormulaConceptApp from './lib/concept/QFormulaConceptApp.jsx';
-import SimulConceptApp from './lib/simul-concept/SimulConceptApp.jsx';
-
-// Concept Playgrounds entry points.
-//
-// modeMap renders <ActiveApp {...standardProps} />, which cannot supply the
-// topic's quiz component, so each concept app gets a thin wrapper that passes
-// it in. The quiz apps themselves are unchanged and their own tiles still work.
-// Both are login-gated: the concept session API authenticates every request.
-function QFormulaConceptMode({ onBack }) {
-  return (
-    <AuthGate>
-      <QFormulaConceptApp onBack={onBack} QFormulaApp={QFormulaApp} />
-    </AuthGate>
-  );
-}
-
-function SimulConceptMode({ onBack }) {
-  return (
-    <AuthGate>
-      <SimulConceptApp onBack={onBack} SimulQuizApp={SimulApp} />
-    </AuthGate>
-  );
-}
+import {
+  QFormulaConceptMode,
+  SimulConceptMode
+} from './apps/concepts/ConceptModes.jsx';
 import DiagnosticQuiz from './lib/DiagnosticQuiz.jsx';
 import { useI18n } from './lib/i18n.jsx';
 import CuriosityApp from './Curiosity.jsx';
