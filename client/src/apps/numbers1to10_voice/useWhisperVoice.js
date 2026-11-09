@@ -3,42 +3,6 @@ import { AudioChunkRecorder } from './audioChunkRecorder.js';
 import { resolveTextToNumber } from './phoneticResolver.js';
 
 /**
- * Encode Float32Array PCM samples into a standard 16-bit 16kHz mono WAV Blob.
- * Used for optional local Python Whisper server fallback.
- */
-function encodeWAV(samples, sampleRate = 16000) {
-  const buffer = new ArrayBuffer(44 + samples.length * 2);
-  const view = new DataView(buffer);
-
-  const writeString = (offset, string) => {
-    for (let i = 0; i < string.length; i++) {
-      view.setUint8(offset + i, string.charCodeAt(i));
-    }
-  };
-
-  writeString(0, 'RIFF');
-  view.setUint32(4, 36 + samples.length * 2, true);
-  writeString(8, 'WAVE');
-  view.setUint32(16, 16, true); // PCM Chunk size
-  view.setUint16(20, 1, true);  // AudioFormat (1 = PCM)
-  view.setUint16(22, 1, true);  // Channels (1 = Mono)
-  view.setUint32(24, sampleRate, true);
-  view.setUint32(28, sampleRate * 2, true); // ByteRate
-  view.setUint16(32, 2, true);  // BlockAlign
-  view.setUint16(34, 16, true); // BitsPerSample
-  writeString(36, 'data');
-  view.setUint32(40, samples.length * 2, true);
-
-  let offset = 44;
-  for (let i = 0; i < samples.length; i++, offset += 2) {
-    let s = Math.max(-1, Math.min(1, samples[i]));
-    view.setInt16(offset, s < 0 ? s * 0x8000 : s * 0x7FFF, true);
-  }
-
-  return new Blob([buffer], { type: 'audio/wav' });
-}
-
-/**
  * useWhisperVoice
  *
  * Click-to-Speak & Real-Time Neural Speech hook for NumberTracingApp & SpaceMazeAdventure.
@@ -46,11 +10,11 @@ function encodeWAV(samples, sampleRate = 16000) {
  * Architecture:
  * 1. 100% In-Browser Inference: Spawns dedicated Web Worker (worker.js) running
  *    quantized Whisper ONNX weights via @huggingface/transformers & ONNX Runtime Web.
- * 2. Zero Server Dependency: Runs serverless on Vercel with $0 cloud hosting cost.
+ * 2. Zero Server Dependency: Runs completely serverless on Vercel with 0 backend servers.
  * 3. Real-Time Detection: Automatically detects spoken numbers (1-10) with zero latency
  *    via browser native speech recognition as child speaks.
  * 4. Neural Verification: On release, transcribes PCM chunk in Web Worker and resolves
- *    Indian English accents / regional digits (1-10) with zero cross-site network errors.
+ *    Indian English accents / regional digits (1-10) with zero network calls.
  */
 export function useWhisperVoice({
   onNumberDetected,
@@ -74,7 +38,6 @@ export function useWhisperVoice({
   const onNumberDetectedRef = useRef(onNumberDetected);
   const onTextHeardRef = useRef(onTextHeard);
   const isRecordingRef = useRef(false);
-  const serverOnlineRef = useRef(false);
   const autoStopTimerRef = useRef(null);
   const stopRecordingRef = useRef(null);
 
@@ -89,47 +52,6 @@ export function useWhisperVoice({
   useEffect(() => {
     isRecordingRef.current = isRecording;
   }, [isRecording]);
-
-  // Check optional local Python Whisper server health on mount & periodically
-  useEffect(() => {
-    let isMounted = true;
-
-    const checkLocalServer = async () => {
-      try {
-        const controller = new AbortController();
-        const tid = setTimeout(() => controller.abort(), 1200);
-        let res = null;
-        try {
-          res = await fetch('http://localhost:8000/api/health', {
-            method: 'GET',
-            signal: controller.signal
-          });
-        } catch {
-          res = await fetch('/api/health', {
-            method: 'GET',
-            signal: controller.signal
-          });
-        }
-        clearTimeout(tid);
-        if (isMounted) {
-          const isOk = Boolean(res && res.ok);
-          serverOnlineRef.current = isOk;
-        }
-      } catch (e) {
-        if (isMounted) {
-          serverOnlineRef.current = false;
-        }
-      }
-    };
-
-    checkLocalServer();
-    const interval = setInterval(checkLocalServer, 10000);
-
-    return () => {
-      isMounted = false;
-      clearInterval(interval);
-    };
-  }, []);
 
   // Initialize Web Worker for in-browser ONNX inference
   useEffect(() => {
@@ -226,7 +148,7 @@ export function useWhisperVoice({
       let recognizedRaw = '';
       let detectedNumber = null;
 
-      // 1. Try In-Browser Web Worker (ONNX Runtime Web / Transformers.js)
+      // 1. In-Browser Web Worker (ONNX Runtime Web / Transformers.js)
       if (audioChunk && audioChunk.length >= 800 && workerRef.current) {
         try {
           const workerPromise = new Promise((resolve, reject) => {
@@ -258,36 +180,7 @@ export function useWhisperVoice({
         }
       }
 
-      // 2. Optional Fallback to local Python Whisper server if available
-      if (!detectedNumber && audioChunk && audioChunk.length >= 800 && serverOnlineRef.current) {
-        try {
-          const wavBlob = encodeWAV(audioChunk, 16000);
-          const formData = new FormData();
-          formData.append('file', wavBlob, 'recording.wav');
-
-          const controller = new AbortController();
-          const timeoutId = setTimeout(() => controller.abort(), 2000);
-
-          const response = await fetch('http://localhost:8000/api/recognize', {
-            method: 'POST',
-            body: formData,
-            signal: controller.signal
-          });
-          clearTimeout(timeoutId);
-
-          if (response && response.ok) {
-            const data = await response.json();
-            if (!recognizedRaw) recognizedRaw = data.raw || data.text || '';
-            if (data.digit) {
-              detectedNumber = Number(data.digit);
-            }
-          }
-        } catch (netErr) {
-          // Local server offline, continue to browser speech fallback
-        }
-      }
-
-      // 3. Fallback to browser live speech if neural engine did not resolve digit
+      // 2. Fallback to browser live speech if neural engine did not resolve digit
       if (!detectedNumber) {
         if (!liveSpeechRef.current && !liveDigitRef.current) {
           await new Promise((r) => setTimeout(r, 200));
