@@ -96,3 +96,4 @@ If the project mandates zero backend AI servers:
 
 ---
 *Please share your thoughts, architectural feedback, and deployment preferences below.*
+
