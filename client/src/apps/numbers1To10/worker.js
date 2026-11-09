@@ -19,9 +19,11 @@ const CUSTOM_MODEL = 'gradient-queen/whisper-tiny-indian-digits-final';
 const TASK = 'automatic-speech-recognition';
 
 /**
- * Attempt to initialize the pipeline with WebGPU first, then gracefully fall back to WASM.
- * Uses official Transformers.js whisper configuration:
- * encoder_model (fp32) + decoder_model_merged (q4) for lightning-fast zero-error inference.
+ * Initialize the pipeline with WebAssembly (WASM).
+ * We explicitly use WASM with SIMD instead of WebGPU because ONNX Runtime Web's WebGPU
+ * backend retains tensors in GPU memory buffers during Whisper autoregressive decoding,
+ * which triggers "The data is not on CPU" errors.
+ * WASM runs 100% in CPU linear memory with zero GPU buffer errors.
  */
 async function loadPipeline(task, modelId, progress_callback) {
   const quantConfig = {
@@ -30,27 +32,18 @@ async function loadPipeline(task, modelId, progress_callback) {
   };
 
   try {
-    console.info(`[worker.js] Attempting WebGPU pipeline for ${modelId}...`);
+    console.info(`[worker.js] Loading Whisper pipeline via WebAssembly (wasm): ${modelId}...`);
     return await pipeline(task, modelId, {
       progress_callback,
       dtype: quantConfig,
-      device: 'webgpu'
+      device: 'wasm'
     });
-  } catch (gpuErr) {
-    console.info(`[worker.js] WebGPU unavailable for ${modelId}, using WebAssembly (wasm):`, gpuErr?.message);
-    try {
-      return await pipeline(task, modelId, {
-        progress_callback,
-        dtype: quantConfig,
-        device: 'wasm'
-      });
-    } catch (wasmErr) {
-      console.info(`[worker.js] Default pipeline fallback for ${modelId}:`, wasmErr?.message);
-      return await pipeline(task, modelId, {
-        progress_callback,
-        device: 'wasm'
-      });
-    }
+  } catch (err) {
+    console.warn(`[worker.js] Quantized WASM load failed, trying standard wasm:`, err?.message);
+    return await pipeline(task, modelId, {
+      progress_callback,
+      device: 'wasm'
+    });
   }
 }
 
@@ -82,6 +75,8 @@ class PipelineSingleton {
   }
 }
 
+let isTranscribing = false;
+
 self.addEventListener('message', async (event) => {
   const { type, audio } = event.data || {};
 
@@ -105,6 +100,12 @@ self.addEventListener('message', async (event) => {
   }
 
   if (type === 'transcribe') {
+    if (isTranscribing) {
+      console.warn('[worker.js] Transcription already in progress, dropping duplicate request.');
+      return;
+    }
+    isTranscribing = true;
+
     try {
       if (!audio) {
         throw new Error('No audio chunk provided for transcription.');
@@ -122,7 +123,7 @@ self.addEventListener('message', async (event) => {
         audioInput = padded;
       }
 
-      console.info(`[worker.js] Transcribing audio: ${audioInput.length} samples (${(audioInput.length / 16000).toFixed(2)}s)...`);
+      console.info(`[worker.js] Transcribing audio via WASM: ${audioInput.length} samples (${(audioInput.length / 16000).toFixed(2)}s)...`);
 
       const transcriber = await PipelineSingleton.getInstance();
       const output = await transcriber(audioInput, {
@@ -139,10 +140,14 @@ self.addEventListener('message', async (event) => {
       });
     } catch (error) {
       console.error('[worker.js] Transcription error:', error);
+      // Reset instance on failure to prevent "Session already started" in ONNX Runtime
+      PipelineSingleton.instance = null;
       self.postMessage({
         status: 'error',
         error: error?.message || 'Speech recognition failed.'
       });
+    } finally {
+      isTranscribing = false;
     }
   }
 });
