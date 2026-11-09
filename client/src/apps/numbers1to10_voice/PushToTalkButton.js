@@ -2,11 +2,11 @@ import React from 'react';
 import './PushToTalkButton.css';
 
 /**
- * PushToTalkButton (Minimal Kid-Friendly Voice HUD Button)
+ * PushToTalkButton (Kid-Friendly Voice HUD Button)
  *
  * Click to Open Mic (Start Listening)
  * Real-time detection auto-resolves when speech is heard.
- * Click again to manually close and submit.
+ * Features live reactive sound wave VU meter responding to user's voice in real time.
  *
  * @param {Object} props
  * @param {Object} props.whisperState - The object returned by useWhisperVoice()
@@ -23,6 +23,7 @@ export function PushToTalkButton({
     loadingProgress,
     isRecording,
     isTranscribing,
+    audioLevel = 0,
     heardText,
     lastDetectedNumber,
     errorMessage,
@@ -41,6 +42,9 @@ export function PushToTalkButton({
     if (isTranscribing) return 'whisper-ptt-btn transcribing';
     return 'whisper-ptt-btn muted';
   };
+
+  // Determine if mic is actively receiving sound
+  const isHearingSound = isRecording && audioLevel > 0.04;
 
   return React.createElement(
     'div',
@@ -61,15 +65,33 @@ export function PushToTalkButton({
         React.createElement('span', { key: 'txt' }, `Loading Whisper AI (${loadingProgress}%)...`)
       ],
       modelStatus !== 'loading' && isRecording && [
-        React.createElement('span', { key: 'dot', className: 'mic-active-dot' }),
+        React.createElement('span', {
+          key: 'dot',
+          className: 'mic-active-dot',
+          style: isHearingSound ? { background: '#4ade80', boxShadow: '0 0 14px #4ade80' } : undefined
+        }),
         React.createElement(
           'div',
           { key: 'wave', className: 'ptt-sound-wave' },
-          React.createElement('span', { key: 'w1' }),
-          React.createElement('span', { key: 'w2' }),
-          React.createElement('span', { key: 'w3' })
+          [0, 1, 2, 3, 4].map((i) => {
+            const barHeight = isHearingSound
+              ? Math.round(5 + Math.min(1, audioLevel * (i % 2 === 0 ? 1.6 : 2.4)) * 14)
+              : 6;
+            return React.createElement('span', {
+              key: `bar-${i}`,
+              style: {
+                height: `${barHeight}px`,
+                backgroundColor: isHearingSound ? '#4ade80' : '#ffffff',
+                transition: 'height 0.08s ease, background-color 0.15s ease'
+              }
+            });
+          })
         ),
-        React.createElement('span', { key: 'rec' }, '🔴 Listening... Say it aloud!')
+        React.createElement(
+          'span',
+          { key: 'rec' },
+          isHearingSound ? '🎙️ Hearing voice... Keep talking!' : '🔴 Listening... Say it aloud!'
+        )
       ],
       modelStatus !== 'loading' && isTranscribing && [
         React.createElement('span', { key: 'spin', className: 'ptt-spinner' }),

@@ -13,8 +13,8 @@ import { resolveTextToNumber } from './phoneticResolver.js';
  * 2. Zero Server Dependency: Runs completely serverless on Vercel with 0 backend servers.
  * 3. Real-Time Detection: Automatically detects spoken numbers (1-10) with zero latency
  *    via browser native speech recognition as child speaks.
- * 4. Neural Verification: On release, transcribes PCM chunk in Web Worker and resolves
- *    Indian English accents / regional digits (1-10) with zero network calls.
+ * 4. Reactive Audio VU Meter: Computes live RMS decibel energy to drive real-time visual
+ *    sound wave feedback and provide clear hardware diagnostics.
  */
 export function useWhisperVoice({
   onNumberDetected,
@@ -24,6 +24,7 @@ export function useWhisperVoice({
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [isRecording, setIsRecording] = useState(false);
   const [isTranscribing, setIsTranscribing] = useState(false);
+  const [audioLevel, setAudioLevel] = useState(0);
   const [heardText, setHeardText] = useState('');
   const [lastDetectedNumber, setLastDetectedNumber] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
@@ -82,7 +83,7 @@ export function useWhisperVoice({
             workerResolverRef.current.reject(new Error(error || 'Worker error'));
             workerResolverRef.current = null;
           }
-          // Do not lock out user; model remains functional with native fallback
+          // Model remains functional with native speech fallback
           setModelStatus('ready');
         }
       };
@@ -108,7 +109,11 @@ export function useWhisperVoice({
 
   // Initialize and cleanup audio recorder
   useEffect(() => {
-    recorderRef.current = new AudioChunkRecorder(16000);
+    const recorder = new AudioChunkRecorder(16000);
+    recorder.onVolumeChange = (normalized) => {
+      setAudioLevel(normalized);
+    };
+    recorderRef.current = recorder;
 
     return () => {
       if (autoStopTimerRef.current) {
@@ -130,6 +135,7 @@ export function useWhisperVoice({
     if (!isRecordingRef.current) return;
     setIsRecording(false);
     isRecordingRef.current = false;
+    setAudioLevel(0);
 
     if (autoStopTimerRef.current) {
       clearTimeout(autoStopTimerRef.current);
@@ -139,7 +145,8 @@ export function useWhisperVoice({
     try {
       setIsTranscribing(true);
 
-      // Retrieve 16kHz Float32Array PCM samples from recorder
+      // Stop recorder and retrieve audio diagnostics
+      const stats = recorderRef.current ? recorderRef.current.getStats() : { peakVolume: 0, durationMs: 0 };
       let audioChunk = null;
       if (recorderRef.current) {
         audioChunk = recorderRef.current.stop();
@@ -223,7 +230,14 @@ export function useWhisperVoice({
         if (finalDisplay) {
           setErrorMessage(`Heard "${finalDisplay}", but did not match a number (1-10).`);
         } else {
-          setErrorMessage('No speech detected. Please speak closer to the mic.');
+          // Provide precise diagnostics based on physical mic energy
+          if (stats.peakVolume < 0.003) {
+            setErrorMessage('Microphone appears muted or quiet. Please check system mic settings.');
+          } else if (stats.durationMs < 400) {
+            setErrorMessage('Recording was very short. Click mic, say the number, then stop.');
+          } else {
+            setErrorMessage('No speech detected. Please speak closer to the mic.');
+          }
         }
       }
     } catch (err) {
@@ -249,7 +263,9 @@ export function useWhisperVoice({
 
     try {
       if (!recorderRef.current) {
-        recorderRef.current = new AudioChunkRecorder(16000);
+        const recorder = new AudioChunkRecorder(16000);
+        recorder.onVolumeChange = (normalized) => setAudioLevel(normalized);
+        recorderRef.current = recorder;
       }
       await recorderRef.current.start();
       setIsRecording(true);
@@ -338,6 +354,7 @@ export function useWhisperVoice({
     loadingProgress,
     isRecording,
     isTranscribing,
+    audioLevel,
     heardText,
     lastDetectedNumber,
     errorMessage,

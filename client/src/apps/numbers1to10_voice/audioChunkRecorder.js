@@ -3,8 +3,8 @@
  *
  * Lightweight Web Audio API recorder designed for Push-To-Talk (PTT).
  * Captures clean 16,000 Hz mono PCM Float32Array chunks required by Whisper.
- * Ensures microphone streams and AudioContexts are properly resumed and closed
- * to prevent hardware locks on Chromium/Windows.
+ * Computes real-time RMS audio levels to drive reactive UI sound waves and
+ * diagnose muted or quiet microphones.
  */
 
 export class AudioChunkRecorder {
@@ -17,6 +17,12 @@ export class AudioChunkRecorder {
     this.silentGain = null;
     this.recordedChunks = [];
     this.isRecording = false;
+
+    // Diagnostics & live volume
+    this.peakVolume = 0;
+    this.recordingStartTime = 0;
+    this.recordingDurationMs = 0;
+    this.onVolumeChange = null;
   }
 
   /**
@@ -25,6 +31,8 @@ export class AudioChunkRecorder {
   async start() {
     if (this.isRecording) return;
     this.recordedChunks = [];
+    this.peakVolume = 0;
+    this.recordingStartTime = performance.now();
 
     // Request 1-channel microphone stream with noise suppression
     this.mediaStream = await navigator.mediaDevices.getUserMedia({
@@ -60,6 +68,23 @@ export class AudioChunkRecorder {
       if (!this.isRecording) return;
       const channelData = e.inputBuffer.getChannelData(0);
       this.recordedChunks.push(new Float32Array(channelData));
+
+      // Compute Root-Mean-Square (RMS) audio energy
+      let sumSquares = 0;
+      for (let i = 0; i < channelData.length; i++) {
+        const sample = channelData[i];
+        sumSquares += sample * sample;
+      }
+      const rms = Math.sqrt(sumSquares / channelData.length);
+      if (rms > this.peakVolume) {
+        this.peakVolume = rms;
+      }
+
+      if (this.onVolumeChange) {
+        // Boost volume visually for user feedback (0.0 to 1.0)
+        const normalized = Math.min(1, rms * 14);
+        this.onVolumeChange(normalized, rms);
+      }
     };
 
     // Connect through a silent GainNode to prevent audio feedback through speakers
@@ -80,6 +105,11 @@ export class AudioChunkRecorder {
   stop() {
     if (!this.isRecording && this.recordedChunks.length === 0) return null;
     this.isRecording = false;
+    this.recordingDurationMs = performance.now() - this.recordingStartTime;
+
+    if (this.onVolumeChange) {
+      this.onVolumeChange(0, 0);
+    }
 
     // Disconnect audio nodes
     try {
@@ -116,6 +146,16 @@ export class AudioChunkRecorder {
 
     this.recordedChunks = [];
     return mergedBuffer;
+  }
+
+  /**
+   * Retrieve session diagnostics (peak volume and duration).
+   */
+  getStats() {
+    return {
+      peakVolume: this.peakVolume,
+      durationMs: this.recordingDurationMs
+    };
   }
 }
 
