@@ -14,8 +14,8 @@ import { pipeline, env } from 'https://cdn.jsdelivr.net/npm/@huggingface/transfo
 env.allowLocalModels = false;
 env.useBrowserCache = true;
 
-const PRIMARY_MODEL = 'gradient-queen/whisper-tiny-indian-digits-final';
 const FALLBACK_MODEL = 'onnx-community/whisper-tiny';
+const CUSTOM_MODEL = 'gradient-queen/whisper-tiny-indian-digits-final';
 const TASK = 'automatic-speech-recognition';
 
 /**
@@ -29,7 +29,11 @@ async function loadPipeline(task, modelId, progress_callback) {
       device: 'webgpu'
     });
   } catch (gpuErr) {
-    console.info(`[worker.js] WebGPU unavailable for ${modelId}, falling back to WebAssembly (wasm):`, gpuErr?.message);
+    const msg = gpuErr?.message || '';
+    if (msg.includes('404') || msg.includes('not found') || msg.includes('does not appear')) {
+      throw gpuErr;
+    }
+    console.info(`[worker.js] WebGPU unavailable for ${modelId}, using WebAssembly (wasm):`, gpuErr?.message);
     return await pipeline(task, modelId, {
       progress_callback,
       dtype: 'q8',
@@ -40,19 +44,24 @@ async function loadPipeline(task, modelId, progress_callback) {
 
 class PipelineSingleton {
   static task = TASK;
-  static model = PRIMARY_MODEL;
+  static model = FALLBACK_MODEL;
   static instance = null;
 
   static async getInstance(progress_callback = null) {
     if (this.instance === null) {
       try {
-        // Try fine-tuned model first
-        this.instance = await loadPipeline(this.task, PRIMARY_MODEL, progress_callback);
-        this.model = PRIMARY_MODEL;
-      } catch (err) {
-        console.warn(`[worker.js] Fine-tuned model ${PRIMARY_MODEL} requires ONNX weights on HF Hub; falling back to ${FALLBACK_MODEL}:`, err?.message);
-        this.model = FALLBACK_MODEL;
+        // Load verified community ONNX model first for instant zero-error availability
         this.instance = await loadPipeline(this.task, FALLBACK_MODEL, progress_callback);
+        this.model = FALLBACK_MODEL;
+      } catch (err) {
+        console.warn(`[worker.js] Could not load ${FALLBACK_MODEL}, trying ${CUSTOM_MODEL}:`, err?.message);
+        try {
+          this.instance = await loadPipeline(this.task, CUSTOM_MODEL, progress_callback);
+          this.model = CUSTOM_MODEL;
+        } catch (customErr) {
+          console.error('[worker.js] Both model sources failed:', customErr);
+          throw customErr;
+        }
       }
     }
     return this.instance;

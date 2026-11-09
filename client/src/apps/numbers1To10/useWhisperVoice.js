@@ -157,13 +157,14 @@ export function useWhisperVoice({
               audio: audioChunk
             });
 
-            // 5-second safety timeout
+            // 10-second safety timeout
             setTimeout(() => {
               if (workerResolverRef.current) {
+                console.warn('[useWhisperVoice] Worker transcription timeout');
                 workerResolverRef.current.resolve(null);
                 workerResolverRef.current = null;
               }
-            }, 5000);
+            }, 10000);
           });
 
           const res = await workerPromise;
