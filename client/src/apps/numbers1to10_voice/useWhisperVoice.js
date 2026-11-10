@@ -61,7 +61,10 @@ export function useWhisperVoice({
   useEffect(() => {
     let worker = null;
     try {
-      worker = new Worker(new URL('./worker.js', import.meta.url), { type: 'module' });
+      const workerUrl = (typeof window !== 'undefined' && window.location)
+        ? `${window.location.origin}/whisper-worker.js`
+        : '/whisper-worker.js';
+      worker = new Worker(workerUrl, { type: 'module' });
       workerRef.current = worker;
 
       worker.onmessage = (event) => {
@@ -94,7 +97,7 @@ export function useWhisperVoice({
       };
 
       worker.onerror = (e) => {
-        console.warn('[useWhisperVoice] Worker message error:', e);
+        console.error('[useWhisperVoice] Web Worker error:', e?.message || e);
         setModelStatus('ready');
       };
 
