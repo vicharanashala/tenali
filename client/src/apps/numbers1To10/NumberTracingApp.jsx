@@ -211,6 +211,7 @@ export default function NumberTracingApp({
   const whisperVoiceRef = useRef(null);
   const strokeDoneRef = useRef(false);
   const isDraggingRef = useRef(false);
+  const demoActiveRef = useRef(false);
 
   // Pre-load and warm up browser SpeechSynthesis voices on mount
   useEffect(() => {
@@ -248,6 +249,10 @@ export default function NumberTracingApp({
   useEffect(() => {
     soloCountStepRef.current = soloCountStep;
   }, [soloCountStep]);
+
+  useEffect(() => {
+    demoActiveRef.current = demoActive;
+  }, [demoActive]);
 
   const config = TRACING_CONFIG[selectedNum] || TRACING_CONFIG[1];
   const activeStroke = config.strokes[currentStrokeIdx] || config.strokes[0];
@@ -674,14 +679,19 @@ export default function NumberTracingApp({
       // Next object starts glowing immediately!
       setEchoStep(nextStep);
       echoStepRef.current = nextStep;
-      setEchoSubState('WAITING_KID');
-      echoSubStateRef.current = 'WAITING_KID';
+      setEchoSubState('APP_SPEAKING');
+      echoSubStateRef.current = 'APP_SPEAKING';
       setSuccessBanner(`✓ "${NUMBER_WORDS[currentStep]}"! Now say "${NUMBER_WORDS[nextStep]}"! 🎙️`);
 
       const tNext = setTimeout(() => {
         speakVoiceCommand(`Say ${NUMBER_WORDS[nextStep]}!`, () => {
-          if (whisperVoiceRef.current && !whisperVoiceRef.current.isRecording && stageRef.current === 'ECHO_COUNT') {
-            whisperVoiceRef.current.startRecording();
+          if (stageRef.current === 'ECHO_COUNT') {
+            setEchoSubState('WAITING_KID');
+            echoSubStateRef.current = 'WAITING_KID';
+            lastMatchTimeRef.current = Date.now();
+            if (whisperVoiceRef.current && !whisperVoiceRef.current.isRecording) {
+              whisperVoiceRef.current.startRecording();
+            }
           }
         });
         playTone(520, 'sine', 0.12, 0.15);
@@ -708,16 +718,26 @@ export default function NumberTracingApp({
     stageRef.current = 'ECHO_COUNT';
     setEchoStep(1);
     echoStepRef.current = 1;
-    setEchoSubState('WAITING_KID');
-    echoSubStateRef.current = 'WAITING_KID';
+    setEchoSubState('ANNOUNCING_NUM');
+    echoSubStateRef.current = 'ANNOUNCING_NUM';
     setLitCount(0); // Count starts at 0! Object 1 is NOT green yet; it is glowing as the target!
     setHeardWord('');
     setSuccessBanner(`🔢 Say "One"! 🎙️`);
+    lastMatchTimeRef.current = Date.now() + 1200;
+
+    if (whisperVoiceRef.current && whisperVoiceRef.current.isRecording) {
+      try { whisperVoiceRef.current.stopRecording(); } catch (e) {}
+    }
 
     playTone(520, 'sine', 0.15, 0.18);
     speakVoiceCommand(`Now count the ${config.objectName}s! Say One!`, () => {
-      if (whisperVoiceRef.current && !whisperVoiceRef.current.isRecording && stageRef.current === 'ECHO_COUNT') {
-        whisperVoiceRef.current.startRecording();
+      if (stageRef.current === 'ECHO_COUNT') {
+        setEchoSubState('WAITING_KID');
+        echoSubStateRef.current = 'WAITING_KID';
+        lastMatchTimeRef.current = Date.now();
+        if (whisperVoiceRef.current && !whisperVoiceRef.current.isRecording) {
+          whisperVoiceRef.current.startRecording();
+        }
       }
     });
   }, [config.objectName, speakVoiceCommand, playTone]);
@@ -737,10 +757,16 @@ export default function NumberTracingApp({
     stageRef.current = 'ECHO_COUNT';
     setEchoStep(1);
     echoStepRef.current = 1;
-    setEchoSubState('WAITING_KID');
-    echoSubStateRef.current = 'WAITING_KID';
+    // Set to ANNOUNCING_NUM so delayed speech or previous recording cannot auto-complete counting step 1!
+    setEchoSubState('ANNOUNCING_NUM');
+    echoSubStateRef.current = 'ANNOUNCING_NUM';
     setLitCount(0); // Object 1 is NOT green yet; it is glowing as the active target!
     setSuccessBanner(`🔢 Count: Say "One"! 🎙️`);
+    lastMatchTimeRef.current = Date.now() + 1200;
+
+    if (whisperVoiceRef.current && whisperVoiceRef.current.isRecording) {
+      try { whisperVoiceRef.current.stopRecording(); } catch (e) {}
+    }
 
     playSuccessChord();
     fireConfetti({
@@ -751,25 +777,35 @@ export default function NumberTracingApp({
 
     // Voice command: instruct to count the objects!
     speakVoiceCommand(`Correct! Now count the ${config.objectName}s! Say One!`, () => {
-      // Automatically open mic for counting step 1!
-      if (whisperVoiceRef.current && !whisperVoiceRef.current.isRecording && stageRef.current === 'ECHO_COUNT') {
-        whisperVoiceRef.current.startRecording();
+      // Transition to WAITING_KID and open mic ONLY after the prompt finishes speaking!
+      if (stageRef.current === 'ECHO_COUNT') {
+        setEchoSubState('WAITING_KID');
+        echoSubStateRef.current = 'WAITING_KID';
+        lastMatchTimeRef.current = Date.now();
+        if (whisperVoiceRef.current && !whisperVoiceRef.current.isRecording) {
+          whisperVoiceRef.current.startRecording();
+        }
       }
     });
   }, [config.strokes, config.objectName, playSuccessChord, speakVoiceCommand, clearDemoTimers]);
 
   // Unified voice recognition handler powered by useWhisperVoice hook
   const handleVoiceNumber = useCallback((detectedNum, cleanText, rawText) => {
+    if (demoActiveRef.current || stageRef.current === 'COMPLETED') return;
     if (rawText) setHeardWord(rawText);
     const now = Date.now();
     if (now - lastMatchTimeRef.current < 280) return;
 
     if (detectedNum >= 1 && detectedNum <= 10) {
-      lastMatchTimeRef.current = now;
-
       if (stageRef.current === 'ECHO_COUNT') {
+        if (echoSubStateRef.current !== 'WAITING_KID') {
+          console.info('[handleVoiceNumber] Ignoring voice while app is speaking/transitioning in ECHO_COUNT');
+          return;
+        }
         const expected = echoStepRef.current;
         if (detectedNum === expected) {
+          lastMatchTimeRef.current = now;
+          setEchoSubState('APP_SPEAKING');
           echoSubStateRef.current = 'APP_SPEAKING';
           setLitCount(detectedNum);
           if (onChildEchoedRef.current) {
@@ -777,12 +813,14 @@ export default function NumberTracingApp({
           }
         }
       } else if (stageRef.current === 'SOLO_COUNT') {
+        lastMatchTimeRef.current = now;
         if (handleSoloCountAttemptRef.current) {
           handleSoloCountAttemptRef.current(detectedNum);
         }
       } else if (stageRef.current === 'TRACING') {
         // Child spoke the number: trigger green numeral trace glow, confetti, & object counting!
         if (detectedNum === selectedNumRef.current) {
+          lastMatchTimeRef.current = now;
           triggerNumeralVoiceSuccess();
         }
       }
@@ -913,6 +951,9 @@ export default function NumberTracingApp({
   // Animated Playable Demo: Demonstrates how to trace and count
   const startDemo = useCallback(() => {
     clearDemoTimers();
+    if (whisperVoiceRef.current && whisperVoiceRef.current.isRecording) {
+      try { whisperVoiceRef.current.stopRecording(); } catch (e) {}
+    }
     setDemoActive(true);
     setStage('TRACING');
     stageRef.current = 'TRACING';

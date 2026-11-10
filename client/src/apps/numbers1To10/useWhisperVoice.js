@@ -43,6 +43,7 @@ export function useWhisperVoice({
   const stopRecordingRef = useRef(null);
   const lastToggleTimeRef = useRef(0);
   const lastWorkerErrorRef = useRef(null);
+  const numberEmittedForCurrentRecordingRef = useRef(false);
 
   useEffect(() => {
     onNumberDetectedRef.current = onNumberDetected;
@@ -156,6 +157,20 @@ export function useWhisperVoice({
         audioChunk = recorderRef.current.stop();
       }
 
+      // Stop speech recognition instance
+      if (speechRecognitionRef.current) {
+        try {
+          speechRecognitionRef.current.stop();
+        } catch (e) {}
+      }
+
+      // If a number was already emitted during this recording session via zero-latency native speech,
+      // DO NOT run Whisper and DO NOT emit onNumberDetected again!
+      if (numberEmittedForCurrentRecordingRef.current) {
+        setIsTranscribing(false);
+        return;
+      }
+
       let recognizedRaw = '';
       let detectedNumber = null;
 
@@ -220,13 +235,6 @@ export function useWhisperVoice({
         }
       }
 
-      // Stop speech recognition instance
-      if (speechRecognitionRef.current) {
-        try {
-          speechRecognitionRef.current.stop();
-        } catch (e) {}
-      }
-
       const finalDisplay = recognizedRaw || (detectedNumber ? String(detectedNumber) : '');
       setHeardText(finalDisplay);
 
@@ -234,13 +242,14 @@ export function useWhisperVoice({
         onTextHeardRef.current(finalDisplay);
       }
 
-      if (detectedNumber !== null && detectedNumber >= 1 && detectedNumber <= 10) {
+      if (!numberEmittedForCurrentRecordingRef.current && detectedNumber !== null && detectedNumber >= 1 && detectedNumber <= 10) {
+        numberEmittedForCurrentRecordingRef.current = true;
         setLastDetectedNumber(detectedNumber);
         setErrorMessage('');
         if (onNumberDetectedRef.current) {
           onNumberDetectedRef.current(detectedNumber, finalDisplay);
         }
-      } else {
+      } else if (!numberEmittedForCurrentRecordingRef.current) {
         if (finalDisplay) {
           setErrorMessage(`Heard "${finalDisplay}", but did not match a number (1-10).`);
         } else {
@@ -277,6 +286,7 @@ export function useWhisperVoice({
     lastWorkerErrorRef.current = null;
     liveSpeechRef.current = '';
     liveDigitRef.current = null;
+    numberEmittedForCurrentRecordingRef.current = false;
 
     try {
       if (!recorderRef.current) {
@@ -330,7 +340,8 @@ export function useWhisperVoice({
                 liveSpeechRef.current = matchedText;
                 setHeardText(matchedText);
 
-                if (matchedNum) {
+                if (matchedNum && !numberEmittedForCurrentRecordingRef.current) {
+                  numberEmittedForCurrentRecordingRef.current = true;
                   liveDigitRef.current = matchedNum;
                   setLastDetectedNumber(matchedNum);
                   setErrorMessage('');
