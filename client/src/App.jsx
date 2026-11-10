@@ -52090,6 +52090,9 @@ function GymQuiz({ title, subtitle, typeKeys, welcomeText, algebraInput, onBack 
  */
 function BasicArithApp({ onBack, completedTopics = [], goldMastery = [], markTopicCompleted, setTransferTopic, setMode, isGoalMode = false }) {
   const [showCarJourney, setShowCarJourney] = useState(false)
+  // Origin (the basic-arith-lab templates) is folded in here instead of
+  // having its own home tile (#209); ?mode=basic-arith-lab still opens it.
+  const [showOriginLab, setShowOriginLab] = useState(false)
   // Difficulty level: 'easy', 'medium', 'hard', 'extrahard'
   const [difficulty, setDifficulty] = useState(() => cjTakeReco('basicarith', CJ_RECO_DIFFS) || 'easy')
   // Adaptive mode enabled?
@@ -52334,6 +52337,10 @@ const fetchQuestion = async () => {
     return <CarJourneyApp onBack={() => setShowCarJourney(false)} setMode={setMode} />
   }
 
+  if (showOriginLab) {
+    return <BasicArithmeticLabApp onBack={() => setShowOriginLab(false)} backLabel="Arithmetic" />
+  }
+
   return (
     <QuizLayout title="Origin" subtitle="Add, subtract, multiply & divide positive & negative numbers" onBack={onBack} timer={started && !finished ? timer : null}>
       {!started && !finished && <div className="welcome-box">
@@ -52405,6 +52412,12 @@ const fetchQuestion = async () => {
           padding: '10px 24px', color: 'var(--clr-text-soft)', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer'
         }}>
           The Car Journey — 16-stop math road trip
+        </button>
+        <button type="button" onClick={() => setShowOriginLab(true)} style={{
+          marginTop: '10px', background: 'transparent', border: '1px solid var(--clr-border)', borderRadius: '6px',
+          padding: '10px 24px', color: 'var(--clr-text-soft)', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer'
+        }}>
+          Origin — missing numbers, comparisons and true or false
         </button>
       </div>}
       {started && !finished && <>
@@ -70213,7 +70226,7 @@ function ProgressTrackerApp({ onBack }) {
 
 // Named export so main.jsx can render the global hamburger menu next to <App />
 
-function GenericLabApp({ title, subtitle, endpoint, onBack, renderQuestionCustom, customGenerate, initialDifficulty, initialNumQuestions, initialStarted }) {
+function GenericLabApp({ title, subtitle, endpoint, onBack, backLabel = 'Home', renderQuestionCustom, customGenerate, initialDifficulty, initialNumQuestions, initialStarted }) {
   const [difficulty, setDifficulty] = useState(initialDifficulty || 'easy');
   const [numQuestions, setNumQuestions] = useState(initialNumQuestions || '5');
   const [started, setStarted] = useState(initialStarted || false);
@@ -70385,7 +70398,7 @@ function GenericLabApp({ title, subtitle, endpoint, onBack, renderQuestionCustom
             position: 'absolute', top: '24px', left: '24px', background: 'transparent',
             border: '1px solid #5B5048', borderRadius: '6px', padding: '6px 14px',
             color: '#A89C93', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer'
-          }}>← Home</button>
+          }}>← {backLabel}</button>
 
           <h1 style={{ fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 700, fontSize: '48px', color: '#F4F1ED', margin: '0 0 12px', lineHeight: 1.1 }}>
             {title.replace('🔷 ', '')}
@@ -70500,7 +70513,7 @@ function GenericLabApp({ title, subtitle, endpoint, onBack, renderQuestionCustom
           </div>
           <div className="button-row" style={{ marginTop: '30px' }}>
             <button className="kid-btn-primary" onClick={() => { setStarted(false); setFinished(false); }}>Play Again 🔄</button>
-            <button className="kid-back-btn" onClick={onBack} style={{ marginLeft: '15px' }}>← Back to Home</button>
+            <button className="kid-back-btn" onClick={onBack} style={{ marginLeft: '15px' }}>← Back to {backLabel}</button>
           </div>
         </div>
       )}
@@ -70508,7 +70521,7 @@ function GenericLabApp({ title, subtitle, endpoint, onBack, renderQuestionCustom
   );
 }
 
-function BasicArithmeticLabApp({ onBack }) {
+function BasicArithmeticLabApp({ onBack, backLabel }) {
   const renderCustom = (q, ans, setAns, submitAns, revealed) => {
     if (q.template === 'missing_number' || q.template === 'greater_smaller') {
       const parts = q.prompt.split(' ');
@@ -70559,7 +70572,7 @@ function BasicArithmeticLabApp({ onBack }) {
       </div>
     );
   };
-  return <GenericLabApp title="Origin" subtitle="Mixed multiplication & division templates" endpoint="/api/basic-arithmetic-lab" onBack={onBack} renderQuestionCustom={renderCustom} />;
+  return <GenericLabApp title="Origin" subtitle="Mixed multiplication & division templates" endpoint="/api/basic-arithmetic-lab" onBack={onBack} backLabel={backLabel} renderQuestionCustom={renderCustom} />;
 }
 
 
