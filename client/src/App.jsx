@@ -43,12 +43,12 @@ import {
 import useAuth from './hooks/useAuth.js';
 import useAutoAdvance from './hooks/useAutoAdvance.js';
 import { useQuizCompletion } from './hooks/useQuizCompletion';
-import FeedbackDisplay from './components/common/FeedbackDisplay.jsx'
 import useTimer from './hooks/useTimer.js'
 import useProgressSubmit from './hooks/useProgressSubmit.js'
-import { MathLabHub, MensurationLab, BasicArithmeticLab, GK, ColumnAddition, ColumnMultiplication, ColumnDivision, ColumnSubtraction, Gym, ProgressTracker, BadgeIcon } from './components';
+import { MathLabHub, MensurationLab, BasicArithmeticLab, GK, ColumnAddition, ColumnMultiplication, ColumnDivision, ColumnSubtraction, Gym, ProgressTracker, BadgeIcon, QuizLayout, ResultsTable, DifficultySlider, NumPad, ProfileShowcase, ScaffoldedTables, LJHome, LJTopicView, LJCheckpointQuizView, FeedbackDisplay } from './components';
 import journeyFetch from './utils/journeyFetch.js';
 import useQuizHintsAndXp from './hooks/useHints.js';
+
 
 window.React = React;
 
@@ -40757,7 +40757,7 @@ function App() {
         <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
           {theme === 'dark' ? '☀️' : '🌙'}
         </button>
-        <ScaffoldedTablesApp studentName="Student" />
+        <ScaffoldedTables studentName="Student" />
       </>
     )
   }
@@ -40769,7 +40769,7 @@ function App() {
         <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
           {theme === 'dark' ? '☀️' : '🌙'}
         </button>
-        <ScaffoldedTablesApp studentName="Taittiriya" />
+        <ScaffoldedTables studentName="Taittiriya" />
       </>
     )
   }
@@ -42669,7 +42669,7 @@ function App() {
     if (mode === 'learning_journey') {
       return (
         <AuthGate>
-          <LearningJourneyHome
+          <LJHome
             onSelectTopic={(topicId) => {
               setActiveTopicId(topicId);
               setMode('learning_journey_topic');
@@ -42683,7 +42683,7 @@ function App() {
     if (mode === 'learning_journey_topic') {
       return (
         <AuthGate>
-          <LearningJourneyTopicView
+          <LJTopicView
             topicId={activeTopicId}
             onPlayConcept={(conceptKey) => {
               setJourneyContext({ topicId: activeTopicId, conceptKey });
@@ -42701,7 +42701,7 @@ function App() {
     if (mode === 'learning_journey_checkpoint') {
       return (
         <AuthGate>
-          <LearningJourneyCheckpointQuizView
+          <LJCheckpointQuizView
             topicId={activeTopicId}
             onBack={() => setMode('learning_journey_topic')}
           />
