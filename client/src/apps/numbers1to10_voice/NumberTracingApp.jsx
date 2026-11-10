@@ -798,10 +798,6 @@ export default function NumberTracingApp({
 
     if (detectedNum >= 1 && detectedNum <= 10) {
       if (stageRef.current === 'ECHO_COUNT') {
-        if (echoSubStateRef.current !== 'WAITING_KID') {
-          console.info('[handleVoiceNumber] Ignoring voice while app is speaking/transitioning in ECHO_COUNT');
-          return;
-        }
         const expected = echoStepRef.current;
         if (detectedNum === expected) {
           lastMatchTimeRef.current = now;
@@ -811,6 +807,8 @@ export default function NumberTracingApp({
           if (onChildEchoedRef.current) {
             onChildEchoedRef.current(detectedNum);
           }
+        } else if (echoSubStateRef.current === 'WAITING_KID') {
+          console.info(`[handleVoiceNumber] Spoken number ${detectedNum} does not match expected ${expected}`);
         }
       } else if (stageRef.current === 'SOLO_COUNT') {
         lastMatchTimeRef.current = now;

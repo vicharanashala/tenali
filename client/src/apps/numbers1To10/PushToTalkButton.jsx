@@ -113,7 +113,7 @@ export function PushToTalkButton({
         `➔ ${lastDetectedNumber} ⭐`
       )
     ),
-    errorMessage && !isRecording && React.createElement(
+    errorMessage && !isRecording && !isTranscribing && React.createElement(
       'span',
       { style: { color: '#fca5a5', fontSize: '0.85rem' } },
       `⚠️ ${errorMessage}`

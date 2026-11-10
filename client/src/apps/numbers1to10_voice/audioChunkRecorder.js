@@ -164,7 +164,7 @@ export class AudioChunkRecorder {
     const downsampled = downsampleTo16000(mergedBuffer, this.actualSampleRate);
 
     // Trim leading/trailing dead silence to eliminate room background hiss
-    const trimmed = trimSilence(downsampled, 0.015);
+    const trimmed = trimSilence(downsampled, 0.006);
 
     // Smart normalize so Whisper receives clear signal without noise distortion
     return normalizeAudio(trimmed);
@@ -221,7 +221,7 @@ export class AudioChunkRecorder {
  * @param {number} threshold
  * @returns {Float32Array}
  */
-export function trimSilence(buffer, threshold = 0.015) {
+export function trimSilence(buffer, threshold = 0.006) {
   if (!buffer || buffer.length === 0) return buffer;
   let start = 0;
   while (start < buffer.length && Math.abs(buffer[start]) < threshold) {
@@ -285,9 +285,9 @@ export function normalizeAudio(buffer) {
     const abs = Math.abs(buffer[i]);
     if (abs > maxVal) maxVal = abs;
   }
-  // Only boost if genuine speech signal exists (maxVal >= 0.03) and not already loud (maxVal < 0.85).
+  // Only boost if genuine speech signal exists (maxVal >= 0.008) and not already loud (maxVal < 0.85).
   // Cap boost multiplier at 8x to avoid magnifying quiet room noise into distortion.
-  if (maxVal >= 0.03 && maxVal < 0.85) {
+  if (maxVal >= 0.008 && maxVal < 0.85) {
     const desiredGain = 0.88 / maxVal;
     const gain = Math.min(8.0, desiredGain);
     for (let i = 0; i < buffer.length; i++) {

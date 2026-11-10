@@ -40,6 +40,7 @@ export function useWhisperVoice({
   const onTextHeardRef = useRef(onTextHeard);
   const isRecordingRef = useRef(false);
   const autoStopTimerRef = useRef(null);
+  const nativeStopTimerRef = useRef(null);
   const stopRecordingRef = useRef(null);
   const lastToggleTimeRef = useRef(0);
   const lastWorkerErrorRef = useRef(null);
@@ -127,6 +128,9 @@ export function useWhisperVoice({
       if (autoStopTimerRef.current) {
         clearTimeout(autoStopTimerRef.current);
       }
+      if (nativeStopTimerRef.current) {
+        clearTimeout(nativeStopTimerRef.current);
+      }
       if (recorderRef.current) {
         try { recorderRef.current.destroy(); } catch (e) {}
       }
@@ -144,10 +148,15 @@ export function useWhisperVoice({
     setIsRecording(false);
     isRecordingRef.current = false;
     setAudioLevel(0);
+    setErrorMessage(''); // Clear previous error immediately so UI is clean during transcription
 
     if (autoStopTimerRef.current) {
       clearTimeout(autoStopTimerRef.current);
       autoStopTimerRef.current = null;
+    }
+    if (nativeStopTimerRef.current) {
+      clearTimeout(nativeStopTimerRef.current);
+      nativeStopTimerRef.current = null;
     }
 
     try {
@@ -290,6 +299,10 @@ export function useWhisperVoice({
     liveSpeechRef.current = '';
     liveDigitRef.current = null;
     numberEmittedForCurrentRecordingRef.current = false;
+    if (nativeStopTimerRef.current) {
+      clearTimeout(nativeStopTimerRef.current);
+      nativeStopTimerRef.current = null;
+    }
 
     try {
       if (!recorderRef.current) {
@@ -354,8 +367,9 @@ export function useWhisperVoice({
                     onNumberDetectedRef.current(matchedNum, matchedText);
                   }
 
-                  // Automatically close recording after 700ms
-                  setTimeout(() => {
+                  // Automatically close recording after 700ms (tracked in ref to avoid cutting off next step)
+                  if (nativeStopTimerRef.current) clearTimeout(nativeStopTimerRef.current);
+                  nativeStopTimerRef.current = setTimeout(() => {
                     if (isRecordingRef.current && stopRecordingRef.current) {
                       stopRecordingRef.current();
                     }
