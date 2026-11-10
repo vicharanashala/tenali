@@ -5,6 +5,10 @@
  * Captures clean 16,000 Hz mono PCM Float32Array chunks required by Whisper.
  * Computes real-time RMS audio levels to drive reactive UI sound waves and
  * diagnose muted or quiet microphones.
+ *
+ * Features persistent warm audio context to eliminate the 250ms hardware
+ * spin-up latency on every click, smart silence trimming (VAD), and
+ * capped audio normalization.
  */
 
 export class AudioChunkRecorder {
@@ -27,15 +31,26 @@ export class AudioChunkRecorder {
   }
 
   /**
-   * Request microphone access and begin streaming PCM samples into memory.
+   * Initializes or reuses the warm MediaStream and AudioContext.
+   * This completely eliminates the 250ms hardware delay on subsequent mic taps.
    */
-  async start() {
-    if (this.isRecording) return;
-    this.recordedChunks = [];
-    this.peakVolume = 0;
-    this.recordingStartTime = performance.now();
+  async ensureAudioStream() {
+    // If stream already has active live tracks, reuse it instantly
+    if (this.mediaStream) {
+      const tracks = this.mediaStream.getAudioTracks();
+      if (tracks.length > 0 && tracks[0].readyState === 'live') {
+        if (this.audioContext && this.audioContext.state === 'suspended') {
+          try {
+            await this.audioContext.resume();
+          } catch (e) {
+            console.warn('[AudioChunkRecorder] AudioContext resume failed:', e);
+          }
+        }
+        return;
+      }
+    }
 
-    // Request 1-channel microphone stream with noise suppression
+    // Request 1-channel microphone stream with hardware noise suppression
     this.mediaStream = await navigator.mediaDevices.getUserMedia({
       audio: {
         channelCount: 1,
@@ -53,7 +68,7 @@ export class AudioChunkRecorder {
     }
     this.actualSampleRate = this.audioContext.sampleRate || 48000;
 
-    // Chromium starts AudioContext in 'suspended' state; must explicitly resume!
+    // Chromium starts AudioContext in 'suspended' state; explicitly resume
     if (this.audioContext.state === 'suspended') {
       try {
         await this.audioContext.resume();
@@ -67,6 +82,26 @@ export class AudioChunkRecorder {
     // Buffer size of 4096 gives ~0.25s chunks at 16kHz
     const bufferSize = 4096;
     this.processorNode = this.audioContext.createScriptProcessor(bufferSize, 1, 1);
+
+    // Connect through a silent GainNode to prevent audio feedback through speakers
+    this.silentGain = this.audioContext.createGain();
+    this.silentGain.gain.value = 0;
+
+    this.sourceNode.connect(this.processorNode);
+    this.processorNode.connect(this.silentGain);
+    this.silentGain.connect(this.audioContext.destination);
+  }
+
+  /**
+   * Begin streaming PCM samples into memory.
+   */
+  async start() {
+    if (this.isRecording) return;
+    this.recordedChunks = [];
+    this.peakVolume = 0;
+    this.recordingStartTime = performance.now();
+
+    await this.ensureAudioStream();
 
     this.processorNode.onaudioprocess = (e) => {
       if (!this.isRecording) return;
@@ -91,19 +126,11 @@ export class AudioChunkRecorder {
       }
     };
 
-    // Connect through a silent GainNode to prevent audio feedback through speakers
-    this.silentGain = this.audioContext.createGain();
-    this.silentGain.gain.value = 0;
-
-    this.sourceNode.connect(this.processorNode);
-    this.processorNode.connect(this.silentGain);
-    this.silentGain.connect(this.audioContext.destination);
-
     this.isRecording = true;
   }
 
   /**
-   * Stop recording, release all audio tracks, and return merged 16kHz Float32Array chunk.
+   * Stop recording, keep stream warm, and return merged 16kHz Float32Array chunk.
    * @returns {Float32Array|null}
    */
   stop() {
@@ -115,26 +142,9 @@ export class AudioChunkRecorder {
       this.onVolumeChange(0, 0);
     }
 
-    // Disconnect audio nodes
-    try {
-      if (this.processorNode) {
-        this.processorNode.disconnect();
-        this.processorNode.onaudioprocess = null;
-      }
-      if (this.silentGain) {
-        this.silentGain.disconnect();
-      }
-      if (this.sourceNode) {
-        this.sourceNode.disconnect();
-      }
-      if (this.mediaStream) {
-        this.mediaStream.getTracks().forEach((track) => track.stop());
-      }
-      if (this.audioContext && this.audioContext.state !== 'closed') {
-        this.audioContext.close();
-      }
-    } catch (e) {
-      console.warn('[AudioChunkRecorder] Error releasing audio resources:', e);
+    // Detach listener so warm stream doesn't consume memory or CPU while paused
+    if (this.processorNode) {
+      this.processorNode.onaudioprocess = null;
     }
 
     if (this.recordedChunks.length === 0) return null;
@@ -153,8 +163,43 @@ export class AudioChunkRecorder {
     // Ensure Whisper receives EXACTLY 16,000 Hz Float32Array mono
     const downsampled = downsampleTo16000(mergedBuffer, this.actualSampleRate);
 
-    // Normalize peak volume so quiet microphones are crystal clear to Whisper
-    return normalizeAudio(downsampled);
+    // Trim leading/trailing dead silence to eliminate room background hiss
+    const trimmed = trimSilence(downsampled, 0.015);
+
+    // Smart normalize so Whisper receives clear signal without noise distortion
+    return normalizeAudio(trimmed);
+  }
+
+  /**
+   * Full teardown of hardware mic tracks and AudioContext on unmount.
+   */
+  destroy() {
+    this.isRecording = false;
+    try {
+      if (this.processorNode) {
+        this.processorNode.disconnect();
+        this.processorNode.onaudioprocess = null;
+        this.processorNode = null;
+      }
+      if (this.silentGain) {
+        this.silentGain.disconnect();
+        this.silentGain = null;
+      }
+      if (this.sourceNode) {
+        this.sourceNode.disconnect();
+        this.sourceNode = null;
+      }
+      if (this.mediaStream) {
+        this.mediaStream.getTracks().forEach((track) => track.stop());
+        this.mediaStream = null;
+      }
+      if (this.audioContext && this.audioContext.state !== 'closed') {
+        this.audioContext.close();
+        this.audioContext = null;
+      }
+    } catch (e) {
+      console.warn('[AudioChunkRecorder] Error releasing audio resources:', e);
+    }
   }
 
   /**
@@ -166,6 +211,36 @@ export class AudioChunkRecorder {
       durationMs: this.recordingDurationMs
     };
   }
+}
+
+/**
+ * Trims leading and trailing silence below an RMS energy threshold.
+ * Prevents ambient room noise or dead silence from confusing Whisper's decoder.
+ *
+ * @param {Float32Array} buffer
+ * @param {number} threshold
+ * @returns {Float32Array}
+ */
+export function trimSilence(buffer, threshold = 0.015) {
+  if (!buffer || buffer.length === 0) return buffer;
+  let start = 0;
+  while (start < buffer.length && Math.abs(buffer[start]) < threshold) {
+    start++;
+  }
+
+  if (start >= buffer.length) return buffer;
+
+  let end = buffer.length - 1;
+  while (end > start && Math.abs(buffer[end]) < threshold) {
+    end--;
+  }
+
+  // Retain up to 800 samples (~50ms at 16kHz) padding around speech start and end
+  const padSamples = 800;
+  const safeStart = Math.max(0, start - padSamples);
+  const safeEnd = Math.min(buffer.length, end + padSamples + 1);
+
+  return buffer.slice(safeStart, safeEnd);
 }
 
 /**
@@ -196,7 +271,9 @@ export function downsampleTo16000(buffer, sourceSampleRate) {
 }
 
 /**
- * Normalizes audio volume so Whisper receives clear signal without distortion.
+ * Normalizes audio volume so Whisper receives clear signal without noise distortion.
+ * Avoids magnifying background room hiss into distortion by requiring genuine voice signal
+ * and capping the gain multiplier.
  *
  * @param {Float32Array} buffer
  * @returns {Float32Array}
@@ -208,9 +285,11 @@ export function normalizeAudio(buffer) {
     const abs = Math.abs(buffer[i]);
     if (abs > maxVal) maxVal = abs;
   }
-  // If peak volume is quiet (between 0.01 and 0.8), boost to 0.9
-  if (maxVal > 0.01 && maxVal < 0.8) {
-    const gain = 0.9 / maxVal;
+  // Only boost if genuine speech signal exists (maxVal >= 0.03) and not already loud (maxVal < 0.85).
+  // Cap boost multiplier at 8x to avoid magnifying quiet room noise into distortion.
+  if (maxVal >= 0.03 && maxVal < 0.85) {
+    const desiredGain = 0.88 / maxVal;
+    const gain = Math.min(8.0, desiredGain);
     for (let i = 0; i < buffer.length; i++) {
       buffer[i] *= gain;
     }

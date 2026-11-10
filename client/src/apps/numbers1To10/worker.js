@@ -129,6 +129,10 @@ self.addEventListener('message', async (event) => {
       const output = await transcriber(audioInput, {
         language: 'en',
         task: 'transcribe',
+        temperature: 0.0,
+        do_sample: false,
+        num_beams: 1,
+        condition_on_previous_text: false,
         return_timestamps: false
       });
 

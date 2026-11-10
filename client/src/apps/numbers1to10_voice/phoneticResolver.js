@@ -7,16 +7,16 @@
  */
 
 const NUMBER_PATTERNS = {
-  1:  /\b(1|one|won|wan|van|when|run|first|ek|ondru|onnu|onru|okati|un|uno)\b/i,
-  2:  /\b(2|two|to|too|tu|do|doo|second|rendu|erandu|irandu|dos)\b/i,
-  3:  /\b(3|three|tree|free|thee|tri|third|teen|tin|moonu|moondru|moodu|tres)\b/i,
-  4:  /\b(4|four|for|fore|far|ford|fourth|char|chaar|naalu|naangu|cuatro)\b/i,
-  5:  /\b(5|five|faiv|fai|fiv|fifth|panch|paanch|anju|aindhu|ainthu|aidu|cinco|bye|buy)\b/i,
-  6:  /\b(6|six|siks|sex|sick|sixth|chhe|che|chha|aaru|seis)\b/i,
-  7:  /\b(7|seven|sevn|sevan|seventh|saat|sat|yezhu|ezhu|yedu|siete)\b/i,
-  8:  /\b(8|eight|ate|ait|eat|eighth|aath|ath|ettu|enimidi|ocho)\b/i,
-  9:  /\b(9|nine|nain|nin|night|ninth|nau|no|ombodhu|onpathu|onbathu|thommidi|nueve)\b/i,
-  10: /\b(10|ten|tan|tin|den|tenth|das|dus|pathu|patthu|padi|diez)\b/i
+  1:  /\b(1|one|won|wan|van|when|run|juan|wun|first|ek|ondru|onnu|onru|okati|un|uno)\b/i,
+  2:  /\b(2|two|to|too|tu|do|doo|du|second|rendu|erandu|irandu|dos)\b/i,
+  3:  /\b(3|three|tree|free|thee|tri|tee|tea|thri|third|teen|tin|moonu|moondru|moodu|tres)\b/i,
+  4:  /\b(4|four|for|fore|far|ford|fo|fourth|char|chaar|naalu|naangu|cuatro)\b/i,
+  5:  /\b(5|five|faiv|fai|fiv|fifth|panch|paanch|anju|aindhu|ainthu|aidu|cinco|bye|buy|hi)\b/i,
+  6:  /\b(6|six|siks|sex|sick|sicks|sixth|chhe|che|chha|aaru|seis)\b/i,
+  7:  /\b(7|seven|sevn|sevan|sevin|seventh|saat|sat|yezhu|ezhu|yedu|siete)\b/i,
+  8:  /\b(8|eight|ate|ait|eat|eighth|height|aath|ath|ettu|enimidi|ocho)\b/i,
+  9:  /\b(9|nine|nain|nin|night|ninth|line|mine|nau|no|ombodhu|onpathu|onbathu|thommidi|nueve)\b/i,
+  10: /\b(10|ten|tan|tin|den|then|tenth|das|dus|pathu|patthu|padi|diez)\b/i
 };
 
 /**
@@ -29,8 +29,9 @@ const NUMBER_PATTERNS = {
 export function resolveTextToNumber(rawText) {
   if (!rawText || typeof rawText !== 'string') return null;
 
-  // Normalize string: lowercase, strip punctuation
-  const clean = rawText.toLowerCase().replace(/[^a-z0-9\s]/g, ' ').trim();
+  // Normalize string: lowercase, strip punctuation, quotes, trailing dots
+  const clean = rawText.toLowerCase().replace(/[^a-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim();
+  if (!clean) return null;
 
   // 1. Direct digit check (e.g. "5")
   const digitMatch = clean.match(/\b([1-9]|10)\b/);
@@ -49,4 +50,3 @@ export function resolveTextToNumber(rawText) {
 }
 
 export default resolveTextToNumber;
-

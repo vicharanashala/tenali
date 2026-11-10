@@ -125,7 +125,7 @@ export function useWhisperVoice({
         clearTimeout(autoStopTimerRef.current);
       }
       if (recorderRef.current) {
-        try { recorderRef.current.stop(); } catch (e) {}
+        try { recorderRef.current.destroy(); } catch (e) {}
       }
       if (speechRecognitionRef.current) {
         try { speechRecognitionRef.current.stop(); } catch (e) {}
@@ -351,12 +351,12 @@ export function useWhisperVoice({
                     onNumberDetectedRef.current(matchedNum, matchedText);
                   }
 
-                  // Automatically close recording after 450ms
+                  // Automatically close recording after 700ms
                   setTimeout(() => {
                     if (isRecordingRef.current && stopRecordingRef.current) {
                       stopRecordingRef.current();
                     }
-                  }, 450);
+                  }, 700);
                 }
               }
             }
