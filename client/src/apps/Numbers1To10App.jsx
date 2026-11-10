@@ -582,18 +582,6 @@ export default function Numbers1To10App({
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [demoActive, targetReached, hopRight, hopLeft]);
 
-  // Auto-play tutorial demo as soon as user enters the module
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      startDemo();
-    }, 200);
-    demoTimersRef.current.push(timer);
-
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [startDemo]);
-
   // Clean up timers on unmount
   useEffect(() => {
     return () => {

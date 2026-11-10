@@ -194,6 +194,7 @@ export default function NumberTracingApp({
   const [demoHandPos, setDemoHandPos] = useState({ target: 'none', x: 0, y: 0, pressing: false, itemIdx: 0 });
   const demoTimersRef = useRef([]);
   const demoAnimRef = useRef(null);
+  const hasAutoStartedDemoRef = useRef(false);
 
   // Refs for zero-latency, closure-safe callbacks
   const svgRef = useRef(null);
@@ -1069,6 +1070,21 @@ export default function NumberTracingApp({
       demoTimersRef.current.push(tCountStart);
     };
   }, [config.strokes, selectedNum, clearDemoTimers, playChime, playTone, playSuccessChord, speakNumber, stopDemo]);
+
+  // Auto-play Learn & Trace demo once when the module is opened
+  useEffect(() => {
+    if (hasAutoStartedDemoRef.current) return;
+    hasAutoStartedDemoRef.current = true;
+
+    const timer = setTimeout(() => {
+      startDemo();
+    }, 450);
+    demoTimersRef.current.push(timer);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [startDemo]);
 
   // Clean up on unmount
   useEffect(() => {
