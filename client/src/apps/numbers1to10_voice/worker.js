@@ -6,16 +6,21 @@
  * https://huggingface.co/docs/transformers.js/en/tutorials/react
  *
  * Exclusively tuned for Indian digits and numbers 1 to 10.
- * Runs 100% in-browser via WebAssembly / WebGPU (zero server required).
+ * Runs 100% in-browser via WebAssembly (zero server required).
+ * Primary: Local Olive-quantized INT8 fine-tuned Indian digits Whisper model.
+ * Fallback: onnx-community/whisper-tiny.
  */
 
 import { pipeline, env } from 'https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.3.3';
 
-env.allowLocalModels = false;
+// Enable loading bundled model from client/public/models/
+env.allowLocalModels = true;
+env.allowRemoteModels = true;
+env.localModelPath = '/models/';
 env.useBrowserCache = true;
 
+const LOCAL_MODEL = 'whisper_indian_digits';
 const FALLBACK_MODEL = 'onnx-community/whisper-tiny';
-const CUSTOM_MODEL = 'gradient-queen/whisper-tiny-indian-digits-final';
 const TASK = 'automatic-speech-recognition';
 
 /**
@@ -26,22 +31,17 @@ const TASK = 'automatic-speech-recognition';
  * WASM runs 100% in CPU linear memory with zero GPU buffer errors.
  */
 async function loadPipeline(task, modelId, progress_callback) {
-  const quantConfig = {
-    encoder_model: 'fp32',
-    decoder_model_merged: 'q4'
-  };
-
   try {
     console.info(`[worker.js] Loading Whisper pipeline via WebAssembly (wasm): ${modelId}...`);
     return await pipeline(task, modelId, {
       progress_callback,
-      dtype: quantConfig,
       device: 'wasm'
     });
   } catch (err) {
-    console.warn(`[worker.js] Quantized WASM load failed, trying standard wasm:`, err?.message);
+    console.warn(`[worker.js] First attempt for ${modelId} failed (${err?.message}), retrying with explicit dtype:`, err);
     return await pipeline(task, modelId, {
       progress_callback,
+      dtype: 'fp32',
       device: 'wasm'
     });
   }
@@ -49,25 +49,25 @@ async function loadPipeline(task, modelId, progress_callback) {
 
 class PipelineSingleton {
   static task = TASK;
-  static model = FALLBACK_MODEL;
+  static model = LOCAL_MODEL;
   static instance = null;
 
   static async getInstance(progress_callback = null) {
     if (this.instance === null) {
       try {
-        console.info(`[worker.js] Loading primary community model: ${FALLBACK_MODEL}...`);
-        this.instance = await loadPipeline(this.task, FALLBACK_MODEL, progress_callback);
-        this.model = FALLBACK_MODEL;
-        console.info(`[worker.js] Primary model loaded successfully!`);
-      } catch (err) {
-        console.warn(`[worker.js] Could not load ${FALLBACK_MODEL}, trying ${CUSTOM_MODEL}:`, err?.message);
+        console.info(`[worker.js] Loading primary local Olive INT8 fine-tuned model: ${LOCAL_MODEL}...`);
+        this.instance = await loadPipeline(this.task, LOCAL_MODEL, progress_callback);
+        this.model = LOCAL_MODEL;
+        console.info(`[worker.js] Local fine-tuned model loaded successfully!`);
+      } catch (localErr) {
+        console.warn(`[worker.js] Could not load local model ${LOCAL_MODEL}, falling back to ${FALLBACK_MODEL}:`, localErr?.message);
         try {
-          this.instance = await loadPipeline(this.task, CUSTOM_MODEL, progress_callback);
-          this.model = CUSTOM_MODEL;
-          console.info(`[worker.js] Custom model loaded successfully!`);
-        } catch (customErr) {
-          console.error('[worker.js] Both model sources failed:', customErr);
-          throw customErr;
+          this.instance = await loadPipeline(this.task, FALLBACK_MODEL, progress_callback);
+          this.model = FALLBACK_MODEL;
+          console.info(`[worker.js] Fallback community model loaded successfully!`);
+        } catch (fallbackErr) {
+          console.error('[worker.js] Both model sources failed:', fallbackErr);
+          throw fallbackErr;
         }
       }
     }
@@ -127,11 +127,11 @@ self.addEventListener('message', async (event) => {
 
       const transcriber = await PipelineSingleton.getInstance();
       const output = await transcriber(audioInput, {
-        language: 'en',
         task: 'transcribe',
         temperature: 0.0,
         do_sample: false,
         num_beams: 1,
+        max_new_tokens: 10,
         condition_on_previous_text: false,
         return_timestamps: false
       });
