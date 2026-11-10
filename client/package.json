@@ -45,5 +45,13 @@
     "jsdom": "^29.1.1",
     "vite": "^8.0.0",
     "vitest": "^5.0.2"
+  },
+  "overrides": {
+    "@tensorflow/tfjs-core": {
+      "node-fetch": "2.7.0"
+    },
+    "mafs": {
+      "katex": "0.19.1"
+    }
   }
 }
