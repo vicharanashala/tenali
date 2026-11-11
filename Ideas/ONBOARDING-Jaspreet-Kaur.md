@@ -1,7 +1,7 @@
-# Onboarding Document: Jaspreet Kaur
+Onboarding Document: Jaspreet Kaur
 GitHub: Jaspreet-j 
-Date: 29-10-2026 
-Issue I plan to work on: TwinHuntApp: add a Next Round button so a game can get past round 1 #492
+Date: 11-11-2026 
+Issue I plan to work on: Fold Guess the Number into its parent topic (bases - it is a binary trick) #210
 
 1. What is Tenali?
 Tenali is a website where students practise maths. Most questions are made by the server each time they are asked, so a student can keep practising a topic without running out of questions or seeing the same one twice. A few kinds of content are saved files instead, for example the 991 files in chitragupta/questions/ and the riddles in server/riddles/riddles.json. After each answer the difficulty changes: it goes up when the student is doing well and comes down when they are struggling. If a student gets stuck, they can ask for a step-by-step solution to the question they just saw.
@@ -40,7 +40,7 @@ Where it runs. tenali.fun is one nginx server in front of several apps. This rep
 Tech stack
 
 Frontend: React 19 and Vite, with libraries such as framer-motion, Three.js, mafs and face-api.js.
-Backend: Node.js 20 or newer, Express 5, Mongoose and Socket.IO.
+Backend: Node.js 24.22.1 or newer (set in .nvmrc), Express 5, Mongoose and Socket.IO.
 Database: MongoDB, with an in-memory fallback if no database is available.
 Authentication: JWT with bcrypt.
 Testing: the server uses vitest and supertest, and the issue descriptions say its 124 tests run in about 1.5 seconds.
@@ -49,7 +49,7 @@ What already works
 More than ninety generated puzzle routes across arithmetic, algebra, geometry, calculus, statistics and more.
 Adaptive difficulty and solve-for-explanation on the server.
 Battle Arena, Detective Agency, Guided Learning Journey, Random Mix and Custom Lesson.
-Concept Playgrounds exist as code (conceptPlay.js and conceptSession.js), but according to issue #293 they are not mounted yet, so they do not run in the app today.
+Concept Playgrounds (conceptPlay.js and conceptSession.js) were built but at first not mounted (issue #293). That issue is now closed, and server/index.js mounts them at /api/concept-session and /api/concept-playgrounds.
 Proctoring, coins and badges, language switching and the code playground.
 Bonus content: a vocabulary trainer and a general-knowledge quiz bank.
 How the code is organised, and what is changing
@@ -63,15 +63,15 @@ How contributions work. CONTRIBUTING.md says every pull request must close an ex
 Gap 1: Files from server/node_modules are tracked by git
 Where: the server/node_modules/ folder.
 What: When I switched branches in my local copy, git listed many files such as server/node_modules/qs/... and server/node_modules/iconv-lite/... as modified. Git only reports changes for files it tracks, so these dependency files appear to have been committed to the repository.
-Why it matters: Installed packages normally stay out of the repository because they are rebuilt by npm install. Tracking them makes the repository larger and fills pull requests with changes that have nothing to do with the real work. It can also cause extra merge conflicts, and any pull request that includes them will be rejected.
+Why it matters: Installed packages normally stay out of the repository because they are rebuilt by npm install. Tracking them makes the repository larger and fills pull requests with changes that have nothing to do with the real work, so it makes pull requests harder to review. It can also cause extra merge conflicts. The maintainers checked and found 591 files under server/node_modules tracked by git.
 Gap 2: App.jsx is a merge-conflict bottleneck
 Where: client/src/App.jsx.
 What: The component definitions, the modeMap and the routing of paths all live in this one very large file, so many contributors edit it at the same time.
 Why it matters: CONTRIBUTING.md rejects any pull request that has a merge conflict. So a contributor can lose a correct change because of how the file is organised, not because of anything wrong in their code. The file is also hard to read and review.
-Gap 3: Lint errors are not enforced
-Where: the client lint setup, eslint-suppressions.json, and issues #263 to #277.
-What: CONTRIBUTING.md says client lint is currently non-blocking in CI. The issue list mentions more than a thousand existing lint errors spread across many files.
-Why it matters: Because a lint failure cannot stop a pull request, new errors can be added without anyone noticing, and the backlog keeps growing.
+Gap 3: The Assignees field does not show who is working on an issue
+Where: the issue pages of #229, #243, #259 and #292.
+What: While I was looking for an issue, several of them showed "Assignees: No one assigned" and looked free. In the Activity section, though, they were already taken: #243 and #292 were mentioned from other people's pull requests, #259 had been assigned by a maintainer after a comment, and #229 had already been finished in PR #337 but was still open. I only found this by reading the Activity of each issue and searching the pull requests.
+Why it matters: A contributor can spend hours choosing and preparing an issue that someone else is already finishing. It also means the "no assignee, no linked pull request" search does not give a reliable list of free issues.
 Gap 4: Dependencies between issues are hidden in the text
 Where: the bodies of issues #209, #224 and #225.
 What: These issues say "Depends on: ..." in the last paragraph of the description, but the Relationships field on the issue page says "None yet". Searching for unassigned issues with no linked pull request, which is how I started, still shows blocked issues. For example, #225 depends on #224, which depends on #220, #221 and #222.
@@ -85,28 +85,28 @@ Idea 2: Make issue dependencies visible
 What: Use GitHub's "blocked by" relationships, or a blocked label, in addition to the text in the description.
 Why: A contributor looking for a free issue could filter out blocked ones straight away.
 How: For each issue that has a "Depends on" line, set the relationship in the sidebar and add a label. This can be done by the maintainers once, and kept up to date as issues close.
-Idea 3: Baseline the lint errors so only new ones fail
-What: Record the current lint errors and make CI fail only when a pull request adds new ones.
-Why: It stops the problem getting worse without requiring all existing errors to be fixed first (this matches the goal of issue #277).
-How: The repository already uses eslint-suppressions.json. Once that file reflects the current state, the lint step in CI can be made blocking.
+Idea 3: Mark an issue automatically when a pull request is open for it
+What: When a pull request with Closes #N is opened, add a label such as has-pr to issue #N, and remove it if the pull request is closed without merging.
+Why: Contributors could see at a glance that an issue is taken, and they could filter those issues out of their search.
+How: The pull request check bot already reads Closes #N in the description, so a small GitHub Actions step could reuse that to add or remove the label on the issue. This should be agreed with a maintainer first.
 6. My contribution
-Issue: #492, TwinHuntApp: add a Next Round button so a game can get past round 1.
+Issue: #210, Fold Guess the Number into its parent topic (bases - it is a binary trick).
 
-The problem as I understand it. In the Twin Hunt game, a player who answers round 1 gets stuck. The code that was supposed to move the game on automatically (useAutoAdvance in client/src/App.jsx) was switched off on purpose, and Twin Hunt has no button to replace it. So the next round never starts and "Game complete!" can never be reached. The same happens after a round that times out.
+The problem as I understand it. Guess the Number is a binary trick, so it belongs inside the Number Bases topic and should not have its own tile on the home grid. This is the same kind of change as PR #451, which folded the Origin tile into Basic Arithmetic. I will read #451 first and follow the same pattern.
 
 What I plan to do
 
-Pull the latest main and create a new branch, for example fix/twinhunt-next-round. App.jsx is the file that causes most merge conflicts, so I will sync with upstream/main right before I start and again before I push.
-Open client/src/App.jsx and find TwinHuntApp. The line numbers in the issue may have moved, so I will search for advanceRef and renderFeedback(feedback, isCorrect) and confirm they look the way the issue describes.
-Add the button the issue describes just after renderFeedback(feedback, isCorrect). It shows only after the round is revealed and calls the existing advanceRef.current(). The label is "Next Round", and it becomes "Finish" on the last round. I will not change anything else in the file.
-How I will check that Twin Hunt now moves past round 1
+Read the description of #210 and the merged PR #451 to see exactly which files and lines were changed there.
+Pull the latest main and create a new branch, for example feat/fold-guess-number-into-bases. At least one earlier pull request for #210 was closed because of a conflict with main, so I will sync with upstream/main right before I push as well.
+Remove Guess the Number as a separate tile from the home grid, and make it reachable from inside the Number Bases topic, in the same way #451 did for Origin.
+Keep the existing modeMap entry, so the old address ?mode=guess still opens Guess the Number.
+Keep the change small. I will not touch other tiles, and if App.jsx needs an edit I will keep it to the fewest lines possible.
+How I will check it
 
-Start the client with npm run dev, open Twin Hunt and start a game with 3 rounds.
-Answer round 1. The button should appear after the answer and should not be visible before it.
-Click "Next Round". Round 2 should appear, with the symbols enabled again.
-Answer rounds 2 and 3. On the last round the button should say "Finish", and clicking it should show "Game complete!" with the score.
-Start another game and let a round run out of time. The button should appear and move the game on in the same way.
-Run cd client && npm run lint and npx vite build, and cd server && npm test, to make sure nothing else broke.
-Pull request: One small PR, with Closes #492 in the description, a short before and after description of what I saw in the browser, and no other files changed. The issue also notes that useAutoAdvance is switched off in 39 places and only Twin Hunt has been checked. I will mention in the PR that other apps may have the same gap, but I will not change them there, because the issue is only about Twin Hunt.
+The Guess the Number tile is no longer on the home grid.
+Opening the Number Bases topic shows Guess the Number, and opening it from there works and loads normally.
+The old address with ?mode=guess still opens Guess the Number.
+cd client && npm run lint and npx vite build pass, and cd server && npm test still passes.
+Pull request. One small PR with Closes #210 in the description, a short before and after description of what I saw in the browser, and no other files changed.
 
-Where I am now. I have read the README, CONTRIBUTING.md and the descriptions of the issues I looked at, and I have set up my fork and a branch for this document. I have not started the changes for #492. The maintainers said they will assign it to me once this document is updated, and I will begin on a separate branch after that. This onboarding pull request stays as this one file.
+Where I am now. I have read the README, CONTRIBUTING.md and the descriptions of the issues I looked at, and I have set up my fork and a branch for this document. I have not started the changes for #210. The maintainers said they will assign it to me once this document is updated, and I will begin on a separate branch after that. This onboarding pull request stays as this one file.
