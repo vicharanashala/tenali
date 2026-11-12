@@ -89,7 +89,13 @@ const TOPIC_DOMAINS = {
   custom: DOMAINS.OTHER
 };
 
+const MASTERY_THRESHOLD = 0.85;
+// Reserved for a future migration. It is not stored on ConceptMastery yet.
+const MASTERY_POLICY_VERSION = 'bkt-v1';
+
 module.exports = {
   DOMAINS,
-  TOPIC_DOMAINS
+  TOPIC_DOMAINS,
+  MASTERY_THRESHOLD,
+  MASTERY_POLICY_VERSION
 };
