@@ -54415,9 +54415,7 @@ const loadQuestion = async () => {
                           g.key === 'revision' ? { background: 'rgba(33,150,243,0.18)', borderColor: '#2196f3', color: '#2196f3' } : {}
                         ) : {}}>
                         <input type="radio" name="squaringapp-goal" checked={sessionGoal === g.key} onChange={() => {
-                          setSessionGoal(g.key)
-                          
-                        }} />
+                          setSessionGoal(g.key)}} />
                         {g.label}
                       </label>
                     ))}
