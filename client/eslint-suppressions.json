@@ -1,16 +1,19 @@
 {
   "src/App.jsx": {
     "no-empty": {
-      "count": 148
+      "count": 146
     },
     "no-restricted-syntax": {
       "count": 1
+    },
+    "no-undef": {
+      "count": 40
     },
     "no-unexpected-multiline": {
       "count": 5
     },
     "no-unused-vars": {
-      "count": 209
+      "count": 210
     },
     "no-useless-escape": {
       "count": 4
@@ -25,13 +28,13 @@
       "count": 63
     },
     "react-hooks/refs": {
-      "count": 80
+      "count": 78
     },
     "react-hooks/rules-of-hooks": {
       "count": 6
     },
     "react-hooks/set-state-in-effect": {
-      "count": 93
+      "count": 89
     },
     "react-refresh/only-export-components": {
       "count": 8

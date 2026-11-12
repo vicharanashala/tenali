@@ -1,0 +1,55 @@
+.home-section {
+  margin-bottom: 32px;
+}
+
+.home-section-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 14px;
+  color: var(--clr-text);
+  letter-spacing: -0.01em;
+}
+
+/* Home Header Container */
+.home-top-header {
+  position: relative;
+  width: 100%;
+}
+
+/* Top-Left Back Button (Appears when drilled into a section) */
+.home-back-btn {
+  position: absolute;
+  top: 8px;
+  left: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--clr-surface);
+  border: 1.5px solid var(--clr-border);
+  color: var(--clr-text);
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: background var(--transition), border-color var(--transition), color var(--transition), transform 0.15s ease;
+  z-index: 10;
+}
+
+.home-back-btn:hover {
+  background: var(--clr-hover-strong);
+  border-color: var(--clr-accent);
+  color: var(--clr-accent);
+  transform: translateX(-2px);
+}
+
+.home-back-btn:active {
+  transform: translateX(-2px) scale(0.98);
+}
+
+@media (max-width: 640px) {
+  .home-top-header:has(.home-back-btn) .home-header-center {
+    padding-top: 40px;
+  }
+}
