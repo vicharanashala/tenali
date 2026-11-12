@@ -44489,7 +44489,7 @@ function AdditionApp({ onBack, completedTopics = [], goldMastery = [], markTopic
   /**
    * fetchQuestion(selectedDifficulty?): Fetch next addition question from API
    */
-  
+
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
