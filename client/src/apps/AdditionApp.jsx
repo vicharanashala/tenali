@@ -754,10 +754,3 @@ const fetchQuestion = async (selectedDifficulty = difficulty) => {
 // the file with a slightly different visual style — kept distinct on purpose.)
 
 export default AdditionApp
-
-
-
-
-
-
-

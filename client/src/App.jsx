@@ -63278,6 +63278,3 @@ export function changeXp(delta) {
 
 export default App
 export { AuthMenu }
-
-
-
