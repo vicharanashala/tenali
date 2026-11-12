@@ -65185,18 +65185,6 @@ export function getPromptForType(type, q) {
   }
 }
 
-/**
- * CustomApp Component
- * Custom lesson builder: Combine any puzzle types into a custom quiz
- * Features:
- *   - Setup phase: select puzzles, difficulty, question order, count
- *   - Quiz phase: answer mixed questions from selected puzzle types
- *   - Finished phase: view results and replay option
- *   - Keyboard shortcuts: 1-4 or a-d to select multiple choice answers
- *
- * @param {Object} props
- * @param {Function} props.onBack - Callback to return to home menu
- */
 /* ── Interval Scheduling App ────────────────────────── */
 /**
  * IntervalSchedulingApp Component
