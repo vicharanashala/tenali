@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>🌸 Flower Counting Addition 🌻</title>
+<style>
+  :root{
+    --bg1:#fff5fb; --bg2:#eefcf3; --ink:#3a2f4a;
+    --card:#ffffff; --accent:#ff7bac; --accent2:#7bc96f;
+    --good:#2fb36b; --bad:#ff6b6b; --soft:#f3e9ff;
+    --shadow:0 10px 30px rgba(120,80,160,.15);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;font-family:"Comic Sans MS","Trebuchet MS",system-ui,sans-serif;}
+  body{
+    min-height:100vh;color:var(--ink);
+    background:linear-gradient(135deg,var(--bg1),var(--bg2));
+    display:flex;align-items:center;justify-content:center;padding:16px;
+    overflow-x:hidden;
+  }
+  .game{
+    width:100%;max-width:640px;background:var(--card);
+    border-radius:28px;box-shadow:var(--shadow);
+    padding:26px 24px 32px;position:relative;overflow:hidden;
+  }
+  .topbar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap;}
+  .pill{background:var(--soft);border-radius:999px;padding:8px 16px;font-weight:bold;font-size:15px;display:flex;align-items:center;gap:6px;}
+  h1{text-align:center;font-size:26px;color:var(--accent);margin:4px 0 2px;}
+  .subtitle{text-align:center;color:#9a8fb0;font-size:14px;margin-bottom:18px;}
+  .level-tag{text-align:center;font-size:14px;color:var(--accent2);font-weight:bold;margin-bottom:10px;}
+
+  .flower-field{
+    background:linear-gradient(180deg,#f9f0ff,#f0fff6);
+    border:3px dashed #e3d5f3;border-radius:22px;
+    padding:20px 16px;margin-bottom:18px;
+  }
+  .groups{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px;}
+  .group{
+    background:#fff;border-radius:18px;padding:12px;min-width:90px;
+    display:flex;flex-wrap:wrap;gap:6px;justify-content:center;align-items:center;
+    box-shadow:0 4px 12px rgba(150,110,180,.10);
+  }
+  .flower{font-size:38px;line-height:1;animation:pop .4s ease both;cursor:default;user-select:none;transition:transform .15s;}
+  .flower:hover{transform:scale(1.2) rotate(-8deg);}
+  @keyframes pop{0%{transform:scale(0) rotate(-40deg);opacity:0;}100%{transform:scale(1);opacity:1;}}
+  .plus,.equals{font-size:34px;font-weight:bold;color:var(--accent);padding:0 4px;}
+
+  .answer-row{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:6px;flex-wrap:wrap;}
+  .answer-box{
+    width:92px;height:76px;font-size:38px;text-align:center;
+    border:4px solid var(--accent);border-radius:18px;color:var(--ink);
+    background:#fffafd;outline:none;font-weight:bold;
+  }
+  .answer-box:focus{border-color:var(--accent2);box-shadow:0 0 0 4px rgba(123,201,111,.25);}
+  .hint{text-align:center;color:#b3a8c6;font-size:13px;margin-bottom:14px;height:16px;}
+
+  .btn-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+  button{
+    border:none;cursor:pointer;font-weight:bold;font-size:17px;
+    padding:13px 26px;border-radius:999px;color:#fff;transition:transform .1s,filter .15s;
+  }
+  button:active{transform:translateY(2px);}
+  .check{background:var(--accent2);}
+  .next{background:var(--accent);}
+  .ghost{background:#d9ccec;color:#5b4b70;}
+  button:hover{filter:brightness(1.05);}
+
+  .feedback{text-align:center;font-size:22px;font-weight:bold;min-height:34px;margin:16px 0 4px;}
+  .feedback.good{color:var(--good);}
+  .feedback.bad{color:var(--bad);}
+
+  .stars{text-align:center;font-size:20px;letter-spacing:4px;margin-top:4px;min-height:26px;}
+
+  /* confetti */
+  .confetti{position:fixed;top:-20px;width:12px;height:12px;z-index:50;pointer-events:none;border-radius:2px;}
+
+  .footer-note{text-align:center;font-size:12px;color:#c3b8d4;margin-top:18px;}
+
+  @media(max-width:480px){
+    .flower{font-size:30px;} h1{font-size:22px;} .plus,.equals{font-size:28px;}
+    .answer-box{width:78px;height:66px;font-size:32px;}
+  }
+</style>
+</head>
+<body>
+  <div class="game">
+    <div class="topbar">
+      <div class="pill">⭐ Score: <span id="score">0</span></div>
+      <div class="pill">🔥 Streak: <span id="streak">0</span></div>
+      <div class="pill">🧩 Puzzle: <span id="qnum">1</span></div>
+    </div>
+
+    <h1>Flower Counting Addition</h1>
+    <p class="subtitle">Count all the flowers and type the total in the box!</p>
+    <div class="level-tag" id="levelTag">🌱 Level 1 — Easy</div>
+
+    <div class="flower-field">
+      <div class="groups" id="groups"></div>
+    </div>
+
+    <div class="answer-row">
+      <span class="equals">=</span>
+      <input class="answer-box" id="answer" type="number" inputmode="numeric" min="0" placeholder="?" autocomplete="off" />
+    </div>
+    <div class="hint" id="hint">Tip: count one group, then keep counting into the next.</div>
+
+    <div class="btn-row">
+      <button class="check" id="checkBtn">✓ Check</button>
+      <button class="next" id="nextBtn" style="display:none">Next ➜</button>
+      <button class="ghost" id="restartBtn">↺ Restart</button>
+    </div>
+
+    <div class="feedback" id="feedback"></div>
+    <div class="stars" id="stars"></div>
+
+    <p class="footer-note">Made for little mathematicians 🌼</p>
+  </div>
+
+<script>
+(function(){
+  const FLOWERS = ["🌸","🌻","🌷","🌹","🌼","🏵️","💐","🌺"];
+  const el = id => document.getElementById(id);
+  const groupsEl=el("groups"), answerEl=el("answer"), feedbackEl=el("feedback"),
+        starsEl=el("stars"), hintEl=el("hint"), levelTag=el("levelTag"),
+        checkBtn=el("checkBtn"), nextBtn=el("nextBtn"), restartBtn=el("restartBtn");
+
+  let score=0, streak=0, qnum=0, current=null, answered=false;
+
+  // Levels get harder as the player progresses
+  const LEVELS = [
+    {name:"🌱 Level 1 — Easy",   groups:2, min:1, max:5,  flowerTypes:2},
+    {name:"🌿 Level 2 — Growing",groups:2, min:2, max:8,  flowerTypes:3},
+    {name:"🌳 Level 3 — Strong", groups:3, min:1, max:7,  flowerTypes:3},
+    {name:"🌟 Level 4 — Expert", groups:3, min:3, max:9,  flowerTypes:4},
+  ];
+  function levelFor(q){ return LEVELS[Math.min(Math.floor(q/4), LEVELS.length-1)]; }
+
+  function rand(min,max){ return Math.floor(Math.random()*(max-min+1))+min; }
+  function shuffle(a){ for(let i=a.length-1;i>0;i--){const j=rand(0,i);[a[i],a[j]]=[a[j],a[i]];} return a; }
+
+  function makePuzzle(){
+    answered=false;
+    qnum++;
+    el("qnum").textContent=qnum;
+    const lv=levelFor(qnum-1);
+    levelTag.textContent=lv.name;
+
+    const palette = shuffle(FLOWERS.slice()).slice(0, lv.flowerTypes);
+    const counts=[];
+    for(let g=0; g<lv.groups; g++){ counts.push(rand(lv.min,lv.max)); }
+    const total = counts.reduce((a,b)=>a+b,0);
+    current={counts,total};
+
+    groupsEl.innerHTML="";
+    counts.forEach((c,i)=>{
+      if(i>0){
+        const plus=document.createElement("span");
+        plus.className="plus"; plus.textContent="+";
+        groupsEl.appendChild(plus);
+      }
+      const flower = palette[i % palette.length];
+      const grp=document.createElement("div");
+      grp.className="group";
+      for(let k=0;k<c;k++){
+        const f=document.createElement("span");
+        f.className="flower"; f.textContent=flower;
+        f.style.animationDelay=(k*0.05)+"s";
+        grp.appendChild(f);
+      }
+      groupsEl.appendChild(grp);
+    });
+
+    answerEl.value=""; answerEl.disabled=false; answerEl.focus();
+    feedbackEl.textContent=""; feedbackEl.className="feedback";
+    starsEl.textContent="";
+    hintEl.textContent = lv.groups>2
+      ? "Tip: count every group together to find the total."
+      : "Tip: count one group, then keep counting into the next.";
+    checkBtn.style.display=""; nextBtn.style.display="none";
+  }
+
+  function check(){
+    if(answered) return;
+    const val = parseInt(answerEl.value,10);
+    if(answerEl.value.trim()===""||isNaN(val)){
+      feedbackEl.textContent="Type a number first! ✏️";
+      feedbackEl.className="feedback bad";
+      return;
+    }
+    answered=true;
+    answerEl.disabled=true;
+    if(val===current.total){
+      score+=10; streak++;
+      el("score").textContent=score; el("streak").textContent=streak;
+      feedbackEl.textContent = pick(["Yay! That's right! 🎉","Perfect! 🌟","You got it! 👏","Super counting! 💪"]);
+      feedbackEl.className="feedback good";
+      starsEl.textContent = streak>=3 ? "⭐⭐⭐" : (streak>=2 ? "⭐⭐" : "⭐");
+      burstConfetti();
+    }else{
+      streak=0; el("streak").textContent=streak;
+      feedbackEl.textContent = "Oops! The total was " + current.total + ". Try the next one! 🌼";
+      feedbackEl.className="feedback bad";
+    }
+    checkBtn.style.display="none"; nextBtn.style.display="";
+    nextBtn.focus();
+  }
+
+  function pick(a){ return a[rand(0,a.length-1)]; }
+
+  function burstConfetti(){
+    const colors=["#ff7bac","#7bc96f","#ffd166","#6ec6ff","#c792ea"];
+    for(let i=0;i<40;i++){
+      const c=document.createElement("div");
+      c.className="confetti";
+      c.style.left=rand(0,100)+"vw";
+      c.style.background=colors[rand(0,colors.length-1)];
+      c.style.transform="rotate("+rand(0,360)+"deg)";
+      document.body.appendChild(c);
+      const fall=800+rand(0,900);
+      c.animate(
+        [{top:"-20px",opacity:1},{top:"100vh",opacity:.9}],
+        {duration:fall,easing:"ease-in"}
+      ).onfinish=()=>c.remove();
+    }
+  }
+
+  function restart(){
+    score=0; streak=0; qnum=0;
+    el("score").textContent=0; el("streak").textContent=0;
+    makePuzzle();
+  }
+
+  checkBtn.addEventListener("click",check);
+  nextBtn.addEventListener("click",makePuzzle);
+  restartBtn.addEventListener("click",restart);
+  answerEl.addEventListener("keydown",e=>{
+    if(e.key==="Enter"){ answered ? makePuzzle() : check(); }
+  });
+
+  makePuzzle();
+})();
+</script>
+</body>
+</html>
