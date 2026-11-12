@@ -85,6 +85,7 @@ export const TILES = [
     { key: 'stdform', name: 'Standard Form', subtitle: 'Scientific notation operations', color: 'purple', category: 'algebra' },
     { key: 'stats', name: 'Statistics', subtitle: 'Mean, median, mode, range', color: 'blue', category: 'data-chance' },
     { key: 'sudoku', name: 'Sudoku', subtitle: '9x9 number puzzle — fill every row, column & box', color: 'teal', category: 'shelf' },
+    { key: 'riddle', name: '🧩 Math Riddles', subtitle: 'Find the hidden rule & solve puzzles', color: 'teal', category: 'shelf' },
     { key: 'surds', name: 'Surds', subtitle: 'Simplify, add, multiply, rationalise', color: 'green', category: 'algebra' },
     { key: 'tatsavit', name: 'Tatsavit', subtitle: 'Algebra simplification drill', color: 'blue', category: 'algebra' },
     { key: 'transform', name: 'Transformations', subtitle: 'Reflect, rotate, translate, enlarge', color: 'purple', category: 'shape-space' },
