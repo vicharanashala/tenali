@@ -144,6 +144,8 @@ if (SUBPATH_REDIRECT && SUBPATH_REDIRECT !== '/') {
 const auth = require('./auth');
 const transferScenarios = require('./transferScenarios');
 const progress = require('./progress');
+const mastery = require('./mastery');
+const events = require('./events');
 const hints = require('./hints');
 const translate = require('./translate');
 
@@ -157,6 +159,8 @@ try {
 }
 app.use('/api/auth', auth.router);
 app.use('/api/progress', progress.router);
+app.use('/api/mastery', mastery.router);
+app.use('/api/events', events.router);
 app.use('/api/hints', hints);
 app.use('/api/translate', translate.router);
 app.use('/api/review', require('./routes/review'));

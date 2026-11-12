@@ -1,0 +1,1877 @@
+{
+  "basicarith": {
+    "emoji": "🧠",
+    "bigIdea": "Fast facts free up your brain for the fun part.",
+    "why": "Almost all maths is built from four moves: add, take away, times and share. If you know 7 × 8 = 56 straight away, your brain has room left for the real puzzle. If you work it out every time, you run out of room.",
+    "uses": [
+      {
+        "icon": "🛒",
+        "text": "Adding up a shopping bill"
+      },
+      {
+        "icon": "🕐",
+        "text": "Working out time until lunch"
+      },
+      {
+        "icon": "🍬",
+        "text": "Sharing sweets fairly"
+      }
+    ],
+    "steps": [
+      "Your brain can juggle only about four things at once.",
+      "Every fact you know by heart frees up one of those spots.",
+      "So practise until the answer just pops into your head."
+    ],
+    "demo": {
+      "kind": "basicarith"
+    }
+  },
+  "addition": {
+    "emoji": "➕",
+    "bigIdea": "Adding is the building block of all other maths.",
+    "why": "Times tables are really just adding again and again. Even a computer chip does take-away by adding in a clever way. Get good at adding and everything else gets easier.",
+    "uses": [
+      {
+        "icon": "🏏",
+        "text": "Adding up runs in a match"
+      },
+      {
+        "icon": "💰",
+        "text": "Counting your pocket money"
+      },
+      {
+        "icon": "🎀",
+        "text": "Joining lengths of ribbon"
+      }
+    ],
+    "steps": [
+      "Add the ones column first.",
+      "A column can only hold up to 9.",
+      "If it goes over, carry the extra ten to the next column.",
+      "So 8 + 7 = 15: write 5 and carry 1."
+    ],
+    "demo": {
+      "kind": "addition"
+    }
+  },
+  "multiply": {
+    "emoji": "✖️",
+    "bigIdea": "Times tables turn long adding into one quick step.",
+    "why": "Adding 7 eight times gives you eight chances to slip. Knowing 7 × 8 = 56 gives you none. In a test, that saved time adds up fast.",
+    "uses": [
+      {
+        "icon": "🍫",
+        "text": "Counting chocolates in a box"
+      },
+      {
+        "icon": "🪑",
+        "text": "Chairs in rows for a show"
+      },
+      {
+        "icon": "🚌",
+        "text": "Seats on a school bus"
+      }
+    ],
+    "steps": [
+      "Stuck on a big one? Break it into smaller pieces.",
+      "7 × 8 is the same as 7 × 4, doubled.",
+      "14 × 6 is 10 × 6 plus 4 × 6.",
+      "Add the pieces back together. Done!"
+    ],
+    "demo": {
+      "kind": "multiply"
+    }
+  },
+  "rounding": {
+    "emoji": "🎯",
+    "bigIdea": "Rounding gives a quick answer that is close enough.",
+    "why": "Rounding lets you guess fast, like saying a ₹49 toy costs about ₹50. But round too soon and mistakes sneak in. Turn 1/3 into 0.33, times it by 3000, and ₹10 goes missing!",
+    "uses": [
+      {
+        "icon": "🛍️",
+        "text": "Guessing a bill before you pay"
+      },
+      {
+        "icon": "🚗",
+        "text": "Saying how far a trip is"
+      },
+      {
+        "icon": "🌡️",
+        "text": "Reading the temperature"
+      }
+    ],
+    "steps": [
+      "Find the digit just after where you want to cut.",
+      "If it is 4 or less, leave the number as it is.",
+      "If it is 5 or more, round up.",
+      "Round at the end, not halfway through a sum."
+    ],
+    "demo": {
+      "kind": "rounding"
+    }
+  },
+  "fractionadd": {
+    "emoji": "🍕",
+    "bigIdea": "You can only add pieces that are the same size.",
+    "why": "Half a pizza plus a third of a pizza is not 2/5 of a pizza. That would be less than the half you started with! Fractions only add when the slices are the same size.",
+    "uses": [
+      {
+        "icon": "🍕",
+        "text": "Sharing pizza slices"
+      },
+      {
+        "icon": "🧁",
+        "text": "Following a cake recipe"
+      },
+      {
+        "icon": "⏱️",
+        "text": "Adding half and quarter hours"
+      }
+    ],
+    "steps": [
+      "Halves and thirds are different-sized slices.",
+      "Cut both into sixths, a size they share.",
+      "1/2 becomes 3/6 and 1/3 becomes 2/6.",
+      "Now add the slices: 3/6 + 2/6 = 5/6."
+    ],
+    "demo": {
+      "kind": "fractionadd"
+    }
+  },
+  "percent": {
+    "emoji": "🏷️",
+    "bigIdea": "Percent means \"out of 100\".",
+    "why": "50% off and then 20% off is not 70% off. It is only 60% off! The second discount comes off the price that is left, not the starting price.",
+    "uses": [
+      {
+        "icon": "🏷️",
+        "text": "Spotting real deals in a sale"
+      },
+      {
+        "icon": "📝",
+        "text": "Your marks in a test"
+      },
+      {
+        "icon": "🔋",
+        "text": "Battery left on a phone"
+      }
+    ],
+    "steps": [
+      "20% means 20 out of every 100.",
+      "20% off means you pay 80%, so multiply by 0.8.",
+      "Two discounts: 0.5 × 0.8 = 0.4.",
+      "So you pay 40% and save 60%."
+    ],
+    "demo": {
+      "kind": "percent"
+    }
+  },
+  "profitloss": {
+    "emoji": "🏪",
+    "bigIdea": "Find out if you really made or lost money.",
+    "why": "A shop puts a ₹100 toy up to ₹150. Then it gives 30% off. You pay ₹105, and the shop still makes ₹5! The sale is real, and so is their profit.",
+    "uses": [
+      {
+        "icon": "🍋",
+        "text": "Running a lemonade stall"
+      },
+      {
+        "icon": "🛒",
+        "text": "Checking if a sale is good"
+      },
+      {
+        "icon": "🎪",
+        "text": "Planning a school fair stall"
+      }
+    ],
+    "steps": [
+      "Profit is worked out from the cost price.",
+      "Discount is worked out from the marked price.",
+      "These are two different starting numbers.",
+      "Always ask: what is this percent OF?"
+    ],
+    "demo": {
+      "kind": "profitloss"
+    }
+  },
+  "ratio": {
+    "emoji": "🍚",
+    "bigIdea": "A ratio keeps amounts in balance, at any size.",
+    "why": "Rice for 4 people needs 2 cups of rice and 3 cups of water. For 8 people you use 4 and 6, not 3 and 4. A ratio keeps things in balance, however much you make.",
+    "uses": [
+      {
+        "icon": "🍚",
+        "text": "Cooking for more people"
+      },
+      {
+        "icon": "🎨",
+        "text": "Mixing paint colours"
+      },
+      {
+        "icon": "🗺️",
+        "text": "Reading a map scale"
+      }
+    ],
+    "steps": [
+      "2:3 means 2 parts of one thing for every 3 of the other.",
+      "Multiply every part by the same number and the mix stays the same.",
+      "So 2:3 is the same as 4:6 and 8:12.",
+      "Never just add the same amount to each part."
+    ],
+    "demo": {
+      "kind": "ratio"
+    }
+  },
+  "sdt": {
+    "emoji": "🚗",
+    "bigIdea": "Speed tells you how far you go in each hour.",
+    "why": "Drive to Nani's house at 30 km/h and back at 60 km/h. Your average speed is 40, not 45! You spend longer going slowly, so the slow part counts more.",
+    "uses": [
+      {
+        "icon": "🚆",
+        "text": "Working out when a train arrives"
+      },
+      {
+        "icon": "🏃",
+        "text": "Timing a race"
+      },
+      {
+        "icon": "✈️",
+        "text": "Planning a holiday trip"
+      }
+    ],
+    "steps": [
+      "Speed = distance ÷ time.",
+      "Flip it round: time = distance ÷ speed.",
+      "Going faster saves less and less time.",
+      "On 240 km, 40 to 80 km/h saves 3 hours. 80 to 120 saves just 1."
+    ],
+    "demo": {
+      "kind": "sdt"
+    }
+  },
+  "squaring": {
+    "emoji": "🟩",
+    "bigIdea": "A square number makes a real square of tiles.",
+    "why": "Square numbers go 1, 4, 9, 16, 25. Look at the jumps: 3, 5, 7, 9. They are the odd numbers, in order, forever! That pattern hides inside every square.",
+    "uses": [
+      {
+        "icon": "🧱",
+        "text": "Tiling a square floor"
+      },
+      {
+        "icon": "♟️",
+        "text": "Squares on a chessboard"
+      },
+      {
+        "icon": "🌻",
+        "text": "Area of a square garden"
+      }
+    ],
+    "steps": [
+      "4 × 4 = 16 tiles make a 4 by 4 square.",
+      "To make it 5 by 5, add a row, a column and one corner tile.",
+      "That is 4 + 4 + 1 = 9 new tiles, an odd number.",
+      "Every jump grows the same way."
+    ],
+    "demo": {
+      "kind": "squaring"
+    }
+  },
+  "decimals": {
+    "emoji": "🔢",
+    "bigIdea": "Decimals are fractions written with tens.",
+    "why": "On most computers, 0.1 + 0.2 comes out as 0.30000000000000004! Computers count in twos, and a tenth never ends in twos. It is like 1/3 never ending for us: 0.3333...",
+    "uses": [
+      {
+        "icon": "💵",
+        "text": "Prices like ₹12.50"
+      },
+      {
+        "icon": "⚖️",
+        "text": "Weighing fruit in kilograms"
+      },
+      {
+        "icon": "⏱️",
+        "text": "Race times like 9.58 seconds"
+      }
+    ],
+    "steps": [
+      "Each place after the point is a part of ten.",
+      "0.75 means 7 tenths and 5 hundredths.",
+      "That is the same as 3/4.",
+      "A fraction stops neatly only if its bottom number is made of 2s and 5s."
+    ],
+    "demo": {
+      "kind": "decimals"
+    }
+  },
+  "shares": {
+    "emoji": "📉",
+    "bigIdea": "Ups and downs in price do not cancel out.",
+    "why": "A share falls 50%, then rises 50%. Is it back where it started? No! ₹100 drops to ₹50, and 50% of ₹50 is only ₹25. So you end at ₹75.",
+    "uses": [
+      {
+        "icon": "📈",
+        "text": "Following company shares"
+      },
+      {
+        "icon": "🐷",
+        "text": "Growing your savings"
+      },
+      {
+        "icon": "📰",
+        "text": "Understanding money news"
+      }
+    ],
+    "steps": [
+      "Each change is taken from the price right now, not the first price.",
+      "₹100 falls 50% to ₹50.",
+      "Rising 50% of ₹50 adds only ₹25.",
+      "To undo a 50% fall, you need a 100% rise."
+    ],
+    "demo": {
+      "kind": "shares"
+    }
+  },
+  "banking": {
+    "emoji": "🏦",
+    "bigIdea": "Money in the bank grows by earning interest.",
+    "why": "Put ₹1000 a month into a recurring deposit. The first ₹1000 earns interest for the whole year. The last one earns for just one month. So each deposit grows by a different amount.",
+    "uses": [
+      {
+        "icon": "🚲",
+        "text": "Saving up for a bicycle"
+      },
+      {
+        "icon": "🏦",
+        "text": "Opening a bank account"
+      },
+      {
+        "icon": "🎓",
+        "text": "Planning for college"
+      }
+    ],
+    "steps": [
+      "Every monthly deposit earns interest on its own.",
+      "Early deposits earn for more months than later ones.",
+      "Add up what all the deposits grew to.",
+      "The RD formula is a shortcut for that adding."
+    ],
+    "demo": {
+      "kind": "banking"
+    }
+  },
+  "gst": {
+    "emoji": "🧾",
+    "bigIdea": "GST is a tax added on top of a price.",
+    "why": "A bill says ₹118, and that includes 18% GST. How much is the tax? Most people take 18% of 118 and get ₹21.24. The real answer is ₹18!",
+    "uses": [
+      {
+        "icon": "🧾",
+        "text": "Reading a restaurant bill"
+      },
+      {
+        "icon": "🛒",
+        "text": "Checking prices in a shop"
+      },
+      {
+        "icon": "📱",
+        "text": "Buying things online"
+      }
+    ],
+    "steps": [
+      "Adding 18% GST means multiplying the price by 1.18.",
+      "₹100 × 1.18 = ₹118.",
+      "To take the tax off, divide by 1.18. Do not subtract 18%.",
+      "₹118 ÷ 1.18 = ₹100, so the tax was ₹18."
+    ],
+    "demo": {
+      "kind": "gst"
+    }
+  },
+  "hcflcm": {
+    "emoji": "⚙️",
+    "bigIdea": "Find when things line up again.",
+    "why": "Two gears have 8 and 12 teeth. They line up again after 24 teeth, not 96. Multiplying always gives an answer that works. The LCM gives you the first one, which is the one you want.",
+    "uses": [
+      {
+        "icon": "🚌",
+        "text": "When two buses meet at a stop"
+      },
+      {
+        "icon": "🎁",
+        "text": "Packing sweets into equal bags"
+      },
+      {
+        "icon": "🥁",
+        "text": "When two drum beats match"
+      }
+    ],
+    "steps": [
+      "Break both numbers into prime building blocks.",
+      "HCF: keep only the primes they share.",
+      "LCM: keep every prime, using its biggest power.",
+      "Check: HCF × LCM = the two numbers multiplied."
+    ],
+    "demo": {
+      "kind": "hcflcm"
+    }
+  },
+  "primefactor": {
+    "emoji": "🔐",
+    "bigIdea": "Primes are the building blocks of every number.",
+    "why": "A computer can multiply two huge prime numbers in a flash. Finding them again from the answer could take longer than the age of the universe! That is how banks keep money safe online.",
+    "uses": [
+      {
+        "icon": "🔐",
+        "text": "Keeping online banking safe"
+      },
+      {
+        "icon": "🧩",
+        "text": "Simplifying fractions"
+      },
+      {
+        "icon": "🎁",
+        "text": "Splitting things into equal groups"
+      }
+    ],
+    "steps": [
+      "Divide by the smallest prime that fits.",
+      "Keep going: 12 → 2 × 6 → 2 × 2 × 3.",
+      "Every number has only one prime breakdown.",
+      "Multiplying is quick, but working backwards is very slow."
+    ],
+    "demo": {
+      "kind": "primefactor"
+    }
+  },
+  "bases": {
+    "emoji": "💻",
+    "bigIdea": "Computers count with just 0 and 1.",
+    "why": "Binary has no digit 2, just like we have no single digit for ten. A computer counts 0, 1, 10, 11, 100. That 100 means four, not a hundred!",
+    "uses": [
+      {
+        "icon": "💻",
+        "text": "How computers store everything"
+      },
+      {
+        "icon": "📱",
+        "text": "Photos and songs on a phone"
+      },
+      {
+        "icon": "💡",
+        "text": "Lights switched on and off"
+      }
+    ],
+    "steps": [
+      "In our numbers, each column is worth 10 times the one on its right.",
+      "In binary, each column is worth just double.",
+      "So 1001 means 8 + 0 + 0 + 1 = 9.",
+      "Eight of these 0s and 1s make one byte."
+    ],
+    "demo": {
+      "kind": "bases"
+    }
+  },
+  "sqrt": {
+    "emoji": "🔲",
+    "bigIdea": "A square root takes you from an area back to a side.",
+    "why": "Want a square garden with double the area? Do not double the sides! Multiply them by about 1.414 instead. That number is the square root of 2, and its digits never end.",
+    "uses": [
+      {
+        "icon": "🌱",
+        "text": "Planning a square garden"
+      },
+      {
+        "icon": "📺",
+        "text": "Working out screen sizes"
+      },
+      {
+        "icon": "🏗️",
+        "text": "Builders measuring diagonals"
+      }
+    ],
+    "steps": [
+      "Area = side × side.",
+      "A square root goes backwards, from area to side.",
+      "4 times the area only gives 2 times the side.",
+      "That is why a room twice as big does not look twice as wide."
+    ],
+    "demo": {
+      "kind": "sqrt"
+    }
+  },
+  "indices": {
+    "emoji": "🚀",
+    "bigIdea": "Powers are a short way to write lots of multiplying.",
+    "why": "Fold a sheet of paper 42 times and it would reach the moon! Each fold doubles the thickness. You cannot really fold it that much, but the maths is true. Doubling grows faster than anyone guesses.",
+    "uses": [
+      {
+        "icon": "🦠",
+        "text": "How germs multiply"
+      },
+      {
+        "icon": "💾",
+        "text": "Computer memory sizes"
+      },
+      {
+        "icon": "🌌",
+        "text": "Huge distances in space"
+      }
+    ],
+    "steps": [
+      "2⁴ means 2 × 2 × 2 × 2 = 16.",
+      "Multiplying powers of the same number? Add the small numbers on top.",
+      "So 10³ × 10⁴ = 10⁷.",
+      "Dividing? Subtract them instead."
+    ],
+    "demo": {
+      "kind": "indices"
+    }
+  },
+  "surds": {
+    "emoji": "🌀",
+    "bigIdea": "Some numbers can never be written as a fraction.",
+    "why": "The square root of 2 can never be written as a fraction. Ancient Greek thinkers proved it, and the story goes that it really upset them! Its digits go on forever without repeating.",
+    "uses": [
+      {
+        "icon": "📄",
+        "text": "The shape of A4 paper"
+      },
+      {
+        "icon": "📐",
+        "text": "The diagonal of a square"
+      },
+      {
+        "icon": "🎵",
+        "text": "Tuning musical notes"
+      }
+    ],
+    "steps": [
+      "√2 = 1.41421356... and it never stops.",
+      "Writing 1.414 already loses a little accuracy.",
+      "Keeping √2 as it is keeps your answer exact.",
+      "Simplify by pulling out squares: √50 = √25 × √2 = 5√2."
+    ],
+    "demo": {
+      "kind": "surds"
+    }
+  },
+  "stdform": {
+    "emoji": "🌌",
+    "bigIdea": "A neat way to write very big and very small numbers.",
+    "why": "There are about 10⁸⁰ atoms in the whole universe. Written out, that is 81 digits! In standard form it is short and easy to compare.",
+    "uses": [
+      {
+        "icon": "🪐",
+        "text": "Distances to planets and stars"
+      },
+      {
+        "icon": "🦠",
+        "text": "The size of tiny germs"
+      },
+      {
+        "icon": "🖥️",
+        "text": "How fast computers work"
+      }
+    ],
+    "steps": [
+      "Write a number between 1 and 10.",
+      "Multiply it by a power of 10.",
+      "The power counts how many places the point moved.",
+      "So 3400000 = 3.4 × 10⁶."
+    ],
+    "demo": {
+      "kind": "stdform"
+    }
+  },
+  "log": {
+    "emoji": "🌋",
+    "bigIdea": "Logs count how many times you multiplied.",
+    "why": "A size 7 earthquake is not a bit worse than a size 6. The ground shakes ten times as much! The scale goes up by multiplying, not by adding.",
+    "uses": [
+      {
+        "icon": "🌋",
+        "text": "Measuring earthquakes"
+      },
+      {
+        "icon": "🔊",
+        "text": "Loudness in decibels"
+      },
+      {
+        "icon": "🍋",
+        "text": "How sour a lemon is (pH)"
+      }
+    ],
+    "steps": [
+      "A log asks: how many times did I multiply?",
+      "1000 = 10 × 10 × 10, so the log (base 10) of 1000 is 3.",
+      "Each step up the scale means ten times more.",
+      "That is why going from 6 to 7 is a giant jump."
+    ],
+    "demo": {
+      "kind": "log"
+    }
+  },
+  "quadratic": {
+    "emoji": "🏀",
+    "bigIdea": "Throw anything and it flies along this curve.",
+    "why": "Throw a ball, kick a football or watch a fountain. They all follow the same curve, called a parabola. Satellite dishes use this shape too, to catch signals in one spot.",
+    "uses": [
+      {
+        "icon": "🏀",
+        "text": "Shooting a basketball"
+      },
+      {
+        "icon": "⛲",
+        "text": "Water from a fountain"
+      },
+      {
+        "icon": "📡",
+        "text": "Satellite dishes"
+      }
+    ],
+    "steps": [
+      "The x² part bends the straight line into a curve.",
+      "If the number in front is positive, it opens up like a smile.",
+      "If it is negative, it opens down like a frown.",
+      "Both sides of the curve match, like a mirror."
+    ],
+    "demo": {
+      "kind": "quadratic"
+    }
+  },
+  "funceval": {
+    "emoji": "🤖",
+    "bigIdea": "A function is a machine: put a number in, get one out.",
+    "why": "A function always gives exactly one answer for each number you put in. \"Double it\" is a function: put in 4, get 8, every single time. That is what makes it something you can trust.",
+    "uses": [
+      {
+        "icon": "🧮",
+        "text": "How calculators work"
+      },
+      {
+        "icon": "🌡️",
+        "text": "Changing °C into °F"
+      },
+      {
+        "icon": "🎮",
+        "text": "Scores in a video game"
+      }
+    ],
+    "steps": [
+      "Think of f(x) as a machine with a slot.",
+      "Put your number in place of every x.",
+      "Work it out to get the answer.",
+      "f(3) means \"put 3 in\", not \"f times 3\"."
+    ],
+    "demo": {
+      "kind": "funceval"
+    }
+  },
+  "polymul": {
+    "emoji": "🟦",
+    "bigIdea": "Multiplying brackets is really finding an area.",
+    "why": "Is (a + b)² the same as a² + b²? No! It is a² + 2ab + b². That 2ab is two real rectangles you can draw. Forgetting it is a very common mistake.",
+    "uses": [
+      {
+        "icon": "🏡",
+        "text": "Working out areas of rooms"
+      },
+      {
+        "icon": "🧮",
+        "text": "Quick mental maths tricks"
+      },
+      {
+        "icon": "🎮",
+        "text": "Formulas inside games"
+      }
+    ],
+    "steps": [
+      "Every term in the first bracket meets every term in the second.",
+      "Draw a big square with sides a + b.",
+      "Cut it into a², b², and two ab rectangles.",
+      "Add the pieces: a² + 2ab + b²."
+    ],
+    "demo": {
+      "kind": "polymul"
+    }
+  },
+  "polyfactor": {
+    "emoji": "🗝️",
+    "bigIdea": "Factorising unlocks the answers to an equation.",
+    "why": "x² + 5x + 6 = 0 looks hard. Factorise it into (x + 2)(x + 3) = 0 and it is easy! Two things multiply to zero only if one of them is zero.",
+    "uses": [
+      {
+        "icon": "🧩",
+        "text": "Solving puzzles with unknowns"
+      },
+      {
+        "icon": "🏗️",
+        "text": "Designing bridges and arches"
+      },
+      {
+        "icon": "💻",
+        "text": "Computer graphics"
+      }
+    ],
+    "steps": [
+      "Find two numbers that multiply to the last number.",
+      "They must also add up to the middle number.",
+      "For x² + 5x + 6, that is 2 and 3.",
+      "So the answers are x = -2 and x = -3."
+    ],
+    "demo": {
+      "kind": "polyfactor"
+    }
+  },
+  "qformula": {
+    "emoji": "🧪",
+    "bigIdea": "One formula solves every quadratic equation.",
+    "why": "The quadratic formula works on every quadratic, every time. It even tells you how many answers there are before you finish!",
+    "uses": [
+      {
+        "icon": "🚀",
+        "text": "Where a rocket will land"
+      },
+      {
+        "icon": "🏀",
+        "text": "Planning a perfect throw"
+      },
+      {
+        "icon": "🌉",
+        "text": "Designing arches and bridges"
+      }
+    ],
+    "steps": [
+      "Find a, b and c in ax² + bx + c = 0.",
+      "Look at b² - 4ac first.",
+      "Positive: two answers. Zero: one answer. Negative: no real answers.",
+      "Then put the numbers into the formula."
+    ],
+    "demo": {
+      "kind": "qformula"
+    }
+  },
+  "simul": {
+    "emoji": "🕵️",
+    "bigIdea": "Two clues together can find two mystery numbers.",
+    "why": "One clue is not enough to find two mystery numbers. Two clues usually are! Each clue is a straight line, and the answer is where the two lines cross.",
+    "uses": [
+      {
+        "icon": "🍎",
+        "text": "Prices of apples and bananas"
+      },
+      {
+        "icon": "🕵️",
+        "text": "Solving detective puzzles"
+      },
+      {
+        "icon": "📦",
+        "text": "Planning deliveries"
+      }
+    ],
+    "steps": [
+      "Each equation is a straight line on a graph.",
+      "The answer is the point where the lines cross.",
+      "Add or subtract the equations so one letter disappears.",
+      "Solve for that letter, then put it back to find the other."
+    ],
+    "demo": {
+      "kind": "simul"
+    }
+  },
+  "ineq": {
+    "emoji": "🐊",
+    "bigIdea": "Inequalities compare: bigger, smaller, or in between.",
+    "why": "Multiply both sides by a negative number and the sign flips! -2 < 3 is true. Times both by -1 and you get 2 > -3. Forget the flip and your answer goes wrong.",
+    "uses": [
+      {
+        "icon": "🎢",
+        "text": "Height limits on rides"
+      },
+      {
+        "icon": "📵",
+        "text": "Age limits on apps"
+      },
+      {
+        "icon": "💰",
+        "text": "Staying within a budget"
+      }
+    ],
+    "steps": [
+      "Treat it like an equation: do the same to both sides.",
+      "Adding or subtracting never changes the sign.",
+      "Multiplying or dividing by a negative flips it.",
+      "Picture the number line turning round in a mirror."
+    ],
+    "demo": {
+      "kind": "ineq"
+    }
+  },
+  "sequences": {
+    "emoji": "🔁",
+    "bigIdea": "Find the pattern and predict what comes next.",
+    "why": "Add 5 a day for 20 days and you get 100. Double each day for 20 days and you get over half a million! Multiplying soon leaves adding far behind.",
+    "uses": [
+      {
+        "icon": "🌱",
+        "text": "Plants growing each week"
+      },
+      {
+        "icon": "🐷",
+        "text": "Saving a bit more each month"
+      },
+      {
+        "icon": "🎵",
+        "text": "Patterns in music"
+      }
+    ],
+    "steps": [
+      "Some patterns add the same amount each time: 5, 10, 15, 20.",
+      "Others multiply each time: 2, 4, 8, 16.",
+      "Find the rule and you can work out any term.",
+      "Multiplying patterns grow much faster."
+    ],
+    "demo": {
+      "kind": "sequences"
+    }
+  },
+  "variation": {
+    "emoji": "👷",
+    "bigIdea": "When one thing changes, watch how the other changes.",
+    "why": "If 6 workers build a wall in 10 days, 12 workers take 5 days. More workers, less time. But 12 painters cannot finish one painting in half the time! Knowing when the rule works is the real skill.",
+    "uses": [
+      {
+        "icon": "⛽",
+        "text": "Fuel used and distance driven"
+      },
+      {
+        "icon": "👷",
+        "text": "Workers and time for a job"
+      },
+      {
+        "icon": "🍰",
+        "text": "Cake slices and number of guests"
+      }
+    ],
+    "steps": [
+      "Direct: both go up together, like cost and how many you buy.",
+      "Inverse: one goes up as the other goes down, like speed and time.",
+      "Find the fixed number from one example.",
+      "Use it to work out any other pair."
+    ],
+    "demo": {
+      "kind": "variation"
+    }
+  },
+  "binomial": {
+    "emoji": "🧮",
+    "bigIdea": "Expanding brackets uses a magic triangle of numbers.",
+    "why": "The numbers you get from expanding brackets make Pascal's triangle. The same numbers count how many ways you can choose things. Two different questions share one answer!",
+    "uses": [
+      {
+        "icon": "🎲",
+        "text": "Counting ways to win a game"
+      },
+      {
+        "icon": "🧬",
+        "text": "Predicting family traits"
+      },
+      {
+        "icon": "📊",
+        "text": "Chances in sport"
+      }
+    ],
+    "steps": [
+      "Each row of Pascal's triangle starts and ends with 1.",
+      "Each middle number is the two above it added.",
+      "Row four is 1 4 6 4 1.",
+      "Those are the numbers in front when you expand (a + b)⁴."
+    ],
+    "demo": {
+      "kind": "binomial"
+    }
+  },
+  "complex": {
+    "emoji": "🔄",
+    "bigIdea": "Imaginary numbers help describe things that spin.",
+    "why": "No ordinary number squares to give -1. So mathematicians invented one, called i. It sounds made up, but it helps power the electricity in your home!",
+    "uses": [
+      {
+        "icon": "⚡",
+        "text": "Electricity in your home"
+      },
+      {
+        "icon": "📻",
+        "text": "Radio and phone signals"
+      },
+      {
+        "icon": "🎮",
+        "text": "Spinning things in games"
+      }
+    ],
+    "steps": [
+      "i is the square root of -1, so i × i = -1.",
+      "A complex number has a normal part and an i part, like 3 + 2i.",
+      "Multiplying by i turns a number a quarter turn.",
+      "That is why it is great for spinning things."
+    ],
+    "demo": {
+      "kind": "complex"
+    }
+  },
+  "bounds": {
+    "emoji": "📏",
+    "bigIdea": "Every measurement is a tiny bit uncertain.",
+    "why": "A pencil is 12 cm long, to the nearest cm. So it could really be anywhere from 11.5 cm to 12.5 cm. Use these numbers in a sum and the wobble grows.",
+    "uses": [
+      {
+        "icon": "✂️",
+        "text": "Measuring for a craft project"
+      },
+      {
+        "icon": "🏗️",
+        "text": "Building parts that must fit"
+      },
+      {
+        "icon": "🏃",
+        "text": "Timing races fairly"
+      }
+    ],
+    "steps": [
+      "A length rounded to the nearest cm could be half a cm either way.",
+      "The biggest answer comes from using the biggest values.",
+      "The smallest answer uses the smallest values.",
+      "When dividing, use biggest ÷ smallest for the top limit."
+    ],
+    "demo": {
+      "kind": "bounds"
+    }
+  },
+  "lineareq": {
+    "emoji": "⚖️",
+    "bigIdea": "An equation is a balance. Keep both sides level.",
+    "why": "The = sign means both sides balance, like a see-saw. Whatever you do to one side, do to the other. Then it stays level and your answer stays right.",
+    "uses": [
+      {
+        "icon": "🛒",
+        "text": "Finding a missing price"
+      },
+      {
+        "icon": "⏰",
+        "text": "Working out how long is left"
+      },
+      {
+        "icon": "🧁",
+        "text": "Fixing a recipe"
+      }
+    ],
+    "steps": [
+      "Undo things in reverse order to get x on its own.",
+      "If x was times 2 and then plus 3, take away 3 first.",
+      "Then divide by 2.",
+      "Like taking your shoes off before your socks!"
+    ],
+    "demo": {
+      "kind": "lineareq"
+    }
+  },
+  "linprog": {
+    "emoji": "🏭",
+    "bigIdea": "Find the best choice when you have limits.",
+    "why": "A baker has only so much flour and time. Which cakes should she bake to earn the most? The best answer is always at a corner of the allowed area, so you only check a few points!",
+    "uses": [
+      {
+        "icon": "🧁",
+        "text": "Planning what a bakery makes"
+      },
+      {
+        "icon": "🚚",
+        "text": "Choosing delivery routes"
+      },
+      {
+        "icon": "🏭",
+        "text": "Running a factory"
+      }
+    ],
+    "steps": [
+      "Each limit is a straight line on a graph.",
+      "The allowed choices make a shape with corners.",
+      "The best answer is always at one of the corners.",
+      "Check each corner and pick the winner."
+    ],
+    "demo": {
+      "kind": "linprog"
+    }
+  },
+  "remfactor": {
+    "emoji": "🔍",
+    "bigIdea": "A quick test to see if a bracket divides exactly.",
+    "why": "Does (x - 2) divide into a long polynomial? Just put x = 2 into it. If you get 0, it divides exactly. No long division needed!",
+    "uses": [
+      {
+        "icon": "🧩",
+        "text": "Solving tricky equations fast"
+      },
+      {
+        "icon": "💻",
+        "text": "Checking data for errors"
+      },
+      {
+        "icon": "🔐",
+        "text": "Secret codes"
+      }
+    ],
+    "steps": [
+      "Dividing by (x - a) leaves a remainder.",
+      "That remainder is exactly f(a).",
+      "If f(a) = 0, the remainder is zero.",
+      "So (x - a) is a factor."
+    ],
+    "demo": {
+      "kind": "remfactor"
+    }
+  },
+  "angles": {
+    "emoji": "📐",
+    "bigIdea": "Angles tell you how much something turns.",
+    "why": "Angles on a straight line always add to 180°. Angles around a point always add to 360°. So measure one, and you can work out the rest for free!",
+    "uses": [
+      {
+        "icon": "🍕",
+        "text": "Cutting fair pizza slices"
+      },
+      {
+        "icon": "⚽",
+        "text": "Aiming a kick"
+      },
+      {
+        "icon": "🕐",
+        "text": "Hands on a clock"
+      }
+    ],
+    "steps": [
+      "A full turn is 360°.",
+      "Half a turn, a straight line, is 180°.",
+      "Angles that fill these spaces must add up to them.",
+      "Where two lines cross, opposite angles are equal."
+    ],
+    "demo": {
+      "kind": "angles"
+    }
+  },
+  "triangles": {
+    "emoji": "🔺",
+    "bigIdea": "Triangles are the strongest shape.",
+    "why": "Push a square frame and it squashes flat. Push a triangle and it stays firm! Three sides lock its shape in place. That is why bridges and cranes are full of triangles.",
+    "uses": [
+      {
+        "icon": "🌉",
+        "text": "Bridges"
+      },
+      {
+        "icon": "🏗️",
+        "text": "Cranes and towers"
+      },
+      {
+        "icon": "🚲",
+        "text": "Bicycle frames"
+      }
+    ],
+    "steps": [
+      "Three side lengths make only one possible triangle.",
+      "So a triangle cannot change shape.",
+      "A square frame can bend.",
+      "Add a diagonal and it becomes two strong triangles."
+    ],
+    "demo": {
+      "kind": "triangles"
+    }
+  },
+  "polygons": {
+    "emoji": "🛑",
+    "bigIdea": "Shapes with straight sides follow neat angle rules.",
+    "why": "Walk all the way around any shape with straight sides. You always turn one full circle, 360°. That is true for 3 sides or 300!",
+    "uses": [
+      {
+        "icon": "🛑",
+        "text": "Stop signs"
+      },
+      {
+        "icon": "🐝",
+        "text": "Honeycomb hexagons"
+      },
+      {
+        "icon": "⚽",
+        "text": "Patterns on a football"
+      }
+    ],
+    "steps": [
+      "At each corner you turn by the outside angle.",
+      "One lap is one full turn: 360°.",
+      "So the outside angles add up to 360°.",
+      "For a regular shape, divide 360° by the number of sides."
+    ],
+    "demo": {
+      "kind": "polygons"
+    }
+  },
+  "congruence": {
+    "emoji": "👯",
+    "bigIdea": "Congruent shapes are exact copies.",
+    "why": "Three sides fix a triangle exactly. Three angles only fix its shape, not its size. That is why matching sides prove two triangles are twins, but matching angles do not.",
+    "uses": [
+      {
+        "icon": "🧩",
+        "text": "Jigsaw pieces that match"
+      },
+      {
+        "icon": "🏭",
+        "text": "Making identical parts"
+      },
+      {
+        "icon": "🪟",
+        "text": "Window panes that fit"
+      }
+    ],
+    "steps": [
+      "Two triangles are twins if they match exactly.",
+      "You need enough facts to leave no wiggle room.",
+      "SSS, SAS, ASA and RHS all do that.",
+      "Two sides and an angle not between them can make two different triangles."
+    ],
+    "demo": {
+      "kind": "congruence"
+    }
+  },
+  "similarity": {
+    "emoji": "🪆",
+    "bigIdea": "Similar shapes are the same shape in different sizes.",
+    "why": "Make a pizza twice as wide and you get four times the pizza, not two! Area grows faster than width. Check the size before you pick the cheaper deal.",
+    "uses": [
+      {
+        "icon": "🗺️",
+        "text": "Maps and scale models"
+      },
+      {
+        "icon": "📸",
+        "text": "Zooming photos"
+      },
+      {
+        "icon": "🍕",
+        "text": "Comparing pizza sizes"
+      }
+    ],
+    "steps": [
+      "Similar shapes have the same angles.",
+      "If lengths get 2 times bigger, area gets 4 times bigger.",
+      "Volume gets 8 times bigger.",
+      "Area uses two lengths, volume uses three."
+    ],
+    "demo": {
+      "kind": "similarity"
+    }
+  },
+  "pythag": {
+    "emoji": "🪜",
+    "bigIdea": "Find a missing side of any right-angled triangle.",
+    "why": "In a right-angled triangle, the two short sides squared add up to the long side squared. Builders use this to check perfect corners with just a rope!",
+    "uses": [
+      {
+        "icon": "🪜",
+        "text": "Placing a ladder safely"
+      },
+      {
+        "icon": "📺",
+        "text": "TV screen sizes"
+      },
+      {
+        "icon": "🗺️",
+        "text": "Shortcut across a field"
+      }
+    ],
+    "steps": [
+      "Square the two short sides.",
+      "Add them together.",
+      "Take the square root to get the long side.",
+      "Remember 3, 4, 5: 9 + 16 = 25!"
+    ],
+    "demo": {
+      "kind": "pythag"
+    }
+  },
+  "circleth": {
+    "emoji": "⭕",
+    "bigIdea": "Circles hide angle rules that never change.",
+    "why": "The angle at the centre of a circle is always double the angle at the edge, on the same arc. Slide the edge point anywhere and that angle stays the same!",
+    "uses": [
+      {
+        "icon": "🎡",
+        "text": "Designing big wheels"
+      },
+      {
+        "icon": "⚽",
+        "text": "Best spots to shoot at goal"
+      },
+      {
+        "icon": "🏛️",
+        "text": "Arches and domes"
+      }
+    ],
+    "steps": [
+      "Every radius is the same length.",
+      "So triangles inside the circle have two equal sides.",
+      "Equal sides mean equal angles.",
+      "Follow those equal angles and the doubling appears."
+    ],
+    "demo": {
+      "kind": "circleth"
+    }
+  },
+  "mensur": {
+    "emoji": "📦",
+    "bigIdea": "Measure how much space a shape covers or holds.",
+    "why": "Double every side of a box and it holds eight times as much, not two! That is why big family packs are cheaper per gram. It is also why an elephant needs such thick legs.",
+    "uses": [
+      {
+        "icon": "🧃",
+        "text": "How much a juice box holds"
+      },
+      {
+        "icon": "🎁",
+        "text": "Wrapping paper for a gift"
+      },
+      {
+        "icon": "🏊",
+        "text": "Filling a swimming pool"
+      }
+    ],
+    "steps": [
+      "Area uses two lengths, so doubling the sides gives 4 times the area.",
+      "Volume uses three lengths, so it gives 8 times the space.",
+      "The inside grows faster than the outside.",
+      "Bigger boxes give you more for less wrapping."
+    ],
+    "demo": {
+      "kind": "mensur"
+    }
+  },
+  "transform": {
+    "emoji": "🪞",
+    "bigIdea": "Move, flip, turn or stretch a shape.",
+    "why": "Flip a shape in one mirror, then in another. You get a turn! Two flips always make a rotation. Video games use tricks like this to move characters.",
+    "uses": [
+      {
+        "icon": "🎮",
+        "text": "Moving characters in games"
+      },
+      {
+        "icon": "🦋",
+        "text": "Patterns and symmetry"
+      },
+      {
+        "icon": "🧩",
+        "text": "Rotating puzzle pieces"
+      }
+    ],
+    "steps": [
+      "Each move has a rule for where every point goes.",
+      "Reflect: flip it in a mirror line.",
+      "Rotate: turn it around a point.",
+      "Two mirror flips add up to one rotation."
+    ],
+    "demo": {
+      "kind": "transform"
+    }
+  },
+  "bearings": {
+    "emoji": "🧭",
+    "bigIdea": "Bearings give exact directions using angles.",
+    "why": "Bearings always have three digits and are measured clockwise from north. East is 090, never just 90. Over a crackly radio, \"zero nine zero\" cannot be misheard!",
+    "uses": [
+      {
+        "icon": "🚢",
+        "text": "Ships finding their way"
+      },
+      {
+        "icon": "✈️",
+        "text": "Pilots flying planes"
+      },
+      {
+        "icon": "🏕️",
+        "text": "Hiking with a compass"
+      }
+    ],
+    "steps": [
+      "Start facing north.",
+      "Turn clockwise and measure the angle.",
+      "Always write three digits: 045, not 45.",
+      "To head back the way you came, add or subtract 180°."
+    ],
+    "demo": {
+      "kind": "bearings"
+    }
+  },
+  "coordgeom": {
+    "emoji": "📍",
+    "bigIdea": "Use numbers to describe exactly where things are.",
+    "why": "The distance between two points on a grid is just Pythagoras in disguise! The gap across and the gap up are the short sides of a hidden triangle.",
+    "uses": [
+      {
+        "icon": "🗺️",
+        "text": "Maps and GPS on phones"
+      },
+      {
+        "icon": "🎮",
+        "text": "Placing things in games"
+      },
+      {
+        "icon": "✈️",
+        "text": "Tracking planes"
+      }
+    ],
+    "steps": [
+      "Find the gap in x and the gap in y.",
+      "Square both gaps and add them.",
+      "Take the square root to get the distance.",
+      "Slope is the y gap divided by the x gap."
+    ],
+    "demo": {
+      "kind": "coordgeom"
+    }
+  },
+  "lineq": {
+    "emoji": "📈",
+    "bigIdea": "Two numbers describe any straight line.",
+    "why": "In y = mx + c, m tells you how steep the line is. c tells you where it starts. With just those two numbers you can find any point on the line!",
+    "uses": [
+      {
+        "icon": "🚕",
+        "text": "Taxi fares: start price plus per km"
+      },
+      {
+        "icon": "📱",
+        "text": "Comparing phone plans"
+      },
+      {
+        "icon": "🌡️",
+        "text": "Temperature changing steadily"
+      }
+    ],
+    "steps": [
+      "m is the slope: how far up for each step across.",
+      "A slope of 3 means 3 up for every 1 across.",
+      "c is where the line crosses the y-axis.",
+      "Parallel lines have the same slope."
+    ],
+    "demo": {
+      "kind": "lineq"
+    }
+  },
+  "trig": {
+    "emoji": "🏢",
+    "bigIdea": "Find heights and distances you cannot reach.",
+    "why": "Stand 50 m from a tall building and measure the angle up to the roof. Trigonometry tells you how tall it is, with no ladder! People even worked out the distance to the moon this way.",
+    "uses": [
+      {
+        "icon": "🏢",
+        "text": "Measuring tall buildings"
+      },
+      {
+        "icon": "🛰️",
+        "text": "GPS and satellites"
+      },
+      {
+        "icon": "🛝",
+        "text": "Designing ramps and slides"
+      }
+    ],
+    "steps": [
+      "In a right-angled triangle, side ratios depend only on the angle.",
+      "sin, cos and tan are the names of those ratios.",
+      "Know one angle and one side?",
+      "Then you can find all the other sides."
+    ],
+    "demo": {
+      "kind": "trig"
+    }
+  },
+  "invtrig": {
+    "emoji": "↩️",
+    "bigIdea": "Go backwards from a ratio to find the angle.",
+    "why": "Your calculator gives one answer for inverse sin. But lots of angles share the same sine! The calculator just picks one between -90° and 90°. Always check it makes sense.",
+    "uses": [
+      {
+        "icon": "🛝",
+        "text": "The angle of a slide"
+      },
+      {
+        "icon": "☀️",
+        "text": "Tilting solar panels"
+      },
+      {
+        "icon": "🎯",
+        "text": "Aiming in games"
+      }
+    ],
+    "steps": [
+      "Normal trig: angle in, ratio out.",
+      "Inverse trig: ratio in, angle out.",
+      "Sine repeats, so many angles give the same ratio.",
+      "Draw a sketch to check your angle is sensible."
+    ],
+    "demo": {
+      "kind": "invtrig"
+    }
+  },
+  "heron": {
+    "emoji": "🌾",
+    "bigIdea": "Find a triangle's area from its three sides.",
+    "why": "Know just the three sides of a triangle? That is enough to find its area. No height and no angles needed! Surveyors have used this for about 2000 years.",
+    "uses": [
+      {
+        "icon": "🌾",
+        "text": "Measuring oddly shaped fields"
+      },
+      {
+        "icon": "🏠",
+        "text": "Working out roof areas"
+      },
+      {
+        "icon": "⛵",
+        "text": "Sizing a triangle sail"
+      }
+    ],
+    "steps": [
+      "Add the three sides and halve it. Call this s.",
+      "Work out s × (s - a) × (s - b) × (s - c).",
+      "Take the square root.",
+      "That is the area!"
+    ],
+    "demo": {
+      "kind": "heron"
+    }
+  },
+  "section": {
+    "emoji": "✂️",
+    "bigIdea": "Find the point that splits a line in a ratio.",
+    "why": "A point splitting a line in the ratio 2:1 sits closer to the far end than you might guess. The bigger number pushes the point further along. Mixing that up is the classic mistake.",
+    "uses": [
+      {
+        "icon": "🎮",
+        "text": "Placing objects between two points"
+      },
+      {
+        "icon": "🎨",
+        "text": "Blending two colours"
+      },
+      {
+        "icon": "🏗️",
+        "text": "Marking points on a beam"
+      }
+    ],
+    "steps": [
+      "Think of it as a weighted average.",
+      "Ratio m:n means the point is m parts from the start and n parts from the end.",
+      "Formula: (m × x₂ + n × x₁) ÷ (m + n).",
+      "When m = n, it is just the midpoint."
+    ],
+    "demo": {
+      "kind": "section"
+    }
+  },
+  "circmeasure": {
+    "emoji": "🥧",
+    "bigIdea": "Radians measure angles using the circle itself.",
+    "why": "A radian is the angle where the curved edge is as long as the radius. It is about 57.3°. It seems odd, but it makes circle maths much simpler!",
+    "uses": [
+      {
+        "icon": "🎡",
+        "text": "How fast a big wheel turns"
+      },
+      {
+        "icon": "⚙️",
+        "text": "Spinning wheels and gears"
+      },
+      {
+        "icon": "🛰️",
+        "text": "Satellites going round Earth"
+      }
+    ],
+    "steps": [
+      "One radian: the arc is as long as the radius.",
+      "Arc length = r × θ, when θ is in radians.",
+      "Sector area = ½ × r² × θ.",
+      "In degrees you would need an extra π/180 every time."
+    ],
+    "demo": {
+      "kind": "circmeasure"
+    }
+  },
+  "conics": {
+    "emoji": "🍦",
+    "bigIdea": "Slice a cone and you get four famous curves.",
+    "why": "Slice an ice-cream cone at different angles. You get a circle, an oval called an ellipse, a parabola or a hyperbola. Four curves, one cone!",
+    "uses": [
+      {
+        "icon": "🪐",
+        "text": "Paths of planets"
+      },
+      {
+        "icon": "🔦",
+        "text": "Torch reflectors"
+      },
+      {
+        "icon": "🏟️",
+        "text": "Stadium and bridge shapes"
+      }
+    ],
+    "steps": [
+      "Each curve follows a distance rule.",
+      "Circle: one distance stays the same.",
+      "Ellipse: two distances always add to the same total.",
+      "Hyperbola: two distances always have the same difference."
+    ],
+    "demo": {
+      "kind": "conics"
+    }
+  },
+  "diff": {
+    "emoji": "📸",
+    "bigIdea": "Find how fast something changes at one moment.",
+    "why": "A speed camera checks your speed at one instant, not your average for the trip. Working out that instant speed is differentiation!",
+    "uses": [
+      {
+        "icon": "🚓",
+        "text": "Speed cameras"
+      },
+      {
+        "icon": "🚀",
+        "text": "Rocket launches"
+      },
+      {
+        "icon": "📈",
+        "text": "When prices rise fastest"
+      }
+    ],
+    "steps": [
+      "Pick two points on a curve.",
+      "Slide them closer and closer together.",
+      "The line through them becomes a tangent.",
+      "Its slope is the rate of change right there."
+    ],
+    "demo": {
+      "kind": "diff"
+    }
+  },
+  "integ": {
+    "emoji": "🧱",
+    "bigIdea": "Add up lots of tiny pieces to find a whole.",
+    "why": "On a speed and time graph, the area under the line is the distance travelled. An area and a distance turn out to be the same sum!",
+    "uses": [
+      {
+        "icon": "🏊",
+        "text": "Water filling a pool"
+      },
+      {
+        "icon": "🚗",
+        "text": "Distance from a car's speed"
+      },
+      {
+        "icon": "🏗️",
+        "text": "Areas of curved shapes"
+      }
+    ],
+    "steps": [
+      "Chop the area into thin strips.",
+      "Add up all the strips.",
+      "Make the strips thinner and thinner.",
+      "The total you end up with is the integral."
+    ],
+    "demo": {
+      "kind": "integ"
+    }
+  },
+  "limits": {
+    "emoji": "🐢",
+    "bigIdea": "See what a number gets closer and closer to.",
+    "why": "1 ÷ x gets smaller and smaller as x grows, but it never reaches zero. Limits are how maths talks about getting closer forever. Calculus is built on them.",
+    "uses": [
+      {
+        "icon": "🔎",
+        "text": "Zooming in on a graph"
+      },
+      {
+        "icon": "🚀",
+        "text": "Speed at an exact moment"
+      },
+      {
+        "icon": "🍰",
+        "text": "Sharing cake with more friends"
+      }
+    ],
+    "steps": [
+      "A limit asks: what is it getting close to?",
+      "Not what it equals.",
+      "Try numbers closer and closer to the point.",
+      "Watch where the answers are heading."
+    ],
+    "demo": {
+      "kind": "limits"
+    }
+  },
+  "diffeq": {
+    "emoji": "☕",
+    "bigIdea": "Equations about how fast things change.",
+    "why": "Cooling chai, growing rabbit families and fading radioactive rocks all follow the same maths. In each one, how fast it changes depends on how much is there now.",
+    "uses": [
+      {
+        "icon": "☕",
+        "text": "How quickly chai cools"
+      },
+      {
+        "icon": "🐇",
+        "text": "Animal populations"
+      },
+      {
+        "icon": "💊",
+        "text": "Medicine leaving the body"
+      }
+    ],
+    "steps": [
+      "You know how fast something is changing.",
+      "You want to find the thing itself.",
+      "Separate the letters and integrate both sides.",
+      "Use one starting fact to finish the answer."
+    ],
+    "demo": {
+      "kind": "diffeq"
+    }
+  },
+  "stats": {
+    "emoji": "📊",
+    "bigIdea": "Make sense of lots of numbers at once.",
+    "why": "Two classes can have the same average mark and be totally different. In one, everyone scored 50. In the other, half scored 100 and half scored 0! An average alone can hide a lot.",
+    "uses": [
+      {
+        "icon": "🏏",
+        "text": "Batting averages"
+      },
+      {
+        "icon": "🌧️",
+        "text": "Weather reports"
+      },
+      {
+        "icon": "📝",
+        "text": "Class test results"
+      }
+    ],
+    "steps": [
+      "The mean is the total shared out equally.",
+      "The median is the middle value when they are in order.",
+      "The spread shows how far scores sit from the middle.",
+      "Use the median when a few huge values pull the mean."
+    ],
+    "demo": {
+      "kind": "stats"
+    }
+  },
+  "prob": {
+    "emoji": "🎲",
+    "bigIdea": "Probability measures how likely something is.",
+    "why": "Put 23 people in a room. It is more likely than not that two share a birthday! Most people guess you need over 100. You are comparing everyone with everyone, not just with you.",
+    "uses": [
+      {
+        "icon": "🌦️",
+        "text": "Weather forecasts"
+      },
+      {
+        "icon": "🎲",
+        "text": "Board games"
+      },
+      {
+        "icon": "⚽",
+        "text": "Predicting match results"
+      }
+    ],
+    "steps": [
+      "Probability goes from 0 (never) to 1 (certain).",
+      "Sometimes it is easier to find the chance it does NOT happen.",
+      "Then take that away from 1.",
+      "For events that do not affect each other, multiply the chances."
+    ],
+    "demo": {
+      "kind": "prob"
+    }
+  },
+  "sets": {
+    "emoji": "🧺",
+    "bigIdea": "Group things and see where the groups overlap.",
+    "why": "Ask 30 kids who likes tea and who likes coffee. The two counts often add to more than 30! Kids who like both got counted twice.",
+    "uses": [
+      {
+        "icon": "🔎",
+        "text": "Search filters online"
+      },
+      {
+        "icon": "🎒",
+        "text": "Sorting things into groups"
+      },
+      {
+        "icon": "📋",
+        "text": "Class surveys"
+      }
+    ],
+    "steps": [
+      "Draw two circles that overlap.",
+      "Count the people in each circle.",
+      "Add the two counts.",
+      "Take away the overlap, because it was counted twice."
+    ],
+    "demo": {
+      "kind": "sets"
+    }
+  },
+  "spot": {
+    "emoji": "👀",
+    "bigIdea": "Train your eyes to spot what really matches.",
+    "why": "Your first panel might take thirty seconds. Later ones take three! Your eyes learn to search smarter. That same skill catches copying slips in maths.",
+    "uses": [
+      {
+        "icon": "✏️",
+        "text": "Checking your working for slips"
+      },
+      {
+        "icon": "🔢",
+        "text": "Comparing long numbers"
+      },
+      {
+        "icon": "🧩",
+        "text": "Finding puzzle pieces"
+      }
+    ],
+    "steps": [
+      "Your eyes do not check every object one by one.",
+      "They rule out whole areas at once.",
+      "Remembering what you saw makes it faster.",
+      "Practice makes that search quicker everywhere."
+    ],
+    "demo": {
+      "kind": "spot"
+    }
+  },
+  "permcomb": {
+    "emoji": "🔏",
+    "bigIdea": "Count all the ways things can be arranged or chosen.",
+    "why": "A 6-character password has about 57 billion possibilities. Add 2 more characters and it passes 200 trillion! Each extra character multiplies all the options.",
+    "uses": [
+      {
+        "icon": "🔐",
+        "text": "Making strong passwords"
+      },
+      {
+        "icon": "🍦",
+        "text": "Choosing ice-cream toppings"
+      },
+      {
+        "icon": "🏆",
+        "text": "Arranging teams and races"
+      }
+    ],
+    "steps": [
+      "If order matters, it is a permutation.",
+      "If order does not matter, it is a combination.",
+      "For order, multiply the shrinking choices: 5 × 4 × 3.",
+      "For combinations, divide by the repeats you counted."
+    ],
+    "demo": {
+      "kind": "permcomb"
+    }
+  },
+  "vectors": {
+    "emoji": "➡️",
+    "bigIdea": "Vectors have a size and a direction.",
+    "why": "Walk 3 km east, then 4 km north. You are 5 km from the start, not 7! When direction matters, adding works differently.",
+    "uses": [
+      {
+        "icon": "✈️",
+        "text": "Planes flying in the wind"
+      },
+      {
+        "icon": "⚽",
+        "text": "Passing a ball"
+      },
+      {
+        "icon": "🎮",
+        "text": "Moving game characters"
+      }
+    ],
+    "steps": [
+      "Split each vector into an across part and an up part.",
+      "Add the across parts together.",
+      "Add the up parts together.",
+      "Use Pythagoras to get the straight-line distance."
+    ],
+    "demo": {
+      "kind": "vectors"
+    }
+  },
+  "dotprod": {
+    "emoji": "🔦",
+    "bigIdea": "Check how much two directions point the same way.",
+    "why": "If two directions are at right angles, their dot product is zero. That gives a computer a super quick test for right angles. No angle measuring needed!",
+    "uses": [
+      {
+        "icon": "💡",
+        "text": "Lighting in video games"
+      },
+      {
+        "icon": "⚽",
+        "text": "How much of a kick goes forward"
+      },
+      {
+        "icon": "🛰️",
+        "text": "Aiming satellites"
+      }
+    ],
+    "steps": [
+      "Multiply the matching parts.",
+      "Add them up.",
+      "Same direction gives a big answer.",
+      "Right angles give zero."
+    ],
+    "demo": {
+      "kind": "dotprod"
+    }
+  },
+  "matrix": {
+    "emoji": "🎮",
+    "bigIdea": "Grids of numbers that move and turn shapes.",
+    "why": "With matrices, order matters! Turn a game character and then move it. It lands somewhere different than if you move it first and then turn it.",
+    "uses": [
+      {
+        "icon": "🎮",
+        "text": "3D video games"
+      },
+      {
+        "icon": "📷",
+        "text": "Photo filters"
+      },
+      {
+        "icon": "🤖",
+        "text": "Robots moving their arms"
+      }
+    ],
+    "steps": [
+      "A matrix is a grid of numbers.",
+      "To multiply, each row meets each column.",
+      "Multiply the pairs and add them up.",
+      "Swapping the order usually changes the answer."
+    ],
+    "demo": {
+      "kind": "matrix"
+    }
+  }
+}
