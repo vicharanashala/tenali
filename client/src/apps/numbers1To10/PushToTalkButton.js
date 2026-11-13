@@ -14,7 +14,8 @@ import './PushToTalkButton.css';
  */
 export function PushToTalkButton({
   whisperState,
-  label = 'Click to Speak (Say 1..10)'
+  label = 'Click to Speak (Say 1..10)',
+  listeningPrompt = null
 }) {
   if (!whisperState) return null;
 
@@ -90,7 +91,7 @@ export function PushToTalkButton({
         React.createElement(
           'span',
           { key: 'rec' },
-          isHearingSound ? '🎙️ Hearing voice... Keep talking!' : '🔴 Listening... Say it aloud!'
+          listeningPrompt || (isHearingSound ? '🎙️ Hearing voice... Keep talking!' : '🔴 Listening... Say a number from 1 to 10!')
         )
       ],
       modelStatus !== 'loading' && isTranscribing && [

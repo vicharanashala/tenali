@@ -226,6 +226,19 @@
   animation: numbersFadeIn 0.2s ease-out;
 }
 
+.voice-test-instruction {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: #fed7aa;
+  background: rgba(234, 88, 12, 0.15);
+  border: 1px dashed rgba(251, 146, 60, 0.45);
+  padding: 4px 10px;
+  border-radius: 8px;
+}
+
 .numbers-section-header h1 {
   font-family: var(--font-display, Georgia, serif);
   font-size: clamp(1.5rem, 3.2vw, 2rem);

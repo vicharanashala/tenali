@@ -594,10 +594,10 @@ export default function Numbers1To10App({
           hopRight();
         }
       }
-      setTimeout(() => setTestMicFeedback(''), 4500);
+      setTimeout(() => setTestMicFeedback(''), 5000);
     },
     onTextHeard: (t) => {
-      if (t) setTestMicFeedback(`Hearing: "${t}"...`);
+      if (t) setTestMicFeedback(`Hearing: "${t}"... (Say a number from 1 to 10)`);
     }
   });
 
@@ -728,7 +728,8 @@ export default function Numbers1To10App({
         <div className="voice-test-left">
           <PushToTalkButton
             whisperState={hopscotchVoice}
-            label="🎙️ Test Mic (Say 1..10)"
+            label="🎙️ Test Mic (Say a number from 1 to 10)"
+            listeningPrompt="🔴 Listening... Say a number from 1 to 10!"
           />
           <div className="voice-model-badge">
             {hopscotchVoice.modelStatus === 'loading' ? (
@@ -740,6 +741,9 @@ export default function Numbers1To10App({
                 🟢 Whisper Model Ready
               </span>
             )}
+          </div>
+          <div className="voice-test-instruction">
+            <span>🗣️ <strong>Say a number from 1 to 10</strong> to test your mic!</span>
           </div>
         </div>
         {testMicFeedback && (
