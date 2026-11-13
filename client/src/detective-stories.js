@@ -1344,9 +1344,47 @@ const ALL_DETECTIVE_STORIES = [
         hints: ['cos(90°) = 0.', 'c² = 49 + 100 = 149.', '√149 ≈ 12.2 cm.'] },
     ],
   },
+
+  // ════════════════════════════════════════════════════════════════════════
+  // ENHANCED DETECTIVE STORIES — Metadata stubs
+  // Full cases with suspects, stages, and evidence are generated dynamically
+  // by detective-generators.js (CASE_GENERATORS registry).
+  // These stubs exist solely for the case library display (title, difficulty, topic, etc.).
+  // ════════════════════════════════════════════════════════════════════════
+
+  { id: 'case-enhanced-1',  title: 'The Museum Heist',              description: 'A priceless diamond vanished from the museum overnight. Three suspects remain.',                      difficulty: 2, xpReward: 75, topic: 'pythag',    suspects: [] },
+  { id: 'case-enhanced-2',  title: 'The Circular Conspiracy Returns', description: 'A circular vault was cracked open. The angles tell the story.',                                        difficulty: 3, xpReward: 90, topic: 'circleth',  suspects: [] },
+  { id: 'case-enhanced-3',  title: 'The Bridge Sabotage',           description: 'A bridge was sabotaged during construction. The angles reveal who did it.',                                 difficulty: 3, xpReward: 95, topic: 'trig',      suspects: [] },
+  { id: 'case-enhanced-4',  title: 'The Coded Ransom',              description: 'A ransom note contains coded equations. Solve them to find the kidnapper.',                                  difficulty: 2, xpReward: 70, topic: 'lineareq',  suspects: [] },
+  { id: 'case-enhanced-5',  title: 'The Quadratic Cover-Up',        description: 'A quadratic equation was used to encode the location of stolen goods.',                                     difficulty: 3, xpReward: 85, topic: 'quadratic', suspects: [] },
+  { id: 'case-enhanced-6',  title: 'The Simultaneous Standoff',     description: 'Two suspects were at two locations. Equations reveal who was where.',                                       difficulty: 2, xpReward: 75, topic: 'simul',     suspects: [] },
+  { id: 'case-enhanced-7',  title: 'The GST Swindle',               description: 'A shopkeeper evaded GST. The tax calculations reveal the fraud.',                                          difficulty: 2, xpReward: 70, topic: 'gst',       suspects: [] },
+  { id: 'case-enhanced-8',  title: 'The Stock Market Mystery',      description: 'A broker manipulated share prices. The dividend calculations expose the fraud.',                           difficulty: 3, xpReward: 85, topic: 'shares',    suspects: [] },
+  { id: 'case-enhanced-9',  title: 'The Profit & Loss Conspiracy',  description: 'The Corner Mart accounts don\'t add up. Someone is cooking the books — can you crack the case?',        difficulty: 1, xpReward: 60, topic: 'profitloss', suspects: [] },
+  { id: 'case-enhanced-10', title: 'The Dice Game Rigged',          description: 'A casino game was rigged. Probability exposes the cheat.',                                                difficulty: 2, xpReward: 75, topic: 'prob',      suspects: [] },
+  { id: 'case-enhanced-11', title: 'The Data Breach',              description: 'A data analyst manipulated statistics. Find the true mean.',                                              difficulty: 2, xpReward: 70, topic: 'stats',     suspects: [] },
+  { id: 'case-enhanced-12', title: 'The Permutation Puzzle',        description: 'A lock combination was cracked using permutations. Who knew the code?',                                    difficulty: 3, xpReward: 85, topic: 'permcomb',  suspects: [] },
+  { id: 'case-enhanced-13', title: 'The Derivative Detective',      description: 'A criminal used derivatives to encode their escape route.',                                                difficulty: 3, xpReward: 90, topic: 'diff',      suspects: [] },
+  { id: 'case-enhanced-14', title: 'The Integration Investigation', description: 'Integration reveals the area under the criminal\'s plan.',                                               difficulty: 3, xpReward: 90, topic: 'integ',     suspects: [] },
+  { id: 'case-enhanced-15', title: 'The Limit Labyrinth',           description: 'A limit describes the value the suspect approached as they escaped.',                                       difficulty: 3, xpReward: 85, topic: 'limits',    suspects: [] },
+  { id: 'case-enhanced-16', title: 'The Coded Ledger Mystery',      description: 'A ledger was tampered with using coded equations. Collect clues along the path and eliminate the culprit by deduction.', difficulty: 2, xpReward: 80, topic: 'lineareq', suspects: [], mode: 'path' },
 ];
 
 // ── Helpers ────────────────────────────────────────────────────────────
+
+/**
+ * Check if a story is an enhanced case (has suspects array).
+ */
+function isEnhancedCase(story) {
+  return !!(story && story.id && story.id.startsWith('case-enhanced-'));
+}
+
+/**
+ * Get all enhanced stories (those with suspects).
+ */
+function getEnhancedStories() {
+  return ALL_DETECTIVE_STORIES.filter(s => isEnhancedCase(s));
+}
 
 /**
  * Get all cases for a given topic.
@@ -1397,6 +1435,307 @@ function getCaseCountByTopic() {
   return counts;
 }
 
+// ── Dynamic Story Generators have moved to detective-generators.js ──────
+
+/**
+ * Generate elimination reasons for a suspect based on evidence and suspect profile.
+ * Returns exactly 3 options: 1 correct + 2 wrong distractors.
+ * The correct reason is the best-matching one from the suspect's profile vs evidence.
+ * Wrong reasons are plausible-sounding but incorrect (from other suspects' profiles).
+ */
+// ─── Evidence highlight helpers ──────────────────────────────────────────
+
+const ALIAS_STOPWORDS = new Set(['the', 'of', 'and', 'a', 'an', 'at']);
+const EVIDENCE_SENTENCE_SPLIT = /(?<=[.!?])\s+(?=[A-Z0-9₹])/;
+const EXONERATION_RE = /couldn't|doesn't|don't|didn't|wasn't|weren't|can't|never|no access|lacks|without|not\b/i;
+
+function escapeRegex(str) {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+/**
+ * Build the set of text tokens that identify a suspect in evidence text:
+ * words from the suspect's name, words from the role, plus two common
+ * abbreviations ("Teaching Assistant" → ta, "Database Administrator" → admin).
+ */
+function buildSuspectAliases(suspect) {
+  const aliases = new Set();
+  const add = (w) => { if (w.length >= 2 && !ALIAS_STOPWORDS.has(w)) aliases.add(w); };
+  for (const w of suspect.name.toLowerCase().split(/[^a-z0-9]+/)) add(w);
+  for (const w of suspect.role.toLowerCase().split(/[^a-z0-9]+/)) if (w.length >= 3) add(w);
+  const role = suspect.role.toLowerCase();
+  if (role.includes('teaching assistant')) { aliases.add('ta'); aliases.add('assistant'); }
+  if (role.includes('database')) { aliases.add('admin'); aliases.add('administrator'); }
+  return aliases;
+}
+
+/**
+ * Split an evidence text into sentences and mark the sentences that reference
+ * one of the eliminated suspects (by name or role token). Longer aliases are
+ * preferred so the bolded token is the most specific match. Falls back to
+ * exoneration-keyword scoring when nothing matches.
+ */
+function highlightEvidenceSentences(text, suspects, eliminatedIds) {
+  const eliminated = (suspects || []).filter((s) => (eliminatedIds || []).includes(s.id));
+  const aliases = eliminated
+    .flatMap((s) => [...buildSuspectAliases(s)])
+    .sort((a, b) => b.length - a.length || a.localeCompare(b));
+  const result = (text || '').split(EVIDENCE_SENTENCE_SPLIT).map((t) => t.trim()).filter(Boolean)
+    .map((t) => ({ text: t, highlight: false, token: null }));
+  for (const item of result) {
+    for (const alias of aliases) {
+      if (new RegExp(`\\b${escapeRegex(alias)}\\b`, 'i').test(item.text)) {
+        item.highlight = true;
+        item.token = alias;
+        break;
+      }
+    }
+  }
+  if (!result.some((r) => r.highlight)) {
+    let bestIdx = -1;
+    let bestHits = 0;
+    for (let i = 0; i < result.length; i++) {
+      const hits = (result[i].text.match(EXONERATION_RE) || []).length;
+      if (hits > bestHits) { bestHits = hits; bestIdx = i; }
+    }
+    if (bestIdx >= 0 && bestHits > 0) result[bestIdx].highlight = true;
+  }
+  return result;
+}
+
+function getEliminationReasons(evidence, suspect, allSuspects) {
+  const text = (evidence.text || '').toLowerCase();
+  const chars = suspect.characteristics || {};
+  const isEliminatedBy = (evidence.eliminates || []).includes(suspect.id);
+  if (!isEliminatedBy) return [];
+
+  // Build pool of possible correct reasons
+  const correctPool = [];
+
+  if (chars.height === 'tall' && (text.includes('short') || text.includes('height') || text.includes('reach'))) {
+    correctPool.push({ label: 'Height mismatch', detail: `${suspect.name} is tall, but the evidence indicates someone shorter was involved.` });
+  }
+  if (chars.height === 'short' && (text.includes('tall') || text.includes('height') || text.includes('reach') || text.includes('high'))) {
+    correctPool.push({ label: 'Too short for the task', detail: `${suspect.name} is too short to have reached the height indicated by the evidence.` });
+  }
+  if (chars.height === 'very short' && (text.includes('tall') || text.includes('height') || text.includes('reach') || text.includes('high'))) {
+    correctPool.push({ label: 'Physical limitation', detail: `${suspect.name} is too short to have accessed the location shown in the evidence.` });
+  }
+  if (chars.height === 'medium' && text.includes('tall')) {
+    correctPool.push({ label: 'Not tall enough', detail: `${suspect.name} is medium height, but the evidence points to someone taller.` });
+  }
+  if (chars.hand === 'left' && (text.includes('right') || text.includes('hand'))) {
+    correctPool.push({ label: 'Wrong handedness', detail: `${suspect.name} is left-handed, but the evidence indicates right-handed action.` });
+  }
+  if (chars.hand === 'right' && text.includes('left') && text.includes('hand')) {
+    correctPool.push({ label: 'Wrong handedness', detail: `${suspect.name} is right-handed, but the evidence indicates left-handed action.` });
+  }
+  if (suspect.alibi && (text.includes('location') || text.includes('area') || text.includes('wing') || text.includes('corridor') || text.includes('gate'))) {
+    correctPool.push({ label: "Alibi doesn't match", detail: `${suspect.name} claims ${suspect.alibi.toLowerCase()}, which doesn't match the location in the evidence.` });
+  }
+  if (suspect.role && (text.includes('knowledge') || text.includes('skill') || text.includes('technique') || text.includes('expertise') || text.includes('specialist'))) {
+    correctPool.push({ label: 'Lacks required expertise', detail: `As ${suspect.role.toLowerCase()}, ${suspect.name} wouldn't have the specialized knowledge indicated by the evidence.` });
+  }
+  if (correctPool.length === 0) {
+    correctPool.push({ label: 'Evidence rules them out', detail: `The evidence indicates this suspect could not have committed the crime.` });
+  }
+
+  const correctReason = correctPool[0];
+
+  // Build wrong distractor reasons from OTHER suspects' profiles
+  const otherSuspects = (allSuspects || []).filter(s => s.id !== suspect.id);
+  const wrongPool = [];
+  for (const other of otherSuspects) {
+    const oc = other.characteristics || {};
+    if (oc.height === 'tall') {
+      wrongPool.push({ label: 'Physically capable', detail: `${other.name} is tall enough, so height doesn't rule them out.` });
+    }
+    if (oc.height === 'short') {
+      wrongPool.push({ label: 'Could still be involved', detail: `${other.name}'s height matches what the evidence describes.` });
+    }
+    if (other.role && !other.role.toLowerCase().includes('none')) {
+      wrongPool.push({ label: 'Has relevant experience', detail: `As ${other.role.toLowerCase()}, ${other.name} could have the skills mentioned in the evidence.` });
+    }
+  }
+  // Fallback wrong reasons
+  if (wrongPool.length === 0) {
+    wrongPool.push({ label: 'Could have been there', detail: 'This suspect had the opportunity to commit the crime.' });
+    wrongPool.push({ label: 'Motive exists', detail: 'This suspect had a clear reason to commit the crime.' });
+  }
+
+  // Pick up to 2 wrong reasons, shuffle everything
+  const picked = [{ ...correctReason, correct: true }];
+  const shuffled = wrongPool.sort(() => Math.random() - 0.5);
+  picked.push({ ...shuffled[0], correct: false });
+  if (shuffled[1]) picked.push({ ...shuffled[1], correct: false });
+  // Shuffle the final 3 so the correct one isn't always first
+  return picked.sort(() => Math.random() - 0.5);
+}
+
+// ── Clue helpers (path cases) ────────────────────────────────────────────
+// A "clue" is a plain object such as:
+//   { type: 'letter', value: 'V' }                       — "name contains the letter V"
+//   { type: 'characteristic', key: 'hand', value: 'right' } — "culprit is right-handed"
+// The culprit is never eliminated. Clue semantics are designed so each clue
+// eliminates 0 or more innocent suspects but never the culprit.
+
+/** Human-readable sentence for a clue (used as the evidence text in notebooks). */
+function formatClueText(clue) {
+  if (!clue) return '';
+  if (clue.type === 'letter') return `The culprit's name contains the letter '${clue.value}'.`;
+  if (clue.type === 'characteristic') {
+    if (clue.key === 'hand') return `The culprit is ${clue.value === 'right' ? 'right' : 'left'}-handed.`;
+    if (clue.key === 'height') return `The culprit is ${clue.value}.`;
+    return `The culprit is ${clue.value}.`;
+  }
+  return '';
+}
+
+/**
+ * Does a clue eliminate a given suspect? A letter clue eliminates suspects whose
+ * name does NOT contain the letter; a characteristic clue eliminates suspects
+ * whose characteristic does not match the clue's value.
+ */
+function clueEliminatesSuspect(clue, suspect) {
+  if (!clue || !suspect) return false;
+  if (clue.type === 'letter') {
+    const letter = String(clue.value || '').toLowerCase();
+    if (!letter) return false;
+    const name = String(suspect.name || '').toLowerCase();
+    return !name.includes(letter);
+  }
+  if (clue.type === 'characteristic') {
+    const chars = suspect.characteristics || {};
+    return String(chars[clue.key] || '').toLowerCase() !== String(clue.value || '').toLowerCase();
+  }
+  return false;
+}
+
+/** Suspects eliminated by a clue (suspects for whom clueEliminatesSuspect is true). */
+function getClueEliminableSuspects(clue, suspects) {
+  return (suspects || []).filter((s) => clueEliminatesSuspect(clue, s));
+}
+
+/**
+ * Build up to 3 "who does this eliminate?" reason options for a selected suspect
+ * given a clue. When the clue eliminates the suspect, exactly one option is the
+ * correct reason (correct: true); otherwise all options are distractors.
+ */
+function getClueEliminationReasons(clue, suspect, allSuspects) {
+  if (!clue || !suspect) return [];
+  const chars = suspect.characteristics || {};
+  const canEliminate = clueEliminatesSuspect(clue, suspect);
+
+  const correctPool = [];
+  if (canEliminate) {
+    if (clue.type === 'letter') {
+      correctPool.push({
+        label: "Name doesn't match",
+        detail: `The culprit's name contains the letter '${clue.value}', but ${suspect.name}'s name doesn't contain it.`,
+      });
+    } else if (clue.type === 'characteristic' && clue.key === 'hand') {
+      correctPool.push({
+        label: 'Wrong handedness',
+        detail: `The culprit is ${clue.value === 'right' ? 'right' : 'left'}-handed, but ${suspect.name} is ${chars.hand === 'right' ? 'right' : 'left'}-handed.`,
+      });
+    } else if (clue.type === 'characteristic' && clue.key === 'height') {
+      correctPool.push({
+        label: 'Wrong height',
+        detail: `The culprit is ${clue.value}, but ${suspect.name} is ${chars.height}.`,
+      });
+    }
+  }
+  if (correctPool.length === 0) {
+    correctPool.push({
+      label: 'Evidence rules them out',
+      detail: `The evidence indicates this suspect could not have committed the crime.`,
+    });
+  }
+
+  // Build wrong distractor reasons from OTHER suspects' profiles
+  const otherSuspects = (allSuspects || []).filter((s) => s.id !== suspect.id);
+  const wrongPool = [];
+  for (const other of otherSuspects) {
+    const oc = other.characteristics || {};
+    if (clue.type === 'letter') {
+      wrongPool.push({ label: 'Letter matches their name', detail: `The letter '${clue.value}' appears in ${other.name}'s name, so the clue doesn't rule ${other.name} out.` });
+    } else {
+      if (oc.height) wrongPool.push({ label: 'Height fits', detail: `${other.name} is ${oc.height}, consistent with the clue.` });
+      if (oc.hand) wrongPool.push({ label: 'Handedness fits', detail: `${other.name} is ${oc.hand === 'right' ? 'right' : 'left'}-handed, consistent with the clue.` });
+    }
+    if (other.role && !other.role.toLowerCase().includes('none')) {
+      wrongPool.push({ label: 'Has relevant experience', detail: `As ${other.role.toLowerCase()}, ${other.name} could have carried this out.` });
+    }
+  }
+  // Fallback wrong reasons
+  if (wrongPool.length < 2) {
+    wrongPool.push({ label: 'Could have been there', detail: 'This suspect had the opportunity to commit the crime.' });
+    wrongPool.push({ label: 'Motive exists', detail: 'This suspect had a clear reason to commit the crime.' });
+  }
+
+  const picked = canEliminate ? [{ ...correctPool[0], correct: true }] : [];
+  const shuffled = wrongPool.sort(() => Math.random() - 0.5);
+  picked.push({ ...shuffled[0], correct: false });
+  picked.push({ ...shuffled[1], correct: false });
+  if (!canEliminate && shuffled[2]) picked.push({ ...shuffled[2], correct: false });
+  return picked.sort(() => Math.random() - 0.5);
+}
+
+/**
+ * Validate an enhanced story schema.
+ * Returns { valid: boolean, errors: string[] }.
+ */
+function validateEnhancedStory(story) {
+  const errors = [];
+  if (!story.id) errors.push('Missing story id');
+  if (!story.suspects || !Array.isArray(story.suspects) || story.suspects.length < 2) {
+    errors.push('Story must have at least 2 suspects');
+  }
+  if (!story.culprit) errors.push('Missing culprit');
+  if (story.suspects && story.culprit && !story.suspects.find(s => s.id === story.culprit)) {
+    errors.push('Culprit ID does not match any suspect');
+  }
+  if (!story.stages || !Array.isArray(story.stages) || story.stages.length < 1) {
+    errors.push('Story must have at least 1 stage');
+  }
+  if (story.suspects) {
+    const ids = story.suspects.map(s => s.id);
+    const uniqueIds = new Set(ids);
+    if (uniqueIds.size !== ids.length) errors.push('Duplicate suspect IDs');
+    for (const s of story.suspects) {
+      if (!s.name) errors.push(`Suspect ${s.id} missing name`);
+      if (!s.role) errors.push(`Suspect ${s.id} missing role`);
+      if (!s.appearance) errors.push(`Suspect ${s.id} missing appearance emoji`);
+      if (!s.characteristics) errors.push(`Suspect ${s.id} missing characteristics`);
+    }
+  }
+  if (story.stages) {
+    let totalEliminated = 0;
+    for (let i = 0; i < story.stages.length; i++) {
+      const stage = story.stages[i];
+      if (!stage.answer && stage.answer !== 0 && stage.answer !== '') {
+        errors.push(`Stage ${i} missing answer`);
+      }
+      if (stage.evidence) {
+        if (!stage.evidence.id) errors.push(`Stage ${i} evidence missing id`);
+        if (!stage.evidence.text) errors.push(`Stage ${i} evidence missing text`);
+        // Path-mode cases may include an "ambiguous" clue that eliminates nobody;
+        // the cumulative-elimination invariant below still guarantees the culprit
+        // is the only suspect left standing.
+        if (story.mode !== 'path' && (!stage.evidence.eliminates || !Array.isArray(stage.evidence.eliminates) || stage.evidence.eliminates.length === 0)) {
+          errors.push(`Stage ${i} evidence must eliminate at least one suspect`);
+        } else if (Array.isArray(stage.evidence.eliminates)) {
+          totalEliminated += stage.evidence.eliminates.length;
+        }
+      }
+    }
+    if (story.suspects && totalEliminated < story.suspects.length - 1) {
+      errors.push(`Not enough eliminations: ${totalEliminated} eliminations for ${story.suspects.length} suspects (need at least ${story.suspects.length - 1})`);
+    }
+  }
+  return { valid: errors.length === 0, errors };
+}
+
 export {
   ALL_DETECTIVE_STORIES,
   DETECTIVE_TOPICS,
@@ -1405,4 +1744,16 @@ export {
   pickUnsolvedCase,
   getCoveredTopics,
   getCaseCountByTopic,
+  getEnhancedStories,
+  isEnhancedCase,
+  getEliminationReasons,
+  buildSuspectAliases,
+  highlightEvidenceSentences,
+  escapeRegex,
+  validateEnhancedStory,
+  formatClueText,
+  clueEliminatesSuspect,
+  getClueEliminableSuspects,
+  getClueEliminationReasons,
+
 };
