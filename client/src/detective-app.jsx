@@ -3364,7 +3364,7 @@ export default function EnhancedMathDetectiveApp({ onBack }) {
     const totalHintsUsed = meta.totalHintsUsed ?? meta.hintLevel ?? 0;
     // Replays are best-of: only improvements over the recorded result award XP.
     const reward = resolveCaseReward(caseData, totalHintsUsed, updated.cases[caseId]);
-    const { stars, xpEarned, xpAwarded, starsAwarded, bestStars, bestXp, bestHintLevel } = reward;
+    const { xpAwarded, starsAwarded, bestStars, bestXp, bestHintLevel } = reward;
 
     // Mark case as solved, keeping the best-of record for replays
     updated.cases[caseId] = {
