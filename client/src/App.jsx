@@ -58149,6 +58149,8 @@ function RandomMixApp({ onBack, isGoalMode = false }) {
     }
   }, [isGoalMode]);
   const timer = useTimer()
+  const finished = phase === 'finished'
+  const totalQ = totalQuestions
   const { hintsUsedCount, xpBreakdown, bonusLoading } = useQuizHintsAndXp('mix', finished, score, totalQ, typeof isCorrect !== 'undefined' ? (isCorrect || false) : false, results);
   const advanceFnRef = useRef(null)
   const submittedRef = useRef(false)
@@ -70630,4 +70632,4 @@ export function changeXp(delta) {
 }
 
 export default App
-export { AuthMenu }
+export { AuthMenu, RandomMixApp, GymApp }
