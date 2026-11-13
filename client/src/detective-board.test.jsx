@@ -871,8 +871,8 @@ describe('Board Case 2 schema validation', () => {
     expect(BOARD_CASE_2.objects).toHaveLength(7);
   });
 
-  test('Case 2 has 5 elimination rules', () => {
-    expect(BOARD_CASE_2.eliminationRules).toHaveLength(5);
+  test('Case 2 has one elimination rule per non-culprit', () => {
+    expect(BOARD_CASE_2.eliminationRules).toHaveLength(3);
   });
 
   test('all Case 2 objects are reachable from player start', () => {
@@ -881,6 +881,106 @@ describe('Board Case 2 schema validation', () => {
       const { state } = walkTo(s, BOARD_CASE_2, obj.cell);
       expect(state.playerPos).toEqual(obj.cell);
     }
+  });
+});
+
+describe('Board case data consistency', () => {
+  test('all three board cases validate with zero problems', () => {
+    for (const spec of BOARD_CASES) {
+      expect(validateBoardCase(spec), spec.id).toEqual([]);
+    }
+  });
+
+  test('every elimination rule has a matching prompt in every board case', () => {
+    for (const spec of BOARD_CASES) {
+      const promptEvidence = new Set(
+        (spec.currentThoughts || [])
+          .filter(t => t.kind === 'prompt')
+          .map(t => t.evidenceId || (t.afterEvidenceIds || []).find(eid =>
+            (spec.eliminationRules || []).some(r => r.evidenceId === eid)))
+      );
+      for (const rule of spec.eliminationRules || []) {
+        expect(promptEvidence.has(rule.evidenceId), `${spec.id}: no prompt for ${rule.evidenceId}`).toBe(true);
+      }
+    }
+  });
+
+  test('every elimination prompt shows the suspect it clears', () => {
+    for (const spec of BOARD_CASES) {
+      for (const rule of spec.eliminationRules || []) {
+        const prompt = (spec.currentThoughts || []).find(t =>
+          t.kind === 'prompt' && (t.evidenceId === rule.evidenceId
+            || (t.afterEvidenceIds || []).includes(rule.evidenceId)));
+        expect(prompt, `${spec.id}: no prompt for ${rule.evidenceId}`).toBeDefined();
+        const shown = new Set((prompt.compare || []).map(c => c.suspectId));
+        for (const sid of rule.eliminates) {
+          expect(shown.has(sid), `${spec.id}: ${rule.evidenceId} cannot clear ${sid}`).toBe(true);
+        }
+      }
+    }
+  });
+
+  test('no suspect is eliminated by more than one rule', () => {
+    for (const spec of BOARD_CASES) {
+      const eliminated = (spec.eliminationRules || []).flatMap(r => r.eliminates);
+      expect(new Set(eliminated).size, spec.id).toBe(eliminated.length);
+    }
+  });
+
+  test('Case 2 eliminates every non-culprit exactly once', () => {
+    const eliminated = BOARD_CASE_2.eliminationRules.flatMap(r => r.eliminates);
+    const nonCulprits = BOARD_CASE_2.suspects.map(s => s.id).filter(id => id !== BOARD_CASE_2.culprit);
+    expect([...eliminated].sort()).toEqual([...nonCulprits].sort());
+  });
+
+  test('Case 3 elimination rules reference three distinct suspects', () => {
+    const eliminated = BOARD_CASE_3.eliminationRules.flatMap(r => r.eliminates);
+    expect(new Set(eliminated).size).toBe(3);
+  });
+
+  test('every Case 2 object drives a deduction, a clue note, or a profile reveal', () => {
+    const ruleEvidence = new Set(BOARD_CASE_2.eliminationRules.map(r => r.evidenceId));
+    const thoughtEvidence = new Set(
+      (BOARD_CASE_2.currentThoughts || []).flatMap(t => t.afterEvidenceIds || [])
+    );
+    for (const obj of BOARD_CASE_2.objects) {
+      const useful = profileUnlocks(obj).length > 0
+        || ruleEvidence.has(obj.evidence.id)
+        || thoughtEvidence.has(obj.evidence.id);
+      expect(useful, `${obj.id} is dead`).toBe(true);
+    }
+  });
+
+  test('Case 2 unlocks the intended profile fields, including the brown-thread colour', () => {
+    const suspect = (id) => BOARD_CASE_2.suspects.find(s => s.id === id);
+    const revealed = (id, evidenceId, field) =>
+      getRevealedProfile(suspect(id), BOARD_CASE_2, [evidenceId])[field];
+
+    expect(revealed('suki', 'ev-button', 'colour')).toBe(suspect('suki').profile.colour);
+    expect(revealed('suki', 'ev-backpack', 'favouriteFood')).toBe(suspect('suki').profile.favouriteFood);
+    expect(revealed('mira', 'ev-paint', 'colour')).toBe(suspect('mira').profile.colour);
+    expect(revealed('ethan', 'ev-timing', 'timing')).toBe(suspect('ethan').profile.timing);
+    expect(revealed('nora', 'ev-schedule', 'timing')).toBe(suspect('nora').profile.timing);
+    expect(revealed('nora', 'ev-timing', 'timing')).toBe('???');
+  });
+
+  test('Case 3 removes the duplicate Bruno timing unlock', () => {
+    const bruno = BOARD_CASE_3.suspects.find(s => s.id === 'bruno');
+    expect(getRevealedProfile(bruno, BOARD_CASE_3, ['ev-boxes']).timing).toBe(bruno.profile.timing);
+    expect(getRevealedProfile(bruno, BOARD_CASE_3, ['ev-clock']).timing).toBe('???');
+  });
+
+  test('a profile slot stays revealed once any of its clues is collected', () => {
+    const spec = {
+      suspects: [{ id: 's', profile: { food: 'acorns' } }],
+      objects: [
+        { id: 'a', evidence: { id: 'ea' }, observation: { unlocksProfile: [{ suspectId: 's', field: 'food' }] } },
+        { id: 'b', evidence: { id: 'eb' }, observation: { unlocksProfile: [{ suspectId: 's', field: 'food' }] } },
+      ],
+    };
+    expect(getRevealedProfile(spec.suspects[0], spec, []).food).toBe('???');
+    expect(getRevealedProfile(spec.suspects[0], spec, ['ea']).food).toBe('acorns');
+    expect(getRevealedProfile(spec.suspects[0], spec, ['eb']).food).toBe('acorns');
   });
 });
 

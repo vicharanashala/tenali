@@ -615,7 +615,7 @@ function DetectiveCaseLibrary({ progress, cases, allComplete, onSelectCase, onBa
 
 // ─── DetectiveCaseView (enhanced with hints) ─────────────────────────
 
-function DetectiveCaseView({ caseData, initialStage, onComplete, onBack }) {
+function DetectiveCaseView({ caseData, initialStage, initialHintsUsed = 0, initialSkippedClues = [], onComplete, onBack }) {
   const [stageIndex, setStageIndex] = useState(initialStage);
   const [answer, setAnswer] = useState('');
   const [feedback, setFeedback] = useState(null);
@@ -624,7 +624,8 @@ function DetectiveCaseView({ caseData, initialStage, onComplete, onBack }) {
   const [award, setAward] = useState(null);
   const [hintLevel, setHintLevel] = useState(0);
   const [, setHintUsed] = useState(false);
-  const [totalHintsUsed, setTotalHintsUsed] = useState(0);
+  const [totalHintsUsed, setTotalHintsUsed] = useState(initialHintsUsed);
+  const [skippedStages, setSkippedStages] = useState(new Set(initialSkippedClues));
   const [skipMessage, setSkipMessage] = useState(false);
   const [motivationIdx, setMotivationIdx] = useState(0);
   const wrongMotivations = ['Close, detective! Give it another go.', 'Not quite — recheck the numbers!', 'Almost there! Try once more.', "Keep at it, detective! You're getting warmer.", "Don't give up! Look at the clues again."];
@@ -656,10 +657,17 @@ function DetectiveCaseView({ caseData, initialStage, onComplete, onBack }) {
   const handleNext = () => {
     if (!feedback) return;
     if (feedback.correct) {
+      setSkippedStages(prev => {
+        if (!prev.has(stageIndex)) return prev;
+        const next = new Set(prev);
+        next.delete(stageIndex);
+        return next;
+      });
       if (stageIndex + 1 >= caseData.stages.length) {
         setCompleted(true);
         const stars = starsForHints(totalHintsUsed);
-        const result = onComplete(caseData.id, true, { hintUsed: totalHintsUsed > 0, stars, hintLevel: totalHintsUsed, totalHintsUsed });
+        const skippedClues = [...skippedStages].filter(i => i !== stageIndex);
+        const result = onComplete(caseData.id, true, { hintUsed: totalHintsUsed > 0, stars, hintLevel: totalHintsUsed, totalHintsUsed, skippedClues });
         setAward(result || null);
       } else {
         const nextIdx = stageIndex + 1;
@@ -672,12 +680,10 @@ function DetectiveCaseView({ caseData, initialStage, onComplete, onBack }) {
         setHintUsed(false);
       }
     } else {
-      setTotalHintsUsed(t => Math.max(0, t - hintLevel));
       setAnswer('');
       setFeedback(null);
       setRevealed(false);
       setSkipMessage(false);
-      setHintLevel(0);
       setHintUsed(false);
     }
   };
@@ -836,11 +842,13 @@ function DetectiveCaseView({ caseData, initialStage, onComplete, onBack }) {
     <div className="app-shell">
       <div className="card" style={{ maxWidth: 'min(600px, 95vw)', margin: '0 auto' }}>
         <button className="back-button" onClick={() => {
-          if (!completed && stageIndex > 0) {
+          if (!completed && (stageIndex > 0 || totalHintsUsed > 0 || skippedStages.size > 0)) {
             saveInProgressCase(caseData.id, {
               currentStage: stageIndex,
               totalStages: caseData.stages.length,
               topic: caseData.topic,
+              totalHintsUsed,
+              skippedClues: [...skippedStages],
             });
           }
           onBack();
@@ -991,9 +999,10 @@ function DetectiveCaseView({ caseData, initialStage, onComplete, onBack }) {
               </button>
               <button onClick={() => {
                 setRevealed(true);
-                setFeedback({ correct: false, correctAnswer: stage.answer });
+                setFeedback({ correct: false, skipped: true, correctAnswer: stage.answer });
                 setSkipMessage(false);
                 setTotalHintsUsed(t => t + 1);
+                setSkippedStages(prev => new Set(prev).add(stageIndex));
               }}
                 style={{
                   padding: '0.5rem 1.2rem', borderRadius: 8,
@@ -1050,7 +1059,11 @@ function DetectiveCaseView({ caseData, initialStage, onComplete, onBack }) {
           }}>
             <div style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.3rem',
               color: feedback && feedback.correct ? 'var(--clr-correct, #4caf50)' : 'var(--clr-wrong, #e05a4a)' }}>
-              {feedback && feedback.correct ? '✓ Correct!' : '🔍 ' + wrongMotivations[motivationIdx]}
+              {feedback && feedback.correct
+                ? '✓ Correct!'
+                : feedback?.skipped
+                  ? '⏭️ Skipped — you can revisit this clue.'
+                  : '🔍 ' + wrongMotivations[motivationIdx]}
             </div>
             {!feedback.correct && (
               <div style={{ fontSize: '0.85rem', color: 'var(--clr-text-soft)', marginBottom: '0.5rem' }}>
@@ -1071,7 +1084,7 @@ function DetectiveCaseView({ caseData, initialStage, onComplete, onBack }) {
             >
               {feedback && feedback.correct
                 ? (stageIndex + 1 >= caseData.stages.length ? 'Complete Case' : 'Next Stage')
-                : 'Try Again'}
+                : feedback?.skipped ? 'Revisit clue' : 'Try Again'}
             </button>
           </div>
         )}
@@ -2031,6 +2044,7 @@ function CluePathMap({ stages, solvedCount, onSelectStage }) {
 function EnhancedCasePlay({ story, onComplete, onBack, initialState }) {
   const [phase, setPhase] = useState(initialState?.phase || 'clue-grid'); // 'clue-grid' | 'solving' | 'elimination' | 'accusation' | 'done'
   const [solvedClues, setSolvedClues] = useState(new Set(initialState?.solvedClues || []));
+  const [skippedClues, setSkippedClues] = useState(new Set(initialState?.skippedClues || []));
   const [eliminatedIds, setEliminatedIds] = useState(new Set(initialState?.eliminatedIds || []));
   const [evidenceItems, setEvidenceItems] = useState(initialState?.evidenceItems || []);
   const [currentClueIdx, setCurrentClueIdx] = useState(initialState?.currentClueIdx ?? null);
@@ -2053,6 +2067,12 @@ function EnhancedCasePlay({ story, onComplete, onBack, initialState }) {
     const newSolved = new Set(solvedClues);
     newSolved.add(clueIdx);
     setSolvedClues(newSolved);
+    setSkippedClues(prev => {
+      if (!prev.has(clueIdx)) return prev;
+      const next = new Set(prev);
+      next.delete(clueIdx);
+      return next;
+    });
     setTotalHintsUsed(t => t + hintsUsed);
 
     if (stage.evidence) {
@@ -2064,6 +2084,15 @@ function EnhancedCasePlay({ story, onComplete, onBack, initialState }) {
       setCurrentClueIdx(null);
       setPhase('clue-grid');
     }
+  };
+
+  const handleSkipClue = (clueIdx, hintsUsed) => {
+    // Skipping costs the hints already spent, but awards no evidence and does
+    // not mark the clue solved — it stays available on the grid to revisit.
+    setTotalHintsUsed(t => t + hintsUsed);
+    setSkippedClues(prev => new Set(prev).add(clueIdx));
+    setCurrentClueIdx(null);
+    setPhase('clue-grid');
   };
 
   const handleElimination = (selectedSuspectId) => {
@@ -2147,13 +2176,14 @@ function EnhancedCasePlay({ story, onComplete, onBack, initialState }) {
   // Persist mid-case progress so it survives leaving the case or refreshing
   useEffect(() => {
     if (completed) return;
-    if (solvedClues.size === 0 && eliminatedIds.size === 0 && evidenceItems.length === 0) return;
+    if (solvedClues.size === 0 && eliminatedIds.size === 0 && evidenceItems.length === 0 && skippedClues.size === 0 && totalHintsUsed === 0) return;
     saveInProgressCase(story.id, {
       currentStage: stages.length,
       totalStages: stages.length,
       topic: story.topic,
       phase,
       solvedClues: [...solvedClues],
+      skippedClues: [...skippedClues],
       eliminatedIds: [...eliminatedIds],
       evidenceItems,
       currentClueIdx,
@@ -2161,7 +2191,7 @@ function EnhancedCasePlay({ story, onComplete, onBack, initialState }) {
       totalHintsUsed,
       savedCase: story,
     });
-  }, [phase, solvedClues, eliminatedIds, evidenceItems, currentClueIdx, pendingEvidence, totalHintsUsed, completed, story, stages.length]);
+  }, [phase, solvedClues, skippedClues, eliminatedIds, evidenceItems, currentClueIdx, pendingEvidence, totalHintsUsed, completed, story, stages.length]);
 
   // ── Render: Completion screen ──────────────────────────────────────────
   if (completed) {
@@ -2366,6 +2396,7 @@ function EnhancedCasePlay({ story, onComplete, onBack, initialState }) {
         story={story}
         clueIdx={currentClueIdx}
         onSolved={(hintsUsed) => handleSolveClue(currentClueIdx, hintsUsed)}
+        onSkip={(hintsUsed) => handleSkipClue(currentClueIdx, hintsUsed)}
         onBack={() => { setCurrentClueIdx(null); setPhase('clue-grid'); }}
       />
     );
@@ -2379,13 +2410,14 @@ function EnhancedCasePlay({ story, onComplete, onBack, initialState }) {
     <div className="app-shell">
       <div className="card" style={{ maxWidth: 'min(650px, 95vw)', margin: '0 auto' }}>
         <button className="back-button" onClick={() => {
-          if (!completed && (solvedClues.size > 0 || eliminatedIds.size > 0 || evidenceItems.length > 0)) {
+          if (!completed && (solvedClues.size > 0 || eliminatedIds.size > 0 || evidenceItems.length > 0 || skippedClues.size > 0 || totalHintsUsed > 0)) {
             saveInProgressCase(story.id, {
               currentStage: stages.length,
               totalStages: stages.length,
               topic: story.topic,
               phase,
               solvedClues: [...solvedClues],
+              skippedClues: [...skippedClues],
               eliminatedIds: [...eliminatedIds],
               evidenceItems,
               currentClueIdx,
@@ -2407,17 +2439,18 @@ function EnhancedCasePlay({ story, onComplete, onBack, initialState }) {
         <div style={{ display: 'grid', gridTemplateColumns: stages.length > 3 ? '1fr 1fr' : '1fr', gap: '0.6rem', marginBottom: '1rem' }}>
           {stages.map((stage, idx) => {
             const isSolved = solvedClues.has(idx);
+            const isSkipped = skippedClues.has(idx);
             return (
               <button key={idx}
                 onClick={() => { if (!isSolved) { setCurrentClueIdx(idx); setPhase('solving'); } }}
                 disabled={isSolved}
                 className={`mda-delay-${(idx % 4) + 1}`}
-                aria-label={isSolved ? `Clue ${idx + 1}: solved` : `Clue ${idx + 1}: ${stage.narrative?.slice(0, 50)}...`}
+                aria-label={isSolved ? `Clue ${idx + 1}: solved` : isSkipped ? `Clue ${idx + 1}: skipped, tap to revisit` : `Clue ${idx + 1}: ${stage.narrative?.slice(0, 50)}...`}
                 style={{
                   display: 'flex', alignItems: 'flex-start', gap: '0.7rem',
                   padding: '0.9rem 1rem', borderRadius: 12, textAlign: 'left',
-                  border: isSolved ? '1.5px solid rgba(76,175,80,0.3)' : '1.5px solid var(--clr-border)',
-                  background: isSolved ? 'rgba(76,175,80,0.06)' : 'var(--clr-surface)',
+                  border: isSolved ? '1.5px solid rgba(76,175,80,0.3)' : isSkipped ? '1.5px solid rgba(255,152,0,0.45)' : '1.5px solid var(--clr-border)',
+                  background: isSolved ? 'rgba(76,175,80,0.06)' : isSkipped ? 'rgba(255,152,0,0.06)' : 'var(--clr-surface)',
                   cursor: isSolved ? 'default' : 'pointer',
                   opacity: isSolved ? 0.8 : 1,
                   transition: 'all 0.2s', color: 'var(--clr-text)', width: '100%',
@@ -2437,7 +2470,7 @@ function EnhancedCasePlay({ story, onComplete, onBack, initialState }) {
                     {stage.narrative?.slice(0, 80)}{stage.narrative?.length > 80 ? '...' : ''}
                   </div>
                   <div style={{ fontSize: '0.68rem', color: 'var(--clr-text-soft)' }}>
-                    {isSolved ? '✓ Solved — evidence collected' : '🔍 Tap to investigate'}
+                    {isSolved ? '✓ Solved — evidence collected' : isSkipped ? '⏭️ Skipped — tap to revisit' : '🔍 Tap to investigate'}
                   </div>
                 </div>
                 {!isSolved && <span style={{ fontSize: '0.8rem', opacity: 0.4 }}>→</span>}
@@ -2482,7 +2515,7 @@ function EnhancedCasePlay({ story, onComplete, onBack, initialState }) {
 
 // ─── EnhancedClueSolve — individual clue solving within enhanced case ────
 
-function EnhancedClueSolve({ story, clueIdx, onSolved, onBack, contextHidden = false, stageLabel = 'Clue' }) {
+function EnhancedClueSolve({ story, clueIdx, onSolved, onSkip, onBack, contextHidden = false, stageLabel = 'Clue' }) {
   const [answer, setAnswer] = useState('');
   const [feedback, setFeedback] = useState(null);
   const [revealed, setRevealed] = useState(false);
@@ -2522,11 +2555,11 @@ function EnhancedClueSolve({ story, clueIdx, onSolved, onBack, contextHidden = f
     if (feedback.correct) {
       onSolved(hintsUsed);
     } else {
+      // Keep the hint ladder and its count intact: hints already spent must
+      // not be refunded by a wrong answer.
       setAnswer('');
       setFeedback(null);
       setRevealed(false);
-      setHintLevel(0);
-      setHintsUsed(0);
     }
   };
 
@@ -2672,7 +2705,7 @@ function EnhancedClueSolve({ story, clueIdx, onSolved, onBack, contextHidden = f
                   I'll keep investigating
                 </span>
               </button>
-              <button onClick={() => onSolved(hintsUsed)}
+              <button onClick={() => onSkip(hintsUsed)}
                 style={{
                   padding: '0.5rem 1.2rem', borderRadius: 8,
                   border: '1.5px solid var(--clr-border)', background: 'var(--clr-surface)',
@@ -2753,6 +2786,7 @@ function EnhancedClueSolve({ story, clueIdx, onSolved, onBack, contextHidden = f
 
 function PathCasePlay({ story, onComplete, onBack, initialState }) {
   const [solvedClues, setSolvedClues] = useState(new Set(initialState?.solvedClues || []));
+  const [skippedClues, setSkippedClues] = useState(new Set(initialState?.skippedClues || []));
   const [phase, setPhase] = useState(initialState?.phase || 'path'); // 'path' | 'solving' | 'clue-reveal' | 'elimination' | 'evidence-summary' | 'accusation' | 'done'
   const [currentIdx, setCurrentIdx] = useState(() => {
     if (initialState?.currentClueIdx != null && initialState.currentClueIdx !== 'null') return initialState.currentClueIdx;
@@ -2789,6 +2823,12 @@ function PathCasePlay({ story, onComplete, onBack, initialState }) {
     const stage = stages[idx];
     setTotalHintsUsed(t => t + hintsUsed);
     setSolvedClues(prev => new Set(prev).add(idx));
+    setSkippedClues(prev => {
+      if (!prev.has(idx)) return prev;
+      const next = new Set(prev);
+      next.delete(idx);
+      return next;
+    });
     const ev = stage.evidence;
     if (ev) {
       setEvidenceItems(prev => [...prev, ev]);
@@ -2797,6 +2837,15 @@ function PathCasePlay({ story, onComplete, onBack, initialState }) {
     } else {
       setPhase('path');
     }
+  };
+
+  const handleStageSkipped = (idx, hintsUsed) => {
+    // The stage stays unsolved on the path (so it can be revisited), but the
+    // hints already spent still count and no clue is awarded.
+    setTotalHintsUsed(t => t + hintsUsed);
+    setSkippedClues(prev => new Set(prev).add(idx));
+    setCurrentIdx(idx);
+    setPhase('path');
   };
 
   const handleElimination = (suspectId) => {
@@ -2891,13 +2940,14 @@ function PathCasePlay({ story, onComplete, onBack, initialState }) {
   // Persist mid-case progress
   useEffect(() => {
     if (completed) return;
-    if (solvedClues.size === 0 && eliminatedIds.size === 0 && evidenceItems.length === 0) return;
+    if (solvedClues.size === 0 && eliminatedIds.size === 0 && evidenceItems.length === 0 && skippedClues.size === 0 && totalHintsUsed === 0) return;
     saveInProgressCase(story.id, {
       currentStage: stages.length,
       totalStages: stages.length,
       topic: story.topic,
       phase,
       solvedClues: [...solvedClues],
+      skippedClues: [...skippedClues],
       eliminatedIds: [...eliminatedIds],
       evidenceItems,
       currentClueIdx: phase === 'solving' ? currentIdx : solvedClues.size,
@@ -2905,7 +2955,7 @@ function PathCasePlay({ story, onComplete, onBack, initialState }) {
       totalHintsUsed,
       savedCase: story,
     });
-  }, [phase, solvedClues, eliminatedIds, evidenceItems, currentIdx, lastEvidence, totalHintsUsed, completed, story, stages.length]);
+  }, [phase, solvedClues, skippedClues, eliminatedIds, evidenceItems, currentIdx, lastEvidence, totalHintsUsed, completed, story, stages.length]);
 
   // ── Render: Completion ────────────────────────────────────────────────
   if (completed) {
@@ -2932,6 +2982,7 @@ function PathCasePlay({ story, onComplete, onBack, initialState }) {
         story={story}
         clueIdx={currentIdx}
         onSolved={(hintsUsed) => handleStageSolved(currentIdx, hintsUsed)}
+        onSkip={(hintsUsed) => handleStageSkipped(currentIdx, hintsUsed)}
         onBack={() => setPhase('path')}
         contextHidden
         stageLabel="Stage"
@@ -3172,13 +3223,14 @@ function PathCasePlay({ story, onComplete, onBack, initialState }) {
     <div className="app-shell">
       <div className="card" style={{ maxWidth: 'min(650px, 95vw)', margin: '0 auto' }}>
         <button className="back-button" onClick={() => {
-          if (solvedClues.size > 0 || eliminatedIds.size > 0 || evidenceItems.length > 0) {
+          if (solvedClues.size > 0 || eliminatedIds.size > 0 || evidenceItems.length > 0 || skippedClues.size > 0 || totalHintsUsed > 0) {
             saveInProgressCase(story.id, {
               currentStage: stages.length,
               totalStages: stages.length,
               topic: story.topic,
               phase,
               solvedClues: [...solvedClues],
+              skippedClues: [...skippedClues],
               eliminatedIds: [...eliminatedIds],
               evidenceItems,
               currentClueIdx: phase === 'solving' ? currentIdx : solvedClues.size,
@@ -3570,6 +3622,7 @@ export default function EnhancedMathDetectiveApp({ onBack }) {
           ? {
               phase: caseProgress.phase,
               solvedClues: caseProgress.solvedClues || [],
+              skippedClues: caseProgress.skippedClues || [],
               eliminatedIds: caseProgress.eliminatedIds || [],
               evidenceItems: caseProgress.evidenceItems || [],
               currentClueIdx: caseProgress.currentClueIdx ?? null,
@@ -3609,6 +3662,12 @@ export default function EnhancedMathDetectiveApp({ onBack }) {
     const initialStage = caseProgress && caseProgress.status === 'in_progress'
       ? Math.min(caseProgress.currentStage || 0, caseData.stages.length - 1)
       : 0;
+    const initialHintsUsed = caseProgress && caseProgress.status === 'in_progress'
+      ? (caseProgress.totalHintsUsed || 0)
+      : 0;
+    const initialSkippedClues = caseProgress && caseProgress.status === 'in_progress'
+      ? (caseProgress.skippedClues || [])
+      : [];
 
     return (
       <>
@@ -3616,6 +3675,8 @@ export default function EnhancedMathDetectiveApp({ onBack }) {
         <DetectiveCaseView
           caseData={caseData}
           initialStage={initialStage}
+          initialHintsUsed={initialHintsUsed}
+          initialSkippedClues={initialSkippedClues}
           onComplete={handleCaseComplete}
           onBack={handleBackFromCase}
         />
@@ -3856,3 +3917,5 @@ export default function EnhancedMathDetectiveApp({ onBack }) {
     </>
   );
 }
+
+export { DetectiveCaseView, EnhancedCasePlay, EnhancedClueSolve, PathCasePlay };
