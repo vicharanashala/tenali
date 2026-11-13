@@ -338,11 +338,13 @@ export default function SchemaClassifier() {
       target = 0;
     }
 
-    const path = target !== null ? `/vachana/schema/level-${target}` : '/vachana/schema';
-    if (replace) {
-      window.history.replaceState({}, '', path);
-    } else {
-      window.history.pushState({}, '', path);
+    if (window.location.pathname.startsWith('/vachana')) {
+      const path = target !== null ? `/vachana/schema/level-${target}` : '/vachana/schema';
+      if (replace) {
+        window.history.replaceState({}, '', path);
+      } else {
+        window.history.pushState({}, '', path);
+      }
     }
     setActiveLevel(target);
     resetLevelState();
@@ -368,9 +370,11 @@ export default function SchemaClassifier() {
   // state: locked-level URLs are clamped during initialization, so this only
   // rewrites the address bar when it differs from the rendered level.
   useEffect(() => {
-    const path = activeLevel !== null ? `/vachana/schema/level-${activeLevel}` : '/vachana/schema';
-    if (window.location.pathname !== path) {
-      window.history.replaceState({}, '', path);
+    if (window.location.pathname.startsWith('/vachana')) {
+      const path = activeLevel !== null ? `/vachana/schema/level-${activeLevel}` : '/vachana/schema';
+      if (window.location.pathname !== path) {
+        window.history.replaceState({}, '', path);
+      }
     }
   }, [activeLevel]);
 

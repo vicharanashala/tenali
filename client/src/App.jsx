@@ -51,6 +51,7 @@ import useQuizHintsAndXp from './hooks/useHints.js';
 
 
 window.React = React;
+import TILES from './features/tiles';
 
 
 /**
@@ -67,9 +68,14 @@ import Vachana from './vachana';
 import './App.css';
 import BattleApp from './BattleApp';
 import CarJourneyApp from './CarJourneyApp';
-import ContrastChallengeApp from './ContrastChallengeApp';
 import CuriosityApp from './Curiosity.jsx';
 import EquationCraftingLab from './EquationCraftingLab';
+import ContrastChallengeApp, { QuizLayoutExtension } from './ContrastChallengeApp';
+import CrosswordApp from './language/CrosswordApp';
+import WordSearchApp from './language/WordSearchApp';
+import WordCreatorApp from './language/WordCreatorApp';
+import { VOCAB_CORPUS } from './vocabCorpus';
+import CoordinateGrid from './components/interactive/CoordinateGrid';
 import GeometryApp from './GeometryApp';
 import IdliVadaSambharApp from './IdliVadaSambharApp';
 import InteractiveLcmHcfApp from './LcmHcfApp';
@@ -3264,7 +3270,7 @@ function SuperTables1App() {
         <div style={{ maxWidth: 620, margin: '0 auto' }}>
           {/* Header */}
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
-            <button onClick={goHome} style={S.back}>← Home</button>
+            <button onClick={goHome} style={S.back}>← Back</button>
             <div style={{ textAlign: 'center' }}>
               <div style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--clr-text-soft)' }}>Table of {tableNum}</div>
               <div style={{ fontSize: '1rem', fontWeight: 800, color: phase === 1 ? 'var(--clr-accent)' : 'var(--clr-correct)' }}>
@@ -7602,7 +7608,7 @@ function Chapter5App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack}>← Home</button>
+          <button className="back-button" onClick={onBack}>← Back</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter 5 — Fractions, Percentages & Standard Form</h1>
@@ -8685,7 +8691,7 @@ function Chapter6App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack}>← Home</button>
+          <button className="back-button" onClick={onBack}>← Back</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter 6 — Equations, Factors and Formulae</h1>
@@ -10361,7 +10367,7 @@ function Chapter7App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack}>← Home</button>
+          <button className="back-button" onClick={onBack}>← Back</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter 7 — Perimeter, Area & Volume</h1>
@@ -11861,7 +11867,7 @@ function Chapter8App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack}>← Home</button>
+          <button className="back-button" onClick={onBack}>← Back</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter 8 — Introduction to Probability</h1>
@@ -13547,7 +13553,7 @@ function Chapter9App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack}>← Home</button>
+          <button className="back-button" onClick={onBack}>← Back</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter 9 — Sequences, Surds & Sets</h1>
@@ -15235,7 +15241,7 @@ function Chapter10App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack}>← Home</button>
+          <button className="back-button" onClick={onBack}>← Back</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter 10 — Straight Lines Sequences, Surds & Sets Quadratic Equations</h1>
@@ -16782,7 +16788,7 @@ function Chapter11App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack}>← Home</button>
+          <button className="back-button" onClick={onBack}>← Back</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter 11 — Straight Lines Sequences, Surds & Sets Quadratic Equations</h1>
@@ -18335,7 +18341,7 @@ function Chapter12App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack}>← Home</button>
+          <button className="back-button" onClick={onBack}>← Back</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter 12 — Straight Lines Sequences, Surds & Sets Quadratic Equations</h1>
@@ -19723,7 +19729,7 @@ function Chapter13App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack}>← Home</button>
+          <button className="back-button" onClick={onBack}>← Back</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter 13 — Straight Lines Sequences, Surds & Sets Quadratic Equations</h1>
@@ -21260,7 +21266,7 @@ function Chapter14App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack}>← Home</button>
+          <button className="back-button" onClick={onBack}>← Back</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter 14 — Further Equations & Inequalities</h1>
@@ -22928,7 +22934,7 @@ function Chapter15App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack}>← Home</button>
+          <button className="back-button" onClick={onBack}>← Back</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter  — Scale Drawings, Bearings & Trigonometry</h1>
@@ -24068,7 +24074,7 @@ function Chapter16App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack}>← Home</button>
+          <button className="back-button" onClick={onBack}>← Back</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter  — Scale Drawings, Bearings & Trigonometry</h1>
@@ -25461,7 +25467,7 @@ function Chapter17App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack}>← Home</button>
+          <button className="back-button" onClick={onBack}>← Back</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter  — Scale Drawings, Bearings & Trigonometry</h1>
@@ -27120,7 +27126,7 @@ function Chapter18App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack}>← Home</button>
+          <button className="back-button" onClick={onBack}>← Back</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter  — Scale Drawings, Bearings & Trigonometry</h1>
@@ -28517,7 +28523,7 @@ function Chapter19App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack}>← Home</button>
+          <button className="back-button" onClick={onBack}>← Back</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter  — Scale Drawings, Bearings & Trigonometry</h1>
@@ -29781,7 +29787,7 @@ function Chapter20App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack}>← Home</button>
+          <button className="back-button" onClick={onBack}>← Back</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter  — Scale Drawings, Bearings & Trigonometry</h1>
@@ -31308,7 +31314,7 @@ function Chapter21App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack}>← Home</button>
+          <button className="back-button" onClick={onBack}>← Back</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter  — Scale Drawings, Bearings & Trigonometry</h1>
@@ -32664,7 +32670,7 @@ function Chapter22App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack}>← Home</button>
+          <button className="back-button" onClick={onBack}>← Back</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter 22 — More Equations, Formulae & Functions</h1>
@@ -34142,7 +34148,7 @@ function Chapter23App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack}>← Home</button>
+          <button className="back-button" onClick={onBack}>← Back</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter 23 — Transformations & Vectors</h1>
@@ -35575,7 +35581,7 @@ function Chapter24App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack}>← Home</button>
+          <button className="back-button" onClick={onBack}>← Back</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter 24 — Probability with Tree & Venn Diagrams</h1>
@@ -36425,7 +36431,7 @@ function Chapter1App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack}>← Home</button>
+          <button className="back-button" onClick={onBack}>← Back</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter 1 — Reviewing Number Concepts</h1>
@@ -37246,7 +37252,7 @@ function Chapter2App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack}>← Home</button>
+          <button className="back-button" onClick={onBack}>← Back</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter 2 — Making Sense of Algebra</h1>
@@ -38042,7 +38048,7 @@ function Chapter3App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack}>← Home</button>
+          <button className="back-button" onClick={onBack}>← Back</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter 3 — Lines, Angles and Shapes</h1>
@@ -38836,7 +38842,7 @@ function Chapter4App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack}>← Home</button>
+          <button className="back-button" onClick={onBack}>← Back</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter 4 — Collecting, Organising and Displaying Data</h1>
@@ -39161,7 +39167,7 @@ function TenthApp({ onBack }) {
   return (
     <div style={{ maxWidth: 980, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
       <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-        <button className="back-button" onClick={onBack}>← Home</button>
+        <button className="back-button" onClick={onBack}>← Back</button>
       </div>
       {user && (
         <p style={{ margin: '0 0 12px', fontSize: '1.1rem', opacity: 0.85 }}>
@@ -39246,22 +39252,6 @@ function TenthApp({ onBack }) {
 
 
 
-const getTopicBadgeType = (topicKey, completedTopicsList) => {
-  if (!completedTopicsList || !Array.isArray(completedTopicsList)) return 'topic_blue';
-  if (completedTopicsList.includes(`${topicKey}-extrahard`) || completedTopicsList.includes(`${topicKey}-hard`) || completedTopicsList.includes(`${topicKey}-adaptive`)) {
-    return 'topic_gold';
-  }
-  if (completedTopicsList.includes(`${topicKey}-medium`)) {
-    return 'topic_silver';
-  }
-  if (completedTopicsList.includes(`${topicKey}-easy`)) {
-    return 'topic_bronze';
-  }
-  if (completedTopicsList.includes(`${topicKey}-started`)) {
-    return 'topic_blue';
-  }
-  return 'topic_blue';
-};
 
 function ComicAdditionApp({ onBack }) {
   const [started, setStarted] = useState(false)
@@ -40139,6 +40129,21 @@ function PercentPage(props) {
   return <PercentExplanationApp {...props} PercentApp={PercentApp} />;
 }
 
+function getCategoryForMode(modeKey) {
+  if (!modeKey || modeKey === 'goalpractice') return null;
+  if (typeof modeKey === 'string') {
+    if (modeKey === 'contrastlist' || modeKey.startsWith('contrast-')) return 'contrast-challenge';
+    if (modeKey === 'treasurehunt' || modeKey.startsWith('treasurehunt-') || modeKey.startsWith('treasurehunt_')) return 'treasure-hunt';
+    if (modeKey === 'riddle' || modeKey.startsWith('riddle-') || modeKey.startsWith('riddle_')) return 'math-riddles';
+    if (modeKey === 'playground' || modeKey === 'local-compiler') return 'coding-playground';
+  }
+  if (Array.isArray(TILES)) {
+    const tile = TILES.find(t => t.key === modeKey);
+    if (tile?.category) return tile.category;
+  }
+  return 'shelf';
+}
+
 function App() {
   const [diagnosticState, setDiagnosticState] = useState({});
   const { t } = useI18n();
@@ -40147,11 +40152,54 @@ function App() {
   const [mode, setMode] = useState(() => {
     try {
       const params = new URLSearchParams(window.location.search);
-      return params.get('mode') || null;
+      const m = params.get('mode');
+      if (m && m.startsWith('contrast-')) {
+        localStorage.setItem('tenali-start-contrast-id', m.replace(/^contrast-/, ''));
+        return m;
+      }
+      if (m === 'contrastlist') {
+        return null;
+      }
+      if (m === 'treasurehunt') {
+        return null;
+      }
+      if (m === 'riddle') {
+        return null;
+      }
+      return m || null;
     } catch {
       return null;
     }
   })
+
+  // Currently selected section on Home (null = cards grid, or section key like 'contrast-challenge')
+  const [selectedHomeSection, setSelectedHomeSection] = useState(() => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const m = params.get('mode');
+      const sec = params.get('section');
+      if (sec) return sec;
+      if (m === 'contrastlist' || (m && m.startsWith('contrast-'))) return 'contrast-challenge';
+      if (m === 'treasurehunt' || (m && (m.startsWith('treasurehunt-') || m.startsWith('treasurehunt_')))) return 'treasure-hunt';
+      if (m === 'riddle' || (m && (m.startsWith('riddle-') || m.startsWith('riddle_')))) return 'math-riddles';
+      return null;
+    } catch {
+      return null;
+    }
+  });
+
+  const handleSelectSection = (sec) => {
+    setSelectedHomeSection(sec);
+    try {
+      const url = new URL(window.location.href);
+      if (sec) {
+        url.searchParams.set('section', sec);
+      } else {
+        url.searchParams.delete('section');
+      }
+      window.history.replaceState({}, '', url.toString());
+    } catch {}
+  };
 
   // Current view when mode is null: 'landing' (full landing page) or 'puzzles' (90+ puzzles grid)
   const [currentView, setCurrentView] = useState(() => {
@@ -40260,17 +40308,21 @@ function App() {
       const params = new URLSearchParams(window.location.search);
       const currentMode = params.get('mode');
       const currentParamView = params.get('view');
+      const currentParamSection = params.get('section');
       if (mode) {
         if (currentMode !== mode) {
-          window.history.pushState({ mode }, '', `${BASE}/?mode=${mode}`);
+          const sectionQuery = selectedHomeSection ? `&section=${encodeURIComponent(selectedHomeSection)}` : '';
+          window.history.pushState({ mode }, '', `${BASE}/?mode=${mode}${sectionQuery}`);
         }
       } else {
         if (currentView === 'puzzles') {
-          if (currentParamView !== 'puzzles' || currentMode) {
-            window.history.replaceState({}, '', `${BASE}/?view=puzzles`);
+          const sectionQuery = selectedHomeSection ? `&section=${encodeURIComponent(selectedHomeSection)}` : '';
+          const targetUrl = `${BASE}/?view=puzzles${sectionQuery}`;
+          if (currentParamView !== 'puzzles' || currentMode || currentParamSection !== (selectedHomeSection || null)) {
+            window.history.replaceState({}, '', targetUrl);
           }
         } else {
-          if (currentMode || currentParamView) {
+          if (currentMode || currentParamView || currentParamSection) {
             window.history.replaceState({}, '', `${BASE}/`);
           }
         }
@@ -40278,7 +40330,7 @@ function App() {
     } catch (e) {
       console.error('Failed to sync URL mode:', e);
     }
-  }, [mode, currentView]);
+  }, [mode, currentView, selectedHomeSection]);
 
   // Listen for browser Back/Forward navigation (popstate) to restore mode and view
   useEffect(() => {
@@ -40286,8 +40338,28 @@ function App() {
       try {
         const params = new URLSearchParams(window.location.search);
         const urlMode = params.get('mode') || null;
+        const urlSection = params.get('section') || null;
         const urlView = params.get('view') || (urlMode ? 'puzzles' : 'landing');
-        setMode(urlMode);
+        let effectiveMode = urlMode;
+        let effectiveSection = urlSection;
+        if (urlMode === 'contrastlist') {
+          effectiveMode = null;
+          effectiveSection = 'contrast-challenge';
+        } else if (urlMode === 'treasurehunt') {
+          effectiveMode = null;
+          effectiveSection = 'treasure-hunt';
+        } else if (urlMode && urlMode.startsWith('contrast-')) {
+          effectiveSection = 'contrast-challenge';
+        } else if (urlMode === 'riddle') {
+          effectiveMode = null;
+          effectiveSection = 'math-riddles';
+        } else if (urlMode && (urlMode.startsWith('treasurehunt-') || urlMode.startsWith('treasurehunt_'))) {
+          effectiveSection = 'treasure-hunt';
+        } else if (urlMode && (urlMode.startsWith('riddle-') || urlMode.startsWith('riddle_'))) {
+          effectiveSection = 'math-riddles';
+        }
+        setMode(effectiveMode);
+        setSelectedHomeSection(effectiveSection);
         setCurrentView(urlView === 'puzzles' ? 'puzzles' : 'landing');
         if (urlMode === 'angles') {
           setLearningPhase('select');
@@ -40323,6 +40395,10 @@ function App() {
   const [celebrationQueue, setCelebrationQueue] = useState([])
   const [transferTopic, setTransferTopic] = useState(null)
   const syncTimeoutRef = useRef(null)
+  const goldMasteryRef = useRef(goldMastery)
+  goldMasteryRef.current = goldMastery
+  const coinsRef = useRef(coins)
+  coinsRef.current = coins
 
   // Generate confetti particles once per active celebration card so they
   // don't teleport to new positions on every parent re-render (timer
@@ -40590,11 +40666,14 @@ function App() {
     }, 1000);
   };
 
-  const markTopicCompleted = (topicKey, difficulty = '') => {
-    const next = addCompletedTopic(topicKey, difficulty);
-    setCompletedTopics(next);
-    syncProgressToServer(next, goldMastery, coins);
-  };
+  const markTopicCompleted = useCallback((topicKey, difficulty = '') => {
+    setCompletedTopics((prev) => {
+      const next = addCompletedTopic(topicKey, difficulty);
+      if (next === prev) return prev;
+      syncProgressToServer(next, goldMasteryRef.current, coinsRef.current);
+      return next;
+    });
+  }, []);
 
   const markGoldMastery = (topicKey) => {
     if (goldMastery.includes(topicKey)) return;
@@ -40647,7 +40726,17 @@ function App() {
   useEffect(() => {
     const handleModeChange = (e) => {
       if (e.detail) {
-        setMode(e.detail);
+        if (typeof e.detail === 'string' && e.detail.startsWith('contrast-')) {
+          const pairId = e.detail.replace(/^contrast-/, '');
+          try { localStorage.setItem('tenali-start-contrast-id', pairId); } catch {}
+          setSelectedHomeSection('contrast-challenge');
+          setMode(e.detail);
+        } else if (e.detail === 'contrastlist') {
+          handleSelectSection('contrast-challenge');
+          setMode(null);
+        } else {
+          setMode(e.detail);
+        }
       }
     };
     window.addEventListener('tenali-change-mode', handleModeChange);
@@ -40674,6 +40763,65 @@ function App() {
     // Persist to localStorage for future sessions
     try { localStorage.setItem('tenali-theme', theme) } catch { }
   }, [theme])
+
+  // ========== LEARN / TEST GATEWAY HOOKS ==========
+  const [learningPhase, setLearningPhase] = useState(() => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('mode') === 'angles' ? 'select' : null;
+    } catch {
+      return null;
+    }
+  })
+  const [learnData, setLearnData] = useState(null)
+  const [revealedBlocks, setRevealedBlocks] = useState(1)
+  const [blockStartTime, setBlockStartTime] = useState(Date.now())
+  const [warningMessage, setWarningMessage] = useState(null)
+
+  const getModeLabel = (key) => {
+    const labels = {
+      gk: 'General Knowledge', addition: 'Addition', quadratic: 'Quadratic Substitution',
+      multiply: 'Multiplication Tables', vocab: 'Vocabulary', spot: 'Twin Hunt',
+      sqrt: 'Square Root', polymul: 'Polynomial Multiplication', polyfactor: 'Polynomial Factoring',
+      primefactor: 'Prime Factorization', qformula: 'Quadratic Formula', simul: 'Simultaneous Equations',
+      'qformula-concept': 'Quadratics: Concept Lab', 'simul-concept': 'Sim. Equations: Concept Lab',
+      funceval: 'Functions', lineq: 'Line Equations', basicarith: 'Arithmetic',
+      fractionadd: 'Fractions', surds: 'Surds', indices: 'Indices',
+      sequences: 'Sequences & Series', ratio: 'Ratio & Proportion', percent: 'Percentages',
+      sets: 'Sets & Venn Diagrams', trig: 'Trigonometry', ineq: 'Inequalities',
+      coordgeom: 'Coordinate Geometry', prob: 'Probability', stats: 'Statistics',
+      matrix: 'Matrices', vectors: 'Vectors', dotprod: 'Dot Products',
+      transform: 'Transformations', mensur: 'Mensuration', bearings: 'Bearings',
+      log: 'Logarithms', diff: 'Differentiation', bases: 'Number Bases',
+      circleth: 'Circle Theorems', integ: 'Integration', stdform: 'Standard Form',
+      bounds: 'Bounds', sdt: 'Speed, Distance, Time', variation: 'Variation',
+      hcflcm: 'HCF & LCM', profitloss: 'Profit & Loss', rounding: 'Rounding',
+      binomial: 'Binomial Theorem', complex: 'Complex Numbers', angles: 'Angles',
+      triangles: 'Triangles', congruence: 'Congruence', pythag: "Pythagoras' Theorem",
+      polygons: 'Polygons', similarity: 'Similarity', squaring: 'Squaring (a+b)²',
+      lineareq: 'Linear Equations', decimals: 'Decimals', permcomb: 'Permutations & Combinations',
+      limits: 'Limits', invtrig: 'Inverse Trig', remfactor: 'Remainder Theorem',
+      heron: "Heron's Formula", shares: 'Shares & Dividends', banking: 'Banking (RD)',
+      gst: 'GST', section: 'Section Formula', linprog: 'Linear Programming',
+      circmeasure: 'Circular Measure', conics: 'Conic Sections', diffeq: 'Differential Equations',
+      tatsavit: 'Math Drill', randommix: 'Random Mix', custom: 'Custom Lesson',
+      gym: 'Gym', guess: 'Guess the Number',
+      gymdecimals: 'Gym Decimals', funcgym: 'Functions Gym', dotprodgym: 'Dot Products Gym',
+      fracaddgym: 'Fractions Gym', lineqgym: 'Linear Equations Gym',
+      indicesgym: 'Indices Gym', polygym: 'Polynomials Gym',
+    }
+    return labels[key] || key
+  }
+
+  useEffect(() => {
+    if (mode && learningPhase === 'learn') {
+      const topicName = getModeLabel(mode)
+      setLearnData(null)
+      getLearnContent(mode, topicName).then(data => {
+        setLearnData(data)
+      })
+    }
+  }, [mode, learningPhase])
 
   /**
    * toggleTheme(): Switch between dark and light modes
@@ -40823,16 +40971,8 @@ function App() {
   }
 
   if (pathname === '/riddle') {
-    return (
-      <>
-        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-        <div className="app-shell"><div className="card">
-          <RiddleApp onBack={() => { window.location.href = withBase('/') }} />
-        </div></div>
-      </>
-    )
+    window.location.replace(withBase('/?section=math-riddles'));
+    return null;
   }
 
   // Route: /tatsavit0 → legacy 9-level progressive math drill (kept for reference)
@@ -41318,7 +41458,11 @@ function App() {
         <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
           {theme === 'dark' ? '☀️' : '🌙'}
         </button>
-        <PlaygroundApp onBack={() => { window.location.href = withBase('/') }} />
+        <div className="app-shell">
+          <div className="card is-wide">
+            <PlaygroundApp onBack={() => { window.location.href = withBase('/?section=coding-playground') }} />
+          </div>
+        </div>
       </>
     )
   }
@@ -41355,7 +41499,11 @@ function App() {
         <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
           {theme === 'dark' ? '\u2600\uFE0F' : '\uD83C\uDF19'}
         </button>
-        <LocalCompilerApp onBack={() => { window.location.href = withBase('/') }} />
+        <div className="app-shell">
+          <div className="card is-wide">
+            <LocalCompilerApp onBack={() => { window.location.href = withBase('/?section=coding-playground') }} />
+          </div>
+        </div>
       </>
     )
   }
@@ -41380,7 +41528,9 @@ function App() {
           {theme === 'dark' ? '☀️' : '🌙'}
         </button>
         <div className="app-shell">
-          <Vachana onBack={() => { window.location.href = withBase('/') }} />
+          <div className="card is-wide">
+            <Vachana onBack={() => { window.location.href = withBase('/?section=language-words') }} />
+          </div>
         </div>
       </>
     )
@@ -42078,11 +42228,39 @@ function App() {
   }
 
   // ========== MATH RIDDLES APP ==========
-  function RiddleApp({ onBack }) {
+  function RiddleApp({ onBack, initialType, autoStartMixed }) {
     const [stage, setStage] = useState('setup')
     const [difficulty, setDifficulty] = useState(2)
-    const [selectedType, setSelectedType] = useState(null)
-    const [riddleType, setRiddleType] = useState(null)
+    const [selectedType, setSelectedType] = useState(initialType || null)
+    const [riddleType, setRiddleType] = useState(initialType || null)
+    const RIDDLE_TYPES = [
+      {
+        type: 'find-rule',
+        icon: '🔍',
+        label: 'Find the Rule',
+        desc: 'Study input → output pairs, spot the hidden formula, then apply it to a new input.',
+      },
+      {
+        type: 'sequence',
+        icon: '🔢',
+        label: 'Number Sequence',
+        desc: 'Look at the pattern in a list of numbers and predict what comes next.',
+      },
+      {
+        type: 'logic',
+        icon: '🧩',
+        label: 'Logic Puzzle',
+        desc: 'Read a word problem, reason it through step by step to reach the answer.',
+      },
+      {
+        type: 'image',
+        icon: '🖼️',
+        label: 'Visual Puzzle',
+        desc: 'Decode shapes, patterns and images — pick the option that completes the picture.',
+      }
+    ]
+    const currentMeta = RIDDLE_TYPES.find(r => r.type === (selectedType || riddleType || initialType)) || RIDDLE_TYPES[0]
+
     const [maxForType, setMaxForType] = useState(44)
     const [question, setQuestion] = useState(null)
     const [answer, setAnswer] = useState('')
@@ -42157,6 +42335,17 @@ function App() {
         })
       } catch (e) { setMaxForType(44) }
     }
+
+    useEffect(() => {
+      if (initialType) {
+        selectType(initialType)
+      } else if (autoStartMixed) {
+        setSelectedType(null)
+        setRiddleType(null)
+        setMaxForType(44)
+        startGame()
+      }
+    }, [initialType, autoStartMixed])
 
     const advance = () => {
       if (questionNumber >= totalQuestions) { setStage('finished'); return }
@@ -42234,72 +42423,21 @@ function App() {
 
     return (
       <>
-        <div style={{ display: 'flex', alignItems: 'center', marginBottom: '16px' }}>
-          <button className="back-button" onClick={onBack}>&larr;</button>
-          <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '1.5rem', margin: 0, flex: 1, textAlign: 'center', color: 'var(--clr-text)' }}>Math Riddles</h2>
-          <div style={{ width: 40 }} />
-        </div>
+          <div style={{ display: 'flex', alignItems: 'center', marginBottom: '16px' }}>
+            <button className="back-button" onClick={onBack}>&larr;</button>
+          </div>
 
-        {stage === 'setup' && (
-          <div className="welcome-box">
-            <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '1.8rem', color: 'var(--clr-text)', marginBottom: '8px' }}>Math Riddles</h2>
-            <p className="welcome-text">Pick a riddle type to begin!</p>
+          {stage === 'setup' && (
+            <div className="welcome-box">
+              <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '1.8rem', color: 'var(--clr-text)', marginBottom: '8px' }}>
+                {currentMeta.icon} {currentMeta.label}
+              </h2>
+              <p className="welcome-text" style={{ maxWidth: 520, margin: '0 auto 16px' }}>
+                {currentMeta.desc}
+              </p>
 
-            {/* Flashcards for each riddle type */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '12px', margin: '16px 0' }}>
-              {[
-                {
-                  type: 'find-rule',
-                  icon: '🔍',
-                  label: 'Find the Rule',
-                  color: 'var(--clr-accent)',
-                  desc: 'Study input → output pairs, spot the hidden formula, then apply it to a new input.',
-                  example: '3 → 8, 7 → 12  ⇒  9 → ?'
-                },
-                {
-                  type: 'sequence',
-                  icon: '🔢',
-                  label: 'Number Sequence',
-                  color: '#7c5cff',
-                  desc: 'Look at the pattern in a list of numbers and predict what comes next.',
-                  example: '2, 4, 8, 16, ?'
-                },
-                {
-                  type: 'logic',
-                  icon: '🧩',
-                  label: 'Logic Puzzle',
-                  color: '#ff8a5c',
-                  desc: 'Read a word problem, reason it through step by step to reach the answer.',
-                  example: 'If all Bloops are Razzies…'
-                },
-                {
-                  type: 'image',
-                  icon: '🖼️',
-                  label: 'Visual Puzzle',
-                  color: '#2bbf9c',
-                  desc: 'Decode shapes, patterns and images — pick the option that completes the picture.',
-                  example: 'Which piece fits the gap?'
-                }
-              ].map((fc, i) => (
-                <div key={i} onClick={() => selectType(fc.type)}
-                  style={{ background: selectedType === fc.type ? 'var(--clr-accent-soft)' : 'var(--clr-surface)', border: selectedType === fc.type ? `2px solid ${fc.color}` : '1px solid var(--clr-border)', borderTop: `3px solid ${fc.color}`, borderRadius: 'var(--radius)', padding: '14px 16px', textAlign: 'left', cursor: 'pointer', transition: 'transform 0.12s, box-shadow 0.12s' }}
-                  onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = '0 6px 18px rgba(0,0,0,0.25)' }}
-                  onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = 'none' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
-                    <span style={{ fontSize: '1.4rem' }}>{fc.icon}</span>
-                    <span style={{ fontFamily: 'var(--font-display)', fontSize: '1.05rem', color: fc.color, fontWeight: 700 }}>{fc.label}</span>
-                  </div>
-                  <p style={{ fontSize: '0.85rem', lineHeight: 1.45, color: 'var(--clr-text-soft)', margin: '0 0 8px' }}>{fc.desc}</p>
-                  <div style={{ fontSize: '0.82rem', fontStyle: 'italic', color: 'var(--clr-text)', background: 'var(--clr-input)', borderRadius: '8px', padding: '6px 8px' }}>{fc.example}</div>
-                  <div style={{ marginTop: '10px', fontSize: '0.78rem', fontWeight: 600, color: fc.color }}>{selectedType === fc.type ? '✓ Selected' : '▶ Select →'}</div>
-                </div>
-              ))}
-            </div>
-
-            {/* Options appear only after a type is selected */}
-            {selectedType && (
               <div style={{ marginTop: '8px' }}>
-                <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', flexWrap: 'wrap', margin: '12px 0' }}>
+                <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', flexWrap: 'wrap', margin: '16px 0 12px' }}>
                   {[{ v: 1, l: 'Easy' }, { v: 2, l: 'Medium' }, { v: 3, l: 'Hard' }, { v: 5, l: 'All' }].map(d => (
                     <button key={d.v} className={`radio-pill${difficulty === d.v ? ' active' : ''}`} onClick={() => setDifficulty(d.v)}>{d.l}</button>
                   ))}
@@ -42312,220 +42450,165 @@ function App() {
                     if (/^\d+$/.test(v)) { const n = Number(v); if (n >= 1 && n <= maxForType) setTotalQuestions(n); }
                   }} onBlur={() => { if (totalQuestions === '' || Number(totalQuestions) < 1) setTotalQuestions(Math.min(15, maxForType)) }} />
                 </div>
-                <div className="button-row">
-                  <button onClick={() => startGameWithType(selectedType)}>Start Riddles</button>
-                  <button onClick={() => { setSelectedType(null); setRiddleType(null); setMaxForType(44); startGame() }} style={{ background: 'transparent', border: '1px solid var(--clr-text-soft)', color: 'var(--clr-text-soft)' }}>Mixed</button>
+                <div className="button-row" style={{ marginTop: '20px' }}>
+                  <button onClick={() => startGameWithType(selectedType || currentMeta.type)}>Start Riddles</button>
                 </div>
               </div>
-            )}
-          </div>
-        )}
-
-        {stage === 'playing' && (
-          <>
-            <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', flexWrap: 'wrap', marginBottom: '12px' }}>
-              <div className="progress-pill center">Riddle {questionNumber}/{totalQuestions}</div>
-              {riddleType && <div className="progress-pill center" style={{ textTransform: 'capitalize' }}>{riddleType === 'image' ? 'Visual Puzzle' : riddleType.replace('-', ' ')}</div>}
-              <div className="score-pill">⭐ {score}/{total}</div>
             </div>
+          )}
 
-            {loading && <div style={{ textAlign: 'center', padding: '24px', color: 'var(--clr-text-soft)' }}>Loading riddle…</div>}
+          {stage === 'playing' && (
+            <>
+              <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', flexWrap: 'wrap', marginBottom: '12px' }}>
+                <div className="progress-pill center">Riddle {questionNumber}/{totalQuestions}</div>
+                {riddleType && <div className="progress-pill center" style={{ textTransform: 'capitalize' }}>{riddleType === 'image' ? 'Visual Puzzle' : riddleType.replace('-', ' ')}</div>}
+                <div className="score-pill">⭐ {score}/{total}</div>
+              </div>
 
-            {!loading && question && (
-              <>
-                {/* Title */}
-                {question.title && <h3 style={{ fontFamily: 'var(--font-display)', textAlign: 'center', fontSize: '1.3rem', color: 'var(--clr-text)', margin: '0 0 12px' }}>{question.title}</h3>}
+              {loading && <div style={{ textAlign: 'center', padding: '24px', color: 'var(--clr-text-soft)' }}>Loading riddle…</div>}
 
-                {/* Find Rule: Equation Table */}
-                {question.type === 'find-rule' && question.equations && (
-                  <div style={{ background: 'var(--clr-surface)', borderRadius: 'var(--radius)', border: '1px solid var(--clr-border)', padding: '16px 20px', margin: '0 auto 16px', maxWidth: 320 }}>
-                    {question.equations.map((eq, i) => (
-                      <div key={i} style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', borderBottom: i < question.equations.length - 1 ? '1px solid var(--clr-border)' : 'none', fontSize: '1.1rem' }}>
-                        <span style={{ color: 'var(--clr-text)' }}>{eq.input}</span>
-                        <span style={{ color: 'var(--clr-accent)', fontWeight: 600 }}>→</span>
-                        <span style={{ color: 'var(--clr-text)' }}>{eq.output}</span>
-                      </div>
-                    ))}
-                    <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', fontSize: '1.1rem', borderTop: '2px solid var(--clr-accent)', marginTop: '4px' }}>
-                      <span style={{ color: 'var(--clr-text)' }}>{question.question}</span>
-                      <span style={{ color: 'var(--clr-accent)', fontWeight: 600 }}>→</span>
-                      <span style={{ color: 'var(--clr-accent)', fontWeight: 700, fontStyle: 'italic' }}>?</span>
-                    </div>
-                  </div>
-                )}
+              {!loading && question && (
+                <>
+                  {/* Title */}
+                  {question.title && <h3 style={{ fontFamily: 'var(--font-display)', textAlign: 'center', fontSize: '1.3rem', color: 'var(--clr-text)', margin: '0 0 12px' }}>{question.title}</h3>}
 
-                {/* Sequence Type */}
-                {question.type === 'sequence' && question.sequence && (
-                  <div style={{ textAlign: 'center', margin: '0 auto 16px' }}>
-                    <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', flexWrap: 'wrap', margin: '0 0 8px' }}>
-                      {question.sequence.map((n, i) => (
-                        <span key={i} style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 48, height: 48, borderRadius: 'var(--radius)', background: 'var(--clr-surface)', border: '1px solid var(--clr-border)', fontSize: '1.1rem', fontWeight: 600, color: 'var(--clr-text)' }}>{n}</span>
+                  {/* Find Rule: Equation Table */}
+                  {question.type === 'find-rule' && question.equations && (
+                    <div style={{ background: 'var(--clr-surface)', borderRadius: 'var(--radius)', border: '1px solid var(--clr-border)', padding: '16px 20px', margin: '0 auto 16px', maxWidth: 320 }}>
+                      {question.equations.map((eq, i) => (
+                        <div key={i} style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', borderBottom: i < question.equations.length - 1 ? '1px solid var(--clr-border)' : 'none', fontSize: '1.1rem' }}>
+                          <span style={{ color: 'var(--clr-text)' }}>{eq.input}</span>
+                          <span style={{ color: 'var(--clr-accent)', fontWeight: 600 }}>→</span>
+                          <span style={{ color: 'var(--clr-text)' }}>{eq.output}</span>
+                        </div>
                       ))}
-                      <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 48, height: 48, borderRadius: 'var(--radius)', background: 'var(--clr-accent-soft)', border: '2px dashed var(--clr-accent)', fontSize: '1.2rem', fontWeight: 700, color: 'var(--clr-accent)' }}>?</span>
-                    </div>
-                    <p style={{ fontSize: '0.9rem', color: 'var(--clr-text-soft)', margin: 0 }}>{question.question}</p>
-                  </div>
-                )}
-
-                {/* Logic Type */}
-                {question.type === 'logic' && (
-                  <div className="question-box" style={{ textAlign: 'center', margin: '0 auto 16px', maxWidth: 480, padding: '20px', background: 'var(--clr-surface)', borderRadius: 'var(--radius)', border: '1px solid var(--clr-border)' }}>
-                    <p style={{ fontSize: '1.1rem', lineHeight: 1.6, color: 'var(--clr-text)', margin: 0 }}>{question.question}</p>
-                  </div>
-                )}
-
-                {/* Image Types */}
-                {(question.type === 'image-numpad' || question.type === 'image-option') && question.image && (
-                  <div style={{ textAlign: 'center', margin: '0 auto 16px' }}>
-                    <img
-                      src={withBase(question.image.startsWith('/') ? question.image : `/${question.image}`)}
-                      alt={question.title || 'Visual Riddle'}
-                      onError={(e) => {
-                        console.warn(`[Math Riddles] Failed to load riddle image: ${e.target.src}`);
-                      }}
-                      style={{ maxWidth: '100%', maxHeight: 280, width: 'auto', height: 'auto', objectFit: 'contain', borderRadius: 'var(--radius)', border: '1px solid var(--clr-border)', background: 'var(--clr-input)' }}
-                    />
-                  </div>
-                )}
-
-                {/* Answer Input */}
-                {!revealed && question.type !== 'image-option' && (
-                  <div style={{ textAlign: 'center', margin: '0 0 12px' }}>
-                    <input
-                      className="answer-input"
-                      type="text"
-                      value={answer}
-                      onChange={e => setAnswer(e.target.value)}
-                      onKeyDown={handleKeyDown}
-                      placeholder="Your answer"
-                      autoFocus
-                      style={{ maxWidth: 200, textAlign: 'center', fontSize: '1.3rem' }}
-                    />
-                  </div>
-                )}
-
-                {/* Option Buttons for image-option type */}
-                {!revealed && question.type === 'image-option' && question.options && (
-                  <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', flexWrap: 'wrap', margin: '0 0 12px' }}>
-                    {question.options.map((opt, i) => (
-                      <button
-                        key={i}
-                        onClick={() => setSelectedOption(opt)}
-                        style={{
-                          width: 64,
-                          height: 64,
-                          borderRadius: 'var(--radius)',
-                          border: selectedOption === opt ? '2px solid var(--clr-accent)' : '1.5px solid var(--clr-border)',
-                          background: selectedOption === opt ? 'var(--clr-accent-soft)' : 'var(--clr-input)',
-                          cursor: 'pointer',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          fontSize: question.optionImages ? '0' : '1.2rem',
-                          fontWeight: 600,
-                          color: 'var(--clr-text)',
-                          transition: 'all 0.15s',
-                          overflow: 'hidden'
-                        }}
-                      >
-                        {question.optionImages && question.optionImages[i] ? (
-                          <img
-                            src={withBase(question.optionImages[i].startsWith('/') ? question.optionImages[i] : `/${question.optionImages[i]}`)}
-                            alt={opt}
-                            style={{ width: '100%', height: '100%', objectFit: 'contain', padding: '4px' }}
-                          />
-                        ) : opt}
-                      </button>
-                    ))}
-                  </div>
-                )}
-
-                {/* Numpad */}
-                {!revealed && (question.type !== 'image-option') && (
-                  <div className="numpad" style={{ maxWidth: 280, margin: '0 auto 12px' }}>
-                    {[['7', '8', '9'], ['4', '5', '6'], ['1', '2', '3']].map((row, ri) => (
-                      <div key={ri} className="numpad-row">
-                        {row.map(k => <button key={k} className="numpad-key" onClick={() => numpadPress(k)}>{k}</button>)}
+                      <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', fontSize: '1.1rem', borderTop: '2px solid var(--clr-accent)', marginTop: '4px' }}>
+                        <span style={{ color: 'var(--clr-text)' }}>{question.question}</span>
+                        <span style={{ color: 'var(--clr-accent)', fontWeight: 600 }}>→</span>
+                        <span style={{ color: 'var(--clr-accent)', fontWeight: 700 }}>?</span>
                       </div>
-                    ))}
-                    <div className="numpad-row">
-                      <button className="numpad-key numpad-special" onClick={() => numpadPress('±')}>±</button>
-                      <button className="numpad-key" onClick={() => numpadPress('0')}>0</button>
-                      <button className="numpad-key numpad-special" onClick={() => numpadPress('⌫')}>⌫</button>
                     </div>
-                  </div>
-                )}
-
-                {/* Feedback */}
-                {revealed && (
-                  <div className={`feedback ${isCorrect ? 'correct' : 'wrong'}`} style={{ marginBottom: '12px' }}>{feedback}</div>
-                )}
-
-                {/* Hint */}
-                {hintText && (
-                  <div className="feedback solve" style={{ marginBottom: '12px', textAlign: 'center' }}>💡 {hintText}</div>
-                )}
-
-                {/* Step-by-step solution (deep) */}
-                {solutionSteps && solutionSteps.length > 0 && (
-                  <div style={{ background: 'var(--clr-surface)', border: '1px solid var(--clr-accent)', borderRadius: 'var(--radius)', padding: '14px 18px', margin: '0 auto 14px', maxWidth: 460, textAlign: 'left' }}>
-                    <div style={{ fontFamily: 'var(--font-display)', fontSize: '1.05rem', color: 'var(--clr-accent)', fontWeight: 700, marginBottom: '8px', textAlign: 'center' }}>🔦 Step-by-Step Solution</div>
-                    {solutionSteps.map((step, i) => (
-                      <div key={i} style={{ display: 'flex', gap: '10px', padding: '6px 0', borderBottom: i < solutionSteps.length - 1 ? '1px solid var(--clr-border)' : 'none', fontSize: '0.92rem', lineHeight: 1.5, color: 'var(--clr-text)' }}>
-                        <span style={{ flexShrink: 0, width: 22, height: 22, borderRadius: '50%', background: 'var(--clr-accent)', color: '#fff', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.78rem', fontWeight: 700 }}>{i + 1}</span>
-                        <span>{step}</span>
-                      </div>
-                    ))}
-                  </div>
-                )}
-
-                {/* Buttons */}
-                <div className="button-row">
-                  {!revealed ? (
-                    <>
-                      <button onClick={handleSubmit} disabled={question.type === 'image-option' ? !selectedOption : !answer.trim()}>Submit</button>
-                      <button onClick={handleSolve} style={{ background: 'transparent', border: '1px solid var(--clr-accent)', color: 'var(--clr-accent)' }}>Solve</button>
-                      {!hintUsed && <button onClick={handleHint} style={{ background: 'transparent', border: '1px solid var(--clr-text-soft)', color: 'var(--clr-text-soft)' }}>💡 Hint</button>}
-                    </>
-                  ) : (
-                    <button onClick={advance}>{questionNumber >= totalQuestions ? 'Finish' : 'Next Riddle'}</button>
                   )}
-                </div>
 
-                {/* Results so far */}
-                {results.length > 0 && (
-                  <div style={{ marginTop: '16px' }}>
-                    <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.82rem' }}>
-                      <thead><tr style={{ color: 'var(--clr-text-soft)' }}><th style={{ textAlign: 'left', padding: '4px 8px' }}>#</th><th style={{ textAlign: 'left', padding: '4px 8px' }}>Riddle</th><th style={{ textAlign: 'center', padding: '4px 8px' }}>Your Answer</th><th style={{ textAlign: 'center', padding: '4px 8px' }}>Correct?</th></tr></thead>
-                      <tbody>
-                        {results.map((r, i) => (
-                          <tr key={i} style={{ borderTop: '1px solid var(--clr-border)' }}>
-                            <td style={{ padding: '4px 8px', color: 'var(--clr-text-soft)' }}>{i + 1}</td>
-                            <td style={{ padding: '4px 8px', color: 'var(--clr-text)' }}>{r.prompt}</td>
-                            <td style={{ padding: '4px 8px', textAlign: 'center', color: 'var(--clr-text)' }}>{r.userAnswer}</td>
-                            <td style={{ padding: '4px 8px', textAlign: 'center', color: r.correct ? 'var(--clr-correct)' : 'var(--clr-wrong)' }}>{r.correct ? '✓' : '✗'}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
+                  {/* Sequence */}
+                  {question.type === 'sequence' && question.sequence && (
+                    <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', flexWrap: 'wrap', margin: '0 0 16px' }}>
+                      {question.sequence.map((item, i) => (
+                        <div key={i} style={{ background: item === '?' ? 'var(--clr-accent-soft)' : 'var(--clr-surface)', border: item === '?' ? '2px dashed var(--clr-accent)' : '1px solid var(--clr-border)', borderRadius: 'var(--radius)', padding: '10px 16px', fontSize: '1.3rem', fontWeight: 700, color: item === '?' ? 'var(--clr-accent)' : 'var(--clr-text)', minWidth: 44, textAlign: 'center' }}>
+                          {item}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Logic: Question Text */}
+                  {question.type === 'logic' && (
+                    <p style={{ fontSize: '1.05rem', lineHeight: 1.6, color: 'var(--clr-text)', margin: '0 auto 16px', maxWidth: 480, textAlign: 'left', background: 'var(--clr-surface)', padding: '16px 20px', borderRadius: 'var(--radius)', border: '1px solid var(--clr-border)' }}>
+                      {question.question}
+                    </p>
+                  )}
+
+                  {/* Visual: SVG Diagram / Grid */}
+                  {question.type === 'image-option' && question.svg && (
+                    <div style={{ textAlign: 'center', margin: '0 auto 16px', maxWidth: 360, background: 'var(--clr-surface)', borderRadius: 'var(--radius)', padding: '12px', border: '1px solid var(--clr-border)' }}
+                      dangerouslySetInnerHTML={{ __html: question.svg }} />
+                  )}
+
+                  {/* Image Options */}
+                  {question.type === 'image-option' && question.options && (
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '10px', maxWidth: 360, margin: '0 auto 16px', maxWidth: 360 }}>
+                      {question.options.map(opt => (
+                        <button key={opt.id} onClick={() => !revealed && setSelectedOption(opt.id)}
+                          style={{ background: selectedOption === opt.id ? 'var(--clr-accent-soft)' : 'var(--clr-surface)', border: selectedOption === opt.id ? '2px solid var(--clr-accent)' : '1px solid var(--clr-border)', borderRadius: 'var(--radius)', padding: '10px', cursor: revealed ? 'default' : 'pointer' }}
+                          dangerouslySetInnerHTML={{ __html: opt.svg }} />
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Text/Number Input */}
+                  {question.type !== 'image-option' && (
+                    <div className="input-group" style={{ maxWidth: 280, margin: '0 auto 12px' }}>
+                      <input className="answer-input" type="text" value={answer} onChange={e => setAnswer(e.target.value)} onKeyDown={handleKeyDown} disabled={revealed} placeholder="Your answer" autoFocus />
+                    </div>
+                  )}
+
+                  {/* Onscreen Numpad for numeric questions */}
+                  {question.type !== 'image-option' && question.numeric && !revealed && (
+                    <div style={{ maxWidth: 220, margin: '0 auto 12px' }}>
+                      <NumPad onInput={numpadPress} />
+                    </div>
+                  )}
+
+                  {/* Feedback */}
+                  {feedback && (
+                    <div className={`feedback ${isCorrect ? 'correct' : 'wrong'}`} style={{ marginBottom: '12px', textAlign: 'center' }}>{feedback}</div>
+                  )}
+
+                  {/* Hint */}
+                  {hintText && (
+                    <div className="feedback solve" style={{ marginBottom: '12px', textAlign: 'center' }}>💡 {hintText}</div>
+                  )}
+
+                  {/* Step-by-step solution (deep) */}
+                  {solutionSteps && solutionSteps.length > 0 && (
+                    <div style={{ background: 'var(--clr-surface)', border: '1px solid var(--clr-accent)', borderRadius: 'var(--radius)', padding: '14px 18px', margin: '0 auto 14px', maxWidth: 460, textAlign: 'left' }}>
+                      <div style={{ fontFamily: 'var(--font-display)', fontSize: '1.05rem', color: 'var(--clr-accent)', fontWeight: 700, marginBottom: '8px', textAlign: 'center' }}>🔦 Step-by-Step Solution</div>
+                      {solutionSteps.map((step, i) => (
+                        <div key={i} style={{ display: 'flex', gap: '10px', padding: '6px 0', borderBottom: i < solutionSteps.length - 1 ? '1px solid var(--clr-border)' : 'none', fontSize: '0.92rem', lineHeight: 1.5, color: 'var(--clr-text)' }}>
+                          <span style={{ flexShrink: 0, width: 22, height: 22, borderRadius: '50%', background: 'var(--clr-accent)', color: '#fff', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.78rem', fontWeight: 700 }}>{i + 1}</span>
+                          <span>{step}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Buttons */}
+                  <div className="button-row">
+                    {!revealed ? (
+                      <>
+                        <button onClick={handleSubmit} disabled={question.type === 'image-option' ? !selectedOption : !answer.trim()}>Submit</button>
+                        <button onClick={handleSolve} style={{ background: 'transparent', border: '1px solid var(--clr-accent)', color: 'var(--clr-accent)' }}>Solve</button>
+                        {!hintUsed && <button onClick={handleHint} style={{ background: 'transparent', border: '1px solid var(--clr-text-soft)', color: 'var(--clr-text-soft)' }}>💡 Hint</button>} 
+                      </>
+                    ) : (
+                      <button onClick={advance}>{questionNumber >= totalQuestions ? 'Finish' : 'Next Riddle'}</button>
+                    )}
                   </div>
-                )}
-              </>
-            )}
-          </>
-        )}
 
-        {stage === 'finished' && (
-          <div className="welcome-box">
-            <div style={{ fontSize: '2rem', marginBottom: '8px' }}>{'⭐'.repeat(stars)}</div>
-            <p className="final-score">{score}/{total} Riddles Solved!</p>
-            <p className="welcome-text">Accuracy: {pct}% · Hints used: {hintUsed ? 'Yes' : 'No'}</p>
-            <div className="button-row">
-              <button onClick={() => { setStage('setup'); setRiddleType(null) }}>Play Again</button>
-              <button onClick={onBack} style={{ background: 'transparent', border: '1px solid var(--clr-accent)', color: 'var(--clr-accent)' }}>Back to Home</button>
+                  {/* Results so far */}
+                  {results.length > 0 && (
+                    <div style={{ marginTop: '16px' }}>
+                      <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.82rem' }}>
+                        <thead><tr style={{ color: 'var(--clr-text-soft)' }}><th style={{ textAlign: 'left', padding: '4px 8px' }}>#</th><th style={{ textAlign: 'left', padding: '4px 8px' }}>Riddle</th><th style={{ textAlign: 'center', padding: '4px 8px' }}>Your Answer</th><th style={{ textAlign: 'center', padding: '4px 8px' }}>Correct?</th></tr></thead>
+                        <tbody>
+                          {results.map((r, i) => (
+                            <tr key={i} style={{ borderTop: '1px solid var(--clr-border)' }}>
+                              <td style={{ padding: '4px 8px', color: 'var(--clr-text-soft)' }}>{i + 1}</td>
+                              <td style={{ padding: '4px 8px', color: 'var(--clr-text)' }}>{r.prompt}</td>
+                              <td style={{ padding: '4px 8px', textAlign: 'center', color: 'var(--clr-text)' }}>{r.userAnswer}</td>
+                              <td style={{ padding: '4px 8px', textAlign: 'center', color: r.correct ? 'var(--clr-correct)' : 'var(--clr-wrong)' }}>{r.correct ? '✓' : '✗'}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  )}
+                </>
+              )}
+            </>
+          )}
+
+          {stage === 'finished' && (
+            <div className="welcome-box">
+              <div style={{ fontSize: '2rem', marginBottom: '8px' }}>{'⭐'.repeat(stars)}</div>
+              <p className="final-score">{score}/{total} Riddles Solved!</p>
+              <p className="welcome-text">Accuracy: {pct}% · Hints used: {hintUsed ? 'Yes' : 'No'}</p>
+              <div className="button-row">
+                <button onClick={() => { setStage('setup'); setRiddleType(initialType || selectedType || currentMeta.type); setSelectedType(initialType || selectedType || currentMeta.type); }}>Play Again</button>
+                <button onClick={onBack} style={{ background: 'transparent', border: '1px solid var(--clr-accent)', color: 'var(--clr-accent)' }}>Back</button>
+              </div>
             </div>
-          </div>
-        )}
+          )}
       </>
     )
   }
@@ -42627,6 +42710,9 @@ function App() {
     diffeq: DiffEqApp,             // Differential Equations
     tatsavit: TatsavitApp,         // Tatsavit (progressive math drill)
     language: LanguageDashboard,   // Language Puzzles Dashboard
+    crossword: CrosswordApp,
+    wordsearch: WordSearchApp,
+    wordcreator: WordCreatorApp,
     randommix: RandomMixApp,       // Random Mix (adaptive)
     custom: CustomApp,             // Custom lesson builder
     gym: Gym,                   // Unified adaptive Gym — bundles all 7 below
@@ -42646,13 +42732,60 @@ function App() {
     riddle: RiddleApp,              // Math Riddles
     'water-jug-lab': WaterJugLab,
     'equation-crafting-lab': EquationCraftingLab,
+    playground: PlaygroundApp,
+    'local-compiler': LocalCompilerApp,
     pathmap: PathMap, // Learning Path (prerequisite graph & personalized path)
   }
 
   // Get the component to render (or null if mode not set)
-  const ActiveApp = mode && mode !== 'goalpractice' ? modeMap[mode] : null
+  const ActiveApp = mode && mode !== 'goalpractice'
+    ? (mode.startsWith('contrast-') ? ContrastChallengeApp : modeMap[mode])
+    : null;
 
   const renderContent = () => {
+    if (mode === 'treasurehunt' || (mode && (mode.startsWith('treasurehunt-') || mode.startsWith('treasurehunt_')))) {
+      const rawWorldId = (mode.startsWith('treasurehunt-') || mode.startsWith('treasurehunt_'))
+        ? mode.replace(/^treasurehunt[-_]/, '')
+        : null;
+      const worldId = rawWorldId ? rawWorldId.replace(/_/g, '-') : null;
+      return (
+        <TreasureHuntApp
+          initialWorldId={worldId}
+          onBack={() => {
+            setMode(null);
+            setSelectedHomeSection('treasure-hunt');
+            setCurrentView('puzzles');
+          }}
+        />
+      );
+    }
+
+    if (mode && mode.startsWith('riddle-')) {
+      const riddleType = mode.replace(/^riddle-/, '');
+      return (
+        <RiddleApp
+          initialType={riddleType}
+          onBack={() => {
+            setMode(null);
+            setSelectedHomeSection('math-riddles');
+            setCurrentView('puzzles');
+          }}
+        />
+      );
+    }
+
+    if (mode === 'playground') {
+      return (
+        <PlaygroundApp onBack={() => setMode(null)} />
+      );
+    }
+
+    if (mode === 'local-compiler') {
+      return (
+        <LocalCompilerApp onBack={() => setMode(null)} />
+      );
+    }
+
     if (mode === 'transfer') {
       return (
         <TransferChallengeApp
@@ -42715,12 +42848,25 @@ function App() {
           isGoalSelection={true}
           completedTopics={completedTopics}
           goldMastery={goldMastery}
+          selectedSection={selectedHomeSection}
+          onSelectSection={handleSelectSection}
           onBack={() => {
             setMode(null);
             setIsGoalMode(false);
           }}
           onSelect={(key) => {
-            setMode(key);
+            const cat = getCategoryForMode(key);
+            if (cat) {
+              setSelectedHomeSection(cat);
+            }
+            if (key && key.startsWith('contrast-')) {
+              const pairId = key.replace(/^contrast-/, '');
+              try { localStorage.setItem('tenali-start-contrast-id', pairId); } catch {}
+              setSelectedHomeSection('contrast-challenge');
+              setMode(key);
+            } else {
+              setMode(key);
+            }
             setIsGoalMode(true);
           }}
         />
@@ -42736,6 +42882,7 @@ function App() {
           markGoldMastery={markGoldMastery}
           updateCoins={updateCoins}
           setMode={setMode}
+          pairId={mode?.startsWith('contrast-') ? mode.replace(/^contrast-/, '') : undefined}
           setTransferTopic={setTransferTopic}
           onBack={journeyContext ? async () => {
             const isCompleted = !!document.querySelector('.final-score');
@@ -42771,14 +42918,26 @@ function App() {
       <Home
         completedTopics={completedTopics}
         goldMastery={goldMastery}
+        selectedSection={selectedHomeSection}
+        onSelectSection={handleSelectSection}
         onSelect={(key) => {
           setCurrentView('puzzles');
+          const cat = getCategoryForMode(key);
+          if (cat) {
+            setSelectedHomeSection(cat);
+          }
           if (key === 'goalpractice') {
             setMode('goalpractice');
           } else if (key === 'angles') {
             // PROTOTYPE: ONLY Angles enters the Learn/Test gateway
             setIsGoalMode(false);
             handleSelectMode(key);
+          } else if (key && key.startsWith('contrast-')) {
+            const pairId = key.replace(/^contrast-/, '');
+            try { localStorage.setItem('tenali-start-contrast-id', pairId); } catch {}
+            setSelectedHomeSection('contrast-challenge');
+            setMode(key);
+            setIsGoalMode(false);
           } else {
             // All other topics bypass the gateway and go straight to quiz configuration
             setMode(key);
@@ -42790,66 +42949,17 @@ function App() {
   };
 
   // ========== LEARN / TEST GATEWAY ==========
-  const [learningPhase, setLearningPhase] = useState(() => {
-    try {
-      const params = new URLSearchParams(window.location.search);
-      return params.get('mode') === 'angles' ? 'select' : null;
-    } catch {
-      return null;
-    }
-  })
-  const [learnData, setLearnData] = useState(null)
-  const [revealedBlocks, setRevealedBlocks] = useState(1)
-  const [blockStartTime, setBlockStartTime] = useState(Date.now())
-  const [warningMessage, setWarningMessage] = useState(null)
-
-  useEffect(() => {
-    if (mode && learningPhase === 'learn') {
-      const topicName = getModeLabel(mode)
-      setLearnData(null)
-      getLearnContent(mode, topicName).then(data => {
-        setLearnData(data)
-      })
-    }
-  }, [mode, learningPhase])
-
-
-  const getModeLabel = (key) => {
-    const labels = {
-      gk: 'General Knowledge', addition: 'Addition', quadratic: 'Quadratic Substitution',
-      multiply: 'Multiplication Tables', vocab: 'Vocabulary', spot: 'Twin Hunt',
-      sqrt: 'Square Root', polymul: 'Polynomial Multiplication', polyfactor: 'Polynomial Factoring',
-      primefactor: 'Prime Factorization', qformula: 'Quadratic Formula', simul: 'Simultaneous Equations',
-      'qformula-concept': 'Quadratics: Concept Lab', 'simul-concept': 'Sim. Equations: Concept Lab',
-      funceval: 'Functions', lineq: 'Line Equations', basicarith: 'Arithmetic',
-      fractionadd: 'Fractions', surds: 'Surds', indices: 'Indices',
-      sequences: 'Sequences & Series', ratio: 'Ratio & Proportion', percent: 'Percentages',
-      sets: 'Sets & Venn Diagrams', trig: 'Trigonometry', ineq: 'Inequalities',
-      coordgeom: 'Coordinate Geometry', prob: 'Probability', stats: 'Statistics',
-      matrix: 'Matrices', vectors: 'Vectors', dotprod: 'Dot Products',
-      transform: 'Transformations', mensur: 'Mensuration', bearings: 'Bearings',
-      log: 'Logarithms', diff: 'Differentiation', bases: 'Number Bases',
-      circleth: 'Circle Theorems', integ: 'Integration', stdform: 'Standard Form',
-      bounds: 'Bounds', sdt: 'Speed, Distance, Time', variation: 'Variation',
-      hcflcm: 'HCF & LCM', profitloss: 'Profit & Loss', rounding: 'Rounding',
-      binomial: 'Binomial Theorem', complex: 'Complex Numbers', angles: 'Angles',
-      triangles: 'Triangles', congruence: 'Congruence', pythag: "Pythagoras' Theorem",
-      polygons: 'Polygons', similarity: 'Similarity', squaring: 'Squaring (a+b)²',
-      lineareq: 'Linear Equations', decimals: 'Decimals', permcomb: 'Permutations & Combinations',
-      limits: 'Limits', invtrig: 'Inverse Trig', remfactor: 'Remainder Theorem',
-      heron: "Heron's Formula", shares: 'Shares & Dividends', banking: 'Banking (RD)',
-      gst: 'GST', section: 'Section Formula', linprog: 'Linear Programming',
-      circmeasure: 'Circular Measure', conics: 'Conic Sections', diffeq: 'Differential Equations',
-      tatsavit: 'Math Drill', randommix: 'Random Mix', custom: 'Custom Lesson',
-      gym: 'Gym', guess: 'Guess the Number',
-      gymdecimals: 'Gym Decimals', funcgym: 'Functions Gym', dotprodgym: 'Dot Products Gym',
-      fracaddgym: 'Fractions Gym', lineqgym: 'Linear Equations Gym',
-      indicesgym: 'Indices Gym', polygym: 'Polynomials Gym',
-    }
-    return labels[key] || key
-  }
-
   const handleSelectMode = (key) => {
+    const cat = getCategoryForMode(key);
+    if (cat) {
+      setSelectedHomeSection(cat);
+    }
+    if (key && key.startsWith('contrast-')) {
+      const pairId = key.replace(/^contrast-/, '');
+      try { localStorage.setItem('tenali-start-contrast-id', pairId); } catch {}
+      setMode(key);
+      return;
+    }
     setMode(key)
     setLearningPhase('select')
     setRevealedBlocks(1)
@@ -42858,6 +42968,10 @@ function App() {
   }
 
   const handleBackToHome = () => {
+    const currentCat = getCategoryForMode(mode);
+    if (currentCat) {
+      setSelectedHomeSection(currentCat);
+    }
     setMode(null)
     setLearningPhase(null)
     setRevealedBlocks(1)
@@ -42875,7 +42989,7 @@ function App() {
         <div className="card">
           <div style={{ maxWidth: 640, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
             <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
-              <button className="back-button" onClick={handleBackToHome}>← Home</button>
+              <button className="back-button" onClick={handleBackToHome}>← Back</button>
             </div>
             <div style={{ textAlign: 'center', marginBottom: 32 }}>
               <h1 style={{ marginBottom: 8, fontSize: '2.5rem' }}>{topicName}</h1>
@@ -43202,11 +43316,21 @@ function App() {
           }}
           onSelectTopic={(topicKey) => {
             setCurrentView('puzzles');
+            const cat = getCategoryForMode(topicKey);
+            if (cat) {
+              setSelectedHomeSection(cat);
+            }
             if (topicKey === 'goalpractice') {
               setMode('goalpractice');
             } else if (topicKey === 'angles') {
               setIsGoalMode(false);
               handleSelectMode(topicKey);
+            } else if (topicKey && topicKey.startsWith('contrast-')) {
+              const pairId = topicKey.replace(/^contrast-/, '');
+              try { localStorage.setItem('tenali-start-contrast-id', pairId); } catch {}
+              setSelectedHomeSection('contrast-challenge');
+              setMode(topicKey);
+              setIsGoalMode(false);
             } else {
               setMode(topicKey);
               setIsGoalMode(false);
@@ -43350,13 +43474,9 @@ function App() {
         </div>
       )}
       <div>
-        {mode === 'vachana' ? (
-          <Vachana onBack={() => setMode(null)} initialAdaptScore={diagnosticState[mode] || 0} />
-        ) : (
-          <div className={`card ${mode === 'contrastlist' ? 'is-wide' : ''}`}>
-            {renderContent()}
-          </div>
-        )}
+        <div className={`card ${mode === 'contrastlist' || (mode && mode.startsWith('contrast-')) || mode === 'vachana' || mode === 'treasurehunt' || (mode && (mode.startsWith('treasurehunt-') || mode.startsWith('treasurehunt_'))) || mode === 'playground' || mode === 'local-compiler' ? 'is-wide' : ''}`}>
+          {renderContent()}
+        </div>
       </div>
       {renderCelebrationModal()}
       {/* Misconception Monsters — toast overlay (portals to body) + Hall modal. Spec §6. */}
@@ -43806,39 +43926,23 @@ function AdditionApp({ onBack, completedTopics = [], goldMastery = [], markTopic
     return <ComicAdditionApp onBack={() => setShowComicAddition(false)} />
   }
 
-  if (!started && !finished) {
-    return (
-      <div style={{ minHeight: '100vh', background: '#181512', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px', fontFamily: 'Inter, sans-serif' }}>
-        <div style={{
-          background: '#2D2520', border: '1.5px solid #4A4038', borderRadius: '28px',
-          boxShadow: '0 20px 40px rgba(0,0,0,.45)', padding: '48px 40px', maxWidth: '720px', width: '100%',
-          textAlign: 'center', position: 'relative'
-        }}>
-          <button onClick={onBack} style={{
-            position: 'absolute', top: '24px', left: '24px', background: 'transparent',
-            border: '1px solid #5B5048', borderRadius: '6px', padding: '6px 14px',
-            color: '#A89C93', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer'
-          }}>← Home</button>
-
-          <h1 style={{ fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 700, fontSize: '48px', color: '#F4F1ED', margin: '0 0 12px', lineHeight: 1.1 }}>
-            Addition
-          </h1>
-          <p style={{ color: '#988D84', fontSize: '0.9rem', margin: '0 0 24px', fontFamily: 'Inter, sans-serif', fontWeight: 400, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
-            <span>Practice addition!</span>
-          </p>
+  return (
+    <QuizLayout title="Addition" subtitle="Practice addition!" onBack={onBack} timer={started && !finished ? timer : null}>
+      {!started && !finished && (
+        <div className="welcome-box">
           <KeyTerms topicKey="addition" />
 
           <div style={{ marginBottom: '24px' }}>
-            <h3 style={{ color: '#F4F1ED', fontSize: '0.9rem', margin: '0 0 16px', fontFamily: 'Inter, sans-serif', fontWeight: 700 }}>
+            <h3 style={{ color: 'var(--clr-text)', fontSize: '0.9rem', margin: '0 0 16px', fontFamily: 'Inter, sans-serif', fontWeight: 700 }}>
               Select Difficulty:
             </h3>
             <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '12px' }}>
               {['easy', 'medium', 'hard', ...(additionMode === 'standard' ? ['extrahard'] : [])].map(d => (
                 <button key={d} onClick={() => { setDifficulty(d); setIsAdaptive(false); }} style={{
-                  background: (!isAdaptive && difficulty === d) ? '#F08C46' : 'transparent',
-                  border: (!isAdaptive && difficulty === d) ? '1px solid #F08C46' : '1px solid #5B5048',
+                  background: (!isAdaptive && difficulty === d) ? 'var(--clr-accent)' : 'transparent',
+                  border: (!isAdaptive && difficulty === d) ? '1px solid var(--clr-accent)' : '1px solid var(--clr-border)',
                   borderRadius: '50px', padding: '8px 16px',
-                  color: (!isAdaptive && difficulty === d) ? '#FFF' : '#988D84', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer'
+                  color: (!isAdaptive && difficulty === d) ? '#FFF' : 'var(--clr-text-soft)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer'
                 }}>
                   {diffLabels[d]}
                 </button>
@@ -43847,10 +43951,10 @@ function AdditionApp({ onBack, completedTopics = [], goldMastery = [], markTopic
             {additionMode === 'standard' && (
               <div style={{ display: 'flex', justifyContent: 'center' }}>
                 <button onClick={() => setIsAdaptive(true)} style={{
-                  background: isAdaptive ? '#F08C46' : 'transparent',
-                  border: isAdaptive ? '1px solid #F08C46' : '1px solid #5B5048',
+                  background: isAdaptive ? 'var(--clr-accent)' : 'transparent',
+                  border: isAdaptive ? '1px solid var(--clr-accent)' : '1px solid var(--clr-border)',
                   borderRadius: '50px', padding: '8px 16px',
-                  color: isAdaptive ? '#FFF' : '#988D84', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer'
+                  color: isAdaptive ? '#FFF' : 'var(--clr-text-soft)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer'
                 }}>
                   Adaptive
                 </button>
@@ -43859,61 +43963,57 @@ function AdditionApp({ onBack, completedTopics = [], goldMastery = [], markTopic
           </div>
 
           <div style={{ marginBottom: '32px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <label style={{ color: '#988D84', fontSize: '0.85rem', margin: '0 0 12px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>
+            <label style={{ color: 'var(--clr-text-soft)', fontSize: '0.85rem', margin: '0 0 12px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>
               How many questions? (max 100)
             </label>
             <input type="text" value={numQuestions} onChange={(e) => { const v = e.target.value; if (v === '' || (/^\d+$/.test(v) && Number(v) <= 100)) setNumQuestions(v) }} style={{
-              background: '#463B34', border: '1px solid #5B5048', borderRadius: '6px',
-              padding: '10px', color: '#FFF', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem',
+              background: 'var(--clr-input)', border: '1px solid var(--clr-border)', borderRadius: '6px',
+              padding: '10px', color: 'var(--clr-text)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem',
               width: '100px', textAlign: 'center', outline: 'none'
             }} placeholder={String(DEFAULT_TOTAL)} />
           </div>
 
           <button onClick={startQuiz} style={{
-            background: '#F08C46', border: 'none', borderRadius: '6px',
+            background: 'var(--clr-accent)', border: 'none', borderRadius: '6px',
             padding: '10px 24px', color: '#FFF', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer'
           }}>
             Start Quiz
           </button>
 
           <button type="button" onClick={() => setShowComicAddition(true)} style={{
-            marginTop: '16px', background: 'transparent', border: '1px solid #5B5048', borderRadius: '6px',
-            padding: '10px 24px', color: '#C9BFB6', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer'
+            marginTop: '16px', background: 'transparent', border: '1px solid var(--clr-border)', borderRadius: '6px',
+            padding: '10px 24px', color: 'var(--clr-text-soft)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer'
           }}>
             Comic Addition — Story Mode
           </button>
-        </div>
-        {isStage3Completed('addition', completedTopics) && (
-          <div className="transfer-cta-box" style={{ marginTop: '20px', padding: '16px', background: 'var(--clr-hover, rgba(255,255,255,0.03))', borderRadius: '10px', border: '1px solid var(--clr-border)', textAlign: 'center' }}>
-            <p style={{ margin: '0 0 12px', fontSize: '0.9rem', color: 'var(--clr-text-soft)', lineHeight: '1.4' }}>
-              {goldMastery.includes('addition') ? (
-                <>🥇 You have achieved Gold Mastery for this topic!</>
-              ) : (
-                <>🎉 You have completed Stage 3 Practice for this topic!</>
-              )}
-            </p>
-            <button
-              className="btn-transfer-cta"
-              onClick={() => {
-                if (setTransferTopic) setTransferTopic('addition')
-                if (setMode) setMode('transfer')
-              }}
-              style={{ width: '100%', padding: '10px', background: 'linear-gradient(135deg, #FFD700, #FFA500)', color: '#000', fontWeight: 'bold', border: 'none', borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
-            >
-              {goldMastery.includes('addition') ? (
-                <>🔄 Revisit Transfer Challenge (Stage 4) 🥇</>
-              ) : (
-                <>🚀 Start Transfer Challenge (Stage 4) 🥇</>
-              )}
-            </button>
-          </div>
-        )}
-      </div>
-    )
-  }
 
-  return (
-    <QuizLayout title="Addition" onBack={onBack} timer={timer}>
+          {isStage3Completed('addition', completedTopics) && (
+            <div className="transfer-cta-box" style={{ marginTop: '20px', padding: '16px', background: 'var(--clr-hover, rgba(255,255,255,0.03))', borderRadius: '10px', border: '1px solid var(--clr-border)', textAlign: 'center' }}>
+              <p style={{ margin: '0 0 12px', fontSize: '0.9rem', color: 'var(--clr-text-soft)', lineHeight: '1.4' }}>
+                {goldMastery.includes('addition') ? (
+                  <>🥇 You have achieved Gold Mastery for this topic!</>
+                ) : (
+                  <>🎉 You have completed Stage 3 Practice for this topic!</>
+                )}
+              </p>
+              <button
+                className="btn-transfer-cta"
+                onClick={() => {
+                  if (setTransferTopic) setTransferTopic('addition')
+                  if (setMode) setMode('transfer')
+                }}
+                style={{ width: '100%', padding: '10px', background: 'linear-gradient(135deg, #FFD700, #FFA500)', color: '#000', fontWeight: 'bold', border: 'none', borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
+              >
+                {goldMastery.includes('addition') ? (
+                  <>🔄 Revisit Transfer Challenge (Stage 4) 🥇</>
+                ) : (
+                  <>🚀 Start Transfer Challenge (Stage 4) 🥇</>
+                )}
+              </button>
+            </div>
+          )}
+        </div>
+      )}
       {started && !finished && <>
         {/* Progress Display */}
         <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '0.3rem' }}>
@@ -44926,7 +45026,7 @@ function GymQuiz({ title, subtitle, typeKeys, welcomeText, algebraInput, onBack 
         <div className="kid-card" style={{ marginTop: '5vh' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <h1>{title}</h1>
-            <button className="kid-back-btn" onClick={onBack}>← Home</button>
+            <button className="kid-back-btn" onClick={onBack}>← Back</button>
           </div>
           <p className="subtitle">{subtitle}</p>
 
@@ -45019,7 +45119,7 @@ function GymQuiz({ title, subtitle, typeKeys, welcomeText, algebraInput, onBack 
           <ResultsTable results={results} />
           <div className="button-row" style={{ gap: '0.5rem' }}>
             <button onClick={() => { setStarted(false); setFinished(false); setAdaptive(false) }}>Play Again</button>
-            <button onClick={onBack} style={{ background: 'transparent', border: '1px solid var(--clr-accent)', color: 'var(--clr-accent)' }}>Back to Home</button>
+            <button onClick={onBack} style={{ background: 'transparent', border: '1px solid var(--clr-accent)', color: 'var(--clr-accent)' }}>Back</button>
           </div>
         </div>
       )}
@@ -47354,8 +47454,7 @@ function FractionsPage(props) {
 
   if (learningPhase === 'select') {
     return (
-      <div className="app-shell" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', paddingTop: '40px' }}>
-        <div className="card" style={{ maxWidth: 900, width: '90%', padding: '3rem', color: 'var(--clr-text)', textAlign: 'center', borderRadius: '24px', boxShadow: '0 10px 30px rgba(0,0,0,0.05)', background: 'var(--clr-card)' }}>
+      <div style={{ maxWidth: 900, width: '100%', margin: '0 auto', padding: '1rem', color: 'var(--clr-text)', textAlign: 'center' }}>
           <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
             <button className="kid-btn-secondary" onClick={props.onBack} style={{ padding: '8px 16px', borderRadius: '20px', fontWeight: 'bold', border: 'none', background: 'rgba(0,0,0,0.05)', cursor: 'pointer', color: 'var(--clr-text)' }}>
               ← Back to Home
@@ -47385,7 +47484,6 @@ function FractionsPage(props) {
           }}>
             Idli Vada Sambhar — multiples & LCM game
           </button>
-        </div>
       </div>
     );
   }
@@ -48460,43 +48558,23 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
 
     const curAdaptLevel = adaptiveLevel(adaptScore)
 
-    if (!started && !finished) {
-      return (
-        <div style={{ minHeight: '100vh', background: 'var(--clr-bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px', fontFamily: 'Inter, sans-serif' }}>
-          <div style={{
-            background: '#2D2520', border: '1.5px solid #4A4038', borderRadius: '28px',
-            boxShadow: '0 20px 40px rgba(0,0,0,.45)', padding: '48px 40px', maxWidth: '720px', width: '100%',
-            textAlign: 'center', position: 'relative'
-          }}>
-            <button onClick={onBack} style={{
-              position: 'absolute', top: '24px', left: '24px', background: 'transparent',
-              border: '1px solid #5B5048', borderRadius: '6px', padding: '6px 14px',
-              color: '#A89C93', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer'
-            }}>← Home</button>
-
-            <h1 style={{ fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 700, fontSize: '48px', color: '#F4F1ED', margin: '0 0 12px', lineHeight: 1.1 }}>
-              {title}
-            </h1>
-            <p style={{ color: '#988D84', fontSize: '0.9rem', margin: '0 0 40px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>
-              {subtitle}
-            </p>
-            <p style={{ color: '#988D84', fontSize: '0.9rem', margin: '0 0 24px', fontFamily: 'Inter, sans-serif', fontWeight: 400, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
-              <span>Practice {title.toLowerCase()}!</span>
-            </p>
-            {tip && <p style={{ fontSize: '0.85rem', color: '#A89C93', marginBottom: '16px' }}>{tip}</p>}
+    return (
+      <QuizLayout title={title} subtitle={subtitle} onBack={onBack} timer={started && !finished ? timer : null}>
+        {!started && !finished && (
+          <div className="welcome-box">
             {topicKey && <KeyTerms topicKey={topicKey} />}
 
             <div style={{ marginBottom: '24px' }}>
-              <h3 style={{ color: '#F4F1ED', fontSize: '0.9rem', margin: '0 0 16px', fontFamily: 'Inter, sans-serif', fontWeight: 700 }}>
+              <h3 style={{ color: 'var(--clr-text)', fontSize: '0.9rem', margin: '0 0 16px', fontFamily: 'Inter, sans-serif', fontWeight: 700 }}>
                 Select Difficulty:
               </h3>
               <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '12px' }}>
                 {diffs.map(d => (
                   <button key={d} onClick={() => { setDifficulty(d); setIsAdaptive(false); }} style={{
-                    background: (!isAdaptive && difficulty === d) ? '#F08C46' : 'transparent',
-                    border: (!isAdaptive && difficulty === d) ? '1px solid #F08C46' : '1px solid #5B5048',
+                    background: (!isAdaptive && difficulty === d) ? 'var(--clr-accent)' : 'transparent',
+                    border: (!isAdaptive && difficulty === d) ? '1px solid var(--clr-accent)' : '1px solid var(--clr-border)',
                     borderRadius: '50px', padding: '8px 16px',
-                    color: (!isAdaptive && difficulty === d) ? '#FFF' : '#988D84', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer'
+                    color: (!isAdaptive && difficulty === d) ? '#FFF' : 'var(--clr-text-soft)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer'
                   }}>
                     {diffLabels[d]}
                   </button>
@@ -48504,10 +48582,10 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
               </div>
               <div style={{ display: 'flex', justifyContent: 'center' }}>
                 <button onClick={() => setIsAdaptive(true)} style={{
-                  background: isAdaptive ? '#F08C46' : 'transparent',
-                  border: isAdaptive ? '1px solid #F08C46' : '1px solid #5B5048',
+                  background: isAdaptive ? 'var(--clr-accent)' : 'transparent',
+                  border: isAdaptive ? '1px solid var(--clr-accent)' : '1px solid var(--clr-border)',
                   borderRadius: '50px', padding: '8px 16px',
-                  color: isAdaptive ? '#FFF' : '#988D84', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer'
+                  color: isAdaptive ? '#FFF' : 'var(--clr-text-soft)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer'
                 }}>
                   Adaptive
                 </button>
@@ -48515,54 +48593,49 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
             </div>
 
             <div style={{ marginBottom: '32px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-              <label style={{ color: '#988D84', fontSize: '0.85rem', margin: '0 0 12px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>
+              <label style={{ color: 'var(--clr-text-soft)', fontSize: '0.85rem', margin: '0 0 12px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>
                 How many questions? (max 100)
               </label>
               <input type="text" value={numQuestions} onChange={(e) => { const v = e.target.value; if (v === '' || (/^\d+$/.test(v) && Number(v) <= 100)) setNumQuestions(v) }} style={{
-                background: '#463B34', border: '1px solid #5B5048', borderRadius: '6px',
-                padding: '10px', color: '#FFF', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem',
+                background: 'var(--clr-input)', border: '1px solid var(--clr-border)', borderRadius: '6px',
+                padding: '10px', color: 'var(--clr-text)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem',
                 width: '100px', textAlign: 'center', outline: 'none'
               }} placeholder={String(DEFAULT_TOTAL)} />
             </div>
 
             <button onClick={startQuiz} style={{
-              background: '#F08C46', border: 'none', borderRadius: '6px',
+              background: 'var(--clr-accent)', border: 'none', borderRadius: '6px',
               padding: '10px 24px', color: '#FFF', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer'
             }}>
               Start Quiz
             </button>
+            {isStage3Completed(topicKey, completedTopics) && (
+              <div className="transfer-cta-box" style={{ marginTop: '20px', padding: '16px', background: 'var(--clr-hover, rgba(255,255,255,0.03))', borderRadius: '10px', border: '1px solid var(--clr-border)', textAlign: 'center' }}>
+                <p style={{ margin: '0 0 12px', fontSize: '0.9rem', color: 'var(--clr-text-soft)', lineHeight: '1.4' }}>
+                  {goldMastery.includes(topicKey) ? (
+                    <>🥇 You have achieved Gold Mastery for this topic!</>
+                  ) : (
+                    <>🎉 You have completed Stage 3 Practice for this topic!</>
+                  )}
+                </p>
+                <button
+                  className="btn-transfer-cta"
+                  onClick={() => {
+                    if (setTransferTopic) setTransferTopic(topicKey)
+                    if (setMode) setMode('transfer')
+                  }}
+                  style={{ width: '100%', padding: '10px', background: 'linear-gradient(135deg, #FFD700, #FFA500)', color: '#000', fontWeight: 'bold', border: 'none', borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
+                >
+                  {goldMastery.includes(topicKey) ? (
+                    <>🔄 Revisit Transfer Challenge (Stage 4) 🥇</>
+                  ) : (
+                    <>🚀 Start Transfer Challenge (Stage 4) 🥇</>
+                  )}
+                </button>
+              </div>
+            )}
           </div>
-          {isStage3Completed(topicKey, completedTopics) && (
-            <div className="transfer-cta-box" style={{ marginTop: '20px', padding: '16px', background: 'var(--clr-hover, rgba(255,255,255,0.03))', borderRadius: '10px', border: '1px solid var(--clr-border)', textAlign: 'center' }}>
-              <p style={{ margin: '0 0 12px', fontSize: '0.9rem', color: 'var(--clr-text-soft)', lineHeight: '1.4' }}>
-                {goldMastery.includes(topicKey) ? (
-                  <>🥇 You have achieved Gold Mastery for this topic!</>
-                ) : (
-                  <>🎉 You have completed Stage 3 Practice for this topic!</>
-                )}
-              </p>
-              <button
-                className="btn-transfer-cta"
-                onClick={() => {
-                  if (setTransferTopic) setTransferTopic(topicKey)
-                  if (setMode) setMode('transfer')
-                }}
-                style={{ width: '100%', padding: '10px', background: 'linear-gradient(135deg, #FFD700, #FFA500)', color: '#000', fontWeight: 'bold', border: 'none', borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
-              >
-                {goldMastery.includes(topicKey) ? (
-                  <>🔄 Revisit Transfer Challenge (Stage 4) 🥇</>
-                ) : (
-                  <>🚀 Start Transfer Challenge (Stage 4) 🥇</>
-                )}
-              </button>
-            </div>
-          )}
-        </div>
-      )
-    }
-
-    return (
-      <QuizLayout title={title} subtitle={subtitle} onBack={onBack} timer={timer}>
+        )}
         {started && !finished && <>
           <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '0.3rem' }}>
             <div className="progress-pill center">Question {questionNumber}/{totalQ}</div>
@@ -49499,8 +49572,7 @@ function GSTPage(props) {
 
   if (learningPhase === 'select') {
     return (
-      <div className="app-shell" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', paddingTop: '40px' }}>
-        <div className="card" style={{ maxWidth: 900, width: '90%', padding: '3rem', color: 'var(--clr-text)', textAlign: 'center', borderRadius: '24px', boxShadow: '0 10px 30px rgba(0,0,0,0.05)', background: 'var(--clr-card)' }}>
+      <div style={{ maxWidth: 900, width: '100%', margin: '0 auto', padding: '1rem', color: 'var(--clr-text)', textAlign: 'center' }}>
           <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
             <button className="kid-btn-secondary" onClick={props.onBack} style={{ padding: '8px 16px', borderRadius: '20px', fontWeight: 'bold', border: 'none', background: 'rgba(0,0,0,0.05)', cursor: 'pointer', color: 'var(--clr-text)' }}>
               ← Back to Home
@@ -49524,7 +49596,6 @@ function GSTPage(props) {
               <span style={{ color: 'var(--clr-text-soft)' }}>Jump straight to the GST quiz</span>
             </button>
           </div>
-        </div>
       </div>
     );
   }
@@ -50094,7 +50165,7 @@ function TatsavitApp({ onBack }) {
   if (homeScreen && !drillingScreen && !summaryScreen) {
     return (
       <div style={baseStyles.container}>
-        <button onClick={onBack} style={{ ...baseStyles.buttonSecondary, alignSelf: 'flex-start', marginBottom: '16px' }}>← Home</button>
+        <button onClick={onBack} style={{ ...baseStyles.buttonSecondary, alignSelf: 'flex-start', marginBottom: '16px' }}>← Back</button>
         <div style={baseStyles.card}>
           <h1 style={baseStyles.title}>Tatsavit</h1>
           <p style={baseStyles.subtitle}>Algebra Simplification Drill</p>
@@ -50131,7 +50202,7 @@ function TatsavitApp({ onBack }) {
 
     return (
       <div style={baseStyles.container}>
-        <button onClick={onBack} style={{ ...baseStyles.buttonSecondary, alignSelf: 'flex-start', marginBottom: '16px' }}>← Home</button>
+        <button onClick={onBack} style={{ ...baseStyles.buttonSecondary, alignSelf: 'flex-start', marginBottom: '16px' }}>← Back</button>
         <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '16px' }}>
           <div style={baseStyles.progressPill}>Level {level}</div>
           <div style={baseStyles.progressPill}>{levelInfo}</div>
@@ -50191,7 +50262,7 @@ function TatsavitApp({ onBack }) {
   if (summaryScreen && !homeScreen && !drillingScreen) {
     return (
       <div style={baseStyles.container}>
-        <button onClick={onBack} style={{ ...baseStyles.buttonSecondary, alignSelf: 'flex-start', marginBottom: '16px' }}>← Home</button>
+        <button onClick={onBack} style={{ ...baseStyles.buttonSecondary, alignSelf: 'flex-start', marginBottom: '16px' }}>← Back</button>
         <div style={baseStyles.card}>
           <h2 style={{ fontSize: '1.8rem', marginBottom: '16px' }}>Drill Complete!</h2>
           <p style={{ fontSize: '2rem', fontWeight: 600, color: 'var(--clr-accent)', marginBottom: '8px' }}>Score: {score}</p>
@@ -50203,7 +50274,7 @@ function TatsavitApp({ onBack }) {
           </p>
           <div style={baseStyles.buttonRow}>
             <button onClick={startDrill} style={baseStyles.button}>Try Again</button>
-            <button onClick={goHome} style={{ ...baseStyles.button, background: 'var(--clr-text-soft)' }}>Back to Home</button>
+            <button onClick={goHome} style={{ ...baseStyles.button, background: 'var(--clr-text-soft)' }}>Back</button>
           </div>
         </div>
       </div>
@@ -50556,7 +50627,7 @@ function GuessNumberApp({ onBack }) {
   return (
     <>
       <div className="header-row">
-        <button className="back-button" onClick={onBack}>← Home</button>
+        <button className="back-button" onClick={onBack}>← Back</button>
       </div>
       <h1>Guess the Number</h1>
       <p className="subtitle">Think of a number from 0 to 31 — I'll find it!</p>
@@ -50763,6 +50834,8 @@ function RandomMixApp({ onBack, isGoalMode = false }) {
     }
   }, [isGoalMode]);
   const timer = useTimer()
+  const finished = phase === 'finished'
+  const totalQ = totalQuestions
   const { hintsUsedCount, xpBreakdown, bonusLoading } = useQuizHintsAndXp('mix', finished, score, totalQ, typeof isCorrect !== 'undefined' ? (isCorrect || false) : false, results);
   const advanceFnRef = useRef(null)
   const submittedRef = useRef(false)
@@ -61558,6 +61631,8 @@ function TatsavitLineApp({ onBack, isGoalMode = false }) {
   )
 }
 
-export default App
-export { AuthMenu };
+const GymApp = Gym;
+
+export default App;
+export { AuthMenu, RandomMixApp, GymApp };
 

@@ -3206,12 +3206,12 @@ function LinearAlgebraApp({ onBack }) {
     if (allModules) {
       return (
         <div className="la-module">
-          <button className="la-back" onClick={onBack}>&larr; Home</button>
+          <button className="la-back" onClick={onBack}>&larr; Back</button>
           <div className="la-complete">
             <h2>All Modules Complete!</h2>
             <div className="big-score">{solvedMissions.length}/36</div>
             <p>You mastered Linear Algebra!</p>
-            <button className="la-quiz-next-btn" onClick={onBack} style={{ marginTop: 16, maxWidth: 300, margin: '16px auto 0' }}>Back to Home</button>
+            <button className="la-quiz-next-btn" onClick={onBack} style={{ marginTop: 16, maxWidth: 300, margin: '16px auto 0' }}>Back</button>
           </div>
         </div>
       );
@@ -3219,7 +3219,7 @@ function LinearAlgebraApp({ onBack }) {
     const pct = Math.round((modSolvedCount / modTotal) * 100);
     return (
       <div className="la-module">
-        <button className="la-back" onClick={onBack}>&larr; Home</button>
+        <button className="la-back" onClick={onBack}>&larr; Back</button>
         <div className="la-complete">
           <h2>{mod.emoji} {mod.title} Complete!</h2>
           <div className="big-score">{modSolvedCount}/{modTotal}</div>
@@ -3233,7 +3233,7 @@ function LinearAlgebraApp({ onBack }) {
               Next Module &rarr;
             </button>
           )}
-          <button className="la-quiz-next-btn" onClick={onBack} style={{ maxWidth: 300, margin: '8px auto 0' }}>Back to Home</button>
+          <button className="la-quiz-next-btn" onClick={onBack} style={{ maxWidth: 300, margin: '8px auto 0' }}>Back</button>
         </div>
       </div>
     );
@@ -3255,7 +3255,7 @@ function LinearAlgebraApp({ onBack }) {
 
   return (
     <div className="la-module">
-      {phase !== 'missionquiz' && <button className="la-back" onClick={onBack}>&larr; Home</button>}
+      {phase !== 'missionquiz' && <button className="la-back" onClick={onBack}>&larr; Back</button>}
 
       {phase === 'modules' && (
         <div style={{ textAlign: 'center', padding: '8px 0' }}>

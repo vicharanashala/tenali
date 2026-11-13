@@ -4,7 +4,7 @@ import PmGoalPicker from './PmGoalPicker';
 import PmSnakePath from './PmSnakePath';
 import PmStatsBar from './PmStatsBar';
 
-function PmGoalModal({ open, onClose }) {
+function PmGoalModal({ open, onClose, onOpenFullPage }) {
     const { goalIds, known, path, setGoal, clearGoal, toggleKnown, resetKnown, pmStatus } = usePathmapState();
 
     if (!open) return null;
@@ -13,10 +13,10 @@ function PmGoalModal({ open, onClose }) {
         <div
         onClick={e => { if (e.target === e.currentTarget) onClose(); }}
         style={{
-            position: 'fixed', inset: 0, zIndex: 200,
+            position: 'fixed', inset: 0, zIndex: 100000,
             background: 'rgba(0,0,0,0.75)',
             display: 'flex', alignItems: 'flex-start', justifyContent: 'center',
-            padding: '24px 16px', overflowY: 'auto',
+            padding: '80px 16px 32px', overflowY: 'auto',
         }}
         >
         <div style={{
@@ -34,8 +34,8 @@ function PmGoalModal({ open, onClose }) {
             ✕
             </button>
 
-            <h2 style={{ margin: '0 0 4px', fontSize: '1.2rem' }}>
-            🗺 Learn by Path
+            <h2 style={{ margin: '0 0 4px', fontSize: '1.25rem' }}>
+            🗺 Learning Path
             </h2>
             <p style={{ margin: '0 0 20px', fontSize: '0.83rem', color: 'var(--clr-text-soft)' }}>
             Pick a goal topic — we'll build your path below the search bar on the home screen.
@@ -46,11 +46,49 @@ function PmGoalModal({ open, onClose }) {
                 {pmStatus === 'error' ? "Couldn't load topic data. Please refresh and try again." : 'Loading topics…'}
             </div>
             ) : (
-            <PmGoalPicker
-                goalIds={goalIds}
-                onSetGoal={ids => setGoal(ids)}
-                onClear={() => clearGoal()}
-            />
+            <>
+                <PmGoalPicker
+                    goalIds={goalIds}
+                    onSetGoal={ids => setGoal(ids)}
+                    onClear={() => clearGoal()}
+                />
+
+                {path.length === 0 && onOpenFullPage && (
+                  <div style={{ marginTop: '20px', paddingTop: '16px', borderTop: '1px solid var(--clr-border)', textAlign: 'center' }}>
+                    <button
+                      type="button"
+                      onClick={onOpenFullPage}
+                      style={{
+                        width: '100%',
+                        padding: '12px 18px',
+                        background: 'var(--clr-surface, rgba(255,255,255,0.06))',
+                        border: '1.5px solid var(--clr-border)',
+                        borderRadius: '12px',
+                        color: 'var(--clr-accent, #e8864a)',
+                        fontSize: '0.92rem',
+                        fontWeight: 700,
+                        cursor: 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '8px',
+                        boxShadow: 'var(--shadow-card, 0 4px 12px rgba(0,0,0,0.1))',
+                        transition: 'all 0.2s ease',
+                      }}
+                      onMouseEnter={e => {
+                        e.currentTarget.style.borderColor = 'var(--clr-accent)';
+                        e.currentTarget.style.transform = 'translateY(-2px)';
+                      }}
+                      onMouseLeave={e => {
+                        e.currentTarget.style.borderColor = 'var(--clr-border)';
+                        e.currentTarget.style.transform = 'none';
+                      }}
+                    >
+                      <span>🌐</span> Explore All Topics & Prerequisite Graph →
+                    </button>
+                  </div>
+                )}
+            </>
             )}
 
             {pmStatus === 'ready' && path.length > 0 && (
@@ -110,6 +148,25 @@ function PmGoalModal({ open, onClose }) {
                 >
                 Show my path →
                 </button>
+                {onOpenFullPage && (
+                  <button
+                    type="button"
+                    onClick={onOpenFullPage}
+                    style={{
+                      width: '100%', marginTop: 8, padding: '10px',
+                      background: 'var(--clr-surface)',
+                      border: '1px solid var(--clr-border)',
+                      borderRadius: 10,
+                      color: 'var(--clr-text)',
+                      fontWeight: 600,
+                      fontSize: '0.88rem', cursor: 'pointer',
+                      fontFamily: 'var(--font-body)',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+                    }}
+                  >
+                    🌐 View All Topics & Prerequisite Graph →
+                  </button>
+                )}
                 {known.size > 0 && (
                 <button
                     onClick={() => {

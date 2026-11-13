@@ -163,7 +163,7 @@ export default function NetBuilderApp({ onBack }) {
   if (phase === 'setup') {
     return (
       <div style={{ minHeight: '100vh', background: C.bg, color: C.text, padding: 24, fontFamily: 'system-ui, sans-serif' }}>
-        <button onClick={onBack} style={{ background: 'none', border: 'none', color: C.accent, cursor: 'pointer', fontSize: 16, marginBottom: 20 }}>← Back to Home</button>
+        <button onClick={onBack} style={{ background: 'none', border: 'none', color: C.accent, cursor: 'pointer', fontSize: 16, marginBottom: 20 }}>← Back</button>
         <div style={{ maxWidth: 500, margin: '0 auto', textAlign: 'center' }}>
           <h1 style={{ fontSize: 28, marginBottom: 8 }}>Net Builder</h1>
           <p style={{ color: C.muted, marginBottom: 32 }}>Draw the unfolded net of 3D shapes</p>
@@ -206,7 +206,7 @@ export default function NetBuilderApp({ onBack }) {
           </div>
           <div style={{ display: 'flex', gap: 12, justifyContent: 'center' }}>
             <button onClick={startGame} style={{ padding: '10px 24px', borderRadius: 8, border: 'none', background: C.accent, color: '#fff', fontWeight: 700, cursor: 'pointer' }}>New Quiz</button>
-            <button onClick={onBack} style={{ padding: '10px 24px', borderRadius: 8, border: `1px solid ${C.border}`, background: C.card, color: C.text, cursor: 'pointer' }}>Home</button>
+            <button onClick={onBack} style={{ padding: '10px 24px', borderRadius: 8, border: `1px solid ${C.border}`, background: C.card, color: C.text, cursor: 'pointer' }}>Back</button>
           </div>
         </div>
       </div>

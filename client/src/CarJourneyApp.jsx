@@ -1880,7 +1880,7 @@ export default function CarJourneyApp({ onBack, setMode }) {
     const unlocked = isUnlocked(shownIdx);
     return (
       <div className="cj-app">
-        <button className="cj-back" onClick={onBack}>← Back to menu</button>
+        <button className="cj-back" onClick={onBack}>← Back</button>
         <h1 className="cj-title">🚗 The Car Journey</h1>
         <div className="cj-progressbar" aria-label={`${doneCount} of ${CJ_STOPS.length} stops complete`}>
           <div className="cj-progressbar-fill" style={{ width: `${(doneCount / CJ_STOPS.length) * 100}%` }} />

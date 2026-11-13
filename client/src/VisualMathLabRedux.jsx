@@ -735,14 +735,16 @@ export default function VisualMathLabRedux({ onBack, initialDifficulty, initialN
   const correctAnswerLabel = useMemo(() => question ? getEquation(question, question.answer) : '', [question]);
 
   return (
-    <div style={{ minHeight:'100vh', background:'#181512', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'flex-start', padding:'24px 16px 48px', position:'relative' }}>
+    <div style={{ width: '100%', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'flex-start', padding:'16px 0', position:'relative' }}>
       <FloatingBg/>
 
       {/* ── START ───────────────────────────────────────────────── */}
       {!started && !finished && (
-        <div style={{ background:'#2D2520', border:'1.5px solid #4A4038', borderRadius:'28px', boxShadow:'0 20px 40px rgba(0,0,0,.45)', padding:'48px 40px', maxWidth:'720px', width:'100%', textAlign:'center', position:'relative', margin:'auto', zIndex:10 }}>
-          <button onClick={onBack} style={{ position:'absolute', top:'24px', left:'24px', background:'transparent', border:'1px solid #5B5048', borderRadius:'6px', padding:'6px 14px', color:'#A89C93', fontFamily:'Inter, sans-serif', fontWeight:600, fontSize:'0.85rem', cursor:'pointer', zIndex:20 }}>← Home</button>
-          <h1 style={{ fontFamily:'Georgia, "Times New Roman", serif', fontWeight:700, fontSize:'48px', color:'#F4F1ED', margin:'0 0 12px', lineHeight:1.1 }}>Multiplication &amp; division</h1>
+        <div style={{ maxWidth:'720px', width:'100%', textAlign:'center', position:'relative', margin:'0 auto', zIndex:10 }}>
+          <div style={{ display:'flex', alignItems:'center', justifyContent:'flex-start', marginBottom:'16px' }}>
+            <button onClick={onBack} style={{ background:'transparent', border:'1px solid #5B5048', borderRadius:'6px', padding:'6px 14px', color:'#A89C93', fontFamily:'Inter, sans-serif', fontWeight:600, fontSize:'0.85rem', cursor:'pointer', zIndex:20 }}>← Back</button>
+          </div>
+          <h1 style={{ fontFamily:'Georgia, "Times New Roman", serif', fontWeight:700, fontSize:'42px', color:'#F4F1ED', margin:'0 0 12px', lineHeight:1.15, wordBreak:'break-word' }}>Multiplication &amp; division</h1>
           <p style={{ color:'#988D84', fontSize:'0.9rem', margin:'0 0 40px', fontFamily:'Inter, sans-serif', fontWeight:400 }}>Practice multiplication and division!</p>
           <div style={{ marginBottom:'24px' }}>
             <h3 style={{ color:'#F4F1ED', fontSize:'0.9rem', margin:'0 0 16px', fontFamily:'Inter, sans-serif', fontWeight:700 }}>Select Difficulty:</h3>
@@ -762,7 +764,7 @@ export default function VisualMathLabRedux({ onBack, initialDifficulty, initialN
 
       {/* ── QUESTION ────────────────────────────────────────────── */}
       {started && !finished && (
-        <div style={{ maxWidth:'870px', width:'100%', background:C.card, border:`1px solid ${C.border}`, borderRadius:'28px', padding:'40px 44px', boxShadow:'0 25px 60px rgba(0,0,0,0.65)', position:'relative', marginTop:'4vh', zIndex:1 }}>
+        <div style={{ maxWidth:'870px', width:'100%', position:'relative', zIndex:1 }}>
           <XPPopup show={showXP}/>
 
           {/* Header */}
@@ -874,7 +876,7 @@ export default function VisualMathLabRedux({ onBack, initialDifficulty, initialN
 
       {/* ── FINISH ──────────────────────────────────────────────── */}
       {finished && (
-        <div style={{ maxWidth:'870px', width:'100%', background:C.card, border:`1px solid ${C.border}`, borderRadius:'28px', padding:'40px 44px', boxShadow:'0 25px 60px rgba(0,0,0,0.65)', position:'relative', marginTop:'8vh', textAlign:'center', zIndex:1 }}>
+        <div style={{ maxWidth:'870px', width:'100%', position:'relative', textAlign:'center', zIndex:1 }}>
           <motion.div animate={{ y:[0,-18,0], rotate:[0,8,-8,0] }} transition={{ duration:1.4, repeat:Infinity }} style={{ fontSize:'5rem', marginBottom:'14px' }}>🏆</motion.div>
           <h1 style={{ fontSize:'2.8rem', fontWeight:900, color:C.white, margin:'0 0 8px' }}>Lab Complete!</h1>
           <p style={{ fontSize:'1.25rem', color:C.muted, margin:'0 0 12px' }}>Final Score: <span style={{ color:C.orange, fontWeight:900 }}>{score} / {totalQ}</span></p>

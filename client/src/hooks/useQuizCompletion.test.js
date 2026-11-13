@@ -1,5 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
-import { recordQuizCompletion } from './useQuizCompletion';
+import { renderHook } from '@testing-library/react';
+import { recordQuizCompletion, useQuizCompletion } from './useQuizCompletion';
 
 describe('recordQuizCompletion', () => {
   it('calls markTopicCompleted with correct topic and difficulty when score is >= 80%', () => {
@@ -52,5 +53,52 @@ describe('recordQuizCompletion', () => {
     expect(recordQuizCompletion({})).toBe(false);
     expect(recordQuizCompletion({ topicKey: 'addition', score: 10, totalQ: 0 })).toBe(false);
     expect(recordQuizCompletion({ topicKey: 'addition', markTopicCompleted: null })).toBe(false);
+  });
+});
+
+describe('useQuizCompletion hook', () => {
+  it('calls markTopicCompleted only once on completion and prevents render loops across re-renders', () => {
+    const markMock = vi.fn();
+
+    const { rerender } = renderHook(
+      (props) => useQuizCompletion(props),
+      {
+        initialProps: {
+          topicKey: 'addition',
+          difficulty: 'hard',
+          isAdaptive: false,
+          score: 9,
+          totalQ: 10,
+          finished: true,
+          markTopicCompleted: markMock,
+        },
+      }
+    );
+
+    expect(markMock).toHaveBeenCalledTimes(1);
+
+    // Re-render multiple times with a fresh function instance (simulating App re-render)
+    rerender({
+      topicKey: 'addition',
+      difficulty: 'hard',
+      isAdaptive: false,
+      score: 9,
+      totalQ: 10,
+      finished: true,
+      markTopicCompleted: vi.fn(), // new function reference
+    });
+
+    rerender({
+      topicKey: 'addition',
+      difficulty: 'hard',
+      isAdaptive: false,
+      score: 9,
+      totalQ: 10,
+      finished: true,
+      markTopicCompleted: vi.fn(), // another new reference
+    });
+
+    // Must NOT fire again for the same finished quiz
+    expect(markMock).toHaveBeenCalledTimes(1);
   });
 });

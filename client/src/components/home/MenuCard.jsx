@@ -7,6 +7,7 @@ import './MenuCard.css';
  * Renders an individual puzzle card in section drill-down or search results.
  * Follows the Section Category Card layout:
  * - Left-aligned clean title and subtitle
+ * - Example clue snippet (if provided)
  * - Horizontal footer divider
  * - Number-free badge pills for Completion (✓) and Gold Mastery (🥇)
  * - Clean "Open" CTA button
@@ -29,6 +30,9 @@ export default function MenuCard({ app, isCompleted = false, isGold = false, onS
       <div className="topic-card-main">
         <h3 className="topic-card-title">{app.name}</h3>
         <p className="topic-card-desc">{app.subtitle}</p>
+        {app.example && (
+          <div className="topic-card-example">{app.example}</div>
+        )}
       </div>
 
       <div className="topic-card-footer">

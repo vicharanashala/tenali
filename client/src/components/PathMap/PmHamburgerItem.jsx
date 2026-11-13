@@ -20,7 +20,7 @@ function PmHamburgerItem({ onOpen }) {
         onMouseLeave={e => e.currentTarget.style.background = 'none'}
         >
         <strong style={{ color: 'var(--clr-accent)' }}>
-            {pmStatus !== 'ready' ? '📍 Loading…' : goalIds.length > 0 ? `📍 Path (${stepsLeft} left)` : '📍 Level Map'}
+            {pmStatus !== 'ready' ? '📍 Loading…' : goalIds.length > 0 ? `📍 Learning Path (${stepsLeft} left)` : '📍 Learning Path'}
         </strong>
         <span style={{ display: 'block', fontSize: '0.78rem', color: 'var(--clr-text-soft)', marginTop: '2px' }}>
             Learn by prerequisite path
