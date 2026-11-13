@@ -38,8 +38,11 @@
   padding: 10px;
   border-radius: 12px;
   border: 1px solid var(--clr-border);
+  -webkit-user-select: none;
   user-select: none;
+  -webkit-touch-callout: none;
   touch-action: none;
+  position: relative;
 }
 
 .ws-cell {
@@ -56,6 +59,7 @@
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   border: 1.5px solid rgba(230, 126, 34, 0.15);
   position: relative;
+  z-index: 1;
 }
 
 .ws-cell:hover {
@@ -71,10 +75,70 @@
   box-shadow: 0 0 10px rgba(230, 126, 34, 0.2);
 }
 
+/* Found letters: the word's capsule carries the colour, not the cell */
 .ws-cell--solved {
-  background: rgba(46, 204, 113, 0.25) !important;
-  border-color: rgba(46, 204, 113, 0.5) !important;
-  color: #2ecc71 !important;
+  background: transparent !important;
+  border-color: transparent !important;
+  color: var(--clr-text) !important;
+}
+
+/* Letters shared with another found word keep a circle beneath the capsules */
+.ws-cell--solved.ws-cell--shared {
+  --ws-a: 46, 204, 113;
+  --ws-b: 46, 204, 113;
+  background: linear-gradient(135deg, rgba(var(--ws-a), 0.45) 50%, rgba(var(--ws-b), 0.45) 50%) !important;
+  border-color: rgba(var(--ws-a), 0.9) !important;
+}
+
+.ws-cell--solved:hover,
+.ws-cell--popped {
+  transform: scale(1.12);
+}
+
+/* Hovered word: letters sit on the solid capsule, so drop any shared-letter circle */
+.ws-cell--solved.ws-cell--shared.ws-cell--popped {
+  background: transparent !important;
+  border-color: transparent !important;
+}
+
+.ws-cell--solved.ws-cell--popped {
+  color: #1a1614 !important;
+  font-weight: 800;
+}
+
+.ws-capsules {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 2;
+  overflow: visible;
+  transition: opacity 0.2s;
+}
+
+/* Hovered word's solid capsule: below the letters (z-index 1), above the grid */
+.ws-capsules--under {
+  z-index: 0;
+}
+
+
+.ws-capsule {
+  stroke-width: 2.5;
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), filter 0.2s;
+}
+
+/* Hovering a found word makes its whole capsule pop out of the grid */
+.ws-capsule--popped {
+  transform: scale(1.1);
+  filter: drop-shadow(0 4px 8px rgba(var(--ws-rgb), 0.6));
+}
+
+.ws-capsule--drag {
+  fill: rgba(230, 126, 34, 0.15);
+  stroke: rgba(230, 126, 34, 0.8);
+  stroke-dasharray: 5 4;
 }
 
 .ws-cell--hinted {
@@ -136,6 +200,15 @@
   position: relative;
   overflow: hidden;
 }
+/* Found word lit up from the grid (or the list): same solid colour as its capsule */
+.ws-word-item--solved.ws-word-item--hovered {
+  background: rgb(var(--ws-rgb)) !important;
+  border-color: rgb(var(--ws-rgb)) !important;
+  color: #1a1614 !important;
+  font-weight: 800;
+  box-shadow: 0 4px 12px rgba(var(--ws-rgb), 0.5);
+}
+
 .ws-word-item--solved {
   background: rgba(46, 204, 113, 0.1) !important;
   border-color: rgba(46, 204, 113, 0.3) !important;

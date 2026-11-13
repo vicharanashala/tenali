@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
-import { useTimer } from '../hooks/useTimer';
-import { QuizLayout } from '../components/QuizLayout';
+import useTimer from '../hooks/useTimer';
+import { QuizLayout } from '../components/layout/QuizLayout';
 import './CrosswordApp.css';
 
 // ─────────────────────────────────────────────────────────────
@@ -18,7 +18,7 @@ const WORD_CLUES = {
   'BALL': 'Round object used in games and sports.',
   'FISH': 'Water-dwelling creature with gills and fins.',
   'STAR': 'Twinkling celestial body visible in the night sky.',
-  
+
   // Medium
   'PYTHON': 'A type of large snake, or a popular programming language.',
   'ROBOT': 'A machine capable of carrying out complex actions automatically.',
@@ -286,7 +286,7 @@ function buildGrid(puzzle) {
       const c = direction === 'across' ? col + i : col;
       if (r >= 0 && r < gridSize && c >= 0 && c < gridSize) {
         grid[r][c].isLetter = true;
-        grid[r][c].answer   = word[i].toUpperCase();
+        grid[r][c].answer = word[i].toUpperCase();
         if (i === 0 && number != null) {
           if (!grid[r][c].number) grid[r][c].number = number;
         }
@@ -461,13 +461,13 @@ export default function CrosswordApp({ onBack }) {
     if (!selectedCell || !grid || grid.length === 0 || !puzzle) return;
     const { r, c } = selectedCell;
     const cell = grid[r]?.[c];
-    
+
     if (cell && cell.isLetter && cell.solved) {
       const word = getActiveWord(puzzle, { r, c }, direction);
       if (word) {
         const cells = getWordCells(word);
         const idx = cells.findIndex(item => item.r === r && item.c === c);
-        
+
         let nextIdx = idx + 1;
         let found = false;
         while (nextIdx < cells.length) {
@@ -530,7 +530,7 @@ export default function CrosswordApp({ onBack }) {
         return cells.some(item => item.r === r && item.c === c);
       });
       const hasAcross = matchingWords.some(w => w.direction === 'across');
-      const hasDown   = matchingWords.some(w => w.direction === 'down');
+      const hasDown = matchingWords.some(w => w.direction === 'down');
       if (hasAcross && !hasDown) {
         setDirection('across');
       } else if (hasDown && !hasAcross) {
@@ -555,9 +555,9 @@ export default function CrosswordApp({ onBack }) {
     const key = e.key;
 
     if (key === 'ArrowRight') { e.preventDefault(); setDirection('across'); advanceCursor(r, c, false); }
-    if (key === 'ArrowLeft')  { e.preventDefault(); setDirection('across'); advanceCursor(r, c, true); }
-    if (key === 'ArrowDown')  { e.preventDefault(); setDirection('down');   advanceCursor(r, c, false); }
-    if (key === 'ArrowUp')    { e.preventDefault(); setDirection('down');   advanceCursor(r, c, true); }
+    if (key === 'ArrowLeft') { e.preventDefault(); setDirection('across'); advanceCursor(r, c, true); }
+    if (key === 'ArrowDown') { e.preventDefault(); setDirection('down'); advanceCursor(r, c, false); }
+    if (key === 'ArrowUp') { e.preventDefault(); setDirection('down'); advanceCursor(r, c, true); }
 
     if (key === 'Backspace') {
       e.preventDefault();
@@ -801,7 +801,7 @@ export default function CrosswordApp({ onBack }) {
   if (!puzzle || grid.length === 0) return null;
 
   const acrossClues = puzzle.words.filter(w => w.direction === 'across');
-  const downClues   = puzzle.words.filter(w => w.direction === 'down');
+  const downClues = puzzle.words.filter(w => w.direction === 'down');
   const totalPuzzles = chosenLevel.puzzles.length;
   const allSolved = solvedWords.size === totalWords;
 
@@ -847,7 +847,7 @@ export default function CrosswordApp({ onBack }) {
               className="cw-grid"
               style={{
                 gridTemplateColumns: `repeat(${puzzle.gridSize}, 46px)`,
-                gridTemplateRows:    `repeat(${puzzle.gridSize}, 46px)`,
+                gridTemplateRows: `repeat(${puzzle.gridSize}, 46px)`,
               }}
             >
               {grid.map((row, rIdx) =>
@@ -861,8 +861,8 @@ export default function CrosswordApp({ onBack }) {
                   }
 
                   let cellClass = 'cw-cell cw-cell--letter';
-                  if (cell.solved)       cellClass += ' cw-cell--correct';
-                  else if (isSelected)   cellClass += ' cw-cell--selected';
+                  if (cell.solved) cellClass += ' cw-cell--correct';
+                  else if (isSelected) cellClass += ' cw-cell--selected';
                   else if (isHighlighted) cellClass += ' cw-cell--word-highlight';
 
                   return (

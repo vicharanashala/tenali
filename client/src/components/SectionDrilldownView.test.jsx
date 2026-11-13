@@ -1,8 +1,8 @@
 import { describe, it, expect, vi } from 'vitest';
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import SectionDrilldownView from './SectionDrilldownView';
-import CategoryCardsGrid from './CategoryCardsGrid';
+import SectionDrilldownView from './search/SectionDrilldownView';
+import CategoryCardsGrid from './home/CategoryCardsGrid';
 import { TILES } from '../features/tiles';
 
 describe('SectionDrilldownView', () => {

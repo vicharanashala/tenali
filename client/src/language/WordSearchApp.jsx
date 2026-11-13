@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { useTimer } from '../hooks/useTimer';
-import { QuizLayout } from '../components/QuizLayout';
+import { useEffect, useRef, useState } from 'react';
+import { QuizLayout } from '../components/layout/QuizLayout';
+import useTimer from '../hooks/useTimer';
 // eslint-disable-next-line no-unused-vars -- motion is used as <motion.div> in JSX
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import './WordSearchApp.css';
 
 // Words based on user requirements
@@ -39,6 +39,59 @@ const WORDS_BY_LEVEL = {
   }
 };
 
+// Distinct "r, g, b" triplets used to circle found words
+const WORD_COLORS = [
+  '46, 204, 113',  // green
+  '52, 152, 219',  // blue
+  '155, 89, 182',  // purple
+  '231, 76, 60',   // red
+  '241, 196, 15',  // yellow
+  '26, 188, 156',  // teal
+];
+
+// Grid geometry (must match .ws-grid in WordSearchApp.css)
+const CELL = 36;
+const GAP = 4;
+const PAD = 10;
+
+// 8 directions indexed by angle step (0 = right, 1 = down-right, ... clockwise)
+const STEP_DIRS = [[0, 1], [1, 1], [1, 0], [1, -1], [0, -1], [-1, -1], [-1, 0], [-1, 1]];
+
+const cellCenter = ({ r, c }) => ({
+  x: PAD + c * (CELL + GAP) + CELL / 2,
+  y: PAD + r * (CELL + GAP) + CELL / 2,
+});
+
+// Rounded capsule (ellipse-like pill) spanning first -> last cell of a word
+const capsuleGeometry = (cells) => {
+  const a = cellCenter(cells[0]);
+  const b = cellCenter(cells[cells.length - 1]);
+  const len = Math.hypot(b.x - a.x, b.y - a.y);
+  const rad = 14; // hugs the letter glyphs so neighbouring capsules rarely touch
+  return {
+    transform: `translate(${(a.x + b.x) / 2} ${(a.y + b.y) / 2}) rotate(${(Math.atan2(b.y - a.y, b.x - a.x) * 180) / Math.PI})`,
+    x: -len / 2 - rad, y: -rad, width: len + rad * 2, height: rad * 2, rx: rad,
+  };
+};
+
+// Snap a drag from `start` to `end` onto the nearest straight line (8 directions)
+const lineBetween = (start, end, size) => {
+  const dr = end.r - start.r;
+  const dc = end.c - start.c;
+  if (dr === 0 && dc === 0) return [start];
+  const step = (Math.round(Math.atan2(dr, dc) / (Math.PI / 4)) + 8) % 8;
+  const [sr, sc] = STEP_DIRS[step];
+  const len = Math.max(Math.abs(dr), Math.abs(dc));
+  const cells = [];
+  for (let i = 0; i <= len; i++) {
+    const r = start.r + sr * i;
+    const c = start.c + sc * i;
+    if (r < 0 || c < 0 || r >= size || c >= size) break;
+    cells.push({ r, c });
+  }
+  return cells;
+};
+
 const LEVELS = [
   { id: 1, name: 'Level 1', desc: 'Grades K–2 (Easy)', color: 'orange' },
   { id: 2, name: 'Level 2', desc: 'Grades 3–5 (Medium)', color: 'orange' },
@@ -54,6 +107,8 @@ export default function WordSearchApp({ onBack }) {
   const [wordPositions, setWordPositions] = useState([]); // Array of { word, cells: [{r,c}] }
   const [targetWords, setTargetWords] = useState([]);
   const [solvedWords, setSolvedWords] = useState(new Set());
+  const [wordColors, setWordColors] = useState({}); // word -> index into WORD_COLORS
+  const [hoveredWord, setHoveredWord] = useState(null);
   const [totalXp, setTotalXp] = useState(() => {
     try {
       const saved = localStorage.getItem('tenali_wordsearch_xp');
@@ -68,10 +123,14 @@ export default function WordSearchApp({ onBack }) {
   // Advanced selection & target states
   const [activeWord, setActiveWord] = useState(null); // String
   const [selection, setSelection] = useState([]); // Array of {r, c}
+  const [isDragging, setIsDragging] = useState(false);
   const [hintedCell, setHintedCell] = useState(null); // {r, c}
   const [successAnimation, setSuccessAnimation] = useState(false);
 
   const timer = useTimer();
+  const dragStartRef = useRef(null);
+  const selectionRef = useRef([]);
+  const finishDragRef = useRef(() => {});
 
   // Keyboard navigation for escape key to deselect activeWord
   useEffect(() => {
@@ -79,6 +138,8 @@ export default function WordSearchApp({ onBack }) {
       if (e.key === 'Escape') {
         setActiveWord(null);
         setSelection([]);
+        dragStartRef.current = null;
+        setIsDragging(false);
       }
     };
     window.addEventListener('keydown', handleKeyDown);
@@ -167,6 +228,8 @@ export default function WordSearchApp({ onBack }) {
     setWordPositions(placedWords);
     setTargetWords(placedWords.map(p => p.word));
     setSolvedWords(new Set());
+    setWordColors({});
+    setHoveredWord(null);
     setActiveWord(null);
     setHintedCell(null);
     setLevelXp(0);
@@ -197,6 +260,20 @@ export default function WordSearchApp({ onBack }) {
       newSolved.add(matched.word);
       setSolvedWords(newSolved);
 
+      // Pick a colour not used by any already-solved word that crosses this one
+      const crossingColors = new Set();
+      wordPositions.forEach(p => {
+        if (p.word === matched.word || !solvedWords.has(p.word)) return;
+        const crosses = p.cells.some(a => matched.cells.some(b => a.r === b.r && a.c === b.c));
+        if (crosses) crossingColors.add(wordColors[p.word]);
+      });
+      let colorIdx = solvedWords.size % WORD_COLORS.length;
+      for (let i = 0; i < WORD_COLORS.length; i++) {
+        const candidate = (solvedWords.size + i) % WORD_COLORS.length;
+        if (!crossingColors.has(candidate)) { colorIdx = candidate; break; }
+      }
+      setWordColors(prev => ({ ...prev, [matched.word]: colorIdx }));
+
       const newStreak = streak + 1;
       setStreak(newStreak);
 
@@ -221,49 +298,89 @@ export default function WordSearchApp({ onBack }) {
       }
       return true;
     }
-    
+
     return false;
   };
 
-  // Handle cell click selection loop
+  // Drag selection: press on a letter, drag in a straight line, release to check
+  const cellFromPoint = (x, y) => {
+    const el = document.elementFromPoint(x, y)?.closest('[data-r]');
+    return el ? { r: Number(el.dataset.r), c: Number(el.dataset.c) } : null;
+  };
+
+  // Click chain: tap letters one by one (each must touch the previous one)
   const handleCellClick = (r, c) => {
     setHintedCell(null);
-    // If selection is empty, start a new selection loop with this cell
     if (selection.length === 0) {
       setSelection([{ r, c }]);
       return;
     }
-
-    // Check if clicked cell is already the last selected cell (backtrack/pop)
     const lastCell = selection[selection.length - 1];
     if (lastCell.r === r && lastCell.c === c) {
       setSelection(prev => prev.slice(0, -1));
       return;
     }
-
-    // Check if clicked cell is already in selection (pop/truncate selection to this point)
     const existingIndex = selection.findIndex(cell => cell.r === r && cell.c === c);
     if (existingIndex !== -1) {
       setSelection(prev => prev.slice(0, existingIndex + 1));
       return;
     }
-
-    // Check if clicked cell is adjacent to the last selected cell
     const isAdjacent = Math.abs(r - lastCell.r) <= 1 && Math.abs(c - lastCell.c) <= 1;
     if (isAdjacent) {
       const nextSelection = [...selection, { r, c }];
       setSelection(nextSelection);
-
-      // Check if current selection spells the activeWord or any target word
-      const found = checkSelection(nextSelection);
-      if (found) {
-        setSelection([]);
-      }
+      if (checkSelection(nextSelection)) setSelection([]);
     } else {
-      // Not adjacent: reset selection loop to start from this new cell
       setSelection([{ r, c }]);
     }
   };
+
+  // Pressing a letter arms a drag; if the pointer never leaves it, release counts as a click
+  const handleCellPointerDown = (e, r, c) => {
+    if (e.button !== undefined && e.button !== 0) return;
+    dragStartRef.current = { r, c };
+  };
+
+  const handleGridPointerMove = (e) => {
+    const start = dragStartRef.current;
+    if (!start) return;
+    const target = cellFromPoint(e.clientX, e.clientY);
+    if (!target) return;
+    if (!isDragging && target.r === start.r && target.c === start.c) return;
+    const next = lineBetween(start, target, grid.length);
+    const prev = selectionRef.current;
+    if (isDragging && next.length === prev.length && next[next.length - 1].r === prev[prev.length - 1].r && next[next.length - 1].c === prev[prev.length - 1].c) return;
+    setHintedCell(null);
+    setIsDragging(true);
+    setSelection(next);
+  };
+
+  // Refreshed after every render so the window-level pointerup sees current state
+  useEffect(() => {
+    selectionRef.current = selection;
+    finishDragRef.current = () => {
+      const start = dragStartRef.current;
+      if (!start) return;
+      dragStartRef.current = null;
+      if (!isDragging) {
+        handleCellClick(start.r, start.c);
+        return;
+      }
+      setIsDragging(false);
+      if (selection.length > 1) checkSelection(selection);
+      setSelection([]);
+    };
+  });
+
+  useEffect(() => {
+    const end = () => finishDragRef.current();
+    window.addEventListener('pointerup', end);
+    window.addEventListener('pointercancel', end);
+    return () => {
+      window.removeEventListener('pointerup', end);
+      window.removeEventListener('pointercancel', end);
+    };
+  }, []);
 
   // Word selection click handler
   const handleWordClick = (word) => {
@@ -286,7 +403,7 @@ export default function WordSearchApp({ onBack }) {
   // Hints handler
   const handleHint = () => {
     if (hintsLeft <= 0) return;
-    
+
     let targetWord = null;
     if (activeWord) {
       targetWord = wordPositions.find(p => p.word === activeWord);
@@ -345,6 +462,7 @@ export default function WordSearchApp({ onBack }) {
   }
 
   // Active game view
+  const gridPx = PAD * 2 + grid.length * CELL + (grid.length - 1) * GAP;
   const progressPercent = targetWords.length > 0 ? Math.round((solvedWords.size / targetWords.length) * 100) : 0;
   const isFinished = solvedWords.size === targetWords.length && targetWords.length > 0;
 
@@ -409,27 +527,90 @@ export default function WordSearchApp({ onBack }) {
             className="ws-grid"
             animate={successAnimation ? { scale: [1, 1.03, 1] } : {}}
             transition={{ duration: 0.5 }}
+            onPointerMove={handleGridPointerMove}
+            onMouseDown={(e) => e.preventDefault()}
+            onDragStart={(e) => e.preventDefault()}
             style={{
-              gridTemplateColumns: `repeat(${grid.length}, 36px)`,
-              gridTemplateRows: `repeat(${grid.length}, 36px)`,
+              gridTemplateColumns: `repeat(${grid.length}, ${CELL}px)`,
+              gridTemplateRows: `repeat(${grid.length}, ${CELL}px)`,
             }}
           >
+            {/* Hovered word: solid capsule sitting beneath the letters */}
+            <svg className="ws-capsules ws-capsules--under" width={gridPx} height={gridPx} aria-hidden="true">
+              {wordPositions.filter(p => p.word === hoveredWord && solvedWords.has(p.word)).map(p => {
+                const rgb = WORD_COLORS[wordColors[p.word] ?? 0];
+                return (
+                  <g key={p.word} transform={capsuleGeometry(p.cells).transform}>
+                    <rect
+                      className="ws-capsule ws-capsule--popped"
+                      {...capsuleGeometry(p.cells)}
+                      transform={undefined}
+                      style={{ fill: `rgb(${rgb})`, stroke: `rgb(${rgb})`, '--ws-rgb': rgb }}
+                    />
+                  </g>
+                );
+              })}
+            </svg>
+            {/* One translucent capsule per found word (and a dashed one for the drag in progress) */}
+            <svg
+              className="ws-capsules"
+              width={gridPx}
+              height={gridPx}
+              aria-hidden="true"
+            >
+              {wordPositions.filter(p => solvedWords.has(p.word) && p.word !== hoveredWord).map(p => {
+                const rgb = WORD_COLORS[wordColors[p.word] ?? 0];
+                return (
+                  <g key={p.word} transform={capsuleGeometry(p.cells).transform}>
+                    <rect
+                      className="ws-capsule"
+                      {...capsuleGeometry(p.cells)}
+                      transform={undefined}
+                      style={{ fill: `rgba(${rgb}, 0.2)`, stroke: `rgb(${rgb})`, '--ws-rgb': rgb }}
+                    />
+                  </g>
+                );
+              })}
+              {isDragging && selection.length > 1 && (
+                <g transform={capsuleGeometry(selection).transform}>
+                  <rect className="ws-capsule ws-capsule--drag" {...capsuleGeometry(selection)} transform={undefined} />
+                </g>
+              )}
+            </svg>
             {grid.map((row, rIdx) =>
               row.map((char, cIdx) => {
                 const isCellSelected = selection.some(cell => cell.r === rIdx && cell.c === cIdx);
-                const isCellSolved = wordPositions.some(p => solvedWords.has(p.word) && p.cells.some(cell => cell.r === rIdx && cell.c === cIdx));
+                const solvedHere = wordPositions.filter(p => solvedWords.has(p.word) && p.cells.some(cell => cell.r === rIdx && cell.c === cIdx));
+                const isCellSolved = solvedHere.length > 0;
+                const isCellPopped = solvedHere.some(p => p.word === hoveredWord);
                 const isCellHinted = hintedCell && hintedCell.r === rIdx && hintedCell.c === cIdx;
 
                 let cellClass = 'ws-cell';
                 if (isCellSelected) cellClass += ' ws-cell--selected';
                 else if (isCellSolved) cellClass += ' ws-cell--solved';
                 else if (isCellHinted) cellClass += ' ws-cell--hinted';
+                if (isCellSolved && isCellPopped) cellClass += ' ws-cell--popped';
+                // A letter reused by another found word keeps its own circle under the capsules
+                if (solvedHere.length > 1) cellClass += ' ws-cell--shared';
+
+                // Crossing cells show a split of both words' colours
+                let cellStyle;
+                if (solvedHere.length > 1 && !isCellSelected) {
+                  const a = WORD_COLORS[wordColors[solvedHere[0].word] ?? 0];
+                  const b = solvedHere[1] ? WORD_COLORS[wordColors[solvedHere[1].word] ?? 1] : a;
+                  cellStyle = { '--ws-a': a, '--ws-b': b };
+                }
 
                 return (
                   <div
                     key={`${rIdx}-${cIdx}`}
                     className={cellClass}
-                    onClick={() => handleCellClick(rIdx, cIdx)}
+                    style={cellStyle}
+                    data-r={rIdx}
+                    data-c={cIdx}
+                    onPointerDown={(e) => handleCellPointerDown(e, rIdx, cIdx)}
+                    onMouseEnter={() => isCellSolved && !isCellPopped && setHoveredWord(solvedHere[solvedHere.length - 1].word)}
+                    onMouseLeave={() => setHoveredWord(null)}
                   >
                     {char}
                   </div>
@@ -448,7 +629,7 @@ export default function WordSearchApp({ onBack }) {
               </button>
             )}
           </div>
-          </div>
+        </div>
 
         {/* Target Words */}
         <div className="ws-words-panel">
@@ -459,7 +640,9 @@ export default function WordSearchApp({ onBack }) {
               const isActive = activeWord === word;
 
               let wordClass = 'ws-word-item';
+              const isHoveredSolved = isSolved && hoveredWord === word;
               if (isSolved) wordClass += ' ws-word-item--solved';
+              if (isHoveredSolved) wordClass += ' ws-word-item--hovered';
               else if (isActive) wordClass += ' ws-word-item--active';
 
               return (
@@ -470,14 +653,17 @@ export default function WordSearchApp({ onBack }) {
                   aria-selected={isActive}
                   aria-disabled={isSolved}
                   onClick={() => handleWordClick(word)}
+                  onMouseEnter={() => isSolved && setHoveredWord(word)}
+                  onMouseLeave={() => setHoveredWord(null)}
                   onKeyDown={(e) => handleWordKeyDown(e, word)}
                   className={wordClass}
-                  whileHover={{ scale: isSolved ? 1 : 1.05 }}
+                  whileHover={{ scale: isSolved ? 1.06 : 1.05 }}
                   whileTap={{ scale: isSolved ? 1 : 0.95 }}
-                  animate={isActive ? { scale: [1, 1.04, 1] } : {}}
-                  transition={isActive ? { repeat: Infinity, duration: 2, ease: "easeInOut" } : {}}
+                  animate={isActive ? { scale: [1, 1.04, 1] } : { scale: isHoveredSolved ? 1.06 : 1 }}
+                  transition={isActive ? { repeat: Infinity, duration: 2, ease: "easeInOut" } : { duration: 0.2 }}
                   style={{
-                    cursor: isSolved ? 'not-allowed' : 'pointer',
+                    cursor: isSolved ? 'default' : 'pointer',
+                    ...(isSolved ? { '--ws-rgb': WORD_COLORS[wordColors[word] ?? 0] } : {}),
                     outline: 'none',
                     display: 'flex',
                     alignItems: 'center',
@@ -486,7 +672,7 @@ export default function WordSearchApp({ onBack }) {
                   }}
                 >
                   <span>{word}</span>
-                  {isSolved && <span style={{ color: '#2ecc71', fontSize: '0.85rem' }}>✓</span>}
+                  {isSolved && <span style={{ color: isHoveredSolved ? '#1a1614' : `rgb(${WORD_COLORS[wordColors[word] ?? 0]})`, fontSize: '0.85rem' }}>✓</span>}
                   {isActive && <span style={{ color: '#e67e22', fontSize: '0.75rem' }}>●</span>}
                 </motion.div>
               );

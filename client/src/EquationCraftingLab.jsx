@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { QuizLayout } from './App';
+import { QuizLayout } from './components';
 import './EquationCraftingLab.css';
 
 export default function EquationCraftingLab({ onBack }) {
