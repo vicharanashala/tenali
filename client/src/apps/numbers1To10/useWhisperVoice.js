@@ -2,6 +2,71 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { AudioChunkRecorder } from './audioChunkRecorder.js';
 import { resolveTextToNumber } from './phoneticResolver.js';
 
+// Module-level shared Web Worker singleton (pre-warms model once across all tabs)
+let sharedWorker = null;
+let sharedModelStatus = 'loading'; // 'loading' | 'ready'
+let sharedLoadingProgress = 0;
+let sharedWorkerResolver = null;
+const sharedStatusListeners = new Set();
+const sharedCompletionListeners = new Set();
+
+function getOrCreateSharedWorker() {
+  if (typeof window === 'undefined') return null;
+  if (!sharedWorker) {
+    try {
+      const workerUrl = window.location
+        ? `${window.location.origin}/whisper-worker.js`
+        : '/whisper-worker.js';
+      sharedWorker = new Worker(workerUrl, { type: 'module' });
+
+      sharedWorker.onmessage = (event) => {
+        const { status, output, error, data } = event.data || {};
+
+        if (status === 'progress') {
+          if (data && typeof data.progress === 'number') {
+            sharedLoadingProgress = Math.round(data.progress);
+            sharedStatusListeners.forEach((fn) => fn(sharedModelStatus, sharedLoadingProgress));
+          }
+        } else if (status === 'ready') {
+          sharedModelStatus = 'ready';
+          sharedLoadingProgress = 100;
+          sharedStatusListeners.forEach((fn) => fn('ready', 100));
+        } else if (status === 'complete') {
+          console.info('[useWhisperVoice] Worker transcription result:', output);
+          if (sharedWorkerResolver) {
+            sharedWorkerResolver.resolve(output);
+            sharedWorkerResolver = null;
+          }
+          // Broadcast to active instance listeners (protects against lost or late results)
+          sharedCompletionListeners.forEach((fn) => {
+            try { fn(output); } catch (e) {}
+          });
+        } else if (status === 'error') {
+          console.warn('[useWhisperVoice] Worker error:', error);
+          if (sharedWorkerResolver) {
+            sharedWorkerResolver.reject(new Error(error || 'Worker error'));
+            sharedWorkerResolver = null;
+          }
+          sharedModelStatus = 'ready';
+          sharedStatusListeners.forEach((fn) => fn('ready', 100));
+        }
+      };
+
+      sharedWorker.onerror = (e) => {
+        console.error('[useWhisperVoice] Web Worker error:', e?.message || e);
+        sharedModelStatus = 'ready';
+        sharedStatusListeners.forEach((fn) => fn('ready', 100));
+      };
+
+      sharedWorker.postMessage({ type: 'load' });
+    } catch (err) {
+      console.warn('[useWhisperVoice] Failed to spawn worker:', err);
+      sharedModelStatus = 'ready';
+    }
+  }
+  return sharedWorker;
+}
+
 /**
  * useWhisperVoice
  *
@@ -20,8 +85,8 @@ export function useWhisperVoice({
   onNumberDetected,
   onTextHeard
 } = {}) {
-  const [modelStatus, setModelStatus] = useState('loading');
-  const [loadingProgress, setLoadingProgress] = useState(0);
+  const [modelStatus, setModelStatus] = useState(sharedModelStatus);
+  const [loadingProgress, setLoadingProgress] = useState(sharedLoadingProgress);
   const [isRecording, setIsRecording] = useState(false);
   const [isTranscribing, setIsTranscribing] = useState(false);
   const [audioLevel, setAudioLevel] = useState(0);
@@ -32,8 +97,6 @@ export function useWhisperVoice({
 
   const recorderRef = useRef(null);
   const speechRecognitionRef = useRef(null);
-  const workerRef = useRef(null);
-  const workerResolverRef = useRef(null);
   const liveSpeechRef = useRef('');
   const liveDigitRef = useRef(null);
   const onNumberDetectedRef = useRef(onNumberDetected);
@@ -58,61 +121,67 @@ export function useWhisperVoice({
     isRecordingRef.current = isRecording;
   }, [isRecording]);
 
-  // Initialize Web Worker for in-browser ONNX inference
+  // Track shared Web Worker status and pre-warm model
   useEffect(() => {
-    let worker = null;
-    try {
-      const workerUrl = (typeof window !== 'undefined' && window.location)
-        ? `${window.location.origin}/whisper-worker.js`
-        : '/whisper-worker.js';
-      worker = new Worker(workerUrl, { type: 'module' });
-      workerRef.current = worker;
+    const handleStatus = (status, progress) => {
+      setModelStatus(status);
+      setLoadingProgress(progress);
+    };
+    sharedStatusListeners.add(handleStatus);
 
-      worker.onmessage = (event) => {
-        const { status, output, error, data } = event.data || {};
-
-        if (status === 'progress') {
-          if (data && typeof data.progress === 'number') {
-            setLoadingProgress(Math.round(data.progress));
-          }
-        } else if (status === 'ready') {
-          setModelStatus('ready');
-          setLoadingProgress(100);
-          setServerOnline(true);
-        } else if (status === 'complete') {
-          console.info('[useWhisperVoice] Worker transcription result:', output);
-          if (workerResolverRef.current) {
-            workerResolverRef.current.resolve(output);
-            workerResolverRef.current = null;
-          }
-        } else if (status === 'error') {
-          console.warn('[useWhisperVoice] Worker error:', error);
-          lastWorkerErrorRef.current = error;
-          if (workerResolverRef.current) {
-            workerResolverRef.current.reject(new Error(error || 'Worker error'));
-            workerResolverRef.current = null;
-          }
-          // Model remains functional with native speech fallback
-          setModelStatus('ready');
-        }
-      };
-
-      worker.onerror = (e) => {
-        console.error('[useWhisperVoice] Web Worker error:', e?.message || e);
-        setModelStatus('ready');
-      };
-
-      worker.postMessage({ type: 'load' });
-    } catch (err) {
-      console.warn('[useWhisperVoice] Failed to spawn worker:', err);
+    if (sharedModelStatus === 'ready') {
       setModelStatus('ready');
+      setLoadingProgress(100);
+    } else {
+      getOrCreateSharedWorker();
     }
 
     return () => {
-      if (worker) {
-        try { worker.terminate(); } catch (e) {}
+      sharedStatusListeners.delete(handleStatus);
+    };
+  }, []);
+
+  // Subscribe to shared worker completions (handles late completions if safety timeout hit)
+  useEffect(() => {
+    const handleSharedComplete = (output) => {
+      if (numberEmittedForCurrentRecordingRef.current) return;
+
+      let extractedText = '';
+      if (typeof output === 'string') {
+        extractedText = output;
+      } else if (output && typeof output.text === 'string') {
+        extractedText = output.text;
+      } else if (Array.isArray(output) && output.length > 0) {
+        extractedText = typeof output[0] === 'string' ? output[0] : (output[0].text || '');
       }
-      workerRef.current = null;
+
+      const text = (extractedText || '').trim();
+      if (!text) return;
+
+      const num = resolveTextToNumber(text);
+      console.info('[useWhisperVoice] Late worker transcription resolved:', text, '-> number:', num);
+
+      setHeardText(text);
+      if (onTextHeardRef.current) {
+        onTextHeardRef.current(text);
+      }
+
+      if (num !== null && num >= 1 && num <= 10) {
+        numberEmittedForCurrentRecordingRef.current = true;
+        setLastDetectedNumber(num);
+        setErrorMessage('');
+        if (onNumberDetectedRef.current) {
+          onNumberDetectedRef.current(num, text);
+        }
+      } else {
+        setErrorMessage(`Heard "${text}", but did not match a number (1-10).`);
+      }
+      setIsTranscribing(false);
+    };
+
+    sharedCompletionListeners.add(handleSharedComplete);
+    return () => {
+      sharedCompletionListeners.delete(handleSharedComplete);
     };
   }, []);
 
@@ -187,26 +256,28 @@ export function useWhisperVoice({
       let detectedNumber = null;
 
       // 1. In-Browser Web Worker (ONNX Runtime Web / Transformers.js)
-      if (audioChunk && audioChunk.length >= 800 && workerRef.current) {
-        try {
-          const workerPromise = new Promise((resolve, reject) => {
-            workerResolverRef.current = { resolve, reject };
-            workerRef.current.postMessage({
-              type: 'transcribe',
-              audio: audioChunk
+      if (audioChunk && audioChunk.length >= 800) {
+        const worker = getOrCreateSharedWorker();
+        if (worker) {
+          try {
+            const workerPromise = new Promise((resolve, reject) => {
+              sharedWorkerResolver = { resolve, reject };
+              worker.postMessage({
+                type: 'transcribe',
+                audio: audioChunk
+              });
+
+              // 60-second safety timeout for cold-start model initialization
+              setTimeout(() => {
+                if (sharedWorkerResolver) {
+                  console.warn('[useWhisperVoice] Worker transcription timeout');
+                  sharedWorkerResolver.resolve(null);
+                  sharedWorkerResolver = null;
+                }
+              }, 60000);
             });
 
-            // 30-second safety timeout for first-run model initialization
-            setTimeout(() => {
-              if (workerResolverRef.current) {
-                console.warn('[useWhisperVoice] Worker transcription timeout');
-                workerResolverRef.current.resolve(null);
-                workerResolverRef.current = null;
-              }
-            }, 30000);
-          });
-
-          const res = await workerPromise;
+            const res = await workerPromise;
           let extractedText = '';
           if (typeof res === 'string') {
             extractedText = res;
@@ -228,6 +299,7 @@ export function useWhisperVoice({
           lastWorkerErrorRef.current = workerErr?.message || String(workerErr);
         }
       }
+    }
 
       // 2. Fallback to browser live speech if neural engine did not resolve digit
       if (!detectedNumber) {

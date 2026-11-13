@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import confetti from 'canvas-confetti';
 import SpaceMazeAdventure from './numbers1to10_voice/SpaceMazeAdventure.jsx';
 import NumberTracingApp from './numbers1to10_voice/NumberTracingApp.jsx';
+import { useWhisperVoice, PushToTalkButton } from './numbers1to10_voice/index.js';
 import './numbers1to10_voice/Numbers1To10App.css';
 import './numbers1to10_voice/PushToTalkButton.css';
 
@@ -582,6 +583,24 @@ export default function Numbers1To10App({
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [demoActive, targetReached, hopRight, hopLeft]);
 
+  // Test Mic & Voice recognition for Hopscotch
+  const [testMicFeedback, setTestMicFeedback] = useState('');
+  const hopscotchVoice = useWhisperVoice({
+    onNumberDetected: (num, rawText) => {
+      sfxCoin();
+      setTestMicFeedback(`✓ Mic Working! Heard: "${rawText || num}" ➔ ${num} ⭐ Model Ready!`);
+      if (hasRolled && !targetReached && !gameDiceRolling) {
+        if (num === bunnyPos + 1 || num === gameDiceTarget) {
+          hopRight();
+        }
+      }
+      setTimeout(() => setTestMicFeedback(''), 4500);
+    },
+    onTextHeard: (t) => {
+      if (t) setTestMicFeedback(`Hearing: "${t}"...`);
+    }
+  });
+
   // Clean up timers on unmount
   useEffect(() => {
     return () => {
@@ -739,6 +758,32 @@ export default function Numbers1To10App({
           >
             <span>🎬 Watch Demo</span>
           </button>
+        </div>
+
+        {/* Test Mic & Voice Model Readiness Bar */}
+        <div className="hopscotch-voice-test-bar">
+          <div className="voice-test-left">
+            <PushToTalkButton
+              whisperState={hopscotchVoice}
+              label="🎙️ Test Mic (Say 1..10)"
+            />
+            <div className="voice-model-badge">
+              {hopscotchVoice.modelStatus === 'loading' ? (
+                <span className="badge-loading">
+                  ⏳ Loading Whisper AI ({hopscotchVoice.loadingProgress}%)...
+                </span>
+              ) : (
+                <span className="badge-ready">
+                  🟢 Whisper Model Ready
+                </span>
+              )}
+            </div>
+          </div>
+          {testMicFeedback && (
+            <div className="voice-test-feedback">
+              {testMicFeedback}
+            </div>
+          )}
         </div>
 
         {/* ============================================================ */}

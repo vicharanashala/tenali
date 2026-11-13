@@ -79,12 +79,31 @@ self.addEventListener('message', async (event) => {
   if (type === 'load') {
     try {
       console.info('[whisper-worker] Received load event, initializing model in background...');
-      await PipelineSingleton.getInstance((progressData) => {
+      const transcriber = await PipelineSingleton.getInstance((progressData) => {
         self.postMessage({
           status: 'progress',
           data: progressData
         });
       });
+
+      // Warm up WASM kernels and ONNX execution session with 0.5s of silence
+      try {
+        console.info('[whisper-worker] Pre-warming ONNX WebAssembly execution session...');
+        const warmUpSilence = new Float32Array(8000);
+        await transcriber(warmUpSilence, {
+          task: 'transcribe',
+          temperature: 0.0,
+          do_sample: false,
+          num_beams: 1,
+          max_new_tokens: 2,
+          condition_on_previous_text: false,
+          return_timestamps: false
+        });
+        console.info('[whisper-worker] Warm-up inference complete! Session ready.');
+      } catch (warmErr) {
+        console.warn('[whisper-worker] Warm-up inference notice (non-fatal):', warmErr);
+      }
+
       console.info('[whisper-worker] Model initialized and ready for transcription!');
       self.postMessage({ status: 'ready', model: PipelineSingleton.model });
     } catch (error) {
