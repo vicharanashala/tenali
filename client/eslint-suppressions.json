@@ -1,40 +1,40 @@
 {
   "src/App.jsx": {
     "no-empty": {
-      "count": 146
+      "count": 130
     },
     "no-undef": {
-      "count": 35
+      "count": 33
     },
     "no-unexpected-multiline": {
       "count": 5
     },
     "no-unused-vars": {
-      "count": 210
+      "count": 175
     },
     "no-useless-escape": {
-      "count": 4
+      "count": 2
     },
     "react-hooks/immutability": {
-      "count": 22
+      "count": 14
     },
     "react-hooks/preserve-manual-memoization": {
-      "count": 73
+      "count": 72
     },
     "react-hooks/purity": {
-      "count": 63
+      "count": 50
     },
     "react-hooks/refs": {
-      "count": 78
+      "count": 57
     },
     "react-hooks/rules-of-hooks": {
       "count": 6
     },
     "react-hooks/set-state-in-effect": {
-      "count": 89
+      "count": 71
     },
     "react-refresh/only-export-components": {
-      "count": 8
+      "count": 1
     }
   },
   "src/BattleApp.jsx": {
@@ -101,32 +101,22 @@
       "count": 1
     }
   },
-  "src/components/GlossaryText.jsx": {
-    "react-hooks/set-state-in-effect": {
-      "count": 1
-    }
-  },
   "src/components/HintSystem/HintModal.jsx": {
     "react-hooks/set-state-in-effect": {
       "count": 1
     }
   },
-  "src/components/HintSystem/useHints.jsx": {
-    "no-undef": {
-      "count": 1
-    }
-  },
-  "src/components/KeyTerms.jsx": {
+  "src/components/common/GlossaryText.jsx": {
     "react-hooks/set-state-in-effect": {
       "count": 1
     }
   },
-  "src/components/OnboardingTour.jsx": {
+  "src/components/common/KeyTerms.jsx": {
     "react-hooks/set-state-in-effect": {
-      "count": 2
+      "count": 1
     }
   },
-  "src/components/ThreeDViewer.jsx": {
+  "src/components/interactive/ThreeDViewer.jsx": {
     "react-refresh/only-export-components": {
       "count": 1
     }
@@ -151,13 +141,13 @@
       "count": 1
     }
   },
-  "src/detective-app.jsx": {
+  "src/components/onboarding/OnboardingTour.jsx": {
     "react-hooks/set-state-in-effect": {
-      "count": 1
+      "count": 2
     }
   },
-  "src/hooks/useTimer.js": {
-    "react-hooks/purity": {
+  "src/detective-app.jsx": {
+    "react-hooks/set-state-in-effect": {
       "count": 1
     }
   },
