@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react'
-import ThreeDViewer from './components/ThreeDViewer'
+import ThreeDViewer from './components/interactive/ThreeDViewer'
 
 const C = { bg: '#0b0e14', card: '#141820', surface: '#1c2028', accent: '#4dabf7', green: '#51cf66', red: '#ff6b6b', text: '#e8e8e8', muted: '#8b949e', border: '#2d333b' }
 

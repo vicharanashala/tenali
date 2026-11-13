@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import ScribbleCanvas from './components/ScribbleCanvas'
+import ScribbleCanvas from './components/interactive/ScribbleCanvas'
 
 const C = {
   bg: '#0b0e14', card: '#141820', surface: '#1c2028',

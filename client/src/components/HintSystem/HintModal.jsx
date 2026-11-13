@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { API, getLocalXp, setLocalXp, changeXp } from './hintUtils.js';
+import CONFIG from '../../config.js';
+import { changeXp, getLocalXp, setLocalXp } from '../../hooks/useHints.js';
 
 export function HintModal({ concept, questionId, questionData, answerData, revealed }) {
   const [unlockedLevels, setUnlockedLevels] = useState({}); // { [level]: hintText }
@@ -53,7 +54,7 @@ export function HintModal({ concept, questionId, questionData, answerData, revea
 
     try {
       const token = localStorage.getItem('tenali-auth-token');
-      const res = await fetch(`${API}/api/hints/unlock`, {
+      const res = await fetch(`${CONFIG.api}/api/hints/unlock`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
