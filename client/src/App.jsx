@@ -167,7 +167,7 @@ import { getLearnContent } from './data/learnContent.js'
 import AnglesLearnPage from './components/learning/AnglesLearnPage'
 import GSTLearnPage from './components/learning/GSTLearnPage'
 import FractionsLearnPage from './components/learning/FractionsLearnPage'
-import Numbers1To10App from './apps/Numbers1To10App.jsx'
+import Numbers1To10App from './components/Numbers1To10'
 
 // API base URL from environment variables (Vite)
 export const API = import.meta.env.VITE_API_BASE_URL || '';
