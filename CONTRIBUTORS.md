@@ -50,19 +50,19 @@
 <!-- live-snapshot:start -->
 | 🏆 Commits | 🔀 Merged PRs | 👥 Contributors | 🧩 Puzzles | 📚 Vocab | 🌍 GK |
 |----------:|------------:|--------------:|---------:|-------:|----:|
-| **1169** | **131** | **50** | **93** | **7,662** | **991** |
+| **1200** | **131** | **65** | **93** | **7,662** | **991** |
 <!-- live-snapshot:end -->
 
 ## 🥇 Leaderboard
 
 <!-- live-rank:start -->
-_Live data — last regenerated 2026-10-18 · auto-refreshed by [`github-actions[bot]`](https://github.com/features/actions) on every push to `main` and every 12h._
+_Live data — last regenerated 2026-11-01 · auto-refreshed by [`github-actions[bot]`](https://github.com/features/actions) on every push to `main` and every 12h._
 
 | # | 👤 Real Name | 🔗 GitHub ID | 📝 Commits | 🔀 PRs | 🏷️ Role |
 |--:|:-------------|:-------------|----------:|-----:|:--------|
 | 🥇 | **S. R. S. Iyengar**<br/><sub>↳ also commits as <b>sudarshan</b></sub> | [sudarshansudarshan](https://github.com/sudarshansudarshan) | **281** | 0  | Lead Architect · Curriculum Author · 69 puzzle families |
 | 🥈 | **25f2002654**<br/><sub>↳ also commits as <b>Mudit Agrawal</b></sub> | [muditagrawal2007](https://github.com/muditagrawal2007) | **193** | 25  | Maintainer · Battle Arena · Linear Algebra · Sudoku · Playground |
-| 🥉 | **Jinal Gupta** | [jgupta05072003-code](https://github.com/jgupta05072003-code) | **147** | 0  | Upstream Repo Maintainer & PR Reviewer |
+| 🥉 | **Jinal Gupta** | [jgupta05072003-code](https://github.com/jgupta05072003-code) | **149** | 0  | Upstream Repo Maintainer & PR Reviewer |
 | 4. | **Priyanshu Kumar** | [priyanshu7725](https://github.com/priyanshu7725) | **54** | 1  | — |
 | 5. | **Vaibhav Satish**<br/><sub>↳ also commits as <b>Vaibhav</b></sub> | [Vaibhav-sa30](https://github.com/Vaibhav-sa30) | **50** | 3  | Vachana Literacy Lab & Vocabulary |
 | 6. | **Lakshmi Varshini Nandula ** | [varshini-nandula](https://github.com/varshini-nandula) | **43** | 1  | Profile Showcase & Offline Storage |
@@ -81,35 +81,50 @@ _Live data — last regenerated 2026-10-18 · auto-refreshed by [`github-actions
 | 19. | **jinal-gupta**<br/><sub>↳ also commits as <b>JINAL GUPTA</b></sub> | [jinal-gupta](https://github.com/jinal-gupta) | **12** | 0  | — |
 | 20. | **lalithasriharshitha**<br/><sub>↳ also commits as <b>LalithaSriHarshitha</b></sub> | [lalithasriharshitha](https://github.com/lalithasriharshitha) | **10** | 0  | — |
 | 21. | **tanvish desai** | [tanvishdesai](https://github.com/tanvishdesai) | **9** | 2  | — |
-| 22. | **shreejal-bangera**<br/><sub>↳ also commits as <b>Shreejal Bangera</b></sub> | [shreejal-bangera](https://github.com/shreejal-bangera) | **8** | 0  | — |
-| 23. | **cursor-agent**<br/><sub>↳ also commits as <b>Cursor Agent</b></sub> | [cursor-agent](https://github.com/cursor-agent) | **6** | 0  | — |
-| 24. | **ayushkochhar**<br/><sub>↳ also commits as <b>AYUSHKOCHHAR</b></sub> | [ayushkochhar](https://github.com/ayushkochhar) | **6** | 0  | — |
-| 25. | **krishna009-pro**<br/><sub>↳ also commits as <b>Krishna009-pro</b></sub> | [krishna009-pro](https://github.com/krishna009-pro) | **6** | 0  | — |
-| 26. | **SemiColonSlayer** | [sharonyamita-spec](https://github.com/sharonyamita-spec) | **6** | 1  | Math Detective Agency |
-| 27. | **PANDRAJU POORVI PRAVALLIKA** | [poorvipravallika06](https://github.com/poorvipravallika06) | **6** | 1  | HCF/LCM Interactive Module |
-| 28. | **tarang-rajvanshi**<br/><sub>↳ also commits as <b>Tarang Rajvanshi</b></sub> | [tarang-rajvanshi](https://github.com/tarang-rajvanshi) | **5** | 0  | — |
-| 29. | **tenzai-aj**<br/><sub>↳ also commits as <b>Tenzai-AJ</b></sub> | [tenzai-aj](https://github.com/tenzai-aj) | **5** | 0  | — |
-| 30. | **Rukmender T** | [RukmenderT](https://github.com/RukmenderT) | **5** | 1  | Curiosity Mode |
-| 31. | **Ayush Mishra** | [codefixxx](https://github.com/codefixxx) | **4** | 2  | — |
-| 32. | **Anshul Kanodia** | [AnshulKanodia](https://github.com/AnshulKanodia) | **4** | 1  | Geometry Game Restoration |
-| 33. | **sharad**<br/><sub>↳ also commits as <b>Sharad</b></sub> | [sharad](https://github.com/sharad) | **4** | 0  | — |
-| 34. | **sharad-**<br/><sub>↳ also commits as <b>Sharad.</b></sub> | [sharad-](https://github.com/sharad-) | **4** | 0  | — |
-| 35. | **Disha Bansal** | [disha01bansal](https://github.com/disha01bansal) | **4** | 0  | — |
-| 36. | **sai-sowjanya-meka**<br/><sub>↳ also commits as <b>Sai Sowjanya Meka</b></sub> | [sai-sowjanya-meka](https://github.com/sai-sowjanya-meka) | **3** | 0  | — |
-| 37. | **yummypancake2607**<br/><sub>↳ also commits as <b>yummyPancake2607</b></sub> | [yummypancake2607](https://github.com/yummypancake2607) | **3** | 0  | — |
-| 38. | **pradeep-gupta7**<br/><sub>↳ also commits as <b>Pradeep-gupta7</b></sub> | [pradeep-gupta7](https://github.com/pradeep-gupta7) | **3** | 0  | — |
-| 39. | **S. Hamsalekha**<br/><sub>↳ also commits as <b>S Hamsalekha</b></sub> | [S-Hamsalekha-annamai](https://github.com/S-Hamsalekha-annamai) | **3** | 1  | Track User Progress |
-| 40. | **code-zero07**<br/><sub>↳ also commits as <b>Code-Zero07</b></sub> | [code-zero07](https://github.com/code-zero07) | **2** | 0  | — |
-| 41. | **nirmal-np**<br/><sub>↳ also commits as <b>Nirmal_np</b></sub> | [nirmal-np](https://github.com/nirmal-np) | **2** | 0  | — |
-| 42. | **disha-singh**<br/><sub>↳ also commits as <b>Disha Singh</b></sub> | [disha-singh](https://github.com/disha-singh) | **2** | 0  | — |
-| 43. | **Remy baastin rayappan** | [remy-baastin](https://github.com/remy-baastin) | **2** | 1  | — |
-| 44. | **harsh**<br/><sub>↳ also commits as <b>Harsh</b></sub> | [harsh](https://github.com/harsh) | **2** | 0  | — |
-| 45. | **dynosuprovo**<br/><sub>↳ also commits as <b>DYNOSuprovo</b></sub> | [dynosuprovo](https://github.com/dynosuprovo) | **1** | 0  | — |
-| 46. | **athira-kv**<br/><sub>↳ also commits as <b>Athira Kv</b></sub> | [athira-kv](https://github.com/athira-kv) | **1** | 0  | — |
-| 47. | **garv-arora**<br/><sub>↳ also commits as <b>Garv Arora</b></sub> | [garv-arora](https://github.com/garv-arora) | **1** | 0  | — |
-| 48. | **pradeep-gupta**<br/><sub>↳ also commits as <b>Pradeep Gupta</b></sub> | [pradeep-gupta](https://github.com/pradeep-gupta) | **1** | 0  | — |
-| 49. | **priyanshu-kumar**<br/><sub>↳ also commits as <b>Priyanshu Kumar</b></sub> | [priyanshu-kumar](https://github.com/priyanshu-kumar) | **1** | 0  | — |
-| 50. | **Vasuki** | [vasuki-tenali](https://github.com/vasuki-tenali) | **1** | 0  | Infra contributor |
+| 22. | **25f2002654** | [25f2002654](https://github.com/25f2002654) | **8** | 0  | — |
+| 23. | **shreejal-bangera**<br/><sub>↳ also commits as <b>Shreejal Bangera</b></sub> | [shreejal-bangera](https://github.com/shreejal-bangera) | **8** | 0  | — |
+| 24. | **cursor-agent**<br/><sub>↳ also commits as <b>Cursor Agent</b></sub> | [cursor-agent](https://github.com/cursor-agent) | **6** | 0  | — |
+| 25. | **ayushkochhar**<br/><sub>↳ also commits as <b>AYUSHKOCHHAR</b></sub> | [ayushkochhar](https://github.com/ayushkochhar) | **6** | 0  | — |
+| 26. | **krishna009-pro**<br/><sub>↳ also commits as <b>Krishna009-pro</b></sub> | [krishna009-pro](https://github.com/krishna009-pro) | **6** | 0  | — |
+| 27. | **SemiColonSlayer** | [sharonyamita-spec](https://github.com/sharonyamita-spec) | **6** | 1  | Math Detective Agency |
+| 28. | **PANDRAJU POORVI PRAVALLIKA** | [poorvipravallika06](https://github.com/poorvipravallika06) | **6** | 1  | HCF/LCM Interactive Module |
+| 29. | **tarang-rajvanshi**<br/><sub>↳ also commits as <b>Tarang Rajvanshi</b></sub> | [tarang-rajvanshi](https://github.com/tarang-rajvanshi) | **5** | 0  | — |
+| 30. | **tenzai-aj**<br/><sub>↳ also commits as <b>Tenzai-AJ</b></sub> | [tenzai-aj](https://github.com/tenzai-aj) | **5** | 0  | — |
+| 31. | **Rukmender T** | [RukmenderT](https://github.com/RukmenderT) | **5** | 1  | Curiosity Mode |
+| 32. | **shreya-s-salian**<br/><sub>↳ also commits as <b>Shreya S Salian</b></sub> | [shreya-s-salian](https://github.com/shreya-s-salian) | **4** | 0  | — |
+| 33. | **sai-sowjanya-meka**<br/><sub>↳ also commits as <b>Sai Sowjanya Meka</b></sub> | [sai-sowjanya-meka](https://github.com/sai-sowjanya-meka) | **4** | 0  | — |
+| 34. | **Ayush Mishra** | [codefixxx](https://github.com/codefixxx) | **4** | 2  | — |
+| 35. | **Anshul Kanodia** | [AnshulKanodia](https://github.com/AnshulKanodia) | **4** | 1  | Geometry Game Restoration |
+| 36. | **sharad**<br/><sub>↳ also commits as <b>Sharad</b></sub> | [sharad](https://github.com/sharad) | **4** | 0  | — |
+| 37. | **sharad-**<br/><sub>↳ also commits as <b>Sharad.</b></sub> | [sharad-](https://github.com/sharad-) | **4** | 0  | — |
+| 38. | **Disha Bansal** | [disha01bansal](https://github.com/disha01bansal) | **4** | 0  | — |
+| 39. | **v-t-rushi-kannan**<br/><sub>↳ also commits as <b>V T Rushi Kannan</b></sub> | [v-t-rushi-kannan](https://github.com/v-t-rushi-kannan) | **3** | 0  | — |
+| 40. | **yummypancake2607**<br/><sub>↳ also commits as <b>yummyPancake2607</b></sub> | [yummypancake2607](https://github.com/yummypancake2607) | **3** | 0  | — |
+| 41. | **pradeep-gupta7**<br/><sub>↳ also commits as <b>Pradeep-gupta7</b></sub> | [pradeep-gupta7](https://github.com/pradeep-gupta7) | **3** | 0  | — |
+| 42. | **S. Hamsalekha**<br/><sub>↳ also commits as <b>S Hamsalekha</b></sub> | [S-Hamsalekha-annamai](https://github.com/S-Hamsalekha-annamai) | **3** | 1  | Track User Progress |
+| 43. | **swati-jain**<br/><sub>↳ also commits as <b>Swati Jain</b></sub> | [swati-jain](https://github.com/swati-jain) | **2** | 0  | — |
+| 44. | **code-zero07**<br/><sub>↳ also commits as <b>Code-Zero07</b></sub> | [code-zero07](https://github.com/code-zero07) | **2** | 0  | — |
+| 45. | **nirmal-np**<br/><sub>↳ also commits as <b>Nirmal_np</b></sub> | [nirmal-np](https://github.com/nirmal-np) | **2** | 0  | — |
+| 46. | **disha-singh**<br/><sub>↳ also commits as <b>Disha Singh</b></sub> | [disha-singh](https://github.com/disha-singh) | **2** | 0  | — |
+| 47. | **Remy baastin rayappan** | [remy-baastin](https://github.com/remy-baastin) | **2** | 1  | — |
+| 48. | **harsh**<br/><sub>↳ also commits as <b>Harsh</b></sub> | [harsh](https://github.com/harsh) | **2** | 0  | — |
+| 49. | **sonali-bharti**<br/><sub>↳ also commits as <b>Sonali Bharti</b></sub> | [sonali-bharti](https://github.com/sonali-bharti) | **1** | 0  | — |
+| 50. | **gurnoor-singh**<br/><sub>↳ also commits as <b>Gurnoor Singh</b></sub> | [gurnoor-singh](https://github.com/gurnoor-singh) | **1** | 0  | — |
+| 51. | **sweta010708-ai** | [sweta010708-ai](https://github.com/sweta010708-ai) | **1** | 0  | — |
+| 52. | **rhytam-biswas**<br/><sub>↳ also commits as <b>Rhytam Biswas</b></sub> | [rhytam-biswas](https://github.com/rhytam-biswas) | **1** | 0  | — |
+| 53. | **vedhiga**<br/><sub>↳ also commits as <b>Vedhiga</b></sub> | [vedhiga](https://github.com/vedhiga) | **1** | 0  | — |
+| 54. | **anshika-o**<br/><sub>↳ also commits as <b>Anshika-o</b></sub> | [anshika-o](https://github.com/anshika-o) | **1** | 0  | — |
+| 55. | **halima-parvin** | [halima-parvin](https://github.com/halima-parvin) | **1** | 0  | — |
+| 56. | **sneha-jindal**<br/><sub>↳ also commits as <b>Sneha Jindal</b></sub> | [sneha-jindal](https://github.com/sneha-jindal) | **1** | 0  | — |
+| 57. | **megana-kurugodu**<br/><sub>↳ also commits as <b>Megana Kurugodu</b></sub> | [megana-kurugodu](https://github.com/megana-kurugodu) | **1** | 0  | — |
+| 58. | **lakshit-verma**<br/><sub>↳ also commits as <b>Lakshit Verma</b></sub> | [lakshit-verma](https://github.com/lakshit-verma) | **1** | 0  | — |
+| 59. | **aadya-singh**<br/><sub>↳ also commits as <b>Aadya Singh</b></sub> | [aadya-singh](https://github.com/aadya-singh) | **1** | 0  | — |
+| 60. | **dynosuprovo**<br/><sub>↳ also commits as <b>DYNOSuprovo</b></sub> | [dynosuprovo](https://github.com/dynosuprovo) | **1** | 0  | — |
+| 61. | **athira-kv**<br/><sub>↳ also commits as <b>Athira Kv</b></sub> | [athira-kv](https://github.com/athira-kv) | **1** | 0  | — |
+| 62. | **garv-arora**<br/><sub>↳ also commits as <b>Garv Arora</b></sub> | [garv-arora](https://github.com/garv-arora) | **1** | 0  | — |
+| 63. | **pradeep-gupta**<br/><sub>↳ also commits as <b>Pradeep Gupta</b></sub> | [pradeep-gupta](https://github.com/pradeep-gupta) | **1** | 0  | — |
+| 64. | **priyanshu-kumar**<br/><sub>↳ also commits as <b>Priyanshu Kumar</b></sub> | [priyanshu-kumar](https://github.com/priyanshu-kumar) | **1** | 0  | — |
+| 65. | **Vasuki** | [vasuki-tenali](https://github.com/vasuki-tenali) | **1** | 0  | Infra contributor |
 <!-- live-rank:end -->
 
 ---
@@ -191,7 +206,7 @@ _Live data — last regenerated 2026-10-18 · auto-refreshed by [`github-actions
         <br/><b>Jinal Gupta</b>
         <br/><sub><i>(git: J. Gupta)</i></sub>
         <br/><a href="https://github.com/jgupta05072003-code">@jgupta05072003-code</a>
-        <br/><sub>🏆 147 commits · 0 PRs merged</sub>
+        <br/><sub>🏆 149 commits · 0 PRs merged</sub>
       </td>
       <td valign="top" width="*">
         <h4>🥉 Upstream Repo Maintainer & PR Reviewer</h4>
@@ -642,6 +657,27 @@ _Live data — last regenerated 2026-10-18 · auto-refreshed by [`github-actions
   <table>
     <tr>
       <td align="center" width="220">
+        <a href="https://github.com/25f2002654"><img src="https://github.com/25f2002654.png?size=120&s=120" width="120" style="border-radius:50%; border:3px solid #888888;" alt="25f2002654"/></a>
+        <br/><b>25f2002654</b>
+        <br/><a href="https://github.com/25f2002654">@25f2002654</a>
+        <br/><sub>🏆 8 commits · 0 PRs merged</sub>
+      </td>
+      <td valign="top" width="*">
+        <h4>22. New Contributor</h4>
+        <ul>
+          <li>🆕 <b>New contributor</b> — auto-added by the readme-bot</li>
+          <li>📊 <b>8 commits</b> across this repo's history</li>
+          <li>🔗 <i>Add a <code>FALLBACK_PROFILES</code> entry in <code>scripts/update-readme-contributors.js</code> to enrich this card with real name, avatar, location, and curated feature list</i></li>
+        </ul>
+      </td>
+    </tr>
+  </table>
+</p>
+
+<p align="center">
+  <table>
+    <tr>
+      <td align="center" width="220">
         <a href="https://github.com/shreejal-bangera"><img src="https://github.com/shreejal-bangera.png?size=120&s=120" width="120" style="border-radius:50%; border:3px solid #888888;" alt="shreejal-bangera"/></a>
         <br/><b>shreejal-bangera</b>
         <br/><a href="https://github.com/shreejal-bangera">@shreejal-bangera</a>
@@ -649,7 +685,7 @@ _Live data — last regenerated 2026-10-18 · auto-refreshed by [`github-actions
         <br/><sub>🔗 also commits as: <b>Shreejal Bangera</b></sub>
       </td>
       <td valign="top" width="*">
-        <h4>22. New Contributor</h4>
+        <h4>23. New Contributor</h4>
         <ul>
           <li>🆕 <b>New contributor</b> — auto-added by the readme-bot</li>
           <li>📊 <b>8 commits</b> across this repo's history</li>
@@ -671,7 +707,7 @@ _Live data — last regenerated 2026-10-18 · auto-refreshed by [`github-actions
         <br/><sub>🔗 also commits as: <b>Cursor Agent</b></sub>
       </td>
       <td valign="top" width="*">
-        <h4>23. New Contributor</h4>
+        <h4>24. New Contributor</h4>
         <ul>
           <li>🆕 <b>New contributor</b> — auto-added by the readme-bot</li>
           <li>📊 <b>6 commits</b> across this repo's history</li>
@@ -693,7 +729,7 @@ _Live data — last regenerated 2026-10-18 · auto-refreshed by [`github-actions
         <br/><sub>🔗 also commits as: <b>AYUSHKOCHHAR</b></sub>
       </td>
       <td valign="top" width="*">
-        <h4>24. New Contributor</h4>
+        <h4>25. New Contributor</h4>
         <ul>
           <li>🆕 <b>New contributor</b> — auto-added by the readme-bot</li>
           <li>📊 <b>6 commits</b> across this repo's history</li>
@@ -715,7 +751,7 @@ _Live data — last regenerated 2026-10-18 · auto-refreshed by [`github-actions
         <br/><sub>🔗 also commits as: <b>Krishna009-pro</b></sub>
       </td>
       <td valign="top" width="*">
-        <h4>25. New Contributor</h4>
+        <h4>26. New Contributor</h4>
         <ul>
           <li>🆕 <b>New contributor</b> — auto-added by the readme-bot</li>
           <li>📊 <b>6 commits</b> across this repo's history</li>
@@ -738,7 +774,7 @@ _Live data — last regenerated 2026-10-18 · auto-refreshed by [`github-actions
         <br/><sub><i>(SemiColonSlayer)</i></sub>
       </td>
       <td valign="top" width="*">
-        <h4>26. Math Detective Agency</h4>
+        <h4>27. Math Detective Agency</h4>
         <ul>
           <li>🕵️ <b>Math Detective Agency (PR #54)</b> — story-based mystery math cases with chained clue progression</li>
           <li>🪪 <b>Badge detail modal</b> — CSS for badge detail modal in <code>App.css</code></li>
@@ -760,7 +796,7 @@ _Live data — last regenerated 2026-10-18 · auto-refreshed by [`github-actions
         <br/><sub>🏆 6 commits · 1 PR merged</sub>
       </td>
       <td valign="top" width="*">
-        <h4>27. HCF/LCM Interactive Module</h4>
+        <h4>28. HCF/LCM Interactive Module</h4>
         <ul>
           <li>🍕 <b>Interactive LCM & HCF (PR #12)</b> — dynamic quiz with stepper locks, validation popups, accordion examples, mistake redirection</li>
           <li>🎯 <b>Confidence meter</b> — confidence-based quiz progression with sequential redirection</li>
@@ -784,7 +820,7 @@ _Live data — last regenerated 2026-10-18 · auto-refreshed by [`github-actions
         <br/><sub>🔗 also commits as: <b>Tarang Rajvanshi</b></sub>
       </td>
       <td valign="top" width="*">
-        <h4>28. New Contributor</h4>
+        <h4>29. New Contributor</h4>
         <ul>
           <li>🆕 <b>New contributor</b> — auto-added by the readme-bot</li>
           <li>📊 <b>5 commits</b> across this repo's history</li>
@@ -806,7 +842,7 @@ _Live data — last regenerated 2026-10-18 · auto-refreshed by [`github-actions
         <br/><sub>🔗 also commits as: <b>Tenzai-AJ</b></sub>
       </td>
       <td valign="top" width="*">
-        <h4>29. New Contributor</h4>
+        <h4>30. New Contributor</h4>
         <ul>
           <li>🆕 <b>New contributor</b> — auto-added by the readme-bot</li>
           <li>📊 <b>5 commits</b> across this repo's history</li>
@@ -827,12 +863,56 @@ _Live data — last regenerated 2026-10-18 · auto-refreshed by [`github-actions
         <br/><sub>🏆 5 commits · 1 PR merged</sub>
       </td>
       <td valign="top" width="*">
-        <h4>30. Curiosity Mode</h4>
+        <h4>31. Curiosity Mode</h4>
         <ul>
           <li>🤔 <b>Curiosity Mode (PR #56)</b> — variation discovery puzzles that explore "what if" scenarios</li>
           <li>🪟 <b>Hamburger menu integration</b> — restored Curiosity Mode after upstream merges</li>
           <li>🛠️ <b>Merge conflict resolutions</b> — clean upstream syncs</li>
           <li>🧹 <b>UI cleanup</b> — removed duplicate hover tooltip + left-side variation label</li>
+        </ul>
+      </td>
+    </tr>
+  </table>
+</p>
+
+<p align="center">
+  <table>
+    <tr>
+      <td align="center" width="220">
+        <a href="https://github.com/shreya-s-salian"><img src="https://github.com/shreya-s-salian.png?size=120&s=120" width="120" style="border-radius:50%; border:3px solid #888888;" alt="shreya-s-salian"/></a>
+        <br/><b>shreya-s-salian</b>
+        <br/><a href="https://github.com/shreya-s-salian">@shreya-s-salian</a>
+        <br/><sub>🏆 4 commits · 0 PRs merged</sub>
+        <br/><sub>🔗 also commits as: <b>Shreya S Salian</b></sub>
+      </td>
+      <td valign="top" width="*">
+        <h4>32. New Contributor</h4>
+        <ul>
+          <li>🆕 <b>New contributor</b> — auto-added by the readme-bot</li>
+          <li>📊 <b>4 commits</b> across this repo's history</li>
+          <li>🔗 <i>Add a <code>FALLBACK_PROFILES</code> entry in <code>scripts/update-readme-contributors.js</code> to enrich this card with real name, avatar, location, and curated feature list</i></li>
+        </ul>
+      </td>
+    </tr>
+  </table>
+</p>
+
+<p align="center">
+  <table>
+    <tr>
+      <td align="center" width="220">
+        <a href="https://github.com/sai-sowjanya-meka"><img src="https://github.com/sai-sowjanya-meka.png?size=120&s=120" width="120" style="border-radius:50%; border:3px solid #888888;" alt="sai-sowjanya-meka"/></a>
+        <br/><b>sai-sowjanya-meka</b>
+        <br/><a href="https://github.com/sai-sowjanya-meka">@sai-sowjanya-meka</a>
+        <br/><sub>🏆 4 commits · 0 PRs merged</sub>
+        <br/><sub>🔗 also commits as: <b>Sai Sowjanya Meka</b></sub>
+      </td>
+      <td valign="top" width="*">
+        <h4>33. New Contributor</h4>
+        <ul>
+          <li>🆕 <b>New contributor</b> — auto-added by the readme-bot</li>
+          <li>📊 <b>4 commits</b> across this repo's history</li>
+          <li>🔗 <i>Add a <code>FALLBACK_PROFILES</code> entry in <code>scripts/update-readme-contributors.js</code> to enrich this card with real name, avatar, location, and curated feature list</i></li>
         </ul>
       </td>
     </tr>
@@ -850,7 +930,7 @@ _Live data — last regenerated 2026-10-18 · auto-refreshed by [`github-actions
         <br/><sub>📍 Delhi</sub>
       </td>
       <td valign="top" width="*">
-        <h4>31. New Contributor</h4>
+        <h4>34. New Contributor</h4>
         <ul>
           <li>🆕 <b>New contributor</b> — auto-added by the readme-bot</li>
           <li>📊 <b>4 commits</b> across this repo's history</li>
@@ -872,7 +952,7 @@ _Live data — last regenerated 2026-10-18 · auto-refreshed by [`github-actions
         <br/><sub>📍 india · 🌐 anshulkanodia.me</sub>
       </td>
       <td valign="top" width="*">
-        <h4>32. Geometry Game Restoration</h4>
+        <h4>35. Geometry Game Restoration</h4>
         <ul>
           <li>🔺 <b>Re-added Geometry Game (PR #8)</b> — restored the 20-July geometry game after it was lost in a merge</li>
           <li>🔀 <b>Upstream merge integration</b> for <code>patnaikArpita/Re-added-geometry-game-20July</code></li>
@@ -893,7 +973,7 @@ _Live data — last regenerated 2026-10-18 · auto-refreshed by [`github-actions
         <br/><sub>🔗 also commits as: <b>Sharad</b></sub>
       </td>
       <td valign="top" width="*">
-        <h4>33. New Contributor</h4>
+        <h4>36. New Contributor</h4>
         <ul>
           <li>🆕 <b>New contributor</b> — auto-added by the readme-bot</li>
           <li>📊 <b>4 commits</b> across this repo's history</li>
@@ -915,7 +995,7 @@ _Live data — last regenerated 2026-10-18 · auto-refreshed by [`github-actions
         <br/><sub>🔗 also commits as: <b>Sharad.</b></sub>
       </td>
       <td valign="top" width="*">
-        <h4>34. New Contributor</h4>
+        <h4>37. New Contributor</h4>
         <ul>
           <li>🆕 <b>New contributor</b> — auto-added by the readme-bot</li>
           <li>📊 <b>4 commits</b> across this repo's history</li>
@@ -936,7 +1016,7 @@ _Live data — last regenerated 2026-10-18 · auto-refreshed by [`github-actions
         <br/><sub>🏆 4 commits · 0 PRs merged</sub>
       </td>
       <td valign="top" width="*">
-        <h4>35. New Contributor</h4>
+        <h4>38. New Contributor</h4>
         <ul>
           <li>🆕 <b>New contributor</b> — auto-added by the readme-bot</li>
           <li>📊 <b>4 commits</b> across this repo's history</li>
@@ -951,14 +1031,14 @@ _Live data — last regenerated 2026-10-18 · auto-refreshed by [`github-actions
   <table>
     <tr>
       <td align="center" width="220">
-        <a href="https://github.com/sai-sowjanya-meka"><img src="https://github.com/sai-sowjanya-meka.png?size=120&s=120" width="120" style="border-radius:50%; border:3px solid #888888;" alt="sai-sowjanya-meka"/></a>
-        <br/><b>sai-sowjanya-meka</b>
-        <br/><a href="https://github.com/sai-sowjanya-meka">@sai-sowjanya-meka</a>
+        <a href="https://github.com/v-t-rushi-kannan"><img src="https://github.com/v-t-rushi-kannan.png?size=120&s=120" width="120" style="border-radius:50%; border:3px solid #888888;" alt="v-t-rushi-kannan"/></a>
+        <br/><b>v-t-rushi-kannan</b>
+        <br/><a href="https://github.com/v-t-rushi-kannan">@v-t-rushi-kannan</a>
         <br/><sub>🏆 3 commits · 0 PRs merged</sub>
-        <br/><sub>🔗 also commits as: <b>Sai Sowjanya Meka</b></sub>
+        <br/><sub>🔗 also commits as: <b>V T Rushi Kannan</b></sub>
       </td>
       <td valign="top" width="*">
-        <h4>36. New Contributor</h4>
+        <h4>39. New Contributor</h4>
         <ul>
           <li>🆕 <b>New contributor</b> — auto-added by the readme-bot</li>
           <li>📊 <b>3 commits</b> across this repo's history</li>
@@ -980,7 +1060,7 @@ _Live data — last regenerated 2026-10-18 · auto-refreshed by [`github-actions
         <br/><sub>🔗 also commits as: <b>yummyPancake2607</b></sub>
       </td>
       <td valign="top" width="*">
-        <h4>37. New Contributor</h4>
+        <h4>40. New Contributor</h4>
         <ul>
           <li>🆕 <b>New contributor</b> — auto-added by the readme-bot</li>
           <li>📊 <b>3 commits</b> across this repo's history</li>
@@ -1002,7 +1082,7 @@ _Live data — last regenerated 2026-10-18 · auto-refreshed by [`github-actions
         <br/><sub>🔗 also commits as: <b>Pradeep-gupta7</b></sub>
       </td>
       <td valign="top" width="*">
-        <h4>38. New Contributor</h4>
+        <h4>41. New Contributor</h4>
         <ul>
           <li>🆕 <b>New contributor</b> — auto-added by the readme-bot</li>
           <li>📊 <b>3 commits</b> across this repo's history</li>
@@ -1024,11 +1104,33 @@ _Live data — last regenerated 2026-10-18 · auto-refreshed by [`github-actions
         <br/><sub>🔗 also commits as: <b>S Hamsalekha</b></sub>
       </td>
       <td valign="top" width="*">
-        <h4>39. Track User Progress</h4>
+        <h4>42. Track User Progress</h4>
         <ul>
           <li>📊 <b>Track User Progress (PR #77)</b> — per-user attempt log, progress timeline, mastery milestones</li>
           <li>🗂️ <b><code>StudentAttemptLog</code></b> model in MongoDB for fine-grained analytics</li>
           <li>🔀 <b>Upstream merge</b> for <code>feat/track_user_progress</code></li>
+        </ul>
+      </td>
+    </tr>
+  </table>
+</p>
+
+<p align="center">
+  <table>
+    <tr>
+      <td align="center" width="220">
+        <a href="https://github.com/swati-jain"><img src="https://github.com/swati-jain.png?size=120&s=120" width="120" style="border-radius:50%; border:3px solid #888888;" alt="swati-jain"/></a>
+        <br/><b>swati-jain</b>
+        <br/><a href="https://github.com/swati-jain">@swati-jain</a>
+        <br/><sub>🏆 2 commits · 0 PRs merged</sub>
+        <br/><sub>🔗 also commits as: <b>Swati Jain</b></sub>
+      </td>
+      <td valign="top" width="*">
+        <h4>43. New Contributor</h4>
+        <ul>
+          <li>🆕 <b>New contributor</b> — auto-added by the readme-bot</li>
+          <li>📊 <b>2 commits</b> across this repo's history</li>
+          <li>🔗 <i>Add a <code>FALLBACK_PROFILES</code> entry in <code>scripts/update-readme-contributors.js</code> to enrich this card with real name, avatar, location, and curated feature list</i></li>
         </ul>
       </td>
     </tr>
@@ -1046,7 +1148,7 @@ _Live data — last regenerated 2026-10-18 · auto-refreshed by [`github-actions
         <br/><sub>🔗 also commits as: <b>Code-Zero07</b></sub>
       </td>
       <td valign="top" width="*">
-        <h4>40. New Contributor</h4>
+        <h4>44. New Contributor</h4>
         <ul>
           <li>🆕 <b>New contributor</b> — auto-added by the readme-bot</li>
           <li>📊 <b>2 commits</b> across this repo's history</li>
@@ -1068,7 +1170,7 @@ _Live data — last regenerated 2026-10-18 · auto-refreshed by [`github-actions
         <br/><sub>🔗 also commits as: <b>Nirmal_np</b></sub>
       </td>
       <td valign="top" width="*">
-        <h4>41. New Contributor</h4>
+        <h4>45. New Contributor</h4>
         <ul>
           <li>🆕 <b>New contributor</b> — auto-added by the readme-bot</li>
           <li>📊 <b>2 commits</b> across this repo's history</li>
@@ -1090,7 +1192,7 @@ _Live data — last regenerated 2026-10-18 · auto-refreshed by [`github-actions
         <br/><sub>🔗 also commits as: <b>Disha Singh</b></sub>
       </td>
       <td valign="top" width="*">
-        <h4>42. New Contributor</h4>
+        <h4>46. New Contributor</h4>
         <ul>
           <li>🆕 <b>New contributor</b> — auto-added by the readme-bot</li>
           <li>📊 <b>2 commits</b> across this repo's history</li>
@@ -1111,7 +1213,7 @@ _Live data — last regenerated 2026-10-18 · auto-refreshed by [`github-actions
         <br/><sub>🏆 2 commits · 1 PR merged</sub>
       </td>
       <td valign="top" width="*">
-        <h4>43. New Contributor</h4>
+        <h4>47. New Contributor</h4>
         <ul>
           <li>🆕 <b>New contributor</b> — auto-added by the readme-bot</li>
           <li>📊 <b>2 commits</b> across this repo's history</li>
@@ -1133,10 +1235,250 @@ _Live data — last regenerated 2026-10-18 · auto-refreshed by [`github-actions
         <br/><sub>🔗 also commits as: <b>Harsh</b></sub>
       </td>
       <td valign="top" width="*">
-        <h4>44. New Contributor</h4>
+        <h4>48. New Contributor</h4>
         <ul>
           <li>🆕 <b>New contributor</b> — auto-added by the readme-bot</li>
           <li>📊 <b>2 commits</b> across this repo's history</li>
+          <li>🔗 <i>Add a <code>FALLBACK_PROFILES</code> entry in <code>scripts/update-readme-contributors.js</code> to enrich this card with real name, avatar, location, and curated feature list</i></li>
+        </ul>
+      </td>
+    </tr>
+  </table>
+</p>
+
+<p align="center">
+  <table>
+    <tr>
+      <td align="center" width="220">
+        <a href="https://github.com/sonali-bharti"><img src="https://github.com/sonali-bharti.png?size=120&s=120" width="120" style="border-radius:50%; border:3px solid #888888;" alt="sonali-bharti"/></a>
+        <br/><b>sonali-bharti</b>
+        <br/><a href="https://github.com/sonali-bharti">@sonali-bharti</a>
+        <br/><sub>🏆 1 commits · 0 PRs merged</sub>
+        <br/><sub>🔗 also commits as: <b>Sonali Bharti</b></sub>
+      </td>
+      <td valign="top" width="*">
+        <h4>49. New Contributor</h4>
+        <ul>
+          <li>🆕 <b>New contributor</b> — auto-added by the readme-bot</li>
+          <li>📊 <b>1 commits</b> across this repo's history</li>
+          <li>🔗 <i>Add a <code>FALLBACK_PROFILES</code> entry in <code>scripts/update-readme-contributors.js</code> to enrich this card with real name, avatar, location, and curated feature list</i></li>
+        </ul>
+      </td>
+    </tr>
+  </table>
+</p>
+
+<p align="center">
+  <table>
+    <tr>
+      <td align="center" width="220">
+        <a href="https://github.com/gurnoor-singh"><img src="https://github.com/gurnoor-singh.png?size=120&s=120" width="120" style="border-radius:50%; border:3px solid #888888;" alt="gurnoor-singh"/></a>
+        <br/><b>gurnoor-singh</b>
+        <br/><a href="https://github.com/gurnoor-singh">@gurnoor-singh</a>
+        <br/><sub>🏆 1 commits · 0 PRs merged</sub>
+        <br/><sub>🔗 also commits as: <b>Gurnoor Singh</b></sub>
+      </td>
+      <td valign="top" width="*">
+        <h4>50. New Contributor</h4>
+        <ul>
+          <li>🆕 <b>New contributor</b> — auto-added by the readme-bot</li>
+          <li>📊 <b>1 commits</b> across this repo's history</li>
+          <li>🔗 <i>Add a <code>FALLBACK_PROFILES</code> entry in <code>scripts/update-readme-contributors.js</code> to enrich this card with real name, avatar, location, and curated feature list</i></li>
+        </ul>
+      </td>
+    </tr>
+  </table>
+</p>
+
+<p align="center">
+  <table>
+    <tr>
+      <td align="center" width="220">
+        <a href="https://github.com/sweta010708-ai"><img src="https://avatars.githubusercontent.com/u/260088154?v=4&s=120" width="120" style="border-radius:50%; border:3px solid #888888;" alt="sweta010708-ai"/></a>
+        <br/><b>sweta010708-ai</b>
+        <br/><a href="https://github.com/sweta010708-ai">@sweta010708-ai</a>
+        <br/><sub>🏆 1 commits · 0 PRs merged</sub>
+      </td>
+      <td valign="top" width="*">
+        <h4>51. New Contributor</h4>
+        <ul>
+          <li>🆕 <b>New contributor</b> — auto-added by the readme-bot</li>
+          <li>📊 <b>1 commits</b> across this repo's history</li>
+          <li>🔗 <i>Add a <code>FALLBACK_PROFILES</code> entry in <code>scripts/update-readme-contributors.js</code> to enrich this card with real name, avatar, location, and curated feature list</i></li>
+        </ul>
+      </td>
+    </tr>
+  </table>
+</p>
+
+<p align="center">
+  <table>
+    <tr>
+      <td align="center" width="220">
+        <a href="https://github.com/rhytam-biswas"><img src="https://github.com/rhytam-biswas.png?size=120&s=120" width="120" style="border-radius:50%; border:3px solid #888888;" alt="rhytam-biswas"/></a>
+        <br/><b>rhytam-biswas</b>
+        <br/><a href="https://github.com/rhytam-biswas">@rhytam-biswas</a>
+        <br/><sub>🏆 1 commits · 0 PRs merged</sub>
+        <br/><sub>🔗 also commits as: <b>Rhytam Biswas</b></sub>
+      </td>
+      <td valign="top" width="*">
+        <h4>52. New Contributor</h4>
+        <ul>
+          <li>🆕 <b>New contributor</b> — auto-added by the readme-bot</li>
+          <li>📊 <b>1 commits</b> across this repo's history</li>
+          <li>🔗 <i>Add a <code>FALLBACK_PROFILES</code> entry in <code>scripts/update-readme-contributors.js</code> to enrich this card with real name, avatar, location, and curated feature list</i></li>
+        </ul>
+      </td>
+    </tr>
+  </table>
+</p>
+
+<p align="center">
+  <table>
+    <tr>
+      <td align="center" width="220">
+        <a href="https://github.com/vedhiga"><img src="https://github.com/vedhiga.png?size=120&s=120" width="120" style="border-radius:50%; border:3px solid #888888;" alt="vedhiga"/></a>
+        <br/><b>vedhiga</b>
+        <br/><a href="https://github.com/vedhiga">@vedhiga</a>
+        <br/><sub>🏆 1 commits · 0 PRs merged</sub>
+        <br/><sub>🔗 also commits as: <b>Vedhiga</b></sub>
+      </td>
+      <td valign="top" width="*">
+        <h4>53. New Contributor</h4>
+        <ul>
+          <li>🆕 <b>New contributor</b> — auto-added by the readme-bot</li>
+          <li>📊 <b>1 commits</b> across this repo's history</li>
+          <li>🔗 <i>Add a <code>FALLBACK_PROFILES</code> entry in <code>scripts/update-readme-contributors.js</code> to enrich this card with real name, avatar, location, and curated feature list</i></li>
+        </ul>
+      </td>
+    </tr>
+  </table>
+</p>
+
+<p align="center">
+  <table>
+    <tr>
+      <td align="center" width="220">
+        <a href="https://github.com/anshika-o"><img src="https://github.com/anshika-o.png?size=120&s=120" width="120" style="border-radius:50%; border:3px solid #888888;" alt="anshika-o"/></a>
+        <br/><b>anshika-o</b>
+        <br/><a href="https://github.com/anshika-o">@anshika-o</a>
+        <br/><sub>🏆 1 commits · 0 PRs merged</sub>
+        <br/><sub>🔗 also commits as: <b>Anshika-o</b></sub>
+      </td>
+      <td valign="top" width="*">
+        <h4>54. New Contributor</h4>
+        <ul>
+          <li>🆕 <b>New contributor</b> — auto-added by the readme-bot</li>
+          <li>📊 <b>1 commits</b> across this repo's history</li>
+          <li>🔗 <i>Add a <code>FALLBACK_PROFILES</code> entry in <code>scripts/update-readme-contributors.js</code> to enrich this card with real name, avatar, location, and curated feature list</i></li>
+        </ul>
+      </td>
+    </tr>
+  </table>
+</p>
+
+<p align="center">
+  <table>
+    <tr>
+      <td align="center" width="220">
+        <a href="https://github.com/halima-parvin"><img src="https://avatars.githubusercontent.com/u/332380921?v=4&s=120" width="120" style="border-radius:50%; border:3px solid #888888;" alt="halima-parvin"/></a>
+        <br/><b>halima-parvin</b>
+        <br/><a href="https://github.com/halima-parvin">@halima-parvin</a>
+        <br/><sub>🏆 1 commits · 0 PRs merged</sub>
+      </td>
+      <td valign="top" width="*">
+        <h4>55. New Contributor</h4>
+        <ul>
+          <li>🆕 <b>New contributor</b> — auto-added by the readme-bot</li>
+          <li>📊 <b>1 commits</b> across this repo's history</li>
+          <li>🔗 <i>Add a <code>FALLBACK_PROFILES</code> entry in <code>scripts/update-readme-contributors.js</code> to enrich this card with real name, avatar, location, and curated feature list</i></li>
+        </ul>
+      </td>
+    </tr>
+  </table>
+</p>
+
+<p align="center">
+  <table>
+    <tr>
+      <td align="center" width="220">
+        <a href="https://github.com/sneha-jindal"><img src="https://github.com/sneha-jindal.png?size=120&s=120" width="120" style="border-radius:50%; border:3px solid #888888;" alt="sneha-jindal"/></a>
+        <br/><b>sneha-jindal</b>
+        <br/><a href="https://github.com/sneha-jindal">@sneha-jindal</a>
+        <br/><sub>🏆 1 commits · 0 PRs merged</sub>
+        <br/><sub>🔗 also commits as: <b>Sneha Jindal</b></sub>
+      </td>
+      <td valign="top" width="*">
+        <h4>56. New Contributor</h4>
+        <ul>
+          <li>🆕 <b>New contributor</b> — auto-added by the readme-bot</li>
+          <li>📊 <b>1 commits</b> across this repo's history</li>
+          <li>🔗 <i>Add a <code>FALLBACK_PROFILES</code> entry in <code>scripts/update-readme-contributors.js</code> to enrich this card with real name, avatar, location, and curated feature list</i></li>
+        </ul>
+      </td>
+    </tr>
+  </table>
+</p>
+
+<p align="center">
+  <table>
+    <tr>
+      <td align="center" width="220">
+        <a href="https://github.com/megana-kurugodu"><img src="https://github.com/megana-kurugodu.png?size=120&s=120" width="120" style="border-radius:50%; border:3px solid #888888;" alt="megana-kurugodu"/></a>
+        <br/><b>megana-kurugodu</b>
+        <br/><a href="https://github.com/megana-kurugodu">@megana-kurugodu</a>
+        <br/><sub>🏆 1 commits · 0 PRs merged</sub>
+        <br/><sub>🔗 also commits as: <b>Megana Kurugodu</b></sub>
+      </td>
+      <td valign="top" width="*">
+        <h4>57. New Contributor</h4>
+        <ul>
+          <li>🆕 <b>New contributor</b> — auto-added by the readme-bot</li>
+          <li>📊 <b>1 commits</b> across this repo's history</li>
+          <li>🔗 <i>Add a <code>FALLBACK_PROFILES</code> entry in <code>scripts/update-readme-contributors.js</code> to enrich this card with real name, avatar, location, and curated feature list</i></li>
+        </ul>
+      </td>
+    </tr>
+  </table>
+</p>
+
+<p align="center">
+  <table>
+    <tr>
+      <td align="center" width="220">
+        <a href="https://github.com/lakshit-verma"><img src="https://github.com/lakshit-verma.png?size=120&s=120" width="120" style="border-radius:50%; border:3px solid #888888;" alt="lakshit-verma"/></a>
+        <br/><b>lakshit-verma</b>
+        <br/><a href="https://github.com/lakshit-verma">@lakshit-verma</a>
+        <br/><sub>🏆 1 commits · 0 PRs merged</sub>
+        <br/><sub>🔗 also commits as: <b>Lakshit Verma</b></sub>
+      </td>
+      <td valign="top" width="*">
+        <h4>58. New Contributor</h4>
+        <ul>
+          <li>🆕 <b>New contributor</b> — auto-added by the readme-bot</li>
+          <li>📊 <b>1 commits</b> across this repo's history</li>
+          <li>🔗 <i>Add a <code>FALLBACK_PROFILES</code> entry in <code>scripts/update-readme-contributors.js</code> to enrich this card with real name, avatar, location, and curated feature list</i></li>
+        </ul>
+      </td>
+    </tr>
+  </table>
+</p>
+
+<p align="center">
+  <table>
+    <tr>
+      <td align="center" width="220">
+        <a href="https://github.com/aadya-singh"><img src="https://github.com/aadya-singh.png?size=120&s=120" width="120" style="border-radius:50%; border:3px solid #888888;" alt="aadya-singh"/></a>
+        <br/><b>aadya-singh</b>
+        <br/><a href="https://github.com/aadya-singh">@aadya-singh</a>
+        <br/><sub>🏆 1 commits · 0 PRs merged</sub>
+        <br/><sub>🔗 also commits as: <b>Aadya Singh</b></sub>
+      </td>
+      <td valign="top" width="*">
+        <h4>59. New Contributor</h4>
+        <ul>
+          <li>🆕 <b>New contributor</b> — auto-added by the readme-bot</li>
+          <li>📊 <b>1 commits</b> across this repo's history</li>
           <li>🔗 <i>Add a <code>FALLBACK_PROFILES</code> entry in <code>scripts/update-readme-contributors.js</code> to enrich this card with real name, avatar, location, and curated feature list</i></li>
         </ul>
       </td>
@@ -1155,7 +1497,7 @@ _Live data — last regenerated 2026-10-18 · auto-refreshed by [`github-actions
         <br/><sub>🔗 also commits as: <b>DYNOSuprovo</b></sub>
       </td>
       <td valign="top" width="*">
-        <h4>45. New Contributor</h4>
+        <h4>60. New Contributor</h4>
         <ul>
           <li>🆕 <b>New contributor</b> — auto-added by the readme-bot</li>
           <li>📊 <b>1 commits</b> across this repo's history</li>
@@ -1177,7 +1519,7 @@ _Live data — last regenerated 2026-10-18 · auto-refreshed by [`github-actions
         <br/><sub>🔗 also commits as: <b>Athira Kv</b></sub>
       </td>
       <td valign="top" width="*">
-        <h4>46. New Contributor</h4>
+        <h4>61. New Contributor</h4>
         <ul>
           <li>🆕 <b>New contributor</b> — auto-added by the readme-bot</li>
           <li>📊 <b>1 commits</b> across this repo's history</li>
@@ -1199,7 +1541,7 @@ _Live data — last regenerated 2026-10-18 · auto-refreshed by [`github-actions
         <br/><sub>🔗 also commits as: <b>Garv Arora</b></sub>
       </td>
       <td valign="top" width="*">
-        <h4>47. New Contributor</h4>
+        <h4>62. New Contributor</h4>
         <ul>
           <li>🆕 <b>New contributor</b> — auto-added by the readme-bot</li>
           <li>📊 <b>1 commits</b> across this repo's history</li>
@@ -1221,7 +1563,7 @@ _Live data — last regenerated 2026-10-18 · auto-refreshed by [`github-actions
         <br/><sub>🔗 also commits as: <b>Pradeep Gupta</b></sub>
       </td>
       <td valign="top" width="*">
-        <h4>48. New Contributor</h4>
+        <h4>63. New Contributor</h4>
         <ul>
           <li>🆕 <b>New contributor</b> — auto-added by the readme-bot</li>
           <li>📊 <b>1 commits</b> across this repo's history</li>
@@ -1243,7 +1585,7 @@ _Live data — last regenerated 2026-10-18 · auto-refreshed by [`github-actions
         <br/><sub>🔗 also commits as: <b>Priyanshu Kumar</b></sub>
       </td>
       <td valign="top" width="*">
-        <h4>49. New Contributor</h4>
+        <h4>64. New Contributor</h4>
         <ul>
           <li>🆕 <b>New contributor</b> — auto-added by the readme-bot</li>
           <li>📊 <b>1 commits</b> across this repo's history</li>
@@ -1264,7 +1606,7 @@ _Live data — last regenerated 2026-10-18 · auto-refreshed by [`github-actions
         <br/><sub>🏆 1 commits · 0 PRs merged</sub>
       </td>
       <td valign="top" width="*">
-        <h4>50. Infra contributor</h4>
+        <h4>65. Infra contributor</h4>
         <ul>
           <li>🔧 <b>Single administrative / infrastructure commit</b> to the project</li>
           <li>📧 <i>Email was private — no public GitHub profile linked</i></li>

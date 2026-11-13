@@ -5,6 +5,7 @@ const CATEGORIES = [
     id: 'numbers',
     name: '🔢 Number Foundations',
     topics: [
+      { key: 'numbers-1-to-10', name: '🐰 Hopscotch Numbers', sub: 'Count dots & hop with Bunny (1 to 10)' },
       { key: 'addition', name: 'Addition', sub: '20-question mental addition' },
       { key: 'multiply', name: 'Multiplication Tables', sub: 'Adaptive times table drills (2–19)' },
       { key: 'fractionadd', name: 'Fractions', sub: 'Add, subtract, multiply & divide' },

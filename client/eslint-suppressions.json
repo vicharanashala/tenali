@@ -226,10 +226,5 @@
     "react-refresh/only-export-components": {
       "count": 6
     }
-  },
-  "vite.config.js": {
-    "no-dupe-keys": {
-      "count": 25
-    }
   }
 }
