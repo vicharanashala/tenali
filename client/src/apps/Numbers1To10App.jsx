@@ -723,6 +723,32 @@ export default function Numbers1To10App({
         </button>
       </nav>
 
+      {/* Universal Test Mic & Voice Model Readiness Bar (Visible across all tabs) */}
+      <div className="hopscotch-voice-test-bar" style={{ margin: '12px auto 16px auto', maxWidth: '960px', width: '100%' }}>
+        <div className="voice-test-left">
+          <PushToTalkButton
+            whisperState={hopscotchVoice}
+            label="🎙️ Test Mic (Say 1..10)"
+          />
+          <div className="voice-model-badge">
+            {hopscotchVoice.modelStatus === 'loading' ? (
+              <span className="badge-loading">
+                ⏳ Loading Whisper AI ({hopscotchVoice.loadingProgress}%)...
+              </span>
+            ) : (
+              <span className="badge-ready">
+                🟢 Whisper Model Ready
+              </span>
+            )}
+          </div>
+        </div>
+        {testMicFeedback && (
+          <div className="voice-test-feedback">
+            {testMicFeedback}
+          </div>
+        )}
+      </div>
+
       {/* Main Tab Workspaces wrapped in ErrorBoundary to prevent blank crashes */}
       <NumbersErrorBoundary>
         {/* ============================================================ */}
@@ -758,32 +784,6 @@ export default function Numbers1To10App({
           >
             <span>🎬 Watch Demo</span>
           </button>
-        </div>
-
-        {/* Test Mic & Voice Model Readiness Bar */}
-        <div className="hopscotch-voice-test-bar">
-          <div className="voice-test-left">
-            <PushToTalkButton
-              whisperState={hopscotchVoice}
-              label="🎙️ Test Mic (Say 1..10)"
-            />
-            <div className="voice-model-badge">
-              {hopscotchVoice.modelStatus === 'loading' ? (
-                <span className="badge-loading">
-                  ⏳ Loading Whisper AI ({hopscotchVoice.loadingProgress}%)...
-                </span>
-              ) : (
-                <span className="badge-ready">
-                  🟢 Whisper Model Ready
-                </span>
-              )}
-            </div>
-          </div>
-          {testMicFeedback && (
-            <div className="voice-test-feedback">
-              {testMicFeedback}
-            </div>
-          )}
         </div>
 
         {/* ============================================================ */}
