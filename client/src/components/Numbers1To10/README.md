@@ -1,87 +1,28 @@
-# In-Browser Whisper Voice Recognizer for Numbers 1 to 10
+# Numbers 1 to 10 Component Package
 
-Implements in-browser speech recognition exclusively using:
-- **Library:** `@huggingface/transformers`
-- **Model:** [`gradient-queen/whisper-tiny-indian-digits-final`](https://huggingface.co/gradient-queen/whisper-tiny-indian-digits-final)
-- **Architecture:** [Hugging Face Transformers.js React Tutorial](https://huggingface.co/docs/transformers.js/en/tutorials/react)
+Comprehensive Numbers 1 to 10 module featuring Hopscotch Mat, Learn & Trace, Space Maze, and in-browser ONNX Whisper speech recognition.
 
 ---
 
-## Files Overview
+## Architecture & Files
 
 | File | Purpose |
 |---|---|
-| `worker.js` | Dedicated Web Worker loading `@huggingface/transformers` pipeline and executing neural inference off the main thread. |
-| `useWhisperVoice.js` | Custom React hook managing the Web Worker lifecycle, downloading progress (0-100%), Web Audio 16kHz capture, and transcription. |
-| `PushToTalkButton.jsx` | Kid-friendly tactile Push-to-Talk button with glowing pulse ring, live audio wave animation, and heard digit badge. |
-| `PushToTalkButton.css` | Styling for tactile button and animations. |
-| `WhisperVoiceRecognizer.jsx` | All-in-one drop-in component combining hook and button for 1-line integration. |
-| `phoneticResolver.js` | Multilingual & Indian phonetic regex resolver converting text to digits `1` to `10`. |
-| `audioChunkRecorder.js` | Web Audio API 16kHz mono PCM recorder that releases microphone hardware locks cleanly. |
+| `Numbers1To10App.jsx` | Main activity container managing tab navigation, hopscotch gameplay, and universal mic test. |
+| `Numbers1To10App.css` | Complete responsive styling, hopscotch mat grid, and celebration animations. |
+| `NumberTracingApp.jsx` | Tab 1: Interactive drawing canvas for learning digits 1 to 10 with voice feedback. |
+| `SpaceMazeAdventure.jsx` | Tab 3: Space Maze Adventure gamified practice with voice commands. |
+| `useWhisperVoice.js` | Module-level shared Web Worker speech recognition hook with late-completion recovery. |
+| `PushToTalkButton.jsx` | Push-to-Talk HUD button with dynamic SVG audio wave VU meter and custom prompts. |
+| `PushToTalkButton.css` | Styling for push-to-talk button and live audio wave animations. |
+| `audioChunkRecorder.js` | Web Audio API 16kHz mono PCM recorder with real-time RMS decibel analytics. |
+| `phoneticResolver.js` | Indian English phonetic regex resolver mapping spoken words to numbers `1` to `10`. |
+| `numbers1To10Data.js` | Number stroke guides, hints, and counting object configurations. |
+| `confettiHelper.js` | Confetti celebration animation utility. |
+| `index.js` | Clean barrel export file exporting `Numbers1To10App` as default. |
 
 ---
 
-## Quick Integration Examples
-
-### 1. In `NumberTracingApp.jsx`
-
-```jsx
-import React from 'react';
-import { useWhisperVoice, PushToTalkButton } from './WhisperVoiceRecognizer.jsx';
-// OR: import WhisperVoiceRecognizer from './WhisperVoiceRecognizer.jsx';
-
-export function NumberTracingApp() {
-  const handleVoiceNumber = (num, rawText) => {
-    console.log(`Detected number: ${num} from speech: "${rawText}"`);
-    // Your number selection / tracing logic:
-    // selectNumber(num);
-  };
-
-  const whisper = useWhisperVoice({
-    onNumberDetected: handleVoiceNumber,
-    onTextHeard: (text) => console.log('Raw speech heard:', text)
-  });
-
-  return (
-    <div className="tracing-app">
-      {/* Subheader Voice Control */}
-      <div className="voice-bar">
-        <PushToTalkButton
-          whisperState={whisper}
-          label="Hold to Say Number (1-10)"
-        />
-      </div>
-
-      {/* Rest of Tracing UI */}
-    </div>
-  );
-}
-```
-
----
-
-### 2. In `SpaceMazeAdventure.jsx`
-
-```jsx
-import React from 'react';
-import { WhisperVoiceRecognizer } from './WhisperVoiceRecognizer.jsx';
-
-export function SpaceMazeAdventure() {
-  const handleMazeNumber = (detectedNum, rawText) => {
-    console.log(`Space Maze heard number: ${detectedNum}`);
-    // Match against current station:
-    // if (detectedNum === currentCountingStep) { advanceStation(); }
-  };
-
-  return (
-    <div className="space-maze-game">
-      {/* Counting HUD Voice Pill */}
-      <WhisperVoiceRecognizer
-        onNumberDetected={handleMazeNumber}
-        label="Hold to Say Station Number"
-      />
-    </div>
-  );
-}
-```
-
+## Runtime Model & Worker Assets
+- **Web Worker**: Served directly at `/whisper-worker.js` from `client/public/whisper-worker.js`.
+- **Model Weights**: Quantized ONNX weights served directly at `/models/whisper_indian_digits/` from `client/public/models/whisper_indian_digits/`.
