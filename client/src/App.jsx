@@ -23,7 +23,7 @@
 
 
 
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import LinearAlgebraApp from './LinearAlgebraApp';
 import { HintModal } from './components/HintSystem/HintModal.jsx';
 import LandingNavbar from './components/LandingPage/LandingNavbar.jsx';
