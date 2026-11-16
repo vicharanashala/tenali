@@ -19,6 +19,13 @@ env.allowRemoteModels = true;
 env.localModelPath = '/models/';
 env.useBrowserCache = true;
 
+// Configure ONNX Runtime Web WASM flags for maximum speed & multi-core execution
+if (env.backends?.onnx?.wasm) {
+  env.backends.onnx.wasm.simd = true;
+  env.backends.onnx.wasm.numThreads = Math.min(4, typeof navigator !== 'undefined' ? (navigator.hardwareConcurrency || 2) : 2);
+  env.backends.onnx.wasm.proxy = false;
+}
+
 const LOCAL_MODEL = 'whisper_indian_digits';
 const FALLBACK_MODEL = 'onnx-community/whisper-tiny';
 const TASK = 'automatic-speech-recognition';
@@ -148,7 +155,8 @@ self.addEventListener('message', async (event) => {
         temperature: 0.0,
         do_sample: false,
         num_beams: 1,
-        max_new_tokens: 10,
+        max_new_tokens: 3,
+        early_stopping: true,
         condition_on_previous_text: false,
         return_timestamps: false
       });

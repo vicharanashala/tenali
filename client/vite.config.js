@@ -42,6 +42,10 @@ export default defineConfig({
   server: {
     host: 'localhost',
     port: 5173,
+    headers: {
+      'Cross-Origin-Opener-Policy': 'same-origin',
+      'Cross-Origin-Embedder-Policy': 'credentialless',
+    },
     // API proxy configuration: Forward API requests to backend services
     proxy: {
       // Primary API endpoint - routes to main quiz service

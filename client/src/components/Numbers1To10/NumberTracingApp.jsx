@@ -417,7 +417,8 @@ export default function NumberTracingApp({
     speakVoiceCommand(word);
   }, [speakVoiceCommand]);
 
-  // Compute live dot coordinates along the SVG path based on progress
+  // Compute live dot coordinates along the SVG path based on progress & measure stroke length
+  const [activeStrokeLength, setActiveStrokeLength] = useState(300);
   const [dotPos, setDotPos] = useState(() => {
     const start = (activeStroke && activeStroke.start) || [150, 55];
     return { x: start[0], y: start[1] };
@@ -428,6 +429,7 @@ export default function NumberTracingApp({
       try {
         const totalLen = pathRef.current.getTotalLength();
         if (totalLen && !isNaN(totalLen)) {
+          setActiveStrokeLength(totalLen);
           const pt = pathRef.current.getPointAtLength(totalLen * strokeProgress);
           if (pt && !isNaN(pt.x) && !isNaN(pt.y)) {
             setDotPos({ x: pt.x, y: pt.y });
@@ -835,10 +837,20 @@ export default function NumberTracingApp({
   });
   whisperVoiceRef.current = whisperVoice;
 
-  // User Pointer Dragging along Path
+  // User Pointer Dragging along Path (Strict & Precise Tracking)
   const handlePointerDown = (e) => {
     if (demoActive) stopDemo();
     if (stage !== 'TRACING' || strokeDoneRef.current) return;
+
+    // Strict Grab: pointer must touch directly on the slider knob (within 36px)
+    if (svgRef.current) {
+      const svgRect = svgRef.current.getBoundingClientRect();
+      const svgX = ((e.clientX - svgRect.left) / svgRect.width) * 300;
+      const svgY = ((e.clientY - svgRect.top) / svgRect.height) * 300;
+      const distToKnob = Math.hypot(dotPos.x - svgX, dotPos.y - svgY);
+      if (distToKnob > 36) return;
+    }
+
     isDraggingRef.current = true;
     setIsDragging(true);
     e.target.setPointerCapture(e.pointerId);
@@ -859,13 +871,20 @@ export default function NumberTracingApp({
     const totalLen = pathRef.current.getTotalLength();
     if (totalLen <= 0) return;
 
-    const samples = 35;
+    // Proximity check: pointer must remain attached near the slider knob (max 50px)
+    // If the child drags wildly off the trace, pause movement until brought back
+    const distToKnob = Math.hypot(dotPos.x - svgX, dotPos.y - svgY);
+    if (distToKnob > 50) return;
+
+    // Tight forward search window: allows max 7% advance per event
+    // Prevents jumping across gaps or curves (e.g. diagonal to bottom base in 2)
+    const minSearch = Math.max(0, (strokeProgress - 0.03) * totalLen);
+    const maxSearch = Math.min(totalLen, (strokeProgress + 0.07) * totalLen);
+    const samples = 25;
+    const step = (maxSearch - minSearch) / samples;
+
     let bestDist = Infinity;
     let bestLen = strokeProgress * totalLen;
-
-    const minSearch = Math.max(0, (strokeProgress - 0.08) * totalLen);
-    const maxSearch = Math.min(totalLen, (strokeProgress + 0.35) * totalLen);
-    const step = (maxSearch - minSearch) / samples;
 
     for (let l = minSearch; l <= maxSearch; l += step) {
       const pt = pathRef.current.getPointAtLength(l);
@@ -876,11 +895,14 @@ export default function NumberTracingApp({
       }
     }
 
-    if (bestDist < 55) {
-      const newProgress = Math.min(1, Math.max(strokeProgress, bestLen / totalLen));
+    // Strict tube tolerance: must stay within 26px of the path center
+    if (bestDist < 26) {
+      const candidateProgress = bestLen / totalLen;
+      const newProgress = Math.min(1, Math.max(strokeProgress, candidateProgress));
       setStrokeProgress(newProgress);
 
-      if (newProgress >= 0.94) {
+      // Complete stroke ONLY when reaching the actual end (>= 96%)
+      if (newProgress >= 0.96) {
         if (strokeDoneRef.current) return;
         isDraggingRef.current = false;
         setIsDragging(false);
@@ -917,8 +939,17 @@ export default function NumberTracingApp({
   };
 
   const handlePointerUp = (e) => {
-    isDraggingRef.current = false;
-    setIsDragging(false);
+    if (isDraggingRef.current) {
+      isDraggingRef.current = false;
+      setIsDragging(false);
+
+      // Strict enforcement: if kid releases halfway before reaching the end (>= 0.96),
+      // reset strokeProgress back to 0 with a gentle audio cue!
+      if (strokeProgress < 0.96 && strokeProgress > 0 && !strokeDoneRef.current) {
+        playTone(320, 'sine', 0.12, 0.15);
+        setStrokeProgress(0);
+      }
+    }
     try {
       e.target.releasePointerCapture(e.pointerId);
     } catch {
@@ -1345,11 +1376,14 @@ export default function NumberTracingApp({
                 />
               ))}
 
-              {/* 3. Completed / Active Stroke Fill */}
+              {/* 3. Completed / Active Stroke Fill with Dynamic Reveal */}
               {config.strokes.map((s, idx) => {
                 const isFinished = completedStrokes.includes(idx) || isTraceGreenGlow;
                 const isCurrent = idx === currentStrokeIdx && stage === 'TRACING';
                 if (!isFinished && !isCurrent) return null;
+
+                const strokeLen = activeStrokeLength || 350;
+                const dashOffset = isFinished ? 0 : Math.max(0, strokeLen * (1 - strokeProgress));
 
                 return (
                   <path
@@ -1360,6 +1394,8 @@ export default function NumberTracingApp({
                     strokeWidth={isTraceGreenGlow ? "36" : "28"}
                     strokeLinecap="round"
                     strokeLinejoin="round"
+                    strokeDasharray={isCurrent && !isFinished ? strokeLen : undefined}
+                    strokeDashoffset={isCurrent && !isFinished ? dashOffset : undefined}
                     filter={isTraceGreenGlow ? "url(#numeral-super-glow)" : undefined}
                     className={isTraceGreenGlow ? "trace-numeral-green-glow-pulse" : undefined}
                     opacity={1}
@@ -1396,31 +1432,58 @@ export default function NumberTracingApp({
                 );
               })}
 
+              {/* 5b. End Target Goal Marker */}
+              {stage === 'TRACING' && completedStrokes.length < config.strokes.length && activeStroke && activeStroke.end && (
+                <g
+                  transform={`translate(${activeStroke.end[0]}, ${activeStroke.end[1]})`}
+                  className="trace-end-marker-group"
+                  pointerEvents="none"
+                >
+                  <circle r="14" fill="#1e1b4b" stroke="#fde047" strokeWidth="2.5" strokeDasharray="4 3" opacity="0.9" />
+                  <circle r="5" fill="#fde047" />
+                  <text
+                    x="0"
+                    y="22"
+                    textAnchor="middle"
+                    fontSize="9"
+                    fontWeight="800"
+                    fill="#fde047"
+                    style={{ filter: 'drop-shadow(0 0 3px #000)' }}
+                  >
+                    END 🏁
+                  </text>
+                </g>
+              )}
+
               {/* 6. Glowing Green Start Dot / Slider with Directional Hint */}
               {stage === 'TRACING' && completedStrokes.length < config.strokes.length && (
                 <g
                   transform={`translate(${dotPos.x}, ${dotPos.y})`}
                   onPointerDown={handlePointerDown}
-                  style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
+                  style={{ cursor: isDragging ? 'grabbing' : 'grab', touchAction: 'none' }}
                   className="trace-interactive-dot-group"
                 >
+                  <circle
+                    r="26"
+                    fill="transparent"
+                  />
                   <circle
                     r="24"
                     fill="none"
                     stroke="#a3e635"
                     strokeWidth="2"
-                    opacity="0.75"
-                    className="trace-radar-halo"
+                    opacity={isDragging ? 0.35 : 0.75}
+                    className={isDragging ? undefined : "trace-radar-halo"}
                   />
                   <circle
                     r="15"
-                    fill="#84cc16"
+                    fill={isDragging ? "#a3e635" : "#84cc16"}
                     stroke="#ffffff"
                     strokeWidth="3.5"
                     filter="url(#green-radar-glow)"
                   />
                   <circle r="5" fill="#fef08a" />
-                  {strokeProgress === 0 && (
+                  {strokeProgress < 0.05 && (
                     <text
                       x="0"
                       y="-22"

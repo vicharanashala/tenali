@@ -2020,6 +2020,16 @@
   fill: #a3e635;
 }
 
+.trace-end-marker-group text {
+  font-family: inherit;
+  letter-spacing: 0.5px;
+}
+
+.trace-interactive-dot-group {
+  touch-action: none;
+  user-select: none;
+}
+
 /* Right Column: Counting & Voice Panel */
 .trace-counter-panel {
   display: flex;

@@ -235,8 +235,8 @@ export function trimSilence(buffer, threshold = 0.006) {
     end--;
   }
 
-  // Retain up to 800 samples (~50ms at 16kHz) padding around speech start and end
-  const padSamples = 800;
+  // Retain up to 400 samples (~25ms at 16kHz) padding around speech start and end
+  const padSamples = 400;
   const safeStart = Math.max(0, start - padSamples);
   const safeEnd = Math.min(buffer.length, end + padSamples + 1);
 

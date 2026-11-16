@@ -104,6 +104,9 @@ export function useWhisperVoice({
   const isRecordingRef = useRef(false);
   const autoStopTimerRef = useRef(null);
   const nativeStopTimerRef = useRef(null);
+  const speechEndTimerRef = useRef(null);
+  const silenceTimerRef = useRef(null);
+  const speechDetectedInSessionRef = useRef(false);
   const stopRecordingRef = useRef(null);
   const lastToggleTimeRef = useRef(0);
   const lastWorkerErrorRef = useRef(null);
@@ -188,8 +191,30 @@ export function useWhisperVoice({
   // Initialize and cleanup audio recorder
   useEffect(() => {
     const recorder = new AudioChunkRecorder(16000);
-    recorder.onVolumeChange = (normalized) => {
+    recorder.onVolumeChange = (normalized, rms) => {
       setAudioLevel(normalized);
+
+      // Voice Activity Detection (VAD): Detect speech onset
+      if ((normalized > 0.08 || rms > 0.008) && isRecordingRef.current) {
+        speechDetectedInSessionRef.current = true;
+        if (silenceTimerRef.current) {
+          clearTimeout(silenceTimerRef.current);
+          silenceTimerRef.current = null;
+        }
+      } else if (
+        speechDetectedInSessionRef.current &&
+        isRecordingRef.current &&
+        !silenceTimerRef.current &&
+        !numberEmittedForCurrentRecordingRef.current
+      ) {
+        // User spoke and has now been quiet for >650ms: trigger quick auto-stop for instant processing
+        silenceTimerRef.current = setTimeout(() => {
+          if (isRecordingRef.current && stopRecordingRef.current) {
+            console.info('[useWhisperVoice] Speech followed by silence detected; stopping for rapid recognition.');
+            stopRecordingRef.current();
+          }
+        }, 650);
+      }
     };
     recorderRef.current = recorder;
 
@@ -199,6 +224,12 @@ export function useWhisperVoice({
       }
       if (nativeStopTimerRef.current) {
         clearTimeout(nativeStopTimerRef.current);
+      }
+      if (speechEndTimerRef.current) {
+        clearTimeout(speechEndTimerRef.current);
+      }
+      if (silenceTimerRef.current) {
+        clearTimeout(silenceTimerRef.current);
       }
       if (recorderRef.current) {
         try { recorderRef.current.destroy(); } catch (e) {}
@@ -226,6 +257,14 @@ export function useWhisperVoice({
     if (nativeStopTimerRef.current) {
       clearTimeout(nativeStopTimerRef.current);
       nativeStopTimerRef.current = null;
+    }
+    if (speechEndTimerRef.current) {
+      clearTimeout(speechEndTimerRef.current);
+      speechEndTimerRef.current = null;
+    }
+    if (silenceTimerRef.current) {
+      clearTimeout(silenceTimerRef.current);
+      silenceTimerRef.current = null;
     }
 
     try {
@@ -371,9 +410,18 @@ export function useWhisperVoice({
     liveSpeechRef.current = '';
     liveDigitRef.current = null;
     numberEmittedForCurrentRecordingRef.current = false;
+    speechDetectedInSessionRef.current = false;
     if (nativeStopTimerRef.current) {
       clearTimeout(nativeStopTimerRef.current);
       nativeStopTimerRef.current = null;
+    }
+    if (speechEndTimerRef.current) {
+      clearTimeout(speechEndTimerRef.current);
+      speechEndTimerRef.current = null;
+    }
+    if (silenceTimerRef.current) {
+      clearTimeout(silenceTimerRef.current);
+      silenceTimerRef.current = null;
     }
 
     try {
@@ -399,6 +447,17 @@ export function useWhisperVoice({
           rec.onend = () => {
             if (isRecordingRef.current) {
               try { rec.start(); } catch (e) {}
+            }
+          };
+
+          rec.onspeechend = () => {
+            // User finished speaking; if not already recognized, stop recording quickly to run Whisper immediately
+            if (isRecordingRef.current && !numberEmittedForCurrentRecordingRef.current && !speechEndTimerRef.current) {
+              speechEndTimerRef.current = setTimeout(() => {
+                if (isRecordingRef.current && stopRecordingRef.current) {
+                  stopRecordingRef.current();
+                }
+              }, 400);
             }
           };
 
