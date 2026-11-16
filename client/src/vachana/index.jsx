@@ -111,8 +111,10 @@ function getTabFromUrl() {
 }
 
 function pushTabUrl(tabId) {
-  const url = tabId ? `/vachana/${tabId}` : '/vachana';
-  window.history.pushState({ tabId }, '', url);
+  if (window.location.pathname.startsWith('/vachana')) {
+    const url = tabId ? `/vachana/${tabId}` : '/vachana';
+    window.history.pushState({ tabId }, '', url);
+  }
 }
 
 // ─── Vachana Shell ────────────────────────────────────────────────────────────
@@ -246,12 +248,11 @@ export default function Vachana({ onBack }) {
 
   // Handle browser Back/Forward navigation & initial URL alignment
   useEffect(() => {
-    if (window.location.pathname === '/') {
-      pushTabUrl(activeTab);
+    if (window.location.pathname.startsWith('/vachana')) {
+      const onPopState = () => setActiveTab(getTabFromUrl());
+      window.addEventListener('popstate', onPopState);
+      return () => window.removeEventListener('popstate', onPopState);
     }
-    const onPopState = () => setActiveTab(getTabFromUrl());
-    window.addEventListener('popstate', onPopState);
-    return () => window.removeEventListener('popstate', onPopState);
   }, []);
 
   const ExerciseComponent = activeTab ? EXERCISE_COMPONENTS[activeTab] : null;
@@ -269,7 +270,7 @@ export default function Vachana({ onBack }) {
             <p className="subtitle" style={{ margin: '4px 0 0 0' }}>Learn to parse, translate, and communicate in the language of mathematics</p>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <button className="back-button" onClick={onBack}>← Back to Home</button>
+            <button className="back-button" onClick={onBack}>← Back</button>
           </div>
         </div>
       )}

@@ -65,7 +65,7 @@ export function QuizLayout({ title, subtitle, onBack, children, timer, sessionGo
   return (
     <>
       <div className="header-row">
-        <button className="back-button" onClick={onBack}>← Home</button>
+        <button className="back-button" onClick={onBack}>← Back</button>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           {goalBadge}
           {timerDisplay}

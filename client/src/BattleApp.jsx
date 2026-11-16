@@ -944,7 +944,7 @@ const resetToLobby = useCallback(() => {
 
         <div style={{ display: 'flex', gap: 8 }}>
           <button onClick={() => resetToLobby()} style={{ flex: 1, padding: '11px', borderRadius: 'var(--radius)', border: 'none', background: topicInfo.color, color: '#fff', fontWeight: 700, fontSize: '0.92rem', cursor: 'pointer' }}>New Battle</button>
-          <button onClick={() => { resetToLobby(); onBack() }} style={{ flex: 1, padding: '11px', borderRadius: 'var(--radius)', border: '1px solid var(--clr-border)', background: 'transparent', color: 'var(--clr-text-soft)', fontWeight: 600, fontSize: '0.92rem', cursor: 'pointer' }}>Home</button>
+          <button onClick={() => { resetToLobby(); onBack() }} style={{ flex: 1, padding: '11px', borderRadius: 'var(--radius)', border: '1px solid var(--clr-border)', background: 'transparent', color: 'var(--clr-text-soft)', fontWeight: 600, fontSize: '0.92rem', cursor: 'pointer' }}>Back</button>
         </div>
       </div>
     </div>

@@ -17,7 +17,7 @@ function PmCongratsModal({ goalIds, path, onClose, onNewGoal, onSetGoal }) {
         <div
         onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
         style={{
-            position: 'fixed', inset: 0, zIndex: 300,
+            position: 'fixed', inset: 0, zIndex: 100000,
             background: 'rgba(0,0,0,0.78)',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             padding: '24px 16px',

@@ -120,3 +120,17 @@
 .topic-menu-card:hover .topic-card-cta {
   transform: translateX(2px);
 }
+
+
+.topic-card-example {
+  margin-top: 8px;
+  font-size: 0.78rem;
+  font-style: italic;
+  color: var(--clr-text);
+  background: var(--clr-input, rgba(255, 255, 255, 0.05));
+  border-radius: 6px;
+  padding: 4px 8px;
+  width: fit-content;
+  max-width: 100%;
+  border: 1px solid var(--clr-border);
+}
