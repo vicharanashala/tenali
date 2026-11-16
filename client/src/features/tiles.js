@@ -1,7 +1,7 @@
 // Home-screen tile registry.
 //
 // Extracted from App.jsx (issue #189). This file is intentionally PURE DATA:
-// every entry is { key, name, subtitle, color } and nothing here imports or
+// every entry is { key, name, subtitle, color, category } and nothing here imports or
 // references a React component. That is what makes it safe to edit without
 // touching the App.jsx monolith.
 //
@@ -44,7 +44,9 @@ export const TILES = [
     { key: 'ineq', name: 'Inequalities', subtitle: 'Linear & quadratic inequalities', color: 'green', category: 'algebra' },
     { key: 'integ', name: 'Integration', subtitle: 'Reverse differentiation & areas', color: 'blue', category: 'calculus' },
     { key: 'invtrig', name: 'Inverse Trig', subtitle: 'arcsin, arccos, arctan', color: 'green', category: 'shape-space' },
-    { key: 'language', name: 'Language Puzzles', subtitle: 'Fill in the blanks to create new words', color: 'orange', category: 'shelf' },
+    { key: 'crossword', name: 'Crossword Puzzle', subtitle: 'Fill mathematical & vocabulary clues', color: 'orange', category: 'language-words' },
+    { key: 'wordsearch', name: 'Word Search', subtitle: 'Hunt words in letter grids', color: 'blue', category: 'language-words' },
+    { key: 'wordcreator', name: 'Word Creator', subtitle: 'Build valid words from letter pools', color: 'green', category: 'language-words' },
     { key: 'limits', name: 'Limits', subtitle: 'Evaluate limits', color: 'purple', category: 'calculus' },
     { key: 'linearalgebra', name: 'Linear Algebra', subtitle: '56 missions across 6 modules', color: 'orange', category: 'linear-algebra' },
     { key: 'lineareq', name: 'Linear Equations', subtitle: 'Solve for x in one variable', color: 'blue', category: 'algebra' },
@@ -53,11 +55,12 @@ export const TILES = [
     { key: 'log', name: 'Logarithms', subtitle: 'Evaluate, simplify, solve', color: 'purple', category: 'algebra' },
     { key: 'matrix', name: 'Matrices', subtitle: 'Add, multiply, determinant', color: 'blue', category: 'linear-algebra' },
     { key: 'mensur', name: 'Mensuration', subtitle: 'Area, volume, surface area', color: 'green', category: 'shape-space' },
-    { key: 'mensuration-lab', name: 'Mensuration Lab', subtitle: 'Area, perimeter & volume through animated shapes', color: 'green', category: 'shape-space' },
-    { key: 'math-lab', name: '🔬 Visual Learning Universe', subtitle: 'Visual, Mensuration & Addition labs', color: 'orange', category: 'shape-space' },
+    { key: 'visual-math-lab-redux', name: 'Multiplication & Division Lab', subtitle: 'Visual grid models & division steps', color: 'blue', category: 'visual-universe' },
+    { key: 'mensuration-lab', name: 'Mensuration Lab', subtitle: 'Area, perimeter & volume through animated shapes', color: 'green', category: 'visual-universe' },
+    { key: 'comic-addition', name: 'Balance Scale & Visual Addition', subtitle: 'Balance scale & counting objects', color: 'orange', category: 'visual-universe' },
     { key: 'multiply', name: 'Multiplication', subtitle: 'Practice any times table (2–19)', color: 'purple', category: 'number-foundations' },
     { key: 'bases', name: 'Number Bases', subtitle: 'Binary, decimal, hexadecimal', color: 'green', category: 'number-foundations' },
-    { key: 'basic-arith-lab', name: 'Origin', subtitle: 'Practice +, -, ×, ÷ with varied templates', color: 'blue', category: 'number-foundations', foldInto: 'basicarith' },
+    { key: 'basic-arith-lab', name: 'Visual Arithmetic Origin Lab', subtitle: 'Practice +, -, ×, ÷ with visual models', color: 'teal', category: 'visual-universe' },
     { key: 'percent', name: 'Percentages', subtitle: 'Find, increase, reverse, compound', color: 'blue', category: 'everyday-maths' },
     { key: 'permcomb', name: 'Perm. & Comb.', subtitle: 'Permutations & combinations', color: 'purple', category: 'data-chance' },
     { key: 'polyfactor', name: 'Poly Factor', subtitle: 'Factor a quadratic expression', color: 'green', category: 'algebra' },
@@ -93,9 +96,10 @@ export const TILES = [
     { key: 'trig', name: 'Trigonometry', subtitle: 'SOH-CAH-TOA, sine/cosine rule', color: 'green', category: 'shape-space' },
     { key: 'variation', name: 'Variation', subtitle: 'Direct & inverse proportion', color: 'purple', category: 'algebra' },
     { key: 'vectors', name: 'Vectors', subtitle: 'Add, scale, magnitude', color: 'blue', category: 'linear-algebra' },
-    { key: 'vachana', name: 'Vachana', subtitle: 'Mathematical Literacy Lab', color: 'purple', category: 'shelf' },
-    { key: 'vocab', name: 'Vocabulary', subtitle: 'Match words to definitions', color: 'green', category: 'shelf' },
+    { key: 'vachana', name: 'Vachana', subtitle: 'Mathematical Literacy Lab', color: 'purple', category: 'language-words' },
+    { key: 'vocab', name: 'Vocabulary', subtitle: 'Match words to definitions', color: 'green', category: 'language-words' },
     { key: 'spot', name: 'Twin Hunt', subtitle: 'Find the common object', color: 'purple', category: 'shelf' },
+    { key: 'curiosity', name: 'Curiosity Mode', subtitle: 'Explore "What if" question variations', color: 'pink', category: 'shelf' },
     { key: 'gymdecimals', name: 'Decimals', subtitle: 'Signed decimal × decimal — 1-digit MCQ', color: 'purple', category: 'number-foundations', foldInto: 'decimals' },
     { key: 'guess', name: 'Guess the Number', subtitle: 'Binary magic trick — mind-reading game', color: 'blue', category: 'number-foundations', foldInto: 'bases' },
     { key: 'funcgym', name: 'Functions', subtitle: 'Evaluate small polynomials (MCQ)', color: 'blue', category: 'algebra', foldInto: 'funceval' },
@@ -106,8 +110,79 @@ export const TILES = [
     { key: 'polygym', name: 'Polynomials', subtitle: 'Arithmetic → monomial algebra (MCQ)', color: 'blue', category: 'algebra', foldInto: 'polymul' },
     { key: 'water-jug-lab', name: '🧪 Water Jug Lab', subtitle: 'GCD discovery — 13-level progression', color: 'teal', category: 'shelf' },
     { key: 'equation-crafting-lab', name: '⚗️ Equation Crafting Lab', subtitle: 'Build expressions in the mixing pot', color: 'orange', category: 'algebra' },
-    { key: 'contrastlist', name: 'Contrast Challenge', subtitle: 'Distinguish similar concepts', color: 'featured', category: 'shelf' },
-    { key: 'pathmap', name: '📍 Learning Path', subtitle: 'Prerequisite graph & personalized path', color: 'orange', category: 'shelf' },
+    { key: 'contrast-area-perimeter', name: 'Area vs Perimeter', subtitle: '2D perimeter boundary vs covered surface area', color: 'featured', category: 'contrast-challenge' },
+    { key: 'contrast-congruence-similarity', name: 'Congruence vs Similarity', subtitle: 'Identical dimensions vs proportional scaling', color: 'featured', category: 'contrast-challenge' },
+    { key: 'contrast-decimals-fractions', name: 'Decimals vs Fractions', subtitle: 'Place value notation vs integer ratios', color: 'featured', category: 'contrast-challenge' },
+    { key: 'contrast-differentiation-integration', name: 'Diff vs Integration', subtitle: 'Rate of change slope vs accumulated area', color: 'featured', category: 'contrast-challenge' },
+    { key: 'contrast-factors-multiples', name: 'Factors vs Multiples', subtitle: 'Numbers that divide evenly vs products', color: 'featured', category: 'contrast-challenge' },
+    { key: 'contrast-hcf-lcm', name: 'HCF vs LCM', subtitle: 'Highest common factor vs lowest common multiple', color: 'featured', category: 'contrast-challenge' },
+    { key: 'contrast-interior-exterior', name: 'Interior vs Exterior Angles', subtitle: 'Internal polygon angles vs turn angles', color: 'featured', category: 'contrast-challenge' },
+    { key: 'contrast-limits-differentiation', name: 'Limits vs Differentiation', subtitle: 'Approaching values vs derivative slopes', color: 'featured', category: 'contrast-challenge' },
+    { key: 'contrast-linear-simultaneous', name: 'Linear vs Sim Equations', subtitle: 'Single line solutions vs line intersections', color: 'featured', category: 'contrast-challenge' },
+    { key: 'contrast-matrices-determinants', name: 'Matrices vs Determinants', subtitle: 'Data transformations vs scalar areas', color: 'featured', category: 'contrast-challenge' },
+    { key: 'contrast-mean-median-mode', name: 'Mean, Median & Mode', subtitle: 'Balancing center vs middle rank vs common value', color: 'featured', category: 'contrast-challenge' },
+    { key: 'contrast-permutation-combination', name: 'Permutation vs Combination', subtitle: 'Ordered sequences vs unordered selections', color: 'featured', category: 'contrast-challenge' },
+    { key: 'contrast-prime-composite', name: 'Prime vs Composite', subtitle: 'Exactly two factors vs composite products', color: 'featured', category: 'contrast-challenge' },
+    { key: 'contrast-radius-diameter', name: 'Radius vs Diameter', subtitle: 'Center to edge vs edge to edge through center', color: 'featured', category: 'contrast-challenge' },
+    { key: 'contrast-trig-inverse-trig', name: 'Trig vs Inverse Trig', subtitle: 'Angle to side ratio vs ratio back to angle', color: 'featured', category: 'contrast-challenge' },
+    { key: 'carjourney', name: 'The Car Journey', subtitle: '16 stops from wheel counting to suspension equations', color: 'teal', category: 'real-world' },
+
+    // Treasure Hunt (13 Worlds)
+    { key: 'treasurehunt-island-of-numbers', name: 'Island of Numbers', subtitle: '8 of 8 topics ready', color: 'blue', category: 'treasure-hunt', worldId: 'island-of-numbers' },
+    { key: 'treasurehunt-merchants-market', name: 'Merchant\'s Market', subtitle: '8 of 8 topics ready', color: 'green', category: 'treasure-hunt', worldId: 'merchants-market' },
+    { key: 'treasurehunt-number-theory-vault', name: 'Number Theory Vault', subtitle: '1 of 6 topics ready', color: 'purple', category: 'treasure-hunt', worldId: 'number-theory-vault' },
+    { key: 'treasurehunt-algebra-temple', name: 'Algebra Temple', subtitle: '4 of 7 topics ready', color: 'orange', category: 'treasure-hunt', worldId: 'algebra-temple' },
+    { key: 'treasurehunt-polynomial-peak', name: 'Polynomial Peak', subtitle: '3 of 6 topics ready', color: 'blue', category: 'treasure-hunt', worldId: 'polynomial-peak' },
+    { key: 'treasurehunt-calculus-cliffs', name: 'Calculus Cliffs', subtitle: '2 of 4 topics ready', color: 'teal', category: 'treasure-hunt', worldId: 'calculus-cliffs' },
+    { key: 'treasurehunt-matrix-vector-vault', name: 'Matrix & Vector Vault', subtitle: '4 of 5 topics ready', color: 'indigo', category: 'treasure-hunt', worldId: 'matrix-vector-vault' },
+    { key: 'treasurehunt-geometry-cave', name: 'Geometry Cave', subtitle: '8 of 8 topics ready', color: 'purple', category: 'treasure-hunt', worldId: 'geometry-cave' },
+    { key: 'treasurehunt-circle-coordinate-cove', name: 'Circle & Coordinate Cove', subtitle: '4 of 6 topics ready', color: 'teal', category: 'treasure-hunt', worldId: 'circle-coordinate-cove' },
+    { key: 'treasurehunt-trigonometry-tower', name: 'Trigonometry Tower', subtitle: '2 of 3 topics ready', color: 'orange', category: 'treasure-hunt', worldId: 'trigonometry-tower' },
+    { key: 'treasurehunt-data-logic-lab', name: 'Data & Logic Lab', subtitle: '4 of 5 topics ready', color: 'green', category: 'treasure-hunt', worldId: 'data-logic-lab' },
+    { key: 'treasurehunt-mixed-adventure', name: 'Mixed Adventure', subtitle: '48 of 48 topics ready', color: 'purple', category: 'treasure-hunt', worldId: 'mixed-adventure' },
+    { key: 'treasurehunt-endless-treasure', name: 'Endless Treasure', subtitle: '48 of 48 topics ready', color: 'red', category: 'treasure-hunt', worldId: 'endless-treasure' },
+
+    // Math Riddles (4 Types)
+    {
+      key: 'riddle-find-rule',
+      name: '🔍 Find the Rule',
+      subtitle: 'Study input → output pairs, spot the hidden formula, then apply it to a new input.',
+      example: '3 → 8, 7 → 12 ⇒ 9 → ?',
+      color: 'orange',
+      category: 'math-riddles',
+      riddleType: 'find-rule'
+    },
+    {
+      key: 'riddle-sequence',
+      name: '🔢 Number Sequence',
+      subtitle: 'Look at the pattern in a list of numbers and predict what comes next.',
+      example: '2, 4, 8, 16, ?',
+      color: 'purple',
+      category: 'math-riddles',
+      riddleType: 'sequence'
+    },
+    {
+      key: 'riddle-logic',
+      name: '🧩 Logic Puzzle',
+      subtitle: 'Read a word problem, reason it through step by step to reach the answer.',
+      example: 'If all Bloops are Razzies..',
+      color: 'teal',
+      category: 'math-riddles',
+      riddleType: 'logic'
+    },
+    {
+      key: 'riddle-image',
+      name: '🖼️ Visual Puzzle',
+      subtitle: 'Decode shapes, patterns and images — pick the option that completes the picture.',
+      example: 'Which piece fits the gap?',
+      color: 'green',
+      category: 'math-riddles',
+      riddleType: 'image'
+    },
+
+    // Coding Playground
+    { key: 'playground', name: 'Universal Code Playground', subtitle: 'Run code in 50+ languages with Judge0 (Python, C++, Java, JS, Rust, Go)', color: 'teal', category: 'coding-playground' },
+    { key: 'local-compiler', name: 'Local Fast Compiler', subtitle: 'Direct instant execution for C, C++, Python, Node, Java & more', color: 'blue', category: 'coding-playground' },
 ]
 
 // Hamburger-only entries (#190). Data only -- composition stays in App.jsx.
@@ -115,15 +190,10 @@ export const FEATURED_TILES = [
     { key: 'randommix', name: 'Random Mix', subtitle: 'Adaptive cross-topic quiz', color: 'featured' },
     { key: 'custom', name: 'Custom Lesson', subtitle: 'Build your own mixed quiz', color: 'featured' },
     { key: 'gym', name: 'Gym', subtitle: 'Adaptive workout across all 7 gym puzzles', color: 'featured' },
-    { key: 'treasurehunt', name: 'Treasure Hunt', subtitle: 'Solve & seek on a treasure grid', color: 'featured' },
-    { key: 'contrastlist', name: 'Contrast Challenge', subtitle: 'Distinguish similar concepts', color: 'featured' },
-    { key: 'vachana', name: 'Vachana', subtitle: 'Mathematical Literacy Lab', color: 'featured' },
 ]
 
-// Hamburger pin for Visual Learning Universe (#191); also on home grid (#216).
+// Hamburger pin references (kept for backward compatibility)
 export const MATH_LAB_ENTRY = { key: 'math-lab', name: '🔬 Visual Learning Universe', subtitle: 'Visual, Mensuration & Addition labs', color: 'orange' }
-
-// Hamburger pin for GeoCraft (#191); also on home grid (#215).
 export const GEOCRAFT_ENTRY = { key: 'geocraft', name: '📐 GeoCraft', subtitle: 'Interactive Geometry Lab', color: 'featured' }
 
 export default TILES

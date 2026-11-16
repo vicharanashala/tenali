@@ -544,7 +544,7 @@ function LevelsSelectView({ onBack, onSelectLevel }) {
   return (
     <div className="levels-layout">
       <div className="header-row">
-        <button className="back-button" onClick={onBack}>← Home</button>
+        <button className="back-button" onClick={onBack}>← Back</button>
       </div>
 
       <h1 className="title-serif">Percentages</h1>

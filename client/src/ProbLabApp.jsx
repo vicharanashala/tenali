@@ -346,25 +346,25 @@ export default function ProbLabApp({ onBack }) {
             animate={{ scale: 1, opacity: 1 }}
             style={{
               width: '640px', background: C.card, borderRadius: '28px',
-              border: `1px solid ${C.border}`, padding: '40px',
-              boxShadow: '0 20px 50px rgba(0,0,0,0.6)', display: 'flex', flexDirection: 'column',
-              position: 'relative'
+              border: `1px solid ${C.border}`, padding: '32px 40px 40px',
+              boxShadow: '0 20px 50px rgba(0,0,0,0.6)', display: 'flex', flexDirection: 'column'
             }}
           >
-            <button 
-              onClick={onBack}
-              style={{
-                position: 'absolute', left: '24px', top: '24px',
-                background: 'rgba(255,255,255,0.05)', border: `1px solid ${C.border}`,
-                color: C.muted, padding: '8px 16px', borderRadius: '16px',
-                fontSize: '0.85rem', cursor: 'pointer', fontWeight: 600
-              }}
-            >
-              ← Home
-            </button>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', marginBottom: '16px' }}>
+              <button 
+                onClick={onBack}
+                style={{
+                  background: 'rgba(255,255,255,0.05)', border: `1px solid ${C.border}`,
+                  color: C.muted, padding: '6px 14px', borderRadius: '6px',
+                  fontSize: '0.85rem', cursor: 'pointer', fontWeight: 600
+                }}
+              >
+                ← Back
+              </button>
+            </div>
 
-            <div style={{ textAlign: 'center', marginTop: '20px', marginBottom: '24px' }}>
-              <h1 style={{ margin: '0 0 8px 0', fontSize: '3rem', fontWeight: 'bold', fontFamily: FONT_SERIF, color: C.white }}>Probability</h1>
+            <div style={{ textAlign: 'center', marginBottom: '24px' }}>
+              <h1 style={{ margin: '0 0 8px 0', fontSize: '2.5rem', fontWeight: 'bold', fontFamily: FONT_SERIF, color: C.white, wordBreak: 'break-word', lineHeight: 1.15 }}>Probability</h1>
               <p style={{ margin: 0, fontSize: '1.1rem', color: C.muted, fontFamily: FONT_SANS }}>Single & combined events</p>
             </div>
 
