@@ -229,6 +229,13 @@ edges.forEach(([src, tgt]) => {
   if (predecessors[tgt]) predecessors[tgt].add(src)
 })
 
+// successors[topic] = Set of topic keys this topic directly unlocks
+const successors = {}
+nodes.forEach(n => { successors[n.id] = new Set() })
+edges.forEach(([src, tgt]) => {
+  if (successors[src]) successors[src].add(tgt)
+})
+
 // ─── Public API ──────────────────────────────────────────────────────────
 
 /**
@@ -262,11 +269,38 @@ export function getTopicApiPath(topicKey) {
   return API_OVERRIDES[topicKey] || `${topicKey}-api`
 }
 
+// Reverse of getTopicApiPath: API path segment (e.g. "circle", "twinhunt")
+// -> topic key (e.g. "circleth", "spot"). Built lazily once. Anything that
+// naively does `apiPath.replace('-api', '')` instead of this will silently
+// break for the topics in API_OVERRIDES above, since their apiPath segment
+// doesn't match their topic key.
+let apiSegmentToTopic = null
+export function getTopicIdFromApiPath(apiPath) {
+  if (!apiSegmentToTopic) {
+    apiSegmentToTopic = {}
+    getAllTopicKeys().forEach((key) => {
+      const segment = getTopicApiPath(key).replace(/-api$/, '')
+      apiSegmentToTopic[segment] = key
+    })
+  }
+  const segment = (apiPath || '').replace(/-api$/, '')
+  return apiSegmentToTopic[segment] || segment
+}
+
 /**
  * Check if a topic has any prerequisites at all.
  */
 export function hasPrerequisites(topicKey) {
   return getPrerequisites(topicKey).length > 0
+}
+
+/**
+ * Get the topics that directly become available once this topic is done.
+ * @param {string} topicKey — e.g. 'ratio'
+ * @returns {string[]} — e.g. ['percent', 'sdt', 'similarity', 'trig']
+ */
+export function getUnlocks(topicKey) {
+  return successors[topicKey] ? [...successors[topicKey]] : []
 }
 
 /**
@@ -281,4 +315,52 @@ export function getAllTopicKeys() {
  */
 export function getTopicCategory(topicKey) {
   return nodeMap[topicKey]?.cat || 'other'
+}
+
+/**
+ * Goal-directed path: given a destination topic and a student's mastered
+ * set, compute exactly what's left between "what they already know" and
+ * that goal — not a single linear chain (the graph is a DAG, a topic can
+ * have several prerequisite branches), but the full set of not-yet-mastered
+ * ancestors, topologically ordered into one valid learning sequence so a
+ * student can just work top to bottom.
+ *
+ * Already-mastered ancestors are included too (marked `mastered: true`),
+ * so the checklist reads as "your whole path," not just the remaining gap
+ * — the point is to show how far they've already come, not just what's left.
+ *
+ * @param {string} goalId
+ * @param {Set<string>} masteredSet
+ * @returns {{ steps: Array<{id:string,label:string,mastered:boolean}>, remaining: number, alreadyThere: boolean }}
+ */
+export function computeGoalPath(goalId, masteredSet) {
+  const mastered = masteredSet || new Set()
+
+  // Full ancestor closure of the goal (including the goal itself).
+  const closure = new Set()
+  const stack = [goalId]
+  while (stack.length) {
+    const cur = stack.pop()
+    if (closure.has(cur)) continue
+    closure.add(cur)
+    for (const p of getPrerequisites(cur)) stack.push(p)
+  }
+
+  // Topological order via longest-chain depth, same technique used for the
+  // map's column layout — ties broken alphabetically for a stable order.
+  const depthCache = {}
+  function depthOf(id) {
+    if (depthCache[id] !== undefined) return depthCache[id]
+    depthCache[id] = 0
+    const prereqs = getPrerequisites(id).filter((p) => closure.has(p))
+    const d = prereqs.length === 0 ? 0 : 1 + Math.max(...prereqs.map(depthOf))
+    depthCache[id] = d
+    return d
+  }
+  const ordered = [...closure].sort((a, b) => depthOf(a) - depthOf(b) || getTopicLabel(a).localeCompare(getTopicLabel(b)))
+
+  const steps = ordered.map((id) => ({ id, label: getTopicLabel(id), mastered: mastered.has(id) }))
+  const remaining = steps.filter((s) => !s.mastered).length
+
+  return { steps, remaining, alreadyThere: remaining === 0 }
 }
