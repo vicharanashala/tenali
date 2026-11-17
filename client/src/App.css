@@ -795,6 +795,487 @@ button:disabled {
   color: #ff8000;
 }
 
+/* ─── WhyLearnThis — optional "why does this topic matter" link ─────────── */
+.why-learn-this {
+  margin: 0 0 16px;
+  text-align: center;
+  /* Quiz start screens are often centred flex columns, which would shrink
+     the panel to its content; fill the row and let max-width cap it. */
+  width: 100%;
+  align-self: stretch;
+}
+.why-link {
+  background: transparent;
+  border: none;
+  color: var(--clr-accent);
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background var(--transition), color var(--transition);
+}
+.why-link:hover,
+.why-link:focus-visible {
+  background: var(--clr-accent-soft);
+  outline: none;
+}
+.why-link:focus-visible {
+  box-shadow: 0 0 0 2px var(--clr-accent-soft);
+}
+.why-link-caret {
+  font-size: 0.75em;
+}
+.why-link-bulb {
+  display: inline-block;
+  font-size: 1.05em;
+}
+/* While closed, the bulb glows now and then: an invitation, not an alarm. */
+.why-link[aria-expanded="false"] .why-link-bulb {
+  animation: why-bulb-glow 3.2s ease-in-out infinite;
+}
+@keyframes why-bulb-glow {
+  0%, 70%, 100% { transform: none; filter: none; }
+  80% { transform: scale(1.25) rotate(-8deg); filter: drop-shadow(0 0 6px rgba(255, 213, 79, 0.9)); }
+  90% { transform: scale(1.1) rotate(6deg); }
+}
+
+/* ─── The panel ─────────────────────────────────────────────────────────
+   Written for a young reader: one big idea, a short why, pictures of where
+   it turns up, something to drag, then the mechanism one step at a time.
+   Each section fades up in turn as the panel opens. */
+.why-panel {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 10px auto 0;
+  max-width: 480px;
+  text-align: left;
+  background: var(--clr-card);
+  border: 1.5px solid var(--clr-accent);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  box-shadow: var(--shadow-card);
+  transform-origin: top center;
+  /* Sizes itself to the space each quiz screen gives it (see @container
+     below), since some start screens are much narrower than others. */
+  container-type: inline-size;
+  container-name: why-panel;
+  animation: why-panel-in 320ms cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
+}
+@keyframes why-panel-in {
+  from { opacity: 0; transform: translateY(-6px) scale(0.96); }
+  to   { opacity: 1; transform: none; }
+}
+.why-panel > * {
+  animation: why-rise 360ms ease both;
+}
+.why-panel > :nth-child(2) { animation-delay: 60ms; }
+.why-panel > :nth-child(3) { animation-delay: 120ms; }
+.why-panel > :nth-child(4) { animation-delay: 180ms; }
+.why-panel > :nth-child(n + 5) { animation-delay: 240ms; }
+@keyframes why-rise {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.why-hero {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.why-hero-emoji {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  background: var(--clr-accent-soft);
+  font-size: 1.85rem;
+  line-height: 1;
+  animation: why-emoji-pop 600ms cubic-bezier(0.3, 1.6, 0.5, 1) 120ms both;
+}
+@keyframes why-emoji-pop {
+  0%   { transform: scale(0) rotate(-25deg); }
+  70%  { transform: scale(1.15) rotate(6deg); }
+  100% { transform: scale(1) rotate(0); }
+}
+.why-hero-idea {
+  margin: 0;
+  font-size: 1.08rem;
+  font-weight: 800;
+  line-height: 1.3;
+  color: var(--clr-text);
+}
+.why-panel-text {
+  color: var(--clr-text);
+  font-size: 0.95rem;
+  line-height: 1.65;
+  margin: 0;
+}
+
+.why-section-label {
+  display: block;
+  margin: 16px 0 8px;
+  color: var(--clr-accent);
+  font-size: 0.74rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* "You use it for…" — three picture cards */
+.why-uses-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+.why-use-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 6px;
+  border-radius: 12px;
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  text-align: center;
+  animation: why-card-in 420ms cubic-bezier(0.3, 1.4, 0.5, 1) both;
+  animation-delay: calc(220ms + var(--i, 0) * 90ms);
+  transition: transform var(--transition), border-color var(--transition);
+}
+.why-use-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--clr-accent);
+}
+@keyframes why-card-in {
+  from { opacity: 0; transform: translateY(10px) scale(0.9); }
+  to   { opacity: 1; transform: none; }
+}
+.why-use-icon {
+  font-size: 1.6rem;
+  line-height: 1;
+}
+.why-use-text {
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--clr-text);
+}
+@media (max-width: 420px) {
+  .why-panel { padding: 16px 14px; }
+}
+@container why-panel (max-width: 380px) {
+  .why-uses-list { grid-template-columns: 1fr; }
+  .why-use-card { flex-direction: row; justify-content: flex-start; text-align: left; padding: 8px 12px; }
+  .why-use-icon { font-size: 1.3rem; }
+}
+@container why-panel (max-width: 260px) {
+  .why-hero { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .why-hero-emoji { width: 44px; height: 44px; font-size: 1.5rem; }
+  .why-hero-idea { font-size: 1rem; }
+  .why-demo { padding: 12px 10px; }
+  .why-step-next, .why-steps-done { margin-left: 0; }
+}
+
+/* "How does it work?" — numbered steps, one per tap */
+.why-how {
+  margin-top: 14px;
+}
+.why-how-toggle {
+  background: transparent;
+  border: none;
+  color: var(--clr-accent);
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 2px 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.why-how-toggle:hover,
+.why-how-toggle:focus-visible {
+  text-decoration: underline;
+}
+.why-steps {
+  list-style: none;
+  margin: 10px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.why-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  animation: why-step-in 340ms cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
+}
+@keyframes why-step-in {
+  from { opacity: 0; transform: translateX(-10px); }
+  to   { opacity: 1; transform: none; }
+}
+.why-step-num {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--clr-accent);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+.why-step-text {
+  padding-top: 3px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--clr-text);
+}
+.why-step-next {
+  margin: 10px 0 0 36px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1.5px solid var(--clr-accent);
+  background: var(--clr-accent-soft);
+  color: var(--clr-accent);
+  font: inherit;
+  font-size: 0.84rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform var(--transition), background var(--transition);
+}
+.why-step-next:hover {
+  transform: translateX(2px);
+}
+.why-step-count {
+  font-size: 0.72rem;
+  font-weight: 600;
+  opacity: 0.75;
+}
+.why-steps-done {
+  margin: 10px 0 0 36px;
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--clr-text);
+  animation: why-step-in 340ms ease both;
+}
+
+/* ── The draggable demo ── */
+.why-try .why-demo {
+  margin-top: 0;
+}
+.why-demo {
+  margin-top: 12px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: var(--clr-surface);
+  border: 1.5px solid var(--clr-border);
+  transition: border-color 300ms ease, box-shadow 300ms ease;
+}
+.why-demo.is-inviting {
+  border-color: var(--clr-accent);
+  box-shadow: 0 0 0 4px var(--clr-accent-soft);
+}
+.why-demo-label {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--clr-text-soft);
+  margin-bottom: 8px;
+}
+.why-demo-label strong {
+  display: inline-block;
+  color: var(--clr-accent);
+  font-size: 1.05em;
+}
+.why-demo-value {
+  animation: why-pop 260ms cubic-bezier(0.3, 1.6, 0.5, 1) both;
+}
+.why-demo-slider-wrap {
+  position: relative;
+}
+.why-demo-slider {
+  width: 100%;
+  accent-color: var(--clr-accent);
+  cursor: grab;
+  margin: 0;
+}
+.why-demo-slider:active {
+  cursor: grabbing;
+}
+.why-demo.is-inviting .why-demo-slider {
+  animation: why-slider-wiggle 2.4s ease-in-out 900ms infinite;
+}
+@keyframes why-slider-wiggle {
+  0%, 60%, 100% { transform: none; }
+  68% { transform: translateX(-4px); }
+  76% { transform: translateX(4px); }
+  84% { transform: translateX(-2px); }
+}
+.why-demo-hint {
+  display: table;
+  margin: 0 0 6px auto;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--clr-accent);
+  color: #fff;
+  font-size: 0.74rem;
+  font-weight: 800;
+  pointer-events: none;
+  animation: why-hint-bob 1.4s ease-in-out infinite;
+  transition: opacity 250ms ease;
+}
+.why-demo-hint.is-done {
+  opacity: 0;
+  animation: none;
+}
+@keyframes why-hint-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+.why-demo-big {
+  margin: 12px 0 0;
+  font-size: 1.12rem;
+  font-weight: 800;
+  color: var(--clr-text);
+  line-height: 1.35;
+  text-align: center;
+  animation: why-pop 300ms cubic-bezier(0.3, 1.6, 0.5, 1) both;
+}
+@keyframes why-pop {
+  from { opacity: 0.4; transform: scale(0.92); }
+  to   { opacity: 1; transform: none; }
+}
+.why-demo-caption {
+  margin: 6px 0 0;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: var(--clr-text-soft);
+  text-align: center;
+}
+.why-demo-svg {
+  display: block;
+  width: 100%;
+  max-width: 280px;
+  margin: 4px auto 8px;
+}
+/* Shapes glide to their new size and place instead of jumping. */
+.why-demo-svg rect,
+.why-demo-svg circle,
+.why-demo-svg ellipse {
+  transition: x 260ms ease, y 260ms ease, width 260ms ease, height 260ms ease,
+              cx 260ms ease, cy 260ms ease, r 260ms ease, rx 260ms ease, ry 260ms ease,
+              fill 260ms ease, opacity 260ms ease;
+}
+
+/* Everything above is decoration. Respect a device asking for less motion. */
+@media (prefers-reduced-motion: reduce) {
+  .why-learn-this *,
+  .why-learn-this *::before,
+  .why-learn-this *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+/* Binary readout — eight switches, lit ones in accent */
+.why-demo-bit {
+  display: inline-block;
+  width: 1.15em;
+  font-family: var(--font-mono, monospace);
+  color: var(--clr-text-soft);
+  opacity: 0.45;
+}
+.why-demo-bit.is-on {
+  color: var(--clr-accent);
+  opacity: 1;
+}
+
+.why-panel-chip-row {
+  margin: 10px 0 0;
+  padding-top: 10px;
+  border-top: 1px solid var(--clr-border);
+}
+.why-panel-chip-label {
+  display: block;
+  color: var(--clr-accent);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 6px;
+}
+.why-panel-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.why-chip {
+  display: inline-block;
+  font-size: 0.8rem;
+  color: var(--clr-text-soft);
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: 999px;
+  padding: 4px 12px;
+}
+.why-chip-clickable {
+  font: inherit;
+  cursor: pointer;
+  color: var(--clr-accent);
+  border-color: var(--clr-accent);
+  background: var(--clr-accent-soft);
+  transition: background var(--transition), transform var(--transition);
+}
+.why-chip-clickable:hover,
+.why-chip-clickable:focus-visible {
+  background: var(--clr-accent);
+  color: #fff;
+  outline: none;
+}
+.why-chip-mastered {
+  color: #ffd54f;
+  border-color: #ffd54f;
+  background: rgba(255, 213, 79, 0.14);
+}
+.why-chip-mastered.why-chip-clickable:hover,
+.why-chip-mastered.why-chip-clickable:focus-visible {
+  background: #ffd54f;
+  color: #2b2b2b;
+}
+.why-chip-more {
+  opacity: 0.7;
+  font-style: italic;
+}
+
+/* Shown only when ?mockMastery= is active (see lib/masteryClient.js) — a
+   dev-only, build-gated way to review mastery-driven UI without a real
+   database, clearly flagged so nobody mistakes it for a real student. */
+.dev-mock-badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(255, 152, 0, 0.16);
+  border: 1px solid #ff9800;
+  color: #ff9800;
+  white-space: nowrap;
+}
+
 /* Rotating caret Ã¢â‚¬â€ flips 180Ã‚Â° when the panel is open. */
 .word-explorer-caret {
   display: inline-block;
@@ -3205,7 +3686,8 @@ button:disabled {
   padding: 0 16px;
 }
 
-.journey-banner-btn {
+.journey-banner-btn,
+.why-math-banner-btn {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -3221,7 +3703,8 @@ button:disabled {
   transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
 }
 
-.journey-banner-btn:hover {
+.journey-banner-btn:hover,
+.why-math-banner-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 18px rgba(254, 180, 123, 0.18);
   background: linear-gradient(135deg, rgba(254, 180, 123, 0.15) 0%, rgba(255, 126, 95, 0.15) 100%);
@@ -3257,6 +3740,15 @@ button:disabled {
   color: var(--clr-accent);
   margin-left: 12px;
   font-weight: bold;
+}
+
+/* ─── Why Mathematics? Home Page Entry — same card as the Learning Journey
+   banner above it ─── */
+.why-math-banner-row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 12px;
+  padding: 0 16px;
 }
 
 

@@ -13,6 +13,7 @@ import {
   pmStarPoints,
   usePathmapState,
 } from './pathMapHelpers';
+import PathMapExplore from './PathMapExplore';
 
 /* ─── PathMap Styles ─── */
 const PM_STYLES = `
@@ -52,6 +53,30 @@ const PM_STYLES = `
 }
 .pm-icon-btn:hover {
   background: var(--clr-hover-strong, rgba(255, 255, 255, 0.15));
+}
+.pm-view-switch {
+  display: inline-flex;
+  gap: 4px;
+  padding: 4px;
+  margin-bottom: 16px;
+  background: var(--clr-card, rgba(255, 255, 255, 0.08));
+  border: 1.5px solid var(--clr-border, rgba(255, 255, 255, 0.15));
+  border-radius: 10px;
+}
+.pm-view-switch button {
+  background: transparent;
+  border: none;
+  border-radius: 7px;
+  color: var(--clr-text-soft, #a89e94);
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 7px 14px;
+  cursor: pointer;
+  box-shadow: none;
+}
+.pm-view-switch button[aria-pressed="true"] {
+  background: var(--clr-accent, #e8864a);
+  color: #fff;
 }
 .pm-intro {
   margin-bottom: 24px;
@@ -693,8 +718,11 @@ function PmModuleGrid({ path, goalIds, onSetGoal }) {
 }
 
 // ─── PathMap main component ───────────────────────────────────
-function PathMap({ onBack }) {
+function PathMap({ onBack, onSelectTopic }) {
   const { goalIds, known, path, setGoal, clearGoal, toggleKnown, pmStatus } = usePathmapState();
+  // 'goal': pick a goal and follow its path. 'explore': every topic on one
+  // map (PathMapExplore), which hands a chosen goal back to this view.
+  const [view, setView] = useState('goal');
 
   if (pmStatus === 'loading') {
     return (
@@ -728,6 +756,24 @@ function PathMap({ onBack }) {
     );
   }
 
+  if (view === 'explore') {
+    return (
+      <PathMapExplore
+        known={known}
+        goalId={goalIds[0] || null}
+        onSetGoal={(id) => setGoal([id])}
+        onShowGoalView={() => setView('goal')}
+        onPractise={(id) => {
+          // App's onSelectTopic resets the per-topic Learn/Test state the
+          // way the home grid does; the event is only a fallback.
+          if (onSelectTopic) onSelectTopic(id);
+          else window.dispatchEvent(new CustomEvent('tenali-change-mode', { detail: id }));
+        }}
+        onBack={() => setView('goal')}
+      />
+    );
+  }
+
   return (
     <div className="pm-shell">
       <style>{PM_STYLES}</style>
@@ -738,6 +784,10 @@ function PathMap({ onBack }) {
           )}
           <h1>Your Learning Path</h1>
         </div>
+      </div>
+      <div className="pm-view-switch" role="group" aria-label="Learning Path view">
+        <button type="button" aria-pressed={view === 'goal'} onClick={() => setView('goal')}>🎯 Goal path</button>
+        <button type="button" aria-pressed={view === 'explore'} onClick={() => setView('explore')}>🗺️ Explore all topics</button>
       </div>
       <div className="pm-intro">
         <p>
