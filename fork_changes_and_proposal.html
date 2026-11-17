@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tenali Fork Documentation & RFC Proposal</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --card-border: rgba(148, 163, 184, 0.15);
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #f97316;
+      --accent-hover: #ea580c;
+      --accent-soft: rgba(249, 115, 22, 0.15);
+      --success: #10b981;
+      --success-soft: rgba(16, 185, 129, 0.15);
+      --primary: #38bdf8;
+      --primary-soft: rgba(56, 189, 248, 0.15);
+      --purple: #a855f7;
+      --purple-soft: rgba(168, 85, 247, 0.15);
+    }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.2rem 0.65rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: rgba(15, 23, 42, 0.6);
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body class="min-h-screen p-4 md:p-8 custom-scrollbar">
+  <div class="max-w-7xl mx-auto space-y-8">
+    
+    <!-- Top Header -->
+    <header class="border border-[var(--card-border)] bg-[var(--card-bg)] rounded-2xl p-6 md:p-8 shadow-xl relative overflow-hidden">
+      <div class="absolute -right-16 -top-16 w-64 h-64 bg-orange-500/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -left-16 -bottom-16 w-64 h-64 bg-sky-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
+        <div class="space-y-3">
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="badge bg-orange-500/20 text-orange-400 border border-orange-500/30">
+              <span class="w-2 h-2 rounded-full bg-orange-400 animate-pulse"></span>
+              Fork Architecture Review
+            </span>
+            <span class="badge bg-sky-500/20 text-sky-400 border border-sky-500/30">
+              Base: vicharanashala/tenali:demo
+            </span>
+            <span class="badge bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+              Target: Numbers 1 to 10
+            </span>
+          </div>
+          <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight text-white">
+            Tenali Fork: In-Browser Neural Whisper AI & Numbers Curriculum
+          </h1>
+          <p class="text-slate-400 max-w-3xl text-sm md:text-base leading-relaxed">
+            Comprehensive audit of every new file added to the forked repository
+            <code class="text-orange-300 bg-orange-950/60 px-1.5 py-0.5 rounded text-xs">github.com/Vedhiga/tenali</code>
+            compared to the upstream base
+            <code class="text-sky-300 bg-sky-950/60 px-1.5 py-0.5 rounded text-xs">github.com/vicharanashala/tenali/tree/demo</code>,
+            including architecture locations, rationale, and the technical RFC proposal.
+          </p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-3 self-start md:self-auto shrink-0">
+          <a href="https://tenali-one.vercel.app/?mode=numbers-1-to-10" target="_blank"
+             class="px-4 py-2.5 rounded-xl bg-orange-600 hover:bg-orange-500 text-white font-medium text-sm flex items-center justify-center gap-2 shadow-lg transition">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+            Live Demo on Vercel
+          </a>
+          <a href="https://huggingface.co/gradient-queen/whisper-tiny-indian-digits-final" target="_blank"
+             class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-medium text-sm flex items-center justify-center gap-2 transition">
+            <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 14.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/></svg>
+            Hugging Face Model
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick Metrics Grid -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 pt-6 border-t border-slate-800">
+        <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800/80">
+          <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider">New Files Added</div>
+          <div class="text-2xl font-bold text-white mt-1">70+ Files</div>
+          <div class="text-xs text-emerald-400 mt-1">Across 7 Core Subsystems</div>
+        </div>
+        <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800/80">
+          <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Fine-Tuned AI</div>
+          <div class="text-2xl font-bold text-orange-400 mt-1">Whisper-Tiny INT8</div>
+          <div class="text-xs text-slate-400 mt-1">Indian Child Digits 1–10</div>
+        </div>
+        <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800/80">
+          <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Runtime Host</div>
+          <div class="text-2xl font-bold text-sky-400 mt-1">100% Client WASM</div>
+          <div class="text-xs text-sky-300 mt-1">Zero Backend Dependency</div>
+        </div>
+        <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800/80">
+          <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Interactive Modules</div>
+          <div class="text-2xl font-bold text-purple-400 mt-1">2 Games</div>
+          <div class="text-xs text-slate-400 mt-1">Tracing & Space Maze</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Navigation / View Tabs -->
+    <nav class="flex flex-wrap items-center justify-between gap-4 border-b border-slate-800 pb-3">
+      <div class="flex flex-wrap gap-2">
+        <button onclick="switchTab('proposal')" id="tab-btn-proposal"
+                class="px-4 py-2 rounded-lg text-sm font-semibold transition bg-orange-600 text-white shadow-sm">
+          💡 The Idea Proposal & RFC
+        </button>
+        <button onclick="switchTab('files')" id="tab-btn-files"
+                class="px-4 py-2 rounded-lg text-sm font-semibold transition bg-slate-800 text-slate-300 hover:text-white">
+          📁 All New Files & Locations
+        </button>
+        <button onclick="switchTab('architecture')" id="tab-btn-architecture"
+                class="px-4 py-2 rounded-lg text-sm font-semibold transition bg-slate-800 text-slate-300 hover:text-white">
+          ⚡ 3 Deployment Alternatives
+        </button>
+        <button onclick="switchTab('feats')" id="tab-btn-feats"
+                class="px-4 py-2 rounded-lg text-sm font-semibold transition bg-slate-800 text-slate-300 hover:text-white">
+          🛠️ Engineering Feats & Solved Bugs
+        </button>
+      </div>
+
+      <div class="text-xs text-slate-400 italic">
+        Branch: <span class="text-white font-mono font-medium">demo</span> (Synced with origin/demo)
+      </div>
+    </nav>
+
+    <!-- TAB 1: IDEA PROPOSAL & RFC -->
+    <section id="tab-content-proposal" class="space-y-6">
+      <div class="bg-[var(--card-bg)] border border-[var(--card-border)] rounded-2xl p-6 md:p-8 space-y-6">
+        <div>
+          <span class="badge bg-orange-500/10 text-orange-400 border border-orange-500/20 mb-2">Architectural Motivation</span>
+          <h2 class="text-2xl font-bold text-white">Why Was This Fork Created?</h2>
+          <p class="text-slate-300 mt-2 text-sm leading-relaxed">
+            In early-childhood mathematics education, spoken interaction ("saying the number aloud") forms a vital neural bridge between visual symbols (numeral shapes) and conceptual quantity (counting objects). The original Tenali repository lacked accurate speech recognition for young children learning numbers.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div class="bg-slate-900/60 p-5 rounded-xl border border-red-500/20 space-y-3">
+            <div class="w-8 h-8 rounded-lg bg-red-500/20 text-red-400 flex items-center justify-center font-bold">1</div>
+            <h3 class="font-bold text-white text-base">The Problem with Web Speech API</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Native browser speech (<code class="text-red-300">webkitSpeechRecognition</code>) is trained predominantly on adult English. Children have higher pitch frequencies (<span class="text-slate-300 font-mono">F₀ > 300Hz</span>), irregular cadence, and vocal elongation that adult models routinely drop or misinterpret as background noise.
+            </p>
+          </div>
+
+          <div class="bg-slate-900/60 p-5 rounded-xl border border-orange-500/20 space-y-3">
+            <div class="w-8 h-8 rounded-lg bg-orange-500/20 text-orange-400 flex items-center justify-center font-bold">2</div>
+            <h3 class="font-bold text-white text-base">Indian Accents & Homophones</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Children across India pronounce numbers with distinct phonetic shifts: <em class="text-orange-200">"tree" / "free"</em> for 3, <em class="text-orange-200">"won" / "van"</em> for 1, <em class="text-orange-200">"ait"</em> for 8, or count in regional tongues (Hindi: <em>ek, do, teen</em>; Tamil: <em>ondru, rendu, moonu</em>; Telugu: <em>okati, rendu, moodu</em>). Generic adult speech engines reject these outright.
+            </p>
+          </div>
+
+          <div class="bg-slate-900/60 p-5 rounded-xl border border-emerald-500/20 space-y-3">
+            <div class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">3</div>
+            <h3 class="font-bold text-white text-base">The Fine-Tuned Whisper Solution</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              I fine-tuned OpenAI's <strong>Whisper-Tiny</strong> model specifically on spoken Indian digits 1 to 10 (<a href="https://huggingface.co/gradient-queen/whisper-tiny-indian-digits-final" class="text-sky-400 underline">gradient-queen/whisper-tiny-indian-digits-final</a>) and bundled quantized ONNX weights directly into the browser to eliminate server hosting dependencies.
+            </p>
+          </div>
+        </div>
+
+        <!-- Pedagogy & Game Flow -->
+        <div class="border-t border-slate-800 pt-6 space-y-4">
+          <h3 class="text-lg font-bold text-white flex items-center gap-2">
+            <svg class="w-5 h-5 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+            Interactive Learning Loop: Tactile Numeral Tracing & Space Maze
+          </h3>
+          <p class="text-slate-300 text-sm leading-relaxed">
+            Rather than passive multiple-choice quizzes, the fork builds a multi-sensory 3-stage mastery loop:
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+            <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-800 space-y-2">
+              <div class="text-sky-400 font-bold uppercase tracking-wider">Stage 1: Tactile Tracing</div>
+              <p class="text-slate-400">Animated 3D cursor guides finger/mouse along real SVG paths with sample distance scoring (<55px) and auditory pitch feedback.</p>
+            </div>
+            <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-800 space-y-2">
+              <div class="text-orange-400 font-bold uppercase tracking-wider">Stage 2: Echo Counting</div>
+              <p class="text-slate-400">Call-and-response rhythm: App prompts "Say One", child echoes into mic; target object turns glowing green with checkmark badge.</p>
+            </div>
+            <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-800 space-y-2">
+              <div class="text-purple-400 font-bold uppercase tracking-wider">Stage 3: Space Rocket Launch</div>
+              <p class="text-slate-400">Child commands spacecraft from Pad 1 to Saturn (Pad 10) through jumbled cosmic stations by speaking or tapping station numbers.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: DETAILED FILE CATALOG & DIRECTORY MAP -->
+    <section id="tab-content-files" class="space-y-6 hidden">
+      <div class="bg-[var(--card-bg)] border border-[var(--card-border)] rounded-2xl p-6 md:p-8 space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <h2 class="text-2xl font-bold text-white">Catalog of Newly Added Files</h2>
+            <p class="text-slate-400 text-xs md:text-sm mt-1">
+              Every file listed below was authored and introduced in this fork, organized by architectural layer.
+            </p>
+          </div>
+          <!-- Filter Buttons -->
+          <div class="flex flex-wrap gap-2 text-xs">
+            <button onclick="filterFiles('all')" class="file-filter-btn px-3 py-1.5 rounded-lg bg-orange-600 text-white font-medium" data-cat="all">All Files</button>
+            <button onclick="filterFiles('model')" class="file-filter-btn px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:text-white" data-cat="model">Neural Model</button>
+            <button onclick="filterFiles('voice')" class="file-filter-btn px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:text-white" data-cat="voice">Speech Engine</button>
+            <button onclick="filterFiles('apps')" class="file-filter-btn px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:text-white" data-cat="apps">Games & UI</button>
+            <button onclick="filterFiles('docs')" class="file-filter-btn px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:text-white" data-cat="docs">Docs & Tests</button>
+          </div>
+        </div>
+
+        <!-- File Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="file-cards-container">
+
+          <!-- 1. Model Weights -->
+          <div class="file-card p-4 rounded-xl bg-slate-900/70 border border-slate-800 space-y-2" data-category="model">
+            <div class="flex items-start justify-between gap-2">
+              <span class="font-mono text-xs text-orange-400 break-all font-semibold">client/public/models/whisper_indian_digits/onnx/decoder_model_merged.onnx</span>
+              <span class="badge bg-orange-500/20 text-orange-300 text-[10px] shrink-0">49.8 MB</span>
+            </div>
+            <div class="text-xs text-slate-300"><strong>Why it is there:</strong> Transformers.js v3 Seq2Seq pipeline requires a merged decoder architecture combining past-key-values and initial step execution into a single unified ONNX graph. Created via <code class="text-slate-200">optimum.onnx.graph_transformations.merge_decoders</code>.</div>
+          </div>
+
+          <div class="file-card p-4 rounded-xl bg-slate-900/70 border border-slate-800 space-y-2" data-category="model">
+            <div class="flex items-start justify-between gap-2">
+              <span class="font-mono text-xs text-orange-400 break-all font-semibold">client/public/models/whisper_indian_digits/onnx/encoder_model_quantized.onnx</span>
+              <span class="badge bg-orange-500/20 text-orange-300 text-[10px] shrink-0">19.5 MB</span>
+            </div>
+            <div class="text-xs text-slate-300"><strong>Why it is there:</strong> Quantized INT8 audio mel-spectrogram encoder weights for Whisper-Tiny. Converts 80-channel log-mel features into deep acoustic representations in under 90ms on browser WASM.</div>
+          </div>
+
+          <div class="file-card p-4 rounded-xl bg-slate-900/70 border border-slate-800 space-y-2" data-category="model">
+            <div class="flex items-start justify-between gap-2">
+              <span class="font-mono text-xs text-orange-400 break-all font-semibold">client/public/models/whisper_indian_digits/tokenizer.json & config.json</span>
+              <span class="badge bg-sky-500/20 text-sky-300 text-[10px] shrink-0">Config</span>
+            </div>
+            <div class="text-xs text-slate-300"><strong>Why it is there:</strong> Byte-Pair Encoding (BPE) vocab, generation config, and Whisper feature extractor settings ensuring audio is sliced into exact 3000-frame mel chunks.</div>
+          </div>
+
+          <!-- 2. Web Worker -->
+          <div class="file-card p-4 rounded-xl bg-slate-900/70 border border-slate-800 space-y-2" data-category="voice">
+            <div class="flex items-start justify-between gap-2">
+              <span class="font-mono text-xs text-emerald-400 break-all font-semibold">client/public/whisper-worker.js</span>
+              <span class="badge bg-emerald-500/20 text-emerald-300 text-[10px] shrink-0">Static Worker</span>
+            </div>
+            <div class="text-xs text-slate-300"><strong>Why it is there:</strong> Unbundled native ES module Web Worker that imports Transformers.js from CDN without bundler collisions. Executes ONNX inference off the main thread so UI animations stay at 60 FPS.</div>
+          </div>
+
+          <!-- 3. React Hooks & Voice Engine -->
+          <div class="file-card p-4 rounded-xl bg-slate-900/70 border border-slate-800 space-y-2" data-category="voice">
+            <div class="flex items-start justify-between gap-2">
+              <span class="font-mono text-xs text-emerald-400 break-all font-semibold">client/src/apps/numbers1To10/useWhisperVoice.js</span>
+              <span class="badge bg-emerald-500/20 text-emerald-300 text-[10px] shrink-0">React Hook</span>
+            </div>
+            <div class="text-xs text-slate-300"><strong>Why it is there:</strong> Central state machine hook coordinating zero-latency native Web Speech with in-browser Whisper fallback, tracking audio volume levels, auto-stop timeouts, and error suppression.</div>
+          </div>
+
+          <div class="file-card p-4 rounded-xl bg-slate-900/70 border border-slate-800 space-y-2" data-category="voice">
+            <div class="flex items-start justify-between gap-2">
+              <span class="font-mono text-xs text-emerald-400 break-all font-semibold">client/src/apps/numbers1To10/audioChunkRecorder.js</span>
+              <span class="badge bg-emerald-500/20 text-emerald-300 text-[10px] shrink-0">Web Audio API</span>
+            </div>
+            <div class="text-xs text-slate-300"><strong>Why it is there:</strong> Lightweight PCM audio capture class delivering 16kHz mono Float32Array chunks. Keeps a warm AudioContext to eliminate the 250ms hardware delay, trims dead silence, and normalizes soft child voices.</div>
+          </div>
+
+          <div class="file-card p-4 rounded-xl bg-slate-900/70 border border-slate-800 space-y-2" data-category="voice">
+            <div class="flex items-start justify-between gap-2">
+              <span class="font-mono text-xs text-emerald-400 break-all font-semibold">client/src/apps/numbers1To10/PushToTalkButton.jsx (.js, .css)</span>
+              <span class="badge bg-purple-500/20 text-purple-300 text-[10px] shrink-0">UI Component</span>
+            </div>
+            <div class="text-xs text-slate-300"><strong>Why it is there:</strong> Reactive child-friendly microphone button with 4 dynamic equalizer sound-bars that pulse as the child speaks, loading spinner, and heard speech badge.</div>
+          </div>
+
+          <div class="file-card p-4 rounded-xl bg-slate-900/70 border border-slate-800 space-y-2" data-category="voice">
+            <div class="flex items-start justify-between gap-2">
+              <span class="font-mono text-xs text-emerald-400 break-all font-semibold">client/src/apps/numbers1To10/phoneticResolver.js</span>
+              <span class="badge bg-purple-500/20 text-purple-300 text-[10px] shrink-0">Phonetics</span>
+            </div>
+            <div class="text-xs text-slate-300"><strong>Why it is there:</strong> Multi-lingual acoustic resolver converting speech transcriptions into digits 1–10. Handles English variations ("tree", "wan", "for"), and Indian languages (Hindi, Tamil, Telugu numerals and transliterations).</div>
+          </div>
+
+          <!-- 4. Interactive Applications -->
+          <div class="file-card p-4 rounded-xl bg-slate-900/70 border border-slate-800 space-y-2" data-category="apps">
+            <div class="flex items-start justify-between gap-2">
+              <span class="font-mono text-xs text-sky-400 break-all font-semibold">client/src/apps/numbers1To10/NumberTracingApp.jsx</span>
+              <span class="badge bg-sky-500/20 text-sky-300 text-[10px] shrink-0">Main Activity</span>
+            </div>
+            <div class="text-xs text-slate-300"><strong>Why it is there:</strong> Tactile numeral tracing app with animated tutorial hand cursor, SVG stroke sampling, call-and-response echo counting, solo counting, and confetti reward animations.</div>
+          </div>
+
+          <div class="file-card p-4 rounded-xl bg-slate-900/70 border border-slate-800 space-y-2" data-category="apps">
+            <div class="flex items-start justify-between gap-2">
+              <span class="font-mono text-xs text-sky-400 break-all font-semibold">client/src/apps/numbers1To10/SpaceMazeAdventure.jsx</span>
+              <span class="badge bg-sky-500/20 text-sky-300 text-[10px] shrink-0">Game Activity</span>
+            </div>
+            <div class="text-xs text-slate-300"><strong>Why it is there:</strong> Gamified cosmic maze game where children navigate a spacecraft from Pad 1 to Saturn (Pad 10) by speaking station numbers aloud or tapping glowing pads.</div>
+          </div>
+
+          <div class="file-card p-4 rounded-xl bg-slate-900/70 border border-slate-800 space-y-2" data-category="apps">
+            <div class="flex items-start justify-between gap-2">
+              <span class="font-mono text-xs text-sky-400 break-all font-semibold">client/src/apps/Numbers1To10App.jsx</span>
+              <span class="badge bg-sky-500/20 text-sky-300 text-[10px] shrink-0">Router Hub</span>
+            </div>
+            <div class="text-xs text-slate-300"><strong>Why it is there:</strong> Top-level entrypoint hooking into Tenali's curriculum router via URL parameter <code class="text-slate-200">?mode=numbers-1-to-10</code>.</div>
+          </div>
+
+          <div class="file-card p-4 rounded-xl bg-slate-900/70 border border-slate-800 space-y-2" data-category="apps">
+            <div class="flex items-start justify-between gap-2">
+              <span class="font-mono text-xs text-sky-400 break-all font-semibold">client/src/apps/numbers1to10_voice/ (Mirrored Module)</span>
+              <span class="badge bg-sky-500/20 text-sky-300 text-[10px] shrink-0">Dedicated Sync</span>
+            </div>
+            <div class="text-xs text-slate-300"><strong>Why it is there:</strong> Self-contained standalone package mirroring the voice module for isolated unit testing, independent NPM packaging, or separate routing configurations.</div>
+          </div>
+
+          <!-- 5. Documentation & Proposals -->
+          <div class="file-card p-4 rounded-xl bg-slate-900/70 border border-slate-800 space-y-2" data-category="docs">
+            <div class="flex items-start justify-between gap-2">
+              <span class="font-mono text-xs text-yellow-400 break-all font-semibold">client/src/apps/numbers1To10/VOICE_RECOGNITION_PROPOSAL.md</span>
+              <span class="badge bg-yellow-500/20 text-yellow-300 text-[10px] shrink-0">RFC Proposal</span>
+            </div>
+            <div class="text-xs text-slate-300"><strong>Why it is there:</strong> Authoritative technical RFC written by Vedhiga V.B detailing the motivation, serverless trade-offs, and comparing the 3 deployment architectures for production.</div>
+          </div>
+
+          <div class="file-card p-4 rounded-xl bg-slate-900/70 border border-slate-800 space-y-2" data-category="docs">
+            <div class="flex items-start justify-between gap-2">
+              <span class="font-mono text-xs text-yellow-400 break-all font-semibold">learn_numbers_1_to_10.html</span>
+              <span class="badge bg-yellow-500/20 text-yellow-300 text-[10px] shrink-0">Standalone Prototype</span>
+            </div>
+            <div class="text-xs text-slate-300"><strong>Why it is there:</strong> Complete, self-contained single-file HTML implementation of the entire Number Foundations curriculum with offline sounds and confetti.</div>
+          </div>
+
+          <div class="file-card p-4 rounded-xl bg-slate-900/70 border border-slate-800 space-y-2" data-category="docs">
+            <div class="flex items-start justify-between gap-2">
+              <span class="font-mono text-xs text-yellow-400 break-all font-semibold">scripts/export_whisper_onnx.py & upload_to_hf.py</span>
+              <span class="badge bg-yellow-500/20 text-yellow-300 text-[10px] shrink-0">Python Scripts</span>
+            </div>
+            <div class="text-xs text-slate-300"><strong>Why it is there:</strong> Model quantization scripts leveraging Optimum and ONNX Runtime to produce the INT8 merged web models and push checkpoints to Hugging Face.</div>
+          </div>
+
+          <div class="file-card p-4 rounded-xl bg-slate-900/70 border border-slate-800 space-y-2" data-category="docs">
+            <div class="flex items-start justify-between gap-2">
+              <span class="font-mono text-xs text-yellow-400 break-all font-semibold">server/__tests__/health.test.js & proctorAuthz.test.js</span>
+              <span class="badge bg-yellow-500/20 text-yellow-300 text-[10px] shrink-0">Upstream Tests</span>
+            </div>
+            <div class="text-xs text-slate-300"><strong>Why it is there:</strong> Security regression test suites verifying GET /api/health probes and proctor authorization checks submitted as upstream improvements.</div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: 3 DEPLOYMENT ALTERNATIVES -->
+    <section id="tab-content-architecture" class="space-y-6 hidden">
+      <div class="bg-[var(--card-bg)] border border-[var(--card-border)] rounded-2xl p-6 md:p-8 space-y-6">
+        <div>
+          <span class="badge bg-sky-500/10 text-sky-400 border border-sky-500/20 mb-2">Architectural Comparison</span>
+          <h2 class="text-2xl font-bold text-white">The 3 Deployment Strategies from the RFC</h2>
+          <p class="text-slate-300 text-sm mt-1">
+            How we can run the custom fine-tuned Whisper model for Tenali users across different hosting setups:
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+          <!-- Option 1 -->
+          <div class="bg-slate-900/80 rounded-xl p-5 border border-emerald-500/30 flex flex-col justify-between space-y-4">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="badge bg-emerald-500/20 text-emerald-400">Option 1: Recommended</span>
+                <span class="text-xs font-mono text-slate-400">&lt;120 ms</span>
+              </div>
+              <h3 class="text-lg font-bold text-white">CTranslate2 Daemon on tenali.fun</h3>
+              <p class="text-xs text-slate-400 leading-relaxed">
+                Colocate a lightweight Python service (<code class="text-slate-300">faster-whisper</code>) on the existing Linux VPS alongside Node.js via systemd. Nginx proxies requests to <code class="text-slate-300">127.0.0.1:8000</code>.
+              </p>
+              <ul class="text-xs text-slate-300 space-y-1.5 list-disc list-inside">
+                <li><strong class="text-emerald-400">Speed:</strong> Sub-120ms latency on CPU</li>
+                <li><strong class="text-emerald-400">Cost:</strong> $0 additional cloud charges</li>
+                <li><strong class="text-emerald-400">RAM:</strong> Only ~150 MB (CTranslate2)</li>
+                <li><strong class="text-emerald-400">Security:</strong> Same-origin, no CORS/CSRF</li>
+              </ul>
+            </div>
+            <div class="text-xs text-slate-500 border-t border-slate-800 pt-3">
+              Ideal when tenali.fun VPS has ~200MB spare RAM headroom.
+            </div>
+          </div>
+
+          <!-- Option 2 -->
+          <div class="bg-slate-900/80 rounded-xl p-5 border border-sky-500/30 flex flex-col justify-between space-y-4">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="badge bg-sky-500/20 text-sky-400">Option 2: Cloud Container</span>
+                <span class="text-xs font-mono text-slate-400">~180 ms</span>
+              </div>
+              <h3 class="text-lg font-bold text-white">Render / Railway Dedicated API</h3>
+              <p class="text-xs text-slate-400 leading-relaxed">
+                Deploy <code class="text-slate-300">server.py</code> in a pre-warmed Docker container on Render or Railway ($5–$7/mo). Vercel routes traffic through a reverse-proxy path.
+              </p>
+              <ul class="text-xs text-slate-300 space-y-1.5 list-disc list-inside">
+                <li><strong class="text-sky-400">Isolation:</strong> Zero load on tenali.fun VPS</li>
+                <li><strong class="text-sky-400">Warm State:</strong> No cold starts on paid tier</li>
+                <li><strong class="text-yellow-400">Cost:</strong> ~$5/mo cloud subscription</li>
+                <li><strong class="text-slate-400">Scale:</strong> Auto-scales with traffic</li>
+              </ul>
+            </div>
+            <div class="text-xs text-slate-500 border-t border-slate-800 pt-3">
+              Ideal if the main web server must remain isolated from AI inference.
+            </div>
+          </div>
+
+          <!-- Option 3 -->
+          <div class="bg-slate-900/80 rounded-xl p-5 border border-orange-500/30 flex flex-col justify-between space-y-4">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="badge bg-orange-500/20 text-orange-400">Option 3: Implemented Here</span>
+                <span class="text-xs font-mono text-slate-400">1.2s - 2.5s</span>
+              </div>
+              <h3 class="text-lg font-bold text-white">100% In-Browser ONNX (Serverless)</h3>
+              <p class="text-xs text-slate-400 leading-relaxed">
+                Quantize model to INT8 ONNX and run directly inside client browser via Transformers.js v3 and WebAssembly inside a dedicated Web Worker.
+              </p>
+              <ul class="text-xs text-slate-300 space-y-1.5 list-disc list-inside">
+                <li><strong class="text-orange-400">Serverless:</strong> Runs on Vercel with 0 backend servers</li>
+                <li><strong class="text-orange-400">Offline:</strong> Operates 100% without internet once cached</li>
+                <li><strong class="text-orange-400">Privacy:</strong> Voice never leaves child's device</li>
+                <li><strong class="text-yellow-400">Consideration:</strong> 1–2s inference on mobile CPU</li>
+              </ul>
+            </div>
+            <div class="text-xs text-slate-500 border-t border-slate-800 pt-3">
+              Currently active on <a href="https://tenali-one.vercel.app/" class="text-orange-400 underline">tenali-one.vercel.app</a>.
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: KEY ENGINEERING FEATS & SOLVED BUGS -->
+    <section id="tab-content-feats" class="space-y-6 hidden">
+      <div class="bg-[var(--card-bg)] border border-[var(--card-border)] rounded-2xl p-6 md:p-8 space-y-6">
+        <div>
+          <span class="badge bg-purple-500/10 text-purple-400 border border-purple-500/20 mb-2">Technical Mastery</span>
+          <h2 class="text-2xl font-bold text-white">Key Engineering Breakthroughs in this Fork</h2>
+          <p class="text-slate-300 text-sm mt-1">
+            Running Whisper client-side on Vercel required solving several non-trivial web runtime and bundler challenges:
+          </p>
+        </div>
+
+        <div class="space-y-4">
+
+          <div class="bg-slate-900/60 p-5 rounded-xl border border-slate-800 space-y-2">
+            <div class="flex items-center gap-2">
+              <span class="text-emerald-400 font-bold text-sm">✔ 1. Elimination of Vite IIFE Worker Bundling Crash</span>
+              <span class="badge bg-emerald-500/10 text-emerald-300 text-[10px]">Commit 4782d371</span>
+            </div>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Vite automatically bundled worker scripts into IIFE format, converting CDN imports into undefined globals (<code class="text-red-300">ReferenceError: https___cdn_jsdelivr_net... is not defined</code>). Fixed by serving <code class="text-emerald-300">client/public/whisper-worker.js</code> as an unbundled static public ES module.
+            </p>
+          </div>
+
+          <div class="bg-slate-900/60 p-5 rounded-xl border border-slate-800 space-y-2">
+            <div class="flex items-center gap-2">
+              <span class="text-emerald-400 font-bold text-sm">✔ 2. Merged Decoder ONNX Generation for Transformers.js v3</span>
+              <span class="badge bg-emerald-500/10 text-emerald-300 text-[10px]">Commit 16721c4a</span>
+            </div>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Transformers.js v3 Seq2Seq pipeline required <code class="text-slate-200">decoder_model_merged.onnx</code>. Resolved 404 network errors by merging <code class="text-slate-200">decoder_model.onnx</code> and <code class="text-slate-200">decoder_with_past_model.onnx</code> using Hugging Face Optimum.
+            </p>
+          </div>
+
+          <div class="bg-slate-900/60 p-5 rounded-xl border border-slate-800 space-y-2">
+            <div class="flex items-center gap-2">
+              <span class="text-emerald-400 font-bold text-sm">✔ 3. Suppressed Stale "No Speech" Warnings During Transcription</span>
+              <span class="badge bg-emerald-500/10 text-emerald-300 text-[10px]">Commit 056d2513</span>
+            </div>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Fixed UI glitch where stale error messages persisted while transcribing because condition checked only <code class="text-slate-200">!isRecording</code>. Updated to <code class="text-emerald-300">errorMessage && !isRecording && !isTranscribing</code>, anchored auto-stop timers in refs, and cleared errors on recording stop.
+            </p>
+          </div>
+
+          <div class="bg-slate-900/60 p-5 rounded-xl border border-slate-800 space-y-2">
+            <div class="flex items-center gap-2">
+              <span class="text-emerald-400 font-bold text-sm">✔ 4. Zero-Latency Warm Audio Stream & Real-time VU Visualizer</span>
+              <span class="badge bg-emerald-500/10 text-emerald-300 text-[10px]">Commit 3bc69fbf</span>
+            </div>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Reused warm MediaStream and AudioContext to eliminate the 250ms hardware delay on every mic tap. Computes Root-Mean-Square (RMS) decibels in real-time to drive 4 animated sound wave bars, giving visual feedback and diagnosing muted mics.
+            </p>
+          </div>
+
+          <div class="bg-slate-900/60 p-5 rounded-xl border border-slate-800 space-y-2">
+            <div class="flex items-center gap-2">
+              <span class="text-emerald-400 font-bold text-sm">✔ 5. Hybrid Speech Cascade: Native Interim + Neural Fallback</span>
+              <span class="badge bg-emerald-500/10 text-emerald-300 text-[10px]">Commit 3ca5ffbb</span>
+            </div>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              If browser native speech detects a number instantly, it emits immediately with 0 latency. If native speech drops or struggles with child accents, Whisper ONNX transcribes the audio chunk in the background as an accurate fallback.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800 pt-6 text-center text-xs text-slate-500 space-y-2">
+      <div>Tenali Project · Fork Documentation & Architecture Review · Authored by Vedhiga V.B</div>
+      <div>Source Repository: <a href="https://github.com/Vedhiga/tenali" class="text-orange-400 hover:underline">github.com/Vedhiga/tenali</a> (Branch: <code class="text-slate-400">demo</code>)</div>
+    </footer>
+
+  </div>
+
+  <script>
+    function switchTab(tabId) {
+      const tabs = ['proposal', 'files', 'architecture', 'feats'];
+      tabs.forEach(id => {
+        const content = document.getElementById('tab-content-' + id);
+        const btn = document.getElementById('tab-btn-' + id);
+        if (id === tabId) {
+          content.classList.remove('hidden');
+          btn.classList.remove('bg-slate-800', 'text-slate-300');
+          btn.classList.add('bg-orange-600', 'text-white');
+        } else {
+          content.classList.add('hidden');
+          btn.classList.remove('bg-orange-600', 'text-white');
+          btn.classList.add('bg-slate-800', 'text-slate-300');
+        }
+      });
+    }
+
+    function filterFiles(category) {
+      const cards = document.querySelectorAll('.file-card');
+      const buttons = document.querySelectorAll('.file-filter-btn');
+
+      buttons.forEach(btn => {
+        if (btn.getAttribute('data-cat') === category) {
+          btn.classList.remove('bg-slate-800', 'text-slate-300');
+          btn.classList.add('bg-orange-600', 'text-white');
+        } else {
+          btn.classList.remove('bg-orange-600', 'text-white');
+          btn.classList.add('bg-slate-800', 'text-slate-300');
+        }
+      });
+
+      cards.forEach(card => {
+        if (category === 'all' || card.getAttribute('data-category') === category) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>
+

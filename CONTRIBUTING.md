@@ -18,7 +18,7 @@ We welcome contributions from everyone, whether it's fixing a bug, adding a new 
 ### 3. Quality Checks
 These are what CI actually runs on every PR (see `.github/workflows/test.yml`) — matching them locally means you're not surprised by a red check:
 - **Client tests:** `cd client && npm test` (see [Frontend Testing](#frontend-testing) below).
-- **Client lint:** `cd client && npm run lint` (currently non-blocking in CI until `App.jsx` is split up — but please still run it and fix what you introduce).
+- **Client lint:** `cd client && npm run lint` (blocking in CI — every PR must pass lint; please fix any lint errors you introduce).
 - **Server tests:** `cd server && npm test`.
 - **BKT unit check:** `node server/lib/bkt.test.js`.
 - If you fix existing lint issues, run `npx eslint . --prune-suppressions` to remove obsolete entries from `eslint-suppressions.json`.

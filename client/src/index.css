@@ -21,6 +21,11 @@
   padding: 0;              /* Remove default padding */
 }
 
+/* Ensure stable scrollbar gutter to prevent layout shift on Windows/desktop browsers */
+html {
+  scrollbar-gutter: stable;
+}
+
 /* Body reset: Remove default body margins */
 body {
   margin: 0;
