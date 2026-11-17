@@ -293,7 +293,7 @@ export function getMathFor(state, object) {
  */
 export function registerAnswer(state, spec, object, answer) {
   const variant = getMathFor(state, object);
-  const correct = checkDetectiveAnswer(variant.answer, answer);
+  const correct = checkDetectiveAnswer(variant.answer, answer, { tolerance: variant.answerTolerance });
   if (!correct) {
     return {
       ok: true,

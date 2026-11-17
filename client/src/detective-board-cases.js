@@ -57,7 +57,7 @@ export const BOARD_CASE_1 = {
     {
       id: 'riya', name: 'Riya', animalEmoji: '🐰', species: 'rabbit',
       hint: 'Quick, eager to please, always watching the clock.',
-      profile: { favouriteFood: 'carrots', footprint: '9 cm', colour: 'white fur', timing: 'early, always' },
+      profile: { favouriteFood: 'carrots', footprint: '15 cm', colour: 'white fur', timing: 'early, always' },
       eliminatedReason: "She wanted to surprise the teacher — she just forgot to ask first.",
     },
   ],
@@ -254,7 +254,7 @@ export const BOARD_CASE_1 = {
         { suspectId: 'leo', value: '16 cm' },
         { suspectId: 'mila', value: '4 cm' },
         { suspectId: 'teddy', value: '18 cm' },
-        { suspectId: 'riya', value: '9 cm' },
+        { suspectId: 'riya', value: '15 cm' },
       ],
       hint1: 'The print is 15 cm. Whose paws can\'t even reach that?',
       hint2: 'Who has the smallest paws in class?',

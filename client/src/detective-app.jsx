@@ -640,7 +640,7 @@ function DetectiveCaseView({ caseData, initialStage, initialHintsUsed = 0, initi
   const handleSubmit = (e) => {
     e.preventDefault();
     if (revealed || !answer.trim()) return;
-    const correct = checkDetectiveAnswer(stage?.answer, answer);
+    const correct = checkDetectiveAnswer(stage?.answer, answer, { tolerance: stage?.answerTolerance });
     setRevealed(true);
     setFeedback({ correct, correctAnswer: stage?.answer });
     if (!correct) setMotivationIdx(i => (i + 1) % wrongMotivations.length);
@@ -2097,6 +2097,13 @@ function EnhancedCasePlay({ story, onComplete, onBack, initialState }) {
 
   const handleElimination = (selectedSuspectId) => {
     if (!pendingEvidence) return;
+    // Evidence that does not rule this suspect out has no reasoning to offer:
+    // say so straight away instead of opening an empty list of reasons.
+    const target = suspects.find(s => s.id === selectedSuspectId);
+    if (target && getEliminationReasons(pendingEvidence, target, suspects).length === 0) {
+      setEliminationMsg({ type: 'wrong', text: `This evidence does not rule out ${target.name}. Look again at what it tells you.` });
+      return;
+    }
     setSelectedElimSuspect(selectedSuspectId);
     setReasonPhase(true);
   };
@@ -2537,7 +2544,7 @@ function EnhancedClueSolve({ story, clueIdx, onSolved, onSkip, onBack, contextHi
   const handleSubmit = (e) => {
     e.preventDefault();
     if (revealed || !answer.trim()) return;
-    const correct = checkDetectiveAnswer(stage.answer, answer);
+    const correct = checkDetectiveAnswer(stage.answer, answer, { tolerance: stage.answerTolerance });
     setRevealed(true);
     setFeedback({ correct });
     if (!correct) setMotivationIdx(i => (i + 1) % wrongMotivations.length);

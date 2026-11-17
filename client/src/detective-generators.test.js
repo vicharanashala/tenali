@@ -163,7 +163,7 @@ describe('generated mathematics', () => {
       const favorable = 6 - called;
       expect(stage1.answer, `${context} stage 1 answer`).toBe(fractionText(favorable, 6));
 
-      const second = stage2.question.match(/^Two dice\. Sum = (\d+)\. Number of favorable/);
+      const second = stage2.question.match(/^Two dice\. Sum = (\d+)\. Probability = favorable outcomes \u00f7 36 = \? \(as a fraction\)$/);
       expect(second, `${context} stage 2 question: ${stage2.question}`).not.toBeNull();
       const target = Number(second[1]);
       let pairs = 0;

@@ -11,7 +11,7 @@
  *   - coordinate pairs                        '(5, 5)', '(-3, 4)'
  *   - unordered root lists                    '-3, 5'
  *   - words / symbols                         'triangle', 'Northeast', 'DE'
- *   - one algebraic expression                '12x^2'
+ *   - one algebraic expression                '12x^2', '(4/3)x^3 + 7x + C'
  *
  * Rules:
  *   - Numeric answers keep the house tolerance (|diff| < 0.01) and accept a
@@ -20,6 +20,13 @@
  *     decimal rounded to within tolerance, but never a bare prefix ('5' for
  *     '5/12').
  *   - Coordinate pairs are order-sensitive; root lists are order-insensitive.
+ *   - A whole-number answer between 1 and 12 also accepts a clock reading of
+ *     that hour ('2:00', '2 o'clock').
+ *   - Expressions in x are compared term by term, so '1x^3' and 'x^3' are the
+ *     same, and a coefficient may be written as a fraction or a decimal
+ *     ('(5/3)x^3', '1.67x^3'). A '+ C' in the stored answer must be present.
+ *   - A caller can pass `{ tolerance }` for answers that the question asks the
+ *     learner to round (for example 0.5 for "to the nearest metre").
  *   - Everything else is compared as normalised text (case-insensitive,
  *     whitespace-collapsed; expressions ignore spaces and '*').
  */
@@ -65,8 +72,71 @@ function parseListElement(text) {
   return parseNumberWithOptionalUnit(text);
 }
 
-function sameNumber(a, b) {
-  return Math.abs(a - b) < TOLERANCE;
+function sameNumber(a, b, tolerance = TOLERANCE) {
+  // The small epsilon keeps a half exactly on the edge (23.5 for 23 +/- 0.5) from
+  // failing on floating point noise.
+  return Math.abs(a - b) < tolerance + 1e-9;
+}
+
+const CLOCK_RE = /^(\d{1,2})\s*(?::\s*00|\.00|o'?\s*clock)$/i;
+
+/** One signed term of an expression in x -> { power, coefficient } or the constant C. */
+function parseTerm(raw) {
+  const sign = raw.startsWith('-') ? -1 : 1;
+  const body = raw.replace(/^[+-]/, '');
+  if (body === 'c') return { constant: true };
+  const match = body.match(/^(\(?[\d./]*\)?)(?:x(?:\^(\d+))?)?$/);
+  if (!match || body === '') return null;
+  const hasX = body.includes('x');
+  const coefText = match[1].replace(/[()]/g, '');
+  let coefficient;
+  if (coefText === '') {
+    if (!hasX) return null;
+    coefficient = 1;
+  } else {
+    const fraction = parseFraction(coefText);
+    coefficient = fraction ? fraction.num / fraction.den : NUMBER_RE.test(coefText) ? Number(coefText) : NaN;
+  }
+  if (!Number.isFinite(coefficient)) return null;
+  const power = hasX ? (match[2] === undefined ? 1 : Number(match[2])) : 0;
+  return { power, coefficient: sign * coefficient };
+}
+
+/** 'x^3 + 5x + C' -> { powers: Map(3 -> 1, 1 -> 5), hasC: true }; null when it is not such an expression. */
+function parseExpression(text) {
+  const t = normalizeText(text).toLowerCase().replace(/\s+/g, '').replace(/\*/g, '');
+  if (t === '' || !/x/.test(t)) return null;
+  const pieces = [];
+  let depth = 0;
+  let start = 0;
+  for (let i = 0; i < t.length; i++) {
+    const ch = t[i];
+    if (ch === '(') depth++;
+    else if (ch === ')') depth--;
+    else if ((ch === '+' || ch === '-') && depth === 0 && i > start && t[i - 1] !== '^') {
+      pieces.push(t.slice(start, i));
+      start = i;
+    }
+  }
+  pieces.push(t.slice(start));
+  const powers = new Map();
+  let hasC = false;
+  for (const piece of pieces) {
+    const term = parseTerm(piece);
+    if (!term) return null;
+    if (term.constant) { hasC = true; continue; }
+    powers.set(term.power, (powers.get(term.power) || 0) + term.coefficient);
+  }
+  return { powers, hasC };
+}
+
+function sameExpression(a, b, tolerance) {
+  if (a.hasC !== b.hasC) return false;
+  const keys = new Set([...a.powers.keys(), ...b.powers.keys()]);
+  for (const key of keys) {
+    if (!sameNumber(a.powers.get(key) || 0, b.powers.get(key) || 0, tolerance)) return false;
+  }
+  return true;
 }
 
 function splitList(text) {
@@ -105,30 +175,32 @@ function matchesList(correctText, userText) {
   return correctValues.every((value, i) => sameNumber(value, userValues[i]));
 }
 
-function matchesNumber(expected, userText) {
+function matchesNumber(expected, userText, tolerance) {
   const fraction = parseFraction(userText);
-  if (fraction) return sameNumber(expected, fraction.num / fraction.den);
+  if (fraction) return sameNumber(expected, fraction.num / fraction.den, tolerance);
   const value = parseNumberWithOptionalUnit(userText);
-  return value !== null && sameNumber(expected, value);
+  return value !== null && sameNumber(expected, value, tolerance);
 }
 
-function matchesFraction(expected, userText) {
+function matchesFraction(expected, userText, tolerance) {
   const fraction = parseFraction(userText);
   if (fraction) {
     return fraction.num * expected.den === expected.num * fraction.den;
   }
   // Accept the decimal equivalent (some prompts say "as a decimal or fraction").
   const value = parseNumberWithOptionalUnit(userText);
-  return value !== null && sameNumber(expected.num / expected.den, value);
+  return value !== null && sameNumber(expected.num / expected.den, value, tolerance);
 }
 
 /**
  * Tolerant but non-prefix answer check.
  * @param {number|string} correctAnswer  the stored answer
  * @param {unknown}       userAnswer     raw learner input
+ * @param {{ tolerance?: number }} [options]  wider tolerance for rounded answers
  * @returns {boolean}
  */
-export function checkDetectiveAnswer(correctAnswer, userAnswer) {
+export function checkDetectiveAnswer(correctAnswer, userAnswer, options = {}) {
+  const tolerance = Number(options && options.tolerance) > 0 ? Number(options.tolerance) : TOLERANCE;
   if (correctAnswer === null || correctAnswer === undefined) return false;
   if (userAnswer === null || userAnswer === undefined) return false;
 
@@ -138,9 +210,23 @@ export function checkDetectiveAnswer(correctAnswer, userAnswer) {
   if (userText === correctText) return true;
 
   const correctFraction = parseFraction(correctText);
-  if (correctFraction) return matchesFraction(correctFraction, userText);
+  if (correctFraction) return matchesFraction(correctFraction, userText, tolerance);
 
-  if (NUMBER_RE.test(correctText)) return matchesNumber(Number(correctText), userText);
+  if (NUMBER_RE.test(correctText)) {
+    const expected = Number(correctText);
+    // "What time is it?" with a stored hour: '2:00' and '2 o'clock' mean 2.
+    const clock = userText.match(CLOCK_RE);
+    if (clock && Number.isInteger(expected) && expected >= 1 && expected <= 12) {
+      return Number(clock[1]) === expected;
+    }
+    return matchesNumber(expected, userText, tolerance);
+  }
+
+  const correctExpression = /x/i.test(correctText) ? parseExpression(correctText) : null;
+  if (correctExpression) {
+    const userExpression = parseExpression(userText);
+    return !!userExpression && sameExpression(correctExpression, userExpression, tolerance);
+  }
 
   if (correctText.includes(',')) return matchesList(correctText, userText);
 
