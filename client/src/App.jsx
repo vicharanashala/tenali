@@ -55435,7 +55435,7 @@ function TransferChallengeApp({ topicKey, onBack, completedTopics, goldMastery, 
 }
 
 function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, answerField, topicKey: customTopicKey }) {
-  return function GeneratedQuizApp({ onBack, completedTopics = [], goldMastery = [], markTopicCompleted, markGoldMastery, updateCoins, setMode, setTransferTopic, initialDifficulty, initialNumQuestions, initialStarted, isGoalMode = false }) {
+  return function GeneratedQuizApp({ onBack, completedTopics = [], goldMastery = [], markTopicCompleted, markGoldMastery, updateCoins, setMode, setTransferTopic, initialDifficulty, initialNumQuestions, initialStarted, isGoalMode = false, extraStartButton }) {
     const diffs = Object.keys(diffLabels)
     // Feature CR: a just-earned Road License pre-selects the earned difficulty (one-shot; student can change it)
     const [difficulty, setDifficulty] = useState(() => initialDifficulty || cjTakeReco(customTopicKey || apiPath.replace('-api', ''), diffs) || diffs[0])
@@ -55802,6 +55802,7 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
             }}>
               Start Quiz
             </button>
+            {extraStartButton}
           </div>
         {isStage3Completed(topicKey, completedTopics) && (
           <div className="transfer-cta-box" style={{ marginTop: '20px', padding: '16px', background: 'var(--clr-hover, rgba(255,255,255,0.03))', borderRadius: '10px', border: '1px solid var(--clr-border)', textAlign: 'center' }}>
@@ -56426,11 +56427,37 @@ const DiffApp = makeQuizApp({
   placeholders: 'e.g. 12 or -3/2',
 })
 
-const BasesApp = makeQuizApp({
+const BasesQuizApp = makeQuizApp({
   title: 'Number Bases', subtitle: 'Binary, decimal, hexadecimal', apiPath: 'bases-api', topicKey: 'number-bases',
   diffLabels: { easy: 'Easy — Dec→Bin', medium: 'Medium — Bin→Dec', hard: 'Hard — Dec→Hex', extrahard: 'Extra Hard — Bin add / Hex→Bin' },
   placeholders: (q, d) => d === 'medium' ? 'e.g. 42' : d === 'hard' ? 'e.g. FF' : 'e.g. 101010',
 })
+
+function BasesApp(props) {
+  const [showGuessLab, setShowGuessLab] = useState(false)
+
+  if (showGuessLab) {
+    return <GuessNumberApp onBack={() => setShowGuessLab(false)} backLabel="Number Bases" />
+  }
+
+  return (
+    <BasesQuizApp
+      {...props}
+      extraStartButton={
+        <button
+          type="button"
+          onClick={() => setShowGuessLab(true)}
+          style={{
+            marginTop: '16px', background: 'transparent', border: '1px solid var(--clr-border)', borderRadius: '6px',
+            padding: '10px 24px', color: 'var(--clr-text-soft)', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer'
+          }}
+        >
+          Guess the Number — Binary magic trick
+        </button>
+      }
+    />
+  )
+}
 
 const CircleThApp = makeQuizApp({
   title: 'Circle Theorems', subtitle: 'Angles, tangents, cyclic quads', apiPath: 'circleth-api', topicKey: 'circle-theorems',
@@ -58397,7 +58424,7 @@ const loadQuestion = async () => {
 //   Card 3 → bit 2 (4, 5, 6, 7, 12, 13, 14, 15, …)
 //   Card 4 → bit 3 (8–15, 24–31)
 //   Card 5 → bit 4 (16–31)
-function GuessNumberApp({ onBack }) {
+function GuessNumberApp({ onBack, backLabel }) {
   const [phase, setPhase] = useState('intro') // intro | playing | done
   const [cardIndex, setCardIndex] = useState(0) // 0–4
   const [guessedTotal, setGuessedTotal] = useState(0)
@@ -58442,7 +58469,7 @@ function GuessNumberApp({ onBack }) {
   return (
     <>
       <div className="header-row">
-        <button className="back-button" onClick={onBack}>← Home</button>
+        <button className="back-button" onClick={onBack}>{backLabel ? (backLabel.startsWith('←') ? backLabel : `← ${backLabel}`) : '← Home'}</button>
       </div>
       <h1>Guess the Number</h1>
       <p className="subtitle">Think of a number from 0 to 31 — I'll find it!</p>
