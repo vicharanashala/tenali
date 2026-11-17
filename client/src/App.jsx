@@ -47457,7 +47457,7 @@ function FractionsPage(props) {
       <div style={{ maxWidth: 900, width: '100%', margin: '0 auto', padding: '1rem', color: 'var(--clr-text)', textAlign: 'center' }}>
           <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
             <button className="kid-btn-secondary" onClick={props.onBack} style={{ padding: '8px 16px', borderRadius: '20px', fontWeight: 'bold', border: 'none', background: 'rgba(0,0,0,0.05)', cursor: 'pointer', color: 'var(--clr-text)' }}>
-              ← Back to Home
+              ← Back
             </button>
           </div>
           <h1 style={{ marginBottom: 12, fontSize: '2.8rem', color: '#3182CE', fontWeight: '800' }}>
@@ -49575,7 +49575,7 @@ function GSTPage(props) {
       <div style={{ maxWidth: 900, width: '100%', margin: '0 auto', padding: '1rem', color: 'var(--clr-text)', textAlign: 'center' }}>
           <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
             <button className="kid-btn-secondary" onClick={props.onBack} style={{ padding: '8px 16px', borderRadius: '20px', fontWeight: 'bold', border: 'none', background: 'rgba(0,0,0,0.05)', cursor: 'pointer', color: 'var(--clr-text)' }}>
-              ← Back to Home
+              ← Back
             </button>
           </div>
           <h1 style={{ marginBottom: 12, fontSize: '2.8rem', color: 'var(--clr-accent, #FF7E67)', fontWeight: '800' }}>
