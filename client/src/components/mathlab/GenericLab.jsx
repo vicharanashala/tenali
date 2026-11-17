@@ -172,7 +172,7 @@ function GenericLab({ title, subtitle, endpoint, onBack, renderQuestionCustom, c
                 position: 'absolute', top: '24px', left: '24px', background: 'transparent',
                 border: '1px solid #5B5048', borderRadius: '6px', padding: '6px 14px',
                 color: '#A89C93', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer'
-            }}>← Home</button>
+            }}>← Back</button>
 
             <h1 style={{ fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 700, fontSize: '48px', color: '#F4F1ED', margin: '0 0 12px', lineHeight: 1.1 }}>
                 {title.replace('🔷 ', '')}
@@ -287,7 +287,7 @@ function GenericLab({ title, subtitle, endpoint, onBack, renderQuestionCustom, c
             </div>
             <div className="button-row" style={{ marginTop: '30px' }}>
                 <button className="kid-btn-primary" onClick={() => { setStarted(false); setFinished(false); }}>Play Again 🔄</button>
-                <button className="kid-back-btn" onClick={onBack} style={{ marginLeft: '15px' }}>← Back to Home</button>
+                <button className="kid-back-btn" onClick={onBack} style={{ marginLeft: '15px' }}>← Back</button>
             </div>
             </div>
         )}

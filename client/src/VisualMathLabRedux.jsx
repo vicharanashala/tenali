@@ -892,7 +892,7 @@ export default function VisualMathLabRedux({ onBack, initialDifficulty, initialN
             </button>
             <button onClick={onBack}
               style={{ background:'rgba(255,255,255,0.05)', border:`2px solid ${C.border}`, borderRadius:'16px', padding:'16px 24px', color:C.muted, fontFamily:FONT, fontWeight:700, fontSize:'1rem', cursor:'pointer' }}>
-              ← Home
+              ← Back
             </button>
           </div>
         </div>

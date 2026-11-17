@@ -176,7 +176,7 @@ function ProgressTracker({ onBack }) {
     return (
         <>
         <div className="header-row">
-            <button className="back-button" onClick={onBack}>← Home</button>
+            <button className="back-button" onClick={onBack}>← Back</button>
         </div>
         <h1>Track Progress</h1>
 

@@ -80,7 +80,7 @@ const FractionsLearnPage = ({ onStartTest, onBack }) => {
       <div className="fractions-learn-header">
         <div style={{ textAlign: 'left', marginBottom: '20px' }}>
           <button onClick={onBack} style={{ padding: '10px 20px', borderRadius: '25px', fontWeight: 'bold', border: '2px solid rgba(0,0,0,0.1)', background: 'white', color: 'var(--clr-text)', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '8px', fontSize: '1rem', boxShadow: '0 4px 6px rgba(0,0,0,0.05)' }}>
-            <span style={{ fontSize: '1.2rem' }}>🏠</span> Back to Home
+            ← Back
           </button>
         </div>
         <h1>{learnData.title}</h1>

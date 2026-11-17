@@ -192,7 +192,8 @@ h1 {
   line-height: 1.15;        /* Compact line height for headings */
 }
 
-.subtitle {
+.subtitle,
+.quiz-subtitle {
   margin: 0 0 36px;
   text-align: center;
   font-size: 0.95rem;

@@ -1807,7 +1807,7 @@ export default function InteractiveLcmHcfApp({ onBack }) {
             marginTop: '20px'
           }}
         >
-          Back to Main Menu
+          ← Back
         </button>
       </div>
     );

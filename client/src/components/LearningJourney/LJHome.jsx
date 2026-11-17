@@ -50,7 +50,7 @@ function LJHome({ onSelectTopic, onBack }) {
     return (
         <div style={{ padding: '16px' }}>
         <div className="header-row" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
-            <button className="back-button" onClick={onBack}>← Main Menu</button>
+            <button className="back-button" onClick={onBack}>← Back</button>
             <span style={{ fontSize: '1.25rem', fontWeight: 'bold', color: 'var(--clr-accent)' }}>⭐ Learning Journey</span>
         </div>
 
