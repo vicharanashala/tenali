@@ -11,6 +11,9 @@ const Sup = ({ base, exp }) => (
   <span>{base}<sup style={{ fontSize: '0.7em' }}>{exp}</sup></span>
 )
 
+// Serialize a React element tree into a stable string so two visually
+// identical choices (e.g. a^4 and a^4 produced by different formulas that
+// happened to collide on the same random inputs) compare equal.
 const jsxKey = (node) => {
   if (node == null || typeof node === 'boolean') return ''
   if (typeof node === 'string' || typeof node === 'number') return String(node)
@@ -46,7 +49,7 @@ const generateQuestion = (level) => {
 
   // Retry with fresh random parameters until all four choices are distinct.
   // Collisions are rare for most levels but common for a few specific
-  // parameter combinations (e.g. m=n=2 in Level 1 makes a^(m+n) = a^(mÂ·n)).
+  // parameter combinations (e.g. m=n=2 in Level 1 makes a^(m+n) = a^(m·n)).
   let q = gen()
   for (let i = 0; i < 100 && q && !choicesAllUnique(q.choices); i++) {
     q = gen()
@@ -69,11 +72,11 @@ const generateExponentQuestion = (level) => {
   const topicName = 'Exponent Rules'
 
   if (level === 1) {
-    // Product rule: a^m Â· a^n = a^(m+n)
+    // Product rule: a^m · a^n = a^(m+n)
     const m = 2 + Math.floor(Math.random() * 4)
     const n = 2 + Math.floor(Math.random() * 4)
     const correct = m + n
-    const questionJSX = <span><Sup base="a" exp={m} /> Â· <Sup base="a" exp={n} /> = ?</span>
+    const questionJSX = <span><Sup base="a" exp={m} /> · <Sup base="a" exp={n} /> = ?</span>
     const distractors = [
       { jsx: <Sup base="a" exp={m * n} />, isCorrect: false }, // multiply instead of add
       { jsx: <Sup base="a" exp={m - n} />, isCorrect: false }, // subtract
@@ -99,11 +102,11 @@ const generateExponentQuestion = (level) => {
   }
 
   if (level === 3) {
-    // Power rule: (a^m)^n = a^(mÂ·n)
+    // Power rule: (a^m)^n = a^(m·n)
     const m = 2 + Math.floor(Math.random() * 3)
     const n = 2 + Math.floor(Math.random() * 3)
     const correct = m * n
-    const questionJSX = <span>(<Sup base="a" exp={m} /><sup style={{ fontSize: '0.7em' }}>)</sup><sup style={{ fontSize: '0.7em' }}>{n}</sup> = ?</span>
+   const questionJSX = <span>(<Sup base="a" exp={m} />)<sup style={{ fontSize: '0.7em' }}>{n}</sup> = ?</span>
     const distractors = [
       { jsx: <Sup base="a" exp={m + n} />, isCorrect: false },
       { jsx: <Sup base="a" exp={m} />, isCorrect: false },
@@ -132,12 +135,12 @@ const generateExponentQuestion = (level) => {
   }
 
   if (level === 5) {
-    // Combined: (a^4 Â· a^3) / a^2 = a^5
+    // Combined: (a^4 · a^3) / a^2 = a^5
     const a = 2 + Math.floor(Math.random() * 3)
     const b = 2 + Math.floor(Math.random() * 3)
     const c = 1 + Math.floor(Math.random() * 2)
     const correct = a + b - c
-    const questionJSX = <span><Frac n={<span><Sup base="a" exp={a} /> Â· <Sup base="a" exp={b} /></span>} d={<Sup base="a" exp={c} />} /> = ?</span>
+    const questionJSX = <span><Frac n={<span><Sup base="a" exp={a} /> · <Sup base="a" exp={b} /></span>} d={<Sup base="a" exp={c} />} /> = ?</span>
     const distractors = [
       { jsx: <Sup base="a" exp={a + b} />, isCorrect: false },
       { jsx: <Sup base="a" exp={a + b + c} />, isCorrect: false },
@@ -173,7 +176,7 @@ const generateNegativeExponentQuestion = (level) => {
     const exp = 2
     const numResult = Math.pow(q, exp)
     const denResult = Math.pow(p, exp)
-    const questionJSX = <span>(<Frac n={p} d={q} />)<sup style={{ fontSize: '0.7em' }}>â»{exp}</sup> = ?</span>
+    const questionJSX = <span>(<Frac n={p} d={q} />)<sup style={{ fontSize: '0.7em' }}>⁻{exp}</sup> = ?</span>
     const distractors = [
       { jsx: <Frac n={Math.pow(p, exp)} d={Math.pow(q, exp)} />, isCorrect: false },
       { jsx: <Frac n={p * exp} d={q * exp} />, isCorrect: false },
@@ -184,11 +187,11 @@ const generateNegativeExponentQuestion = (level) => {
   }
 
   if (level === 8) {
-    // a^-3 Â· a^5 = a^2
+    // a^-3 · a^5 = a^2
     const m = 2 + Math.floor(Math.random() * 3)
     const n = 3 + Math.floor(Math.random() * 4)
     const correct = n - m
-    const questionJSX = <span><Sup base="a" exp={-m} /> Â· <Sup base="a" exp={n} /> = ?</span>
+    const questionJSX = <span><Sup base="a" exp={-m} /> · <Sup base="a" exp={n} /> = ?</span>
     const distractors = [
       { jsx: <Sup base="a" exp={n} />, isCorrect: false },
       { jsx: <Sup base="a" exp={-m} />, isCorrect: false },
@@ -199,17 +202,33 @@ const generateNegativeExponentQuestion = (level) => {
   }
 
   if (level === 9) {
-    // (x^-2 y^3)^2 = y^6 / x^4  (equivalently x^-4 y^6 â€” so that form must NOT appear as a distractor)
-    const exp = 2
-    const questionJSX = <span>(<Sup base="x" exp={-2} /><Sup base="y" exp={3} /><sup style={{ fontSize: '0.7em' }}>)</sup><sup style={{ fontSize: '0.7em' }}>{exp}</sup> = ?</span>
-    const distractors = [
-      // Common error: applied outer exponent only to y, left x^-2 alone
-      { jsx: <span><Sup base="x" exp={-2} /><Sup base="y" exp={6} /></span>, isCorrect: false },
-      // Error: forgot to double the x exponent (kept x^2 in the denominator)
-      { jsx: <Frac n={<Sup base="y" exp={6} />} d={<Sup base="x" exp={2} />} />, isCorrect: false },
-      // Error: flipped the fraction the wrong way
-      { jsx: <Frac n={<Sup base="x" exp={4} />} d={<Sup base="y" exp={6} />} />, isCorrect: false }
-    ]
+  // (x^-2 y^3)^2 = y^6 / x^4
+  const exp = 2
+
+  const questionJSX = (
+    <span>
+      (<Sup base="x" exp={-2} /><Sup base="y" exp={3} />)
+      <sup style={{ fontSize: '0.7em' }}>{exp}</sup> = ?
+    </span>
+  )
+
+  const distractors = [
+    // Applied the outer exponent only to y
+    {
+      jsx: <span><Sup base="x" exp={-2} /><Sup base="y" exp={6} /></span>,
+      isCorrect: false
+    },
+    // Forgot to double the x exponent
+    {
+      jsx: <Frac n={<Sup base="y" exp={6} />} d={<Sup base="x" exp={2} />} />,
+      isCorrect: false
+    },
+    // Flipped the fraction
+    {
+      jsx: <Frac n={<Sup base="x" exp={4} />} d={<Sup base="y" exp={6} />} />,
+      isCorrect: false
+    }
+  ]
     const choices = [{ jsx: <Frac n={<Sup base="y" exp={6} />} d={<Sup base="x" exp={4} />} />, isCorrect: true }, ...distractors].sort(() => Math.random() - 0.5)
     return { questionJSX, choices, levelName: `${topicName} - Level ${level}` }
   }
@@ -481,11 +500,11 @@ setMaxLevelReached(previous => Math.max(previous, levelRef.current))
     }
   }
 
-  // â”€â”€â”€ Home Screen â”€â”€â”€
+  // ─── Home Screen ───
   if (homeScreen && !drillingScreen && !summaryScreen) {
     return (
       <div style={baseStyles.container}>
-        <button onClick={onBack} style={{ ...baseStyles.buttonSecondary, alignSelf: 'flex-start', marginBottom: '16px' }}>â† Home</button>
+        <button onClick={onBack} style={{ ...baseStyles.buttonSecondary, alignSelf: 'flex-start', marginBottom: '16px' }}>← Home</button>
         <div style={baseStyles.card}>
           <h1 style={baseStyles.title}>Tatsavit</h1>
           <p style={baseStyles.subtitle}>Algebra Simplification Drill</p>
@@ -496,8 +515,8 @@ setMaxLevelReached(previous => Math.max(previous, levelRef.current))
             <strong style={{ color: 'var(--clr-accent)' }}>How it works:</strong>
             <ul style={{ marginTop: '8px', paddingLeft: '20px' }}>
               <li>Start at Level 1</li>
-              <li>3 correct answers in a row â†’ advance to next level</li>
-              <li>Wrong answer â†’ drop back one level (minimum Level 1)</li>
+              <li>3 correct answers in a row → advance to next level</li>
+              <li>Wrong answer → drop back one level (minimum Level 1)</li>
               <li>13 levels total across 3 topics</li>
             </ul>
           </div>
@@ -509,7 +528,7 @@ setMaxLevelReached(previous => Math.max(previous, levelRef.current))
     )
   }
 
-  // â”€â”€â”€ Drilling Screen â”€â”€â”€
+  // ─── Drilling Screen ───
   if (drillingScreen && !homeScreen && !summaryScreen) {
     const levelInfo = (() => {
       if (level >= 1 && level <= 5) return 'Exponent Rules'
@@ -522,7 +541,7 @@ setMaxLevelReached(previous => Math.max(previous, levelRef.current))
 
     return (
       <div style={baseStyles.container}>
-        <button onClick={onBack} style={{ ...baseStyles.buttonSecondary, alignSelf: 'flex-start', marginBottom: '16px' }}>â† Home</button>
+        <button onClick={onBack} style={{ ...baseStyles.buttonSecondary, alignSelf: 'flex-start', marginBottom: '16px' }}>← Home</button>
         <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '16px' }}>
           <div style={baseStyles.progressPill}>Level {level}</div>
           <div style={baseStyles.progressPill}>{levelInfo}</div>
@@ -578,11 +597,11 @@ setMaxLevelReached(previous => Math.max(previous, levelRef.current))
     )
   }
 
-  // â”€â”€â”€ Summary Screen â”€â”€â”€
+  // ─── Summary Screen ───
   if (summaryScreen && !homeScreen && !drillingScreen) {
     return (
       <div style={baseStyles.container}>
-        <button onClick={onBack} style={{ ...baseStyles.buttonSecondary, alignSelf: 'flex-start', marginBottom: '16px' }}>â† Home</button>
+        <button onClick={onBack} style={{ ...baseStyles.buttonSecondary, alignSelf: 'flex-start', marginBottom: '16px' }}>← Home</button>
         <div style={baseStyles.card}>
           <h2 style={{ fontSize: '1.8rem', marginBottom: '16px' }}>Drill Complete!</h2>
           <p style={{ fontSize: '2rem', fontWeight: 600, color: 'var(--clr-accent)', marginBottom: '8px' }}>Score: {score}</p>
