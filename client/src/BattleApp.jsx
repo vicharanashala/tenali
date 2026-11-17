@@ -2,7 +2,6 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import { io } from 'socket.io-client'
 import confetti from 'canvas-confetti'
 
-const API = import.meta.env?.VITE_API_BASE_URL || ''
 // socket.io must mount at the same sub-path as the app (e.g. /summership).
 // Using just `window.location.origin` (no path) makes the client connect to
 // the host's `/socket.io/` endpoint, which on this deployment returns the
@@ -169,7 +168,6 @@ function Timer({ timeLeft, totalDuration = 15000 }) {
   else if (timeLeft <= 10) { color = 'var(--clr-accent)' }
   if (timeLeft <= 5) barClass = 'bar-urgent'
   else if (timeLeft <= 10) barClass = 'bar-warning'
-
   return (
     <>
       <style jsx>{`
@@ -198,36 +196,6 @@ function Timer({ timeLeft, totalDuration = 15000 }) {
 
 const REACTION_EMOJIS = ['🔥', '👏', '😂', '💀', '👀', '😮']
 
-function ReactionBar({ onSend, disabled }) {
-  const handleClick = (emoji) => {
-    if (!disabled) {
-      onSend(emoji)
-    }
-  }
-  return (
-    <div style={{ display: 'flex', gap: 4, justifyContent: 'center', marginTop: 8, flexWrap: 'wrap' }}>
-      {REACTION_EMOJIS.map((e) => (
-        <button key={e} onClick={() => handleClick(e)} disabled={disabled}
-          style={{ fontSize: '1.3rem', padding: '4px 8px', border: '1px solid var(--clr-border)', borderRadius: 'var(--radius)', background: 'var(--clr-surface)', cursor: disabled ? 'not-allowed' : 'pointer', opacity: disabled ? 0.4 : 1, transition: 'transform 0.1s, background 0.1s' }}
-          onMouseEnter={(ev) => { if (!disabled) ev.target.style.transform = 'scale(1.2)' }}
-          onMouseLeave={(ev) => { if (!disabled) ev.target.style.transform = 'scale(1)' }}>
-          {e}
-        </button>
-      ))}
-    </div>
-  )
-}
-
-function FloatingReaction({ emoji }) {
-  return (
-    <div style={{ position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', fontSize: '3.5rem', pointerEvents: 'none', zIndex: 1000, animation: 'reaction-pop 1.5s ease-out forwards', filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.4))' }}>
-      {emoji}
-      <style jsx>{`
-        @keyframes reaction-pop { 0% { opacity: 0; transform: translate(-50%, -50%) scale(0.3); } 15% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); } 50% { transform: translate(-50%, -80%) scale(1); } 100% { opacity: 0; transform: translate(-50%, -120%) scale(0.8); } }
-      `}</style>
-    </div>
-  )
-}
 
 export default function BattleApp({ onBack, initialTopic }) {
   const [phase, setPhase] = useState('lobby')
@@ -280,6 +248,24 @@ export default function BattleApp({ onBack, initialTopic }) {
       socket.emit('getOpenRooms')
     }
     return () => { socket.off('connect'); socket.off('openRooms') }
+  }, [])
+const resetToLobby = useCallback(() => {
+    setPhase('lobby')
+    setRoomCode('')
+    setPlayers([])
+    setQuestion(null)
+    setAnswer('')
+    setScores([])
+    setRoundWinner(null)
+    setRoundPlayers([])
+    setSudokuPuzzle(null)
+    setSudokuGrid(null)
+    setSudokuRaceActive(false)
+    setSudokuWrongCount(0)
+    setSudokuSelectedCell(null)
+    setSudokuOpponentFinished(false)
+    clearInterval(timerRef.current)
+    setTimeout(() => socket.emit('getOpenRooms'), 100)
   }, [])
 
   useEffect(() => {
@@ -390,27 +376,9 @@ export default function BattleApp({ onBack, initialTopic }) {
       socket.off('cellResult'); socket.off('sudokuForcedEnd')
       clearInterval(timerRef.current)
     }
-  }, [myId, players])
+   }, [myId, players, resetToLobby])
 
-  const resetToLobby = useCallback(() => {
-    setPhase('lobby')
-    setRoomCode('')
-    setPlayers([])
-    setQuestion(null)
-    setAnswer('')
-    setScores([])
-    setRoundWinner(null)
-    setRoundPlayers([])
-    setSudokuPuzzle(null)
-    setSudokuGrid(null)
-    setSudokuRaceActive(false)
-    setSudokuWrongCount(0)
-    setSudokuSelectedCell(null)
-    setSudokuOpponentFinished(false)
-    clearInterval(timerRef.current)
-    setTimeout(() => socket.emit('getOpenRooms'), 100)
-  }, [])
-
+  
   const handleCreate = useCallback(() => {
     setError('')
     socket.emit('createRoom', { name: name.trim() || 'Player', topic, numQuestions }, ({ ok, code, players: p, error: e }) => {

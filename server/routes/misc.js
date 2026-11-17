@@ -2,14 +2,12 @@
 const router = require('express').Router();
 const banks = require('../lib/question-banks');
 
-function randomInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+const { randomInt, simplifyFraction, triPick, setPick, gcd, lcm } = require('../lib/mathHelpers');
 const randInt = randomInt;
-function triPick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
 
-function simplifyFraction(num, den) {
-  if (den < 0) { num = -num; den = -den; }
-  const g = gcd(Math.abs(num), den);
-  return { num: num / g, den: den / g };
+function roundHalfUp(val, decimals = 2) {
+  const p = Math.pow(10, decimals);
+  return Math.round((val + Number.EPSILON) * p) / p;
 }
 
 function toMixed(num, den) {
@@ -66,13 +64,25 @@ function buildOptions(correctText, distractors) {
   const seen = new Set([String(correctText)]);
   const cleaned = [];
   for (const d of distractors) {
+    if (d === undefined || d === null) continue;
     const s = String(d);
     if (!seen.has(s)) { seen.add(s); cleaned.push(s); }
     if (cleaned.length >= 3) break;
   }
   let pad = 1;
+  const numVal = parseFloat(correctText);
+  const isNumeric = !isNaN(numVal) && String(numVal) === String(correctText).trim();
+
   while (cleaned.length < 3) {
-    const filler = `${correctText}_${pad++}`;
+    let filler;
+    if (isNumeric) {
+      const offset = (pad % 2 === 1 ? Math.ceil(pad / 2) : -Math.ceil(pad / 2));
+      filler = String(numVal + offset);
+    } else {
+      const fallbacks = ["0", "1", "Undefined", "Cannot be determined", "None of these"];
+      filler = fallbacks[(pad - 1) % fallbacks.length];
+    }
+    pad++;
     if (!seen.has(filler)) { seen.add(filler); cleaned.push(filler); }
   }
   const all = shuffleArray([{ text: String(correctText), correct: true }, ...cleaned.slice(0, 3).map(t => ({ text: t, correct: false }))]);
@@ -364,9 +374,9 @@ function indicesgymQuestion(difficulty) {
   };
 
   const laws = (difficulty === 'easy') ? ['product', 'quotient']
-              : (difficulty === 'medium') ? ['product', 'quotient', 'power']
-              : (difficulty === 'hard') ? ['product', 'quotient', 'power', 'mixed', 'chain']
-              : ['power', 'mixed', 'chain', 'powerchain'];
+    : (difficulty === 'medium') ? ['product', 'quotient', 'power']
+      : (difficulty === 'hard') ? ['product', 'quotient', 'power', 'mixed', 'chain']
+        : ['power', 'mixed', 'chain', 'powerchain'];
   const law = laws[randomInt(0, laws.length - 1)];
 
   let prompt, correctText, distractors;
@@ -464,10 +474,10 @@ function polygymQuestion(difficulty) {
   const kinds = (difficulty === 'easy')
     ? ['intMul', 'twoDigAdd', 'intMul', 'twoDigAdd']
     : (difficulty === 'medium')
-    ? ['intTimesMono', 'monoAdd', 'intTimesMono', 'monoAdd', 'intMul']
-    : (difficulty === 'hard')
-    ? ['monoTimesMono', 'monoTimesMonoXY', 'monoBigAdd', 'monoTimesMono']
-    : ['monoSquare', 'monoTimesMonoXY', 'collectLikeTerms', 'monoSquare'];
+      ? ['intTimesMono', 'monoAdd', 'intTimesMono', 'monoAdd', 'intMul']
+      : (difficulty === 'hard')
+        ? ['monoTimesMono', 'monoTimesMonoXY', 'monoBigAdd', 'monoTimesMono']
+        : ['monoSquare', 'monoTimesMonoXY', 'collectLikeTerms', 'monoSquare'];
   const kind = kinds[randomInt(0, kinds.length - 1)];
 
   let prompt, correctText, distractors;
@@ -596,9 +606,9 @@ function tatsavitQuestion(difficulty, level) {
     type = Math.max(0, Math.min(8, Number(level)));
   } else {
     const pools = {
-      easy:      [0, 0, 0, 1, 2, 6, 7],
-      medium:    [0, 1, 1, 2, 3, 4, 6, 7],
-      hard:      [1, 2, 3, 4, 5, 6, 7, 8],
+      easy: [0, 0, 0, 1, 2, 6, 7],
+      medium: [0, 1, 1, 2, 3, 4, 6, 7],
+      hard: [1, 2, 3, 4, 5, 6, 7, 8],
       extrahard: [2, 3, 4, 5, 5, 8, 8, 8],
     };
     const pool = pools[difficulty] || pools.easy;
@@ -699,18 +709,18 @@ function tatsavitQuestion(difficulty, level) {
       const patterns = isHarder
         ? ['sub_neg', 'neg_add_neg', 'neg_sub_neg', 'neg_sub_pos', 'neg_add_pos']
         : isMed ? ['sub_neg', 'neg_add_neg', 'neg_sub_neg']
-        : ['sub_neg'];
+          : ['sub_neg'];
       const pat = triPick(patterns);
       const a = randomInt(2, isHarder ? 30 : 12);
       const b = randomInt(2, isHarder ? 30 : 12);
       let prompt, answer;
       switch (pat) {
-        case 'sub_neg':      prompt = `${a} − (−${b})`;   answer = a + b;  break;
-        case 'neg_add_neg':  prompt = `−${a} + (−${b})`;  answer = -(a + b); break;
-        case 'neg_sub_neg':  prompt = `−${a} − (−${b})`;  answer = -a + b; break;
-        case 'neg_sub_pos':  prompt = `−${a} − ${b}`;     answer = -(a + b); break;
-        case 'neg_add_pos':  prompt = `−${a} + ${b}`;     answer = b - a;  break;
-        default:             prompt = `${a} − (−${b})`;   answer = a + b;
+        case 'sub_neg': prompt = `${a} − (−${b})`; answer = a + b; break;
+        case 'neg_add_neg': prompt = `−${a} + (−${b})`; answer = -(a + b); break;
+        case 'neg_sub_neg': prompt = `−${a} − (−${b})`; answer = -a + b; break;
+        case 'neg_sub_pos': prompt = `−${a} − ${b}`; answer = -(a + b); break;
+        case 'neg_add_pos': prompt = `−${a} + ${b}`; answer = b - a; break;
+        default: prompt = `${a} − (−${b})`; answer = a + b;
       }
       return { id, type: 8, typeName: 'Negative Arithmetic', prompt: `${prompt} = ?`, answer, display: String(answer) };
     }
@@ -719,10 +729,6 @@ function tatsavitQuestion(difficulty, level) {
   }
 }
 
-function gcd(a, b) { a = Math.abs(a); b = Math.abs(b); while (b) { const t = b; b = a % b; a = t; } return a; }
-function lcm(a, b) { return Math.abs(a * b) / gcd(a, b); }
-
-function setPick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
 function setRand(lo, hi) { return lo + Math.floor(Math.random() * (hi - lo + 1)); }
 function randomSubset(universe, k) {
   const copy = [...universe]; const result = [];
@@ -1134,7 +1140,7 @@ const generators = {
         const val = randInt(10, 99); const dp1 = randInt(1, 9);
         const num = val + dp1 / 10;
         prompt = `${num} is rounded to 1 decimal place. What is the lower bound?`;
-        answer = num - 0.05; display = String(answer);
+        answer = Number((num - 0.05).toFixed(2)); display = String(answer);
       } else if (diff === 'medium') {
         const base = randInt(3, 15) * 10;
         prompt = `A length is ${base} cm, rounded to the nearest 10 cm. What is the upper bound?`;
@@ -1142,11 +1148,11 @@ const generators = {
       } else if (diff === 'hard') {
         const a = randInt(20, 50) / 10; const b = randInt(20, 50) / 10;
         prompt = `a = ${a} (1 d.p.) and b = ${b} (1 d.p.). Find the upper bound of a + b.`;
-        answer = Math.round((a + 0.05 + b + 0.05) * 100) / 100; display = String(answer);
+        answer = Number((a + 0.05 + b + 0.05).toFixed(2)); display = String(answer);
       } else {
         const a = randInt(30, 80) / 10; const b = randInt(20, 40) / 10;
         const upperA = a + 0.05; const lowerB = b - 0.05;
-        const result = Math.round((upperA / lowerB) * 1000) / 1000;
+        const result = Number((upperA / lowerB).toFixed(3));
         prompt = `a = ${a} (1 d.p.) and b = ${b} (1 d.p.). Find the upper bound of a ÷ b. Give answer to 3 d.p.`;
         answer = result; display = String(answer);
       }
@@ -1179,19 +1185,19 @@ const generators = {
         const ansNum = totalD * timeDen; const ansDen = timeNum;
         const g = gcd(Math.abs(ansNum), Math.abs(ansDen));
         const rn = ansNum / g; const rd = ansDen / g;
-        answer = rd === 1 ? rn : Math.round((rn / rd) * 100) / 100;
+        answer = rd === 1 ? rn : roundHalfUp(rn / rd, 2);
         display = answer + ' km/h';
-        prompt = `A cyclist rides ${d1} km at ${s1} km/h then ${d2} km at ${s2} km/h. Find the average speed (to 2 d.p. if needed).`;
+        prompt = `A cyclist rides ${d1} km at ${s1} km/h then ${d2} km at ${s2} km/h. Find the average speed. Give your answer correct to 2 decimal places.`;
       } else {
         const ms = randInt(5, 30);
-        answer = Math.round(ms * 3.6 * 100) / 100; display = answer + ' km/h';
+        answer = roundHalfUp(ms * 3.6, 2); display = answer + ' km/h';
         prompt = `Convert ${ms} m/s to km/h.`;
       }
       return { prompt, answer, display, difficulty: diff };
     },
     check(body) {
       const ua = parseFloat((body.userAnswer || '').replace(/[^\d.\-\/]/g, ''));
-      const correct = !isNaN(ua) && Math.abs(ua - body.answer) < 0.05;
+      const correct = !isNaN(ua) && Math.round(ua * 100) === Math.round(body.answer * 100);
       return { correct, display: body.display, message: correct ? 'Correct!' : 'Incorrect' };
     },
   },
@@ -1239,7 +1245,9 @@ const generators = {
       const type = randInt(1, 4);
       if (diff === 'easy') {
         if (type === 1) {
-          const g = randInt(2, 8); const a = g * randInt(2, 5); const b = g * randInt(2, 5);
+          const g = randInt(2, 8); const multA = randInt(2, 5); let multB = randInt(2, 5);
+          while (multB === multA) { multB = randInt(2, 5); }
+          const a = g * multA; const b = g * multB;
           answer = gcd(a, b); display = String(answer);
           prompt = `Find the HCF (Highest Common Factor) of ${a} and ${b}.`;
         } else if (type === 2) {
@@ -1262,7 +1270,8 @@ const generators = {
         }
       } else if (diff === 'medium') {
         if (type === 1) {
-          const a = randInt(4, 12); const b = randInt(4, 12);
+          const a = randInt(4, 12); let b = randInt(4, 12);
+          while (a === b) { b = randInt(4, 12); }
           answer = lcm(a, b); display = String(answer);
           prompt = `Find the LCM (Lowest Common Multiple) of ${a} and ${b}.`;
         } else if (type === 2) {
@@ -1286,11 +1295,18 @@ const generators = {
         }
       } else if (diff === 'hard') {
         if (type === 1) {
-          const a = randInt(3, 8); const b = randInt(3, 8); const c = randInt(3, 8);
+          const a = randInt(3, 8); let b = randInt(3, 8);
+          while (a === b) { b = randInt(3, 8); }
+          let c = randInt(3, 8);
+          while (c === a || c === b) { c = randInt(3, 8); }
           answer = lcm(lcm(a, b), c); display = String(answer);
           prompt = `Find the LCM of ${a}, ${b}, and ${c}.`;
         } else if (type === 2) {
-          const g = randInt(2, 6); const a = g * randInt(2, 4); const b = g * randInt(2, 4); const c = g * randInt(2, 4);
+          const g = randInt(2, 6); const m1 = randInt(2, 4); let m2 = randInt(2, 4);
+          while (m2 === m1) { m2 = randInt(2, 4); }
+          let m3 = randInt(2, 4);
+          while (m3 === m1 || m3 === m2) { m3 = randInt(2, 4); }
+          const a = g * m1; const b = g * m2; const c = g * m3;
           answer = gcd(gcd(a, b), c); display = String(answer);
           prompt = `Find the Highest Common Factor (HCF) of ${a}, ${b}, and ${c}.`;
         } else if (type === 3) {
@@ -1312,7 +1328,8 @@ const generators = {
           answer = gcd(a - r, b - r); display = String(answer);
           prompt = `Find the largest number that divides ${a} and ${b} leaving a remainder of ${r} in each case.`;
         } else if (type === 2) {
-          const r = randInt(2, 5); const a = randInt(5, 10); const b = randInt(5, 10);
+          const r = randInt(2, 5); const a = randInt(5, 10); let b = randInt(5, 10);
+          while (b === a) { b = randInt(5, 10); }
           answer = lcm(a, b) + r; display = String(answer);
           prompt = `What is the smallest positive integer which when divided by ${a} and ${b} leaves a remainder of ${r} in each case?`;
         } else if (type === 3) {
@@ -1323,7 +1340,8 @@ const generators = {
           answer = lengths.g; display = String(answer);
           prompt = `A merchant has three pieces of ribbon of lengths ${lengths.a} cm, ${lengths.b} cm, and ${lengths.c} cm. He wants to cut them into equal pieces of the maximum possible length. What should be the length of each piece (in cm)?`;
         } else {
-          const a = randInt(6, 12); const b = randInt(8, 15);
+          const a = randInt(6, 12); let b = randInt(8, 15);
+          while (b === a) { b = randInt(8, 15); }
           answer = lcm(a, b); display = String(answer);
           prompt = `Two neon signs blink at different rates. Sign A blinks every ${a} seconds, and Sign B blinks every ${b} seconds. If they both blink together now, after how many seconds will they next blink together?`;
         }
@@ -1693,7 +1711,7 @@ function curiosityVariation(req, res) {
         const isMultiply = /multiply|times|\*|x|×/.test(vv)
         const isAdd = /add|plus|\+/.test(vv)
         const isSubtract = /subtract|minus|\-/.test(vv)
-        
+
         const num = extractNumber(vv)
         const mentionsNumerator = /numerator/.test(vv)
         const mentionsDenominator = /denominator/.test(vv)

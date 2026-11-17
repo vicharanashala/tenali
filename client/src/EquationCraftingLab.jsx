@@ -23,12 +23,19 @@ export default function EquationCraftingLab({ onBack }) {
   const [results, setResults] = useState([]);
   const [submittedLabel, setSubmittedLabel] = useState('');
 
-  // Auto-select when there are exactly 2 blocks in the crucible
-  useEffect(() => {
-    if (crucible.length === 2) {
-      setSelectedIds([crucible[0].id, crucible[1].id]);
+  // Auto-select when there are exactly 2 blocks in the crucible.
+  // This is the former useEffect([crucible]) body, moved into the handlers
+  // that replace the crucible so it runs during the update instead of in a
+  // follow-up render. The else branch is the setSelectedIds([]) those
+  // handlers used to call explicitly, so each call site keeps its final state.
+  const applyCrucible = (nextCrucible) => {
+    setCrucible(nextCrucible);
+    if (nextCrucible.length === 2) {
+      setSelectedIds([nextCrucible[0].id, nextCrucible[1].id]);
+    } else {
+      setSelectedIds([]);
     }
-  }, [crucible]);
+  };
   const [startTime, setStartTime] = useState(null);
 
   const [autoCountdown, setAutoCountdown] = useState(null);
@@ -96,7 +103,7 @@ export default function EquationCraftingLab({ onBack }) {
     ]
   };
 
-  const SAFE_MATH_REGEX = /^[\d\s\+\-\*\/\^\(\)\.xab]*$/;
+  const SAFE_MATH_REGEX = /^[\d\s+\-*/^().xab]*$/;
 
   const sanitizeMathExpr = (expr) => {
     if (typeof expr !== 'string') return null;
@@ -163,7 +170,7 @@ export default function EquationCraftingLab({ onBack }) {
         label: r,
         expr: r
       }));
-    setCrucible(initialCrucible);
+    applyCrucible(initialCrucible);
     setStartTime(Date.now());
   };
 
@@ -246,10 +253,10 @@ export default function EquationCraftingLab({ onBack }) {
       expr: fusedExpr
     };
 
-    // Replace combined blocks
+    // Replace combined blocks (applyCrucible clears the selection too, when
+    // the result is not exactly two blocks, as the explicit clear did before)
     const nextCrucible = crucible.filter(b => b.id !== block1.id && b.id !== block2.id);
-    setCrucible([...nextCrucible, newBlock]);
-    setSelectedIds([]);
+    applyCrucible([...nextCrucible, newBlock]);
     setSelectedCatalyst(null);
   };
 
@@ -263,9 +270,23 @@ export default function EquationCraftingLab({ onBack }) {
         label: r,
         expr: r
       }));
-    setCrucible(initialCrucible);
-    setSelectedIds([]);
+    applyCrucible(initialCrucible);
     setSelectedCatalyst(null);
+  };
+
+  // Clean countdown and advance
+  const handleNextQuestion = () => {
+    if (autoTimerRef.current) {
+      clearInterval(autoTimerRef.current);
+    }
+    setAutoCountdown(null);
+
+    if (currentQuestion + 1 >= questionCount) {
+      setPhase('finished');
+    } else {
+      setCurrentQuestion(prev => prev + 1);
+      fetchQuestion();
+    }
   };
 
   // Submit the potion for verification
@@ -342,21 +363,6 @@ export default function EquationCraftingLab({ onBack }) {
       }
     ]);
     setLoading(false);
-  };
-
-  // Clean countdown and advance
-  const handleNextQuestion = () => {
-    if (autoTimerRef.current) {
-      clearInterval(autoTimerRef.current);
-    }
-    setAutoCountdown(null);
-
-    if (currentQuestion + 1 >= questionCount) {
-      setPhase('finished');
-    } else {
-      setCurrentQuestion(prev => prev + 1);
-      fetchQuestion();
-    }
   };
 
   useEffect(() => {

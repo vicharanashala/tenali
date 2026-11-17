@@ -53,10 +53,10 @@ export const TILES = [
     { key: 'log', name: 'Logarithms', subtitle: 'Evaluate, simplify, solve', color: 'purple', category: 'algebra' },
     { key: 'matrix', name: 'Matrices', subtitle: 'Add, multiply, determinant', color: 'blue', category: 'linear-algebra' },
     { key: 'mensur', name: 'Mensuration', subtitle: 'Area, volume, surface area', color: 'green', category: 'shape-space' },
+    { key: 'mensuration-lab', name: 'Mensuration Lab', subtitle: 'Area, perimeter & volume through animated shapes', color: 'green', category: 'shape-space' },
     { key: 'math-lab', name: '🔬 Visual Learning Universe', subtitle: 'Visual, Mensuration & Addition labs', color: 'orange', category: 'shape-space' },
     { key: 'multiply', name: 'Multiplication', subtitle: 'Practice any times table (2–19)', color: 'purple', category: 'number-foundations' },
     { key: 'bases', name: 'Number Bases', subtitle: 'Binary, decimal, hexadecimal', color: 'green', category: 'number-foundations' },
-    { key: 'basic-arith-lab', name: 'Origin', subtitle: 'Practice +, -, ×, ÷ with varied templates', color: 'blue', category: 'number-foundations', foldInto: 'basicarith' },
     { key: 'percent', name: 'Percentages', subtitle: 'Find, increase, reverse, compound', color: 'blue', category: 'everyday-maths' },
     { key: 'permcomb', name: 'Perm. & Comb.', subtitle: 'Permutations & combinations', color: 'purple', category: 'data-chance' },
     { key: 'polyfactor', name: 'Poly Factor', subtitle: 'Factor a quadratic expression', color: 'green', category: 'algebra' },
@@ -92,6 +92,7 @@ export const TILES = [
     { key: 'trig', name: 'Trigonometry', subtitle: 'SOH-CAH-TOA, sine/cosine rule', color: 'green', category: 'shape-space' },
     { key: 'variation', name: 'Variation', subtitle: 'Direct & inverse proportion', color: 'purple', category: 'algebra' },
     { key: 'vectors', name: 'Vectors', subtitle: 'Add, scale, magnitude', color: 'blue', category: 'linear-algebra' },
+    { key: 'vachana', name: 'Vachana', subtitle: 'Mathematical Literacy Lab', color: 'purple', category: 'shelf' },
     { key: 'vocab', name: 'Vocabulary', subtitle: 'Match words to definitions', color: 'green', category: 'shelf' },
     { key: 'spot', name: 'Twin Hunt', subtitle: 'Find the common object', color: 'purple', category: 'shelf' },
     { key: 'gymdecimals', name: 'Decimals', subtitle: 'Signed decimal × decimal — 1-digit MCQ', color: 'purple', category: 'number-foundations', foldInto: 'decimals' },
@@ -103,6 +104,7 @@ export const TILES = [
     { key: 'polygym', name: 'Polynomials', subtitle: 'Arithmetic → monomial algebra (MCQ)', color: 'blue', category: 'algebra', foldInto: 'polymul' },
     { key: 'water-jug-lab', name: '🧪 Water Jug Lab', subtitle: 'GCD discovery — 13-level progression', color: 'teal', category: 'shelf' },
     { key: 'equation-crafting-lab', name: '⚗️ Equation Crafting Lab', subtitle: 'Build expressions in the mixing pot', color: 'orange', category: 'algebra' },
+    { key: 'contrastlist', name: 'Contrast Challenge', subtitle: 'Distinguish similar concepts', color: 'featured', category: 'shelf' },
     { key: 'pathmap', name: '📍 Learning Path', subtitle: 'Prerequisite graph & personalized path', color: 'orange', category: 'shelf' },
 ]
 

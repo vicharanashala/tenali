@@ -14,9 +14,9 @@ function randomInt(min, max) {
 }
 
 function arithRange(difficulty) {
-  if (difficulty === 'easy')      return { min: 1, max: 9 };
-  if (difficulty === 'medium')    return { min: 10, max: 99 };
-  if (difficulty === 'hard')      return { min: 100, max: 999 };
+  if (difficulty === 'easy') return { min: 1, max: 9 };
+  if (difficulty === 'medium') return { min: 10, max: 99 };
+  if (difficulty === 'hard') return { min: 100, max: 999 };
   if (difficulty === 'extrahard') return { min: 1000, max: 9999 };
   return { min: 1, max: 9 };
 }
@@ -366,8 +366,8 @@ const generators = {
           multiDigitMultiplier: true,
           message: correct ? 'Correct!'
             : !ppCorrect ? 'Partial product digits wrong'
-            : !carriesCorrect ? 'Carries wrong'
-            : 'Answer wrong',
+              : !carriesCorrect ? 'Carries wrong'
+                : 'Answer wrong',
         };
       }
 
@@ -691,10 +691,10 @@ const generators = {
     question(difficulty) {
       const id = Date.now();
       let lo, hi;
-      if (difficulty === 'easy')        { lo = 11; hi = 29; }
+      if (difficulty === 'easy') { lo = 11; hi = 29; }
       else if (difficulty === 'medium') { lo = 30; hi = 59; }
-      else if (difficulty === 'hard')   { lo = 60; hi = 79; }
-      else                              { lo = 80; hi = 99; }
+      else if (difficulty === 'hard') { lo = 60; hi = 79; }
+      else { lo = 80; hi = 99; }
       const n = randomInt(lo, hi);
       const a = Math.floor(n / 10) * 10;
       const b = n - a;

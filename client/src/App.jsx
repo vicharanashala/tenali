@@ -51,13 +51,14 @@ import { pmTrackAnswer } from './pathMapHelpers';
 import { TILES, FEATURED_TILES, MATH_LAB_ENTRY, GEOCRAFT_ENTRY } from './features/tiles'
 import LandingPage from './components/LandingPage/LandingPage.jsx'
 import LandingNavbar from './components/LandingPage/LandingNavbar.jsx'
+import { createDynamicWeightBank } from './balanceScaleBank.js';
 
 
 /**
  * useProgressSubmit Hook
  * Submits the result of a quiz question to the backend to track mastery and ensure unique questions.
  */
-function useProgressSubmit(revealed, isCorrect, topic, questionId) {
+export function useProgressSubmit(revealed, isCorrect, topic, questionId) {
   useEffect(() => {
     if (!revealed) return;
     try { pmTrackAnswer(topic, 'medium', isCorrect); } catch {}
@@ -110,6 +111,7 @@ import VisualMathLabRedux, {
 import CoordinateGrid from './components/CoordinateGrid';
 import LanguageDashboard from './language/LanguageDashboard'
 import ContrastChallengeApp, { QuizLayoutExtension } from './ContrastChallengeApp'
+import CoordGeomInteractiveApp from './apps/CoordGeomInteractiveApp.jsx'
 import { VOCAB_CORPUS } from './vocabCorpus'
 import PercentExplanationApp from './PercentExplanationApp'
 import { playSound } from './audioContext'
@@ -180,6 +182,36 @@ const stripBase = (pn) => {
   if (b && (x === b || x.startsWith(b + '/'))) x = x.slice(b.length);
   return x || '/';
 };
+
+// Pretty URLs (#246): a bare /<mode> path is sent to the long-standing
+// /?mode=<mode> URL, so everything after that (URL sync, Back/Forward)
+// behaves exactly as it does for ?mode= links. replace() keeps the pretty
+// URL out of history, so Back does not land on it again.
+function RedirectTo({ href }) {
+  useEffect(() => {
+    window.location.replace(href);
+  }, [href]);
+  return null;
+}
+
+// Shown for a path that is neither a page nor a mode, instead of silently
+// rendering the home grid as if the URL had worked.
+function PageNotFound({ pathname }) {
+  return (
+    <div className="app-shell">
+      <div className="card" style={{ textAlign: 'center' }}>
+        <h1 style={{ marginTop: 0 }}>Page not found</h1>
+        <p style={{ color: 'var(--clr-text-soft)' }}>
+          There is no Tenali page at <code>{pathname}</code>.
+        </p>
+        <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap', marginTop: '20px' }}>
+          <button type="button" onClick={() => { window.location.href = withBase('/?view=puzzles') }}>Browse all puzzles</button>
+          <button type="button" onClick={() => { window.location.href = withBase('/') }}>Go to the home page</button>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 // Global fetch interceptor to automatically attach authorization header
 const originalFetch = window.fetch;
@@ -1113,7 +1145,7 @@ const enhanceFinishedScreen = (node, sessionGoal) => {
  * structured card with highlighted answer and formatted explanation.
  * For normal correct/wrong feedback, renders inline text.
  */
-function renderFeedback(feedback, isCorrect) {
+export function renderFeedback(feedback, isCorrect) {
   if (!feedback) return null
   const isSolve = isCorrect === false && feedback.startsWith('Solution:')
   if (!isSolve) {
@@ -41638,261 +41670,6 @@ function DragDropCountingApp({ onBack }) {
   )
 }
 
-function CoordGeomInteractiveApp({ onBack }) {
-  const [started, setStarted] = useState(false);
-  const [finished, setFinished] = useState(false);
-  const [round, setRound] = useState(0);
-  const [numQuestions, setNumQuestions] = useState('10');
-  const [difficulty, setDifficulty] = useState('easy');
-  const [score, setScore] = useState(0);
-
-  const [currentQ, setCurrentQ] = useState(null);
-  const [dartPos, setDartPos] = useState(null); // {x, y}
-  const [textAnswer, setTextAnswer] = useState(''); // for distance, gradient, etc.
-  const [revealed, setRevealed] = useState(false);
-  const [isCorrect, setIsCorrect] = useState(null);
-  const [feedback, setFeedback] = useState('');
-  const [results, setResults] = useState([]);
-
-  useProgressSubmit(revealed, isCorrect, 'coordgeom', currentQ?.id);
-  const timer = useTimer();
-
-  const loadQuestion = async () => {
-    try {
-      const r = await fetch(`${API}/coordgeom-api/question?difficulty=${difficulty}`);
-      if (!r.ok) throw new Error('Server error');
-      const data = await r.json();
-      setCurrentQ(data);
-      setDartPos(null);
-      setTextAnswer('');
-      setRevealed(false);
-      setIsCorrect(null);
-      setFeedback('');
-      timer.start();
-    } catch (e) {
-      console.error(e);
-      setFeedback('Error loading question. ' + e.message);
-    }
-  };
-
-  const startGame = () => {
-    const qCount = parseInt(numQuestions) || 10;
-    setNumQuestions(String(qCount));
-    setStarted(true);
-    setFinished(false);
-    setRound(1);
-    setScore(0);
-    setResults([]);
-    loadQuestion();
-  };
-
-  // CoordinateGrid handles clicks internally
-
-  const handleCheck = async () => {
-    if (revealed) return;
-    if (currentQ?.type === 'coord' && !dartPos) return;
-    if (currentQ?.type !== 'coord' && !textAnswer.trim()) return;
-
-    const timeTaken = timer.stop();
-    setRevealed(true);
-
-    try {
-      const payload = {
-        ...currentQ,
-        userAnswer: currentQ.type === 'coord' ? `(${dartPos.x}, ${dartPos.y})` : textAnswer
-      };
-      const r = await fetch(`${API}/coordgeom-api/check`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-      const data = await r.json();
-
-      const correct = data.correct;
-      setIsCorrect(correct);
-      setFeedback(data.message + (correct ? ` ${data.display} is correct!` : ` The answer was ${data.display}.`));
-      if (correct) setScore(s => s + 1);
-
-      setResults(prev => [...prev, {
-        question: currentQ.prompt,
-        userAnswer: payload.userAnswer,
-        correctAnswer: data.display,
-        correct,
-        time: timeTaken
-      }]);
-    } catch (e) {
-      console.error(e);
-      setFeedback('Error checking answer.');
-    }
-  };
-
-  const handleSolve = () => {
-    if (revealed || !currentQ) return;
-    timer.stop();
-    setRevealed(true);
-    setIsCorrect(false);
-    setFeedback(`Solution: The answer is ${currentQ.display}.`);
-    setResults(prev => [...prev, {
-      question: currentQ.prompt,
-      userAnswer: '—',
-      correctAnswer: currentQ.display,
-      correct: false,
-      time: 0
-    }]);
-  };
-
-  const nextQuestion = () => {
-    if (round >= Number(numQuestions)) {
-      setFinished(true);
-    } else {
-      setRound(r => r + 1);
-      loadQuestion();
-    }
-  };
-
-  if (!started) {
-    const diffLabels = { easy: 'Easy — Foundations', medium: 'Medium — Lengths', hard: 'Hard — Slopes & Eqs', extrahard: 'Extra Hard — Advanced' };
-    return (
-      <div style={{ minHeight: '100vh', background: '#181512', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px', fontFamily: 'Inter, sans-serif' }}>
-        <div style={{
-          background: '#2D2520', border: '1.5px solid #4A4038', borderRadius: '28px',
-          boxShadow: '0 20px 40px rgba(0,0,0,.45)', padding: '48px 40px', maxWidth: '720px', width: '100%',
-          textAlign: 'center', position: 'relative'
-        }}>
-          <button onClick={onBack} style={{
-            position: 'absolute', top: '24px', left: '24px', background: 'transparent',
-            border: '1px solid #5B5048', borderRadius: '6px', padding: '6px 14px',
-            color: '#A89C93', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer'
-          }}>← Home</button>
-
-          <h1 style={{ fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 700, fontSize: '48px', color: '#F4F1ED', margin: '0 0 12px', lineHeight: 1.1 }}>
-            Coordinate Geometry
-          </h1>
-          <p style={{ color: '#988D84', fontSize: '0.9rem', margin: '0 0 40px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>
-            Choose a level and solve coordinate geometry challenges
-          </p>
-          <p style={{ color: '#988D84', fontSize: '0.9rem', margin: '0 0 24px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>
-            Practice coordinate geometry!
-          </p>
-
-          <div style={{ marginBottom: '24px' }}>
-            <h3 style={{ color: '#F4F1ED', fontSize: '0.9rem', margin: '0 0 16px', fontFamily: 'Inter, sans-serif', fontWeight: 700 }}>
-              Select Difficulty:
-            </h3>
-            <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '12px' }}>
-              {['easy', 'medium', 'hard', 'extrahard'].map(d => (
-                <button key={d} onClick={() => setDifficulty(d)} style={{
-                  background: difficulty === d ? '#F08C46' : 'transparent',
-                  border: difficulty === d ? '1px solid #F08C46' : '1px solid #5B5048',
-                  borderRadius: '50px', padding: '8px 16px',
-                  color: difficulty === d ? '#FFF' : '#988D84', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer'
-                }}>
-                  {diffLabels[d]}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div style={{ marginBottom: '32px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <label style={{ color: '#988D84', fontSize: '0.85rem', margin: '0 0 12px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>
-              How many questions?
-            </label>
-            <input type="text" value={numQuestions} onChange={(e) => { const v = e.target.value; if (v === '' || /^\d+$/.test(v)) setNumQuestions(v) }} style={{
-              background: '#463B34', border: '1px solid #5B5048', borderRadius: '6px',
-              padding: '10px', color: '#FFF', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem',
-              width: '100px', textAlign: 'center', outline: 'none'
-            }} placeholder="10" />
-          </div>
-
-          <button onClick={startGame} style={{
-            background: '#F08C46', border: 'none', borderRadius: '6px',
-            padding: '10px 24px', color: '#FFF', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer'
-          }}>
-            Start Quiz
-          </button>
-        </div>
-      </div>
-    );
-  }
-
-  if (finished) {
-    return (
-      <QuizLayout title="Coordinate Geometry" onBack={onBack}>
-        <ResultsView score={score} total={Number(numQuestions)} results={results} onRetry={startGame} />
-      </QuizLayout>
-    );
-  }
-
-  return (
-    <QuizLayout title="Coordinate Geometry" onBack={onBack}>
-      <div style={{ textAlign: 'center' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8, padding: '0 4px' }}>
-          <span style={{ color: 'var(--clr-muted)', fontSize: '0.85rem' }}>Round {round} / {numQuestions}</span>
-          <span style={{ fontWeight: 700, color: 'var(--clr-accent)' }}>Score: {score}</span>
-        </div>
-
-        <h3 className="prompt-text">{currentQ?.prompt}</h3>
-
-        <div style={{ margin: '20px auto', display: 'flex', justifyContent: 'center' }}>
-          <CoordinateGrid
-            points={currentQ?.points || []}
-            onClick={currentQ?.type === 'coord' && !revealed ? (pos) => setDartPos(pos) : undefined}
-            cursorType={currentQ?.type === 'coord' ? 'crosshair' : 'default'}
-            userTarget={dartPos}
-            revealedTarget={revealed && !isCorrect && currentQ?.type === 'coord' ? { x: currentQ.ansX, y: currentQ.ansY } : null}
-            connectPoints={true}
-            width={350}
-            height={350}
-          />
-        </div>
-
-        {currentQ?.type === 'coord' ? (
-          dartPos && !revealed && (
-            <p style={{ color: 'var(--clr-muted)', fontSize: '0.85rem', margin: '8px 0 0' }}>
-              Selected Point: ({dartPos.x}, {dartPos.y})
-            </p>
-          )
-        ) : (
-          <div style={{ marginTop: 20 }}>
-            <input
-              type="text"
-              className="answer-input"
-              placeholder={currentQ?.type === 'equation' ? 'e.g. y=-3/4x+2' : currentQ?.type === 'fraction' ? 'e.g. -3/4' : 'e.g. 13'}
-              value={textAnswer}
-              onChange={e => !revealed && setTextAnswer(e.target.value)}
-              onKeyDown={e => { if (e.key === 'Enter') handleCheck(); }}
-              disabled={revealed}
-            />
-          </div>
-        )}
-
-        <div className="button-row" style={{ marginTop: 20, justifyContent: 'center', gap: '10px' }}>
-          {!revealed ? (
-            <>
-              <button className="btn" onClick={handleCheck} disabled={currentQ?.type === 'coord' ? !dartPos : !textAnswer.trim()}>
-                Check Answer
-              </button>
-              <button className="btn" onClick={handleSolve} style={{ background: 'transparent', border: '1px solid var(--clr-border)', color: 'var(--clr-muted)' }}>
-                💡 Solve
-              </button>
-            </>
-          ) : (
-            <button className="btn" onClick={nextQuestion}>
-              Next Question
-            </button>
-          )}
-        </div>
-
-        {revealed && (
-          <div style={{ marginTop: 20 }}>
-            {renderFeedback(feedback, isCorrect)}
-          </div>
-        )}
-      </div>
-    </QuizLayout>
-  );
-}
-
 function DartBoardApp({ onBack }) {
   const [started, setStarted] = useState(false);
   const [finished, setFinished] = useState(false);
@@ -42181,39 +41958,6 @@ function BalanceScaleApp({ onBack }) {
   const advanceFnRef = useRef(null)
   const targetTotal = question ? (Number(question.a) + Number(question.b)) : 0
   const rightTotal = rightBlocks.reduce((acc, b) => acc + b.val, 0)
-
-  const createDynamicWeightBank = (target) => {
-    let denominations = [];
-    if (target >= 500) {
-      denominations = [500, 100, 50, 10, 5, 1];
-    } else if (target >= 100) {
-      denominations = [100, 50, 10, 5, 1];
-    } else if (target >= 15) {
-      denominations = [50, 10, 5, 1];
-    } else {
-      denominations = [5, 1];
-    }
-
-    let bank = [];
-    denominations.forEach(d => {
-      let count = 4;
-      if (d === 100) count = 10;
-      if (d === 50) count = 6;
-      if (d === 10) count = 15;
-      if (d === 5) count = 8;
-      if (d === 1) count = 15;
-
-      const needed = Math.ceil(target / d) + 2;
-      if (needed > count) {
-        count = needed;
-      }
-
-      for (let i = 0; i < count; i++) {
-        bank.push({ id: `bank-${d}-${i}-${Math.random()}`, val: d });
-      }
-    });
-    return bank;
-  };
 
   const fetchQuestion = async (selectedLevel) => {
     setLoading(true)
@@ -42572,7 +42316,7 @@ function App() {
       const currentParamView = params.get('view');
       if (mode) {
         if (currentMode !== mode) {
-          window.history.replaceState({}, '', `${BASE}/?mode=${mode}`);
+          window.history.pushState({ mode }, '', `${BASE}/?mode=${mode}`);
         }
       } else {
         if (currentView === 'puzzles') {
@@ -42589,6 +42333,30 @@ function App() {
       console.error('Failed to sync URL mode:', e);
     }
   }, [mode, currentView]);
+
+  // Listen for browser Back/Forward navigation (popstate) to restore mode and view
+  useEffect(() => {
+    const handlePopState = () => {
+      try {
+        const params = new URLSearchParams(window.location.search);
+        const urlMode = params.get('mode') || null;
+        const urlView = params.get('view') || (urlMode ? 'puzzles' : 'landing');
+        setMode(urlMode);
+        setCurrentView(urlView === 'puzzles' ? 'puzzles' : 'landing');
+        if (urlMode === 'angles') {
+          setLearningPhase('select');
+        } else {
+          setLearningPhase(null);
+        }
+        setIsGoalMode(urlMode === 'goalpractice');
+      } catch (e) {
+        console.error('Failed to handle popstate:', e);
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
 
   const { user } = useAuth()
   const [completedTopics, setCompletedTopics] = useState(() => {
@@ -44671,7 +44439,14 @@ function App() {
                   {/* Image Types */}
                   {(question.type === 'image-numpad' || question.type === 'image-option') && question.image && (
                     <div style={{ textAlign: 'center', margin: '0 auto 16px' }}>
-                      <img src={question.image} alt="Riddle" style={{ maxWidth: '100%', maxHeight: 280, width: 'auto', height: 'auto', objectFit: 'contain', borderRadius: 'var(--radius)', border: '1px solid var(--clr-border)', background: 'var(--clr-input)' }} />
+                      <img
+                        src={withBase(question.image.startsWith('/') ? question.image : `/${question.image}`)}
+                        alt={question.title || 'Visual Riddle'}
+                        onError={(e) => {
+                          console.warn(`[Math Riddles] Failed to load riddle image: ${e.target.src}`);
+                        }}
+                        style={{ maxWidth: '100%', maxHeight: 280, width: 'auto', height: 'auto', objectFit: 'contain', borderRadius: 'var(--radius)', border: '1px solid var(--clr-border)', background: 'var(--clr-input)' }}
+                      />
                     </div>
                   )}
 
@@ -44716,7 +44491,11 @@ function App() {
                           }}
                         >
                           {question.optionImages && question.optionImages[i] ? (
-                            <img src={question.optionImages[i]} alt={opt} style={{ width: '100%', height: '100%', objectFit: 'contain', padding: '4px' }} />
+                            <img
+                              src={withBase(question.optionImages[i].startsWith('/') ? question.optionImages[i] : `/${question.optionImages[i]}`)}
+                              alt={opt}
+                              style={{ width: '100%', height: '100%', objectFit: 'contain', padding: '4px' }}
+                            />
                           ) : opt}
                         </button>
                       ))}
@@ -45472,6 +45251,26 @@ function App() {
     )
   }
 
+  // ========== ROUTING: PRETTY MODE URLS (#246) ==========
+  // Every page path returned near the top of App, so a path still unmatched
+  // here is either a mode (/trig opens Trigonometry) or not a Tenali page at
+  // all. Links that already carry ?mode= or ?view= keep their existing
+  // behaviour. This sits after the last hook in App, so it never changes how
+  // many hooks a render calls.
+  if (pathname !== '/' && pathname !== '/index.html') {
+    const params = new URLSearchParams(window.location.search)
+    if (!params.has('mode') && !params.has('view')) {
+      const segment = pathname.slice(1)
+      // stripBase lowercases the path; mode keys are matched the same way.
+      const modeKey = Object.keys(modeMap).find((k) => k.toLowerCase() === segment)
+      if (modeKey) {
+        params.set('mode', modeKey)
+        return <RedirectTo href={withBase(`/?${params.toString()}`)} />
+      }
+      return <PageNotFound pathname={pathname} />
+    }
+  }
+
   // ========== LANDING PAGE VIEW (Default when mode === null and currentView === 'landing') ==========
   if (mode === null && currentView === 'landing') {
     return (
@@ -45873,18 +45672,6 @@ function Home({ onSelect, onBackToLanding, completedTopics = [], goldMastery = [
             </button>
 
             {filteredHamburgerApps.map(app => (
-              <button key={app.key} onClick={() => { setMenuOpen(false); onSelect(app.key) }} style={{
-                display: 'block', width: '100%', textAlign: 'left', padding: '10px 16px',
-                background: 'none', border: 'none', cursor: 'pointer', color: 'var(--clr-text)',
-                fontFamily: 'var(--font-body)', fontSize: '0.95rem', transition: 'background var(--transition)'
-              }} onMouseEnter={e => e.target.style.background = 'var(--clr-hover-strong)'}
-                onMouseLeave={e => e.target.style.background = 'none'}>
-                <strong style={{ color: 'var(--clr-accent)' }}>{app.name}</strong>
-                <span style={{ display: 'block', fontSize: '0.78rem', color: 'var(--clr-text-soft)', marginTop: '2px' }}>{app.subtitle}</span>
-              </button>
-            ))}
-
-            {featuredApps.map(app => (
               <button key={app.key} onClick={() => { setMenuOpen(false); onSelect(app.key) }} style={{
                 display: 'block', width: '100%', textAlign: 'left', padding: '10px 16px',
                 background: 'none', border: 'none', cursor: 'pointer', color: 'var(--clr-text)',
@@ -52070,7 +51857,7 @@ function GymQuiz({ title, subtitle, typeKeys, welcomeText, algebraInput, onBack 
     }
     const gen = GYM_TYPES[t]?.generator
     setQuestion(gen ? gen(d) : null)
-    timer.start(sessionGoal, handleTimeout, getSpeedRunLimit(difficulty ?? 'easy', isAdaptive ?? false))
+    timer.start()
   }
 
   // Stop button (adaptive mode only): end the session and show the results screen.
@@ -52321,6 +52108,9 @@ function GymQuiz({ title, subtitle, typeKeys, welcomeText, algebraInput, onBack 
  */
 function BasicArithApp({ onBack, completedTopics = [], goldMastery = [], markTopicCompleted, setTransferTopic, setMode, isGoalMode = false }) {
   const [showCarJourney, setShowCarJourney] = useState(false)
+  // Origin (the basic-arith-lab templates) is folded in here instead of
+  // having its own home tile (#209); ?mode=basic-arith-lab still opens it.
+  const [showOriginLab, setShowOriginLab] = useState(false)
   // Difficulty level: 'easy', 'medium', 'hard', 'extrahard'
   const [difficulty, setDifficulty] = useState(() => cjTakeReco('basicarith', CJ_RECO_DIFFS) || 'easy')
   // Adaptive mode enabled?
@@ -52565,6 +52355,10 @@ const fetchQuestion = async () => {
     return <CarJourneyApp onBack={() => setShowCarJourney(false)} setMode={setMode} />
   }
 
+  if (showOriginLab) {
+    return <BasicArithmeticLabApp onBack={() => setShowOriginLab(false)} backLabel="Arithmetic" />
+  }
+
   return (
     <QuizLayout title="Origin" subtitle="Add, subtract, multiply & divide positive & negative numbers" onBack={onBack} timer={started && !finished ? timer : null}>
       {!started && !finished && <div className="welcome-box">
@@ -52636,6 +52430,12 @@ const fetchQuestion = async () => {
           padding: '10px 24px', color: 'var(--clr-text-soft)', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer'
         }}>
           The Car Journey — 16-stop math road trip
+        </button>
+        <button type="button" onClick={() => setShowOriginLab(true)} style={{
+          marginTop: '10px', background: 'transparent', border: '1px solid var(--clr-border)', borderRadius: '6px',
+          padding: '10px 24px', color: 'var(--clr-text-soft)', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer'
+        }}>
+          Origin — missing numbers, comparisons and true or false
         </button>
       </div>}
       {started && !finished && <>
@@ -53829,6 +53629,9 @@ function MultiplyApp({ onBack, completedTopics = [], goldMastery = [], markTopic
   }, [isGoalMode]);
   const l3TimerRef = useRef(null)
   const l3DeadlineRef = useRef(0)
+  // Always points at the latest handleLevel3Timeout so the countdown interval
+  // never runs a stale closure (e.g. question === null on the first question).
+  const l3TimeoutRef = useRef(null)
   const timer = useTimer()
 
   useEffect(() => {
@@ -53847,15 +53650,19 @@ function MultiplyApp({ onBack, completedTopics = [], goldMastery = [], markTopic
   }, [phase, score, results.length, level, markTopicCompleted])
 
   // ─── Helpers ──────────────────────────────────────────────────────────
-  const nextQuestion = (planArr, index) => {
+  // `lvl` is passed explicitly by the level launchers: they call setLevel() and
+  // nextQuestion() in the same tick, so the `level` state here is still stale.
+  const nextQuestion = (planArr, index, lvl = level) => {
     const q = planArr[index]
     setQuestion({ table: q.table, multiplier: q.multiplier, prompt: `${q.table} × ${q.multiplier}` })
     setAnswer('')
     setFeedback('')
     setRevealed(false)
     setIsCorrect(null)
-    timer.start(sessionGoal, handleTimeout, getSpeedRunLimit(difficulty ?? 'easy', isAdaptive ?? false))
-    if (level === 3) startLevel3Countdown()
+    // Count-up timer only: MultiplyApp has no handleTimeout/difficulty/isAdaptive,
+    // and Level 3 runs its own countdown below.
+    timer.start()
+    if (lvl === 3) startLevel3Countdown()
   }
 
   const startLevel3Countdown = () => {
@@ -53869,7 +53676,7 @@ function MultiplyApp({ onBack, completedTopics = [], goldMastery = [], markTopic
         clearInterval(l3TimerRef.current)
         l3TimerRef.current = null
         // Timeout = wrong answer; record and advance immediately.
-        handleLevel3Timeout()
+        l3TimeoutRef.current?.()
       }
     }, 200)
   }
@@ -53890,7 +53697,7 @@ function MultiplyApp({ onBack, completedTopics = [], goldMastery = [], markTopic
     setRoundTotalTime(0); setRoundQuestionsCount(0)
     setSourceTables(MULT_TABLES.slice())
     setPhase('quiz')
-    nextQuestion(p, 0)
+    nextQuestion(p, 0, 1)
   }
 
   const beginLevel2Setup = () => {
@@ -53915,7 +53722,7 @@ function MultiplyApp({ onBack, completedTopics = [], goldMastery = [], markTopic
     setRoundTotalTime(0); setRoundQuestionsCount(0)
     setSourceTables(tables)
     setPhase('quiz')
-    nextQuestion(initial, 0)
+    nextQuestion(initial, 0, 2)
   }
 
   const startLevel3 = () => {
@@ -53927,7 +53734,7 @@ function MultiplyApp({ onBack, completedTopics = [], goldMastery = [], markTopic
     setPhase('quiz')
     const first = buildExtensionBatch(MULT_TABLES, 1)[0]
     setPlan([first])
-    nextQuestion([first], 0)
+    nextQuestion([first], 0, 3)
   }
 
   // ─── Submission paths ─────────────────────────────────────────────────
@@ -54049,6 +53856,8 @@ function MultiplyApp({ onBack, completedTopics = [], goldMastery = [], markTopic
     setQIndex(qIndex + 1)
     nextQuestion(nextPlan, qIndex + 1)
   }
+
+  useEffect(() => { l3TimeoutRef.current = handleLevel3Timeout })
 
   const exitLevel3 = () => {
     stopLevel3Countdown()
@@ -56930,6 +56739,7 @@ function GymApp({ onBack }) {
   const [loading, setLoading] = useState(false)
   const [loadError, setLoadError] = useState('')
   const timer = useTimer()
+  const finished = phase === 'finished'
   const { hintsUsedCount, xpBreakdown, bonusLoading } = useQuizHintsAndXp('gym', finished, score, totalQ, typeof isCorrect !== 'undefined' ? (isCorrect || false) : false, results);
   const sessionGoal = 'standard'
   const isAdaptive = true
@@ -58676,7 +58486,8 @@ function RandomMixApp({ onBack, isGoalMode = false }) {
     }
   }, [isGoalMode]);
   const timer = useTimer()
-  const { hintsUsedCount, xpBreakdown, bonusLoading } = useQuizHintsAndXp('mix', finished, score, totalQ, typeof isCorrect !== 'undefined' ? (isCorrect || false) : false, results);
+  const finished = phase === 'finished'
+  const { hintsUsedCount, xpBreakdown, bonusLoading } = useQuizHintsAndXp('mix', finished, score, totalQuestions, typeof isCorrect !== 'undefined' ? (isCorrect || false) : false, results);
   const advanceFnRef = useRef(null)
   const submittedRef = useRef(false)
   const advancedRef = useRef(false)
@@ -62222,6 +62033,8 @@ function TwinHuntApp({ onBack, isGoalMode = false }) {
   const [results, setResults] = useState([])
   // Timer instance for tracking time per round
   const timer = useTimer()
+  const roundRef = useRef(0)
+  const commonSymbolRef = useRef('')
 
   /**
    * scatterPositions(n): Generate random scattered positions for n symbols in circular area
@@ -62284,38 +62097,21 @@ function TwinHuntApp({ onBack, isGoalMode = false }) {
    * Resets feedback/reveal and starts timer for the round
    */
   
-  const handleTimeout = async () => {
-    if (typeof revealed !== 'undefined' && revealed) return
-    if (typeof finished !== 'undefined' && finished) return
-    if (typeof phase !== 'undefined' && phase === 'finished') return
-    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
-    try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
-    try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch(_) {}
+  const handleTimeout = (targetRound, targetSymbol) => {
+    if (revealed || finished) return
+    setIsCorrect(false)
+    setRevealed(true)
+    setFeedback(`⏰ Time's up! The match was ${targetSymbol}.`)
     const timeTaken = timer.stop ? timer.stop() : 0
-    const qPrompt = question ? (question.prompt || question.question || (question.n1 !== undefined ? `${question.n1} ${question.op || '+'} ${question.n2}` : 'Question')) : 'Question'
-    try {
-      const r = await fetch(`${API}/twinhunt-api/check`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' },
-        body: JSON.stringify({ ...(typeof question !== 'undefined' ? question : {}), userAnswer: '', answer: '', sessionGoal })
-      })
-      const d = await r.json()
-      const corrAns = d.display || d.correctAnswer || d.answer || '—'
-      if (typeof setResults === 'function') {
-        setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: corrAns, correct: false, time: timeTaken }])
-      }
-      if (sessionGoal === 'perfect') {
-        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch(_) {}
-      }
-    } catch(e) {
-      console.error('handleTimeout error:', e)
-      if (typeof setResults === 'function') {
-        setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: '—', correct: false, time: timeTaken }])
-      }
+    const qPrompt = `Round ${targetRound}`
+    setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: targetSymbol, correct: false, time: timeTaken }])
+    if (sessionGoal === 'perfect') {
+      setFinished(true)
+      timer.reset()
     }
   }
 
-const generateRound = (n) => {
+  const generateRound = (n, currentRoundNum) => {
     // Shuffle symbol pool and select 2n-1 unique symbols
     const pool = [...TWIN_SYMBOLS].sort(() => Math.random() - 0.5)
     const common = pool[0]  // Symbol that will appear in both panels
@@ -62340,10 +62136,21 @@ const generateRound = (n) => {
     setLeftPositions(scatterPositions(left.length))
     setRightPositions(scatterPositions(right.length))
     setCommonSymbol(common)
+    commonSymbolRef.current = common
+    roundRef.current = currentRoundNum
     setFeedback('')
     setIsCorrect(null)
     setRevealed(false)
-    timer.start(sessionGoal, handleTimeout, getSpeedRunLimit(difficulty ?? 'easy', isAdaptive ?? false))
+
+    // Capture round and symbol as local values for this round's timeout callback
+    const roundForTimeout = currentRoundNum
+    const symbolForTimeout = common
+    const onTimeout = () => {
+      handleTimeout(roundForTimeout, symbolForTimeout)
+    }
+
+    // TwinHuntApp has no difficulty/isAdaptive state, so use the 'easy', non-adaptive limit.
+    timer.start(sessionGoal, onTimeout, getSpeedRunLimit('easy', false))
   }
 
   /**
@@ -62365,8 +62172,9 @@ const generateRound = (n) => {
     setFinished(false)
     setScore(0)
     setRound(1)
+    roundRef.current = 1
     setResults([])
-    generateRound(n)
+    generateRound(n, 1)
   }
 
   /**
@@ -62381,16 +62189,18 @@ const generateRound = (n) => {
   const handlePick = (symbol) => {
     if (revealed) return  // Ignore picks after round already answered
     const timeTaken = timer.stop()
-    const correct = symbol === commonSymbol
+    const activeSymbol = commonSymbolRef.current || commonSymbol
+    const activeRound = roundRef.current || round
+    const correct = symbol === activeSymbol
     if (correct) setScore((s) => s + 1)
     setIsCorrect(correct)
     setFeedback(correct
-      ? `Correct! ${commonSymbol} was the match.`
-      : `Wrong — you picked ${symbol}. The match was ${commonSymbol}.`)
+      ? `Correct! ${activeSymbol} was the match.`
+      : `Wrong — you picked ${symbol}. The match was ${activeSymbol}.`)
     setResults((prev) => [...prev, {
-      question: `Round ${round}`,
+      question: `Round ${activeRound}`,
       userAnswer: symbol,
-      correctAnswer: commonSymbol,
+      correctAnswer: activeSymbol,
       correct,
       time: timeTaken,
     }])
@@ -62411,8 +62221,10 @@ const generateRound = (n) => {
       timer.reset()
       return
     }
-    setRound((r) => r + 1)
-    generateRound(Number(count))
+    const nextRound = round + 1
+    setRound(nextRound)
+    roundRef.current = nextRound
+    generateRound(Number(count), nextRound)
   }
   useAutoAdvance(revealed, advanceRef, isCorrect)
 
@@ -62528,6 +62340,11 @@ const generateRound = (n) => {
           </div>
         </div>
         {renderFeedback(feedback, isCorrect)}
+        {revealed && (
+          <button onClick={() => advanceRef.current()}>
+            {round >= totalRounds ? 'Finish' : 'Next Round'}
+          </button>
+        )}
       </>}
       {finished && <div className="welcome-box">
         <p className="welcome-text">Game complete!</p>
@@ -62610,7 +62427,6 @@ function SqrtApp({ onBack, isGoalMode = false }) {
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    if (typeof phase !== 'undefined' && phase === 'finished') return
     try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
     try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch(_) {}
@@ -62628,7 +62444,7 @@ function SqrtApp({ onBack, isGoalMode = false }) {
         setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: corrAns, correct: false, time: timeTaken }])
       }
       if (sessionGoal === 'perfect') {
-        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch(_) {}
+        try { if (typeof setFinished === 'function') setFinished(true); timer.reset() } catch(_) {}
       }
     } catch(e) {
       console.error('handleTimeout error:', e)
@@ -62944,7 +62760,6 @@ function PolyMulApp({ onBack, isGoalMode = false }) {
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    if (typeof phase !== 'undefined' && phase === 'finished') return
     try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
     try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch(_) {}
@@ -62962,7 +62777,7 @@ function PolyMulApp({ onBack, isGoalMode = false }) {
         setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: corrAns, correct: false, time: timeTaken }])
       }
       if (sessionGoal === 'perfect') {
-        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch(_) {}
+        try { if (typeof setFinished === 'function') setFinished(true); timer.reset() } catch(_) {}
       }
     } catch(e) {
       console.error('handleTimeout error:', e)
@@ -63277,7 +63092,6 @@ function PolyFactorApp({ onBack, isGoalMode = false }) {
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    if (typeof phase !== 'undefined' && phase === 'finished') return
     try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
     try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch(_) {}
@@ -63295,7 +63109,7 @@ function PolyFactorApp({ onBack, isGoalMode = false }) {
         setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: corrAns, correct: false, time: timeTaken }])
       }
       if (sessionGoal === 'perfect') {
-        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch(_) {}
+        try { if (typeof setFinished === 'function') setFinished(true); timer.reset() } catch(_) {}
       }
     } catch(e) {
       console.error('handleTimeout error:', e)
@@ -63592,7 +63406,6 @@ function PrimeFactorApp({ onBack, isGoalMode = false }) {
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    if (typeof phase !== 'undefined' && phase === 'finished') return
     try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
     try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch(_) {}
@@ -63610,7 +63423,7 @@ function PrimeFactorApp({ onBack, isGoalMode = false }) {
         setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: corrAns, correct: false, time: timeTaken }])
       }
       if (sessionGoal === 'perfect') {
-        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch(_) {}
+        try { if (typeof setFinished === 'function') setFinished(true); timer.reset() } catch(_) {}
       }
     } catch(e) {
       console.error('handleTimeout error:', e)
@@ -63951,7 +63764,6 @@ function QFormulaApp({ onBack, isGoalMode = false }) {
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    if (typeof phase !== 'undefined' && phase === 'finished') return
     try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
     try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch(_) {}
@@ -63969,7 +63781,7 @@ function QFormulaApp({ onBack, isGoalMode = false }) {
         setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: corrAns, correct: false, time: timeTaken }])
       }
       if (sessionGoal === 'perfect') {
-        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch(_) {}
+        try { if (typeof setFinished === 'function') setFinished(true); timer.reset() } catch(_) {}
       }
     } catch(e) {
       console.error('handleTimeout error:', e)
@@ -64287,7 +64099,6 @@ function SimulApp({ onBack, isGoalMode = false }) {
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    if (typeof phase !== 'undefined' && phase === 'finished') return
     try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
     try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch(_) {}
@@ -64305,7 +64116,7 @@ function SimulApp({ onBack, isGoalMode = false }) {
         setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: corrAns, correct: false, time: timeTaken }])
       }
       if (sessionGoal === 'perfect') {
-        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch(_) {}
+        try { if (typeof setFinished === 'function') setFinished(true); timer.reset() } catch(_) {}
       }
     } catch(e) {
       console.error('handleTimeout error:', e)
@@ -64622,7 +64433,6 @@ function FuncEvalApp({ onBack, isGoalMode = false }) {
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    if (typeof phase !== 'undefined' && phase === 'finished') return
     try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
     try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch(_) {}
@@ -64640,7 +64450,7 @@ function FuncEvalApp({ onBack, isGoalMode = false }) {
         setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: corrAns, correct: false, time: timeTaken }])
       }
       if (sessionGoal === 'perfect') {
-        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch(_) {}
+        try { if (typeof setFinished === 'function') setFinished(true); timer.reset() } catch(_) {}
       }
     } catch(e) {
       console.error('handleTimeout error:', e)
@@ -64924,7 +64734,6 @@ function LineEqApp({ onBack, isGoalMode = false }) {
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    if (typeof phase !== 'undefined' && phase === 'finished') return
     try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
     try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch(_) {}
@@ -64942,7 +64751,7 @@ function LineEqApp({ onBack, isGoalMode = false }) {
         setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: corrAns, correct: false, time: timeTaken }])
       }
       if (sessionGoal === 'perfect') {
-        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch(_) {}
+        try { if (typeof setFinished === 'function') setFinished(true); timer.reset() } catch(_) {}
       }
     } catch(e) {
       console.error('handleTimeout error:', e)
@@ -70461,7 +70270,7 @@ function ProgressTrackerApp({ onBack }) {
 
 // Named export so main.jsx can render the global hamburger menu next to <App />
 
-function GenericLabApp({ title, subtitle, endpoint, onBack, renderQuestionCustom, customGenerate, initialDifficulty, initialNumQuestions, initialStarted }) {
+function GenericLabApp({ title, subtitle, endpoint, onBack, backLabel = 'Home', renderQuestionCustom, customGenerate, initialDifficulty, initialNumQuestions, initialStarted }) {
   const [difficulty, setDifficulty] = useState(initialDifficulty || 'easy');
   const [numQuestions, setNumQuestions] = useState(initialNumQuestions || '5');
   const [started, setStarted] = useState(initialStarted || false);
@@ -70633,7 +70442,7 @@ function GenericLabApp({ title, subtitle, endpoint, onBack, renderQuestionCustom
             position: 'absolute', top: '24px', left: '24px', background: 'transparent',
             border: '1px solid #5B5048', borderRadius: '6px', padding: '6px 14px',
             color: '#A89C93', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer'
-          }}>← Home</button>
+          }}>← {backLabel}</button>
 
           <h1 style={{ fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 700, fontSize: '48px', color: '#F4F1ED', margin: '0 0 12px', lineHeight: 1.1 }}>
             {title.replace('🔷 ', '')}
@@ -70748,7 +70557,7 @@ function GenericLabApp({ title, subtitle, endpoint, onBack, renderQuestionCustom
           </div>
           <div className="button-row" style={{ marginTop: '30px' }}>
             <button className="kid-btn-primary" onClick={() => { setStarted(false); setFinished(false); }}>Play Again 🔄</button>
-            <button className="kid-back-btn" onClick={onBack} style={{ marginLeft: '15px' }}>← Back to Home</button>
+            <button className="kid-back-btn" onClick={onBack} style={{ marginLeft: '15px' }}>← Back to {backLabel}</button>
           </div>
         </div>
       )}
@@ -70756,7 +70565,7 @@ function GenericLabApp({ title, subtitle, endpoint, onBack, renderQuestionCustom
   );
 }
 
-function BasicArithmeticLabApp({ onBack }) {
+function BasicArithmeticLabApp({ onBack, backLabel }) {
   const renderCustom = (q, ans, setAns, submitAns, revealed) => {
     if (q.template === 'missing_number' || q.template === 'greater_smaller') {
       const parts = q.prompt.split(' ');
@@ -70807,7 +70616,7 @@ function BasicArithmeticLabApp({ onBack }) {
       </div>
     );
   };
-  return <GenericLabApp title="Origin" subtitle="Mixed multiplication & division templates" endpoint="/api/basic-arithmetic-lab" onBack={onBack} renderQuestionCustom={renderCustom} />;
+  return <GenericLabApp title="Origin" subtitle="Mixed multiplication & division templates" endpoint="/api/basic-arithmetic-lab" onBack={onBack} backLabel={backLabel} renderQuestionCustom={renderCustom} />;
 }
 
 

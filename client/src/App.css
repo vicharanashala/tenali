@@ -6014,8 +6014,14 @@ button:disabled {
 }
 
 /* Curiosity Mode */
+.card.card--curiosity {
+  max-width: 1040px;
+  width: 100%;
+}
+
 .curiosity-shell {
   width: 100%;
+  min-width: 0;
 }
 
 .curiosity-header {
@@ -6072,7 +6078,7 @@ button:disabled {
 
 .curiosity-workspace {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(380px, 0.68fr);
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
   gap: 18px;
   align-items: start;
 }
@@ -6082,6 +6088,7 @@ button:disabled {
   border-radius: var(--radius);
   background: var(--clr-surface);
   box-shadow: 0 14px 34px rgba(0, 0, 0, 0.14);
+  min-width: 0;
 }
 
 .curiosity-controls {
@@ -6144,8 +6151,9 @@ button:disabled {
 .curiosity-subgrid,
 .curiosity-fraction-setup {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
   gap: 12px;
+  align-items: end;
 }
 
 .curiosity-subgrid--compact {
@@ -6157,7 +6165,8 @@ button:disabled {
 }
 
 .curiosity-field--operator {
-  max-width: 140px;
+  min-width: 100px;
+  max-width: 100%;
 }
 
 .curiosity-mode-switch {
@@ -6218,6 +6227,7 @@ button:disabled {
   color: var(--clr-text);
   line-height: 1.45;
   overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .curiosity-formula-note {
@@ -6243,13 +6253,24 @@ button:disabled {
   color: var(--clr-text);
   font-size: 0.98rem;
   line-height: 1.4;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .curiosity-equation-row {
-  display: grid;
-  grid-template-columns: minmax(58px, 0.8fr) auto minmax(58px, 0.8fr) minmax(58px, 0.8fr) auto minmax(58px, 0.8fr) minmax(58px, 0.8fr) auto minmax(58px, 0.8fr);
+  display: flex;
+  flex-wrap: wrap;
   gap: 8px;
   align-items: center;
+  min-width: 0;
+}
+
+.curiosity-equation-row input,
+.curiosity-equation-row select {
+  flex: 1 1 48px;
+  min-width: 44px;
+  max-width: 84px;
+  text-align: center;
 }
 
 .curiosity-equation-row--simple {
@@ -6268,6 +6289,7 @@ button:disabled {
   grid-template-columns: minmax(54px, 1fr) auto minmax(54px, 1fr);
   gap: 8px;
   align-items: center;
+  min-width: 0;
 }
 
 .curiosity-playground {
@@ -6573,15 +6595,16 @@ button:disabled {
 
 .curiosity-edit-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
   gap: 10px;
 }
 
 .curiosity-edit-row {
   display: grid;
-  grid-template-columns: minmax(132px, 1fr) 72px minmax(86px, 0.8fr);
+  grid-template-columns: minmax(0, 1.2fr) 60px minmax(0, 0.9fr);
   gap: 8px;
   align-items: end;
+  min-width: 0;
 }
 
 .curiosity-toggle-row,
@@ -6614,7 +6637,7 @@ button:disabled {
 .curiosity-preview {
   position: sticky;
   top: 18px;
-  overflow: hidden;
+  min-width: 0;
 }
 
 .curiosity-preview-header {
@@ -6645,6 +6668,7 @@ button:disabled {
   display: grid;
   gap: 12px;
   padding: 16px;
+  min-width: 0;
 }
 
 .curiosity-preview-item,
@@ -6665,6 +6689,7 @@ button:disabled {
   font-size: 1rem;
   line-height: 1.45;
   overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .curiosity-answer {
@@ -6681,6 +6706,7 @@ button:disabled {
 .curiosity-result-body {
   display: grid;
   gap: 10px;
+  min-width: 0;
 }
 
 .curiosity-comparison {
@@ -6689,15 +6715,25 @@ button:disabled {
   border: 1px solid var(--clr-border);
   border-radius: var(--radius-sm);
   background: var(--clr-surface);
+  min-width: 0;
+  width: 100%;
 }
 
 .curiosity-comparison-head,
 .curiosity-comparison-row {
   display: grid;
-  grid-template-columns: minmax(96px, 1fr) minmax(72px, 0.8fr) minmax(72px, 0.8fr);
-  gap: 10px;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.9fr) minmax(0, 0.9fr);
+  gap: 8px;
   align-items: center;
   padding: 9px 11px;
+  min-width: 0;
+}
+
+.curiosity-comparison-head > *,
+.curiosity-comparison-row > * {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .curiosity-comparison-head {
@@ -6721,6 +6757,7 @@ button:disabled {
 .curiosity-comparison-row strong {
   color: var(--clr-text);
   overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .curiosity-comparison-row.is-changed strong:last-child {
@@ -6732,6 +6769,9 @@ button:disabled {
   margin: 0;
   overflow: auto;
   white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  max-width: 100%;
   color: var(--clr-text-soft);
   font: 0.9rem/1.55 var(--font-body);
 }
@@ -6740,6 +6780,7 @@ button:disabled {
   color: var(--clr-wrong);
   font-weight: 700;
   overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .curiosity-empty {
@@ -6782,7 +6823,6 @@ button:disabled {
     grid-template-columns: 1fr;
   }
 
-  .curiosity-equation-row,
   .curiosity-equation-row--simple {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -7235,5 +7275,111 @@ mark.nudge-keyword {
   font-size: 0.9rem;
   opacity: 0.8;
   line-height: 1.5;
+}
+
+/* Celebration Overlay */
+.celebration-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  backdrop-filter: blur(6px);
+  overflow: hidden;
+}
+
+.celebration-card {
+  background: var(--clr-card);
+  border: 4px solid #fbbf24;
+  border-radius: 24px;
+  width: 90%;
+  max-width: 450px;
+  padding: 32px;
+  text-align: center;
+  box-shadow: 0 10px 40px rgba(251, 191, 36, 0.4);
+  position: relative;
+  animation: modal-pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.celebration-sparkles {
+  font-size: 2.2rem;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.celebration-title {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  color: #fbbf24;
+  margin: 0 0 16px 0;
+}
+
+.celebration-badge-container {
+  margin: 20px 0;
+  filter: drop-shadow(0 8px 16px rgba(251, 191, 36, 0.3));
+}
+
+.celebration-text {
+  font-size: 1.05rem;
+  margin: 0 0 20px 0;
+  color: var(--clr-text);
+}
+
+.celebration-reward {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(34, 197, 94, 0.12);
+  border: 1.5px dashed #22c55e;
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-weight: 750;
+  font-size: 1.05rem;
+  color: #22c55e;
+  margin-bottom: 24px;
+}
+
+.celebration-btn {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: #fff !important;
+  font-weight: 750;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+  transition: transform 0.2s ease;
+}
+
+.celebration-btn:hover {
+  transform: scale(1.05);
+}
+
+/* Real-time celebration confetti styles */
+.confetti-piece {
+  position: absolute;
+  top: -20px;
+  border-radius: 4px;
+  opacity: 0.85;
+  z-index: 9998;
+  pointer-events: none;
+  animation: confetti-fall linear infinite;
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(105vh) rotate(720deg);
+    opacity: 0;
+  }
 }
 

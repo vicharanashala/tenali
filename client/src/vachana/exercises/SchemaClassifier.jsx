@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 
 const STORAGE_KEY = 'vachana_schema_progress';
 
@@ -234,22 +234,31 @@ const SCHEMA_ICONS = {
 
 export default function SchemaClassifier() {
   const [progress, setProgress] = useState(loadProgress);
-  const [activeLevel, setActiveLevel] = useState(getLevelFromPath);
+  // Resolve locked-level URLs during state initialization so an inaccessible
+  // arena is never rendered and then redirected away from after mount. Level 0,
+  // unlocked levels and the overview load exactly as before.
+  const [activeLevel, setActiveLevel] = useState(() => {
+    const levelFromPath = getLevelFromPath();
+    const isLocked = levelFromPath !== null
+      && levelFromPath !== 0
+      && levelFromPath > progress.unlockedLevel
+      && !progress.completedLevels.includes(levelFromPath - 1);
+    return isLocked ? null : levelFromPath;
+  });
   const [answers, setAnswers] = useState({});
-  const [optionsByQuestion, setOptionsByQuestion] = useState({});
 
-  // Initialize fixed options array per question when level changes
-  useEffect(() => {
+  // Derive the fixed per-question option set during render: re-derived when
+  // the level changes (fresh shuffle per entry), stable while the level is
+  // mounted (no within-mount reshuffling).
+  const optionsByQuestion = useMemo(() => {
+    const optionMap = {};
     if (activeLevel && activeLevel >= 1 && activeLevel <= 7) {
       const questions = QUESTIONS_BY_LEVEL[activeLevel] || [];
-      const optionMap = {};
       questions.forEach(q => {
         optionMap[q.id] = generateOptionsForQuestion(q, activeLevel);
       });
-      setOptionsByQuestion(optionMap);
-    } else {
-      setOptionsByQuestion({});
     }
+    return optionMap;
   }, [activeLevel]);
   const [, setMsg] = useState('');
   const [levelPassed, setLevelPassed] = useState(false);
@@ -344,7 +353,7 @@ export default function SchemaClassifier() {
     const handlePopState = () => {
       const targetLevel = getLevelFromPath();
       if (targetLevel !== null && targetLevel !== 0 && targetLevel > progress.unlockedLevel && !progress.completedLevels.includes(targetLevel - 1)) {
-        navigateToLevel(0, true);
+        navigateToLevel(null, true);
       } else {
         setActiveLevel(targetLevel);
         resetLevelState();
@@ -355,12 +364,15 @@ export default function SchemaClassifier() {
     return () => window.removeEventListener('popstate', handlePopState);
   }, [progress]);
 
-  // Enforce gating on mount or activeLevel change
+  // Keep the URL in sync with the resolved level without touching React
+  // state: locked-level URLs are clamped during initialization, so this only
+  // rewrites the address bar when it differs from the rendered level.
   useEffect(() => {
-    if (activeLevel !== null && activeLevel !== 0 && activeLevel > progress.unlockedLevel && !progress.completedLevels.includes(activeLevel - 1)) {
-      navigateToLevel(0, true);
+    const path = activeLevel !== null ? `/vachana/schema/level-${activeLevel}` : '/vachana/schema';
+    if (window.location.pathname !== path) {
+      window.history.replaceState({}, '', path);
     }
-  }, [activeLevel, progress]);
+  }, [activeLevel]);
 
   const checkOverallLevelPass = (currentAnswers, currentVerified) => {
     if (!activeLevel) return;

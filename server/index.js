@@ -52,6 +52,7 @@ const path = require('path');
 const http = require('http');
 const wordCreator = require('./wordCreator');
 const logger = require('./lib/logger');
+const { randomInt, digitRange, gcd, lcm, simplifyFraction, pick } = require('./lib/mathHelpers');
 const { generateExplanation } = require('./explanations');
 
 // Catch what would otherwise be a silent crash (or, for unhandled promise
@@ -112,6 +113,23 @@ const apiLimiter = rateLimit({
 });
 app.use('/api/auth/login', authLimiter);
 app.use('/api/', apiLimiter);
+
+// ─── Health ──────────────────────────────────────────────────────────────────
+// Liveness probe. `render.yaml` declares `healthCheckPath: /api/health`, so
+// this route has to exist and has to answer JSON — without it the request
+// falls through to the SPA catch-all and returns index.html with a 200,
+// which tells the orchestrator nothing about the API it thinks it checked.
+//
+// Deliberately does not touch MongoDB: a liveness probe that depends on the
+// database reports "down" exactly when the database is the thing that broke,
+// which is a different question from "is this process serving requests?".
+app.get('/api/health', (req, res) => {
+  res.json({
+    status: 'ok',
+    uptime: Math.floor(process.uptime()),
+    node: process.versions.node,
+  });
+});
 
 // Static file serving: Serve built React/Vue client (both root and sub-path mount)
 app.use(express.static(clientDistPath));
@@ -675,17 +693,19 @@ app.use('/dotprodgym-api', advancedRouter);
 const { sudokuIsValid, sudokuSolve, sudokuGenerate } = require('./lib/sudoku');
 
 /**
- * Generate a random integer between min and max (inclusive)
- * @param {number} min - Minimum value (inclusive)
- * @param {number} max - Maximum value (inclusive)
- * @returns {number} Random integer in range [min, max]
+ * Map square root approximation step level to a numeric band
+ * Higher steps = larger numbers to approximate square roots for
+ * Used for progressive difficulty in sqrt-api
+ * @param {number} step - Step number (1 to 100+)
+ * @returns {object} {min, max} range of numbers for sqrt estimation
  */
-function randomInt(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+function bandForStep(step) {
+  if (step <= 10) return { min: 2, max: 50 };
+  if (step <= 20) return { min: 51, max: 150 };
+  if (step <= 35) return { min: 151, max: 350 };
+  if (step <= 60) return { min: 351, max: 700 };
+  return { min: 701, max: 999 };
 }
-function gcd(a, b) { a = Math.abs(a); b = Math.abs(b); while (b) { const t = b; b = a % b; a = t; } return a; }
-function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
-
 
 /**
  * Reads all JSON files in `dir` concurrently (fs.promises.readFile lets libuv's
@@ -1119,7 +1139,6 @@ const conceptQuestions = loadConcepts();
 const banks = require('./lib/question-banks');
 banks.concepts = conceptQuestions;
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // LEARNING JOURNEY ENDPOINTS
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 const { JOURNEY_CURRICULUM } = require('./lil/learning_journey/journeyData');
@@ -1290,8 +1309,12 @@ app.post('/api/proctor/end', async (req, res) => {
   }
 });
 
-// Get proctor session details — public for dashboard view (no login)
-app.get('/api/proctor/session/:id', async (req, res) => {
+// Get proctor session details — admin only.
+// A session carries the student's username and id, and every event carries
+// base64 webcam images, audio and speech transcripts. Those must not be
+// readable by anyone who can reach the server, so this route requires an
+// admin token (VULN-01 in #457).
+app.get('/api/proctor/session/:id', auth.requireAuth, auth.requireAdmin, async (req, res) => {
   try {
     const session = await ProctorSession.findById(req.params.id);
     if (!session) return res.status(404).json({ error: 'session not found' });
@@ -1302,11 +1325,10 @@ app.get('/api/proctor/session/:id', async (req, res) => {
   }
 });
 
-// Get all proctor sessions — public for instructor dashboard view (no login)
-// The dashboard at /proctor is meant to be accessible to anyone monitoring the exam
+// Get all proctor sessions — admin only (see the note on /api/proctor/session/:id)
 app.get('/api/proctor/ping', (req, res) => { res.json({ ok: true }) });
 
-app.get('/api/proctor/sessions', async (req, res) => {
+app.get('/api/proctor/sessions', auth.requireAuth, auth.requireAdmin, async (req, res) => {
   try {
     const limit = Math.min(parseInt(req.query.limit, 10) || 100, 200)
     const sessions = await ProctorSession.find({})
@@ -1378,16 +1400,20 @@ app.post('/api/proctor/face/verify', async (req, res) => {
 
 // ─── Emotion endpoints ───────────────────────────────────────────────────────
 
-// Submit an emotion for a quiz — public (no login)
-app.post('/api/emotions/submit', async (req, res) => {
+// Submit an emotion for a quiz — signed-in students only.
+// The identity is taken from the token, not from the request body: a body
+// that names another student would file the record under that student
+// (VULN-03 in #457). The client already sends the bearer token and skips
+// the call when there is none.
+app.post('/api/emotions/submit', auth.requireAuth, async (req, res) => {
   try {
-    const { quizType, emotion, feedback, userId, username } = req.body;
+    const { quizType, emotion, feedback } = req.body;
     if (!quizType || !emotion) return res.status(400).json({ error: 'quizType and emotion required' });
     const valid = ['very_sad', 'sad', 'neutral', 'happy', 'very_happy'];
     if (!valid.includes(emotion)) return res.status(400).json({ error: 'invalid emotion' });
     const doc = await Emotion.create({
-      userId: userId || 'anonymous',
-      username: username || 'anonymous',
+      userId: req.user.id || req.user.username,
+      username: req.user.username,
       quizType,
       emotion,
       feedback: feedback || '',
@@ -1419,11 +1445,17 @@ app.get('/api/emotions/stats/:quizType', async (req, res) => {
   }
 });
 
-// Get emotion history for a user — public (filter by userId if provided)
-app.get('/api/emotions/history', async (req, res) => {
+// Get emotion history — the caller's own records, or any student's for an admin.
+// The userId filter is a request parameter, so a non-admin's filter is
+// ignored rather than honoured: asking for someone else's id must not
+// return someone else's records (VULN-03 in #457).
+app.get('/api/emotions/history', auth.requireAuth, async (req, res) => {
   try {
     const { userId, limit = 50 } = req.query;
-    const query = userId ? { userId } : {};
+    const isAdmin = req.user.role === 'admin';
+    const query = isAdmin
+      ? (userId ? { userId: String(userId) } : {})
+      : { userId: req.user.id || req.user.username };
     const emotions = await Emotion.find(query).sort({ timestamp: -1 }).limit(parseInt(limit));
     res.json({ emotions });
   } catch (e) {
@@ -1521,6 +1553,22 @@ app.post('/api/playground2/run', auth.requireAuth, playground2Limiter, async (re
 // /riddle-api — Math Riddles
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 app.use('/riddles/images', express.static(path.join(__dirname, 'riddles', 'images')));
+
+// ICT course submissions: a file added as ICT/<folder>/index.html is served at
+// /summership/ict/<folder>/. The pages are written by students, so they are sent
+// with a sandbox Content-Security-Policy. The page can run its own scripts but gets
+// an opaque origin, so it cannot read this site's storage, cookies or login data
+// (this also means a page cannot use localStorage).
+const ictStatic = express.static(path.join(__dirname, '..', 'ICT'), { index: 'index.html', dotfiles: 'ignore' });
+const ictHeaders = (_req, res, next) => {
+  res.setHeader('Content-Security-Policy', 'sandbox allow-scripts allow-forms allow-popups');
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  next();
+};
+app.use('/summership/ict', ictHeaders, ictStatic);
+app.use('/ict', ictHeaders, ictStatic);
+// An ICT path that matches no file is a plain 404, not the Tenali app.
+app.use(['/summership/ict', '/ict'], (_req, res) => res.status(404).send('Not found'));
 
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // /graph — Prerequisite DAG visualisation
@@ -2335,7 +2383,8 @@ function generateBattleQ_basicarith() {
 }
 function generateBattleQ_hcflcm() {
   const type = pick(['hcf', 'lcm']);
-  const a = randomInt(2, 50), b = randomInt(2, 50);
+  const a = randomInt(2, 50); let b = randomInt(2, 50);
+  while (b === a) { b = randomInt(2, 50); }
   const g = gcd(a, b);
   return { prompt: type === 'hcf' ? `HCF of ${a} and ${b}` : `LCM of ${a} and ${b}`,
     answer: type === 'hcf' ? g : (a * b) / g, type: 'number' };
