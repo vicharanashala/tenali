@@ -39,6 +39,98 @@ export default defineConfig({
   optimizeDeps: {
     include: ['face-api.js'],
   },
+  build: {
+    // Meaningful warning threshold for individual chunks (1000 kB)
+    chunkSizeWarningLimit: 1000,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          const normalizedId = id.replace(/\\/g, '/')
+
+          // Vendor library splitting
+          if (normalizedId.includes('/node_modules/')) {
+            if (
+              normalizedId.includes('/node_modules/three/') ||
+              normalizedId.includes('/node_modules/@react-three/')
+            ) {
+              return 'vendor-three'
+            }
+            if (normalizedId.includes('/node_modules/face-api.js/')) {
+              return 'vendor-faceapi'
+            }
+            if (normalizedId.includes('/node_modules/mathjs/')) {
+              return 'vendor-mathjs'
+            }
+            if (
+              normalizedId.includes('/node_modules/chart.js/') ||
+              normalizedId.includes('/node_modules/react-chartjs-2/')
+            ) {
+              return 'vendor-chartjs'
+            }
+            if (normalizedId.includes('/node_modules/mafs/')) {
+              return 'vendor-mafs'
+            }
+            if (normalizedId.includes('/node_modules/framer-motion/')) {
+              return 'vendor-framer-motion'
+            }
+            if (normalizedId.includes('/node_modules/lucide-react/')) {
+              return 'vendor-lucide'
+            }
+            if (normalizedId.includes('/node_modules/socket.io-client/')) {
+              return 'vendor-socketio'
+            }
+            if (
+              normalizedId.includes('/node_modules/react/') ||
+              normalizedId.includes('/node_modules/react-dom/')
+            ) {
+              return 'vendor-react'
+            }
+            return 'vendor-libs'
+          }
+
+          // Heavy standalone app and module splitting
+          if (normalizedId.includes('/src/')) {
+            if (
+              normalizedId.includes('ShapeSlicer3D') ||
+              normalizedId.includes('GeometryApp') ||
+              normalizedId.includes('NetBuilderApp') ||
+              normalizedId.includes('ShapeTranslatorApp')
+            ) {
+              return 'app-3d-geometry'
+            }
+            if (normalizedId.includes('BattleApp')) {
+              return 'app-battle'
+            }
+            if (
+              normalizedId.includes('LinearAlgebraApp') ||
+              normalizedId.includes('/src/linearalgebra/')
+            ) {
+              return 'app-linear-algebra'
+            }
+            if (normalizedId.includes('/src/proctor/')) {
+              return 'app-proctor'
+            }
+            if (
+              normalizedId.includes('PlaygroundApp') ||
+              normalizedId.includes('LocalCompilerApp')
+            ) {
+              return 'app-playground'
+            }
+            if (
+              normalizedId.includes('VisualMathLabRedux') ||
+              normalizedId.includes('ProbLabApp') ||
+              normalizedId.includes('PythagLabApp') ||
+              normalizedId.includes('BearingsLabApp') ||
+              normalizedId.includes('WaterJugLab') ||
+              normalizedId.includes('EquationCraftingLab')
+            ) {
+              return 'app-labs'
+            }
+          }
+        },
+      },
+    },
+  },
   server: {
     host: 'localhost',
     port: 5173,
