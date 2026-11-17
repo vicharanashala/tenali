@@ -16,7 +16,7 @@ function ExtendedEuclidApp() {
   // Sync theme to DOM and localStorage when changed
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme)
-    try { localStorage.setItem('tenali-theme', theme) } catch { }
+    try { localStorage.setItem('tenali-theme', theme) } catch { /* storage can be unavailable; ignore */ }
   }, [theme])
 
   // Toggle between dark and light mode
