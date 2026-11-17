@@ -29,9 +29,10 @@ cd client && npm run lint
 
 **Deploy (production on this server):**
 ```bash
-sudo systemctl restart tenali
+bash /home/tenali/deploy/deploy.sh deploy main          # or: root | matrixmystics | all
+bash /home/tenali/deploy/deploy.sh nginx                 # install the nginx site
 ```
-The systemd service runs `node /home/tenali/tenali/server/index.js` as the `tenali` user. Nginx proxies `tenali.fun` → port 4000 with SSL already configured.
+The deploy script, the systemd units and the nginx site template all live in `server/deploy/` in this repo; the deploy workflow copies them to the droplet before every run. The `main` app runs as `tenali.service` (`node /home/tenali/tenali/server/index.js`, port 4001) and is served at `tenali.fun/summership/`. See [DEPLOYMENT.md](DEPLOYMENT.md) for the full port table.
 
 ---
 
@@ -75,8 +76,8 @@ Each quiz tracks `adaptScore` (float 0–3). Correct → +0.15 to +0.5; wrong �
 ```
 tenali.fun (DNS → <production IP — see README deployment section>)
   └── Nginx (SSL via Let's Encrypt, /etc/nginx/sites-available/tenali)
-        └── proxy_pass http://127.0.0.1:4000
-              └── tenali.service (systemd, runs as tenali user)
-                    └── node /home/tenali/tenali/server/index.js
+        ├── /                → 127.0.0.1:4003  tenali-root.service            (branch tenali-root)
+        ├── /summership/     → 127.0.0.1:4001  tenali.service                 (branch main)
+        └── /matrixmystics/  → 127.0.0.1:4004  tenali-matrixmystics.service   (branch matrix-mystics)
 ```
-The repo lives at `/home/tenali/tenali/`. Changes to server code require a service restart. Changes to client code require a production build followed by a service restart.
+Each app is its own git checkout on the box (`/home/tenali/tenali`, `/home/tenali/tenali-root`, `/home/tenali/tenali-matrixmystics`), its own client build (`VITE_BASE_PATH` = the app's public path) and its own systemd unit running as the `tenali` user. Changes to server code require a service restart; changes to client code require a production build followed by a service restart.
