@@ -13,25 +13,25 @@
       "count": 209
     },
     "no-useless-escape": {
-      "count": 4
+      "count": 2
     },
     "react-hooks/immutability": {
-      "count": 22
+      "count": 20
     },
     "react-hooks/preserve-manual-memoization": {
       "count": 73
     },
     "react-hooks/purity": {
-      "count": 63
+      "count": 33
     },
     "react-hooks/refs": {
-      "count": 80
+      "count": 78
     },
     "react-hooks/rules-of-hooks": {
       "count": 6
     },
     "react-hooks/set-state-in-effect": {
-      "count": 93
+      "count": 91
     },
     "react-refresh/only-export-components": {
       "count": 8
@@ -151,11 +151,7 @@
       "count": 1
     }
   },
-  "src/detective-app.jsx": {
-    "react-hooks/set-state-in-effect": {
-      "count": 1
-    }
-  },
+  "src/detective-app.jsx": {},
   "src/hooks/useTimer.js": {
     "react-hooks/purity": {
       "count": 1
@@ -230,6 +226,39 @@
     },
     "react-refresh/only-export-components": {
       "count": 6
+    }
+  },
+  "src/apps/YazdanTablesApp.jsx": {
+    "react-hooks/immutability": {
+      "count": 1
+    },
+    "react-hooks/purity": {
+      "count": 15
+    },
+    "react-hooks/refs": {
+      "count": 1
+    },
+    "react-hooks/set-state-in-effect": {
+      "count": 1
+    }
+  },
+  "src/apps/JatinTablesApp.jsx": {
+    "react-hooks/immutability": {
+      "count": 1
+    },
+    "react-hooks/purity": {
+      "count": 15
+    },
+    "react-hooks/refs": {
+      "count": 1
+    },
+    "react-hooks/set-state-in-effect": {
+      "count": 1
+    }
+  },
+  "src/lib/tableAppHelpers.jsx": {
+    "no-useless-escape": {
+      "count": 2
     }
   }
 }
