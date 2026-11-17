@@ -28,6 +28,40 @@ function simplifyFraction(numerator, denominator) {
   return `${numerator / divisor}/${denominator / divisor}`;
 }
 
+/** Ordinal for hints: 1 -> "1st", 2 -> "2nd", 3 -> "3rd", 4 -> "4th", 11 -> "11th". */
+function ordinal(value) {
+  const suffixes = ['th', 'st', 'nd', 'rd'];
+  const v = value % 100;
+  return value + (suffixes[(v - 20) % 10] || suffixes[v] || suffixes[0]);
+}
+
+/** numerator/denominator as an integer or a lowest-terms fraction string ("4/3"). */
+function exactNumber(numerator, denominator = 1) {
+  const divisor = gcd(Math.abs(numerator), Math.abs(denominator)) || 1;
+  const top = numerator / divisor;
+  const bottom = denominator / divisor;
+  return bottom === 1 ? String(top) : `${top}/${bottom}`;
+}
+
+/** Coefficient as written in front of x: 1 -> "", 4/3 -> "(4/3)", 5 -> "5". */
+function coefficientText(numerator, denominator = 1) {
+  const text = exactNumber(numerator, denominator);
+  if (text === '1') return '';
+  return text.includes('/') ? `(${text})` : text;
+}
+
+/** "ax^p" written the way a textbook would: 1x^2 -> x^2, 3x^1 -> 3x, 5x^0 -> 5. */
+function termText(coefficient, power) {
+  if (power === 0) return String(coefficient);
+  const lead = coefficient === 1 ? '' : String(coefficient);
+  return `${lead}x${power === 1 ? '' : '^' + power}`;
+}
+
+/** Descending product "n × (n-1) × ... " written out in full, e.g. (8, 2) -> "8 × 7". */
+function descendingProduct(top, terms) {
+  return Array.from({ length: terms }, (_, i) => top - i).join(' × ');
+}
+
 /** Formats a signed constant for display: 7 -> "+ 7", -7 -> "- 7". */
 function formatSignedTerm(value) {
   return value >= 0 ? `+ ${value}` : `- ${Math.abs(value)}`;
@@ -181,11 +215,12 @@ function generateBridgeSabotage() {
     stages: [
       {
         narrative: `Detective, the east bridge support shows signs of tampering. A cable was cut at a ${angle}° angle from the base. The horizontal distance from the base to where the cable touches the ground is ${adj} metres. Using tangent = opposite ÷ adjacent, we can find how high up the cut was made. Someone climbed to exactly this height to reach the cable. How high is the cut?`,
-        question: `Angle = ${angle}°. Adjacent = ${adj}m. Height = ${adj} × tan(${angle}°) = adjacent × tan(${angle}°) = ?`,
+        question: `Angle = ${angle}°. Adjacent = ${adj}m. Height = ${adj} × tan(${angle}°) = ? (round to the nearest metre)`,
         answer: opp,
+        answerTolerance: 0.5,
         hints: [
           `tan(${angle}°) = height ÷ ${adj}. Use tan(${angle}°) = ${Math.tan(rad).toFixed(3)}`,
-          `Height = ${adj} × ${Math.tan(rad).toFixed(3)} = ${opp}m.`,
+          `Height = ${adj} × ${Math.tan(rad).toFixed(3)} = ${(adj * Math.tan(rad)).toFixed(2)}, which is ${opp}m to the nearest metre.`,
         ],
         evidence: {
           id: 'evidence-5',
@@ -195,11 +230,12 @@ function generateBridgeSabotage() {
       },
       {
         narrative: `The sabotage goes deeper. The west bridge cable was cut at a steeper ${angle}° angle, but from a distance of ${dist} metres away. The saboteur needed to calculate the height from this new position. Same formula — opposite = adjacent × tan(angle). What height did the saboteur target this time?`,
-        question: `Angle = ${angle}°. Distance = ${dist}m. Height = ${dist} × tan(${angle}°) = ?`,
+        question: `Angle = ${angle}°. Distance = ${dist}m. Height = ${dist} × tan(${angle}°) = ? (round to the nearest metre)`,
         answer: height,
+        answerTolerance: 0.5,
         hints: [
           'Same formula — opposite = adjacent × tangent of the angle.',
-          `Height = ${dist} × ${Math.tan(rad).toFixed(3)} = ${height}m.`,
+          `Height = ${dist} × ${Math.tan(rad).toFixed(3)} = ${(dist * Math.tan(rad)).toFixed(2)}, which is ${height}m to the nearest metre.`,
         ],
         evidence: {
           id: 'evidence-6',
@@ -209,11 +245,12 @@ function generateBridgeSabotage() {
       },
       {
         narrative: `The saboteur left their toolkit behind. Inside, a handwritten note shows a third calculation: an angle of ${angle2}° with a ${sideA}m base. The saboteur was planning one more cut. If tan(${angle2}°) = height ÷ ${sideA}, what height were they targeting? This was their fail-safe — the cut that would bring the whole bridge down.`,
-        question: `Angle = ${angle2}°. Base = ${sideA}m. Height = ${sideA} × tan(${angle2}°) = ?`,
+        question: `Angle = ${angle2}°. Base = ${sideA}m. Height = ${sideA} × tan(${angle2}°) = ? (round to the nearest metre)`,
         answer: sideB,
+        answerTolerance: 0.5,
         hints: [
           `tan(${angle2}°) = ${Math.tan(angle2 * Math.PI / 180).toFixed(3)}. Multiply by the base.`,
-          `Height = ${sideA} × ${Math.tan(angle2 * Math.PI / 180).toFixed(3)} = ${sideB}m. This third cut proves premeditation.`,
+          `Height = ${sideA} × ${Math.tan(angle2 * Math.PI / 180).toFixed(3)} = ${(sideA * Math.tan(angle2 * Math.PI / 180)).toFixed(2)}, which is ${sideB}m to the nearest metre. This third cut proves premeditation.`,
         ],
         evidence: {
           id: 'evidence-7',
@@ -500,11 +537,12 @@ function generateGSTSwindle() {
       },
       {
         narrative: `A third transaction: a bill shows a total of ₹${total3} including ${rate3}% GST. The store claims the base price was higher than it actually was. If the total includes GST, then total = base + (rate% of base) = base × (100 + rate)/100. What was the actual base price before GST? The inflated base price was used to cover the stolen amount.`,
-        question: `Total (incl. GST) = ₹${total3}. GST rate = ${rate3}%. Base price = (total × 100) ÷ (100 + ${rate3}) = ?`,
+        question: `Total (incl. GST) = ₹${total3}. GST rate = ${rate3}%. Base price = (total × 100) ÷ (100 + ${rate3}) = ? (round to the nearest rupee)`,
         answer: base3,
+        answerTolerance: 0.5,
         hints: [
           `Base = total × 100 ÷ (100 + rate) = ${total3} × 100 ÷ ${100 + rate3}.`,
-          `Base = ${total3 * 100} ÷ ${100 + rate3} = ₹${base3}. The inflated base is the difference.`,
+          `Base = ${total3 * 100} ÷ ${100 + rate3} = ${(total3 * 100 / (100 + rate3)).toFixed(2)}, which is ₹${base3} to the nearest rupee. The inflated base is the difference.`,
         ],
         evidence: {
           id: 'evidence-17',
@@ -565,7 +603,7 @@ function generateStockMarketMystery() {
       },
       {
         narrative: `The market price of these shares was ₹${mp} — above the face value of ₹${fv}. The total investment = number of shares × market price. The Rate of Return = (dividend ÷ investment) × 100. Calculate the ROI percentage. A low ROI despite high dividends means the shares were overvalued — someone manipulated the market price.`,
-        question: `Investment = ${numShares} × ₹${mp} = ? ROI = (₹${dividend} ÷ investment) × 100 = ?%`,
+        question: `Investment = ${numShares} × ₹${mp} = ? ROI = (₹${dividend} ÷ investment) × 100 = ?% (give the ROI to 2 decimal places)`,
         answer: roi,
         hints: [
           `Investment = ${numShares} × ${mp} = ₹${investment}.`,
@@ -579,7 +617,7 @@ function generateStockMarketMystery() {
       },
       {
         narrative: `A second stock was traded: ${num2} shares of ₹${fv2} face value at ${divPct2}% dividend. The market price was ₹${mp2}. The suspect calculated the ROI to ensure it looked legitimate. Calculate the ROI for this second trade. An unusually consistent ROI across different stocks is a red flag — it means someone was cherry-picking data.`,
-        question: `Dividend = ${num2} × ${divPct2}% of ₹${fv2}. Investment = ${num2} × ₹${mp2}. ROI = ?%`,
+        question: `Dividend = ${num2} × ${divPct2}% of ₹${fv2}. Investment = ${num2} × ₹${mp2}. ROI = ?% (to 2 decimal places)`,
         answer: roi2,
         hints: [
           `Dividend = ${num2} × ₹${fv2 * divPct2 / 100} = ₹${div2}. Investment = ${num2} × ${mp2} = ₹${inv2}.`,
@@ -587,7 +625,7 @@ function generateStockMarketMystery() {
         ],
         evidence: {
           id: 'evidence-20',
-          text: `The ${roi2}% ROI is suspiciously close to the first trade's ${roi}%. The broker was meeting a client at the time — he couldn't have cherry-picked these stocks. The analyst, however, had been publishing reports on both companies.`,
+          text: `The second trade gave an ROI of ${roi2}%, against ${roi}% on the first trade. The broker was meeting a client at the time — he couldn't have cherry-picked these stocks. The analyst, however, had been publishing reports on both companies.`,
           eliminates: ['suspect-3'],
         },
       },
@@ -704,7 +742,7 @@ function generateDiceGameRigged() {
       },
       {
         narrative: `The rigged game involves two dice. The dealer says the sum will be ${tgt}. With two fair dice, there are 6 × 6 = 36 possible outcomes. How many ways can the sum be ${tgt}? List the pairs and count. The dealer's been calling sums with fewer winning combinations — the odds are stacked against the players.`,
-        question: `Two dice. Sum = ${tgt}. Number of favorable outcomes out of 36 = ?`,
+        question: `Two dice. Sum = ${tgt}. Probability = favorable outcomes ÷ 36 = ? (as a fraction)`,
         answer: `${favorable2 > 0 ? simplified : '0'}`,
         hints: [
           `List all pairs (a, b) where a + b = ${tgt} and both are between 1 and 6.`,
@@ -776,7 +814,7 @@ function generateDataBreach() {
         question: `Sorted data: ${sorted.join(', ')}. Median = middle value = ?`,
         answer: median,
         hints: [
-          `With ${count} values, the median is the ${Math.ceil(count / 2)}th value.`,
+          `With ${count} values, the median is the ${ordinal(Math.ceil(count / 2))} value.`,
           `Middle value = ${sorted[Math.floor(count / 2)]}. Median = ${median}.`,
         ],
         evidence: {
@@ -827,7 +865,7 @@ function generatePermutationPuzzle() {
         question: `P(${n}, ${r}) = ${n}! ÷ (${n} − ${r})! = ?`,
         answer: nPr,
         hints: [
-          `P(${n}, ${r}) = ${n} × ${n - 1} × ... × ${n - r + 1} (${r} terms).`,
+          `P(${n}, ${r}) = ${descendingProduct(n, r)} (${r} terms).`,
           `P = ${Array.from({length: r}, (_, i) => n - i).join(' × ')} = ${nPr}.`,
         ],
         evidence: {
@@ -841,7 +879,7 @@ function generatePermutationPuzzle() {
         question: `C(${n2}, ${r2}) = ${n2}! ÷ (${r2}! × (${n2} − ${r2})!) = ?`,
         answer: nCr,
         hints: [
-          `C(${n2}, ${r2}) = (${n2} × ${n2 - 1} × ... × ${n2 - r2 + 1}) ÷ ${r2}!.`,
+          `C(${n2}, ${r2}) = (${descendingProduct(n2, r2)}) ÷ ${r2}!.`,
           `C = ${nCrNum} ÷ ${nCrDen} = ${nCr}.`,
         ],
         evidence: {
@@ -879,7 +917,7 @@ function generateDerivativeDetective() {
   const pCoeff = randomInt(1, 4);
   const pPow = pick([2, 3]);
   const qCoeff = randomInt(2, 5);
-  const qPow = pick([1, 2]);
+  const qPow = pick([1, 2].filter(power => power !== pPow));
   const prodDerivAt = pCoeff * pPow * Math.pow(xVal, pPow - 1) + qCoeff * qPow * Math.pow(xVal, qPow - 1);
 
   const c = pick([2, 3, 4]);
@@ -914,12 +952,12 @@ function generateDerivativeDetective() {
         },
       },
       {
-        narrative: `The tampered graph shows f(x) = ${pCoeff}x^${pPow} + ${qCoeff}x^${qPow}. The rate of change at x = ${xVal} determines the slope of the tangent — the suspect used this slope to draw a fake trend line. Differentiate term by term, then plug in x = ${xVal}.`,
-        question: `f(x) = ${pCoeff}x^${pPow} + ${qCoeff}x^${qPow}. Find f'(${xVal}).`,
+        narrative: `The tampered graph shows f(x) = ${termText(pCoeff, pPow)} + ${termText(qCoeff, qPow)}. The rate of change at x = ${xVal} determines the slope of the tangent — the suspect used this slope to draw a fake trend line. Differentiate term by term, then plug in x = ${xVal}.`,
+        question: `f(x) = ${termText(pCoeff, pPow)} + ${termText(qCoeff, qPow)}. Find f'(${xVal}).`,
         answer: prodDerivAt,
         hints: [
-          `f'(x) = ${pCoeff * pPow}x^${pPow - 1} + ${qCoeff * qPow}x^${qPow - 1}.`,
-          `At x = ${xVal}: f'(${xVal}) = ${pCoeff * pPow}(${xVal})^${pPow - 1} + ${qCoeff * qPow}(${xVal})^${qPow - 1} = ${prodDerivAt}.`,
+          `f'(x) = ${termText(pCoeff * pPow, pPow - 1)} + ${termText(qCoeff * qPow, qPow - 1)}.`,
+          `At x = ${xVal}: f'(${xVal}) = ${pCoeff * pPow}(${xVal})${pPow - 1 === 1 ? '' : '^' + (pPow - 1)} + ${qCoeff * qPow}${qPow - 1 === 0 ? '' : '(' + xVal + ')' + (qPow - 1 === 1 ? '' : '^' + (qPow - 1))} = ${prodDerivAt}.`,
         ],
         evidence: {
           id: 'evidence-31',
@@ -952,19 +990,23 @@ function generateIntegrationInvestigation() {
   const n = pick([2, 3, 4]);
   const coeff = randomInt(1, 5);
   const constTerm = randomInt(1, 10);
-  const integral = `${coeff / (n + 1)}x^${n + 1} + ${constTerm}x + C`;
+  const integral = `${coefficientText(coeff, n + 1)}x^${n + 1} + ${constTerm}x + C`;
 
   const a = randomInt(0, 1);
   const b = randomInt(2, 5);
   const polyCoeff = randomInt(2, 4);
   const polyPow = pick([1, 2]);
-  const defIntegral = polyCoeff * (Math.pow(b, polyPow + 1) - Math.pow(a, polyPow + 1)) / (polyPow + 1);
+  const defNumerator = polyCoeff * (Math.pow(b, polyPow + 1) - Math.pow(a, polyPow + 1));
+  const defExact = exactNumber(defNumerator, polyPow + 1);
+  const defIntegral = Number.isInteger(defNumerator / (polyPow + 1)) ? defNumerator / (polyPow + 1) : defExact;
 
   const areaA = 1;
   const areaB = randomInt(2, 4);
   const areaCoeff = randomInt(1, 3);
   const areaPow = 2;
-  const area = areaCoeff * (Math.pow(areaB, areaPow + 1) - Math.pow(areaA, areaPow + 1)) / (areaPow + 1);
+  const areaNumerator = areaCoeff * (Math.pow(areaB, areaPow + 1) - Math.pow(areaA, areaPow + 1));
+  const areaExact = exactNumber(areaNumerator, areaPow + 1);
+  const area = Number.isInteger(areaNumerator / (areaPow + 1)) ? areaNumerator / (areaPow + 1) : areaExact;
 
   return {
     id: 'case-enhanced-14',
@@ -979,11 +1021,11 @@ function generateIntegrationInvestigation() {
     culprit: 'suspect-2',
     stages: [
       {
-        narrative: `Detective, the lab notebook contains a suspicious antiderivative: ∫(${coeff}x^${n} + ${constTerm}) dx. The power rule for integration: ∫ax^n dx = a×x^(n+1)/(n+1) + C. Integrate term by term to find the general antiderivative. This formula was used to encode experimental results.`,
-        question: `∫(${coeff}x^${n} + ${constTerm}) dx = ?`,
+        narrative: `Detective, the lab notebook contains a suspicious antiderivative: ∫(${termText(coeff, n)} + ${constTerm}) dx. The power rule for integration: ∫ax^n dx = a×x^(n+1)/(n+1) + C. Integrate term by term to find the general antiderivative. This formula was used to encode experimental results.`,
+        question: `∫(${termText(coeff, n)} + ${constTerm}) dx = ?`,
         answer: integral,
         hints: [
-          `∫${coeff}x^${n} dx = ${coeff}x^(${n} + 1) ÷ (${n} + 1) = ${coeff / (n + 1)}x^${n + 1}.`,
+          `∫${termText(coeff, n)} dx = ${coeff === 1 ? '' : coeff}x^(${n} + 1) ÷ (${n} + 1) = ${coefficientText(coeff, n + 1)}x^${n + 1}.`,
           `Plus ∫${constTerm} dx = ${constTerm}x + C. So answer: ${integral}.`,
         ],
         evidence: {
@@ -993,30 +1035,30 @@ function generateIntegrationInvestigation() {
         },
       },
       {
-        narrative: `A second clue: a definite integral from x = ${a} to x = ${b}: ∫₀${a === 0 ? '' : '^' + a}${'^' + b} ${polyCoeff}x^${polyPow} dx. The definite integral = F(b) − F(a). Evaluate the antiderivative at the bounds and subtract. This calculates the area under the curve — the exact area where evidence was hidden.`,
-        question: `∫₀${a === 0 ? '' : '^' + a}${b} ${polyCoeff}x^${polyPow} dx = F(${b}) − F(${a}) = ?`,
+        narrative: `A second clue: a definite integral from x = ${a} to x = ${b}: ∫ from ${a} to ${b} of ${polyCoeff}x^${polyPow} dx. The definite integral = F(b) − F(a). Evaluate the antiderivative at the bounds and subtract. This calculates the area under the curve — the exact area where evidence was hidden.`,
+        question: `∫ from ${a} to ${b} of ${polyCoeff}x^${polyPow} dx = F(${b}) − F(${a}) = ? (a whole number or a fraction)`,
         answer: defIntegral,
         hints: [
-          `Antiderivative: F(x) = ${polyCoeff}x^${polyPow + 1} ÷ ${polyPow + 1} = ${polyCoeff / (polyPow + 1)}x^${polyPow + 1}.`,
-          `F(${b}) − F(${a}) = ${polyCoeff / (polyPow + 1)}(${b}^${polyPow + 1} − ${a}^${polyPow + 1}) = ${defIntegral}.`,
+          `Antiderivative: F(x) = ${polyCoeff}x^${polyPow + 1} ÷ ${polyPow + 1} = ${coefficientText(polyCoeff, polyPow + 1)}x^${polyPow + 1}.`,
+          `F(${b}) − F(${a}) = ${exactNumber(polyCoeff, polyPow + 1)} × (${b}^${polyPow + 1} − ${a}^${polyPow + 1}) = ${defExact}${defExact.includes('/') ? ' (about ' + (defNumerator / (polyPow + 1)).toFixed(2) + ')' : ''}.`,
         ],
         evidence: {
           id: 'evidence-34',
-          text: `The area ${defIntegral} corresponds to the lab's off-limits storage room. The head researcher was at a conference and couldn't have accessed the lab. The lab director's security badge was logged entering that storage room at the time the data was planted.`,
+          text: `The area ${defExact} corresponds to the lab's off-limits storage room. The head researcher was at a conference and couldn't have accessed the lab. The lab director's security badge was logged entering that storage room at the time the data was planted.`,
           eliminates: ['suspect-1'],
         },
       },
       {
-        narrative: `The final piece: the area under curve y = ${areaCoeff}x² from x = ${areaA} to x = ${areaB}. This was used to calculate the exact amount of missing research funding. Integrate and evaluate. The result matches the embezzled amount.`,
-        question: `∫₀${areaA}${areaB} ${areaCoeff}x² dx = area under curve from ${areaA} to ${areaB} = ?`,
+        narrative: `The final piece: the area under curve y = ${areaCoeff === 1 ? '' : areaCoeff}x² from x = ${areaA} to x = ${areaB}. This was used to calculate the exact amount of missing research funding. Integrate and evaluate. The result matches the embezzled amount.`,
+        question: `∫ from ${areaA} to ${areaB} of ${areaCoeff === 1 ? '' : areaCoeff}x² dx = area under the curve = ? (a whole number or a fraction)`,
         answer: area,
         hints: [
-          `∫${areaCoeff}x² dx = ${areaCoeff}x³ ÷ 3 = ${areaCoeff / 3}x³.`,
-          `F(${areaB}) − F(${areaA}) = ${areaCoeff / 3}(${areaB}³ − ${areaA}³) = ${areaCoeff / 3 * (areaB * areaB * areaB - areaA * areaA * areaA)}. Round to ${area}.`,
+          `∫${areaCoeff === 1 ? '' : areaCoeff}x² dx = ${areaCoeff === 1 ? '' : areaCoeff}x³ ÷ 3 = ${coefficientText(areaCoeff, 3)}x³.`,
+          `F(${areaB}) − F(${areaA}) = ${exactNumber(areaCoeff, 3)} × (${areaB}³ − ${areaA}³) = ${areaExact}${areaExact.includes('/') ? ' (about ' + (areaNumerator / 3).toFixed(2) + ')' : ''}.`,
         ],
         evidence: {
           id: 'evidence-35',
-          text: `The embezzled amount matches the area ${area}. The student can only submit purchase requests, not authorise them. The head researcher was at a conference — his signature was forged. Only the director knows the signing protocols and the head researcher's signature well enough to forge it.`,
+          text: `The embezzled amount matches the area ${areaExact}. The student can only submit purchase requests, not authorise them. The head researcher was at a conference — his signature was forged. Only the director knows the signing protocols and the head researcher's signature well enough to forge it.`,
           eliminates: ['suspect-1'],
         },
       },
@@ -1182,7 +1224,7 @@ function generateCodedLedger() {
         answer: x3,
         hints: [
           `Multiply both sides by 2: 2x + ${c3} = ${total3 * 2}.`,
-          `Subtract ${c3}: 2x = ${total3 * 2 - c3}. Divide by 2: x = ${(total3 * 2 - c3) / 2} = 5.`,
+          `Subtract ${c3}: 2x = ${total3 * 2 - c3}. Divide by 2: x = ${(total3 * 2 - c3) / 2}.`,
         ],
         evidence: {
           id: 'ledger-ev-3',
