@@ -1,82 +1,33 @@
-# CLAUDE.md
+# Tenali — Claude Code Instructions
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
-
-## Commands
-
-**Run the server (development):**
-```bash
-cd server && node index.js
-```
-Server starts on port 4000 (or `PORT` env var). No nodemon — restart manually after changes.
-
-**Run the client (development):**
-```bash
-cd client && npm run dev
-```
-Vite dev server on port 5173. All `*-api` and `/api` routes are proxied to `http://127.0.0.1:4000`.
-
-**Build for production:**
-```bash
-cd client && npm run build
-```
-Output goes to `client/dist/`. The Express server serves this statically in production.
-
-**Lint the client:**
-```bash
-cd client && npm run lint
-```
-
-**Deploy (production on this server):**
-```bash
-sudo systemctl restart tenali
-```
-The systemd service runs `node /home/tenali/tenali/server/index.js` as the `tenali` user. Nginx proxies `tenali.fun` → port 4000 with SSL already configured.
+> **Canonical Operating Policy**: All AI coding agents operating in this repository must comply with the universal rules defined in [`AGENTS.md`](AGENTS.md) and consult [`docs/map.md`](docs/map.md) for repository architecture, data locations, and source of truth rules.
 
 ---
 
-## Architecture
+## Quick Reference for Claude Code
 
-### Overview
-Tenali is a **stateless** adaptive math quiz platform. The backend generates questions algorithmically on every request — there is no database for question storage. All 69 puzzle types have a `GET /<type>-api/question` and `POST /<type>-api/check` pair in a single file.
+### 1. Mandatory Pre-Flight
+- Always run `git status` and `git branch -vv` to verify the working tree and active branch before editing files.
+- Work only on the authorized branch; never push directly to remotes or open PRs.
+- Active PR target branch for development contributions is **`demo`**.
 
-### Server (`server/index.js` — ~9000 lines)
-One monolithic file. The structure top-to-bottom:
-1. **Solve middleware** (wraps all `POST *-api/check` calls) — monkey-patches `res.json` to inject `explanation` when `req.body.solve === true`, without touching individual handlers.
-2. **`generateExplanation(req, data)`** (~700 lines) — produces step-by-step educational walkthroughs for 50+ puzzle types. Called only by the solve middleware.
-3. **Utility functions** — `gcd`, `lcm`, `simplifyFraction`, `randomInt`, `pick`, `digitRange`, `formatSignedTerm`, etc.
-4. **Data loading** — `loadQuestions()` reads 991 GK JSONs from `chitragupta/questions/`; `loadVocab()` reads 7,662 vocab JSONs from `vocab/questions/`. Both load at startup.
-5. **59 endpoint pairs** — one `GET` (question generation) and one `POST` (answer checking) per puzzle type. Difficulty (0–3) drives parameter ranges via helpers like `digitRange(difficulty)`.
-6. **Auth** (`server/auth.js`) — JWT auth backed by MongoDB, with an in-memory fallback for the seed users when MongoDB is unavailable. Seed users are configured via the `TENALI_SEED_USERS` env var (`"username:password"` pairs), not hardcoded.
-7. **Static serving** — serves `client/dist`, `graph/`, `enhanced/`, and a SPA catch-all.
+### 2. Architecture & Modularity
+- **Never append new components to `client/src/App.jsx`**.
+- New interactive quiz modules belong in `client/src/apps/<Name>.jsx` or under a dedicated directory in `client/src/<feature>/`, following [`client/src/apps/README.md`](client/src/apps/README.md) and [`skills/tenali-modular-development/SKILL.md`](skills/tenali-modular-development/SKILL.md).
+- Backend routes belong in `server/routes/<domain>.js` mounted via `server/index.js`.
 
-### Client (`client/src/App.jsx` — ~47000 lines)
-One monolithic React file. All components live here. Structure:
-- **`useAuth()`** — login/logout hook with localStorage persistence and a custom `tenali-auth-change` window event for cross-component sync.
-- **`useTimer()`** — per-question elapsed timer (250ms tick).
-- **`useAutoAdvance()`** — auto-advances after a correct answer (3.5s delay).
-- **`makeQuizApp({ title, apiPath, diffLabels, placeholders, answerField })`** — factory that generates ~45 standard quiz components. Each has setup → playing → finished screens with adaptive difficulty, Solve, Skip, and self-report buttons built in. Use this for new puzzle types.
-- **Custom quiz apps** — `TatsavitApp`, `RandomMixApp`, `AdaptiveTablesApp`, `ScaffoldedTablesApp`, and others that need non-standard state or UI. These are not factory-generated.
-- **`modeMap`** — maps string keys (e.g. `'trig'`) to React components. The URL/routing is just a `useState` in the root `App` component — no React Router.
-- **`regularApps`** — array of `{ key, name, subtitle, color }` objects that drive the home screen grid.
-- **`fetchQuestionForType(type, difficulty)`** — maps puzzle keys to their API paths; used by `RandomMixApp` and `CustomApp`.
+### 3. Local Commands (Separate Client & Server)
+- **Zero-Dependency Server Check**: `node server/lib/bkt.test.js`
+- **Frontend Production Build**: `cd client && npm run build`
+- **Frontend Lint**: `cd client && npm run lint` (baseline: 0 errors, 117 warnings)
+- **Frontend Unit Tests**: `cd client && npm test`
+- **Backend API Tests**: `cd server && npm test`
 
-### Adding a new puzzle type
-1. Add `GET /<type>-api/question` and `POST /<type>-api/check` endpoints in `server/index.js`.
-2. Add a proxy entry in `client/vite.config.js` for `/<type>-api`.
-3. Create the component with `makeQuizApp(...)` in `App.jsx` (or custom if needed).
-4. Register it in `modeMap` and add an entry to `regularApps`.
-5. Add a case to `generateExplanation()` in `server/index.js` for the Solve button.
-
-### Adaptive difficulty
-Each quiz tracks `adaptScore` (float 0–3). Correct → +0.15 to +0.5; wrong → −0.4 to −0.6. The score maps to easy/medium/hard/extrahard, which drives the `difficulty` parameter sent to the question API. Difficulty is per-component instance and is not persisted across sessions.
-
-### Deployment topology
-```
-tenali.fun (DNS → <production IP — see README deployment section>)
-  └── Nginx (SSL via Let's Encrypt, /etc/nginx/sites-available/tenali)
-        └── proxy_pass http://127.0.0.1:4000
-              └── tenali.service (systemd, runs as tenali user)
-                    └── node /home/tenali/tenali/server/index.js
-```
-The repo lives at `/home/tenali/tenali/`. Changes to server code require a service restart. Changes to client code require a production build followed by a service restart.
+### 4. Specialized Skills
+For detailed workflows, invoke and follow the skills under `skills/`:
+- Repository safety: [`skills/tenali-repository-governance/SKILL.md`](skills/tenali-repository-governance/SKILL.md)
+- Modular development: [`skills/tenali-modular-development/SKILL.md`](skills/tenali-modular-development/SKILL.md)
+- UI and code consistency: [`skills/tenali-consistent-output/SKILL.md`](skills/tenali-consistent-output/SKILL.md)
+- Testing and verification: [`skills/tenali-testing-and-verification/SKILL.md`](skills/tenali-testing-and-verification/SKILL.md)
+- Review and verification: [`skills/tenali-code-review/SKILL.md`](skills/tenali-code-review/SKILL.md)
+- RFC workflow: [`skills/tenali-rfc-workflow/SKILL.md`](skills/tenali-rfc-workflow/SKILL.md)

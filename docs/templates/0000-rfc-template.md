@@ -4,7 +4,7 @@
 - **Status:** Draft | Under Review | Approved | Implemented
 - **Created Date:** YYYY-MM-DD
 - **Target Module/Vertical:** [Fractions | LCM | Engagement | Progression | Core UI]
-- **Related Issue / Problem Statement:** [Link to problem statement, e.g., `docs/problem-statements.md#learner-motivation`]
+- **Related Issue / Problem Statement:** [Link to problem statement, e.g., `docs/specs/problem-statements.md#learner-motivation`]
 
 ---
 

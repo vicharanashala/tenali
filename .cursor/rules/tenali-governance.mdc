@@ -1,0 +1,19 @@
+---
+description: Universal repository governance, modularity, and verification rules for Tenali
+globs: *
+alwaysApply: true
+---
+
+# Tenali Repository Rules (Cursor IDE)
+
+All Cursor agent and editing sessions must strictly adhere to [`AGENTS.md`](../../AGENTS.md) and consult [`docs/map.md`](../../docs/map.md).
+
+## Key Guidelines
+1. **Never edit `client/src/App.jsx` to add new components.** Create dedicated modules in `client/src/apps/` or `client/src/<feature>/`.
+2. **Never push directly to remotes or open PRs.** Humans retain exclusive publication responsibility.
+3. **Target branch for PRs is `demo`**.
+4. **Local Verification**:
+   - `node server/lib/bkt.test.js`
+   - `cd client && npm run build`
+   - `cd client && npm run lint`
+5. Consult [`skills/`](../../skills/) for specialized workflows (governance, modularity, code review, testing, RFCs).
