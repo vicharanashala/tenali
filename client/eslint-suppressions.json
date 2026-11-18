@@ -10,28 +10,28 @@
       "count": 5
     },
     "no-unused-vars": {
-      "count": 209
+      "count": 206
     },
     "no-useless-escape": {
       "count": 4
     },
     "react-hooks/immutability": {
-      "count": 22
+      "count": 21
     },
     "react-hooks/preserve-manual-memoization": {
       "count": 73
     },
     "react-hooks/purity": {
-      "count": 63
+      "count": 54
     },
     "react-hooks/refs": {
-      "count": 80
+      "count": 78
     },
     "react-hooks/rules-of-hooks": {
       "count": 6
     },
     "react-hooks/set-state-in-effect": {
-      "count": 93
+      "count": 90
     },
     "react-refresh/only-export-components": {
       "count": 8
@@ -151,11 +151,6 @@
       "count": 1
     }
   },
-  "src/detective-app.jsx": {
-    "react-hooks/set-state-in-effect": {
-      "count": 1
-    }
-  },
   "src/hooks/useTimer.js": {
     "react-hooks/purity": {
       "count": 1
@@ -230,6 +225,28 @@
     },
     "react-refresh/only-export-components": {
       "count": 6
+    }
+  },
+  "src/apps/SuperTables1App.jsx": {
+    "no-unused-vars": {
+      "count": 3
+    },
+    "react-hooks/purity": {
+      "count": 4
+    },
+    "react-hooks/refs": {
+      "count": 2
+    }
+  },
+  "src/apps/SuperTablesApp.jsx": {
+    "react-hooks/immutability": {
+      "count": 1
+    },
+    "react-hooks/purity": {
+      "count": 5
+    },
+    "react-hooks/set-state-in-effect": {
+      "count": 3
     }
   }
 }
