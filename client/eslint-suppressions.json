@@ -1,16 +1,16 @@
 {
   "src/App.jsx": {
     "no-empty": {
-      "count": 148
+      "count": 144
     },
     "no-restricted-syntax": {
       "count": 1
     },
     "no-unexpected-multiline": {
-      "count": 5
+      "count": 4
     },
     "no-unused-vars": {
-      "count": 209
+      "count": 203
     },
     "no-useless-escape": {
       "count": 4
@@ -25,13 +25,13 @@
       "count": 63
     },
     "react-hooks/refs": {
-      "count": 80
+      "count": 78
     },
     "react-hooks/rules-of-hooks": {
       "count": 6
     },
     "react-hooks/set-state-in-effect": {
-      "count": 93
+      "count": 91
     },
     "react-refresh/only-export-components": {
       "count": 8
@@ -101,6 +101,31 @@
       "count": 1
     }
   },
+  "src/apps/FuncEvalApp.jsx": {
+    "no-empty": {
+      "count": 4
+    },
+    "no-unused-vars": {
+      "count": 5
+    },
+    "react-hooks/refs": {
+      "count": 1
+    },
+    "react-hooks/set-state-in-effect": {
+      "count": 1
+    }
+  },
+  "src/apps/RandomMixApp.jsx": {
+    "no-unused-vars": {
+      "count": 1
+    },
+    "react-hooks/refs": {
+      "count": 1
+    },
+    "react-hooks/set-state-in-effect": {
+      "count": 1
+    }
+  },
   "src/components/GlossaryText.jsx": {
     "react-hooks/set-state-in-effect": {
       "count": 1
@@ -147,11 +172,6 @@
     }
   },
   "src/components/learning/GSTLearnPage.jsx": {
-    "react-hooks/set-state-in-effect": {
-      "count": 1
-    }
-  },
-  "src/detective-app.jsx": {
     "react-hooks/set-state-in-effect": {
       "count": 1
     }
