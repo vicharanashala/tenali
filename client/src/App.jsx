@@ -1,4 +1,4 @@
-import { useAutoAdvance, renderFeedback } from './lib/tableAppHelpers'
+import { renderFeedback } from './lib/tableAppHelpers'
 export { renderFeedback } from './lib/tableAppHelpers'
 import YazdanTablesApp from './apps/YazdanTablesApp'
 import JatinTablesApp from './apps/JatinTablesApp'
@@ -551,6 +551,23 @@ const DEFAULT_TOTAL = 20
 // Bumped from 1500 → 3500 ms so users actually have time to read the feedback
 // (they can still press Enter or click "Next Question" to skip ahead immediately).
 const AUTO_ADVANCE_MS = 3500
+
+/**
+ * useAutoAdvance Hook
+ * Auto-advances to the next question after correct answer is revealed.
+ * Only triggers if revealed=true AND isCorrect=true.
+ * Calls advanceFnRef.current() after AUTO_ADVANCE_MS delay.
+ *
+ * @param {boolean} revealed - Whether the answer feedback is shown
+ * @param {React.MutableRefObject<Function>} advanceFnRef - Ref to the advance function
+ * @param {boolean} isCorrect - Whether the user's answer was correct
+ */
+function useAutoAdvance(revealed, advanceFnRef, isCorrect) {
+  useEffect(() => {
+    // Disabled auto-advance so user has to click "Next Question" manually.
+    return;
+  }, [revealed, isCorrect])
+}
 
 /**
  * Speed-run time limits per difficulty level (seconds).
@@ -41467,7 +41484,7 @@ function App() {
         <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
           {theme === 'dark' ? '☀️' : '🌙'}
         </button>
-        <JatinTablesApp studentName="Jatin" />
+        <JatinTablesApp studentName="Jatin" useAutoAdvance={useAutoAdvance} />
       </>
     )
   }
@@ -41479,7 +41496,7 @@ function App() {
         <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
           {theme === 'dark' ? '☀️' : '🌙'}
         </button>
-        <YazdanTablesApp studentName="Yazdan" />
+        <YazdanTablesApp studentName="Yazdan" useAutoAdvance={useAutoAdvance} />
       </>
     )
   }

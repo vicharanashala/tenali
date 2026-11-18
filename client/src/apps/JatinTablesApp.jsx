@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { useAutoAdvance, renderFeedback } from '../lib/tableAppHelpers'
+import { renderFeedback } from '../lib/tableAppHelpers'
 
 /* ── Jatin's 10-Level Table Learning Strategy ──────────────── */
 /**
@@ -16,7 +16,7 @@ import { useAutoAdvance, renderFeedback } from '../lib/tableAppHelpers'
  * L9:  Direct input — no assistance (×10)
  * L10: Fill in the blank — missing multiplier or result (×10)
  */
-export default function JatinTablesApp({ studentName }) {
+export default function JatinTablesApp({ studentName, useAutoAdvance }) {
   const TOTAL_LEVELS = 10
   const FADE_DURATION = 2000
 

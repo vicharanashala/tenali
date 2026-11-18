@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { useAutoAdvance, renderFeedback } from '../lib/tableAppHelpers'
+import { renderFeedback } from '../lib/tableAppHelpers'
 
 /* ── Yazdan's 10-Level Tables App ──────────────────────────── */
 /**
@@ -16,7 +16,7 @@ import { useAutoAdvance, renderFeedback } from '../lib/tableAppHelpers'
  * L9:  Match the following — 5 pairs
  * L10: Mixed final challenge — all formats (×10)
  */
-export default function YazdanTablesApp({ studentName }) {
+export default function YazdanTablesApp({ studentName, useAutoAdvance }) {
   const TOTAL_LEVELS = 10
   const FAST_MS = 6000
   const FADE_DURATION = 3000 // ms for answer to fully fade

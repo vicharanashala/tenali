@@ -1,22 +1,3 @@
-import { useEffect } from 'react'
-
-/**
- * useAutoAdvance Hook
- * Auto-advances to the next question after correct answer is revealed.
- * Only triggers if revealed=true AND isCorrect=true.
- * Calls advanceFnRef.current() after AUTO_ADVANCE_MS delay.
- *
- * @param {boolean} revealed - Whether the answer feedback is shown
- * @param {React.MutableRefObject<Function>} advanceFnRef - Ref to the advance function
- * @param {boolean} isCorrect - Whether the user's answer was correct
- */
-export function useAutoAdvance(revealed, advanceFnRef, isCorrect) {
-  useEffect(() => {
-    // Disabled auto-advance so user has to click "Next Question" manually.
-    return;
-  }, [revealed, isCorrect])
-}
-
 /**
  * renderFeedback — Renders feedback text. For solve feedback, renders a
  * structured card with highlighted answer and formatted explanation.
