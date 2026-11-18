@@ -231,5 +231,19 @@
     "react-refresh/only-export-components": {
       "count": 6
     }
+  },
+  "src/apps/FractionAddApp.jsx": {
+    "no-unused-vars": {
+      "count": 11
+    },
+    "no-empty": {
+      "count": 4
+    },
+    "react-hooks/set-state-in-effect": {
+      "count": 2
+    },
+    "react-hooks/refs": {
+      "count": 1
+    }
   }
 }
