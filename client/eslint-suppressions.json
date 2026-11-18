@@ -10,7 +10,7 @@
       "count": 5
     },
     "no-unused-vars": {
-      "count": 209
+      "count": 210
     },
     "no-useless-escape": {
       "count": 4
@@ -31,7 +31,7 @@
       "count": 6
     },
     "react-hooks/set-state-in-effect": {
-      "count": 93
+      "count": 91
     },
     "react-refresh/only-export-components": {
       "count": 8
@@ -66,6 +66,9 @@
     }
   },
   "src/PercentExplanationApp.jsx": {
+    "no-unused-vars": {
+      "count": 1
+    },
     "react-hooks/set-state-in-effect": {
       "count": 2
     }
@@ -99,6 +102,14 @@
     },
     "react-hooks/set-state-in-effect": {
       "count": 1
+    }
+  },
+  "src/apps/PercentApp.jsx": {
+    "no-unused-vars": {
+      "count": 1
+    },
+    "react-hooks/set-state-in-effect": {
+      "count": 2
     }
   },
   "src/components/GlossaryText.jsx": {
@@ -147,11 +158,6 @@
     }
   },
   "src/components/learning/GSTLearnPage.jsx": {
-    "react-hooks/set-state-in-effect": {
-      "count": 1
-    }
-  },
-  "src/detective-app.jsx": {
     "react-hooks/set-state-in-effect": {
       "count": 1
     }
