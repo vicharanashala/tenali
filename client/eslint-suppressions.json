@@ -1,7 +1,7 @@
 {
   "src/App.jsx": {
     "no-empty": {
-      "count": 148
+      "count": 144
     },
     "no-restricted-syntax": {
       "count": 1
@@ -10,7 +10,7 @@
       "count": 5
     },
     "no-unused-vars": {
-      "count": 209
+      "count": 208
     },
     "no-useless-escape": {
       "count": 4
@@ -25,13 +25,13 @@
       "count": 63
     },
     "react-hooks/refs": {
-      "count": 80
+      "count": 78
     },
     "react-hooks/rules-of-hooks": {
       "count": 6
     },
     "react-hooks/set-state-in-effect": {
-      "count": 93
+      "count": 92
     },
     "react-refresh/only-export-components": {
       "count": 8
@@ -151,11 +151,6 @@
       "count": 1
     }
   },
-  "src/detective-app.jsx": {
-    "react-hooks/set-state-in-effect": {
-      "count": 1
-    }
-  },
   "src/hooks/useTimer.js": {
     "react-hooks/purity": {
       "count": 1
@@ -230,6 +225,33 @@
     },
     "react-refresh/only-export-components": {
       "count": 6
+    }
+  },
+  "src/apps/AdaptiveMixedApp.jsx": {
+    "no-empty": {
+      "count": 2
+    },
+    "react-hooks/refs": {
+      "count": 1
+    },
+    "react-hooks/set-state-in-effect": {
+      "count": 1
+    }
+  },
+  "src/apps/AdaptiveTablesApp.jsx": {
+    "no-empty": {
+      "count": 2
+    },
+    "no-unused-vars": {
+      "count": 1
+    },
+    "react-hooks/refs": {
+      "count": 1
+    }
+  },
+  "src/detective-app.jsx": {
+    "react-hooks/set-state-in-effect": {
+      "count": 1
     }
   }
 }
