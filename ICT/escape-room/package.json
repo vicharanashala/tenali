@@ -1,0 +1,23 @@
+{
+  "name": "tenali-math-escape-room",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Standalone Math Escape Room puzzle module for tenali.fun (Classes 6-10 CBSE/ICSE)",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^6.0.7",
+    "vitest": "^3.0.4"
+  }
+}
