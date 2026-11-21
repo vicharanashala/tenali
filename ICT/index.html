@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="An interactive science learning project about evaporation, its factors, examples and a quick quiz.">
+  <title>Evaporation | Interactive Science Project</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav container" aria-label="Main navigation">
+      <a class="brand" href="#home"><span class="brand-icon">💧</span> Science<span>Lab</span></a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+      <div class="nav-links" id="navLinks">
+        <a href="#learn">Learn</a>
+        <a href="#factors">Factors</a>
+        <a href="#examples">Examples</a>
+        <a href="#simulation">Simulation</a>
+        <a href="#quiz">Quiz</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div>
+          <p class="eyebrow">PHYSICS • EVERYDAY SCIENCE</p>
+          <h1>Discover the science of <span>evaporation.</span></h1>
+          <p class="hero-copy">Where does a puddle go after the rain? Why do wet clothes dry in the sun? Explore the fascinating process that turns liquid into vapour.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#learn">Start learning <span>→</span></a>
+            <a class="text-link" href="#simulation">Try the simulation</a>
+          </div>
+          <div class="hero-note"><span class="pulse"></span> Learn through concepts, examples and interaction</div>
+        </div>
+        <div class="hero-art" aria-label="Illustration of water evaporating from a puddle">
+          <div class="sun">☀️</div>
+          <div class="vapor vapor-one">〰</div><div class="vapor vapor-two">〰</div><div class="vapor vapor-three">〰</div>
+          <div class="drop drop-one">💧</div><div class="drop drop-two">💧</div>
+          <div class="puddle"></div>
+          <div class="ground"></div>
+          <div class="art-label">Liquid water → Water vapour</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section container" id="learn">
+      <div class="section-heading">
+        <p class="eyebrow">01 / THE CONCEPT</p>
+        <h2>What is evaporation?</h2>
+        <p>Evaporation is a natural process that happens all around us.</p>
+      </div>
+      <div class="concept-card">
+        <div class="concept-symbol">💧 <span>→</span> ☁️</div>
+        <div>
+          <h3>Liquid changes into vapour</h3>
+          <p><strong>Evaporation</strong> is the process by which a liquid changes into vapour from its surface at temperatures below its boiling point. It is a surface phenomenon and can occur at any temperature.</p>
+        </div>
+      </div>
+      <div class="info-grid">
+        <article class="info-card">
+          <span class="card-icon">🌡️</span><h3>Can happen at any temperature</h3>
+          <p>Evaporation can take place even when a liquid is not boiling.</p>
+        </article>
+        <article class="info-card">
+          <span class="card-icon">🫧</span><h3>Surface phenomenon</h3>
+          <p>Only molecules at the exposed surface can escape directly into the air.</p>
+        </article>
+        <article class="info-card">
+          <span class="card-icon">❄️</span><h3>Cooling effect</h3>
+          <p>Higher-energy molecules escape, reducing the average energy of the remaining liquid.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section section-tint" id="factors">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">02 / WHAT CHANGES THE RATE?</p>
+          <h2>Factors affecting evaporation</h2>
+          <p>The rate of evaporation depends on several conditions.</p>
+        </div>
+        <div class="factor-grid">
+          <article class="factor-card"><div class="factor-visual sunny">☀️</div><div><h3>Temperature</h3><p>Higher temperature gives particles more kinetic energy, so evaporation becomes faster.</p><span class="tag">Higher temperature ↑ rate</span></div></article>
+          <article class="factor-card"><div class="factor-visual windy">💨</div><div><h3>Wind speed</h3><p>Moving air carries away water vapour near the surface, allowing more liquid to evaporate.</p><span class="tag">Higher wind speed ↑ rate</span></div></article>
+          <article class="factor-card"><div class="factor-visual spread">🫗</div><div><h3>Surface area</h3><p>A larger exposed surface allows more particles to escape at the same time.</p><span class="tag">Larger surface area ↑ rate</span></div></article>
+          <article class="factor-card"><div class="factor-visual humid">💦</div><div><h3>Humidity</h3><p>When air already contains a lot of water vapour, evaporation becomes slower.</p><span class="tag">Higher humidity ↓ rate</span></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section container" id="examples">
+      <div class="section-heading">
+        <p class="eyebrow">03 / SCIENCE AROUND US</p>
+        <h2>Evaporation in everyday life</h2>
+        <p>We observe evaporation in many familiar situations.</p>
+      </div>
+      <div class="examples-grid">
+        <article class="example-card"><div class="example-art clothes">👕</div><h3>Drying of wet clothes</h3><p>Water in wet clothes evaporates into the surrounding air.</p></article>
+        <article class="example-card"><div class="example-art sweat">🏃</div><h3>Cooling by sweating</h3><p>Evaporation of sweat removes heat from our skin and cools the body.</p></article>
+        <article class="example-card"><div class="example-art puddle">🌦️</div><h3>Drying of puddles</h3><p>After rain, water on roads and other surfaces gradually evaporates.</p></article>
+        <article class="example-card"><div class="example-art perfume">🌸</div><h3>Perfume spreading</h3><p>Volatile liquid components evaporate and their vapour spreads through air.</p></article>
+      </div>
+    </section>
+
+    <section class="section section-dark" id="simulation">
+      <div class="container">
+        <div class="section-heading light">
+          <p class="eyebrow">04 / EXPLORE</p>
+          <h2>Experiment with evaporation</h2>
+          <p>Change the conditions and see how they affect the relative rate of evaporation.</p>
+        </div>
+        <div class="simulator">
+          <div class="sim-controls">
+            <label for="temperature">Temperature <strong id="tempValue">25°C</strong></label>
+            <input id="temperature" type="range" min="5" max="50" value="25">
+            <label for="wind">Wind speed <strong id="windValue">Low</strong></label>
+            <input id="wind" type="range" min="1" max="3" value="1">
+            <label for="area">Exposed surface area <strong id="areaValue">Medium</strong></label>
+            <input id="area" type="range" min="1" max="3" value="2">
+            <label for="humidity">Humidity <strong id="humidityValue">50%</strong></label>
+            <input id="humidity" type="range" min="10" max="90" value="50">
+            <button class="button primary full" id="resetSim" type="button">Reset experiment</button>
+          </div>
+          <div class="sim-result">
+            <div class="beaker-wrap">
+              <div class="steam" id="steam"><i></i><i></i><i></i></div>
+              <div class="beaker"><div class="water" id="water"></div></div>
+            </div>
+            <p class="result-label">Relative rate of evaporation</p>
+            <h3 id="rateText">Moderate</h3>
+            <div class="meter"><div id="meterFill"></div></div>
+            <p class="sim-explanation" id="simExplanation" aria-live="polite">At these settings, evaporation is occurring at a moderate relative rate.</p>
+            <p class="small-note">Educational model only — not a measured or predictive scientific instrument.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section container" id="quiz">
+      <div class="section-heading">
+        <p class="eyebrow">05 / CHECK YOUR UNDERSTANDING</p>
+        <h2>Quick knowledge check</h2>
+        <p>Answer these questions to test what you have learned.</p>
+      </div>
+      <div class="quiz-box">
+        <div class="quiz-top"><span id="questionCount">QUESTION 1 OF 5</span><span id="scoreLabel">Score: 0</span></div>
+        <div class="progress"><div id="progressFill"></div></div>
+        <h3 id="question">Evaporation takes place from which part of a liquid?</h3>
+        <div id="options" class="options"></div>
+        <p id="feedback" class="feedback" aria-live="polite"></p>
+        <button class="button primary" id="nextQuestion" type="button" disabled>Next question →</button>
+        <div id="quizFinal" class="quiz-final" hidden></div>
+      </div>
+    </section>
+
+    <section class="section conclusion">
+      <div class="container conclusion-inner">
+        <p class="eyebrow">06 / KEY TAKEAWAY</p>
+        <h2>Small particles. Big changes.</h2>
+        <p>Evaporation is an important part of our surroundings and the water cycle. Understanding its factors helps explain many everyday observations, from drying clothes to cooling by sweat.</p>
+        <a class="button light-button" href="#home">Back to top ↑</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <a class="brand" href="#home"><span class="brand-icon">💧</span> Science<span>Lab</span></a>
+      <p>Interactive learning project on evaporation.</p>
+      <p class="copyright">Made for science education • <span id="year"></span></p>
+    </div>
+  </footer>
+</body>
+</html>
