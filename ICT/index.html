@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="An interactive learning website for balancing chemical equations.">
+  <title>Balance It! | Chemical Equation Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="Balance It home"><span class="brand-mark">⚗</span><span>Balance<span class="brand-accent">It!</span></span></a>
+    <nav aria-label="Main navigation">
+      <a href="#learn">Learn</a><a href="#lab">Simulation lab</a><a href="#practice">Practice</a>
+    </nav>
+    <a class="header-cta" href="#lab">Start experimenting <span>↗</span></a>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="eyebrow-dot"></span> YOUR INTERACTIVE CHEMISTRY LAB</div>
+        <h1>Make every<br><span>atom count.</span></h1>
+        <p class="hero-lede">Explore the art of balancing chemical equations. Learn the rules, experiment with atoms, and test your chemistry skills.</p>
+        <div class="hero-actions"><a class="button button-primary" href="#lab">Explore the lab <span>→</span></a><a class="text-link" href="#learn">How it works <span>↓</span></a></div>
+        <div class="hero-proof"><div class="avatar-stack"><i>H</i><i>O</i><i>C</i></div><span>Learn by doing, one atom at a time.</span></div>
+      </div>
+      <div class="hero-art" aria-label="Illustration of a chemical reaction">
+        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+        <div class="molecule molecule-a"><b>H</b><b>H</b><em></em></div>
+        <div class="molecule molecule-b"><b>O</b><b>O</b><em></em></div>
+        <div class="molecule molecule-c"><b>H</b><b>O</b><b>H</b></div>
+        <div class="reaction-chip">2H₂ + O₂ <span>→</span> 2H₂O</div>
+        <div class="floating-note note-top">+ Conservation of mass</div>
+        <div class="floating-note note-bottom">Atoms are never lost ✦</div>
+      </div>
+      <div class="hero-bottom"><span>01 / UNDERSTAND</span><span>02 / EXPERIMENT</span><span>03 / MASTER</span></div>
+    </section>
+
+    <section class="section learn-section" id="learn">
+      <div class="section-heading"><div><div class="eyebrow">THE BIG IDEA</div><h2>What does it mean<br>to <span>balance</span> an equation?</h2></div><p>A chemical reaction rearranges atoms. It does not create or destroy them. A balanced equation has the same number of each type of atom on both sides.</p></div>
+      <div class="concept-grid">
+        <article class="concept-card"><div class="concept-icon icon-cyan">01</div><h3>Count the atoms</h3><p>Find how many atoms of each element appear in the reactants and products.</p></article>
+        <article class="concept-card"><div class="concept-icon icon-yellow">02</div><h3>Change coefficients</h3><p>Place whole-number coefficients in front of formulas. Never change subscripts.</p></article>
+        <article class="concept-card"><div class="concept-icon icon-coral">03</div><h3>Check both sides</h3><p>Count again. Each element must have equal totals on the left and right.</p></article>
+      </div>
+      <div class="law-strip"><span class="law-symbol">⚖</span><div><strong>The law of conservation of mass</strong><p>Matter is conserved in a chemical reaction. Balancing equations is how we show this using symbols.</p></div><span class="law-equation">Mass in = Mass out</span></div>
+    </section>
+
+    <section class="lab-section" id="lab">
+      <div class="lab-heading"><div><div class="eyebrow">INTERACTIVE SIMULATION</div><h2>Step into the <span>reaction lab.</span></h2></div><p>Choose a reaction, adjust its coefficients, and watch the atom counters update live.</p></div>
+      <div class="lab-layout">
+        <div class="lab-controls">
+          <label for="reaction-select">SELECT A REACTION</label>
+          <select id="reaction-select">
+            <option value="water">Formation of water</option>
+            <option value="ammonia">Formation of ammonia</option>
+            <option value="methane">Combustion of methane</option>
+            <option value="iron">Formation of iron oxide</option>
+            <option value="sodium">Sodium + chlorine</option>
+          </select>
+          <div class="reaction-description" id="reaction-description">Hydrogen reacts with oxygen to form water.</div>
+          <div class="lab-divider"></div>
+          <div class="control-title"><span>YOUR COEFFICIENTS</span><span class="tiny-label">EDIT THE NUMBERS</span></div>
+          <div id="coefficient-controls" class="coefficient-controls"></div>
+          <div class="lab-buttons"><button class="button button-primary" id="auto-balance">Auto-balance <span>✦</span></button><button class="button button-ghost" id="reset-reaction">Reset</button></div>
+          <p class="hint">Tip: A blank coefficient means 1. Only change the large numbers in front of formulas.</p>
+        </div>
+        <div class="lab-display">
+          <div class="display-top"><span class="live-dot"></span> LIVE ATOM COUNTER <span class="display-tag">SIMULATION 01</span></div>
+          <div class="equation-board">
+            <div class="side-label">REACTANTS</div><div class="formula-row" id="reactant-formulas"></div>
+            <div class="equation-arrow">→</div>
+            <div class="side-label">PRODUCTS</div><div class="formula-row" id="product-formulas"></div>
+          </div>
+          <div class="balance-status" id="balance-status" aria-live="polite"><span>●</span> Adjust the coefficients to balance the equation.</div>
+          <div class="counter-heading"><span>ATOM COUNT</span><span>LEFT vs RIGHT</span></div>
+          <div id="atom-counters" class="atom-counters"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="practice-section" id="practice">
+      <div class="practice-intro"><div class="eyebrow">QUICK KNOWLEDGE CHECK</div><h2>Ready to test<br>your <span>chemistry?</span></h2><p>Try a short challenge and see if you can spot the balanced equation.</p></div>
+      <div class="quiz-card">
+        <div class="quiz-top"><span>MINI CHALLENGE</span><span id="quiz-progress">QUESTION 1 / 3</span></div>
+        <h3 id="quiz-question">Which equation is balanced?</h3>
+        <div id="quiz-options" class="quiz-options"></div>
+        <div id="quiz-feedback" class="quiz-feedback" aria-live="polite">Choose an answer to check your understanding.</div>
+        <button class="button button-primary quiz-next" id="quiz-next" disabled>Next question <span>→</span></button>
+      </div>
+    </section>
+
+    <section class="takeaway">
+      <div class="takeaway-mark">✳</div><div><div class="eyebrow">REMEMBER THIS</div><h2>Same atoms. Same numbers.<br><span>Balanced equation.</span></h2></div><a class="button button-light" href="#home">Back to top ↑</a>
+    </section>
+  </main>
+  <footer><a class="brand footer-brand" href="#home"><span class="brand-mark">⚗</span><span>Balance<span class="brand-accent">It!</span></span></a><span>Made for curious chemistry learners.</span><span>Learn • Experiment • Balance</span></footer>
+  <script src="script.js"></script>
+</body>
+</html>
