@@ -481,7 +481,7 @@ function generateQuestion(lastTemplateIdx = -1, attempt = 0) {
 // MAIN EXPORT
 // ─────────────────────────────────────────────────────────────────────────────
 
-export default function PercentExplanationApp({ onBack }) {
+export default function PercentExplanationApp({ onBack, PercentApp }) {
   // Views: 'LEVELS' | 'EXPLANATION_L1' | 'QUIZ'
   const [view, setView] = useState('LEVELS');
   const [initialStep, setInitialStep] = useState(null);
