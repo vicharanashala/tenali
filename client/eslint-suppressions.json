@@ -231,5 +231,16 @@
     "react-refresh/only-export-components": {
       "count": 6
     }
+  },
+  "src/apps/VisualMathApp.jsx": {
+    "no-unused-vars": {
+      "count": 2
+    },
+    "no-empty": {
+      "count": 1
+    },
+    "react-hooks/set-state-in-effect": {
+      "count": 1
+    }
   }
 }
