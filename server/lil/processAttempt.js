@@ -106,6 +106,8 @@ async function processAttempt(input) {
     totalCoins: stateUpdate.totalCoins,
     totalXP: stateUpdate.totalXP,
     isMastered: masteryUpdate.isMastered,
+    pMastery: masteryUpdate.pMastery,
+    displayedMasteryPercent: masteryUpdate.displayedMasteryPercent,
     events,
     hookResults
   };
