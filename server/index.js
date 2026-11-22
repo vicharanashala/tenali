@@ -2211,10 +2211,20 @@ if (SUBPATH_REDIRECT && SUBPATH_REDIRECT !== '/') {
   app.get('/', (_req, res) => res.redirect(302, SUBPATH_REDIRECT + '/'));
 }
 
-app.get(/.*/, (_req, res) => {
+// Matrix Mystics base route (Issue #222)
+app.get('/matrixmystics', (_req, res) => {
   res.sendFile(path.join(clientDistPath, 'index.html'));
 });
 
+// Matrix Mystics deep-link route (Issue #223)
+app.get(/^\/matrixmystics\/.*$/, (_req, res) => {
+  res.sendFile(path.join(clientDistPath, 'index.html'));
+});
+
+// Generic SPA fallback — keep this last
+app.get(/.*/, (_req, res) => {
+  res.sendFile(path.join(clientDistPath, 'index.html'));
+});
 /**
  * START SERVER + BATTLE HANDLER
  * â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
