@@ -42201,9 +42201,9 @@ function App() {
   const [mode, setMode] = useState(() => {
     try {
       const params = new URLSearchParams(window.location.search);
-      return params.get('mode') || null;
+      return params.get('mode') || 'matrixmystics';
     } catch {
-      return null;
+      return 'matrixmystics';
     }
   })
 
@@ -42339,7 +42339,7 @@ function App() {
     const handlePopState = () => {
       try {
         const params = new URLSearchParams(window.location.search);
-        const urlMode = params.get('mode') || null;
+        const urlMode = params.get('mode') || 'matrixmystics';
         const urlView = params.get('view') || (urlMode ? 'puzzles' : 'landing');
         setMode(urlMode);
         setCurrentView(urlView === 'puzzles' ? 'puzzles' : 'landing');
@@ -44703,7 +44703,7 @@ function App() {
     indicesgym: IndicesGymApp,     // Indices-Gym — index laws (MCQ)
     polygym: PolyGymApp,           // Polynomials Gym — arithmetic → monomial algebra (MCQ)
     treasurehunt: TreasureHuntApp, // Treasure Hunt — solve & seek grid game
-    // matrixmystics mode removed — Matrix Mystics content now embedded in LinearAlgebraApp's mission quiz
+    matrixmystics: MatrixMysticsApp, // Matrix Mystics — comprehensive linear algebra MCQ test bank
     trackProgress: ProgressTrackerApp,
     riddle: RiddleApp,              // Math Riddles
     'water-jug-lab': WaterJugLab,
