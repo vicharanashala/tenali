@@ -19,9 +19,24 @@
 ---
 
 <!-- live-changelog:start -->
-### 📊 Total: 1212 commits · 98 active days · 62 unique authors
+### 📊 Total: 1216 commits · 99 active days · 63 unique authors
 
 > **📖 How to read this:** Each entry shows a clickable SHA, the author, and a one-line subject. Sub-bullets show the **exact files touched** with per-file `+additions −deletions`, the **total line stats**, and (when present) the **commit body** explaining what & why.
+
+#### 📅 2026-11-17  <sub>(4 commits)</sub>
+
+- 🐛 [`6b7d5005`](https://github.com/vicharanashala/tenali/commit/6b7d5005b324e6f6138d98b139d2502dec1c3a45) — **jgupta05072003-code** — accept equivalent answers, state rounding, fix content and add tests (follow-up to #519) (#524)
+    - 📁 **7 files:** `client/src/detective-answer.js` `+97 −11`, `client/src/detective-app.jsx` `+9 −2`, `client/src/detective-board-cases.js` `+2 −2`, `client/src/detective-board-engine.js` `+1 −1`, `client/src/detective-generators.js` `+79 −37`, `client/src/detective-generators.test.js` `+1 −1`, `client/src/detective-leftovers.test.js` `+402 −0`
+    - 📊 **`+591 −54`** · 7 files
+- 📌 [`062e3444`](https://github.com/vicharanashala/tenali/commit/062e344456c2eb98b2e521135b09d8c4dc2a2b17) — **Code-Zero07** — Add Detective Agency case files and Detective Board gameplay for Grade 2 learners (#519)
+    - 📁 **18 files:** `client/src/App.css` `+90 −0`, `client/src/detective-answer.js` `+148 −0`, `client/src/detective-answer.test.js` `+97 −0`, `client/src/detective-app.jsx` `+2436 −281`, `client/src/detective-board-app.jsx` `+1790 −0`, `client/src/detective-board-cases.js` `+1130 −0`, `client/src/detective-board-engine.js` `+544 −0`, `client/src/detective-board.css` `+2419 −0` *(+10 more in [`062e3444`](https://github.com/vicharanashala/tenali/commit/062e344456c2eb98b2e521135b09d8c4dc2a2b17))*
+    - 📊 **`+12951 −281`** · 18 files
+- 📌 [`d2e14d1e`](https://github.com/vicharanashala/tenali/commit/d2e14d1e2af0ded5fefd3ecebaf27b95ba2cd913) — **Jaspreet-j** — Fix fold in guess the number (#523)
+    - 📁 **2 files:** `client/src/App.jsx` `+31 −4`, `client/src/features/tiles.js` `+0 −1`
+    - 📊 **`+31 −5`** · 2 files
+- 📝 [`e2f40698`](https://github.com/vicharanashala/tenali/commit/e2f4069835a370fe23a29b134e8900d3f06c0f8b) — **Jaspreet-j** — add onboarding document (Jaspreet Kaur) (#433)
+    - 📁 **1 file:** `Ideas/ONBOARDING-Jaspreet-Kaur.md` `+112 −0`
+    - 📊 **`+112 −0`** · 1 file
 
 #### 📅 2026-11-12  <sub>(2 commits)</sub>
 
