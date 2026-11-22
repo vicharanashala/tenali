@@ -10,31 +10,31 @@
       "count": 5
     },
     "no-unused-vars": {
-      "count": 209
+      "count": 203
     },
     "no-useless-escape": {
       "count": 4
     },
     "react-hooks/immutability": {
-      "count": 22
+      "count": 20
     },
     "react-hooks/preserve-manual-memoization": {
       "count": 73
     },
     "react-hooks/purity": {
-      "count": 63
+      "count": 46
     },
     "react-hooks/refs": {
-      "count": 80
+      "count": 78
     },
     "react-hooks/rules-of-hooks": {
       "count": 6
     },
     "react-hooks/set-state-in-effect": {
-      "count": 93
+      "count": 91
     },
     "react-refresh/only-export-components": {
-      "count": 8
+      "count": 9
     }
   },
   "src/BattleApp.jsx": {
@@ -101,6 +101,40 @@
       "count": 1
     }
   },
+  "src/apps/LakshyaTablesApp.jsx": {
+    "no-unused-vars": {
+      "count": 2
+    },
+    "react-hooks/immutability": {
+      "count": 1
+    },
+    "react-hooks/purity": {
+      "count": 10
+    },
+    "react-hooks/refs": {
+      "count": 1
+    },
+    "react-hooks/set-state-in-effect": {
+      "count": 1
+    }
+  },
+  "src/apps/ScaffoldedTablesApp.jsx": {
+    "no-unused-vars": {
+      "count": 4
+    },
+    "react-hooks/immutability": {
+      "count": 1
+    },
+    "react-hooks/purity": {
+      "count": 7
+    },
+    "react-hooks/refs": {
+      "count": 1
+    },
+    "react-hooks/set-state-in-effect": {
+      "count": 1
+    }
+  },
   "src/components/GlossaryText.jsx": {
     "react-hooks/set-state-in-effect": {
       "count": 1
@@ -147,11 +181,6 @@
     }
   },
   "src/components/learning/GSTLearnPage.jsx": {
-    "react-hooks/set-state-in-effect": {
-      "count": 1
-    }
-  },
-  "src/detective-app.jsx": {
     "react-hooks/set-state-in-effect": {
       "count": 1
     }
@@ -230,6 +259,11 @@
     },
     "react-refresh/only-export-components": {
       "count": 6
+    }
+  },
+  "src/detective-app.jsx": {
+    "react-hooks/set-state-in-effect": {
+      "count": 1
     }
   }
 }
