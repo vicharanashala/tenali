@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { API, QuizLayout, useTimer, useProgressSubmit, renderFeedback } from '../App.jsx'
 import CoordinateGrid from '../components/CoordinateGrid'
+import WhyLearnThis from '../components/WhyLearnThis'
 
 export default function CoordGeomInteractiveApp({ onBack }) {
   const [started, setStarted] = useState(false);
@@ -138,6 +139,7 @@ export default function CoordGeomInteractiveApp({ onBack }) {
           <p style={{ color: '#988D84', fontSize: '0.9rem', margin: '0 0 24px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>
             Practice coordinate geometry!
           </p>
+          <WhyLearnThis topicId="coordgeom" />
 
           <div style={{ marginBottom: '24px' }}>
             <h3 style={{ color: '#F4F1ED', fontSize: '0.9rem', margin: '0 0 16px', fontFamily: 'Inter, sans-serif', fontWeight: 700 }}>
