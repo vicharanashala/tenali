@@ -49,43 +49,128 @@ Tenali already includes a solid foundation of learning modules and server utilit
 
 ---
 
-## 4. Gaps Observed in the Code
+## 4. Existing Misconception Detection
 
-### 🚨 Gap: Lack of Qualitative Misconception Detection in Wrong-Answer Feedback
+Tenali already has a Misconception Monsters feature that identifies specific patterns in incorrect student answers.
 
-- **Where:** `server/routes/misc.js` (which handles topics like fraction arithmetic), the attempt-tracking modules under `server/lil/` (`models.js`, `attemptLogger.js`, `processAttempt.js`), and the explanation generator in `server/explanations.js`.
-- **What:** Tenali accurately checks whether an answer is right or wrong, and it already logs student attempts in the database. In the existing fraction answer checker (`server/routes/misc.js`), the response returns structured fields: `correct`, `correctNum`, `correctDen`, `display`, and `message`. However, it does not inspect the student's submitted numerator and denominator to identify the specific mathematical reasoning mistake behind an incorrect answer. The proposed misconception detector can compare a student's submitted numerator and denominator against known error patterns using the existing request/response flow to detect likely fraction-addition misconceptions and provide targeted feedback.
-- **Why It Matters:** Telling a student that their answer is wrong does not explain *why* their thinking was flawed. For example, if a child solving a fraction addition problem repeatedly adds the numerators and denominators straight across, standard feedback simply tells them to try again or shows the correct final answer. Without targeted feedback that addresses their specific mistake, learners frequently repeat the same error.
+The existing classifier is located at `client/src/monsters/classifier.js` and currently recognises four misconception patterns:
 
----
+- Bracketeer
+- Sign-Swapper
+- Decimal-Drifter
+- Carry-Crasher
 
-## 5. Ideas for the Project
+**The existing classifier has no fraction rules, and it runs on the client after the answer.**
 
-### 💡 Idea: Rule-Based Misconception Detection Layer
+Therefore, although Tenali already supports misconception detection for certain mathematical errors, it does not currently identify the specific fraction-addition misconception in which a student adds the numerators and denominators directly.
 
-- **Proposal:**  
-  I propose adding a lightweight, rule-based misconception-detection layer to Tenali. Instead of only checking whether an answer is correct, the system will compare the student's submitted answer and the problem operands against common mathematical error patterns. Fraction addition will serve as the initial prototype topic. For example, if a student answers `1/2 + 1/3 = 2/5`, the system can recognize that the student likely added the numerators ($1+1=2$) and denominators ($2+3=5$) separately. A single wrong answer will be treated as evidence of a *possible* misconception rather than definitive proof. This layer complements Bayesian Knowledge Tracing (BKT): while BKT estimates an overall probability of topic mastery, this new layer identifies the specific qualitative nature of an error without creating a competing mastery system.
+For example:
 
-- **Why It Helps:**  
-  This feature provides timely, pedagogical feedback directly tailored to the student's mistake. It helps students understand their conceptual errors on the spot, avoids generic explanation fatigue, and requires no external AI services or ongoing API costs.
+\[
+\frac{1}{2}+\frac{1}{3}=\frac{2}{5}
+\]
 
-- **Implementation Approach:**  
+This is the specific misconception that Fraction Fusser is intended to identify.
 
-The implementation will reuse Tenali's existing question generation, answer checking, attempt tracking, and explanation systems rather than building duplicate systems.
+### Investigation of the Existing `misconceptions.js` Module
 
-1. Create a rule-based module containing common mathematical mistakes, initially focusing on fraction addition.
-2. Connect this module to Tenali's existing fraction answer checker. It will examine the fractions in the question and the student's answer to identify whether the answer matches a known mistake, such as adding the numerators and denominators separately.
-3. Use the identified mistake to provide a relevant explanation or follow-up question in the quiz interface.
-4. Add automated tests to check that the rules identify the intended mistakes and do not incorrectly flag correct answers.
-5. In a later stage, use the existing student attempt records to check whether the same mistakes occur repeatedly and provide more targeted practice.
+The repository also contains `client/src/lib/misconceptions.js`, which includes a `fractionadd-api` configuration with fraction-related hint entries.
 
-  **Likely Files Involved:**
-  - `server/lib/misconceptions/fractionRules.js` *(new file)*: Defines explicit math rules for common fraction mistakes (e.g., adding across, adding like denominators, forgetting to invert when dividing).
-  - `server/lib/misconceptions/engine.js` *(new file)*: Compares the submitted answer against the topic rules and selects the appropriate explanation.
-  - `server/routes/misc.js`: Connects the misconception engine to the existing fraction answer-checking route.
-  - `server/lib/misconceptions/__tests__/fractionRules.test.js` *(new file)*: Unit tests verifying positive matches, non-matches, and edge cases.
-  - `client/src/App.jsx`: Displays the targeted misconception feedback or hint in the quiz UI.
-  - `server/lil/` attempt-tracking files: Extended in a future phase if misconception tags need to be stored alongside attempt records.
+However, the investigation found that this module is not imported or referenced elsewhere in the repository. Its fraction rules use generic incorrect-answer comparisons rather than checking the actual fraction operands. The first rule returns for every incorrect answer, making the second rule unreachable.
+
+The module therefore appears to be an unconnected earlier diagnostic prototype rather than part of the active Misconception Monsters classification system.
+
+It is not suitable as the foundation for Fraction Fusser because its current rule interface does not receive the question operands required to identify the specific numerator-plus-denominator misconception.
+
+## 5. Proposed Fraction Fusser Architecture
+
+### 5.1 Recommended Approach: Extend the Existing Monster Classifier
+
+The recommended approach is to extend the existing client-side classifier at `client/src/monsters/classifier.js` with a new fraction-addition misconception rule.
+
+The rule would identify the following incorrect operation:
+
+\[
+\frac{a}{b}+\frac{c}{d}
+\longrightarrow
+\frac{a+c}{b+d}
+\]
+
+It would compare the student's submitted answer with the result of this incorrect operation. Equivalent fractions should also be recognised using mathematical equivalence rather than exact string matching.
+
+This approach follows the existing Monster architecture instead of introducing an independent misconception-detection mechanism.
+
+### 5.2 Why Extend the Existing Classifier?
+
+The existing Monster system already provides a client-side classification mechanism and a user-facing experience for identified misconceptions.
+
+Extending this system has several advantages:
+
+- It maintains a single misconception-classification mechanism.
+- It allows Fraction Fusser to follow the same pattern as the four existing Monsters.
+- It makes existing Monster infrastructure available for explanations, tracking and guided practice.
+- It avoids introducing a separate server-side classification system that would need additional integration with the existing Monster interface.
+
+### 5.3 Existing Components That Can Be Reused
+
+| Existing component | Current responsibility | Proposed use for Fraction Fusser |
+|---|---|---|
+| `server/routes/misc.js` | Checks fraction answers and returns correctness information. | Reuse the existing fraction checker for answer validation without changing its contract. |
+| `client/src/monsters/fetchInterceptor.js` | Intercepts supported quiz-answer requests and passes incorrect answers to the classifier. | Extend its topic support and answer extraction to recognise the fraction-addition request payload. |
+| `client/src/monsters/classifier.js` | Identifies the four existing Monster misconception patterns. | Add a fraction-specific rule to recognise the numerator-plus-denominator error. |
+| `client/src/monsters/monsterStore.js` | Records Monster occurrences and cure-related information in browser local storage. | Extend its registered Monster IDs and reuse its existing tracking mechanism. |
+| `client/src/monsters/monsterExplanations.js` | Stores explanations and descriptions for existing Monsters. | Add Fraction Fusser's description and progressively detailed explanations. |
+| `client/src/monsters/MonsterToast.jsx` | Displays Monster notifications. | Reuse the existing notification mechanism with Fraction Fusser-specific presentation details. |
+| `client/src/monsters/CureFlow.jsx` | Provides practice questions for correcting identified misconceptions. | Reuse the practice flow with fraction-specific questions and fraction-aware answer comparison. |
+| `client/src/monsters/GuidedSolver.jsx` | Provides guided solving experiences for existing Monsters. | Reuse the guided-solving framework with fraction-addition explanations and examples. |
+| `client/src/monsters/MonsterDetail.jsx` | Displays Monster information and related learning support. | Present Fraction Fusser's explanations and occurrence-based progression. |
+
+These components already provide much of the required infrastructure. However, some require additional configuration or adaptation rather than being directly reusable without changes.
+
+### 5.4 Frequency-Based Explanation Progression
+
+The existing Monster store provides a reusable occurrence counter through `getMonsterBreachCount(monsterId)`.
+
+It counts recorded occurrences of a particular Monster and stores the event history in browser local storage. The cumulative breach count is not reset when a student completes a cure; the count of slips since the last cure is tracked separately.
+
+Fraction Fusser could reuse this mechanism to provide explanations at progressively deeper levels:
+
+| Occurrence | Proposed learning response |
+|---|---|
+| First occurrence | A short reminder explaining why denominators cannot be added directly. |
+| Second occurrence | A visual explanation showing why fractions must have the same-sized parts before addition. |
+| Third and subsequent occurrences | A more detailed guided explanation covering common denominators, conversion and addition of numerators. |
+
+This would allow the explanation to become more supportive as the same misconception continues to occur, without introducing a separate frequency-tracking mechanism.
+
+The existing counter is browser-local, so its history is not automatically shared across different devices.
+
+### 5.5 Responsibilities of the Fraction Checker and Monster Classifier
+
+The existing fraction checker and the Monster classifier would have separate responsibilities:
+
+- **Fraction checker:** Determines whether the submitted fraction answer is mathematically correct.
+- **Monster classifier:** When the answer is incorrect, checks whether it matches the specific numerator-plus-denominator misconception.
+
+The existing fraction checker can therefore continue handling answer validation, while Fraction Fusser adds misconception-specific identification.
+
+### 5.6 Why Not Create a Separate Server-Side Classifier?
+
+A separate server-side misconception detector would introduce another classification mechanism alongside the existing client-side Monster system.
+
+It would also require additional integration to connect backend classification results with the existing Monster notifications, tracking, explanations and practice features.
+
+The existing client-side classifier is used for supported quiz flows. However, the fraction-addition request must first be integrated into the existing request-interception pipeline so that the required question and answer information reaches the classifier. Once this integration is addressed, extending the existing classifier is the more consistent approach for this feature.
+
+### 5.7 Architectural Decision
+
+Fraction Fusser should extend the existing `client/src/monsters/classifier.js` system and reuse the existing Monster infrastructure wherever appropriate.
+
+The older `client/src/lib/misconceptions.js` module should not be reused because it is unreferenced, its fraction rules do not identify the specific misconception, and it is disconnected from the active Monster system.
+
+The existing fraction checker should remain responsible for mathematical answer validation. The Monster system should handle misconception identification and the associated learning experience.
+
+This architecture is a proposal for mentor review. Implementation and any necessary changes to the existing components will remain pending mentor approval.
 
 ---
 
