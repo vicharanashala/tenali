@@ -11,7 +11,7 @@
  * Fallback: onnx-community/whisper-tiny.
  */
 
-import { pipeline, env } from 'https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.3.3';
+import { pipeline, env } from '@huggingface/transformers';
 
 // Load remote models directly from Hugging Face Hub (cached in browser CacheStorage)
 env.allowLocalModels = false;

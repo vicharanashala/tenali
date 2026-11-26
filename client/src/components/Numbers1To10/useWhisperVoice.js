@@ -14,10 +14,10 @@ function getOrCreateSharedWorker() {
   if (typeof window === 'undefined') return null;
   if (!sharedWorker) {
     try {
-      const workerUrl = window.location
-        ? `${window.location.origin}/whisper-worker.js`
-        : '/whisper-worker.js';
-      sharedWorker = new Worker(workerUrl, { type: 'module' });
+      sharedWorker = new Worker(
+        new URL('./whisper-worker.js', import.meta.url),
+        { type: 'module' }
+      );
 
       sharedWorker.onmessage = (event) => {
         const { status, output, error, data } = event.data || {};
@@ -39,7 +39,7 @@ function getOrCreateSharedWorker() {
           }
           // Broadcast to active instance listeners (protects against lost or late results)
           sharedCompletionListeners.forEach((fn) => {
-            try { fn(output); } catch (e) {}
+            try { fn(output); } catch (e) { }
           });
         } else if (status === 'error') {
           console.warn('[useWhisperVoice] Worker error:', error);
@@ -232,10 +232,10 @@ export function useWhisperVoice({
         clearTimeout(silenceTimerRef.current);
       }
       if (recorderRef.current) {
-        try { recorderRef.current.destroy(); } catch (e) {}
+        try { recorderRef.current.destroy(); } catch (e) { }
       }
       if (speechRecognitionRef.current) {
-        try { speechRecognitionRef.current.stop(); } catch (e) {}
+        try { speechRecognitionRef.current.stop(); } catch (e) { }
       }
     };
   }, []);
@@ -281,7 +281,7 @@ export function useWhisperVoice({
       if (speechRecognitionRef.current) {
         try {
           speechRecognitionRef.current.stop();
-        } catch (e) {}
+        } catch (e) { }
       }
 
       // If a number was already emitted during this recording session via zero-latency native speech,
@@ -317,28 +317,28 @@ export function useWhisperVoice({
             });
 
             const res = await workerPromise;
-          let extractedText = '';
-          if (typeof res === 'string') {
-            extractedText = res;
-          } else if (res && typeof res.text === 'string') {
-            extractedText = res.text;
-          } else if (Array.isArray(res) && res.length > 0) {
-            extractedText = typeof res[0] === 'string' ? res[0] : (res[0].text || '');
-          }
-
-          if (extractedText) {
-            recognizedRaw = extractedText.trim();
-            const num = resolveTextToNumber(recognizedRaw);
-            if (num) {
-              detectedNumber = num;
+            let extractedText = '';
+            if (typeof res === 'string') {
+              extractedText = res;
+            } else if (res && typeof res.text === 'string') {
+              extractedText = res.text;
+            } else if (Array.isArray(res) && res.length > 0) {
+              extractedText = typeof res[0] === 'string' ? res[0] : (res[0].text || '');
             }
+
+            if (extractedText) {
+              recognizedRaw = extractedText.trim();
+              const num = resolveTextToNumber(recognizedRaw);
+              if (num) {
+                detectedNumber = num;
+              }
+            }
+          } catch (workerErr) {
+            console.warn('[useWhisperVoice] In-browser worker failed:', workerErr);
+            lastWorkerErrorRef.current = workerErr?.message || String(workerErr);
           }
-        } catch (workerErr) {
-          console.warn('[useWhisperVoice] In-browser worker failed:', workerErr);
-          lastWorkerErrorRef.current = workerErr?.message || String(workerErr);
         }
       }
-    }
 
       // 2. Fallback to browser live speech if neural engine did not resolve digit
       if (!detectedNumber) {
@@ -446,7 +446,7 @@ export function useWhisperVoice({
 
           rec.onend = () => {
             if (isRecordingRef.current) {
-              try { rec.start(); } catch (e) {}
+              try { rec.start(); } catch (e) { }
             }
           };
 
