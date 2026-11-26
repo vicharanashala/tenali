@@ -1,7 +1,7 @@
 {
   "src/App.jsx": {
     "no-empty": {
-      "count": 148
+      "count": 147
     },
     "no-restricted-syntax": {
       "count": 1
@@ -10,13 +10,13 @@
       "count": 5
     },
     "no-unused-vars": {
-      "count": 209
+      "count": 202
     },
     "no-useless-escape": {
       "count": 4
     },
     "react-hooks/immutability": {
-      "count": 22
+      "count": 15
     },
     "react-hooks/preserve-manual-memoization": {
       "count": 73
@@ -25,13 +25,13 @@
       "count": 63
     },
     "react-hooks/refs": {
-      "count": 80
+      "count": 79
     },
     "react-hooks/rules-of-hooks": {
       "count": 6
     },
     "react-hooks/set-state-in-effect": {
-      "count": 93
+      "count": 92
     },
     "react-refresh/only-export-components": {
       "count": 8
@@ -95,6 +95,23 @@
   },
   "src/WaterJugLab.jsx": {
     "react-hooks/immutability": {
+      "count": 1
+    },
+    "react-hooks/set-state-in-effect": {
+      "count": 1
+    }
+  },
+  "src/apps/GymApp.jsx": {
+    "no-empty": {
+      "count": 1
+    },
+    "no-unused-vars": {
+      "count": 7
+    },
+    "react-hooks/immutability": {
+      "count": 7
+    },
+    "react-hooks/refs": {
       "count": 1
     },
     "react-hooks/set-state-in-effect": {
