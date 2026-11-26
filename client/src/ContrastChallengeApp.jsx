@@ -6,7 +6,6 @@
  */
 
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { navigate } from './lib/router';
 
 // Hardcoded list of all contrast pairs (replaces server JSON + API)
 const CONTRAST_PAIRS = [
@@ -12663,11 +12662,7 @@ function TrigInverseTrigChallenge({ onBack, onComplete, onMarkComplete }) {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               <button
                 onClick={() => {
-                  // The app has no hash router and no /worksheets route, so the
-                  // old '#/worksheets' target only changed the URL fragment and
-                  // left the student where they were. Send them to the real
-                  // trigonometry practice screen instead.
-                  navigate('/?mode=trig');
+                  window.location.hash = '#/worksheets';
                   onComplete();
                 }}
                 style={{
@@ -12679,11 +12674,11 @@ function TrigInverseTrigChallenge({ onBack, onComplete, onMarkComplete }) {
                   fontWeight: '600'
                 }}
               >
-                Practice Trigonometry
+                Practice Trigonometry Worksheets
               </button>
               <button
                 onClick={() => {
-                  navigate('/?mode=invtrig');
+                  window.location.hash = '#/worksheets';
                   onComplete();
                 }}
                 style={{
@@ -12695,7 +12690,7 @@ function TrigInverseTrigChallenge({ onBack, onComplete, onMarkComplete }) {
                   fontWeight: '600'
                 }}
               >
-                Practice Inverse Trigonometry
+                Practice Inverse Trigonometry Worksheets
               </button>
               <button
                 onClick={onComplete}

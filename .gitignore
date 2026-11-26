@@ -22,5 +22,3 @@ server/_probe*.js
 *.bak.*
 __pycache__/
 *.pyc
-exported_model/
-

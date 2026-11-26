@@ -135,8 +135,6 @@ function SimulConceptMode({ onBack }) {
     </AuthGate>
   );
 }
-import DiagnosticQuiz from './lib/DiagnosticQuiz.jsx';
-import useProctor from './proctor/useProctor';
 import Numbers1To10App from './components/Numbers1To10';
 
 // API base URL from environment variables (Vite)
