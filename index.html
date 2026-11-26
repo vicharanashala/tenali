@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#111b43">
+  <title>Atom Adventure | Balancing Chemical Equations</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="site-header">
+  <a class="logo" href="#home"><span class="logo-icon">⚛</span> Atom <span>Adventure</span></a>
+  <nav aria-label="Main navigation"><a href="#basics">Learn</a><a href="#practice">Practice</a><a href="#quiz">Quick quiz</a><a href="#results">Results</a></nav>
+  <div class="star-pill">⭐ <b id="stars">0</b></div>
+</header>
+<main>
+  <section class="intro" id="home">
+    <div class="intro-glow"></div><div class="intro-copy reveal">
+      <span class="eyebrow"><span class="eyebrow-dot"></span> welcome young ladies and gentleman</span>
+      <h1>welcome to<br><em>world of imaginations</em></h1>
+      <p>discover how you will be running your brains in the world of atoms and molecules</p>
+      <a class="primary-link" href="#basics">Let's explore <span>→</span></a>
+      <div class="intro-note">✨ Small atoms. Big discoveries.</div>
+    </div>
+    <div class="intro-visual" aria-label="Animated illustration of atoms joining to form a molecule">
+      <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+      <div class="atom-ball atom-a">H</div><div class="atom-ball atom-b">O</div><div class="atom-ball atom-c">H</div>
+      <div class="molecule-core"><span></span><span></span><span></span></div>
+      <div class="floating-formula">2H₂ + O₂ <b>→</b> 2H₂O</div><div class="twinkle twinkle-one">✦</div><div class="twinkle twinkle-two">✧</div><div class="twinkle twinkle-three">✦</div>
+    </div>
+    <div class="intro-wave"></div>
+  </section>
+
+  <section class="section basics-section" id="basics">
+    <div class="section-heading reveal"><span class="eyebrow">FIRST, THE BASICS</span><h2>What is a <em>chemical equation?</em></h2><p>A chemical equation is a short way of showing what happens in a chemical reaction.</p></div>
+    <div class="equation-explainer reveal">
+      <div class="equation-side"><span class="mini-label">BEFORE THE REACTION</span><div class="big-equation"><span>H₂</span><b>+</b><span>O₂</span></div><strong>Hydrogen + Oxygen</strong><small>These are the starting substances.</small></div>
+      <div class="equation-arrow"><span>changes into</span><b>→</b></div>
+      <div class="equation-side product-side"><span class="mini-label">AFTER THE REACTION</span><div class="big-equation"><span>H₂O</span></div><strong>Water</strong><small>A new substance is formed.</small></div>
+    </div>
+    <div class="two-notes">
+      <article class="note-card reactant-note reveal"><div class="note-icon">🧪</div><div><h3>Reactants</h3><p>The substances that take part in a chemical reaction. They are written on the <b>left side</b> of the arrow.</p></div></article>
+      <article class="note-card product-note reveal"><div class="note-icon">💧</div><div><h3>Products</h3><p>The new substances formed during a chemical reaction. They are written on the <b>right side</b> of the arrow.</p></div></article>
+    </div>
+  </section>
+
+
+  <section class="steps-section">
+    <div class="section-heading reveal"><span class="eyebrow so-people">So, people</span><h2>How do we <em>balance an equation?</em></h2><p>the ladder goes up as</p></div>
+    <div class="steps-grid">
+      <article class="step-card reveal"><span class="step-num">1</span><div class="step-emoji">👀</div><h3>Write the equation</h3><p>Put the reactants on the left and products on the right.</p></article>
+      <article class="step-card reveal"><span class="step-num">2</span><div class="step-emoji">🔍</div><h3>Count the atoms</h3><p>Count each type of atom on both sides.</p></article>
+      <article class="step-card reveal"><span class="step-num">3</span><div class="step-emoji">🔢</div><h3>Add coefficients</h3><p>Adjust the big numbers in front of formulas until the counts match.</p></article>
+      <article class="step-card reveal"><span class="step-num">4</span><div class="step-emoji">🎉</div><h3>Check your answer</h3><p>Make sure every type of atom is equal on both sides.</p></article>
+    </div>
+  </section>
+
+  <section class="practice-section" id="practice">
+    <div class="section-heading reveal"><span class="eyebrow">YOUR TURN TO TRY</span><h2>Let's balance <em>some equations!</em></h2><p>Choose a reaction, adjust its coefficients, and watch the atom counts change.</p></div>
+    <div class="practice-card">
+      <div class="practice-top"><div><label for="reaction">CHOOSE A REACTION</label><select id="reaction"><option value="water">💧 Formation of water</option><option value="ammonia">☁️ Formation of ammonia</option><option value="methane">🔥 Combustion of methane</option><option value="iron">🧱 Formation of iron oxide</option><option value="salt">🧂 Formation of table salt</option></select></div><div class="progress-wrap"><span id="mission">REACTION 1 OF 5</span><div class="progress-track"><i id="bar"></i></div></div><div class="timer-panel" aria-live="off"><span>⏱ TIME TAKEN</span><strong id="timer">00:00</strong></div></div>
+      <div class="reaction-visuals">
+        <div class="reaction-side"><span class="side-label">REACTANTS</span><div id="left" class="molecule-list"></div></div>
+        <div class="reaction-arrow"><span>react</span><b>→</b></div>
+        <div class="reaction-side product-reaction-side"><span class="side-label">MAIN PRODUCTS</span><div id="right" class="molecule-list"></div><div class="leftover-divider"></div><span class="side-label leftover-label">LEFTOVER REACTANTS</span><div id="leftovers" class="molecule-list leftover-list"></div></div>
+      </div>
+      <div class="atom-counter"><div class="counter-heading"><b>⚖️ Atom count</b><span>LEFT SIDE ↔ RIGHT SIDE</span></div><div id="counts"></div></div>
+      <div class="coefficient-heading"><span>Adjust the big numbers</span><small>Use + and − to change each coefficient.</small></div><div id="controls" class="coefficient-controls"></div>
+      <div class="practice-actions"><button id="check" class="check-button">Check my equation ✓</button><button id="hint" class="hint-button">💡 Give me a hint</button><button id="reset" class="reset-button">↻ Start again</button></div>
+      <div id="message" class="practice-message" aria-live="polite">Ready when you are! Choose a reaction to begin. 🌟</div>
+      <div id="win" class="success-banner" hidden>🏆 <div><b>Excellent balancing!</b><p>Every type of atom is equal on both sides.</p></div> ⭐⭐⭐</div>
+    </div>
+  </section>
+
+  <section class="quiz-section" id="quiz"><div class="quiz-intro reveal"><span class="eyebrow">TIME FOR A QUICK CHECK</span><h2>What have you <em>discovered?</em></h2><p>Try these five multiple-choice questions to check what you remember.</p><div class="quiz-doodle">✏️ <span>🧠</span> ✨</div></div><div class="quiz-card"><div class="quiz-top"><span id="qnum">QUESTION 1 / 5</span><span id="quiz-score">⭐ EARN A STAR</span></div><h3 id="question"></h3><div id="options"></div><p id="feedback" aria-live="polite">Choose your answer!</p><button id="next" disabled>Next question →</button></div></section>
+  <section class="results-section" id="results">
+    <div class="section-heading reveal"><span class="eyebrow">YOUR PROGRESS</span><h2>Your balancing <em>results</em></h2><p>See how long each reaction took, how many checking attempts you made, and which ones you completed.</p></div>
+    <div class="results-card"><div id="results-summary" class="results-summary"></div><h3 class="results-subheading">Reaction summary</h3><div class="results-table-wrap"><table class="results-table"><thead><tr><th>Reaction</th><th>Time taken</th><th>Check attempts</th><th>Result</th></tr></thead><tbody id="results-body"></tbody></table></div><h3 class="results-subheading">Attempt-by-attempt analysis</h3><p class="attempt-note">Each check records the time elapsed for that reaction, whether the equation was balanced, and the attempt number.</p><div class="results-table-wrap"><table class="results-table"><thead><tr><th>Reaction</th><th>Attempt</th><th>Time at check</th><th>Time since last check</th><th>Outcome</th></tr></thead><tbody id="attempts-body"><tr><td colspan="5">No attempts yet. Start balancing to see your analysis here.</td></tr></tbody></table></div></div>
+  </section>
+  <section class="closing-section"><div class="closing-atom">⚛️</div><h2>Keep asking questions.<br><em>Keep discovering!</em></h2><p>Every great scientist starts with curiosity.</p><a href="#home">Back to the beginning ↑</a></section>
+</main>
+<footer><b>⚛ Atom Adventure</b><span>Learning chemistry, one atom at a time 💚</span></footer>
+<script src="script.js"></script>
+</body></html>
