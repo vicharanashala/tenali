@@ -72,6 +72,7 @@ export const TILES = [
     { key: 'ratio', name: 'Ratio', subtitle: 'Ratio & proportion', color: 'green', category: 'everyday-maths' },
     { key: 'remfactor', name: 'Remainder Theorem', subtitle: 'Remainder & factor theorem', color: 'blue', category: 'algebra' },
     { key: 'rounding', name: 'Rounding', subtitle: 'D.P., sig. figs, estimation', color: 'blue', category: 'number-foundations' },
+    { key: 'romannumerals', name: 'Roman Numerals', subtitle: 'Read and write numbers in Roman numerals', color: 'purple', category: 'number-foundations' },
     { key: 'section', name: 'Section Formula', subtitle: 'Midpoint, section, centroid', color: 'green', category: 'shape-space' },
     { key: 'sequences', name: 'Sequences', subtitle: 'Arithmetic & geometric sequences', color: 'purple', category: 'algebra' },
     { key: 'shares', name: 'Shares & Dividends', subtitle: 'Shares, dividends, returns', color: 'purple', category: 'everyday-maths' },
