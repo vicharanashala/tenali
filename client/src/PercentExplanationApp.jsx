@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './PercentExplanationApp.css';
 import { playSound } from './audioContext';
+import WhyLearnThis from './components/WhyLearnThis';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // QUIZ HELPER UTILITIES
@@ -549,6 +550,7 @@ function LevelsSelectView({ onBack, onSelectLevel }) {
 
       <h1 className="title-serif">Percentages</h1>
       <p className="subtitle-body">Master percentage concepts step-by-step through interactive explanations.</p>
+      <WhyLearnThis topicId="percent" />
 
       <div className="levels-grid">
         {levels.map((lvl) => (
