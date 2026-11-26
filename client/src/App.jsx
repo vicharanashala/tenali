@@ -42193,6 +42193,268 @@ function PercentPage(props) {
   return <PercentExplanationApp {...props} PercentApp={PercentApp} />;
 }
 
+const ROMAN_NUMERAL_VALUES = [
+  ['M', 1000], ['CM', 900], ['D', 500], ['CD', 400], ['C', 100], ['XC', 90],
+  ['L', 50], ['XL', 40], ['X', 10], ['IX', 9], ['V', 5], ['IV', 4], ['I', 1],
+]
+
+function toRomanNumerals(number) {
+  let remaining = number
+  return ROMAN_NUMERAL_VALUES.map(([symbol, value]) => {
+    const count = Math.floor(remaining / value)
+    remaining %= value
+    return symbol.repeat(count)
+  }).join('')
+}
+
+function RomanNumeralsApp({ onBack }) {
+  const [screen, setScreen] = useState('hub')
+  const [difficulty, setDifficulty] = useState('easy')
+  const [round, setRound] = useState(0)
+  const [questionSeed, setQuestionSeed] = useState(() => Math.random())
+  const [score, setScore] = useState(0)
+  const [selected, setSelected] = useState(null)
+  const [finished, setFinished] = useState(false)
+  const [showDiscussionForm, setShowDiscussionForm] = useState(false)
+  const [discussionTitle, setDiscussionTitle] = useState('')
+  const [discussionBody, setDiscussionBody] = useState('')
+  const [activeDiscussion, setActiveDiscussion] = useState(null)
+  const [commentText, setCommentText] = useState('')
+  const [discussions, setDiscussions] = useState([
+    { id: 1, author: 'Maya R.', time: 'Popular thread', tag: 'HELP', title: 'Why is 9 written as IX instead of VIIII?', body: 'I know I is 1 and X is 10, but why do we put the smaller one first here?', votes: 18, comments: ['The small-before-large rule means subtract: 10 − 1 = 9. It keeps the symbols compact!'] },
+    { id: 2, author: 'Arjun K.', time: 'Today', tag: 'TIP', title: 'A quick way to remember the subtractive pairs', body: 'Only six pairs use subtraction: IV, IX, XL, XC, CD and CM. Everything else is mostly adding from left to right.', votes: 12, comments: ['That list is super helpful. I wrote it on my notes.'] },
+    { id: 3, author: 'Nia S.', time: 'Yesterday', tag: 'CHALLENGE', title: 'Can you decode MMXXVI without a calculator?', body: 'Bonus: what year does it represent, and which symbols did you group together?', votes: 9, comments: [] },
+  ])
+
+  const question = useMemo(() => {
+    const limits = { easy: 20, medium: 99, hard: 399 }
+    const maximum = limits[difficulty] || limits.easy
+    const number = 1 + Math.floor(questionSeed * maximum)
+    const roman = toRomanNumerals(number)
+    const isRomanToNumber = (round + Math.floor(questionSeed * 1000)) % 2 === 0
+    const answer = isRomanToNumber ? String(number) : roman
+    const distractorNumbers = [...new Set([1, 2, 5].map(offset => ((number - 1 + offset) % maximum) + 1))]
+      .filter(value => value !== number).slice(0, 3)
+    while (distractorNumbers.length < 3) {
+      const candidate = ((number + distractorNumbers.length) % maximum) + 1
+      if (candidate !== number && !distractorNumbers.includes(candidate)) distractorNumbers.push(candidate)
+    }
+    const wrongAnswers = isRomanToNumber
+      ? distractorNumbers.map(String)
+      : distractorNumbers.map(toRomanNumerals)
+    const choices = [...new Set([answer, ...wrongAnswers])]
+    return {
+      answer,
+      prompt: isRomanToNumber ? `What number does ${roman} represent?` : `Write ${number} in Roman numerals.`,
+      choices: choices.sort(() => Math.random() - 0.5),
+    }
+  }, [round, difficulty, questionSeed])
+
+  const chooseAnswer = (choice) => {
+    if (selected !== null) return
+    setSelected(choice)
+    if (choice === question.answer) setScore(value => value + 1)
+  }
+
+  const nextQuestion = () => {
+    const questionCount = difficulty === 'easy' ? 5 : difficulty === 'medium' ? 8 : 10
+    if (round >= questionCount - 1) setFinished(true)
+    else {
+      setQuestionSeed(Math.random())
+      setRound(value => value + 1)
+      setSelected(null)
+    }
+  }
+
+  const restart = () => {
+    setRound(0)
+    setQuestionSeed(Math.random())
+    setScore(0)
+    setSelected(null)
+    setFinished(false)
+    setScreen('quiz')
+  }
+
+  const startQuiz = (level) => {
+    setDifficulty(level)
+    setRound(0)
+    setQuestionSeed(Math.random())
+    setScore(0)
+    setSelected(null)
+    setFinished(false)
+    setScreen('quiz')
+  }
+
+  const addDiscussion = (event) => {
+    event.preventDefault()
+    if (!discussionTitle.trim() || !discussionBody.trim()) return
+    const post = {
+      id: Date.now(), author: 'You', time: 'Just now', tag: 'DISCUSSION',
+      title: discussionTitle.trim(), body: discussionBody.trim(), votes: 0, comments: [],
+    }
+    setDiscussions(current => [post, ...current])
+    setDiscussionTitle('')
+    setDiscussionBody('')
+    setShowDiscussionForm(false)
+  }
+
+  const addComment = (event) => {
+    event.preventDefault()
+    if (!commentText.trim() || activeDiscussion === null) return
+    setDiscussions(current => current.map(post => post.id === activeDiscussion
+      ? { ...post, comments: [...post.comments, commentText.trim()] }
+      : post))
+    setCommentText('')
+  }
+
+  const shellButton = (label, action) => (
+    <button onClick={action} style={{ border: '1px solid var(--clr-border)', borderRadius: 999, padding: '8px 14px', color: 'var(--clr-text)', background: 'var(--clr-card)', cursor: 'pointer', fontWeight: 700 }}>
+      {label}
+    </button>
+  )
+
+  const cardStyle = { border: '1px solid var(--clr-border)', borderRadius: 16, background: 'var(--clr-card)', color: 'var(--clr-text)' }
+
+  return (
+    <QuizLayout title="Roman Numerals" subtitle="Decode the ancient number system" onBack={onBack}>
+      {screen === 'hub' && (
+        <div style={{ maxWidth: 900, margin: '0 auto', padding: '8px 4px 24px' }}>
+          <div style={{ ...cardStyle, padding: '28px', background: 'linear-gradient(125deg, var(--clr-card), var(--clr-accent-soft))', marginBottom: 20 }}>
+            <div style={{ color: 'var(--clr-accent)', fontWeight: 800, letterSpacing: '.08em', fontSize: '.78rem' }}>NUMBER SYSTEMS · FIELD GUIDE 01</div>
+            <h2 style={{ fontSize: 'clamp(1.7rem, 4vw, 2.5rem)', margin: '10px 0' }}>Crack the code of Rome.</h2>
+            <p style={{ color: 'var(--clr-text-soft)', maxWidth: 570, lineHeight: 1.6, margin: 0 }}>Learn the symbols, spot the patterns, then test your skills. Choose your path to begin.</p>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(230px, 1fr))', gap: 16, marginBottom: 28 }}>
+            <button onClick={() => setScreen('learn')} style={{ ...cardStyle, textAlign: 'left', padding: 22, cursor: 'pointer', minHeight: 158 }}>
+              <span style={{ fontSize: '1.8rem' }}>📜</span>
+              <strong style={{ display: 'block', fontSize: '1.25rem', margin: '10px 0 5px' }}>Learn</strong>
+              <span style={{ color: 'var(--clr-text-soft)', lineHeight: 1.45 }}>Explore the symbols, rules, and examples at your own pace.</span>
+            </button>
+            <button onClick={() => setScreen('difficulty')} style={{ ...cardStyle, textAlign: 'left', padding: 22, cursor: 'pointer', minHeight: 158 }}>
+              <span style={{ fontSize: '1.8rem' }}>⚔️</span>
+              <strong style={{ display: 'block', fontSize: '1.25rem', margin: '10px 0 5px' }}>Quiz</strong>
+              <span style={{ color: 'var(--clr-text-soft)', lineHeight: 1.45 }}>Choose a difficulty and see how fast you can decode each round.</span>
+            </button>
+          </div>
+
+          <section style={{ ...cardStyle, overflow: 'hidden' }}>
+            <div style={{ padding: '18px 20px', borderBottom: '1px solid var(--clr-border)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, flexWrap: 'wrap' }}>
+              <div>
+                <div style={{ color: 'var(--clr-accent)', fontSize: '.76rem', fontWeight: 800, letterSpacing: '.08em' }}>THE FORUM</div>
+                <h3 style={{ margin: '4px 0 0' }}>Roman Numeral Discussions</h3>
+              </div>
+              <button onClick={() => setShowDiscussionForm(value => !value)} style={{ border: 0, borderRadius: 9, padding: '10px 14px', background: 'var(--clr-accent)', color: 'white', cursor: 'pointer', fontWeight: 800 }}>
+                {showDiscussionForm ? 'Close composer' : '+ Start a discussion'}
+              </button>
+            </div>
+
+            {showDiscussionForm && (
+              <form onSubmit={addDiscussion} style={{ padding: 18, background: 'var(--clr-surface)', borderBottom: '1px solid var(--clr-border)', display: 'grid', gap: 10 }}>
+                <input value={discussionTitle} onChange={event => setDiscussionTitle(event.target.value)} placeholder="Give your thread a title" aria-label="Discussion title" maxLength={100} required style={{ padding: 11, borderRadius: 8, border: '1px solid var(--clr-border)', background: 'var(--clr-card)', color: 'var(--clr-text)' }} />
+                <textarea value={discussionBody} onChange={event => setDiscussionBody(event.target.value)} placeholder="Share a question, tip, or challenge…" aria-label="Discussion message" maxLength={500} required rows={3} style={{ padding: 11, borderRadius: 8, border: '1px solid var(--clr-border)', background: 'var(--clr-card)', color: 'var(--clr-text)', resize: 'vertical' }} />
+                <button type="submit" style={{ justifySelf: 'start', border: 0, borderRadius: 8, padding: '10px 14px', background: 'var(--clr-accent)', color: 'white', cursor: 'pointer', fontWeight: 800 }}>Publish thread</button>
+              </form>
+            )}
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))' }}>
+              <div>
+                {discussions.map(post => (
+                  <article key={post.id} style={{ padding: '16px 20px', borderBottom: '1px solid var(--clr-border)' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 9, fontSize: '.78rem', color: 'var(--clr-text-soft)' }}>
+                      <span style={{ borderRadius: 5, padding: '3px 6px', color: 'var(--clr-accent)', background: 'var(--clr-accent-soft)', fontWeight: 800 }}>{post.tag}</span>
+                      <strong style={{ color: 'var(--clr-text)' }}>{post.author}</strong><span>· {post.time}</span>
+                    </div>
+                    <button onClick={() => setActiveDiscussion(activeDiscussion === post.id ? null : post.id)} style={{ border: 0, padding: 0, margin: '9px 0 5px', background: 'none', color: 'var(--clr-text)', textAlign: 'left', fontSize: '1rem', fontWeight: 800, cursor: 'pointer' }}>{post.title}</button>
+                    <p style={{ margin: '2px 0 10px', lineHeight: 1.5, color: 'var(--clr-text-soft)' }}>{post.body}</p>
+                    <div style={{ display: 'flex', gap: 14, color: 'var(--clr-text-soft)', fontSize: '.82rem' }}><span>▲ {post.votes} votes</span><span>💬 {post.comments.length} replies</span></div>
+                    {activeDiscussion === post.id && (
+                      <div style={{ marginTop: 14, padding: 12, borderRadius: 10, background: 'var(--clr-surface)' }}>
+                        {post.comments.length ? post.comments.map((comment, index) => <p key={`${post.id}-${index}`} style={{ margin: '0 0 8px', lineHeight: 1.45 }}>↳ {comment}</p>) : <p style={{ color: 'var(--clr-text-soft)', margin: '0 0 8px' }}>No replies yet. Start the conversation.</p>}
+                        <form onSubmit={addComment} style={{ display: 'flex', gap: 8, marginTop: 10 }}>
+                          <input value={commentText} onChange={event => setCommentText(event.target.value)} placeholder="Write a reply…" aria-label="Write a reply" maxLength={300} required style={{ flex: 1, minWidth: 0, padding: 9, borderRadius: 7, border: '1px solid var(--clr-border)', background: 'var(--clr-card)', color: 'var(--clr-text)' }} />
+                          <button type="submit" style={{ border: 0, borderRadius: 7, padding: '0 12px', background: 'var(--clr-accent)', color: 'white', cursor: 'pointer', fontWeight: 700 }}>Reply</button>
+                        </form>
+                      </div>
+                    )}
+                  </article>
+                ))}
+              </div>
+              <aside style={{ borderLeft: '1px solid var(--clr-border)', padding: 20, background: 'var(--clr-surface)' }}>
+                <div style={{ fontSize: '.76rem', fontWeight: 800, letterSpacing: '.08em', color: 'var(--clr-text-soft)' }}>COMMUNITY NOTE</div>
+                <p style={{ lineHeight: 1.55 }}>Good explanations beat fast answers. Share how you spotted the pattern so the next learner can see it too.</p>
+                <div style={{ borderTop: '1px solid var(--clr-border)', paddingTop: 14, color: 'var(--clr-text-soft)', fontSize: '.85rem' }}>💡 Tip: Ask a question, post a mnemonic, or challenge the community.</div>
+              </aside>
+            </div>
+            <p style={{ padding: '0 20px 14px', color: 'var(--clr-text-soft)', fontSize: '.76rem' }}>Posts and replies in this preview are temporary.</p>
+          </section>
+        </div>
+      )}
+
+      {screen === 'learn' && (
+        <div style={{ maxWidth: 760, margin: '0 auto', padding: '8px 4px 24px' }}>
+          <div style={{ marginBottom: 18 }}>{shellButton('← Puzzle home', () => setScreen('hub'))}</div>
+          <div style={{ ...cardStyle, padding: 24, marginBottom: 16 }}>
+            <div style={{ color: 'var(--clr-accent)', fontSize: '.76rem', fontWeight: 800, letterSpacing: '.08em' }}>LEARN · THE SYMBOLS</div>
+            <h2 style={{ margin: '8px 0' }}>Seven symbols build the system.</h2>
+            <p style={{ color: 'var(--clr-text-soft)', lineHeight: 1.55 }}>Roman numerals use letters for values. Read from left to right: when a smaller value comes before a larger one, subtract it; otherwise, add it.</p>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(90px, 1fr))', gap: 9, marginTop: 18 }}>
+              {[['I', '1'], ['V', '5'], ['X', '10'], ['L', '50'], ['C', '100'], ['D', '500'], ['M', '1000']].map(([symbol, value]) => <div key={symbol} style={{ ...cardStyle, padding: 12, textAlign: 'center' }}><strong style={{ display: 'block', fontSize: '1.35rem', color: 'var(--clr-accent)' }}>{symbol}</strong><span style={{ color: 'var(--clr-text-soft)' }}>{value}</span></div>)}
+            </div>
+          </div>
+          <div style={{ ...cardStyle, padding: 24, marginBottom: 20 }}>
+            <h3 style={{ marginTop: 0 }}>The pattern: add or subtract</h3>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))', gap: 12 }}>
+              <div style={{ padding: 15, borderRadius: 11, background: 'var(--clr-correct-bg)' }}><strong>Combine by adding</strong><p style={{ marginBottom: 0, lineHeight: 1.5 }}>VI = 5 + 1 = 6<br />XV = 10 + 5 = 15<br />XXIII = 10 + 10 + 3 = 23</p></div>
+              <div style={{ padding: 15, borderRadius: 11, background: 'var(--clr-accent-soft)' }}><strong>Small before large? Subtract</strong><p style={{ marginBottom: 0, lineHeight: 1.5 }}>IV = 5 − 1 = 4<br />IX = 10 − 1 = 9<br />XL = 50 − 10 = 40</p></div>
+            </div>
+            <p style={{ color: 'var(--clr-text-soft)', lineHeight: 1.55, marginBottom: 0 }}>A symbol is usually repeated no more than three times in a row. For example, 4 is IV, not IIII.</p>
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', gap: 12, flexWrap: 'wrap' }}>{shellButton('← Puzzle home', () => setScreen('hub'))}<button onClick={() => setScreen('difficulty')} style={{ border: 0, borderRadius: 9, padding: '11px 16px', background: 'var(--clr-accent)', color: 'white', cursor: 'pointer', fontWeight: 800 }}>I’m ready · Choose quiz level →</button></div>
+        </div>
+      )}
+
+      {screen === 'difficulty' && (
+        <div style={{ maxWidth: 760, margin: '0 auto', padding: '12px 4px 28px' }}>
+          <div style={{ marginBottom: 20 }}>{shellButton('← Puzzle home', () => setScreen('hub'))}</div>
+          <div style={{ textAlign: 'center', marginBottom: 24 }}><div style={{ fontSize: '2.2rem' }}>🏛️</div><h2 style={{ margin: '8px 0' }}>Choose your challenge</h2><p style={{ color: 'var(--clr-text-soft)' }}>Pick a level. You can try another one whenever you like.</p></div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(190px, 1fr))', gap: 14 }}>
+            {[
+              { key: 'easy', icon: '🌱', name: 'Apprentice', range: 'I – XX', detail: '5 questions · Numbers up to 20' },
+              { key: 'medium', icon: '🛡️', name: 'Scholar', range: 'I – XCIX', detail: '8 questions · Numbers up to 99' },
+              { key: 'hard', icon: '🏆', name: 'Centurion', range: 'I – CCCXCIX', detail: '10 questions · Numbers up to 399' },
+            ].map(level => <button key={level.key} onClick={() => startQuiz(level.key)} style={{ ...cardStyle, padding: 20, textAlign: 'left', cursor: 'pointer' }}><span style={{ fontSize: '1.7rem' }}>{level.icon}</span><strong style={{ display: 'block', fontSize: '1.15rem', marginTop: 9 }}>{level.name}</strong><span style={{ display: 'block', color: 'var(--clr-accent)', fontWeight: 800, margin: '6px 0' }}>{level.range}</span><span style={{ color: 'var(--clr-text-soft)' }}>{level.detail}</span></button>)}
+          </div>
+        </div>
+      )}
+
+      {screen === 'quiz' && (finished ? (
+        <div style={{ textAlign: 'center', padding: '24px 12px' }}>
+          <div style={{ fontSize: '2.5rem' }}>{score === (difficulty === 'easy' ? 5 : difficulty === 'medium' ? 8 : 10) ? '🏆' : '✨'}</div>
+          <h2>{score === (difficulty === 'easy' ? 5 : difficulty === 'medium' ? 8 : 10) ? 'Perfect score!' : 'Round complete!'}</h2>
+          <p className="final-score">You scored {score}/{difficulty === 'easy' ? 5 : difficulty === 'medium' ? 8 : 10}</p>
+          <p style={{ color: 'var(--clr-text-soft)' }}>Level: {difficulty === 'easy' ? 'Apprentice' : difficulty === 'medium' ? 'Scholar' : 'Centurion'}</p>
+          <div className="button-row" style={{ justifyContent: 'center' }}><button onClick={restart}>Play Again</button><button onClick={() => setScreen('difficulty')}>Change Level</button><button onClick={() => setScreen('hub')}>Puzzle Home</button></div>
+        </div>
+      ) : (
+        <div style={{ maxWidth: 560, margin: '0 auto', textAlign: 'center', padding: '8px 4px 24px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>{shellButton('← Change level', () => setScreen('difficulty'))}<p style={{ color: 'var(--clr-text-soft)' }}>{difficulty === 'easy' ? 'Apprentice' : difficulty === 'medium' ? 'Scholar' : 'Centurion'} · Question {round + 1} of {difficulty === 'easy' ? 5 : difficulty === 'medium' ? 8 : 10} · Score {score}</p></div>
+          <div style={{ height: 7, borderRadius: 9, background: 'var(--clr-border)', overflow: 'hidden', margin: '12px 0 24px' }}><div style={{ height: '100%', width: `${((round + 1) / (difficulty === 'easy' ? 5 : difficulty === 'medium' ? 8 : 10)) * 100}%`, background: 'var(--clr-accent)', transition: 'width .2s' }} /></div>
+          <h2 style={{ margin: '24px 0' }}>{question.prompt}</h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 12 }}>
+            {question.choices.map(choice => {
+              const isCorrect = choice === question.answer
+              const isSelected = choice === selected
+              return <button key={choice} onClick={() => chooseAnswer(choice)} disabled={selected !== null} style={{ padding: '16px 12px', borderRadius: 'var(--radius-sm)', border: `1.5px solid ${selected !== null && isCorrect ? 'var(--clr-correct)' : 'var(--clr-border)'}`, background: selected !== null && isCorrect ? 'var(--clr-correct-bg)' : isSelected ? 'var(--clr-wrong-bg)' : 'var(--clr-card)', color: 'var(--clr-text)', fontSize: '1.1rem', fontWeight: 700, cursor: selected === null ? 'pointer' : 'default' }}>{choice}</button>
+            })}
+          </div>
+          {selected !== null && <div aria-live="polite" style={{ marginTop: 18 }}><p style={{ color: selected === question.answer ? 'var(--clr-correct)' : 'var(--clr-wrong)', fontWeight: 700 }}>{selected === question.answer ? 'Correct!' : `Not quite. The answer is ${question.answer}.`}</p><button onClick={nextQuestion}>{round === (difficulty === 'easy' ? 4 : difficulty === 'medium' ? 7 : 9) ? 'See Results' : 'Next Question'}</button></div>}
+        </div>
+      ))}
+    </QuizLayout>
+  )
+}
+
 function App() {
   const [diagnosticState, setDiagnosticState] = useState({});
   const { t } = useI18n();
@@ -44605,6 +44867,7 @@ function App() {
     geocraft: GeometryApp,
     battle: BattleApp,          // Live fastest-finger duels
     sudoku: SudokuApp,          // 9x9 Sudoku puzzle
+    romannumerals: RomanNumeralsApp, // Read and write Roman numerals
 
     'comic-addition': ComicAdditionApp,
     gk: GKApp,                    // General Knowledge
