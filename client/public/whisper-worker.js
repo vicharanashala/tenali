@@ -13,10 +13,9 @@
 
 import { pipeline, env } from 'https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.3.3';
 
-// Enable loading bundled model from client/public/models/
-env.allowLocalModels = true;
+// Load remote models directly from Hugging Face Hub (cached in browser CacheStorage)
+env.allowLocalModels = false;
 env.allowRemoteModels = true;
-env.localModelPath = '/models/';
 env.useBrowserCache = true;
 
 // Configure ONNX Runtime Web WASM flags for maximum speed & multi-core execution
@@ -26,7 +25,7 @@ if (env.backends?.onnx?.wasm) {
   env.backends.onnx.wasm.proxy = false;
 }
 
-const LOCAL_MODEL = 'whisper_indian_digits';
+const PRIMARY_MODEL = 'gradient-queen/whisper-tiny-indian-digits-final';
 const FALLBACK_MODEL = 'onnx-community/whisper-tiny';
 const TASK = 'automatic-speech-recognition';
 
@@ -35,7 +34,7 @@ const TASK = 'automatic-speech-recognition';
  */
 async function loadPipeline(task, modelId, progress_callback) {
   try {
-    console.info(`[whisper-worker] Loading Whisper pipeline via WebAssembly (wasm): ${modelId}...`);
+    console.info(`[whisper-worker] Loading Whisper pipeline from Hugging Face (${modelId})...`);
     return await pipeline(task, modelId, {
       progress_callback,
       device: 'wasm'
@@ -52,18 +51,18 @@ async function loadPipeline(task, modelId, progress_callback) {
 
 class PipelineSingleton {
   static task = TASK;
-  static model = LOCAL_MODEL;
+  static model = PRIMARY_MODEL;
   static instance = null;
 
   static async getInstance(progress_callback = null) {
     if (this.instance === null) {
       try {
-        console.info(`[whisper-worker] Loading primary local Olive INT8 fine-tuned model: ${LOCAL_MODEL}...`);
-        this.instance = await loadPipeline(this.task, LOCAL_MODEL, progress_callback);
-        this.model = LOCAL_MODEL;
-        console.info(`[whisper-worker] Local fine-tuned model loaded successfully!`);
-      } catch (localErr) {
-        console.warn(`[whisper-worker] Could not load local model ${LOCAL_MODEL}, falling back to ${FALLBACK_MODEL}:`, localErr?.message);
+        console.info(`[whisper-worker] Loading primary Hugging Face model: ${PRIMARY_MODEL}...`);
+        this.instance = await loadPipeline(this.task, PRIMARY_MODEL, progress_callback);
+        this.model = PRIMARY_MODEL;
+        console.info(`[whisper-worker] Primary Hugging Face model loaded successfully!`);
+      } catch (primaryErr) {
+        console.warn(`[whisper-worker] Could not load primary model ${PRIMARY_MODEL}, falling back to ${FALLBACK_MODEL}:`, primaryErr?.message);
         try {
           this.instance = await loadPipeline(this.task, FALLBACK_MODEL, progress_callback);
           this.model = FALLBACK_MODEL;
