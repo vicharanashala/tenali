@@ -1,27 +1,5 @@
-node_modules
-*.log
-client/dist
-server.log
-
-server/in_memory_users_db.json
-server/lil/learning_journey/in_memory_journey_progress.json
-server/dictionaryCache
-ISSUE_DRAFT.md
-PR_DRAFT.md
-**/*.ps1
-.env
-
-# local scratch / debug throwaways
-scratch/
-server/_probe*.js
-.env
-*.env
-
-# Backup snapshots — never commit these; use git history instead
-*.bak
-*.bak.*
-__pycache__/
-*.pyc
-
-# Local npm backup files
-client/*.backup
+.DS_Store
+Thumbs.db
+node_modules/
+.vscode/
+.idea/
