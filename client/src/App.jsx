@@ -187,16 +187,102 @@ const TENALI_BUILD_DATE = '2026-07-08 12:52 IST'
 // Tiny pub/sub on top of localStorage so AuthMenu and AuthGate stay in sync.
 
 
-// Hamburger button (top-right) + dropdown + login modal.
-// Renders globally — sits next to the .theme-toggle.
-function AuthMenu({ t = (s) => s }) {
-  const { user, login, logout } = useAuth()
-  const [open, setOpen] = useState(false)
-  const [showLogin, setShowLogin] = useState(false)
+// Reusable login modal popup
+function LoginModal({ isOpen, onClose, onSuccess }) {
+  const { login } = useAuth()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [busy, setBusy] = useState(false)
+
+  useEffect(() => {
+    if (!isOpen) {
+      setError('')
+      return
+    }
+    const onKey = e => {
+      if (e.key === 'Escape') onClose()
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [isOpen, onClose])
+
+  if (!isOpen) return null
+
+  const submit = async (e) => {
+    if (e && e.preventDefault) e.preventDefault()
+    setError(''); setBusy(true)
+    try {
+      await login(username.trim(), password)
+      setUsername(''); setPassword('')
+      onClose()
+      if (onSuccess) onSuccess()
+    } catch (err) {
+      setError(err.message || 'login failed')
+    } finally { setBusy(false) }
+  }
+
+  return (
+    <div
+      onClick={onClose}
+      style={{ position: 'fixed', inset: 0, zIndex: 1100, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+    >
+      <form
+        onClick={e => e.stopPropagation()}
+        onSubmit={submit}
+        style={{
+          minWidth: 320, maxWidth: 360, padding: 24,
+          background: 'var(--clr-surface, #1c1c1f)',
+          border: '1px solid var(--clr-border, #444)',
+          borderRadius: 12,
+          color: 'var(--clr-text)',
+          boxShadow: '0 10px 40px rgba(0,0,0,0.5)',
+        }}
+      >
+        <h2 style={{ marginTop: 0, marginBottom: 16 }}>Log in</h2>
+        <label style={{ display: 'block', marginBottom: 12, fontSize: '0.9rem' }}>
+          Username
+          <input
+            type="text"
+            value={username}
+            onChange={e => setUsername(e.target.value)}
+            autoFocus
+            autoComplete="username"
+            style={{ display: 'block', width: '100%', marginTop: 4, padding: '10px 12px', borderRadius: 6, border: '1px solid var(--clr-border, #555)', background: 'var(--clr-surface, #1c1c1f)', color: 'var(--clr-text)', boxSizing: 'border-box' }}
+          />
+        </label>
+        <label style={{ display: 'block', marginBottom: 12, fontSize: '0.9rem' }}>
+          Password
+          <input
+            type="password"
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+            autoComplete="current-password"
+            style={{ display: 'block', width: '100%', marginTop: 4, padding: '10px 12px', borderRadius: 6, border: '1px solid var(--clr-border, #555)', background: 'var(--clr-surface, #1c1c1f)', color: 'var(--clr-text)', boxSizing: 'border-box' }}
+          />
+        </label>
+        {error && <p style={{ color: '#f85149', margin: '8px 0', fontSize: '0.85rem' }}>{error}</p>}
+        <div style={{ display: 'flex', gap: 8, marginTop: 12, justifyContent: 'flex-end' }}>
+          <button type="button" onClick={onClose}
+            style={{ padding: '8px 14px', borderRadius: 6, background: 'transparent', border: '1px solid var(--clr-border, #555)', color: 'var(--clr-text)', cursor: 'pointer' }}>
+            Cancel
+          </button>
+          <button type="submit" disabled={busy}
+            style={{ padding: '8px 18px', borderRadius: 6, background: '#2ea043', color: '#fff', border: 'none', cursor: busy ? 'not-allowed' : 'pointer', fontWeight: 600 }}>
+            {busy ? 'Logging in…' : 'Log in'}
+          </button>
+        </div>
+      </form>
+    </div>
+  )
+}
+
+// Hamburger button (top-right) + dropdown + login modal.
+// Renders globally — sits next to the .theme-toggle.
+function AuthMenu({ t = (s) => s }) {
+  const { user, logout } = useAuth()
+  const [open, setOpen] = useState(false)
+  const [showLogin, setShowLogin] = useState(false)
 
   // Hide hamburger menu in visual learning to prevent navigation away
   const params = new URLSearchParams(window.location.search)
@@ -214,29 +300,16 @@ function AuthMenu({ t = (s) => s }) {
     mode === 'geocraft'
 
   useEffect(() => {
-    const onKey = e => { if (e.key === 'Escape') { setOpen(false); setShowLogin(false); setError('') } }
+    const onKey = e => { if (e.key === 'Escape') { setOpen(false); setShowLogin(false) } }
     window.addEventListener('keydown', onKey)
     const onNav = e => { setOpen(false) }
     window.addEventListener('tenali-navigate', onNav)
-    const onOpenAuth = e => {
-      if (e?.detail?.showLogin) {
-        setShowLogin(true)
-        setOpen(false)
-      } else {
-        setOpen(prev => !prev)
-      }
-    }
-    const onOpenLogin = () => {
-      setShowLogin(true)
-      setOpen(false)
-    }
+    const onOpenAuth = () => setOpen(prev => !prev)
     window.addEventListener('tenali:openAuth', onOpenAuth)
-    window.addEventListener('tenali:openLogin', onOpenLogin)
     return () => {
       window.removeEventListener('keydown', onKey)
       window.removeEventListener('tenali-navigate', onNav)
       window.removeEventListener('tenali:openAuth', onOpenAuth)
-      window.removeEventListener('tenali:openLogin', onOpenLogin)
     }
   }, [])
 
@@ -245,21 +318,12 @@ function AuthMenu({ t = (s) => s }) {
     setOpen(false)
   }
 
-  const submit = async (e) => {
-    if (e && e.preventDefault) e.preventDefault()
-    setError(''); setBusy(true)
-    try {
-      await login(username.trim(), password)
-      setShowLogin(false); setOpen(false)
-      setUsername(''); setPassword('')
-      if (isVisualLearning || params.get('mode')) {
-        window.location.reload()
-      } else {
-        window.location.href = withBase('/tenth')
-      }
-    } catch (err) {
-      setError(err.message || 'login failed')
-    } finally { setBusy(false) }
+  const handleLoginSuccess = () => {
+    if (isVisualLearning || params.get('mode')) {
+      window.location.reload()
+    } else {
+      window.location.href = withBase('/tenth')
+    }
   }
 
   if (isVisualLearning) {
@@ -370,59 +434,11 @@ function AuthMenu({ t = (s) => s }) {
         </>
       )}
 
-      {showLogin && (
-        <div
-          onClick={() => { setShowLogin(false); setError('') }}
-          style={{ position: 'fixed', inset: 0, zIndex: 1100, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-        >
-          <form
-            onClick={e => e.stopPropagation()}
-            onSubmit={submit}
-            style={{
-              minWidth: 320, maxWidth: 360, padding: 24,
-              background: 'var(--clr-surface, #1c1c1f)',
-              border: '1px solid var(--clr-border, #444)',
-              borderRadius: 12,
-              color: 'var(--clr-text)',
-              boxShadow: '0 10px 40px rgba(0,0,0,0.5)',
-            }}
-          >
-            <h2 style={{ marginTop: 0, marginBottom: 16 }}>Log in</h2>
-            <label style={{ display: 'block', marginBottom: 12, fontSize: '0.9rem' }}>
-              Username
-              <input
-                type="text"
-                value={username}
-                onChange={e => setUsername(e.target.value)}
-                autoFocus
-                autoComplete="username"
-                style={{ display: 'block', width: '100%', marginTop: 4, padding: '10px 12px', borderRadius: 6, border: '1px solid var(--clr-border, #555)', background: 'var(--clr-surface, #1c1c1f)', color: 'var(--clr-text)', boxSizing: 'border-box' }}
-              />
-            </label>
-            <label style={{ display: 'block', marginBottom: 12, fontSize: '0.9rem' }}>
-              Password
-              <input
-                type="password"
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-                autoComplete="current-password"
-                style={{ display: 'block', width: '100%', marginTop: 4, padding: '10px 12px', borderRadius: 6, border: '1px solid var(--clr-border, #555)', background: 'var(--clr-surface, #1c1c1f)', color: 'var(--clr-text)', boxSizing: 'border-box' }}
-              />
-            </label>
-            {error && <p style={{ color: '#f85149', margin: '8px 0', fontSize: '0.85rem' }}>{error}</p>}
-            <div style={{ display: 'flex', gap: 8, marginTop: 12, justifyContent: 'flex-end' }}>
-              <button type="button" onClick={() => { setShowLogin(false); setError('') }}
-                style={{ padding: '8px 14px', borderRadius: 6, background: 'transparent', border: '1px solid var(--clr-border, #555)', color: 'var(--clr-text)', cursor: 'pointer' }}>
-                Cancel
-              </button>
-              <button type="submit" disabled={busy}
-                style={{ padding: '8px 18px', borderRadius: 6, background: '#2ea043', color: '#fff', border: 'none', cursor: busy ? 'not-allowed' : 'pointer', fontWeight: 600 }}>
-                {busy ? 'Logging in…' : 'Log in'}
-              </button>
-            </div>
-          </form>
-        </div>
-      )}
+      <LoginModal
+        isOpen={showLogin}
+        onClose={() => setShowLogin(false)}
+        onSuccess={handleLoginSuccess}
+      />
     </>
   )
 }
@@ -430,6 +446,7 @@ function AuthMenu({ t = (s) => s }) {
 // Wraps a route's content; if not logged in, shows a "log in to continue" notice.
 function AuthGate({ children, onBack }) {
   const { user } = useAuth()
+  const [showLoginModal, setShowLoginModal] = useState(false)
   if (user) return children
 
   const handleBack = () => {
@@ -448,59 +465,60 @@ function AuthGate({ children, onBack }) {
     }
   }
 
-  const handleLogin = () => {
-    window.dispatchEvent(new CustomEvent('tenali:openLogin'))
-    window.dispatchEvent(new CustomEvent('tenali:openAuth', { detail: { showLogin: true } }))
-  }
-
   return (
-    <div style={{ maxWidth: 520, margin: '4rem auto', padding: '2rem', textAlign: 'center', color: 'var(--clr-text)' }}>
-      <h1 style={{ marginBottom: 8 }}>Login required</h1>
-      <p style={{ opacity: 0.85, lineHeight: 1.6 }}>
-        This page is only available to signed-in users. Open the <strong>menu</strong> in the top-right corner and choose <strong>Log in</strong>.
-      </p>
-      <div style={{ display: 'flex', gap: 12, justifyContent: 'center', alignItems: 'center', marginTop: 24, flexWrap: 'wrap' }}>
-        <button
-          type="button"
-          onClick={handleLogin}
-          style={{
-            padding: '10px 24px',
-            borderRadius: 8,
-            background: 'var(--clr-accent, #e8833a)',
-            color: '#fff',
-            border: 'none',
-            cursor: 'pointer',
-            fontWeight: 600,
-            fontSize: '1rem',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
-            transition: 'opacity 0.15s ease',
-          }}
-          onMouseEnter={e => { e.currentTarget.style.opacity = '0.9' }}
-          onMouseLeave={e => { e.currentTarget.style.opacity = '1' }}
-        >
-          Log in
-        </button>
-        <button
-          type="button"
-          onClick={handleBack}
-          style={{
-            padding: '10px 24px',
-            borderRadius: 8,
-            background: 'transparent',
-            color: 'var(--clr-text)',
-            border: '1px solid var(--clr-border, #555)',
-            cursor: 'pointer',
-            fontWeight: 600,
-            fontSize: '1rem',
-            transition: 'background 0.15s ease',
-          }}
-          onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.06)' }}
-          onMouseLeave={e => { e.currentTarget.style.background = 'transparent' }}
-        >
-          ← Back
-        </button>
+    <>
+      <div style={{ maxWidth: 520, margin: '4rem auto', padding: '2rem', textAlign: 'center', color: 'var(--clr-text)' }}>
+        <h1 style={{ marginBottom: 8 }}>Login required</h1>
+        <p style={{ opacity: 0.85, lineHeight: 1.6 }}>
+          This page is only available to signed-in users. Open the <strong>menu</strong> in the top-right corner and choose <strong>Log in</strong>.
+        </p>
+        <div style={{ display: 'flex', gap: 12, justifyContent: 'center', alignItems: 'center', marginTop: 24, flexWrap: 'wrap' }}>
+          <button
+            type="button"
+            onClick={() => setShowLoginModal(true)}
+            style={{
+              padding: '10px 24px',
+              borderRadius: 8,
+              background: 'var(--clr-accent, #e8833a)',
+              color: '#fff',
+              border: 'none',
+              cursor: 'pointer',
+              fontWeight: 600,
+              fontSize: '1rem',
+              boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+              transition: 'opacity 0.15s ease',
+            }}
+            onMouseEnter={e => { e.currentTarget.style.opacity = '0.9' }}
+            onMouseLeave={e => { e.currentTarget.style.opacity = '1' }}
+          >
+            Log in
+          </button>
+          <button
+            type="button"
+            onClick={handleBack}
+            style={{
+              padding: '10px 24px',
+              borderRadius: 8,
+              background: 'transparent',
+              color: 'var(--clr-text)',
+              border: '1px solid var(--clr-border, #555)',
+              cursor: 'pointer',
+              fontWeight: 600,
+              fontSize: '1rem',
+              transition: 'background 0.15s ease',
+            }}
+            onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.06)' }}
+            onMouseLeave={e => { e.currentTarget.style.background = 'transparent' }}
+          >
+            ← Back
+          </button>
+        </div>
       </div>
-    </div>
+      <LoginModal
+        isOpen={showLoginModal}
+        onClose={() => setShowLoginModal(false)}
+      />
+    </>
   )
 }
 
