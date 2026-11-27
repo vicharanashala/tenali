@@ -427,6 +427,7 @@ button:disabled {
   /* Flex container for back button and navigation */
   display: flex;
   justify-content: flex-start;
+  width: 100%;
   margin-bottom: 20px;
 }
 
