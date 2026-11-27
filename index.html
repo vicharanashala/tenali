@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Changes Around Us – Learn &amp; Play</title>
+  <meta name="description" content="An interactive science project on physical and chemical changes with puzzles and games for students." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="hero">
+    <h1>🌍 Changes Around Us</h1>
+    <p>Learn how things change – then test yourself with puzzles and games!</p>
+  </header>
+
+  <nav id="tabs" aria-label="Sections">
+    <button class="tab-btn active" data-tab="learn">📖 Learn</button>
+    <button class="tab-btn" data-tab="sort">🧪 Sort It</button>
+    <button class="tab-btn" data-tab="scramble">🔤 Word Scramble</button>
+    <button class="tab-btn" data-tab="match">🃏 Match Pairs</button>
+    <button class="tab-btn" data-tab="search">🔎 Word Search</button>
+    <button class="tab-btn" data-tab="quiz">🏆 Quiz</button>
+    <button class="tab-btn" data-tab="progress">⭐ My Progress</button>
+  </nav>
+
+  <main>
+    <!-- LEARN -->
+    <section id="tab-learn" class="tab">
+      <h2>What is a change?</h2>
+      <p class="callout big-def">👉 A <strong>change</strong> is when something becomes <strong>different</strong> from before.</p>
+      <p><strong>Examples:</strong> ice melts 🧊, milk turns into curd 🥛, iron rusts 🔩, a seed grows into a plant 🌱.</p>
+
+      <div class="cards">
+        <article class="card">
+          <h3>⏱️ Slow &amp; Fast</h3>
+          <p><strong>Slow:</strong> growing of a plant, rusting of iron, ageing.</p>
+          <p><strong>Fast:</strong> bursting a balloon, burning a match, lightning.</p>
+        </article>
+        <article class="card">
+          <h3>↩️ Reversible &amp; Irreversible</h3>
+          <p><strong>Reversible</strong> changes can be undone: melting and freezing ice, folding paper.</p>
+          <p><strong>Irreversible</strong> changes cannot be undone: baking a cake, burning wood, cooking an egg.</p>
+        </article>
+        <article class="card">
+          <h3>🔁 Periodic &amp; Non-periodic</h3>
+          <p><strong>Periodic</strong> changes repeat after a fixed time: day and night, seasons, the Moon's phases.</p>
+          <p><strong>Non-periodic</strong> changes do not repeat in a fixed way: earthquakes, rain, a falling tree.</p>
+        </article>
+      </div>
+
+      <h2>Physical vs Chemical changes</h2>
+      <div class="cards two">
+        <article class="card physical-card">
+          <h3>🧊 Physical change</h3>
+          <ul>
+            <li>Only shape, size, colour or state changes.</li>
+            <li><strong>No new substance</strong> is formed.</li>
+            <li>Usually reversible.</li>
+          </ul>
+          <p class="example">Examples: melting ice, boiling water, cutting paper, dissolving sugar.</p>
+        </article>
+        <article class="card chemical-card">
+          <h3>🔥 Chemical change</h3>
+          <ul>
+            <li>One or more <strong>new substances</strong> are formed.</li>
+            <li>Usually cannot be reversed easily.</li>
+            <li>Often involves heat, light, gas, smell or a colour change.</li>
+          </ul>
+          <p class="example">Examples: burning paper, rusting, curdling of milk, cooking food.</p>
+        </article>
+      </div>
+
+      <h2>🕵️ 4 clues of a chemical change</h2>
+      <ol class="clues">
+        <li>A <strong>new substance</strong> appears (like ash or rust).</li>
+        <li>A <strong>colour change</strong> you cannot undo.</li>
+        <li>A <strong>gas</strong> is given out (bubbles or a new smell).</li>
+        <li><strong>Heat, light or sound</strong> is produced or absorbed.</li>
+      </ol>
+
+      <h2>🏠 Try it at home (with an adult)</h2>
+      <div class="cards">
+        <article class="card">
+          <h3>Sugar in water</h3>
+          <p>Stir a spoon of sugar in warm water. It seems to vanish. Let the water evaporate in a plate – the sugar comes back! <em>Physical change.</em></p>
+        </article>
+        <article class="card">
+          <h3>Rusting nails</h3>
+          <p>Keep one iron nail in a dry jar and another in a jar of moist air for a week. Which one rusts? <em>Chemical change.</em></p>
+        </article>
+        <article class="card">
+          <h3>Ice race</h3>
+          <p>Put an ice cube in sunlight and another in shade. Time how long each takes to melt. <em>Physical change.</em></p>
+        </article>
+      </div>
+
+      <p class="callout">💡 <strong>Fun fact:</strong> Freshly cut apples turn brown because oxygen in the air reacts with substances in the fruit – a chemical change. A drop of lemon juice slows it down!</p>
+      <p>Ready? Pick a game from the menu above. 🎮</p>
+    </section>
+
+    <!-- SORT -->
+    <section id="tab-sort" class="tab hidden">
+      <h2>🧪 Sort It: Physical or Chemical?</h2>
+      <p>You will see 10 changes. Decide whether each one is a physical or a chemical change.</p>
+      <div id="sort-game" class="game"></div>
+    </section>
+
+    <!-- SCRAMBLE -->
+    <section id="tab-scramble" class="tab hidden">
+      <h2>🔤 Word Scramble</h2>
+      <p>Unscramble the science word using the hint.</p>
+      <div id="scramble-game" class="game"></div>
+    </section>
+
+    <!-- MATCH -->
+    <section id="tab-match" class="tab hidden">
+      <h2>🃏 Match Pairs</h2>
+      <p>Flip two cards. Match <em>what we start with</em> to <em>what we get</em>. Fewer moves means more stars!</p>
+      <div id="match-game" class="game"></div>
+    </section>
+
+    <!-- WORD SEARCH -->
+    <section id="tab-search" class="tab hidden">
+      <h2>🔎 Word Search</h2>
+      <p>Find the 8 hidden words. Click the <strong>first</strong> letter, then click the <strong>last</strong> letter of the word. Words can go across, down or diagonally (forwards or backwards).</p>
+      <div id="search-game" class="game"></div>
+    </section>
+
+    <!-- QUIZ -->
+    <section id="tab-quiz" class="tab hidden">
+      <h2>🏆 Final Quiz</h2>
+      <p>8 questions. Let's see how much you have learnt!</p>
+      <div id="quiz-game" class="game"></div>
+    </section>
+
+    <!-- PROGRESS -->
+    <section id="tab-progress" class="tab hidden">
+      <h2>⭐ My Progress</h2>
+      <p>Your best scores are saved in this browser.</p>
+      <div id="progress-list"></div>
+      <button id="reset-progress" class="btn small">Reset my scores</button>
+    </section>
+  </main>
+
+  <footer>
+    <p>Made with ❤️ for science class · Open-source project (MIT License)</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
