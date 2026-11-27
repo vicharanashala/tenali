@@ -270,7 +270,7 @@ export default function Vachana({ onBack }) {
             <h1 style={{ margin: 0, fontSize: '1.8rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
               {VachanaIcons.header} Vachana Literary Lab
             </h1>
-            <p className="subtitle" style={{ margin: '4px 0 0 0' }}>Learn to parse, translate, and communicate in the language of mathematics</p>
+            <p className="subtitle" style={{ margin: '4px 0 0 0', textAlign: 'left' }}>Learn to parse, translate, and communicate in the language of mathematics</p>
           </div>
         </div>
       )}
