@@ -1758,57 +1758,47 @@ export default function InteractiveLcmHcfApp({ onBack }) {
   // Step 0: Welcome and Age Group Selection
   const renderAgeSelect = () => {
     return (
-      <div style={{ textAlign: 'center' }}>
-        <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '2rem', marginBottom: '8px' }}>
-          LCM & HCF Learning Quest
-        </h2>
-        <p style={{ color: 'var(--clr-text-soft)', marginBottom: '24px' }}>
-          Embark on an age-adaptive mathematics journey. Select your level to begin!
-        </p>
+      <div>
+        <div style={{ display: 'flex', alignItems: 'center', marginBottom: '16px' }}>
+          <button className="back-button" onClick={onBack}>← Back</button>
+        </div>
+        <div style={{ textAlign: 'center' }}>
+          <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '2rem', marginBottom: '8px' }}>
+            LCM & HCF Learning Quest
+          </h2>
+          <p style={{ color: 'var(--clr-text-soft)', marginBottom: '24px' }}>
+            Embark on an age-adaptive mathematics journey. Select your level to begin!
+          </p>
 
-        <div className="age-select-grid">
-          <div className="age-card level-1" onClick={() => { setLevel(1); setCurrentStep(1); }}>
-            <span className="age-emoji">🦁</span>
-            <span className="age-title">Age 10–12 Years</span>
-            <p className="age-desc">
-              Visual flashcards, drag-and-drop games, and easy questions. Very basic illustrations.
-            </p>
-            <span className="age-badge">Level 1</span>
-          </div>
+          <div className="age-select-grid">
+            <div className="age-card level-1" onClick={() => { setLevel(1); setCurrentStep(1); }}>
+              <span className="age-emoji">🦁</span>
+              <span className="age-title">Age 10–12 Years</span>
+              <p className="age-desc">
+                Visual flashcards, drag-and-drop games, and easy questions. Very basic illustrations.
+              </p>
+              <span className="age-badge">Level 1</span>
+            </div>
 
-          <div className="age-card level-2" onClick={() => { setLevel(2); setCurrentStep(1); }}>
-            <span className="age-emoji">🚀</span>
-            <span className="age-title">Age 12–14 Years</span>
-            <p className="age-desc">
-              Moderate detail, visual concepts, and introduction to the Prime Factorization Method.
-            </p>
-            <span className="age-badge">Level 2</span>
-          </div>
+            <div className="age-card level-2" onClick={() => { setLevel(2); setCurrentStep(1); }}>
+              <span className="age-emoji">🚀</span>
+              <span className="age-title">Age 12–14 Years</span>
+              <p className="age-desc">
+                Moderate detail, visual concepts, and introduction to the Prime Factorization Method.
+              </p>
+              <span className="age-badge">Level 2</span>
+            </div>
 
-          <div className="age-card level-3" onClick={() => { setLevel(3); setCurrentStep(1); }}>
-            <span className="age-emoji">💎</span>
-            <span className="age-title">Age 14–16+ Years</span>
-            <p className="age-desc">
-              Deep reasoning, visual proofs, Prime Factorization, and the Long Division Method.
-            </p>
-            <span className="age-badge">Level 3</span>
+            <div className="age-card level-3" onClick={() => { setLevel(3); setCurrentStep(1); }}>
+              <span className="age-emoji">💎</span>
+              <span className="age-title">Age 14–16+ Years</span>
+              <p className="age-desc">
+                Deep reasoning, visual proofs, Prime Factorization, and the Long Division Method.
+              </p>
+              <span className="age-badge">Level 3</span>
+            </div>
           </div>
         </div>
-
-        <button 
-          onClick={onBack}
-          style={{ 
-            background: 'transparent', 
-            borderColor: 'var(--clr-border)', 
-            color: 'var(--clr-text)', 
-            padding: '10px 20px', 
-            borderRadius: 'var(--radius-sm)',
-            cursor: 'pointer',
-            marginTop: '20px'
-          }}
-        >
-          ← Back
-        </button>
       </div>
     );
   };
