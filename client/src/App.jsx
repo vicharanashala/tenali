@@ -122,7 +122,7 @@ const CJ_RECO_DIFFS = ['easy', 'medium', 'hard', 'extrahard'];
 // Both are login-gated: the concept session API authenticates every request.
 function QFormulaConceptMode({ onBack }) {
   return (
-    <AuthGate>
+    <AuthGate onBack={onBack}>
       <QFormulaConceptApp onBack={onBack} QFormulaApp={QFormulaApp} />
     </AuthGate>
   );
@@ -130,7 +130,7 @@ function QFormulaConceptMode({ onBack }) {
 
 function SimulConceptMode({ onBack }) {
   return (
-    <AuthGate>
+    <AuthGate onBack={onBack}>
       <SimulConceptApp onBack={onBack} SimulQuizApp={SimulApp} />
     </AuthGate>
   );
@@ -218,12 +218,25 @@ function AuthMenu({ t = (s) => s }) {
     window.addEventListener('keydown', onKey)
     const onNav = e => { setOpen(false) }
     window.addEventListener('tenali-navigate', onNav)
-    const onOpenAuth = () => setOpen(prev => !prev)
+    const onOpenAuth = e => {
+      if (e?.detail?.showLogin) {
+        setShowLogin(true)
+        setOpen(false)
+      } else {
+        setOpen(prev => !prev)
+      }
+    }
+    const onOpenLogin = () => {
+      setShowLogin(true)
+      setOpen(false)
+    }
     window.addEventListener('tenali:openAuth', onOpenAuth)
+    window.addEventListener('tenali:openLogin', onOpenLogin)
     return () => {
       window.removeEventListener('keydown', onKey)
       window.removeEventListener('tenali-navigate', onNav)
       window.removeEventListener('tenali:openAuth', onOpenAuth)
+      window.removeEventListener('tenali:openLogin', onOpenLogin)
     }
   }, [])
 
@@ -239,7 +252,7 @@ function AuthMenu({ t = (s) => s }) {
       await login(username.trim(), password)
       setShowLogin(false); setOpen(false)
       setUsername(''); setPassword('')
-      if (isVisualLearning) {
+      if (isVisualLearning || params.get('mode')) {
         window.location.reload()
       } else {
         window.location.href = withBase('/tenth')
@@ -415,20 +428,78 @@ function AuthMenu({ t = (s) => s }) {
 }
 
 // Wraps a route's content; if not logged in, shows a "log in to continue" notice.
-function AuthGate({ children }) {
+function AuthGate({ children, onBack }) {
   const { user } = useAuth()
   if (user) return children
+
+  const handleBack = () => {
+    if (typeof onBack === 'function') {
+      onBack()
+      return
+    }
+    const params = new URLSearchParams(window.location.search)
+    const section = params.get('section')
+    if (section) {
+      window.location.href = withBase(`/?view=puzzles&section=${encodeURIComponent(section)}`)
+    } else if (params.get('mode')) {
+      window.location.href = withBase('/?view=puzzles')
+    } else {
+      window.location.href = withBase('/')
+    }
+  }
+
+  const handleLogin = () => {
+    window.dispatchEvent(new CustomEvent('tenali:openLogin'))
+    window.dispatchEvent(new CustomEvent('tenali:openAuth', { detail: { showLogin: true } }))
+  }
+
   return (
     <div style={{ maxWidth: 520, margin: '4rem auto', padding: '2rem', textAlign: 'center', color: 'var(--clr-text)' }}>
       <h1 style={{ marginBottom: 8 }}>Login required</h1>
       <p style={{ opacity: 0.85, lineHeight: 1.6 }}>
         This page is only available to signed-in users. Open the <strong>menu</strong> in the top-right corner and choose <strong>Log in</strong>.
       </p>
-      <button
-        onClick={() => { window.location.href = withBase('/') }}
-        style={{ marginTop: 24, padding: '10px 24px', borderRadius: 8, background: 'var(--clr-accent, #e8833a)', color: '#fff', border: 'none', cursor: 'pointer', fontWeight: 600, fontSize: '1rem' }}>
-        ← Back to home
-      </button>
+      <div style={{ display: 'flex', gap: 12, justifyContent: 'center', alignItems: 'center', marginTop: 24, flexWrap: 'wrap' }}>
+        <button
+          type="button"
+          onClick={handleLogin}
+          style={{
+            padding: '10px 24px',
+            borderRadius: 8,
+            background: 'var(--clr-accent, #e8833a)',
+            color: '#fff',
+            border: 'none',
+            cursor: 'pointer',
+            fontWeight: 600,
+            fontSize: '1rem',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+            transition: 'opacity 0.15s ease',
+          }}
+          onMouseEnter={e => { e.currentTarget.style.opacity = '0.9' }}
+          onMouseLeave={e => { e.currentTarget.style.opacity = '1' }}
+        >
+          Log in
+        </button>
+        <button
+          type="button"
+          onClick={handleBack}
+          style={{
+            padding: '10px 24px',
+            borderRadius: 8,
+            background: 'transparent',
+            color: 'var(--clr-text)',
+            border: '1px solid var(--clr-border, #555)',
+            cursor: 'pointer',
+            fontWeight: 600,
+            fontSize: '1rem',
+            transition: 'background 0.15s ease',
+          }}
+          onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.06)' }}
+          onMouseLeave={e => { e.currentTarget.style.background = 'transparent' }}
+        >
+          ← Back
+        </button>
+      </div>
     </div>
   )
 }
