@@ -42424,7 +42424,7 @@ function App() {
     return (
       <>
           <div style={{ display: 'flex', alignItems: 'center', marginBottom: '16px' }}>
-            <button className="back-button" onClick={onBack}>&larr;</button>
+            <button className="back-button" onClick={onBack}>← Back</button>
           </div>
 
           {stage === 'setup' && (
