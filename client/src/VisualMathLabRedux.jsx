@@ -21,9 +21,9 @@ const API = '/api';
 
 /* ── Colour tokens ───────────────────────────────────────────────── */
 const C = {
-  bg: '#181512', card: '#2D2520', border: '#4A4038',
+  bg: '#181512', card: '#2D2520', border: 'var(--clr-border, #4A4038)',
   orange: '#F08C46', orange2: '#F08C46', blue: '#4F8DFF',
-  green: '#22C55E', red: '#EF4444', white: '#F4F1ED', muted: '#988D84',
+  green: '#22C55E', red: '#EF4444', white: 'var(--clr-text, #F4F1ED)', muted: 'var(--clr-text-soft, #988D84)',
 };
 const FONT = "'Inter', system-ui, sans-serif";
 
@@ -741,24 +741,24 @@ export default function VisualMathLabRedux({ onBack, initialDifficulty, initialN
       {/* ── START ───────────────────────────────────────────────── */}
       {!started && !finished && (
         <div style={{ maxWidth:'720px', width:'100%', textAlign:'center', position:'relative', margin:'0 auto', zIndex:10 }}>
-          <div style={{ display:'flex', alignItems:'center', justifyContent:'flex-start', marginBottom:'16px' }}>
-            <button onClick={onBack} style={{ background:'transparent', border:'1px solid #5B5048', borderRadius:'6px', padding:'6px 14px', color:'#A89C93', fontFamily:'Inter, sans-serif', fontWeight:600, fontSize:'0.85rem', cursor:'pointer', zIndex:20 }}>← Back</button>
+          <div className="header-row">
+            <button onClick={onBack} className="back-button" style={{ zIndex:20 }}>← Back</button>
           </div>
-          <h1 style={{ fontFamily:'Georgia, "Times New Roman", serif', fontWeight:700, fontSize:'42px', color:'#F4F1ED', margin:'0 0 12px', lineHeight:1.15, wordBreak:'break-word' }}>Multiplication &amp; division</h1>
-          <p style={{ color:'#988D84', fontSize:'0.9rem', margin:'0 0 40px', fontFamily:'Inter, sans-serif', fontWeight:400 }}>Practice multiplication and division!</p>
+          <h1 style={{ fontFamily:'Georgia, "Times New Roman", serif', fontWeight:700, fontSize:'42px', color:'var(--clr-text)', margin:'0 0 12px', lineHeight:1.15, wordBreak:'break-word' }}>Multiplication &amp; division</h1>
+          <p style={{ color:'var(--clr-text-soft)', fontSize:'0.9rem', margin:'0 0 40px', fontFamily:'Inter, sans-serif', fontWeight:400 }}>Practice multiplication and division!</p>
           <div style={{ marginBottom:'24px' }}>
-            <h3 style={{ color:'#F4F1ED', fontSize:'0.9rem', margin:'0 0 16px', fontFamily:'Inter, sans-serif', fontWeight:700 }}>Select Difficulty:</h3>
+            <h3 style={{ color:'var(--clr-text)', fontSize:'0.9rem', margin:'0 0 16px', fontFamily:'Inter, sans-serif', fontWeight:700 }}>Select Difficulty:</h3>
             <div style={{ display:'flex', gap:'12px', justifyContent:'center', flexWrap:'wrap', marginBottom:'12px' }}>
               {[['Easy','easy'],['Medium','medium'],['Hard','hard']].map(([lbl,val]) => (
-                <button key={val} onClick={() => setDifficulty(val)} style={{ background:difficulty===val?'#F08C46':'transparent', border:difficulty===val?'1px solid #F08C46':'1px solid #5B5048', borderRadius:'50px', padding:'8px 16px', color:difficulty===val?'#FFF':'#988D84', fontFamily:'Inter, sans-serif', fontWeight:600, fontSize:'0.85rem', cursor:'pointer' }}>{lbl}</button>
+                <button key={val} onClick={() => setDifficulty(val)} style={{ background:difficulty===val?'var(--clr-accent)':'transparent', border:difficulty===val?'1px solid var(--clr-accent)':'1px solid var(--clr-border)', borderRadius:'50px', padding:'8px 16px', color:difficulty===val?'#FFF':'var(--clr-text-soft)', fontFamily:'Inter, sans-serif', fontWeight:600, fontSize:'0.85rem', cursor:'pointer' }}>{lbl}</button>
               ))}
             </div>
           </div>
           <div style={{ marginBottom:'32px', display:'flex', flexDirection:'column', alignItems:'center' }}>
-            <label style={{ color:'#988D84', fontSize:'0.85rem', margin:'0 0 12px', fontFamily:'Inter, sans-serif', fontWeight:400 }}>How many questions?</label>
-            <input type="text" value={numQuestions} onChange={e => { const v=e.target.value; if(v===''||/^\d+$/.test(v)) setNumQuestions(v); }} style={{ background:'#463B34', border:'1px solid #5B5048', borderRadius:'6px', padding:'10px', color:'#FFF', fontFamily:'Inter, sans-serif', fontWeight:600, fontSize:'0.9rem', width:'100px', textAlign:'center', outline:'none' }} placeholder="5"/>
+            <label style={{ color:'var(--clr-text-soft)', fontSize:'0.85rem', margin:'0 0 12px', fontFamily:'Inter, sans-serif', fontWeight:400 }}>How many questions?</label>
+            <input type="text" value={numQuestions} onChange={e => { const v=e.target.value; if(v===''||/^\d+$/.test(v)) setNumQuestions(v); }} style={{ background:'var(--clr-input)', border:'1px solid var(--clr-border)', borderRadius:'6px', padding:'10px', color:'var(--clr-text)', fontFamily:'Inter, sans-serif', fontWeight:600, fontSize:'0.9rem', width:'100px', textAlign:'center', outline:'none' }} placeholder="5"/>
           </div>
-          <button onClick={startQuiz} style={{ background:'#F08C46', border:'none', borderRadius:'6px', padding:'10px 24px', color:'#FFF', fontFamily:'Inter, sans-serif', fontWeight:600, fontSize:'0.9rem', cursor:'pointer' }}>Start Quiz</button>
+          <button onClick={startQuiz} style={{ background:'var(--clr-accent)', border:'none', borderRadius:'6px', padding:'10px 24px', color:'#FFF', fontFamily:'Inter, sans-serif', fontWeight:600, fontSize:'0.9rem', cursor:'pointer' }}>Start Quiz</button>
         </div>
       )}
 
