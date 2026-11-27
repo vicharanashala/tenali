@@ -136,6 +136,7 @@ function SimulConceptMode({ onBack }) {
     </AuthGate>
   );
 }
+import Numbers1To10App from './components/Numbers1To10';
 
 // API base URL from environment variables (Vite)
 export const API = import.meta.env.VITE_API_BASE_URL || '';
@@ -42631,6 +42632,7 @@ function App() {
     'comic-addition': ComicAdditionApp,
     'flower-addition': FlowerAdditionApp,
     gk: GK,                    // General Knowledge
+    'numbers-1-to-10': Numbers1To10App, // Number Foundations 1 to 10
     addition: AdditionApp,         // Basic addition
     'column-addition': ColumnAddition, // Column Addition with carries
     'column-multiplication': ColumnMultiplication, // Column Multiplication with carries
