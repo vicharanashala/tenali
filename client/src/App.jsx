@@ -50148,135 +50148,48 @@ function TatsavitApp({ onBack }) {
   const maxLevelReached = levelRef.current
 
   const baseStyles = {
-    container: {
-      maxWidth: '620px',
-      margin: '0 auto',
-      padding: '20px',
-      background: 'var(--clr-bg)',
-      color: 'var(--clr-text)',
-      fontFamily: 'var(--font-body)',
-      minHeight: '100vh',
-      display: 'flex',
-      flexDirection: 'column'
-    },
-    card: {
-      background: 'var(--clr-card)',
-      border: '1px solid var(--clr-border)',
-      borderRadius: 'var(--radius)',
-      padding: '24px',
-      marginBottom: '16px',
-      boxShadow: 'var(--shadow-card)',
-      textAlign: 'center'
-    },
-    title: {
-      fontSize: '2rem',
-      fontWeight: 600,
-      fontFamily: 'var(--font-display)',
-      marginBottom: '8px',
-      color: 'var(--clr-accent)'
-    },
-    subtitle: {
-      fontSize: '0.95rem',
-      color: 'var(--clr-text-soft)',
-      marginBottom: '16px',
-      lineHeight: 1.5
-    },
-    button: {
-      padding: '12px 24px',
-      borderRadius: 'var(--radius-sm)',
-      border: 'none',
-      background: 'var(--clr-accent)',
-      color: '#fff',
-      fontSize: '1rem',
-      fontWeight: 500,
-      cursor: 'pointer',
-      transition: 'var(--transition)',
-      marginBottom: '8px'
-    },
-    buttonSecondary: {
-      padding: '12px 24px',
-      borderRadius: 'var(--radius-sm)',
-      border: '1px solid var(--clr-accent)',
-      background: 'transparent',
-      color: 'var(--clr-accent)',
-      fontSize: '1rem',
-      fontWeight: 500,
-      cursor: 'pointer',
-      transition: 'var(--transition)',
-      marginRight: '8px'
-    },
-    buttonRow: {
-      display: 'flex',
-      gap: '8px',
-      justifyContent: 'center',
-      marginTop: '20px',
-      flexWrap: 'wrap'
-    },
-    questionBox: {
-      background: 'var(--clr-surface)',
-      border: '1px solid var(--clr-border)',
-      borderRadius: 'var(--radius)',
-      padding: '24px',
-      marginBottom: '20px',
-      fontSize: '1.6rem',
-      fontWeight: 600,
-      lineHeight: 1.8,
-      color: 'var(--clr-text)'
-    },
     choiceButton: {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
       padding: '16px',
       margin: '8px 0',
-      borderRadius: 'var(--radius-sm)',
+      borderRadius: 'var(--radius-sm, 8px)',
       border: '2px solid var(--clr-border)',
       background: 'var(--clr-input)',
+      color: 'var(--clr-text)',
       fontSize: '1.1rem',
       fontWeight: 500,
       cursor: 'pointer',
-      transition: 'var(--transition)',
-      minHeight: '56px'
-    },
-    progressPill: {
-      display: 'inline-block',
-      padding: '8px 16px',
-      borderRadius: '20px',
-      background: 'var(--clr-surface)',
-      color: 'var(--clr-text)',
-      fontSize: '0.9rem',
-      fontWeight: 500,
-      marginRight: '8px',
-      marginBottom: '8px',
-      border: '1px solid var(--clr-border)'
+      transition: 'var(--transition, all 0.2s ease)',
+      minHeight: '56px',
+      width: '100%',
+      boxSizing: 'border-box'
     }
   }
 
   // ─── Home Screen ───
   if (homeScreen && !drillingScreen && !summaryScreen) {
     return (
-      <div style={baseStyles.container}>
-        <button onClick={onBack} style={{ ...baseStyles.buttonSecondary, alignSelf: 'flex-start', marginBottom: '16px' }}>← Back</button>
-        <div style={baseStyles.card}>
-          <h1 style={baseStyles.title}>Tatsavit</h1>
-          <p style={baseStyles.subtitle}>Algebra Simplification Drill</p>
-          <p style={{ fontSize: '0.95rem', color: 'var(--clr-text-soft)', marginBottom: '16px', lineHeight: 1.6 }}>
+      <QuizLayout title="Tatsavit" subtitle="Algebra Simplification Drill" onBack={onBack}>
+        <div className="welcome-box" style={{ maxWidth: 540, margin: '0 auto', textAlign: 'center' }}>
+          <p style={{ fontSize: '0.95rem', color: 'var(--clr-text-soft)', marginBottom: '20px', lineHeight: 1.6 }}>
             Master algebra step by step. Starting with exponent rules, moving to fractions and negative exponents, and ending with combining like terms.
           </p>
-          <div style={{ textAlign: 'left', marginBottom: '16px', fontSize: '0.9rem', color: 'var(--clr-text-soft)' }}>
+          <div style={{ textAlign: 'left', marginBottom: '24px', fontSize: '0.9rem', color: 'var(--clr-text-soft)', background: 'var(--clr-surface)', border: '1px solid var(--clr-border)', borderRadius: 'var(--radius)', padding: '16px 20px' }}>
             <strong style={{ color: 'var(--clr-accent)' }}>How it works:</strong>
-            <ul style={{ marginTop: '8px', paddingLeft: '20px' }}>
+            <ul style={{ marginTop: '8px', paddingLeft: '20px', lineHeight: 1.6 }}>
               <li>Start at Level 1</li>
               <li>3 correct answers in a row → advance to next level</li>
               <li>Wrong answer → drop back one level (minimum Level 1)</li>
               <li>13 levels total across 3 topics</li>
             </ul>
           </div>
-          <div style={baseStyles.buttonRow}>
-            <button onClick={startDrill} style={baseStyles.button}>Start Drill</button>
-          </div>
+          <button onClick={startDrill} style={{ background: 'var(--clr-accent)', border: 'none', borderRadius: '8px', padding: '12px 32px', color: '#fff', fontSize: '1rem', fontWeight: 600, cursor: 'pointer' }}>
+            Start Drill
+          </button>
         </div>
-      </div>
+      </QuizLayout>
     )
   }
 
@@ -50292,83 +50205,107 @@ function TatsavitApp({ onBack }) {
     const choiceLetters = ['A', 'B', 'C', 'D']
 
     return (
-      <div style={baseStyles.container}>
-        <button onClick={onBack} style={{ ...baseStyles.buttonSecondary, alignSelf: 'flex-start', marginBottom: '16px' }}>← Back</button>
-        <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '16px' }}>
-          <div style={baseStyles.progressPill}>Level {level}</div>
-          <div style={baseStyles.progressPill}>{levelInfo}</div>
-          <div style={{ ...baseStyles.progressPill, background: 'var(--clr-accent)', color: '#fff', border: 'none' }}>Streak: {streak}</div>
-        </div>
+      <QuizLayout
+        title="Tatsavit"
+        subtitle={`${levelInfo} · Level ${level} of 13`}
+        onBack={() => {
+          setHomeScreen(true)
+          setDrillingScreen(false)
+        }}
+      >
+        <div style={{ maxWidth: 640, margin: '0 auto', width: '100%' }}>
+          <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '16px' }}>
+            <div className="progress-pill center">Level {level}</div>
+            <div className="progress-pill center">{levelInfo}</div>
+            <div className="progress-pill center" style={{ background: 'var(--clr-accent)', color: '#fff', borderColor: 'var(--clr-accent)' }}>Streak: {streak} / 3</div>
+          </div>
 
-        {currentQuestion && (
-          <>
-            <div style={baseStyles.questionBox}>
-              {currentQuestion.questionJSX}
-            </div>
-
-            <div>
-              {currentQuestion.choices.map((choice, idx) => {
-                let choiceStyle = { ...baseStyles.choiceButton }
-                if (selectedChoice === idx && revealed) {
-                  if (choice.isCorrect) {
-                    choiceStyle.background = 'var(--clr-correct-bg)'
-                    choiceStyle.borderColor = 'var(--clr-correct)'
-                    choiceStyle.color = 'var(--clr-correct)'
-                  } else {
-                    choiceStyle.background = 'var(--clr-wrong-bg)'
-                    choiceStyle.borderColor = 'var(--clr-wrong)'
-                    choiceStyle.color = 'var(--clr-wrong)'
-                  }
-                }
-                return (
-                  <button
-                    key={idx}
-                    style={choiceStyle}
-                    onClick={() => handleChoiceClick(idx)}
-                    disabled={revealed}
-                  >
-                    <span style={{ marginRight: '12px', fontWeight: 700, fontSize: '1.2rem' }}>{choiceLetters[idx]}:</span>
-                    <span>{choice.jsx}</span>
-                  </button>
-                )
-              })}
-            </div>
-
-            {revealed && feedback && (
-              <div style={{ textAlign: 'center', marginTop: '16px', padding: '12px', borderRadius: 'var(--radius-sm)', background: selectedChoice >= 0 && currentQuestion.choices[selectedChoice].isCorrect ? 'var(--clr-correct-bg)' : 'var(--clr-wrong-bg)', color: selectedChoice >= 0 && currentQuestion.choices[selectedChoice].isCorrect ? 'var(--clr-correct)' : 'var(--clr-wrong)', fontSize: '1rem', fontWeight: 500 }}>
-                {feedback}
+          {currentQuestion && (
+            <>
+              <div className="question-box" style={{ padding: '24px', fontSize: '1.6rem', fontWeight: 600, lineHeight: 1.8, textAlign: 'center', marginBottom: '20px', color: 'var(--clr-text)' }}>
+                {currentQuestion.questionJSX}
               </div>
-            )}
-          </>
-        )}
 
-        <div style={baseStyles.buttonRow}>
-          <button onClick={goToSummary} style={{ ...baseStyles.buttonSecondary, marginRight: 0 }}>Finish Drill</button>
+              <div>
+                {currentQuestion.choices.map((choice, idx) => {
+                  let choiceStyle = { ...baseStyles.choiceButton }
+                  if (selectedChoice === idx && revealed) {
+                    if (choice.isCorrect) {
+                      choiceStyle.background = 'var(--clr-correct-bg)'
+                      choiceStyle.borderColor = 'var(--clr-correct)'
+                      choiceStyle.color = 'var(--clr-correct)'
+                    } else {
+                      choiceStyle.background = 'var(--clr-wrong-bg)'
+                      choiceStyle.borderColor = 'var(--clr-wrong)'
+                      choiceStyle.color = 'var(--clr-wrong)'
+                    }
+                  }
+                  return (
+                    <button
+                      key={idx}
+                      style={choiceStyle}
+                      onClick={() => handleChoiceClick(idx)}
+                      disabled={revealed}
+                    >
+                      <span style={{ marginRight: '12px', fontWeight: 700, fontSize: '1.2rem' }}>{choiceLetters[idx]}:</span>
+                      <span>{choice.jsx}</span>
+                    </button>
+                  )
+                })}
+              </div>
+
+              {revealed && feedback && (
+                <div style={{ textAlign: 'center', marginTop: '16px', padding: '12px', borderRadius: 'var(--radius-sm, 8px)', background: selectedChoice >= 0 && currentQuestion.choices[selectedChoice].isCorrect ? 'var(--clr-correct-bg)' : 'var(--clr-wrong-bg)', color: selectedChoice >= 0 && currentQuestion.choices[selectedChoice].isCorrect ? 'var(--clr-correct)' : 'var(--clr-wrong)', fontSize: '1rem', fontWeight: 500 }}>
+                  {feedback}
+                </div>
+              )}
+            </>
+          )}
+
+          <div style={{ display: 'flex', justifyContent: 'center', marginTop: '24px' }}>
+            <button
+              onClick={goToSummary}
+              style={{
+                background: 'transparent',
+                border: '1px solid var(--clr-border)',
+                borderRadius: '8px',
+                padding: '10px 24px',
+                color: 'var(--clr-text-soft)',
+                cursor: 'pointer',
+                fontWeight: 500,
+                fontSize: '0.95rem'
+              }}
+            >
+              Finish Drill
+            </button>
+          </div>
         </div>
-      </div>
+      </QuizLayout>
     )
   }
 
   // ─── Summary Screen ───
   if (summaryScreen && !homeScreen && !drillingScreen) {
     return (
-      <div style={baseStyles.container}>
-        <button onClick={onBack} style={{ ...baseStyles.buttonSecondary, alignSelf: 'flex-start', marginBottom: '16px' }}>← Back</button>
-        <div style={baseStyles.card}>
-          <h2 style={{ fontSize: '1.8rem', marginBottom: '16px' }}>Drill Complete!</h2>
-          <p style={{ fontSize: '2rem', fontWeight: 600, color: 'var(--clr-accent)', marginBottom: '8px' }}>Score: {score}</p>
-          <p style={{ fontSize: '1rem', color: 'var(--clr-text-soft)', marginBottom: '16px' }}>
+      <QuizLayout
+        title="Tatsavit — Drill Complete!"
+        subtitle={`Score: ${score} · Highest level reached: Level ${maxLevelReached}`}
+        onBack={onBack}
+      >
+        <div className="welcome-box" style={{ maxWidth: 480, margin: '0 auto', textAlign: 'center' }}>
+          <p style={{ fontSize: '2rem', fontWeight: 600, color: 'var(--clr-accent)', margin: '8px 0 12px' }}>Score: {score}</p>
+          <p style={{ fontSize: '1rem', color: 'var(--clr-text)', marginBottom: '12px' }}>
             Highest level reached: <strong style={{ color: 'var(--clr-accent)' }}>Level {maxLevelReached}</strong>
           </p>
-          <p style={{ fontSize: '0.9rem', color: 'var(--clr-text-soft)', marginBottom: '20px', lineHeight: 1.6 }}>
+          <p style={{ fontSize: '0.9rem', color: 'var(--clr-text-soft)', marginBottom: '24px', lineHeight: 1.6 }}>
             You answered {questionsAnswered.length} question{questionsAnswered.length !== 1 ? 's' : ''}. Keep practicing to master all topics!
           </p>
-          <div style={baseStyles.buttonRow}>
-            <button onClick={startDrill} style={baseStyles.button}>Try Again</button>
-            <button onClick={goHome} style={{ ...baseStyles.button, background: 'var(--clr-text-soft)' }}>Back</button>
+          <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <button onClick={startDrill} style={{ background: 'var(--clr-accent)', border: 'none', borderRadius: '8px', padding: '10px 24px', color: '#fff', fontWeight: 600, fontSize: '0.95rem', cursor: 'pointer' }}>Try Again</button>
+            <button onClick={goHome} style={{ background: 'transparent', border: '1px solid var(--clr-border)', borderRadius: '8px', padding: '10px 24px', color: 'var(--clr-text)', fontWeight: 600, fontSize: '0.95rem', cursor: 'pointer' }}>Back to Intro</button>
           </div>
         </div>
-      </div>
+      </QuizLayout>
     )
   }
 
