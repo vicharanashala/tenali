@@ -252,10 +252,11 @@ h1 {
 }
 
 .menu-card:hover {
+  background: var(--clr-surface);
   /* Lift card up 3px on hover */
   transform: translateY(-3px);
   /* Enhanced shadow creates depth effect */
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
   /* Accent color highlight on border */
   border-color: var(--clr-accent);
 }

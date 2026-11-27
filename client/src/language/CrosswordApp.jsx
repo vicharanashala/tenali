@@ -750,7 +750,7 @@ export default function CrosswordApp({ onBack }) {
                   setShowResults(false);
                 }}
               >
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', width: '100%' }}>
                   <span className="menu-title">{lvl.title}</span>
                   <StarRow stars={stars} />
                 </div>
