@@ -382,7 +382,7 @@ export default function EquationCraftingLab({ onBack }) {
                 fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer', boxShadow: 'rgba(0, 0, 0, 0.2) 0px 2px 6px',
                 display: 'inline-flex', alignItems: 'center', gap: '6px'
               }}>
-                ← Home
+                ← Back
               </button>
             </div>
 

@@ -562,7 +562,7 @@ export default function WaterJugLab({ onBack }) {
   const [solvable, setSolvable] = useState(true);
   const [gcdVal, setGcdVal] = useState(1);
 
-  const [setupTab, setSetupTab] = useState('concepts'); // 'play' | 'concepts' | 'theory'
+  const [setupTab, setSetupTab] = useState('play'); // 'play' | 'concepts' | 'theory'
   const [, setJourneyDone] = useState(false);
   const [showTheoryModal, setShowTheoryModal] = useState(false);
 
@@ -962,12 +962,7 @@ export default function WaterJugLab({ onBack }) {
                 boxShadow: 'rgba(0, 0, 0, 0.2) 0px 2px 6px', display: 'inline-flex', alignItems: 'center', gap: '6px'
               }}>← Menu</button>
             ) : (
-              <button onClick={onBack} style={{
-                background: 'var(--clr-surface)', border: '1px solid var(--clr-border)',
-                borderRadius: '8px', padding: '8px 16px', color: 'var(--clr-text-soft)',
-                fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer',
-                boxShadow: '0 2px 6px rgba(0,0,0,0.2)', display: 'inline-flex', alignItems: 'center', gap: '6px'
-              }}>← Back</button>
+              <button className="back-button" onClick={onBack}>← Back</button>
             )}
           </div>
 

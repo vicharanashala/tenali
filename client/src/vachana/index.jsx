@@ -262,15 +262,15 @@ export default function Vachana({ onBack }) {
 
       {/* Vachana Header — shown on dashboard */}
       {activeTab === null && (
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', borderBottom: '1px solid var(--clr-border)', paddingBottom: '12px' }}>
+        <div style={{ marginBottom: '20px', borderBottom: '1px solid var(--clr-border)', paddingBottom: '12px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', marginBottom: '16px' }}>
+            <button className="back-button" onClick={onBack}>← Back</button>
+          </div>
           <div>
             <h1 style={{ margin: 0, fontSize: '1.8rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
               {VachanaIcons.header} Vachana Literary Lab
             </h1>
-            <p className="subtitle" style={{ margin: '4px 0 0 0' }}>Learn to parse, translate, and communicate in the language of mathematics</p>
-          </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <button className="back-button" onClick={onBack}>← Back</button>
+            <p className="subtitle" style={{ margin: '4px 0 0 0', textAlign: 'left' }}>Learn to parse, translate, and communicate in the language of mathematics</p>
           </div>
         </div>
       )}

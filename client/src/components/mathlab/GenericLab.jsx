@@ -5,6 +5,7 @@ import useProgressSubmit from '../../hooks/useProgressSubmit';
 import useTimer from '../../hooks/useTimer';
 import FeedbackDisplay from '../common/FeedbackDisplay';
 import ResultsTable from '../common/ResultsTable';
+import QuizLayout from '../layout/QuizLayout';
 
 //GenericLabApp
 function GenericLab({ title, subtitle, endpoint, onBack, renderQuestionCustom, customGenerate, initialDifficulty, initialNumQuestions, initialStarted }) {
@@ -161,66 +162,85 @@ function GenericLab({ title, subtitle, endpoint, onBack, renderQuestionCustom, c
     const BG_SYMS = ['×', '÷', '+', '=', '%', 'π', '√', '∑', '3', '5', '9'];
 
     if (!started && !finished) {
+        const cleanTitle = title.replace('🔷 ', '');
         return (
-        <div style={{ minHeight: '100vh', background: '#181512', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px', fontFamily: 'Inter, sans-serif' }}>
-            <div style={{
-            background: '#2D2520', border: '1.5px solid #4A4038', borderRadius: '28px',
-            boxShadow: '0 20px 40px rgba(0,0,0,.45)', padding: '48px 40px', maxWidth: '720px', width: '100%',
-            textAlign: 'center', position: 'relative'
-            }}>
-            <button onClick={onBack} style={{
-                position: 'absolute', top: '24px', left: '24px', background: 'transparent',
-                border: '1px solid #5B5048', borderRadius: '6px', padding: '6px 14px',
-                color: '#A89C93', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer'
-            }}>← Home</button>
+            <QuizLayout title={cleanTitle} subtitle={subtitle} onBack={onBack}>
+                <div className="welcome-box">
+                    <p className="welcome-text" style={{ maxWidth: 520, margin: '0 auto 16px' }}>
+                        Practice {cleanTitle.toLowerCase()}!
+                    </p>
 
-            <h1 style={{ fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 700, fontSize: '48px', color: '#F4F1ED', margin: '0 0 12px', lineHeight: 1.1 }}>
-                {title.replace('🔷 ', '')}
-            </h1>
-            <p style={{ color: '#988D84', fontSize: '0.9rem', margin: '0 0 40px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>
-                {subtitle}
-            </p>
-            <p style={{ color: '#988D84', fontSize: '0.9rem', margin: '0 0 24px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>
-                Practice {title.toLowerCase().replace('🔷 ', '')}!
-            </p>
+                    <div style={{ marginBottom: '24px' }}>
+                        <h3 style={{ color: 'var(--clr-text)', fontSize: '0.9rem', margin: '0 0 16px', fontFamily: 'Inter, sans-serif', fontWeight: 700 }}>
+                            Select Difficulty:
+                        </h3>
+                        <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '12px' }}>
+                            {[['Easy', 'easy'], ['Medium', 'medium'], ['Hard', 'hard']].map(([lbl, val]) => (
+                                <button
+                                    key={val}
+                                    onClick={() => setDifficulty(val)}
+                                    className={`radio-pill${difficulty === val ? ' active' : ''}`}
+                                    style={{
+                                        background: difficulty === val ? 'var(--clr-accent)' : 'transparent',
+                                        border: difficulty === val ? '1px solid var(--clr-accent)' : '1px solid var(--clr-border)',
+                                        borderRadius: '50px',
+                                        padding: '8px 16px',
+                                        color: difficulty === val ? '#FFF' : 'var(--clr-text-soft)',
+                                        fontFamily: 'Inter, sans-serif',
+                                        fontWeight: 600,
+                                        fontSize: '0.85rem',
+                                        cursor: 'pointer'
+                                    }}
+                                >
+                                    {lbl}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
 
-            <div style={{ marginBottom: '24px' }}>
-                <h3 style={{ color: '#F4F1ED', fontSize: '0.9rem', margin: '0 0 16px', fontFamily: 'Inter, sans-serif', fontWeight: 700 }}>
-                Select Difficulty:
-                </h3>
-                <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '12px' }}>
-                {[['Easy', 'easy'], ['Medium', 'medium'], ['Hard', 'hard']].map(([lbl, val]) => (
-                    <button key={val} onClick={() => setDifficulty(val)} style={{
-                    background: difficulty === val ? '#F08C46' : 'transparent',
-                    border: difficulty === val ? '1px solid #F08C46' : '1px solid #5B5048',
-                    borderRadius: '50px', padding: '8px 16px',
-                    color: difficulty === val ? '#FFF' : '#988D84', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer'
-                    }}>
-                    {lbl}
+                    <div style={{ marginBottom: '32px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <label style={{ color: 'var(--clr-text-soft)', fontSize: '0.85rem', margin: '0 0 12px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>
+                            How many questions?
+                        </label>
+                        <input
+                            type="text"
+                            value={numQuestions}
+                            onChange={(e) => { const v = e.target.value; if (v === '' || /^\d+$/.test(v)) setNumQuestions(v); }}
+                            style={{
+                                background: 'var(--clr-input)',
+                                border: '1px solid var(--clr-border)',
+                                borderRadius: '6px',
+                                padding: '10px',
+                                color: 'var(--clr-text)',
+                                fontFamily: 'Inter, sans-serif',
+                                fontWeight: 600,
+                                fontSize: '0.9rem',
+                                width: '100px',
+                                textAlign: 'center',
+                                outline: 'none'
+                            }}
+                            placeholder="5"
+                        />
+                    </div>
+
+                    <button
+                        onClick={startQuiz}
+                        style={{
+                            background: 'var(--clr-accent)',
+                            border: 'none',
+                            borderRadius: '6px',
+                            padding: '10px 24px',
+                            color: '#FFF',
+                            fontFamily: 'Inter, sans-serif',
+                            fontWeight: 600,
+                            fontSize: '0.9rem',
+                            cursor: 'pointer'
+                        }}
+                    >
+                        Start Quiz
                     </button>
-                ))}
                 </div>
-            </div>
-
-            <div style={{ marginBottom: '32px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <label style={{ color: '#988D84', fontSize: '0.85rem', margin: '0 0 12px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>
-                How many questions?
-                </label>
-                <input type="text" value={numQuestions} onChange={(e) => { const v = e.target.value; if (v === '' || /^\d+$/.test(v)) setNumQuestions(v) }} style={{
-                background: '#463B34', border: '1px solid #5B5048', borderRadius: '6px',
-                padding: '10px', color: '#FFF', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem',
-                width: '100px', textAlign: 'center', outline: 'none'
-                }} placeholder="5" />
-            </div>
-
-            <button onClick={startQuiz} style={{
-                background: '#F08C46', border: 'none', borderRadius: '6px',
-                padding: '10px 24px', color: '#FFF', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer'
-            }}>
-                Start Quiz
-            </button>
-            </div>
-        </div>
+            </QuizLayout>
         );
     }
 
@@ -287,7 +307,7 @@ function GenericLab({ title, subtitle, endpoint, onBack, renderQuestionCustom, c
             </div>
             <div className="button-row" style={{ marginTop: '30px' }}>
                 <button className="kid-btn-primary" onClick={() => { setStarted(false); setFinished(false); }}>Play Again 🔄</button>
-                <button className="kid-back-btn" onClick={onBack} style={{ marginLeft: '15px' }}>← Back to Home</button>
+                <button className="kid-back-btn" onClick={onBack} style={{ marginLeft: '15px' }}>← Back</button>
             </div>
             </div>
         )}

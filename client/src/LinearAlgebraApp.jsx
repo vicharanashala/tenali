@@ -3255,7 +3255,7 @@ function LinearAlgebraApp({ onBack }) {
 
   return (
     <div className="la-module">
-      {phase !== 'missionquiz' && <button className="la-back" onClick={onBack}>&larr; Back</button>}
+      {phase === 'modules' && <button className="la-back" onClick={onBack}>&larr; Back</button>}
 
       {phase === 'modules' && (
         <div style={{ textAlign: 'center', padding: '8px 0' }}>

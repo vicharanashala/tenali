@@ -123,7 +123,7 @@ const CJ_RECO_DIFFS = ['easy', 'medium', 'hard', 'extrahard'];
 // Both are login-gated: the concept session API authenticates every request.
 function QFormulaConceptMode({ onBack }) {
   return (
-    <AuthGate>
+    <AuthGate onBack={onBack}>
       <QFormulaConceptApp onBack={onBack} QFormulaApp={QFormulaApp} />
     </AuthGate>
   );
@@ -131,7 +131,7 @@ function QFormulaConceptMode({ onBack }) {
 
 function SimulConceptMode({ onBack }) {
   return (
-    <AuthGate>
+    <AuthGate onBack={onBack}>
       <SimulConceptApp onBack={onBack} SimulQuizApp={SimulApp} />
     </AuthGate>
   );
@@ -188,16 +188,102 @@ const TENALI_BUILD_DATE = '2026-07-08 12:52 IST'
 // Tiny pub/sub on top of localStorage so AuthMenu and AuthGate stay in sync.
 
 
-// Hamburger button (top-right) + dropdown + login modal.
-// Renders globally — sits next to the .theme-toggle.
-function AuthMenu({ t = (s) => s }) {
-  const { user, login, logout } = useAuth()
-  const [open, setOpen] = useState(false)
-  const [showLogin, setShowLogin] = useState(false)
+// Reusable login modal popup
+function LoginModal({ isOpen, onClose, onSuccess }) {
+  const { login } = useAuth()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [busy, setBusy] = useState(false)
+
+  useEffect(() => {
+    if (!isOpen) {
+      setError('')
+      return
+    }
+    const onKey = e => {
+      if (e.key === 'Escape') onClose()
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [isOpen, onClose])
+
+  if (!isOpen) return null
+
+  const submit = async (e) => {
+    if (e && e.preventDefault) e.preventDefault()
+    setError(''); setBusy(true)
+    try {
+      await login(username.trim(), password)
+      setUsername(''); setPassword('')
+      onClose()
+      if (onSuccess) onSuccess()
+    } catch (err) {
+      setError(err.message || 'login failed')
+    } finally { setBusy(false) }
+  }
+
+  return (
+    <div
+      onClick={onClose}
+      style={{ position: 'fixed', inset: 0, zIndex: 1100, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+    >
+      <form
+        onClick={e => e.stopPropagation()}
+        onSubmit={submit}
+        style={{
+          minWidth: 320, maxWidth: 360, padding: 24,
+          background: 'var(--clr-surface, #1c1c1f)',
+          border: '1px solid var(--clr-border, #444)',
+          borderRadius: 12,
+          color: 'var(--clr-text)',
+          boxShadow: '0 10px 40px rgba(0,0,0,0.5)',
+        }}
+      >
+        <h2 style={{ marginTop: 0, marginBottom: 16 }}>Log in</h2>
+        <label style={{ display: 'block', marginBottom: 12, fontSize: '0.9rem' }}>
+          Username
+          <input
+            type="text"
+            value={username}
+            onChange={e => setUsername(e.target.value)}
+            autoFocus
+            autoComplete="username"
+            style={{ display: 'block', width: '100%', marginTop: 4, padding: '10px 12px', borderRadius: 6, border: '1px solid var(--clr-border, #555)', background: 'var(--clr-surface, #1c1c1f)', color: 'var(--clr-text)', boxSizing: 'border-box' }}
+          />
+        </label>
+        <label style={{ display: 'block', marginBottom: 12, fontSize: '0.9rem' }}>
+          Password
+          <input
+            type="password"
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+            autoComplete="current-password"
+            style={{ display: 'block', width: '100%', marginTop: 4, padding: '10px 12px', borderRadius: 6, border: '1px solid var(--clr-border, #555)', background: 'var(--clr-surface, #1c1c1f)', color: 'var(--clr-text)', boxSizing: 'border-box' }}
+          />
+        </label>
+        {error && <p style={{ color: '#f85149', margin: '8px 0', fontSize: '0.85rem' }}>{error}</p>}
+        <div style={{ display: 'flex', gap: 8, marginTop: 12, justifyContent: 'flex-end' }}>
+          <button type="button" onClick={onClose}
+            style={{ padding: '8px 14px', borderRadius: 6, background: 'transparent', border: '1px solid var(--clr-border, #555)', color: 'var(--clr-text)', cursor: 'pointer' }}>
+            Cancel
+          </button>
+          <button type="submit" disabled={busy}
+            style={{ padding: '8px 18px', borderRadius: 6, background: '#2ea043', color: '#fff', border: 'none', cursor: busy ? 'not-allowed' : 'pointer', fontWeight: 600 }}>
+            {busy ? 'Logging in…' : 'Log in'}
+          </button>
+        </div>
+      </form>
+    </div>
+  )
+}
+
+// Hamburger button (top-right) + dropdown + login modal.
+// Renders globally — sits next to the .theme-toggle.
+function AuthMenu({ t = (s) => s }) {
+  const { user, logout } = useAuth()
+  const [open, setOpen] = useState(false)
+  const [showLogin, setShowLogin] = useState(false)
 
   // Hide hamburger menu in visual learning to prevent navigation away
   const params = new URLSearchParams(window.location.search)
@@ -215,7 +301,7 @@ function AuthMenu({ t = (s) => s }) {
     mode === 'geocraft'
 
   useEffect(() => {
-    const onKey = e => { if (e.key === 'Escape') { setOpen(false); setShowLogin(false); setError('') } }
+    const onKey = e => { if (e.key === 'Escape') { setOpen(false); setShowLogin(false) } }
     window.addEventListener('keydown', onKey)
     const onNav = e => { setOpen(false) }
     window.addEventListener('tenali-navigate', onNav)
@@ -233,21 +319,12 @@ function AuthMenu({ t = (s) => s }) {
     setOpen(false)
   }
 
-  const submit = async (e) => {
-    if (e && e.preventDefault) e.preventDefault()
-    setError(''); setBusy(true)
-    try {
-      await login(username.trim(), password)
-      setShowLogin(false); setOpen(false)
-      setUsername(''); setPassword('')
-      if (isVisualLearning) {
-        window.location.reload()
-      } else {
-        window.location.href = withBase('/tenth')
-      }
-    } catch (err) {
-      setError(err.message || 'login failed')
-    } finally { setBusy(false) }
+  const handleLoginSuccess = () => {
+    if (isVisualLearning || params.get('mode')) {
+      window.location.reload()
+    } else {
+      window.location.href = withBase('/tenth')
+    }
   }
 
   if (isVisualLearning) {
@@ -358,79 +435,91 @@ function AuthMenu({ t = (s) => s }) {
         </>
       )}
 
-      {showLogin && (
-        <div
-          onClick={() => { setShowLogin(false); setError('') }}
-          style={{ position: 'fixed', inset: 0, zIndex: 1100, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-        >
-          <form
-            onClick={e => e.stopPropagation()}
-            onSubmit={submit}
-            style={{
-              minWidth: 320, maxWidth: 360, padding: 24,
-              background: 'var(--clr-surface, #1c1c1f)',
-              border: '1px solid var(--clr-border, #444)',
-              borderRadius: 12,
-              color: 'var(--clr-text)',
-              boxShadow: '0 10px 40px rgba(0,0,0,0.5)',
-            }}
-          >
-            <h2 style={{ marginTop: 0, marginBottom: 16 }}>Log in</h2>
-            <label style={{ display: 'block', marginBottom: 12, fontSize: '0.9rem' }}>
-              Username
-              <input
-                type="text"
-                value={username}
-                onChange={e => setUsername(e.target.value)}
-                autoFocus
-                autoComplete="username"
-                style={{ display: 'block', width: '100%', marginTop: 4, padding: '10px 12px', borderRadius: 6, border: '1px solid var(--clr-border, #555)', background: 'var(--clr-surface, #1c1c1f)', color: 'var(--clr-text)', boxSizing: 'border-box' }}
-              />
-            </label>
-            <label style={{ display: 'block', marginBottom: 12, fontSize: '0.9rem' }}>
-              Password
-              <input
-                type="password"
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-                autoComplete="current-password"
-                style={{ display: 'block', width: '100%', marginTop: 4, padding: '10px 12px', borderRadius: 6, border: '1px solid var(--clr-border, #555)', background: 'var(--clr-surface, #1c1c1f)', color: 'var(--clr-text)', boxSizing: 'border-box' }}
-              />
-            </label>
-            {error && <p style={{ color: '#f85149', margin: '8px 0', fontSize: '0.85rem' }}>{error}</p>}
-            <div style={{ display: 'flex', gap: 8, marginTop: 12, justifyContent: 'flex-end' }}>
-              <button type="button" onClick={() => { setShowLogin(false); setError('') }}
-                style={{ padding: '8px 14px', borderRadius: 6, background: 'transparent', border: '1px solid var(--clr-border, #555)', color: 'var(--clr-text)', cursor: 'pointer' }}>
-                Cancel
-              </button>
-              <button type="submit" disabled={busy}
-                style={{ padding: '8px 18px', borderRadius: 6, background: '#2ea043', color: '#fff', border: 'none', cursor: busy ? 'not-allowed' : 'pointer', fontWeight: 600 }}>
-                {busy ? 'Logging in…' : 'Log in'}
-              </button>
-            </div>
-          </form>
-        </div>
-      )}
+      <LoginModal
+        isOpen={showLogin}
+        onClose={() => setShowLogin(false)}
+        onSuccess={handleLoginSuccess}
+      />
     </>
   )
 }
 
 // Wraps a route's content; if not logged in, shows a "log in to continue" notice.
-function AuthGate({ children }) {
+function AuthGate({ children, onBack }) {
   const { user } = useAuth()
+  const [showLoginModal, setShowLoginModal] = useState(false)
   if (user) return children
+
+  const handleBack = () => {
+    if (typeof onBack === 'function') {
+      onBack()
+      return
+    }
+    const params = new URLSearchParams(window.location.search)
+    const section = params.get('section')
+    if (section) {
+      window.location.href = withBase(`/?view=puzzles&section=${encodeURIComponent(section)}`)
+    } else if (params.get('mode')) {
+      window.location.href = withBase('/?view=puzzles')
+    } else {
+      window.location.href = withBase('/')
+    }
+  }
+
   return (
-    <div style={{ maxWidth: 520, margin: '4rem auto', padding: '2rem', textAlign: 'center', color: 'var(--clr-text)' }}>
-      <h1 style={{ marginBottom: 8 }}>Login required</h1>
-      <p style={{ opacity: 0.85, lineHeight: 1.6 }}>
-        This page is only available to signed-in users. Open the <strong>menu</strong> in the top-right corner and choose <strong>Log in</strong>.
-      </p>
-      <button
-        onClick={() => { window.location.href = withBase('/') }}
-        style={{ marginTop: 24, padding: '10px 24px', borderRadius: 8, background: 'var(--clr-accent, #e8833a)', color: '#fff', border: 'none', cursor: 'pointer', fontWeight: 600, fontSize: '1rem' }}>
-        ← Back to home
-      </button>
-    </div>
+    <>
+      <div style={{ maxWidth: 520, margin: '4rem auto', padding: '2rem', textAlign: 'center', color: 'var(--clr-text)' }}>
+        <h1 style={{ marginBottom: 8 }}>Login required</h1>
+        <p style={{ opacity: 0.85, lineHeight: 1.6 }}>
+          This page is only available to signed-in users. Open the <strong>menu</strong> in the top-right corner and choose <strong>Log in</strong>.
+        </p>
+        <div style={{ display: 'flex', gap: 12, justifyContent: 'center', alignItems: 'center', marginTop: 24, flexWrap: 'wrap' }}>
+          <button
+            type="button"
+            onClick={() => setShowLoginModal(true)}
+            style={{
+              padding: '10px 24px',
+              borderRadius: 8,
+              background: 'var(--clr-accent, #e8833a)',
+              color: '#fff',
+              border: 'none',
+              cursor: 'pointer',
+              fontWeight: 600,
+              fontSize: '1rem',
+              boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+              transition: 'opacity 0.15s ease',
+            }}
+            onMouseEnter={e => { e.currentTarget.style.opacity = '0.9' }}
+            onMouseLeave={e => { e.currentTarget.style.opacity = '1' }}
+          >
+            Log in
+          </button>
+          <button
+            type="button"
+            onClick={handleBack}
+            style={{
+              padding: '10px 24px',
+              borderRadius: 8,
+              background: 'transparent',
+              color: 'var(--clr-text)',
+              border: '1px solid var(--clr-border, #555)',
+              cursor: 'pointer',
+              fontWeight: 600,
+              fontSize: '1rem',
+              transition: 'background 0.15s ease',
+            }}
+            onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.06)' }}
+            onMouseLeave={e => { e.currentTarget.style.background = 'transparent' }}
+          >
+            ← Back
+          </button>
+        </div>
+      </div>
+      <LoginModal
+        isOpen={showLoginModal}
+        onClose={() => setShowLoginModal(false)}
+      />
+    </>
   )
 }
 
@@ -42425,7 +42514,7 @@ function App() {
     return (
       <>
           <div style={{ display: 'flex', alignItems: 'center', marginBottom: '16px' }}>
-            <button className="back-button" onClick={onBack}>&larr;</button>
+            <button className="back-button" onClick={onBack}>← Back</button>
           </div>
 
           {stage === 'setup' && (
@@ -47459,7 +47548,7 @@ function FractionsPage(props) {
       <div style={{ maxWidth: 900, width: '100%', margin: '0 auto', padding: '1rem', color: 'var(--clr-text)', textAlign: 'center' }}>
           <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
             <button className="kid-btn-secondary" onClick={props.onBack} style={{ padding: '8px 16px', borderRadius: '20px', fontWeight: 'bold', border: 'none', background: 'rgba(0,0,0,0.05)', cursor: 'pointer', color: 'var(--clr-text)' }}>
-              ← Back to Home
+              ← Back
             </button>
           </div>
           <h1 style={{ marginBottom: 12, fontSize: '2.8rem', color: '#3182CE', fontWeight: '800' }}>
@@ -49577,7 +49666,7 @@ function GSTPage(props) {
       <div style={{ maxWidth: 900, width: '100%', margin: '0 auto', padding: '1rem', color: 'var(--clr-text)', textAlign: 'center' }}>
           <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
             <button className="kid-btn-secondary" onClick={props.onBack} style={{ padding: '8px 16px', borderRadius: '20px', fontWeight: 'bold', border: 'none', background: 'rgba(0,0,0,0.05)', cursor: 'pointer', color: 'var(--clr-text)' }}>
-              ← Back to Home
+              ← Back
             </button>
           </div>
           <h1 style={{ marginBottom: 12, fontSize: '2.8rem', color: 'var(--clr-accent, #FF7E67)', fontWeight: '800' }}>
@@ -50059,135 +50148,48 @@ function TatsavitApp({ onBack }) {
   const maxLevelReached = levelRef.current
 
   const baseStyles = {
-    container: {
-      maxWidth: '620px',
-      margin: '0 auto',
-      padding: '20px',
-      background: 'var(--clr-bg)',
-      color: 'var(--clr-text)',
-      fontFamily: 'var(--font-body)',
-      minHeight: '100vh',
-      display: 'flex',
-      flexDirection: 'column'
-    },
-    card: {
-      background: 'var(--clr-card)',
-      border: '1px solid var(--clr-border)',
-      borderRadius: 'var(--radius)',
-      padding: '24px',
-      marginBottom: '16px',
-      boxShadow: 'var(--shadow-card)',
-      textAlign: 'center'
-    },
-    title: {
-      fontSize: '2rem',
-      fontWeight: 600,
-      fontFamily: 'var(--font-display)',
-      marginBottom: '8px',
-      color: 'var(--clr-accent)'
-    },
-    subtitle: {
-      fontSize: '0.95rem',
-      color: 'var(--clr-text-soft)',
-      marginBottom: '16px',
-      lineHeight: 1.5
-    },
-    button: {
-      padding: '12px 24px',
-      borderRadius: 'var(--radius-sm)',
-      border: 'none',
-      background: 'var(--clr-accent)',
-      color: '#fff',
-      fontSize: '1rem',
-      fontWeight: 500,
-      cursor: 'pointer',
-      transition: 'var(--transition)',
-      marginBottom: '8px'
-    },
-    buttonSecondary: {
-      padding: '12px 24px',
-      borderRadius: 'var(--radius-sm)',
-      border: '1px solid var(--clr-accent)',
-      background: 'transparent',
-      color: 'var(--clr-accent)',
-      fontSize: '1rem',
-      fontWeight: 500,
-      cursor: 'pointer',
-      transition: 'var(--transition)',
-      marginRight: '8px'
-    },
-    buttonRow: {
-      display: 'flex',
-      gap: '8px',
-      justifyContent: 'center',
-      marginTop: '20px',
-      flexWrap: 'wrap'
-    },
-    questionBox: {
-      background: 'var(--clr-surface)',
-      border: '1px solid var(--clr-border)',
-      borderRadius: 'var(--radius)',
-      padding: '24px',
-      marginBottom: '20px',
-      fontSize: '1.6rem',
-      fontWeight: 600,
-      lineHeight: 1.8,
-      color: 'var(--clr-text)'
-    },
     choiceButton: {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
       padding: '16px',
       margin: '8px 0',
-      borderRadius: 'var(--radius-sm)',
+      borderRadius: 'var(--radius-sm, 8px)',
       border: '2px solid var(--clr-border)',
       background: 'var(--clr-input)',
+      color: 'var(--clr-text)',
       fontSize: '1.1rem',
       fontWeight: 500,
       cursor: 'pointer',
-      transition: 'var(--transition)',
-      minHeight: '56px'
-    },
-    progressPill: {
-      display: 'inline-block',
-      padding: '8px 16px',
-      borderRadius: '20px',
-      background: 'var(--clr-surface)',
-      color: 'var(--clr-text)',
-      fontSize: '0.9rem',
-      fontWeight: 500,
-      marginRight: '8px',
-      marginBottom: '8px',
-      border: '1px solid var(--clr-border)'
+      transition: 'var(--transition, all 0.2s ease)',
+      minHeight: '56px',
+      width: '100%',
+      boxSizing: 'border-box'
     }
   }
 
   // ─── Home Screen ───
   if (homeScreen && !drillingScreen && !summaryScreen) {
     return (
-      <div style={baseStyles.container}>
-        <button onClick={onBack} style={{ ...baseStyles.buttonSecondary, alignSelf: 'flex-start', marginBottom: '16px' }}>← Back</button>
-        <div style={baseStyles.card}>
-          <h1 style={baseStyles.title}>Tatsavit</h1>
-          <p style={baseStyles.subtitle}>Algebra Simplification Drill</p>
-          <p style={{ fontSize: '0.95rem', color: 'var(--clr-text-soft)', marginBottom: '16px', lineHeight: 1.6 }}>
+      <QuizLayout title="Tatsavit" subtitle="Algebra Simplification Drill" onBack={onBack}>
+        <div className="welcome-box" style={{ maxWidth: 540, margin: '0 auto', textAlign: 'center' }}>
+          <p style={{ fontSize: '0.95rem', color: 'var(--clr-text-soft)', marginBottom: '20px', lineHeight: 1.6 }}>
             Master algebra step by step. Starting with exponent rules, moving to fractions and negative exponents, and ending with combining like terms.
           </p>
-          <div style={{ textAlign: 'left', marginBottom: '16px', fontSize: '0.9rem', color: 'var(--clr-text-soft)' }}>
+          <div style={{ textAlign: 'left', marginBottom: '24px', fontSize: '0.9rem', color: 'var(--clr-text-soft)', background: 'var(--clr-surface)', border: '1px solid var(--clr-border)', borderRadius: 'var(--radius)', padding: '16px 20px' }}>
             <strong style={{ color: 'var(--clr-accent)' }}>How it works:</strong>
-            <ul style={{ marginTop: '8px', paddingLeft: '20px' }}>
+            <ul style={{ marginTop: '8px', paddingLeft: '20px', lineHeight: 1.6 }}>
               <li>Start at Level 1</li>
               <li>3 correct answers in a row → advance to next level</li>
               <li>Wrong answer → drop back one level (minimum Level 1)</li>
               <li>13 levels total across 3 topics</li>
             </ul>
           </div>
-          <div style={baseStyles.buttonRow}>
-            <button onClick={startDrill} style={baseStyles.button}>Start Drill</button>
-          </div>
+          <button onClick={startDrill} style={{ background: 'var(--clr-accent)', border: 'none', borderRadius: '8px', padding: '12px 32px', color: '#fff', fontSize: '1rem', fontWeight: 600, cursor: 'pointer' }}>
+            Start Drill
+          </button>
         </div>
-      </div>
+      </QuizLayout>
     )
   }
 
@@ -50203,83 +50205,107 @@ function TatsavitApp({ onBack }) {
     const choiceLetters = ['A', 'B', 'C', 'D']
 
     return (
-      <div style={baseStyles.container}>
-        <button onClick={onBack} style={{ ...baseStyles.buttonSecondary, alignSelf: 'flex-start', marginBottom: '16px' }}>← Back</button>
-        <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '16px' }}>
-          <div style={baseStyles.progressPill}>Level {level}</div>
-          <div style={baseStyles.progressPill}>{levelInfo}</div>
-          <div style={{ ...baseStyles.progressPill, background: 'var(--clr-accent)', color: '#fff', border: 'none' }}>Streak: {streak}</div>
-        </div>
+      <QuizLayout
+        title="Tatsavit"
+        subtitle={`${levelInfo} · Level ${level} of 13`}
+        onBack={() => {
+          setHomeScreen(true)
+          setDrillingScreen(false)
+        }}
+      >
+        <div style={{ maxWidth: 640, margin: '0 auto', width: '100%' }}>
+          <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '16px' }}>
+            <div className="progress-pill center">Level {level}</div>
+            <div className="progress-pill center">{levelInfo}</div>
+            <div className="progress-pill center" style={{ background: 'var(--clr-accent)', color: '#fff', borderColor: 'var(--clr-accent)' }}>Streak: {streak} / 3</div>
+          </div>
 
-        {currentQuestion && (
-          <>
-            <div style={baseStyles.questionBox}>
-              {currentQuestion.questionJSX}
-            </div>
-
-            <div>
-              {currentQuestion.choices.map((choice, idx) => {
-                let choiceStyle = { ...baseStyles.choiceButton }
-                if (selectedChoice === idx && revealed) {
-                  if (choice.isCorrect) {
-                    choiceStyle.background = 'var(--clr-correct-bg)'
-                    choiceStyle.borderColor = 'var(--clr-correct)'
-                    choiceStyle.color = 'var(--clr-correct)'
-                  } else {
-                    choiceStyle.background = 'var(--clr-wrong-bg)'
-                    choiceStyle.borderColor = 'var(--clr-wrong)'
-                    choiceStyle.color = 'var(--clr-wrong)'
-                  }
-                }
-                return (
-                  <button
-                    key={idx}
-                    style={choiceStyle}
-                    onClick={() => handleChoiceClick(idx)}
-                    disabled={revealed}
-                  >
-                    <span style={{ marginRight: '12px', fontWeight: 700, fontSize: '1.2rem' }}>{choiceLetters[idx]}:</span>
-                    <span>{choice.jsx}</span>
-                  </button>
-                )
-              })}
-            </div>
-
-            {revealed && feedback && (
-              <div style={{ textAlign: 'center', marginTop: '16px', padding: '12px', borderRadius: 'var(--radius-sm)', background: selectedChoice >= 0 && currentQuestion.choices[selectedChoice].isCorrect ? 'var(--clr-correct-bg)' : 'var(--clr-wrong-bg)', color: selectedChoice >= 0 && currentQuestion.choices[selectedChoice].isCorrect ? 'var(--clr-correct)' : 'var(--clr-wrong)', fontSize: '1rem', fontWeight: 500 }}>
-                {feedback}
+          {currentQuestion && (
+            <>
+              <div className="question-box" style={{ padding: '24px', fontSize: '1.6rem', fontWeight: 600, lineHeight: 1.8, textAlign: 'center', marginBottom: '20px', color: 'var(--clr-text)' }}>
+                {currentQuestion.questionJSX}
               </div>
-            )}
-          </>
-        )}
 
-        <div style={baseStyles.buttonRow}>
-          <button onClick={goToSummary} style={{ ...baseStyles.buttonSecondary, marginRight: 0 }}>Finish Drill</button>
+              <div>
+                {currentQuestion.choices.map((choice, idx) => {
+                  let choiceStyle = { ...baseStyles.choiceButton }
+                  if (selectedChoice === idx && revealed) {
+                    if (choice.isCorrect) {
+                      choiceStyle.background = 'var(--clr-correct-bg)'
+                      choiceStyle.borderColor = 'var(--clr-correct)'
+                      choiceStyle.color = 'var(--clr-correct)'
+                    } else {
+                      choiceStyle.background = 'var(--clr-wrong-bg)'
+                      choiceStyle.borderColor = 'var(--clr-wrong)'
+                      choiceStyle.color = 'var(--clr-wrong)'
+                    }
+                  }
+                  return (
+                    <button
+                      key={idx}
+                      style={choiceStyle}
+                      onClick={() => handleChoiceClick(idx)}
+                      disabled={revealed}
+                    >
+                      <span style={{ marginRight: '12px', fontWeight: 700, fontSize: '1.2rem' }}>{choiceLetters[idx]}:</span>
+                      <span>{choice.jsx}</span>
+                    </button>
+                  )
+                })}
+              </div>
+
+              {revealed && feedback && (
+                <div style={{ textAlign: 'center', marginTop: '16px', padding: '12px', borderRadius: 'var(--radius-sm, 8px)', background: selectedChoice >= 0 && currentQuestion.choices[selectedChoice].isCorrect ? 'var(--clr-correct-bg)' : 'var(--clr-wrong-bg)', color: selectedChoice >= 0 && currentQuestion.choices[selectedChoice].isCorrect ? 'var(--clr-correct)' : 'var(--clr-wrong)', fontSize: '1rem', fontWeight: 500 }}>
+                  {feedback}
+                </div>
+              )}
+            </>
+          )}
+
+          <div style={{ display: 'flex', justifyContent: 'center', marginTop: '24px' }}>
+            <button
+              onClick={goToSummary}
+              style={{
+                background: 'transparent',
+                border: '1px solid var(--clr-border)',
+                borderRadius: '8px',
+                padding: '10px 24px',
+                color: 'var(--clr-text-soft)',
+                cursor: 'pointer',
+                fontWeight: 500,
+                fontSize: '0.95rem'
+              }}
+            >
+              Finish Drill
+            </button>
+          </div>
         </div>
-      </div>
+      </QuizLayout>
     )
   }
 
   // ─── Summary Screen ───
   if (summaryScreen && !homeScreen && !drillingScreen) {
     return (
-      <div style={baseStyles.container}>
-        <button onClick={onBack} style={{ ...baseStyles.buttonSecondary, alignSelf: 'flex-start', marginBottom: '16px' }}>← Back</button>
-        <div style={baseStyles.card}>
-          <h2 style={{ fontSize: '1.8rem', marginBottom: '16px' }}>Drill Complete!</h2>
-          <p style={{ fontSize: '2rem', fontWeight: 600, color: 'var(--clr-accent)', marginBottom: '8px' }}>Score: {score}</p>
-          <p style={{ fontSize: '1rem', color: 'var(--clr-text-soft)', marginBottom: '16px' }}>
+      <QuizLayout
+        title="Tatsavit — Drill Complete!"
+        subtitle={`Score: ${score} · Highest level reached: Level ${maxLevelReached}`}
+        onBack={onBack}
+      >
+        <div className="welcome-box" style={{ maxWidth: 480, margin: '0 auto', textAlign: 'center' }}>
+          <p style={{ fontSize: '2rem', fontWeight: 600, color: 'var(--clr-accent)', margin: '8px 0 12px' }}>Score: {score}</p>
+          <p style={{ fontSize: '1rem', color: 'var(--clr-text)', marginBottom: '12px' }}>
             Highest level reached: <strong style={{ color: 'var(--clr-accent)' }}>Level {maxLevelReached}</strong>
           </p>
-          <p style={{ fontSize: '0.9rem', color: 'var(--clr-text-soft)', marginBottom: '20px', lineHeight: 1.6 }}>
+          <p style={{ fontSize: '0.9rem', color: 'var(--clr-text-soft)', marginBottom: '24px', lineHeight: 1.6 }}>
             You answered {questionsAnswered.length} question{questionsAnswered.length !== 1 ? 's' : ''}. Keep practicing to master all topics!
           </p>
-          <div style={baseStyles.buttonRow}>
-            <button onClick={startDrill} style={baseStyles.button}>Try Again</button>
-            <button onClick={goHome} style={{ ...baseStyles.button, background: 'var(--clr-text-soft)' }}>Back</button>
+          <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <button onClick={startDrill} style={{ background: 'var(--clr-accent)', border: 'none', borderRadius: '8px', padding: '10px 24px', color: '#fff', fontWeight: 600, fontSize: '0.95rem', cursor: 'pointer' }}>Try Again</button>
+            <button onClick={goHome} style={{ background: 'transparent', border: '1px solid var(--clr-border)', borderRadius: '8px', padding: '10px 24px', color: 'var(--clr-text)', fontWeight: 600, fontSize: '0.95rem', cursor: 'pointer' }}>Back to Intro</button>
           </div>
         </div>
-      </div>
+      </QuizLayout>
     )
   }
 
@@ -51791,6 +51817,12 @@ function RatioApp({ onBack, completedTopics = [], goldMastery = [], markTopicCom
   const [started, setStarted] = useState(false)
   const [finished, setFinished] = useState(false)
 
+  const [question, setQuestion] = useState(null)
+  const [answer, setAnswer] = useState('')
+  const [score, setScore] = useState(0)
+  const [questionNumber, setQuestionNumber] = useState(0)
+  const [totalQ, setTotalQ] = useState(DEFAULT_TOTAL)
+
   useQuizCompletion({
     topicKey: 'ratio',
     difficulty,
@@ -51800,12 +51832,6 @@ function RatioApp({ onBack, completedTopics = [], goldMastery = [], markTopicCom
     finished,
     markTopicCompleted,
   })
-
-  const [question, setQuestion] = useState(null)
-  const [answer, setAnswer] = useState('')
-  const [score, setScore] = useState(0)
-  const [questionNumber, setQuestionNumber] = useState(0)
-  const [totalQ, setTotalQ] = useState(DEFAULT_TOTAL)
   const [feedback, setFeedback] = useState('')
   const [isCorrect, setIsCorrect] = useState(null)
   const [loading, setLoading] = useState(false)
@@ -53696,6 +53722,15 @@ function FractionAddApp({ onBack, completedTopics = [], goldMastery = [], markTo
   const [started, setStarted] = useState(false)
   const [finished, setFinished] = useState(false)
 
+  // Current question object from API
+  const [question, setQuestion] = useState(null)
+  // User's answer as a string: "3/4" or "2 3/4" for mixed numbers
+  const [answer, setAnswer] = useState('')
+  // Score tracking
+  const [score, setScore] = useState(0)
+  const [questionNumber, setQuestionNumber] = useState(0)
+  const [totalQ, setTotalQ] = useState(DEFAULT_TOTAL)
+
   useQuizCompletion({
     topicKey: 'fractionadd',
     difficulty,
@@ -53705,14 +53740,6 @@ function FractionAddApp({ onBack, completedTopics = [], goldMastery = [], markTo
     finished,
     markTopicCompleted,
   })
-  // Current question object from API
-  const [question, setQuestion] = useState(null)
-  // User's answer as a string: "3/4" or "2 3/4" for mixed numbers
-  const [answer, setAnswer] = useState('')
-  // Score tracking
-  const [score, setScore] = useState(0)
-  const [questionNumber, setQuestionNumber] = useState(0)
-  const [totalQ, setTotalQ] = useState(DEFAULT_TOTAL)
   // Feedback after submission
   const [feedback, setFeedback] = useState('')
   const [isCorrect, setIsCorrect] = useState(null)
