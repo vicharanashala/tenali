@@ -51789,6 +51789,12 @@ function RatioApp({ onBack, completedTopics = [], goldMastery = [], markTopicCom
   const [started, setStarted] = useState(false)
   const [finished, setFinished] = useState(false)
 
+  const [question, setQuestion] = useState(null)
+  const [answer, setAnswer] = useState('')
+  const [score, setScore] = useState(0)
+  const [questionNumber, setQuestionNumber] = useState(0)
+  const [totalQ, setTotalQ] = useState(DEFAULT_TOTAL)
+
   useQuizCompletion({
     topicKey: 'ratio',
     difficulty,
@@ -51798,12 +51804,6 @@ function RatioApp({ onBack, completedTopics = [], goldMastery = [], markTopicCom
     finished,
     markTopicCompleted,
   })
-
-  const [question, setQuestion] = useState(null)
-  const [answer, setAnswer] = useState('')
-  const [score, setScore] = useState(0)
-  const [questionNumber, setQuestionNumber] = useState(0)
-  const [totalQ, setTotalQ] = useState(DEFAULT_TOTAL)
   const [feedback, setFeedback] = useState('')
   const [isCorrect, setIsCorrect] = useState(null)
   const [loading, setLoading] = useState(false)
@@ -53694,6 +53694,15 @@ function FractionAddApp({ onBack, completedTopics = [], goldMastery = [], markTo
   const [started, setStarted] = useState(false)
   const [finished, setFinished] = useState(false)
 
+  // Current question object from API
+  const [question, setQuestion] = useState(null)
+  // User's answer as a string: "3/4" or "2 3/4" for mixed numbers
+  const [answer, setAnswer] = useState('')
+  // Score tracking
+  const [score, setScore] = useState(0)
+  const [questionNumber, setQuestionNumber] = useState(0)
+  const [totalQ, setTotalQ] = useState(DEFAULT_TOTAL)
+
   useQuizCompletion({
     topicKey: 'fractionadd',
     difficulty,
@@ -53703,14 +53712,6 @@ function FractionAddApp({ onBack, completedTopics = [], goldMastery = [], markTo
     finished,
     markTopicCompleted,
   })
-  // Current question object from API
-  const [question, setQuestion] = useState(null)
-  // User's answer as a string: "3/4" or "2 3/4" for mixed numbers
-  const [answer, setAnswer] = useState('')
-  // Score tracking
-  const [score, setScore] = useState(0)
-  const [questionNumber, setQuestionNumber] = useState(0)
-  const [totalQ, setTotalQ] = useState(DEFAULT_TOTAL)
   // Feedback after submission
   const [feedback, setFeedback] = useState('')
   const [isCorrect, setIsCorrect] = useState(null)
