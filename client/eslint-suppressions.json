@@ -1,7 +1,7 @@
 {
   "src/App.jsx": {
     "no-empty": {
-      "count": 148
+      "count": 144
     },
     "no-restricted-syntax": {
       "count": 1
@@ -10,7 +10,7 @@
       "count": 5
     },
     "no-unused-vars": {
-      "count": 209
+      "count": 203
     },
     "no-useless-escape": {
       "count": 4
@@ -25,13 +25,13 @@
       "count": 63
     },
     "react-hooks/refs": {
-      "count": 80
+      "count": 79
     },
     "react-hooks/rules-of-hooks": {
       "count": 6
     },
     "react-hooks/set-state-in-effect": {
-      "count": 93
+      "count": 91
     },
     "react-refresh/only-export-components": {
       "count": 8
@@ -230,6 +230,20 @@
     },
     "react-refresh/only-export-components": {
       "count": 6
+    }
+  },
+  "src/apps/SquaringApp.jsx": {
+    "no-empty": {
+      "count": 4
+    },
+    "no-unused-vars": {
+      "count": 6
+    },
+    "react-hooks/refs": {
+      "count": 1
+    },
+    "react-hooks/set-state-in-effect": {
+      "count": 2
     }
   }
 }
