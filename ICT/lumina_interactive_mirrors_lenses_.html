@@ -1,0 +1,4044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LUMINA — Interactive Mirrors &amp; Lenses Studio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style id="lumina-styles">
+    /* =========================================================================
+       COSMIC-AURORA OPTICS LABORATORY THEME TOKENS (DARK & LIGHT MUSEUM MODES)
+       ========================================================================= */
+    :root {
+      --bg-space: #050814;
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --glass-surface: rgba(11, 17, 38, 0.76);
+      --glass-inset: rgba(6, 10, 26, 0.86);
+      --glass-border: rgba(56, 189, 248, 0.25);
+      --nav-surface: rgba(5, 8, 20, 0.85);
+      --accent-cyan: #00e5ff;
+      --accent-magenta: #ff2e93;
+      --accent-gold: #fbbf24;
+      --accent-emerald: #10b981;
+      --card-shadow: 0 16px 42px rgba(0, 0, 0, 0.52), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+
+    body.museum-light {
+      --bg-space: #eef4ff;
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --glass-surface: rgba(255, 255, 255, 0.84);
+      --glass-inset: rgba(241, 245, 255, 0.94);
+      --glass-border: rgba(14, 165, 233, 0.28);
+      --nav-surface: rgba(255, 255, 255, 0.9);
+      --card-shadow: 0 14px 34px rgba(15, 23, 42, 0.09), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Outfit', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg-space);
+      color: var(--text-primary);
+      overflow-x: hidden;
+      min-height: 100vh;
+      transition: background-color 0.35s ease, color 0.35s ease;
+    }
+
+    .font-mono-code {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Radial Nebula Aurora Backdrop */
+    .nebula-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 68% 46% at 14% 8%, rgba(0, 229, 255, 0.14), transparent 62%),
+        radial-gradient(ellipse 60% 44% at 86% 12%, rgba(255, 46, 147, 0.13), transparent 60%),
+        radial-gradient(ellipse 56% 46% at 80% 88%, rgba(16, 185, 129, 0.11), transparent 60%),
+        radial-gradient(ellipse 52% 42% at 18% 84%, rgba(251, 191, 36, 0.09), transparent 60%),
+        var(--bg-space);
+      transition: background 0.35s ease;
+    }
+
+    body.museum-light .nebula-backdrop {
+      background:
+        radial-gradient(ellipse 68% 46% at 14% 8%, rgba(0, 229, 255, 0.19), transparent 62%),
+        radial-gradient(ellipse 60% 44% at 86% 12%, rgba(255, 46, 147, 0.12), transparent 60%),
+        radial-gradient(ellipse 56% 46% at 80% 88%, rgba(16, 185, 129, 0.12), transparent 60%),
+        #eef4ff;
+    }
+
+    #motesCanvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    #confettiCanvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 90;
+      pointer-events: none;
+    }
+
+    /* Glassmorphic Surfaces */
+    .glass-card {
+      background: var(--glass-surface);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--card-shadow);
+      transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.25s ease;
+    }
+
+    .glass-inset {
+      background: var(--glass-inset);
+      border: 1px solid var(--glass-border);
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .top-nav {
+      background: var(--nav-surface);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--glass-border);
+    }
+
+    .text-muted {
+      color: var(--text-secondary);
+    }
+
+    /* Interactive Device Tabs */
+    .device-tab {
+      transition: all 0.24s cubic-bezier(0.22, 1, 0.36, 1);
+      background: var(--glass-inset);
+      border: 1px solid var(--glass-border);
+    }
+    .device-tab:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent-cyan);
+    }
+    .device-tab.active {
+      background: linear-gradient(135deg, rgba(0, 229, 255, 0.22), rgba(255, 46, 147, 0.18));
+      border-color: #00e5ff;
+      box-shadow: 0 0 24px rgba(0, 229, 255, 0.34), inset 0 0 12px rgba(0, 229, 255, 0.14);
+    }
+
+    /* Rule Selector Pills */
+    .rule-pill {
+      transition: all 0.2s ease;
+    }
+    .rule-pill.active {
+      background: linear-gradient(135deg, #00e5ff, #38bdf8);
+      color: #050814 !important;
+      font-weight: 800;
+      box-shadow: 0 0 18px rgba(0, 229, 255, 0.45);
+    }
+
+    /* Custom Precision Sliders */
+    input[type="range"].studio-slider {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 7px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.28);
+      outline: none;
+    }
+    input[type="range"].studio-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #00e5ff;
+      border: 2px solid #ffffff;
+      box-shadow: 0 0 14px rgba(0, 229, 255, 0.9);
+      cursor: pointer;
+      transition: transform 0.15s ease;
+    }
+    input[type="range"].studio-slider::-webkit-slider-thumb:hover {
+      transform: scale(1.18);
+    }
+    input[type="range"].studio-slider.magenta::-webkit-slider-thumb {
+      background: #ff2e93;
+      box-shadow: 0 0 14px rgba(255, 46, 147, 0.9);
+    }
+    input[type="range"].studio-slider.gold::-webkit-slider-thumb {
+      background: #fbbf24;
+      box-shadow: 0 0 14px rgba(251, 191, 36, 0.9);
+    }
+
+    /* Viewfinder Real vs Virtual Styles */
+    .vf-real-glow {
+      background: radial-gradient(circle at center, rgba(251, 191, 36, 0.22), rgba(5, 8, 20, 0.96) 76%);
+      box-shadow: inset 0 0 38px rgba(251, 191, 36, 0.18);
+    }
+    .vf-virtual-glow {
+      background:
+        repeating-linear-gradient(
+          0deg,
+          rgba(0, 229, 255, 0.07) 0px,
+          rgba(0, 229, 255, 0.07) 2px,
+          transparent 2px,
+          transparent 6px
+        ),
+        radial-gradient(circle at center, rgba(0, 229, 255, 0.2), rgba(5, 8, 20, 0.96));
+      animation: holoScan 5s linear infinite;
+    }
+    @keyframes holoScan {
+      0% { background-position: 0 0, 0 0; }
+      100% { background-position: 0 48px, 0 0; }
+    }
+
+    /* Fullscreen Bench Mode */
+    #benchWrapper:fullscreen {
+      background: #050814;
+      padding: 16px;
+      overflow-y: auto;
+    }
+
+    /* Bench Canvas Cursor & Touch */
+    #benchCanvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      touch-action: none;
+      cursor: grab;
+    }
+    #benchCanvas:active {
+      cursor: grabbing;
+    }
+
+    /* Toast Entrance */
+    @keyframes slideToast {
+      from { opacity: 0; transform: translateX(36px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    .toast-card {
+      animation: slideToast 0.34s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    /* Laser Puzzle & Modal Polish */
+    .puzzle-level-btn {
+      transition: all 0.2s ease;
+    }
+    .puzzle-level-btn.active {
+      background: linear-gradient(135deg, #ff2e93, #fbbf24);
+      color: #050814 !important;
+      font-weight: 800;
+      box-shadow: 0 0 18px rgba(255, 46, 147, 0.45);
+    }
+    .puzzle-level-btn.cleared {
+      border-color: rgba(16, 185, 129, 0.65);
+    }
+    .export-tab.active {
+      background: linear-gradient(135deg, #00e5ff, #38bdf8);
+      color: #050814 !important;
+      font-weight: 800;
+    }
+    #puzzleCanvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      touch-action: none;
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-[#00e5ff]/30">
+
+  <!-- Ambient Nebula, Floating Light Motes & Confetti Layers -->
+  <div class="nebula-backdrop"></div>
+  <canvas id="motesCanvas"></canvas>
+  <canvas id="confettiCanvas"></canvas>
+
+  <!-- Notification Toasts -->
+  <div id="toastStack" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2.5 pointer-events-none"></div>
+
+  <!-- =========================================================================
+       TOP STICKY NAVIGATION BAR
+       ========================================================================= -->
+  <header class="sticky top-0 z-40 top-nav">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3">
+      <!-- Brand Logo -->
+      <a href="#hero" class="flex items-center gap-2.5 group">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#00e5ff] via-[#fbbf24] to-[#ff2e93] p-[2px] shadow-lg shadow-[#00e5ff]/25 group-hover:scale-105 transition">
+          <div class="w-full h-full rounded-[10px] bg-[#050814] flex items-center justify-center">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+              <path d="M12 2C7.5 7 7.5 17 12 22C16.5 17 16.5 7 12 2Z" fill="rgba(0,229,255,0.22)" stroke="#00e5ff" stroke-width="2"/>
+              <line x1="2" y1="12" x2="22" y2="12" stroke="#fbbf24" stroke-width="1.8" stroke-dasharray="2.5 2.5"/>
+            </svg>
+          </div>
+        </div>
+        <div>
+          <div class="font-black text-sm sm:text-base tracking-wider leading-tight">
+            LUMINA <span class="text-[#00e5ff]">//</span> OPTICS STUDIO
+          </div>
+          <div class="font-mono-code text-[10px] text-muted leading-tight">
+            Interactive Light &amp; Image Playground
+          </div>
+        </div>
+      </a>
+
+      <!-- Quick Section Links -->
+      <nav class="hidden xl:flex items-center gap-1 glass-inset p-1 rounded-xl text-xs font-semibold">
+        <a href="#rules-section" class="px-3 py-1.5 rounded-lg hover:text-[#fbbf24] transition">1. Golden Rules</a>
+        <a href="#big-lab" class="px-3 py-1.5 rounded-lg hover:text-[#00e5ff] transition">2. Big Light Lab</a>
+        <a href="#laser-puzzle" class="px-3 py-1.5 rounded-lg hover:text-[#ff2e93] transition">3. Laser Puzzle</a>
+        <a href="#missions-section" class="px-3 py-1.5 rounded-lg hover:text-[#10b981] transition">4. Missions</a>
+        <a href="#wonders-section" class="px-3 py-1.5 rounded-lg hover:text-[#ff2e93] transition">5. Real World</a>
+        <a href="#quiz-section" class="px-3 py-1.5 rounded-lg hover:text-[#fbbf24] transition">6. Practice</a>
+      </nav>
+
+      <!-- Live Explorer Rank Badge + Export + Sound + Theme Toggles -->
+      <div class="flex items-center gap-2 sm:gap-2.5">
+        <div class="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gradient-to-r from-[#fbbf24]/15 via-[#00e5ff]/15 to-[#ff2e93]/15 border border-[#fbbf24]/45 shadow-md">
+          <span class="text-sm">✨</span>
+          <div class="leading-tight min-w-[78px]">
+            <div class="flex items-center justify-between gap-2">
+              <span id="rankTitle" class="text-[11px] sm:text-xs font-extrabold text-[#fbbf24]">Novice</span>
+              <span class="font-mono-code text-[10px] text-muted"><span id="xpCounter" class="font-bold text-[#00e5ff]">0</span> XP</span>
+            </div>
+            <div class="w-full h-1.5 rounded-full bg-slate-900/80 overflow-hidden mt-1">
+              <div id="rankBarFill" class="h-full bg-gradient-to-r from-[#00e5ff] via-[#fbbf24] to-[#ff2e93] transition-all duration-300" style="width: 6%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <button id="exportFolderBtn" type="button" title="Export Separated HTML, CSS & JS Folder"
+          class="px-3 py-2 rounded-full bg-[#00e5ff]/15 hover:bg-[#00e5ff]/25 border border-[#00e5ff]/50 text-[#00e5ff] text-xs font-extrabold flex items-center gap-1.5 transition">
+          <span>📦</span>
+          <span class="hidden sm:inline">Export Folder</span>
+        </button>
+
+        <button id="soundToggle" type="button" title="Toggle Sound Effects"
+          class="px-3 py-2 rounded-full glass-inset hover:border-[#00e5ff] text-xs font-bold flex items-center gap-1.5 transition">
+          <span id="soundStatusText">🔊 Sound</span>
+        </button>
+
+        <button id="themeToggle" type="button" title="Toggle Museum Light / Dark Theme"
+          class="px-3 py-2 rounded-full glass-inset hover:border-[#fbbf24] text-xs font-bold flex items-center gap-1.5 transition">
+          <span>🌓 Theme</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-3 sm:px-6 py-6 sm:py-9 space-y-14">
+
+    <!-- =========================================================================
+         HERO SECTION (INTERACTIVE BICONVEX LENS + CURVED MIRROR ARRAY)
+         ========================================================================= -->
+    <section id="hero" class="relative overflow-hidden glass-card rounded-3xl p-6 sm:p-10 border-[#00e5ff]/30">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <!-- Headline & CTAs -->
+        <div class="lg:col-span-6 space-y-5 relative z-10">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#00e5ff]/15 border border-[#00e5ff]/35 font-mono-code text-[11px] font-bold text-[#00e5ff]">
+            <span>🌌</span>
+            <span>INTERACTIVE OPTICAL OBSERVATORY</span>
+          </div>
+
+          <h1 class="text-4xl sm:text-5xl lg:text-[52px] font-black tracking-tight leading-[1.07]">
+            Bend Light. Create Images.
+            <span class="block bg-gradient-to-r from-[#00e5ff] via-[#fbbf24] to-[#ff2e93] bg-clip-text text-transparent">
+              Master Mirrors &amp; Lenses.
+            </span>
+          </h1>
+
+          <p class="text-base sm:text-lg text-muted leading-relaxed">
+            Control glowing photon beams in real time, master the <strong class="text-[#fbbf24]">3 Golden Rules of Image Formation</strong>, ignite solar focal hotspots, and discover how curved glass shapes the world around you.
+          </p>
+
+          <div class="pt-1 flex flex-wrap items-center gap-3.5">
+            <a href="#rules-section"
+              class="px-6 py-3.5 rounded-2xl font-extrabold text-sm sm:text-base bg-gradient-to-r from-[#fbbf24] to-[#f59e0b] text-[#050814] shadow-lg shadow-[#fbbf24]/25 hover:brightness-110 transition">
+              Start With the 3 Rules
+            </a>
+            <a href="#big-lab"
+              class="px-6 py-3.5 rounded-2xl font-extrabold text-sm sm:text-base glass-inset border-[#00e5ff]/50 text-[#00e5ff] hover:bg-[#00e5ff]/15 transition">
+              Jump Into Big Light Lab
+            </a>
+            <a href="#laser-puzzle"
+              class="px-5 py-3.5 rounded-2xl font-extrabold text-sm sm:text-base bg-[#ff2e93]/15 border border-[#ff2e93]/50 text-[#ff2e93] hover:bg-[#ff2e93]/25 transition">
+              🔦 Play Laser Puzzle
+            </a>
+          </div>
+        </div>
+
+        <!-- Interactive Hero Canvas: Switchable Optical Cavity Array + Draggable Light Orb -->
+        <div class="lg:col-span-6 space-y-3">
+          <div class="relative w-full aspect-[16/10] rounded-2xl overflow-hidden bg-[#040712] border border-[#00e5ff]/35 shadow-2xl">
+            <canvas id="heroArrayCanvas" width="640" height="400" class="w-full h-full block cursor-grab active:cursor-grabbing touch-none"></canvas>
+            <div class="pointer-events-none absolute top-3 left-3 px-3 py-1 rounded-full bg-[#050814]/85 border border-white/15 font-mono-code text-[11px] text-slate-200 backdrop-blur-md">
+              ✨ Drag the Light Orb or switch optical cavities!
+            </div>
+            <div class="absolute bottom-3 left-3 flex items-center gap-1 p-1 rounded-xl bg-[#050814]/85 border border-white/15 backdrop-blur-md">
+              <button type="button" data-hero-mode="biconvex" class="hero-mode-btn px-2.5 py-1 rounded-lg text-[11px] font-bold bg-[#00e5ff] text-[#050814] transition">Focus Cavity</button>
+              <button type="button" data-hero-mode="diverging" class="hero-mode-btn px-2.5 py-1 rounded-lg text-[11px] font-semibold text-slate-300 hover:text-white transition">Prism Fan</button>
+              <button type="button" data-hero-mode="twin_focus" class="hero-mode-btn px-2.5 py-1 rounded-lg text-[11px] font-semibold text-slate-300 hover:text-white transition">Twin Lens</button>
+            </div>
+            <button id="pulseWaveBtn" type="button"
+              class="absolute bottom-3 right-3 px-4 py-2 rounded-xl font-extrabold text-xs bg-gradient-to-r from-[#00e5ff] to-[#ff2e93] text-[#050814] shadow-lg shadow-[#00e5ff]/30 hover:scale-105 active:scale-95 transition">
+              ✨ Pulse Wave
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SECTION 1: THE 3 GOLDEN RULES OF IMAGE FORMATION
+         ========================================================================= -->
+    <section id="rules-section" class="space-y-6 scroll-mt-24">
+      <div class="glass-card rounded-3xl p-5 sm:p-6 flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-[#fbbf24]/35">
+        <div>
+          <span class="font-mono-code text-xs font-bold uppercase tracking-widest text-[#fbbf24]">
+            01 • LEARN THE FUNDAMENTALS FIRST
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-black mt-0.5">
+            The 3 Golden Rules of Image Formation
+          </h2>
+          <p class="text-sm text-muted mt-1">
+            Switch between all 4 optical devices below and click <strong class="text-[#00e5ff]">"⚡ Fire Photon!"</strong> on each card to watch how every ray bends or bounces!
+          </p>
+        </div>
+
+        <!-- 4-Device Selector Bar -->
+        <div class="grid grid-cols-2 sm:flex items-center gap-1.5 p-1.5 rounded-2xl glass-inset">
+          <button type="button" data-rule-device="concave_mirror" class="rule-pill active px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold">
+            Concave Mirror
+          </button>
+          <button type="button" data-rule-device="convex_mirror" class="rule-pill px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold">
+            Convex Mirror
+          </button>
+          <button type="button" data-rule-device="convex_lens" class="rule-pill px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold">
+            Convex Lens
+          </button>
+          <button type="button" data-rule-device="concave_lens" class="rule-pill px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold">
+            Concave Lens
+          </button>
+        </div>
+      </div>
+
+      <!-- 3 Side-by-Side Glass Rule Cards -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+        <!-- Rule 1: The Parallel Highway -->
+        <article class="glass-card rounded-3xl p-5 flex flex-col justify-between space-y-4 border-[#fbbf24]/40">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="px-2.5 py-1 rounded-full font-mono-code text-[11px] font-bold bg-[#fbbf24]/20 text-[#fbbf24] border border-[#fbbf24]/40">
+                RULE 1 • SOLAR GOLD
+              </span>
+              <span class="font-mono-code text-xs text-muted">Parallel → F</span>
+            </div>
+            <h3 class="text-xl font-extrabold">The Parallel Highway</h3>
+            <p id="ruleText0" class="text-sm text-muted leading-relaxed">
+              Travels <strong class="text-[#fbbf24]">parallel</strong> to the principal axis, then reflects straight through the real <strong class="text-[#00e5ff]">Focus (F)</strong>.
+            </p>
+          </div>
+          <div class="space-y-3">
+            <div class="w-full aspect-[280/160] rounded-2xl overflow-hidden bg-[#040712] border border-slate-800">
+              <canvas id="ruleCanvas0" width="280" height="160" class="w-full h-full block"></canvas>
+            </div>
+            <button type="button" data-fire-rule="0"
+              class="w-full py-2.5 rounded-xl font-extrabold text-xs sm:text-sm bg-[#fbbf24]/20 hover:bg-[#fbbf24]/30 text-[#fbbf24] border border-[#fbbf24]/45 transition">
+              ⚡ Fire Photon!
+            </button>
+          </div>
+        </article>
+
+        <!-- Rule 2: The Center Shortcut -->
+        <article class="glass-card rounded-3xl p-5 flex flex-col justify-between space-y-4 border-[#ff2e93]/40">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="px-2.5 py-1 rounded-full font-mono-code text-[11px] font-bold bg-[#ff2e93]/20 text-[#ff2e93] border border-[#ff2e93]/40">
+                RULE 2 • NEON MAGENTA
+              </span>
+              <span id="ruleTag1" class="font-mono-code text-xs text-muted">Pole (P) Bounce</span>
+            </div>
+            <h3 class="text-xl font-extrabold">The Center Shortcut</h3>
+            <p id="ruleText1" class="text-sm text-muted leading-relaxed">
+              Strikes the center <strong class="text-[#ff2e93]">Pole (P)</strong> and bounces off symmetrically at the exact same angle.
+            </p>
+          </div>
+          <div class="space-y-3">
+            <div class="w-full aspect-[280/160] rounded-2xl overflow-hidden bg-[#040712] border border-slate-800">
+              <canvas id="ruleCanvas1" width="280" height="160" class="w-full h-full block"></canvas>
+            </div>
+            <button type="button" data-fire-rule="1"
+              class="w-full py-2.5 rounded-xl font-extrabold text-xs sm:text-sm bg-[#ff2e93]/20 hover:bg-[#ff2e93]/30 text-[#ff2e93] border border-[#ff2e93]/45 transition">
+              ⚡ Fire Photon!
+            </button>
+          </div>
+        </article>
+
+        <!-- Rule 3: The Focus Reverse -->
+        <article class="glass-card rounded-3xl p-5 flex flex-col justify-between space-y-4 border-[#00e5ff]/40">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="px-2.5 py-1 rounded-full font-mono-code text-[11px] font-bold bg-[#00e5ff]/20 text-[#00e5ff] border border-[#00e5ff]/40">
+                RULE 3 • ELECTRIC CYAN
+              </span>
+              <span class="font-mono-code text-xs text-muted">F → Parallel</span>
+            </div>
+            <h3 class="text-xl font-extrabold">The Focus Reverse</h3>
+            <p id="ruleText2" class="text-sm text-muted leading-relaxed">
+              Passes through the <strong class="text-[#00e5ff]">Focus (F)</strong> first, then emerges strictly <strong class="text-[#fbbf24]">parallel</strong> to the principal axis.
+            </p>
+          </div>
+          <div class="space-y-3">
+            <div class="w-full aspect-[280/160] rounded-2xl overflow-hidden bg-[#040712] border border-slate-800">
+              <canvas id="ruleCanvas2" width="280" height="160" class="w-full h-full block"></canvas>
+            </div>
+            <button type="button" data-fire-rule="2"
+              class="w-full py-2.5 rounded-xl font-extrabold text-xs sm:text-sm bg-[#00e5ff]/20 hover:bg-[#00e5ff]/30 text-[#00e5ff] border border-[#00e5ff]/45 transition">
+              ⚡ Fire Photon!
+            </button>
+          </div>
+        </article>
+      </div>
+
+      <!-- Visual Comparison Banner: Real Image vs. Virtual Image -->
+      <div class="glass-card rounded-3xl p-5 sm:p-6 border-[#00e5ff]/30">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="rounded-2xl p-4 sm:p-5 border-2 border-[#fbbf24]/75 bg-[#fbbf24]/10 flex items-start gap-4">
+            <div class="w-12 h-12 rounded-2xl bg-[#fbbf24]/20 border border-[#fbbf24]/50 flex items-center justify-center text-2xl shrink-0">
+              🎬
+            </div>
+            <div class="space-y-1">
+              <div class="font-extrabold text-base sm:text-lg text-[#fbbf24]">
+                Real Image
+              </div>
+              <div class="font-mono-code text-[11px] font-bold uppercase tracking-wider">
+                Solid Rays Meet • Upside-Down • Caught on Screen
+              </div>
+              <p class="text-xs sm:text-sm text-muted leading-relaxed pt-1">
+                Formed when actual light rays physically cross each other. Always inverted and can be projected directly onto a cinema screen or wall!
+              </p>
+            </div>
+          </div>
+
+          <div class="rounded-2xl p-4 sm:p-5 border-2 border-[#00e5ff]/75 bg-[#00e5ff]/10 flex items-start gap-4">
+            <div class="w-12 h-12 rounded-2xl bg-[#00e5ff]/20 border border-[#00e5ff]/50 flex items-center justify-center text-2xl shrink-0">
+              🪞
+            </div>
+            <div class="space-y-1">
+              <div class="font-extrabold text-base sm:text-lg text-[#00e5ff]">
+                Virtual Image
+              </div>
+              <div class="font-mono-code text-[11px] font-bold uppercase tracking-wider">
+                Dashed Backward Extensions • Upright • Seen Inside Glass
+              </div>
+              <p class="text-xs sm:text-sm text-muted leading-relaxed pt-1">
+                Formed when diverging rays only appear to meet along dashed backward trace lines. Always right-side up and visible when looking into the mirror or lens!
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SECTION 2: THE GIANT OPTICAL BENCH (1280 x 600 HIGH-DPI CANVAS)
+         ========================================================================= -->
+    <section id="big-lab" class="space-y-5 scroll-mt-24">
+      <div class="flex flex-wrap items-end justify-between gap-3">
+        <div>
+          <span class="font-mono-code text-xs font-bold uppercase tracking-widest text-[#00e5ff]">
+            02 • INTERACTIVE EXPERIMENTATION BENCH
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-black mt-0.5">
+            The Big Light Lab
+          </h2>
+        </div>
+        <div class="text-xs sm:text-sm text-muted">
+          Tip: Select <strong class="text-[#fbbf24]">Very Far (∞)</strong> on a Concave Mirror or Convex Lens to ignite <strong class="text-[#fbbf24]">Solar Spark Mode 🔥</strong>!
+        </div>
+      </div>
+
+      <!-- Prominent 4-Device Selector Tabs with Custom Inline SVG Icons -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
+        <button type="button" data-lab-device="concave_mirror" class="device-tab active rounded-2xl p-3.5 text-left flex items-center gap-3">
+          <div class="w-12 h-12 rounded-xl bg-[#00e5ff]/15 border border-[#00e5ff]/40 flex items-center justify-center shrink-0">
+            <svg width="28" height="34" viewBox="0 0 28 34" fill="none">
+              <path d="M19 3 C9 11, 9 23, 19 31" stroke="#00e5ff" stroke-width="3.2" stroke-linecap="round"/>
+              <path d="M21 6 L25 4 M20 12 L24 10 M19 17 L23 15 M20 22 L24 20 M21 28 L25 26" stroke="#94a3b8" stroke-width="1.6"/>
+            </svg>
+          </div>
+          <div>
+            <div class="font-extrabold text-sm sm:text-base leading-tight">Concave Mirror</div>
+            <div class="text-xs text-[#00e5ff] font-medium">Curved In • Converging</div>
+          </div>
+        </button>
+
+        <button type="button" data-lab-device="convex_mirror" class="device-tab rounded-2xl p-3.5 text-left flex items-center gap-3">
+          <div class="w-12 h-12 rounded-xl bg-[#ff2e93]/15 border border-[#ff2e93]/40 flex items-center justify-center shrink-0">
+            <svg width="28" height="34" viewBox="0 0 28 34" fill="none">
+              <path d="M9 3 C19 11, 19 23, 9 31" stroke="#ff2e93" stroke-width="3.2" stroke-linecap="round"/>
+              <path d="M7 6 L3 4 M8 12 L4 10 M9 17 L5 15 M8 22 L4 20 M7 28 L3 26" stroke="#94a3b8" stroke-width="1.6"/>
+            </svg>
+          </div>
+          <div>
+            <div class="font-extrabold text-sm sm:text-base leading-tight">Convex Mirror</div>
+            <div class="text-xs text-[#ff2e93] font-medium">Bulging Out • Diverging</div>
+          </div>
+        </button>
+
+        <button type="button" data-lab-device="convex_lens" class="device-tab rounded-2xl p-3.5 text-left flex items-center gap-3">
+          <div class="w-12 h-12 rounded-xl bg-[#fbbf24]/15 border border-[#fbbf24]/40 flex items-center justify-center shrink-0">
+            <svg width="28" height="34" viewBox="0 0 28 34" fill="none">
+              <path d="M14 3 C23 11, 23 23, 14 31 C5 23, 5 11, 14 3 Z" fill="rgba(251,191,36,0.24)" stroke="#fbbf24" stroke-width="2.6"/>
+            </svg>
+          </div>
+          <div>
+            <div class="font-extrabold text-sm sm:text-base leading-tight">Convex Lens</div>
+            <div class="text-xs text-[#fbbf24] font-medium">Thick Middle • Converging</div>
+          </div>
+        </button>
+
+        <button type="button" data-lab-device="concave_lens" class="device-tab rounded-2xl p-3.5 text-left flex items-center gap-3">
+          <div class="w-12 h-12 rounded-xl bg-[#10b981]/15 border border-[#10b981]/40 flex items-center justify-center shrink-0">
+            <svg width="28" height="34" viewBox="0 0 28 34" fill="none">
+              <path d="M5 3 L23 3 C17 11, 17 23, 23 31 L5 31 C11 23, 11 11, 5 3 Z" fill="rgba(16,185,129,0.22)" stroke="#10b981" stroke-width="2.6"/>
+            </svg>
+          </div>
+          <div>
+            <div class="font-extrabold text-sm sm:text-base leading-tight">Concave Lens</div>
+            <div class="text-xs text-[#10b981] font-medium">Thin Middle • Diverging</div>
+          </div>
+        </button>
+      </div>
+
+      <!-- Bench Stage Container -->
+      <div id="benchWrapper" class="glass-card rounded-3xl p-3.5 sm:p-5 space-y-4 border-[#00e5ff]/35">
+        <!-- Interactive Canvas HUD Pills -->
+        <div class="flex flex-wrap items-center justify-between gap-2.5">
+          <!-- Object Switcher -->
+          <div class="flex flex-wrap items-center gap-1 p-1 rounded-xl glass-inset">
+            <button type="button" data-obj="candle" class="obj-pill px-2.5 py-1.5 rounded-lg text-xs font-bold bg-[#fbbf24]/25 text-[#fbbf24] border border-[#fbbf24]/50 transition">🕯️ Candle</button>
+            <button type="button" data-obj="rocket" class="obj-pill px-2.5 py-1.5 rounded-lg text-xs font-semibold hover:bg-white/10 border border-transparent transition">🚀 Rocket</button>
+            <button type="button" data-obj="duck" class="obj-pill px-2.5 py-1.5 rounded-lg text-xs font-semibold hover:bg-white/10 border border-transparent transition">🦆 Duck</button>
+            <button type="button" data-obj="pencil" class="obj-pill px-2.5 py-1.5 rounded-lg text-xs font-semibold hover:bg-white/10 border border-transparent transition">✏️ Pencil</button>
+            <button type="button" data-obj="butterfly" class="obj-pill px-2.5 py-1.5 rounded-lg text-xs font-semibold hover:bg-white/10 border border-transparent transition">🦋 Butterfly</button>
+            <button type="button" data-obj="diamond" class="obj-pill px-2.5 py-1.5 rounded-lg text-xs font-semibold hover:bg-white/10 border border-transparent transition">💎 Diamond</button>
+          </div>
+
+          <!-- Effect HUD Pills -->
+          <div class="flex flex-wrap items-center gap-1.5">
+            <button id="rainbowPill" type="button" class="px-3 py-1.5 rounded-xl text-xs font-bold glass-inset hover:border-[#ff2e93] transition">🌈 Rainbow Rays: OFF</button>
+            <button id="wavefrontsPill" type="button" class="px-3 py-1.5 rounded-xl text-xs font-bold glass-inset hover:border-[#00e5ff] transition">🌊 Wavefronts: OFF</button>
+            <button id="slowMoPill" type="button" class="px-3 py-1.5 rounded-xl text-xs font-bold glass-inset hover:border-[#fbbf24] transition">🐌 Slow-Mo Trace: OFF</button>
+            <button id="photonsPill" type="button" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-[#10b981]/20 text-[#10b981] border border-[#10b981]/50 transition">✨ Photons: ON</button>
+            <button id="cinemaPill" type="button" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-[#fbbf24]/20 text-[#fbbf24] border border-[#fbbf24]/50 transition">🎞️ Cinema Screen: ON</button>
+            <button id="blueprintPill" type="button" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-[#ff2e93]/15 text-[#ff2e93] border border-[#ff2e93]/45 hover:bg-[#ff2e93]/25 transition">📸 Save PNG</button>
+            <button id="fullscreenPill" type="button" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-[#00e5ff]/20 text-[#00e5ff] border border-[#00e5ff]/45 hover:bg-[#00e5ff]/30 transition">⛶ Fullscreen</button>
+          </div>
+        </div>
+
+        <!-- Quick Position Jump Chips -->
+        <div class="flex flex-wrap items-center gap-1.5">
+          <span class="font-mono-code text-[11px] font-bold uppercase tracking-wider text-muted mr-1">Jump To:</span>
+          <button type="button" data-jump="infinity" class="px-3 py-1.5 rounded-full text-xs font-bold glass-inset hover:border-[#fbbf24] hover:text-[#fbbf24] transition">Very Far (∞)</button>
+          <button type="button" data-jump="beyond2f" class="px-3 py-1.5 rounded-full text-xs font-semibold glass-inset hover:border-[#00e5ff] hover:text-[#00e5ff] transition">Beyond C / 2F</button>
+          <button type="button" data-jump="at2f" class="px-3 py-1.5 rounded-full text-xs font-semibold glass-inset hover:border-[#00e5ff] hover:text-[#00e5ff] transition">Exactly at C / 2F</button>
+          <button type="button" data-jump="between" class="px-3 py-1.5 rounded-full text-xs font-semibold glass-inset hover:border-[#00e5ff] hover:text-[#00e5ff] transition">Between C &amp; F</button>
+          <button type="button" data-jump="atf" class="px-3 py-1.5 rounded-full text-xs font-semibold glass-inset hover:border-[#ff2e93] hover:text-[#ff2e93] transition">At Focus (F)</button>
+          <button type="button" data-jump="insidef" class="px-3 py-1.5 rounded-full text-xs font-semibold glass-inset hover:border-[#10b981] hover:text-[#10b981] transition">Very Close (Inside F)</button>
+        </div>
+
+        <!-- 1280 x 600 High-DPI Optical Bench Canvas -->
+        <div class="relative w-full aspect-[1280/600] min-h-[270px] rounded-2xl overflow-hidden bg-[#040712] border border-slate-800 shadow-2xl">
+          <canvas id="benchCanvas" width="1280" height="600"></canvas>
+          <div class="pointer-events-none absolute top-3 left-3 px-3 py-1 rounded-xl bg-[#050814]/85 border border-white/15 text-[11px] sm:text-xs text-slate-200 backdrop-blur-md">
+            👆 Drag <strong class="text-[#10b981]">Object</strong>, <strong class="text-[#fbbf24]">Focus (F)</strong>, or top handle directly on canvas!
+          </div>
+          <div id="zoneBadge" class="pointer-events-none absolute top-3 right-3 px-3 py-1 rounded-xl bg-[#050814]/85 border border-[#00e5ff]/45 font-mono-code text-xs font-bold text-[#00e5ff] backdrop-blur-md">
+            Exactly at C
+          </div>
+        </div>
+
+        <!-- Sliders + Live Telemetry + "👁️ What You Actually See" Viewfinder -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-4">
+          <!-- Left 7 Cols: Sliders, Telemetry & Explanation -->
+          <div class="lg:col-span-7 glass-inset rounded-2xl p-4 sm:p-5 flex flex-col justify-between space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div class="space-y-1.5">
+                <div class="flex justify-between text-xs font-semibold">
+                  <label for="sliderU">Object Distance (u)</label>
+                  <span id="valU" class="font-mono-code text-[#00e5ff] font-bold">-200 cm</span>
+                </div>
+                <input id="sliderU" type="range" min="-360" max="-26" value="-200" step="1" class="studio-slider" />
+              </div>
+
+              <div class="space-y-1.5">
+                <div class="flex justify-between text-xs font-semibold">
+                  <label for="sliderF">Focal Length (f)</label>
+                  <span id="valF" class="font-mono-code text-[#ff2e93] font-bold">-100 cm</span>
+                </div>
+                <input id="sliderF" type="range" min="60" max="155" value="100" step="1" class="studio-slider magenta" />
+              </div>
+
+              <div class="space-y-1.5">
+                <div class="flex justify-between text-xs font-semibold">
+                  <label for="sliderH">Object Height (h)</label>
+                  <span id="valH" class="font-mono-code text-[#fbbf24] font-bold">70 cm</span>
+                </div>
+                <input id="sliderH" type="range" min="30" max="115" value="70" step="1" class="studio-slider gold" />
+              </div>
+            </div>
+
+            <!-- 4 Telemetry Metrics -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+              <div class="rounded-xl p-2.5 bg-[#050814]/65 border border-slate-700/60">
+                <div class="text-[10px] uppercase tracking-wider text-slate-400">Image Dist. (v)</div>
+                <div id="telV" class="font-mono-code text-sm sm:text-base font-bold text-[#00e5ff] mt-0.5">-200.0 cm</div>
+              </div>
+              <div class="rounded-xl p-2.5 bg-[#050814]/65 border border-slate-700/60">
+                <div class="text-[10px] uppercase tracking-wider text-slate-400">Magnification (m)</div>
+                <div id="telM" class="font-mono-code text-sm sm:text-base font-bold text-[#fbbf24] mt-0.5">-1.00x</div>
+              </div>
+              <div class="rounded-xl p-2.5 bg-[#050814]/65 border border-slate-700/60">
+                <div class="text-[10px] uppercase tracking-wider text-slate-400">Size</div>
+                <div id="telSize" class="text-xs sm:text-sm font-bold text-[#10b981] mt-0.5">Same Size</div>
+              </div>
+              <div class="rounded-xl p-2.5 bg-[#050814]/65 border border-slate-700/60">
+                <div class="text-[10px] uppercase tracking-wider text-slate-400">Nature</div>
+                <div id="telNature" class="text-xs sm:text-sm font-bold text-[#ff2e93] mt-0.5">Real &amp; Inverted</div>
+              </div>
+            </div>
+
+            <!-- Live Optical Equation Chalkboard -->
+            <div class="rounded-xl p-3 bg-[#050814]/75 border border-[#ff2e93]/35 space-y-1.5">
+              <div class="flex items-center justify-between gap-2">
+                <span id="formulaCardTitle" class="font-mono-code text-[10px] font-bold uppercase tracking-wider text-[#ff2e93]">📐 MIRROR EQUATION</span>
+                <span id="formulaCardSymbolic" class="font-mono-code text-[11px] text-slate-300">1/f = 1/v + 1/u</span>
+              </div>
+              <div id="formulaCardPlugged" class="font-mono-code text-xs text-[#10b981] overflow-x-auto whitespace-nowrap">
+                1/(-100) = 1/(-200.0) + 1/(-200)
+              </div>
+              <div id="formulaCardMag" class="font-mono-code text-[11px] text-[#fbbf24]">
+                m = -v/u = -(-200.0)/(-200) = -1.00x
+              </div>
+            </div>
+
+            <!-- Live Optical Insight Banner -->
+            <div class="rounded-xl p-3.5 bg-[#00e5ff]/10 border border-[#00e5ff]/30">
+              <div class="font-mono-code text-[11px] font-bold uppercase tracking-wider text-[#00e5ff] mb-1">
+                💡 What Is Happening Right Now
+              </div>
+              <p id="liveExplanation" class="text-xs sm:text-sm leading-relaxed">
+                Your object sits at C. Reflected rays cross directly beneath it, forming a sharp upside-down real twin of the exact same size!
+              </p>
+            </div>
+          </div>
+
+          <!-- Right 5 Cols: "👁️ What You Actually See" Viewfinder -->
+          <div class="lg:col-span-5 glass-inset rounded-2xl p-4 sm:p-5 border-[#fbbf24]/35 flex flex-col justify-between space-y-3">
+            <div class="flex items-center justify-between gap-2">
+              <div>
+                <h3 class="text-sm sm:text-base font-extrabold">👁️ What You Actually See</h3>
+                <p class="text-[11px] text-muted">Live scale, orientation &amp; clarity viewfinder</p>
+              </div>
+              <span id="vfStatusBadge" class="px-2.5 py-1 rounded-full font-mono-code text-[10px] font-bold uppercase bg-[#fbbf24]/20 text-[#fbbf24] border border-[#fbbf24]/45">
+                On Cinema Screen
+              </span>
+            </div>
+
+            <div id="vfViewport" class="relative w-full h-44 sm:h-48 rounded-2xl border-2 border-[#fbbf24]/50 vf-real-glow overflow-hidden flex items-center justify-center">
+              <div class="absolute inset-0 opacity-15" style="background-image: linear-gradient(to right, #00e5ff 1px, transparent 1px), linear-gradient(to bottom, #00e5ff 1px, transparent 1px); background-size: 24px 24px;"></div>
+              <div class="absolute inset-x-0 top-1/2 h-px bg-slate-400/35"></div>
+
+              <div id="vfSpriteScaler" class="relative z-10 flex items-center justify-center transition-transform duration-150 select-none">
+                <div id="vfSpriteEmoji" class="text-6xl leading-none">🕯️</div>
+              </div>
+
+              <div id="vfOrientTag" class="absolute bottom-2.5 left-2.5 px-2.5 py-0.5 rounded-full bg-[#050814]/85 border border-white/15 font-mono-code text-[10px] font-bold text-[#fbbf24]">
+                Inverted (Upside-Down)
+              </div>
+              <div id="vfMagTag" class="absolute bottom-2.5 right-2.5 px-2.5 py-0.5 rounded-full bg-[#050814]/85 border border-white/15 font-mono-code text-[10px] font-bold text-slate-200">
+                1.00x
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SECTION 3: LASER CORE ESCAPE — INTERACTIVE OPTICAL PUZZLE GAME
+         ========================================================================= -->
+    <section id="laser-puzzle" class="glass-card rounded-3xl p-5 sm:p-7 space-y-5 border-[#ff2e93]/40 scroll-mt-24">
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+        <div>
+          <span class="font-mono-code text-xs font-bold uppercase tracking-widest text-[#ff2e93]">
+            03 • PLAYABLE OPTICS ARCADE
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-black mt-0.5">
+            🔦 Laser Core Escape — Optical Puzzle Game
+          </h2>
+          <p class="text-sm text-muted mt-1">
+            Bend, focus, and reflect live laser beams around cosmic barriers to charge each <strong class="text-[#00e5ff]">Crystal Core</strong> to 100%! Earn <strong class="text-[#fbbf24]">+120 XP</strong> per level.
+          </p>
+        </div>
+
+        <!-- 5-Level Selector Strip -->
+        <div id="puzzleLevelTabs" class="flex flex-wrap items-center gap-1.5 p-1.5 rounded-2xl glass-inset">
+          <button type="button" data-plevel="0" class="puzzle-level-btn active px-3 py-1.5 rounded-xl text-xs font-bold border border-transparent">L1: Solar Core</button>
+          <button type="button" data-plevel="1" class="puzzle-level-btn px-3 py-1.5 rounded-xl text-xs font-semibold border border-transparent">L2: Asteroid Detour</button>
+          <button type="button" data-plevel="2" class="puzzle-level-btn px-3 py-1.5 rounded-xl text-xs font-semibold border border-transparent">L3: Twin Split</button>
+          <button type="button" data-plevel="3" class="puzzle-level-btn px-3 py-1.5 rounded-xl text-xs font-semibold border border-transparent">L4: Wall Bounce</button>
+          <button type="button" data-plevel="4" class="puzzle-level-btn px-3 py-1.5 rounded-xl text-xs font-semibold border border-transparent">L5: Dual Reactor</button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
+        <!-- Puzzle Canvas Stage (8 Cols) -->
+        <div class="lg:col-span-8 space-y-2.5">
+          <div class="relative w-full aspect-[900/420] min-h-[240px] rounded-2xl overflow-hidden bg-[#040712] border border-[#ff2e93]/40 shadow-2xl">
+            <canvas id="puzzleCanvas" width="900" height="420"></canvas>
+            <div id="puzzleLevelBadge" class="pointer-events-none absolute top-3 left-3 px-3 py-1 rounded-full bg-[#050814]/85 border border-[#ff2e93]/45 font-mono-code text-[11px] font-bold text-[#ff2e93] backdrop-blur-md">
+              LEVEL 1 / 5 • CONCAVE MIRROR
+            </div>
+            <div id="puzzleStatusPill" class="pointer-events-none absolute top-3 right-3 px-3 py-1 rounded-full bg-[#050814]/85 border border-white/15 font-mono-code text-[11px] font-bold text-[#fbbf24] backdrop-blur-md">
+              ⚡ Align Beam With Core
+            </div>
+          </div>
+        </div>
+
+        <!-- Puzzle Mission Briefing & Precision Controls (4 Cols) -->
+        <div class="lg:col-span-4 glass-inset rounded-2xl p-4 sm:p-5 flex flex-col justify-between space-y-4">
+          <div class="space-y-3">
+            <div>
+              <h3 id="puzzleTitle" class="text-lg font-black text-[#00e5ff]">Level 1: Solar Core Ignition</h3>
+              <p id="puzzleDesc" class="text-xs sm:text-sm text-muted mt-1 leading-relaxed">
+                Three parallel laser beams strike a Concave Mirror. Tune the focal length (f) so all beams converge directly into the Crystal Core!
+              </p>
+            </div>
+
+            <!-- Crystal Core Charge Meter -->
+            <div class="rounded-xl p-3 bg-[#050814]/75 border border-slate-700/70 space-y-1.5">
+              <div class="flex items-center justify-between text-xs font-mono-code font-bold">
+                <span class="text-[#00e5ff]">💎 Core Charge</span>
+                <span id="puzzleChargeText" class="text-[#fbbf24]">0%</span>
+              </div>
+              <div class="w-full h-2.5 rounded-full bg-slate-900 overflow-hidden">
+                <div id="puzzleChargeBar" class="h-full bg-gradient-to-r from-[#00e5ff] via-[#fbbf24] to-[#10b981] transition-all duration-100" style="width: 0%;"></div>
+              </div>
+            </div>
+
+            <!-- Control 1 -->
+            <div class="space-y-1.5 pt-1">
+              <div class="flex justify-between text-xs font-semibold">
+                <label id="puzzleCtrl1Label" for="puzzleCtrl1">Focal Length (f)</label>
+                <span id="puzzleCtrl1Val" class="font-mono-code font-bold text-[#00e5ff]">160 cm</span>
+              </div>
+              <input id="puzzleCtrl1" type="range" min="100" max="360" value="160" step="1" class="studio-slider" />
+            </div>
+
+            <!-- Control 2 (Shown on multi-control levels) -->
+            <div id="puzzleCtrl2Wrap" class="hidden space-y-1.5">
+              <div class="flex justify-between text-xs font-semibold">
+                <label id="puzzleCtrl2Label" for="puzzleCtrl2">Lens Vertical Position (Y)</label>
+                <span id="puzzleCtrl2Val" class="font-mono-code font-bold text-[#ff2e93]">210 px</span>
+              </div>
+              <input id="puzzleCtrl2" type="range" min="120" max="300" value="210" step="1" class="studio-slider magenta" />
+            </div>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-2 pt-2">
+            <button id="puzzleResetBtn" type="button" class="px-4 py-2.5 rounded-xl glass-card hover:border-[#00e5ff] text-xs font-bold transition">
+              ↺ Reset Level
+            </button>
+            <button id="puzzleNextBtn" type="button" class="flex-1 py-2.5 rounded-xl font-extrabold text-xs bg-gradient-to-r from-[#ff2e93] to-[#fbbf24] text-[#050814] hover:brightness-110 transition">
+              Next Level →
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SECTION 4: 5 HANDS-ON OPTICAL MISSIONS
+         ========================================================================= -->
+    <section id="missions-section" class="glass-card rounded-3xl p-5 sm:p-7 space-y-5 border-[#10b981]/35 scroll-mt-24">
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <span class="font-mono-code text-xs font-bold uppercase tracking-widest text-[#10b981]">
+            04 • INTERACTIVE QUESTS
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-black mt-0.5">
+            🎯 5 Hands-On Optical Missions
+          </h2>
+          <p class="text-sm text-muted mt-1">
+            Dial in these 5 optical setups on the <a href="#big-lab" class="text-[#00e5ff] underline font-bold">Big Light Lab</a> above—each mission unlocks automatically for <strong class="text-[#fbbf24]">+100 XP</strong> and confetti!
+          </p>
+        </div>
+        <div id="missionsBadge" class="px-4 py-2 rounded-2xl bg-[#10b981]/15 border border-[#10b981]/45 font-mono-code text-sm font-bold text-[#10b981]">
+          0 / 5 Completed
+        </div>
+      </div>
+
+      <div id="missionsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3.5"></div>
+    </section>
+
+    <!-- =========================================================================
+         SECTION 5: REAL-WORLD WONDERS (1-CLICK LAB LOADER)
+         ========================================================================= -->
+    <section id="wonders-section" class="space-y-5 scroll-mt-24">
+      <div>
+        <span class="font-mono-code text-xs font-bold uppercase tracking-widest text-[#ff2e93]">
+          05 • OPTICS IN EVERYDAY LIFE
+        </span>
+        <h2 class="text-2xl sm:text-3xl font-black mt-0.5">
+          Real-World Wonders
+        </h2>
+        <p class="text-sm text-muted mt-1">
+          Click <strong class="text-[#00e5ff]">"Try in Big Lab ↑"</strong> on any everyday invention to load its exact optical setup onto the bench!
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- 1. Car Side Mirror -->
+        <div class="glass-card rounded-2xl p-5 flex flex-col justify-between space-y-4 border-[#ff2e93]/30 hover:border-[#ff2e93]/75 transition">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-3xl">🚗</span>
+              <span class="font-mono-code text-[11px] px-2.5 py-0.5 rounded-full bg-[#ff2e93]/15 text-[#ff2e93]">Convex Mirror</span>
+            </div>
+            <h3 class="text-lg font-extrabold">Car Side Mirror</h3>
+            <p class="text-xs sm:text-sm text-muted">Shrinks vehicles into upright, crisp virtual images so drivers get a wide panoramic view of traffic behind them.</p>
+          </div>
+          <button type="button" data-wonder="car_mirror" class="w-full py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-[#ff2e93]/15 hover:bg-[#ff2e93]/25 text-[#ff2e93] border border-[#ff2e93]/40 transition">
+            Try in Big Lab ↑
+          </button>
+        </div>
+
+        <!-- 2. Dentist Mirror -->
+        <div class="glass-card rounded-2xl p-5 flex flex-col justify-between space-y-4 border-[#10b981]/30 hover:border-[#10b981]/75 transition">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-3xl">🦷</span>
+              <span class="font-mono-code text-[11px] px-2.5 py-0.5 rounded-full bg-[#10b981]/15 text-[#10b981]">Concave Mirror • Inside F</span>
+            </div>
+            <h3 class="text-lg font-extrabold">Dentist Mirror</h3>
+            <p class="text-xs sm:text-sm text-muted">Held closer than Focus (F), a concave mirror creates a giant, upright virtual close-up of tiny tooth surfaces.</p>
+          </div>
+          <button type="button" data-wonder="dentist_mirror" class="w-full py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-[#10b981]/15 hover:bg-[#10b981]/25 text-[#10b981] border border-[#10b981]/40 transition">
+            Try in Big Lab ↑
+          </button>
+        </div>
+
+        <!-- 3. Magnifying Glass -->
+        <div class="glass-card rounded-2xl p-5 flex flex-col justify-between space-y-4 border-[#fbbf24]/30 hover:border-[#fbbf24]/75 transition">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-3xl">🔍</span>
+              <span class="font-mono-code text-[11px] px-2.5 py-0.5 rounded-full bg-[#fbbf24]/15 text-[#fbbf24]">Convex Lens • Inside F</span>
+            </div>
+            <h3 class="text-lg font-extrabold">Magnifying Glass</h3>
+            <p class="text-xs sm:text-sm text-muted">Hold a convex lens close to an object (inside F) to bend diverging rays into an enlarged, upright virtual view!</p>
+          </div>
+          <button type="button" data-wonder="magnifying_glass" class="w-full py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-[#fbbf24]/15 hover:bg-[#fbbf24]/25 text-[#fbbf24] border border-[#fbbf24]/40 transition">
+            Try in Big Lab ↑
+          </button>
+        </div>
+
+        <!-- 4. Movie Projector -->
+        <div class="glass-card rounded-2xl p-5 flex flex-col justify-between space-y-4 border-[#00e5ff]/30 hover:border-[#00e5ff]/75 transition">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-3xl">🎬</span>
+              <span class="font-mono-code text-[11px] px-2.5 py-0.5 rounded-full bg-[#00e5ff]/15 text-[#00e5ff]">Convex Lens • F to 2F</span>
+            </div>
+            <h3 class="text-lg font-extrabold">Movie Projector</h3>
+            <p class="text-xs sm:text-sm text-muted">Places illuminated film between F and 2F to project a giant, sharp real image onto a distant theater screen!</p>
+          </div>
+          <button type="button" data-wonder="movie_projector" class="w-full py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-[#00e5ff]/15 hover:bg-[#00e5ff]/25 text-[#00e5ff] border border-[#00e5ff]/40 transition">
+            Try in Big Lab ↑
+          </button>
+        </div>
+
+        <!-- 5. Nearsighted Glasses -->
+        <div class="glass-card rounded-2xl p-5 flex flex-col justify-between space-y-4 border-[#10b981]/30 hover:border-[#10b981]/75 transition">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-3xl">👓</span>
+              <span class="font-mono-code text-[11px] px-2.5 py-0.5 rounded-full bg-[#10b981]/15 text-[#10b981]">Concave Lens</span>
+            </div>
+            <h3 class="text-lg font-extrabold">Nearsighted Glasses</h3>
+            <p class="text-xs sm:text-sm text-muted">Diverges incoming light rays gently so distant scenery forms a crisp, upright virtual image closer to the eye.</p>
+          </div>
+          <button type="button" data-wonder="nearsighted_glasses" class="w-full py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-[#10b981]/15 hover:bg-[#10b981]/25 text-[#10b981] border border-[#10b981]/40 transition">
+            Try in Big Lab ↑
+          </button>
+        </div>
+
+        <!-- 6. Car Headlights -->
+        <div class="glass-card rounded-2xl p-5 flex flex-col justify-between space-y-4 border-[#fbbf24]/30 hover:border-[#fbbf24]/75 transition">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-3xl">🔦</span>
+              <span class="font-mono-code text-[11px] px-2.5 py-0.5 rounded-full bg-[#fbbf24]/15 text-[#fbbf24]">Concave Mirror • At F</span>
+            </div>
+            <h3 class="text-lg font-extrabold">Car Headlights</h3>
+            <p class="text-xs sm:text-sm text-muted">Places a bright bulb right at Focus (F) of a concave reflector to launch a powerful, parallel beam down the road!</p>
+          </div>
+          <button type="button" data-wonder="car_headlights" class="w-full py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-[#fbbf24]/15 hover:bg-[#fbbf24]/25 text-[#fbbf24] border border-[#fbbf24]/40 transition">
+            Try in Big Lab ↑
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SECTION 6: EXPANDED & CREATIVE OPTICAL PRACTICE ARENA
+         ========================================================================= -->
+    <section id="quiz-section" class="glass-card rounded-3xl p-5 sm:p-7 space-y-5 border-[#fbbf24]/35 scroll-mt-24">
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <span class="font-mono-code text-xs font-bold uppercase tracking-widest text-[#fbbf24]">
+            06 • INTERACTIVE CHALLENGE &amp; MASTERY
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-black mt-0.5">
+            🕹️ Optical Practice &amp; Quiz Arena
+          </h2>
+          <p class="text-xs sm:text-sm text-muted mt-1">
+            Solve live ray diagrams, crack real-world optics mysteries, master sign sense, or race the clock in <strong class="text-[#ff2e93]">60s Lightning Mode</strong>!
+          </p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2">
+          <span id="quizComboTag" class="px-3 py-1.5 rounded-full bg-[#fbbf24]/15 border border-[#fbbf24]/45 font-mono-code text-xs font-bold text-[#fbbf24]">
+            🔥 Streak: 0 (1x XP)
+          </span>
+          <span id="quizProgTag" class="px-3 py-1.5 rounded-full bg-[#ff2e93]/15 border border-[#ff2e93]/40 font-mono-code text-xs font-bold text-[#ff2e93]">
+            Q 1 / 12
+          </span>
+        </div>
+      </div>
+
+      <!-- Practice Category & Mode Tabs -->
+      <div class="flex flex-wrap items-center gap-1.5 p-1.5 rounded-2xl glass-inset">
+        <button type="button" data-practice-mode="all" class="practice-tab active px-3.5 py-2 rounded-xl text-xs sm:text-sm font-extrabold bg-gradient-to-r from-[#00e5ff] to-[#38bdf8] text-[#050814] shadow-md transition">
+          🎯 All Practice (12)
+        </button>
+        <button type="button" data-practice-mode="diagrams" class="practice-tab px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold hover:text-[#00e5ff] transition">
+          📐 Visual Ray Diagrams
+        </button>
+        <button type="button" data-practice-mode="detective" class="practice-tab px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold hover:text-[#10b981] transition">
+          🕵️ Real-World Detective
+        </button>
+        <button type="button" data-practice-mode="formula" class="practice-tab px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold hover:text-[#fbbf24] transition">
+          🧮 Formula &amp; Sign Sense
+        </button>
+        <button type="button" data-practice-mode="lightning" class="practice-tab px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold text-[#ff2e93] hover:bg-[#ff2e93]/15 border border-[#ff2e93]/40 ml-auto transition">
+          ⚡ 60s Lightning Challenge
+        </button>
+      </div>
+
+      <!-- 60s Lightning Challenge Countdown HUD (Hidden unless Lightning Mode active) -->
+      <div id="lightningHud" class="hidden rounded-2xl p-3.5 bg-[#ff2e93]/12 border border-[#ff2e93]/50 space-y-2">
+        <div class="flex items-center justify-between font-mono-code text-xs font-bold">
+          <span class="text-[#ff2e93] flex items-center gap-1.5">⚡ LIGHTNING CHALLENGE ACTIVE — Answer fast to build 2x &amp; 3x XP combos!</span>
+          <span id="lightningClock" class="text-sm text-[#fbbf24]">60.0s</span>
+        </div>
+        <div class="w-full h-2 rounded-full bg-slate-900 overflow-hidden">
+          <div id="lightningTimeBar" class="h-full bg-gradient-to-r from-[#10b981] via-[#fbbf24] to-[#ff2e93] transition-all duration-100" style="width: 100%;"></div>
+        </div>
+      </div>
+
+      <!-- Overall Question Progress Bar -->
+      <div class="w-full h-2.5 rounded-full bg-slate-800/70 overflow-hidden">
+        <div id="quizProgressFill" class="h-full bg-gradient-to-r from-[#00e5ff] via-[#fbbf24] to-[#ff2e93] transition-all duration-300" style="width: 8%;"></div>
+      </div>
+
+      <!-- Dynamic Question Card Container -->
+      <div id="quizBox" class="glass-inset rounded-2xl p-5 sm:p-6 space-y-4"></div>
+    </section>
+
+  </main>
+
+  <footer class="max-w-7xl mx-auto px-4 py-8 text-center text-xs text-muted border-t border-slate-800/40 mt-10 space-y-3">
+    <div>LUMINA // OPTICS STUDIO — Interactive Mirrors, Lenses &amp; Laser Puzzle Playground</div>
+    <div>
+      <button id="footerExportBtn" type="button" class="px-4 py-2 rounded-xl glass-inset hover:border-[#00e5ff] text-[#00e5ff] font-bold text-xs transition">
+        📦 View &amp; Download Separated Project Folder (index.html • css/styles.css • js/app.js)
+      </button>
+    </div>
+  </footer>
+
+  <!-- =========================================================================
+       PROJECT FOLDER EXPORTER MODAL (SEPARATED HTML / CSS / JS GENERATOR)
+       ========================================================================= -->
+  <div id="exportModal" class="hidden fixed inset-0 z-50 bg-[#050814]/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-6">
+    <div class="glass-card rounded-3xl max-w-4xl w-full max-h-[90vh] flex flex-col overflow-hidden border-[#00e5ff]/50 shadow-2xl">
+      <!-- Modal Header -->
+      <div class="p-4 sm:p-5 border-b border-slate-700/60 flex items-center justify-between gap-3">
+        <div>
+          <div class="font-mono-code text-[11px] font-bold uppercase tracking-wider text-[#00e5ff]">
+            📦 SEPARATED PROJECT FOLDER EXPORTER
+          </div>
+          <h3 class="text-lg sm:text-xl font-black mt-0.5">Download Clean HTML, CSS &amp; JS Files</h3>
+        </div>
+        <button id="closeExportModal" type="button" class="w-9 h-9 rounded-xl glass-inset hover:border-[#ff2e93] text-sm font-bold transition">✕</button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="p-4 sm:p-5 space-y-4 overflow-y-auto flex-1">
+        <!-- Folder Structure Preview + Download All -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-3 items-center">
+          <div class="md:col-span-7 rounded-2xl p-3.5 bg-[#040712] border border-slate-800 font-mono-code text-xs text-slate-300 leading-relaxed">
+            <div class="text-[#fbbf24] font-bold">📁 lumina-optics-studio/</div>
+            <div>├── <span class="text-[#00e5ff]">index.html</span> <span class="text-slate-500">(Clean HTML linking CSS &amp; JS)</span></div>
+            <div>├── <span class="text-[#fbbf24]">📁 css/</span></div>
+            <div>│   └── <span class="text-[#ff2e93]">styles.css</span> <span class="text-slate-500">(All custom themes &amp; animations)</span></div>
+            <div>└── <span class="text-[#fbbf24]">📁 js/</span></div>
+            <div>    └── <span class="text-[#10b981]">app.js</span> <span class="text-slate-500">(Complete physics, audio &amp; game engine)</span></div>
+          </div>
+
+          <div class="md:col-span-5 flex flex-col gap-2">
+            <button id="downloadAllBtn" type="button" class="w-full py-3 rounded-xl font-extrabold text-xs sm:text-sm bg-gradient-to-r from-[#00e5ff] via-[#fbbf24] to-[#ff2e93] text-[#050814] hover:brightness-110 transition shadow-lg">
+              ⬇️ Download All 3 Files
+            </button>
+            <p class="text-[11px] text-muted leading-snug">
+              Save <strong>index.html</strong> in the main folder, put <strong>styles.css</strong> inside a <code>css/</code> subfolder, and <strong>app.js</strong> inside a <code>js/</code> subfolder!
+            </p>
+          </div>
+        </div>
+
+        <!-- File Tabs + Copy / Download Single Controls -->
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <div class="flex items-center gap-1.5 p-1 rounded-xl glass-inset">
+            <button type="button" data-export-tab="html" class="export-tab active px-3 py-1.5 rounded-lg text-xs font-bold transition">index.html</button>
+            <button type="button" data-export-tab="css" class="export-tab px-3 py-1.5 rounded-lg text-xs font-semibold transition">css/styles.css</button>
+            <button type="button" data-export-tab="js" class="export-tab px-3 py-1.5 rounded-lg text-xs font-semibold transition">js/app.js</button>
+          </div>
+          <div class="flex items-center gap-2">
+            <button id="copyExportBtn" type="button" class="px-3.5 py-1.5 rounded-xl bg-[#10b981]/20 border border-[#10b981]/50 text-[#10b981] text-xs font-bold hover:bg-[#10b981]/30 transition">
+              📋 Copy Code
+            </button>
+            <button id="downloadSingleBtn" type="button" class="px-3.5 py-1.5 rounded-xl bg-[#00e5ff]/20 border border-[#00e5ff]/50 text-[#00e5ff] text-xs font-bold hover:bg-[#00e5ff]/30 transition">
+              ⬇️ Download <span id="exportFileLabel">index.html</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Code Preview Box -->
+        <pre id="exportCodeView" class="w-full h-72 rounded-2xl p-4 bg-[#040712] border border-slate-800 font-mono-code text-[11px] text-slate-200 overflow-auto whitespace-pre"></pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       COMPLETE SELF-CONTAINED OPTICS, AUDIO & PARTICLE ENGINE
+       ========================================================================= -->
+  <script id="lumina-script">
+    (function () {
+      'use strict';
+
+      /* -----------------------------------------------------------------------
+         1. WEB AUDIO API SYNTHESIZER (ZERO EXTERNAL SOUND FILES)
+         ----------------------------------------------------------------------- */
+      const audio = {
+        on: true,
+        ctx: null,
+        boot() {
+          if (!this.ctx) {
+            const AC = window.AudioContext || window.webkitAudioContext;
+            if (AC) this.ctx = new AC();
+          }
+          if (this.ctx && this.ctx.state === 'suspended') {
+            this.ctx.resume().catch(() => {});
+          }
+        },
+        play(freq, type = 'sine', dur = 0.14, gainVal = 0.08, endFreq = null, delay = 0) {
+          if (!this.on) return;
+          this.boot();
+          if (!this.ctx) return;
+          const t = this.ctx.currentTime + delay;
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = type;
+          osc.frequency.setValueAtTime(freq, t);
+          if (endFreq) osc.frequency.exponentialRampToValueAtTime(endFreq, t + dur);
+          gain.gain.setValueAtTime(gainVal, t);
+          gain.gain.exponentialRampToValueAtTime(0.001, t + dur);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start(t);
+          osc.stop(t + dur + 0.02);
+        },
+        tap() { this.play(620, 'triangle', 0.07, 0.06, 880); },
+        photon() { this.play(340, 'sine', 0.22, 0.08, 940); },
+        spark() { this.play(1020, 'triangle', 0.09, 0.06, 460); },
+        wave() {
+          this.play(260, 'sine', 0.35, 0.09, 780, 0);
+          this.play(390, 'triangle', 0.35, 0.06, 1170, 0.05);
+        },
+        win() {
+          [523.25, 659.25, 783.99, 1046.5].forEach((f, idx) => {
+            this.play(f, 'triangle', 0.22, 0.09, null, idx * 0.08);
+          });
+        },
+        miss() { this.play(210, 'sawtooth', 0.2, 0.05, 130); }
+      };
+
+      document.getElementById('soundToggle').addEventListener('click', () => {
+        audio.on = !audio.on;
+        document.getElementById('soundStatusText').textContent = audio.on ? '🔊 Sound' : '🔇 Muted';
+        if (audio.on) audio.tap();
+      });
+
+      /* -----------------------------------------------------------------------
+         2. MUSEUM LIGHT / DARK THEME TOGGLE
+         ----------------------------------------------------------------------- */
+      let isLightMode = false;
+      document.getElementById('themeToggle').addEventListener('click', () => {
+        isLightMode = !isLightMode;
+        document.body.classList.toggle('museum-light', isLightMode);
+        audio.tap();
+      });
+
+      /* -----------------------------------------------------------------------
+         3. EXPLORER RANK, XP & TOAST NOTIFICATIONS
+         ----------------------------------------------------------------------- */
+      let xp = 0;
+      const RANK_TIERS = [
+        { min: 0, name: 'Novice' },
+        { min: 150, name: 'Light Cadet' },
+        { min: 400, name: 'Optics Engineer' },
+        { min: 750, name: 'Photon Master' },
+        { min: 1200, name: 'Cosmic Luminary' }
+      ];
+
+      function computeRank(currentXp) {
+        let title = RANK_TIERS[0].name;
+        for (const tier of RANK_TIERS) {
+          if (currentXp >= tier.min) title = tier.name;
+        }
+        return title;
+      }
+
+      function awardXP(amount) {
+        const prevRank = computeRank(xp);
+        xp += amount;
+        const nextRank = computeRank(xp);
+        document.getElementById('xpCounter').textContent = xp;
+        document.getElementById('rankTitle').textContent = nextRank;
+
+        // Update rank progress bar
+        let curMin = 0;
+        let nextMin = 1200;
+        for (let i = 0; i < RANK_TIERS.length; i++) {
+          if (xp >= RANK_TIERS[i].min) {
+            curMin = RANK_TIERS[i].min;
+            nextMin = RANK_TIERS[i + 1] ? RANK_TIERS[i + 1].min : RANK_TIERS[i].min + 400;
+          }
+        }
+        const pct = Math.min(100, Math.max(6, Math.round(((xp - curMin) / (nextMin - curMin)) * 100)));
+        const barEl = document.getElementById('rankBarFill');
+        if (barEl) barEl.style.width = `${pct}%`;
+
+        if (nextRank !== prevRank) {
+          pushToast(`🌟 Rank Up: ${nextRank}!`, 'Your mastery of mirrors & lenses is growing!', '#fbbf24');
+        }
+      }
+
+      function pushToast(title, subtitle, accentColor = '#00e5ff') {
+        const stack = document.getElementById('toastStack');
+        if (!stack) return;
+        const card = document.createElement('div');
+        card.className = 'toast-card pointer-events-auto glass-card rounded-2xl px-4 py-3 max-w-xs shadow-2xl';
+        card.style.borderColor = accentColor;
+        card.innerHTML = `
+          <div class="font-extrabold text-xs sm:text-sm" style="color: ${accentColor};">${title}</div>
+          <div class="text-xs text-muted mt-0.5 leading-snug">${subtitle}</div>
+        `;
+        stack.appendChild(card);
+        setTimeout(() => {
+          card.style.opacity = '0';
+          card.style.transform = 'translateX(28px)';
+          card.style.transition = 'all 0.28s ease';
+          setTimeout(() => card.remove(), 300);
+        }, 3600);
+      }
+
+      /* -----------------------------------------------------------------------
+         4. AMBIENT FLOATING LIGHT MOTES & CONFETTI LAYER
+         ----------------------------------------------------------------------- */
+      const motesCanvas = document.getElementById('motesCanvas');
+      const mCtx = motesCanvas.getContext('2d');
+      const confettiCanvas = document.getElementById('confettiCanvas');
+      const cCtx = confettiCanvas.getContext('2d');
+      let motes = [];
+      const confettiPieces = [];
+
+      function resizeGlobalLayers() {
+        motesCanvas.width = window.innerWidth;
+        motesCanvas.height = window.innerHeight;
+        confettiCanvas.width = window.innerWidth;
+        confettiCanvas.height = window.innerHeight;
+
+        const palette = ['#00e5ff', '#ff2e93', '#fbbf24', '#10b981'];
+        motes = Array.from({ length: 48 }, (_, idx) => ({
+          x: Math.random() * motesCanvas.width,
+          y: Math.random() * motesCanvas.height,
+          r: Math.random() * 2 + 0.8,
+          vx: (Math.random() - 0.5) * 0.28,
+          vy: (Math.random() - 0.5) * 0.28,
+          alpha: Math.random() * 0.45 + 0.15,
+          color: palette[idx % palette.length]
+        }));
+      }
+      window.addEventListener('resize', resizeGlobalLayers);
+      resizeGlobalLayers();
+
+      function launchConfetti() {
+        const colors = ['#00e5ff', '#ff2e93', '#fbbf24', '#10b981', '#ffffff'];
+        for (let i = 0; i < 90; i++) {
+          confettiPieces.push({
+            x: window.innerWidth * (0.2 + Math.random() * 0.6),
+            y: window.innerHeight * 0.35,
+            vx: (Math.random() - 0.5) * 14,
+            vy: (Math.random() - 0.85) * 14,
+            size: Math.random() * 6 + 4,
+            color: colors[i % colors.length],
+            rot: Math.random() * Math.PI * 2,
+            vrot: (Math.random() - 0.5) * 0.26,
+            life: 1
+          });
+        }
+      }
+
+      function renderGlobalLayers() {
+        mCtx.clearRect(0, 0, motesCanvas.width, motesCanvas.height);
+        for (const m of motes) {
+          m.x = (m.x + m.vx + motesCanvas.width) % motesCanvas.width;
+          m.y = (m.y + m.vy + motesCanvas.height) % motesCanvas.height;
+          mCtx.save();
+          mCtx.globalAlpha = m.alpha;
+          mCtx.fillStyle = m.color;
+          mCtx.beginPath();
+          mCtx.arc(m.x, m.y, m.r, 0, Math.PI * 2);
+          mCtx.fill();
+          mCtx.restore();
+        }
+
+        cCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+        for (let i = confettiPieces.length - 1; i >= 0; i--) {
+          const p = confettiPieces[i];
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vy += 0.32;
+          p.rot += p.vrot;
+          p.life -= 0.012;
+          if (p.life <= 0) {
+            confettiPieces.splice(i, 1);
+            continue;
+          }
+          cCtx.save();
+          cCtx.globalAlpha = p.life;
+          cCtx.translate(p.x, p.y);
+          cCtx.rotate(p.rot);
+          cCtx.fillStyle = p.color;
+          cCtx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.58);
+          cCtx.restore();
+        }
+      }
+
+      /* -----------------------------------------------------------------------
+         5. SHARED VECTOR & OPTICAL DRAWING HELPERS
+         ----------------------------------------------------------------------- */
+      const OBJECT_GLYPHS = {
+        candle: '🕯️',
+        rocket: '🚀',
+        duck: '🦆',
+        pencil: '✏️',
+        butterfly: '🦋',
+        diamond: '💎'
+      };
+
+      function projectRay(x1, y1, x2, y2, dist = 1200) {
+        const dx = x2 - x1;
+        const dy = y2 - y1;
+        const len = Math.hypot(dx, dy) || 1;
+        return {
+          x: x1 + (dx / len) * dist,
+          y: y1 + (dy / len) * dist
+        };
+      }
+
+      function drawGlowingRay(ctx, x1, y1, x2, y2, color, dashed = false, progress = 1, photonPhase = null) {
+        if (progress <= 0) return;
+        const tx = x1 + (x2 - x1) * Math.min(1, progress);
+        const ty = y1 + (y2 - y1) * Math.min(1, progress);
+
+        ctx.save();
+        ctx.strokeStyle = color;
+        ctx.lineWidth = dashed ? 1.8 : 2.6;
+        if (dashed) {
+          ctx.setLineDash([6, 6]);
+          ctx.globalAlpha = 0.68;
+        } else {
+          ctx.shadowColor = color;
+          ctx.shadowBlur = 11;
+        }
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(tx, ty);
+        ctx.stroke();
+
+        // Moving photon pulse along solid ray
+        if (!dashed && photonPhase !== null && progress >= 1) {
+          const px = x1 + (x2 - x1) * photonPhase;
+          const py = y1 + (y2 - y1) * photonPhase;
+          ctx.fillStyle = '#ffffff';
+          ctx.shadowColor = color;
+          ctx.shadowBlur = 14;
+          ctx.beginPath();
+          ctx.arc(px, py, 3.6, 0, Math.PI * 2);
+          ctx.fill();
+        } else if (!dashed && progress < 1) {
+          ctx.fillStyle = '#ffffff';
+          ctx.beginPath();
+          ctx.arc(tx, ty, 4, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.restore();
+      }
+
+      function drawOpticElement(ctx, cx, cy, halfH, device) {
+        const curve = Math.max(14, halfH * 0.16);
+        ctx.save();
+        if (device === 'concave_mirror') {
+          ctx.strokeStyle = '#00e5ff';
+          ctx.lineWidth = 4;
+          ctx.shadowColor = '#00e5ff';
+          ctx.shadowBlur = 14;
+          ctx.beginPath();
+          ctx.moveTo(cx - curve * 0.55, cy - halfH);
+          ctx.quadraticCurveTo(cx + curve, cy, cx - curve * 0.55, cy + halfH);
+          ctx.stroke();
+
+          ctx.shadowBlur = 0;
+          ctx.strokeStyle = '#64748b';
+          ctx.lineWidth = 1.4;
+          for (let y = -halfH + 8; y < halfH; y += 13) {
+            const t = (y + halfH) / (2 * halfH);
+            const bx = (1 - t) * (1 - t) * (cx - curve * 0.55) + 2 * (1 - t) * t * (cx + curve) + t * t * (cx - curve * 0.55);
+            ctx.beginPath();
+            ctx.moveTo(bx + 3, cy + y);
+            ctx.lineTo(bx + 10, cy + y - 5);
+            ctx.stroke();
+          }
+        } else if (device === 'convex_mirror') {
+          ctx.strokeStyle = '#ff2e93';
+          ctx.lineWidth = 4;
+          ctx.shadowColor = '#ff2e93';
+          ctx.shadowBlur = 14;
+          ctx.beginPath();
+          ctx.moveTo(cx + curve * 0.55, cy - halfH);
+          ctx.quadraticCurveTo(cx - curve, cy, cx + curve * 0.55, cy + halfH);
+          ctx.stroke();
+
+          ctx.shadowBlur = 0;
+          ctx.strokeStyle = '#64748b';
+          ctx.lineWidth = 1.4;
+          for (let y = -halfH + 8; y < halfH; y += 13) {
+            const t = (y + halfH) / (2 * halfH);
+            const bx = (1 - t) * (1 - t) * (cx + curve * 0.55) + 2 * (1 - t) * t * (cx - curve) + t * t * (cx + curve * 0.55);
+            ctx.beginPath();
+            ctx.moveTo(bx + 3, cy + y);
+            ctx.lineTo(bx + 10, cy + y - 5);
+            ctx.stroke();
+          }
+        } else if (device === 'convex_lens') {
+          ctx.fillStyle = 'rgba(251, 191, 36, 0.16)';
+          ctx.strokeStyle = '#fbbf24';
+          ctx.lineWidth = 3;
+          ctx.shadowColor = '#fbbf24';
+          ctx.shadowBlur = 14;
+          ctx.beginPath();
+          ctx.moveTo(cx, cy - halfH);
+          ctx.quadraticCurveTo(cx + curve * 1.15, cy, cx, cy + halfH);
+          ctx.quadraticCurveTo(cx - curve * 1.15, cy, cx, cy - halfH);
+          ctx.fill();
+          ctx.stroke();
+        } else {
+          const w = Math.max(10, halfH * 0.11);
+          ctx.fillStyle = 'rgba(16, 185, 129, 0.16)';
+          ctx.strokeStyle = '#10b981';
+          ctx.lineWidth = 3;
+          ctx.shadowColor = '#10b981';
+          ctx.shadowBlur = 14;
+          ctx.beginPath();
+          ctx.moveTo(cx - w, cy - halfH);
+          ctx.lineTo(cx + w, cy - halfH);
+          ctx.quadraticCurveTo(cx + 3, cy, cx + w, cy + halfH);
+          ctx.lineTo(cx - w, cy + halfH);
+          ctx.quadraticCurveTo(cx - 3, cy, cx - w, cy - halfH);
+          ctx.fill();
+          ctx.stroke();
+        }
+        ctx.restore();
+      }
+
+      function renderSolarSparkHotspot(ctx, fx, fy, now) {
+        ctx.save();
+        const pulse = 10 + Math.sin(now * 0.015) * 4;
+        const grad = ctx.createRadialGradient(fx, fy, 1, fx, fy, pulse * 2.4);
+        grad.addColorStop(0, 'rgba(255, 255, 255, 0.95)');
+        grad.addColorStop(0.35, 'rgba(251, 191, 36, 0.85)');
+        grad.addColorStop(0.75, 'rgba(255, 46, 147, 0.35)');
+        grad.addColorStop(1, 'rgba(251, 191, 36, 0)');
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(fx, fy, pulse * 2.4, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Spark embers around focal point
+        for (let i = 0; i < 8; i++) {
+          const ang = now * 0.006 + (i * Math.PI * 2) / 8;
+          const dist = 6 + ((now * 0.04 + i * 7) % 18);
+          ctx.fillStyle = i % 2 === 0 ? '#fef08a' : '#fbbf24';
+          ctx.beginPath();
+          ctx.arc(fx + Math.cos(ang) * dist, fy + Math.sin(ang) * dist, 2, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.restore();
+      }
+
+      /* -----------------------------------------------------------------------
+         6. HERO INTERACTIVE LENS & MIRROR ARRAY (SWITCHABLE CAVITY MODES)
+         ----------------------------------------------------------------------- */
+      const heroCanvas = document.getElementById('heroArrayCanvas');
+      const hCtx = heroCanvas.getContext('2d');
+      const heroState = {
+        orbX: 115,
+        orbY: 145,
+        dragging: false,
+        mode: 'biconvex', // biconvex | diverging | twin_focus
+        waves: []
+      };
+
+      function triggerHeroWave() {
+        heroState.waves.push({ r: 10, alpha: 0.95 });
+        audio.wave();
+      }
+
+      document.getElementById('pulseWaveBtn').addEventListener('click', triggerHeroWave);
+
+      document.querySelectorAll('[data-hero-mode]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          heroState.mode = btn.dataset.heroMode;
+          document.querySelectorAll('[data-hero-mode]').forEach((b) => {
+            b.className = b === btn
+              ? 'hero-mode-btn px-2.5 py-1 rounded-lg text-[11px] font-bold bg-[#00e5ff] text-[#050814] transition'
+              : 'hero-mode-btn px-2.5 py-1 rounded-lg text-[11px] font-semibold text-slate-300 hover:text-white transition';
+          });
+          triggerHeroWave();
+        });
+      });
+
+      function getHeroPos(e) {
+        const rect = heroCanvas.getBoundingClientRect();
+        return {
+          x: ((e.clientX - rect.left) / rect.width) * heroCanvas.width,
+          y: ((e.clientY - rect.top) / rect.height) * heroCanvas.height
+        };
+      }
+
+      heroCanvas.addEventListener('pointerdown', (e) => {
+        const p = getHeroPos(e);
+        heroState.orbX = Math.max(40, Math.min(250, p.x));
+        heroState.orbY = Math.max(55, Math.min(345, p.y));
+        heroState.dragging = true;
+        heroCanvas.setPointerCapture(e.pointerId);
+        triggerHeroWave();
+      });
+
+      heroCanvas.addEventListener('pointermove', (e) => {
+        const p = getHeroPos(e);
+        if (heroState.dragging || e.pointerType === 'mouse') {
+          heroState.orbX = Math.max(40, Math.min(250, p.x));
+          heroState.orbY = Math.max(55, Math.min(345, p.y));
+        }
+      });
+
+      heroCanvas.addEventListener('pointerup', () => { heroState.dragging = false; });
+
+      function renderHeroOpticalArray(now) {
+        const W = heroCanvas.width;
+        const H = heroCanvas.height;
+        const cy = H * 0.5;
+        const lensX = 305;
+        const mirrorX = 565;
+
+        hCtx.clearRect(0, 0, W, H);
+
+        // Subtle grid & axis
+        hCtx.strokeStyle = 'rgba(0, 229, 255, 0.06)';
+        hCtx.lineWidth = 1;
+        for (let x = 25; x < W; x += 40) {
+          hCtx.beginPath(); hCtx.moveTo(x, 0); hCtx.lineTo(x, H); hCtx.stroke();
+        }
+        for (let y = 20; y < H; y += 40) {
+          hCtx.beginPath(); hCtx.moveTo(0, y); hCtx.lineTo(W, y); hCtx.stroke();
+        }
+
+        hCtx.save();
+        hCtx.strokeStyle = 'rgba(148, 163, 184, 0.35)';
+        hCtx.setLineDash([6, 6]);
+        hCtx.beginPath();
+        hCtx.moveTo(0, cy);
+        hCtx.lineTo(W, cy);
+        hCtx.stroke();
+        hCtx.restore();
+
+        const offsets = [-72, -36, 0, 36, 72];
+        const rayColors = ['#00e5ff', '#38bdf8', '#fbbf24', '#ff2e93', '#10b981'];
+
+        if (heroState.mode === 'biconvex') {
+          drawOpticElement(hCtx, lensX, cy, 128, 'convex_lens');
+          drawOpticElement(hCtx, mirrorX, cy, 132, 'concave_mirror');
+
+          const focalX = 445;
+          const focalY = cy - (heroState.orbY - cy) * 0.52;
+
+          offsets.forEach((dy, idx) => {
+            const hitY = Math.max(cy - 115, Math.min(cy + 115, cy + dy));
+            const col = rayColors[idx % rayColors.length];
+            drawGlowingRay(hCtx, heroState.orbX, heroState.orbY, lensX, hitY, col, false, 1, bench.photonPhase);
+            const slope = (focalY - hitY) / (focalX - lensX);
+            const mirY = Math.max(cy - 120, Math.min(cy + 120, hitY + slope * (mirrorX - lensX)));
+            drawGlowingRay(hCtx, lensX, hitY, mirrorX, mirY, col, false, 1, bench.photonPhase);
+            const refTargetY = cy + (cy - mirY) * 0.35;
+            drawGlowingRay(hCtx, mirrorX, mirY, 435, refTargetY, col, false, 1, bench.photonPhase);
+          });
+          renderSolarSparkHotspot(hCtx, focalX, focalY, now);
+        } else if (heroState.mode === 'diverging') {
+          drawOpticElement(hCtx, lensX, cy, 128, 'concave_lens');
+          drawOpticElement(hCtx, mirrorX, cy, 132, 'convex_mirror');
+          const vFocusX = lensX - 115;
+
+          offsets.forEach((dy, idx) => {
+            const hitY = Math.max(cy - 115, Math.min(cy + 115, cy + dy));
+            const col = rayColors[idx % rayColors.length];
+            drawGlowingRay(hCtx, heroState.orbX, heroState.orbY, lensX, hitY, col, false, 1, bench.photonPhase);
+            const spread = projectRay(vFocusX, cy + (heroState.orbY - cy) * 0.3, lensX, hitY, 340);
+            drawGlowingRay(hCtx, lensX, hitY, spread.x, spread.y, col, false, 1, bench.photonPhase);
+            drawGlowingRay(hCtx, lensX, hitY, vFocusX, cy + (heroState.orbY - cy) * 0.3, col, true, 1);
+          });
+        } else {
+          // Twin Lens Telescope Cavity
+          drawOpticElement(hCtx, 285, cy, 124, 'convex_lens');
+          drawOpticElement(hCtx, 485, cy, 124, 'convex_lens');
+          const midX = 390;
+          const midY = cy - (heroState.orbY - cy) * 0.48;
+
+          offsets.forEach((dy, idx) => {
+            const hitY1 = Math.max(cy - 110, Math.min(cy + 110, cy + dy));
+            const col = rayColors[idx % rayColors.length];
+            drawGlowingRay(hCtx, heroState.orbX, heroState.orbY, 285, hitY1, col, false, 1, bench.photonPhase);
+            const slope = (midY - hitY1) / (midX - 285);
+            const hitY2 = Math.max(cy - 114, Math.min(cy + 114, hitY1 + slope * (485 - 285)));
+            drawGlowingRay(hCtx, 285, hitY1, 485, hitY2, col, false, 1, bench.photonPhase);
+            const exitY = hitY2 + (cy - hitY2) * 0.12;
+            drawGlowingRay(hCtx, 485, hitY2, W - 10, exitY, col, false, 1, bench.photonPhase);
+          });
+          renderSolarSparkHotspot(hCtx, midX, midY, now);
+        }
+
+        // Expanding caustic light waves
+        for (let i = heroState.waves.length - 1; i >= 0; i--) {
+          const w = heroState.waves[i];
+          w.r += 5.5;
+          w.alpha -= 0.016;
+          if (w.alpha <= 0) {
+            heroState.waves.splice(i, 1);
+            continue;
+          }
+          hCtx.save();
+          hCtx.strokeStyle = `rgba(0, 229, 255, ${w.alpha})`;
+          hCtx.lineWidth = 2.5;
+          hCtx.beginPath();
+          hCtx.arc(heroState.orbX, heroState.orbY, w.r, 0, Math.PI * 2);
+          hCtx.stroke();
+          hCtx.restore();
+        }
+
+        // Glowing Light Orb
+        hCtx.save();
+        const orbGrad = hCtx.createRadialGradient(heroState.orbX, heroState.orbY, 2, heroState.orbX, heroState.orbY, 24);
+        orbGrad.addColorStop(0, '#ffffff');
+        orbGrad.addColorStop(0.4, '#00e5ff');
+        orbGrad.addColorStop(1, 'rgba(0, 229, 255, 0)');
+        hCtx.fillStyle = orbGrad;
+        hCtx.beginPath();
+        hCtx.arc(heroState.orbX, heroState.orbY, 24, 0, Math.PI * 2);
+        hCtx.fill();
+        hCtx.restore();
+      }
+
+      /* -----------------------------------------------------------------------
+         7. SECTION 1: THE 3 GOLDEN RULES INTERACTIVE TRAINER
+         ----------------------------------------------------------------------- */
+      let ruleDevice = 'concave_mirror';
+      const ruleBursts = [[], [], []];
+
+      const RULE_COPY = {
+        concave_mirror: {
+          tag1: 'Pole (P) Bounce',
+          t0: 'Travels <strong class="text-[#fbbf24]">parallel</strong> to the principal axis, then reflects straight through the real <strong class="text-[#00e5ff]">Focus (F)</strong>.',
+          t1: 'Strikes the center <strong class="text-[#ff2e93]">Pole (P)</strong> and bounces off symmetrically at the exact same angle.',
+          t2: 'Passes through the <strong class="text-[#00e5ff]">Focus (F)</strong> first, then emerges strictly <strong class="text-[#fbbf24]">parallel</strong> to the principal axis.'
+        },
+        convex_mirror: {
+          tag1: 'Pole (P) Bounce',
+          t0: 'Travels <strong class="text-[#fbbf24]">parallel</strong>, then diverges outward so its dashed backward trace meets the virtual <strong class="text-[#00e5ff]">Focus (F)</strong>.',
+          t1: 'Strikes the center <strong class="text-[#ff2e93]">Pole (P)</strong> and reflects symmetrically, extending backward behind the mirror.',
+          t2: 'Aims straight toward the virtual <strong class="text-[#00e5ff]">Focus (F)</strong>, then bounces back strictly <strong class="text-[#fbbf24]">parallel</strong> to the axis.'
+        },
+        convex_lens: {
+          tag1: 'Optical Center (O)',
+          t0: 'Enters <strong class="text-[#fbbf24]">parallel</strong> to the axis and refracts through the far <strong class="text-[#00e5ff]">Focus (F)</strong>.',
+          t1: 'Passes right through the <strong class="text-[#ff2e93]">Optical Center (O)</strong> in a straight line without bending at all!',
+          t2: 'Passes through the near <strong class="text-[#00e5ff]">Focus (F)</strong> first, then refracts strictly <strong class="text-[#fbbf24]">parallel</strong> to the axis.'
+        },
+        concave_lens: {
+          tag1: 'Optical Center (O)',
+          t0: 'Enters <strong class="text-[#fbbf24]">parallel</strong> and spreads outward as if radiating from the near virtual <strong class="text-[#00e5ff]">Focus (F)</strong>.',
+          t1: 'Passes right through the <strong class="text-[#ff2e93]">Optical Center (O)</strong> in a straight, undeviated line!',
+          t2: 'Aims toward the far <strong class="text-[#00e5ff]">Focus (F)</strong>, then refracts out strictly <strong class="text-[#fbbf24]">parallel</strong> to the axis.'
+        }
+      };
+
+      function updateRuleCardsCopy() {
+        const c = RULE_COPY[ruleDevice];
+        document.getElementById('ruleTag1').textContent = c.tag1;
+        document.getElementById('ruleText0').innerHTML = c.t0;
+        document.getElementById('ruleText1').innerHTML = c.t1;
+        document.getElementById('ruleText2').innerHTML = c.t2;
+      }
+
+      document.querySelectorAll('[data-rule-device]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          ruleDevice = btn.dataset.ruleDevice;
+          document.querySelectorAll('[data-rule-device]').forEach((b) => b.classList.remove('active'));
+          btn.classList.add('active');
+          updateRuleCardsCopy();
+          audio.tap();
+        });
+      });
+
+      document.querySelectorAll('[data-fire-rule]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const idx = Number(btn.dataset.fireRule);
+          ruleBursts[idx].push({ t: 0, sparks: [] });
+          audio.photon();
+        });
+      });
+
+      function renderRuleMiniCanvas(ruleIdx, photonPhase) {
+        const cvs = document.getElementById(`ruleCanvas${ruleIdx}`);
+        if (!cvs) return;
+        const ctx = cvs.getContext('2d');
+        const W = cvs.width;
+        const H = cvs.height;
+        const cx = W * 0.5;
+        const cy = H * 0.54;
+        const fOff = 54;
+        const isMirror = ruleDevice.includes('mirror');
+
+        ctx.clearRect(0, 0, W, H);
+
+        // Principal axis
+        ctx.save();
+        ctx.strokeStyle = 'rgba(148, 163, 184, 0.42)';
+        ctx.setLineDash([5, 5]);
+        ctx.beginPath();
+        ctx.moveTo(8, cy);
+        ctx.lineTo(W - 8, cy);
+        ctx.stroke();
+        ctx.restore();
+
+        drawOpticElement(ctx, cx, cy, 56, ruleDevice);
+
+        // Focus points
+        ctx.save();
+        ctx.fillStyle = '#fbbf24';
+        ctx.font = 'bold 10px "JetBrains Mono", monospace';
+        ctx.textAlign = 'center';
+        [cx - fOff, cx + fOff].forEach((fx) => {
+          ctx.beginPath();
+          ctx.arc(fx, cy, 3.2, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.fillText('F', fx, cy + 14);
+        });
+        ctx.fillStyle = '#00e5ff';
+        ctx.fillText(isMirror ? 'P' : 'O', cx, cy + 14);
+        ctx.restore();
+
+        const col = ruleIdx === 0 ? '#fbbf24' : ruleIdx === 1 ? '#ff2e93' : '#00e5ff';
+        const startX = 28;
+        const startY = cy - 34;
+        let pts = [];
+        let virtLine = null;
+
+        if (ruleIdx === 0) {
+          // Parallel -> F
+          pts.push({ x: startX, y: startY }, { x: cx, y: startY });
+          if (ruleDevice === 'concave_mirror') {
+            const end = projectRay(cx, startY, cx - fOff, cy, 175);
+            pts.push(end);
+          } else if (ruleDevice === 'convex_mirror') {
+            const end = projectRay(cx + fOff, cy, cx, startY, 175);
+            pts.push(end);
+            virtLine = [{ x: cx, y: startY }, { x: cx + fOff, y: cy }];
+          } else if (ruleDevice === 'convex_lens') {
+            const end = projectRay(cx, startY, cx + fOff, cy, 175);
+            pts.push(end);
+          } else {
+            const end = projectRay(cx - fOff, cy, cx, startY, 175);
+            pts.push(end);
+            virtLine = [{ x: cx, y: startY }, { x: cx - fOff, y: cy }];
+          }
+        } else if (ruleIdx === 1) {
+          // Pole / Optical Center shortcut
+          pts.push({ x: startX, y: startY }, { x: cx, y: cy });
+          if (isMirror) {
+            const end = projectRay(cx, cy, startX, cy + (cy - startY), 175);
+            pts.push(end);
+            if (ruleDevice === 'convex_mirror') {
+              const vEnd = projectRay(startX, cy + (cy - startY), cx, cy, 110);
+              virtLine = [{ x: cx, y: cy }, vEnd];
+            }
+          } else {
+            const end = projectRay(startX, startY, cx, cy, 175);
+            pts.push(end);
+          }
+        } else {
+          // Focus -> Parallel
+          if (ruleDevice === 'concave_mirror') {
+            const hitY = cy + 28;
+            pts.push({ x: 38, y: cy - 22 }, { x: cx, y: hitY }, { x: 16, y: hitY });
+          } else if (ruleDevice === 'convex_mirror') {
+            const hitY = cy - 20;
+            pts.push({ x: 24, y: cy - 36 }, { x: cx, y: hitY }, { x: 16, y: hitY });
+            virtLine = [{ x: cx, y: hitY }, { x: cx + fOff, y: cy }];
+          } else if (ruleDevice === 'convex_lens') {
+            const hitY = cy + 28;
+            pts.push({ x: 38, y: cy - 22 }, { x: cx, y: hitY }, { x: W - 16, y: hitY });
+          } else {
+            const hitY = cy - 20;
+            pts.push({ x: 24, y: cy - 36 }, { x: cx, y: hitY }, { x: W - 16, y: hitY });
+            virtLine = [{ x: cx, y: hitY }, { x: cx + fOff, y: cy }];
+          }
+        }
+
+        if (virtLine) {
+          drawGlowingRay(ctx, virtLine[0].x, virtLine[0].y, virtLine[1].x, virtLine[1].y, col, true, 1);
+        }
+        drawGlowingRay(ctx, pts[0].x, pts[0].y, pts[1].x, pts[1].y, col, false, 1, photonPhase);
+        drawGlowingRay(ctx, pts[1].x, pts[1].y, pts[2].x, pts[2].y, col, false, 1, photonPhase);
+
+        // Fired photon burst animation
+        const bursts = ruleBursts[ruleIdx];
+        for (let i = bursts.length - 1; i >= 0; i--) {
+          const b = bursts[i];
+          b.t += 0.025;
+          if (b.t > 1) {
+            bursts.splice(i, 1);
+            continue;
+          }
+          const seg = b.t < 0.5 ? 0 : 1;
+          const lt = b.t < 0.5 ? b.t * 2 : (b.t - 0.5) * 2;
+          const bx = pts[seg].x + (pts[seg + 1].x - pts[seg].x) * lt;
+          const by = pts[seg].y + (pts[seg + 1].y - pts[seg].y) * lt;
+
+          ctx.save();
+          ctx.fillStyle = '#ffffff';
+          ctx.shadowColor = col;
+          ctx.shadowBlur = 18;
+          ctx.beginPath();
+          ctx.arc(bx, by, 6, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
+        }
+      }
+
+      /* -----------------------------------------------------------------------
+         8. SECTION 2: THE BIG LIGHT LAB (1280 x 600 HIGH-DPI BENCH)
+         ----------------------------------------------------------------------- */
+      const bench = {
+        device: 'concave_mirror',
+        u: -200,
+        fMag: 100,
+        h: 70,
+        atInfinity: false,
+        objectKind: 'candle',
+        rainbowOn: false,
+        wavefrontsOn: false,
+        slowMoOn: false,
+        slowMoStep: 3,
+        photonsOn: true,
+        cinemaScreenOn: true,
+        photonPhase: 0
+      };
+
+      const benchCanvas = document.getElementById('benchCanvas');
+      const bCtx = benchCanvas.getContext('2d');
+      const BW = benchCanvas.width;
+      const BH = benchCanvas.height;
+      const BCX = BW * 0.5;
+      const BCY = BH * 0.52;
+      const PX_PER_CM = 1.45;
+
+      const toPxX = (cmX) => BCX + cmX * PX_PER_CM;
+      const toPxY = (cmY) => BCY - cmY * PX_PER_CM;
+      const toCmX = (pxX) => (pxX - BCX) / PX_PER_CM;
+      const toCmY = (pxY) => (BCY - pxY) / PX_PER_CM;
+
+      function solveBenchOptics() {
+        const isMirror = bench.device.includes('mirror');
+        const f = (bench.device === 'concave_mirror' || bench.device === 'concave_lens') ? -bench.fMag : bench.fMag;
+
+        if (bench.atInfinity) {
+          const isReal = (bench.device === 'concave_mirror' || bench.device === 'convex_lens');
+          return {
+            isMirror,
+            f,
+            v: f,
+            m: 0,
+            hPrime: 0,
+            isReal,
+            atFocusInf: false,
+            zone: 'Very Far (u = -∞)',
+            nature: isReal ? 'Real & Point-Sized' : 'Virtual & Point-Sized',
+            sizeLabel: 'Point-Sized (At F)'
+          };
+        }
+
+        let v = 0;
+        let m = 0;
+        let atFocusInf = false;
+
+        if (isMirror) {
+          if (Math.abs(bench.u - f) < 2.6) {
+            atFocusInf = true;
+            v = Infinity;
+            m = Infinity;
+          } else {
+            v = (bench.u * f) / (bench.u - f);
+            m = -v / bench.u;
+          }
+        } else {
+          if (Math.abs(bench.u + f) < 2.6) {
+            atFocusInf = true;
+            v = Infinity;
+            m = Infinity;
+          } else {
+            v = (bench.u * f) / (bench.u + f);
+            m = v / bench.u;
+          }
+        }
+
+        const isReal = !atFocusInf && (isMirror ? v < 0 : v > 0);
+        const absU = Math.abs(bench.u);
+        const fMag = bench.fMag;
+        let zone = '';
+        if (Math.abs(absU - fMag) < 3) zone = 'At Focus (F)';
+        else if (Math.abs(absU - 2 * fMag) < 4) zone = isMirror ? 'Exactly at C' : 'Exactly at 2F';
+        else if (absU > 2 * fMag) zone = isMirror ? 'Beyond C' : 'Beyond 2F';
+        else if (absU > fMag) zone = isMirror ? 'Between C & F' : 'Between 2F & F';
+        else zone = isMirror ? 'Inside F (Close-Up)' : 'Inside F (Magnifier)';
+
+        let sizeLabel = 'Same Size';
+        if (atFocusInf) sizeLabel = 'Infinitely Huge';
+        else if (Math.abs(Math.abs(m) - 1) > 0.08) sizeLabel = Math.abs(m) > 1 ? 'Enlarged' : 'Diminished';
+
+        return {
+          isMirror,
+          f,
+          v,
+          m,
+          hPrime: atFocusInf ? Infinity : m * bench.h,
+          isReal,
+          atFocusInf,
+          zone,
+          nature: atFocusInf ? 'Parallel Beam (∞)' : (isReal ? 'Real & Inverted' : 'Virtual & Erect'),
+          sizeLabel
+        };
+      }
+
+      function renderBigBench(now) {
+        const res = solveBenchOptics();
+        bCtx.clearRect(0, 0, BW, BH);
+
+        // Background tech grid
+        bCtx.strokeStyle = 'rgba(0, 229, 255, 0.06)';
+        bCtx.lineWidth = 1;
+        const step = 50 * PX_PER_CM;
+        for (let x = BCX % step; x < BW; x += step) {
+          bCtx.beginPath(); bCtx.moveTo(x, 0); bCtx.lineTo(x, BH); bCtx.stroke();
+        }
+        for (let y = BCY % step; y < BH; y += step) {
+          bCtx.beginPath(); bCtx.moveTo(0, y); bCtx.lineTo(BW, y); bCtx.stroke();
+        }
+
+        // Principal Axis & Bench Ruler Ticks
+        bCtx.save();
+        bCtx.strokeStyle = 'rgba(148, 163, 184, 0.48)';
+        bCtx.lineWidth = 1.6;
+        bCtx.beginPath();
+        bCtx.moveTo(0, BCY);
+        bCtx.lineTo(BW, BCY);
+        bCtx.stroke();
+
+        bCtx.font = '10px "JetBrains Mono", monospace';
+        bCtx.fillStyle = 'rgba(148, 163, 184, 0.65)';
+        bCtx.textAlign = 'center';
+        for (let cm = -400; cm <= 400; cm += 50) {
+          const rx = toPxX(cm);
+          if (rx < 20 || rx > BW - 20) continue;
+          bCtx.beginPath();
+          bCtx.moveTo(rx, BCY - 4);
+          bCtx.lineTo(rx, BCY + 4);
+          bCtx.stroke();
+          if (cm !== 0 && cm % 100 === 0) {
+            bCtx.fillText(`${cm}`, rx, BCY + 34);
+          }
+        }
+        bCtx.restore();
+
+        // Draw Optical Device
+        drawOpticElement(bCtx, BCX, BCY, 195, bench.device);
+
+        // Draw Optical Reference Points (P/O, F, C/2F)
+        const f = bench.fMag;
+        const markers = res.isMirror
+          ? [
+              { x: 0, label: 'P', color: '#00e5ff' },
+              { x: res.f, label: 'F', color: '#fbbf24' },
+              { x: res.f * 2, label: 'C', color: '#ff2e93' }
+            ]
+          : [
+              { x: 0, label: 'O', color: '#00e5ff' },
+              { x: -f, label: 'F1', color: '#fbbf24' },
+              { x: -2 * f, label: '2F1', color: '#ff2e93' },
+              { x: f, label: 'F2', color: '#fbbf24' },
+              { x: 2 * f, label: '2F2', color: '#ff2e93' }
+            ];
+
+        bCtx.save();
+        bCtx.font = 'bold 13px "JetBrains Mono", monospace';
+        bCtx.textAlign = 'center';
+        for (const m of markers) {
+          const mx = toPxX(m.x);
+          if (mx < 16 || mx > BW - 16) continue;
+          bCtx.fillStyle = m.color;
+          bCtx.beginPath();
+          bCtx.arc(mx, BCY, 5, 0, Math.PI * 2);
+          bCtx.fill();
+          // Subtle draggable ring around F
+          if (m.label === 'F' || m.label === 'F1' || m.label === 'F2') {
+            bCtx.strokeStyle = 'rgba(251, 191, 36, 0.42)';
+            bCtx.lineWidth = 1.5;
+            bCtx.beginPath();
+            bCtx.arc(mx, BCY, 10 + Math.sin(now * 0.008) * 2, 0, Math.PI * 2);
+            bCtx.stroke();
+          }
+          bCtx.fillText(m.label, mx, BCY + 20);
+        }
+        bCtx.restore();
+
+        // Optional Animated Wavefront Ripples (shows light wave bending!)
+        if (bench.wavefrontsOn) {
+          bCtx.save();
+          bCtx.strokeStyle = 'rgba(0, 229, 255, 0.28)';
+          bCtx.lineWidth = 2;
+          const waveCount = 6;
+          const fPx = toPxX(res.f);
+          if (bench.atInfinity) {
+            // Flat vertical incoming wavefronts
+            for (let i = 0; i < waveCount; i++) {
+              const wx = ((now * 0.09 + i * 110) % (BCX - 20));
+              bCtx.beginPath();
+              bCtx.moveTo(wx, BCY - 140);
+              bCtx.lineTo(wx, BCY + 140);
+              bCtx.stroke();
+            }
+            // Curved converging/diverging wavefront arcs
+            bCtx.strokeStyle = res.isReal ? 'rgba(251, 191, 36, 0.34)' : 'rgba(255, 46, 147, 0.3)';
+            for (let i = 0; i < waveCount; i++) {
+              const radius = res.isReal
+                ? Math.max(12, 220 - ((now * 0.08 + i * 38) % 210))
+                : 20 + ((now * 0.08 + i * 38) % 210);
+              const startA = res.isMirror ? Math.PI * 0.7 : -Math.PI * 0.3;
+              const endA = res.isMirror ? Math.PI * 1.3 : Math.PI * 0.3;
+              bCtx.beginPath();
+              bCtx.arc(fPx, BCY, radius, startA, endA);
+              bCtx.stroke();
+            }
+          } else {
+            const ox = toPxX(bench.u);
+            const oy = toPxY(bench.h);
+            for (let i = 0; i < 5; i++) {
+              const r = 18 + ((now * 0.09 + i * 44) % 220);
+              if (ox + r < BCX) {
+                bCtx.beginPath();
+                bCtx.arc(ox, oy, r, -0.55, 0.55);
+                bCtx.stroke();
+              }
+            }
+          }
+          bCtx.restore();
+        }
+        bCtx.restore();
+
+        // Cinema Projection Screen whenever enabled and a Real Image is formed
+        if (bench.cinemaScreenOn && res.isReal && !res.atFocusInf && !bench.atInfinity) {
+          const screenX = toPxX(res.v);
+          if (screenX > 30 && screenX < BW - 30) {
+            bCtx.save();
+            bCtx.strokeStyle = 'rgba(251, 191, 36, 0.72)';
+            bCtx.lineWidth = 4;
+            bCtx.shadowColor = '#fbbf24';
+            bCtx.shadowBlur = 16;
+            bCtx.beginPath();
+            bCtx.moveTo(screenX, BCY - 180);
+            bCtx.lineTo(screenX, BCY + 180);
+            bCtx.stroke();
+
+            bCtx.shadowBlur = 0;
+            bCtx.fillStyle = '#fbbf24';
+            bCtx.font = 'bold 11px "JetBrains Mono", monospace';
+            bCtx.textAlign = 'center';
+            bCtx.fillText('🎞️ SCREEN', screenX, BCY - 190);
+            bCtx.restore();
+          }
+        }
+
+        const phase = bench.photonsOn ? bench.photonPhase : null;
+        const hue = (now * 0.08) % 360;
+        const c1 = bench.rainbowOn ? `hsl(${hue}, 95%, 60%)` : '#fbbf24';
+        const c2 = bench.rainbowOn ? `hsl(${(hue + 120) % 360}, 95%, 60%)` : '#ff2e93';
+        const c3 = bench.rainbowOn ? `hsl(${(hue + 240) % 360}, 95%, 60%)` : '#00e5ff';
+
+        const stepLimit = bench.slowMoOn ? bench.slowMoStep : 3;
+        const fPxX = toPxX(res.f);
+
+        // Case A: Object at Infinity (Parallel Sunbeams + Solar Spark Mode!)
+        if (bench.atInfinity) {
+          const offsets = [-120, -60, 60, 120];
+          offsets.forEach((dy, idx) => {
+            const y = BCY + dy;
+            const rayCol = bench.rainbowOn ? `hsl(${(hue + idx * 55) % 360}, 95%, 60%)` : '#fbbf24';
+            if (stepLimit >= 1) {
+              drawGlowingRay(bCtx, 0, y, BCX, y, rayCol, false, 1, phase);
+            }
+            if (stepLimit >= 2) {
+              if (bench.device === 'concave_mirror' || bench.device === 'convex_lens') {
+                const end = projectRay(BCX, y, fPxX, BCY, 1100);
+                drawGlowingRay(bCtx, BCX, y, end.x, end.y, rayCol, false, 1, phase);
+              } else {
+                const end = projectRay(fPxX, BCY, BCX, y, 1100);
+                drawGlowingRay(bCtx, BCX, y, end.x, end.y, rayCol, false, 1, phase);
+                if (stepLimit >= 3) {
+                  drawGlowingRay(bCtx, BCX, y, fPxX, BCY, rayCol, true, 1);
+                }
+              }
+            }
+          });
+
+          if (stepLimit >= 2) {
+            if (res.isReal) {
+              renderSolarSparkHotspot(bCtx, fPxX, BCY, now);
+            } else {
+              bCtx.save();
+              bCtx.fillStyle = '#00e5ff';
+              bCtx.shadowColor = '#00e5ff';
+              bCtx.shadowBlur = 16;
+              bCtx.beginPath();
+              bCtx.arc(fPxX, BCY, 7, 0, Math.PI * 2);
+              bCtx.fill();
+              bCtx.restore();
+            }
+          }
+          return;
+        }
+
+        // Case B: Finite Object Position
+        const objX = toPxX(bench.u);
+        const objY = toPxY(bench.h);
+        const imgX = res.atFocusInf ? null : toPxX(res.v);
+        const imgY = res.atFocusInf ? null : toPxY(res.hPrime);
+
+        // Ray 1: Parallel Highway
+        if (stepLimit >= 1) {
+          drawGlowingRay(bCtx, objX, objY, BCX, objY, c1, false, 1, phase);
+        }
+        if (stepLimit >= 2) {
+          if (bench.device === 'concave_mirror' || bench.device === 'convex_lens') {
+            const end = projectRay(BCX, objY, fPxX, BCY, 1150);
+            drawGlowingRay(bCtx, BCX, objY, end.x, end.y, c1, false, 1, phase);
+            if (stepLimit >= 3 && !res.isReal && !res.atFocusInf) {
+              drawGlowingRay(bCtx, BCX, objY, imgX, imgY, c1, true, 1);
+            }
+          } else {
+            const end = projectRay(fPxX, BCY, BCX, objY, 1150);
+            drawGlowingRay(bCtx, BCX, objY, end.x, end.y, c1, false, 1, phase);
+            if (stepLimit >= 3) {
+              drawGlowingRay(bCtx, BCX, objY, fPxX, BCY, c1, true, 1);
+            }
+          }
+        }
+
+        // Ray 2: Center Shortcut (Pole P or Optical Center O)
+        if (stepLimit >= 1) {
+          drawGlowingRay(bCtx, objX, objY, BCX, BCY, c2, false, 1, phase);
+        }
+        if (stepLimit >= 2) {
+          if (res.isMirror) {
+            const symY = BCY + (BCY - objY);
+            const end = projectRay(BCX, BCY, objX, symY, 1150);
+            drawGlowingRay(bCtx, BCX, BCY, end.x, end.y, c2, false, 1, phase);
+            if (stepLimit >= 3 && !res.isReal && !res.atFocusInf) {
+              drawGlowingRay(bCtx, BCX, BCY, imgX, imgY, c2, true, 1);
+            }
+          } else {
+            const end = projectRay(objX, objY, BCX, BCY, 1150);
+            drawGlowingRay(bCtx, BCX, BCY, end.x, end.y, c2, false, 1, phase);
+            if (stepLimit >= 3 && !res.isReal && !res.atFocusInf) {
+              drawGlowingRay(bCtx, BCX, BCY, imgX, imgY, c2, true, 1);
+            }
+          }
+        }
+
+        // Ray 3: Focus Reverse (when hit height stays within optic aperture)
+        if (!res.atFocusInf && Math.abs(imgY - BCY) < 190) {
+          if (stepLimit >= 1) {
+            drawGlowingRay(bCtx, objX, objY, BCX, imgY, c3, false, 1, phase);
+          }
+          if (stepLimit >= 2) {
+            const exitX = res.isMirror ? 0 : BW;
+            drawGlowingRay(bCtx, BCX, imgY, exitX, imgY, c3, false, 1, phase);
+            if (stepLimit >= 3 && !res.isReal) {
+              drawGlowingRay(bCtx, BCX, imgY, imgX, imgY, c3, true, 1);
+            }
+          }
+        }
+
+        // Draw Object Arrow + Sprite + Top Drag Handle
+        drawBenchSubject(bCtx, objX, bench.h, false, false);
+
+        // Draw Formed Image Arrow + Sprite
+        if (!res.atFocusInf && Math.abs(res.v) < 900) {
+          drawBenchSubject(bCtx, imgX, res.hPrime, true, !res.isReal);
+        }
+      }
+
+      function drawBenchSubject(ctx, pxX, cmH, isImage, isVirtual) {
+        const py0 = BCY;
+        const py1 = toPxY(cmH);
+        const col = isImage ? (isVirtual ? '#00e5ff' : '#fbbf24') : '#10b981';
+
+        ctx.save();
+        if (isVirtual) ctx.setLineDash([6, 5]);
+        ctx.strokeStyle = col;
+        ctx.lineWidth = 4;
+        ctx.shadowColor = col;
+        ctx.shadowBlur = 12;
+        ctx.beginPath();
+        ctx.moveTo(pxX, py0);
+        ctx.lineTo(pxX, py1);
+        ctx.stroke();
+
+        // Arrowhead
+        const dir = cmH >= 0 ? -1 : 1;
+        ctx.setLineDash([]);
+        ctx.fillStyle = col;
+        ctx.beginPath();
+        ctx.moveTo(pxX, py1);
+        ctx.lineTo(pxX - 8, py1 - dir * 13);
+        ctx.lineTo(pxX + 8, py1 - dir * 13);
+        ctx.closePath();
+        ctx.fill();
+
+        // Emoji sprite alongside arrow
+        const glyphSize = Math.max(22, Math.min(64, Math.abs(cmH * PX_PER_CM) * 0.66));
+        ctx.save();
+        ctx.translate(pxX + (isImage ? 28 : -28), (py0 + py1) * 0.5);
+        if (cmH < 0) ctx.scale(1, -1);
+        if (isVirtual) ctx.globalAlpha = 0.78;
+        ctx.font = `${glyphSize}px sans-serif`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(OBJECT_GLYPHS[bench.objectKind], 0, 0);
+        ctx.restore();
+
+        // Label badge & interactive top drag handle on object
+        ctx.font = 'bold 11px "JetBrains Mono", monospace';
+        ctx.textAlign = 'center';
+        ctx.fillStyle = col;
+        ctx.fillText(isImage ? (isVirtual ? 'VIRTUAL' : 'REAL') : 'OBJECT', pxX, py0 + (cmH >= 0 ? 34 : -24));
+
+        if (!isImage) {
+          ctx.beginPath();
+          ctx.arc(pxX, py1, 8, 0, Math.PI * 2);
+          ctx.fillStyle = '#050814';
+          ctx.fill();
+          ctx.lineWidth = 3;
+          ctx.strokeStyle = '#10b981';
+          ctx.stroke();
+        }
+        ctx.restore();
+      }
+
+      /* -----------------------------------------------------------------------
+         9. BENCH TELEMETRY, VIEWFINDER & CONTROLS
+         ----------------------------------------------------------------------- */
+      function syncBenchTelemetry() {
+        const res = solveBenchOptics();
+
+        document.getElementById('valU').textContent = bench.atInfinity ? '-∞ cm' : `${Math.round(bench.u)} cm`;
+        document.getElementById('valF').textContent = `${res.f > 0 ? '+' : ''}${Math.round(res.f)} cm`;
+        document.getElementById('valH').textContent = `${Math.round(bench.h)} cm`;
+        document.getElementById('zoneBadge').textContent = res.zone;
+
+        document.getElementById('telV').textContent = res.atFocusInf
+          ? '∞ (Infinity)'
+          : `${res.v > 0 ? '+' : ''}${res.v.toFixed(1)} cm`;
+        document.getElementById('telM').textContent = res.atFocusInf
+          ? '∞'
+          : (bench.atInfinity ? '≈ 0.00x' : `${res.m > 0 ? '+' : ''}${res.m.toFixed(2)}x`);
+        document.getElementById('telSize').textContent = res.sizeLabel;
+        document.getElementById('telNature').textContent = res.nature;
+
+        // Live Optical Equation Chalkboard Sync
+        const fTitle = document.getElementById('formulaCardTitle');
+        const fSym = document.getElementById('formulaCardSymbolic');
+        const fPlug = document.getElementById('formulaCardPlugged');
+        const fMag = document.getElementById('formulaCardMag');
+        if (fTitle && fSym && fPlug && fMag) {
+          fTitle.textContent = res.isMirror ? '📐 MIRROR EQUATION' : '📐 LENS EQUATION';
+          fSym.textContent = res.isMirror ? '1/f = 1/v + 1/u' : '1/f = 1/v - 1/u';
+          const uTxt = bench.atInfinity ? '-∞' : Math.round(bench.u);
+          const vTxt = res.atFocusInf ? '∞' : res.v.toFixed(1);
+          const op = res.isMirror ? '+' : '-';
+          fPlug.textContent = `1/(${Math.round(res.f)}) = 1/(${vTxt}) ${op} 1/(${uTxt})`;
+          fMag.textContent = res.atFocusInf
+            ? 'm → ∞ (Rays emerge strictly parallel)'
+            : (res.isMirror
+              ? `m = -v/u = -(${vTxt})/(${uTxt}) = ${res.m > 0 ? '+' : ''}${res.m.toFixed(2)}x`
+              : `m = +v/u = (${vTxt})/(${uTxt}) = ${res.m > 0 ? '+' : ''}${res.m.toFixed(2)}x`);
+        }
+
+        // Live Insight Explanation
+        const expEl = document.getElementById('liveExplanation');
+        if (bench.atInfinity) {
+          expEl.innerHTML = res.isReal
+            ? '🔥 <strong>Solar Spark Mode Active!</strong> Parallel incoming rays converge tightly onto Focus (F), concentrating intense light and heat into a blazing point!'
+            : 'Parallel rays spread outward after hitting this diverging optic—tracing the dashed lines backward reveals a pinpoint virtual focus at F.';
+        } else if (res.atFocusInf) {
+          expEl.innerHTML = '🔦 <strong>Searchlight Beam!</strong> With the object sitting right on Focus (F), outgoing rays travel strictly parallel and never intersect.';
+        } else if (res.isReal) {
+          expEl.innerHTML = `🎬 <strong>Real Image Formed!</strong> Actual light rays physically cross on the ${res.isMirror ? 'front' : 'opposite'} side, projecting an upside-down (${Math.abs(res.m).toFixed(2)}x) image onto the cinema screen.`;
+        } else {
+          expEl.innerHTML = `🪞 <strong>Virtual Image Formed!</strong> Outgoing rays diverge, so your eye traces the dashed lines backward to see a right-side-up (${Math.abs(res.m).toFixed(2)}x) image inside the glass!`;
+        }
+
+        // Update "👁️ What You Actually See" Viewfinder
+        const vfViewport = document.getElementById('vfViewport');
+        const vfBadge = document.getElementById('vfStatusBadge');
+        const vfScaler = document.getElementById('vfSpriteScaler');
+        const vfEmoji = document.getElementById('vfSpriteEmoji');
+        const vfOrient = document.getElementById('vfOrientTag');
+        const vfMag = document.getElementById('vfMagTag');
+
+        vfEmoji.textContent = OBJECT_GLYPHS[bench.objectKind];
+
+        if (res.atFocusInf) {
+          vfScaler.style.transform = 'scale(2.8)';
+          vfEmoji.style.filter = 'blur(8px)';
+          vfBadge.textContent = 'Parallel Beam';
+          vfOrient.textContent = 'No Focal Image';
+          vfMag.textContent = '∞';
+        } else {
+          vfEmoji.style.filter = 'none';
+          const magScale = bench.atInfinity ? 0.24 : Math.max(0.28, Math.min(2.2, Math.abs(res.m)));
+          const flipY = res.isReal ? -1 : 1;
+          vfScaler.style.transform = `scale(${magScale}, ${magScale * flipY})`;
+          vfMag.textContent = bench.atInfinity ? 'Pinpoint' : `${Math.abs(res.m).toFixed(2)}x`;
+
+          if (res.isReal) {
+            vfViewport.className = 'relative w-full h-44 sm:h-48 rounded-2xl border-2 border-[#fbbf24]/50 vf-real-glow overflow-hidden flex items-center justify-center';
+            vfBadge.textContent = 'On Cinema Screen';
+            vfBadge.className = 'px-2.5 py-1 rounded-full font-mono-code text-[10px] font-bold uppercase bg-[#fbbf24]/20 text-[#fbbf24] border border-[#fbbf24]/45';
+            vfOrient.textContent = 'Inverted (Upside-Down)';
+            vfOrient.style.color = '#fbbf24';
+          } else {
+            vfViewport.className = 'relative w-full h-44 sm:h-48 rounded-2xl border-2 border-[#00e5ff]/50 vf-virtual-glow overflow-hidden flex items-center justify-center';
+            vfBadge.textContent = 'Inside Glass';
+            vfBadge.className = 'px-2.5 py-1 rounded-full font-mono-code text-[10px] font-bold uppercase bg-[#00e5ff]/20 text-[#00e5ff] border border-[#00e5ff]/45';
+            vfOrient.textContent = 'Erect (Right-Side Up)';
+            vfOrient.style.color = '#00e5ff';
+          }
+        }
+
+        checkMissionsProgress(res);
+      }
+
+      function selectLabDevice(dev) {
+        bench.device = dev;
+        document.querySelectorAll('[data-lab-device]').forEach((btn) => {
+          btn.classList.toggle('active', btn.dataset.labDevice === dev);
+        });
+        syncBenchTelemetry();
+      }
+
+      document.querySelectorAll('[data-lab-device]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          selectLabDevice(btn.dataset.labDevice);
+          audio.tap();
+        });
+      });
+
+      document.querySelectorAll('[data-obj]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          bench.objectKind = btn.dataset.obj;
+          document.querySelectorAll('[data-obj]').forEach((b) => {
+            b.className = 'obj-pill px-2.5 py-1.5 rounded-lg text-xs font-semibold hover:bg-white/10 border border-transparent transition';
+          });
+          btn.className = 'obj-pill px-2.5 py-1.5 rounded-lg text-xs font-bold bg-[#fbbf24]/25 text-[#fbbf24] border border-[#fbbf24]/50 transition';
+          audio.tap();
+          syncBenchTelemetry();
+        });
+      });
+
+      document.querySelectorAll('[data-jump]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const mode = btn.dataset.jump;
+          const f = bench.fMag;
+          if (mode === 'infinity') {
+            bench.atInfinity = true;
+            audio.spark();
+          } else {
+            bench.atInfinity = false;
+            if (mode === 'beyond2f') bench.u = -Math.min(350, Math.round(f * 2.6));
+            else if (mode === 'at2f') bench.u = -Math.min(350, Math.round(f * 2));
+            else if (mode === 'between') bench.u = -Math.round(f * 1.45);
+            else if (mode === 'atf') bench.u = -f;
+            else if (mode === 'insidef') bench.u = -Math.max(28, Math.round(f * 0.52));
+            document.getElementById('sliderU').value = bench.u;
+            audio.tap();
+          }
+          syncBenchTelemetry();
+        });
+      });
+
+      document.getElementById('sliderU').addEventListener('input', (e) => {
+        bench.atInfinity = false;
+        bench.u = Number(e.target.value);
+        syncBenchTelemetry();
+      });
+
+      document.getElementById('sliderF').addEventListener('input', (e) => {
+        bench.fMag = Number(e.target.value);
+        syncBenchTelemetry();
+      });
+
+      document.getElementById('sliderH').addEventListener('input', (e) => {
+        bench.h = Number(e.target.value);
+        syncBenchTelemetry();
+      });
+
+      document.getElementById('rainbowPill').addEventListener('click', (e) => {
+        bench.rainbowOn = !bench.rainbowOn;
+        e.currentTarget.textContent = bench.rainbowOn ? '🌈 Rainbow Rays: ON' : '🌈 Rainbow Rays: OFF';
+        e.currentTarget.style.borderColor = bench.rainbowOn ? '#ff2e93' : '';
+        audio.tap();
+      });
+
+      document.getElementById('wavefrontsPill').addEventListener('click', (e) => {
+        bench.wavefrontsOn = !bench.wavefrontsOn;
+        e.currentTarget.textContent = bench.wavefrontsOn ? '🌊 Wavefronts: ON' : '🌊 Wavefronts: OFF';
+        e.currentTarget.style.borderColor = bench.wavefrontsOn ? '#00e5ff' : '';
+        audio.tap();
+      });
+
+      document.getElementById('blueprintPill').addEventListener('click', () => {
+        try {
+          const link = document.createElement('a');
+          link.download = `lumina-${bench.device}-diagram.png`;
+          link.href = benchCanvas.toDataURL('image/png');
+          link.click();
+          audio.win();
+          pushToast('📸 Blueprint Saved!', 'Your custom optical ray diagram PNG was downloaded.', '#ff2e93');
+        } catch (err) {
+          pushToast('Snapshot Unavailable', 'Could not export canvas image in this browser.', '#fbbf24');
+        }
+      });
+
+      document.getElementById('slowMoPill').addEventListener('click', (e) => {
+        bench.slowMoOn = !bench.slowMoOn;
+        if (bench.slowMoOn) {
+          bench.slowMoStep = 1;
+          e.currentTarget.textContent = '🐌 Slow-Mo Step 1/3 (Click)';
+          e.currentTarget.style.borderColor = '#fbbf24';
+        } else {
+          bench.slowMoStep = 3;
+          e.currentTarget.textContent = '🐌 Slow-Mo Trace: OFF';
+          e.currentTarget.style.borderColor = '';
+        }
+        audio.photon();
+      });
+
+      benchCanvas.addEventListener('click', () => {
+        if (bench.slowMoOn) {
+          bench.slowMoStep = (bench.slowMoStep % 3) + 1;
+          document.getElementById('slowMoPill').textContent = `🐌 Slow-Mo Step ${bench.slowMoStep}/3 (Click)`;
+          audio.tap();
+        }
+      });
+
+      document.getElementById('photonsPill').addEventListener('click', (e) => {
+        bench.photonsOn = !bench.photonsOn;
+        e.currentTarget.textContent = bench.photonsOn ? '✨ Photons: ON' : '✨ Photons: OFF';
+        e.currentTarget.style.opacity = bench.photonsOn ? '1' : '0.55';
+        audio.tap();
+      });
+
+      document.getElementById('cinemaPill').addEventListener('click', (e) => {
+        bench.cinemaScreenOn = !bench.cinemaScreenOn;
+        e.currentTarget.textContent = bench.cinemaScreenOn ? '🎞️ Cinema Screen: ON' : '🎞️ Cinema Screen: OFF';
+        e.currentTarget.style.opacity = bench.cinemaScreenOn ? '1' : '0.55';
+        audio.tap();
+      });
+
+      document.getElementById('fullscreenPill').addEventListener('click', () => {
+        const wrapper = document.getElementById('benchWrapper');
+        if (!document.fullscreenElement) {
+          wrapper.requestFullscreen?.().catch(() => {});
+        } else {
+          document.exitFullscreen?.().catch(() => {});
+        }
+        audio.tap();
+      });
+
+      // Interactive Dragging on Big Bench Canvas
+      let benchDragMode = null;
+
+      function getBenchPointer(e) {
+        const rect = benchCanvas.getBoundingClientRect();
+        return {
+          x: ((e.clientX - rect.left) / rect.width) * BW,
+          y: ((e.clientY - rect.top) / rect.height) * BH
+        };
+      }
+
+      benchCanvas.addEventListener('pointerdown', (e) => {
+        const p = getBenchPointer(e);
+        // Check if grabbing Focus point F (left or right) to adjust focal length directly!
+        const fLeftPx = toPxX(-bench.fMag);
+        const fRightPx = toPxX(bench.fMag);
+        if (Math.hypot(p.x - fLeftPx, p.y - BCY) < 22 || Math.hypot(p.x - fRightPx, p.y - BCY) < 22) {
+          benchDragMode = 'focus';
+          benchCanvas.setPointerCapture(e.pointerId);
+          return;
+        }
+        if (bench.atInfinity) return;
+        const objX = toPxX(bench.u);
+        const objTopY = toPxY(bench.h);
+
+        if (Math.hypot(p.x - objX, p.y - objTopY) < 28) {
+          benchDragMode = 'height';
+          benchCanvas.setPointerCapture(e.pointerId);
+        } else if (Math.abs(p.x - objX) < 46 && p.y >= objTopY - 20 && p.y <= BCY + 25) {
+          benchDragMode = 'move';
+          benchCanvas.setPointerCapture(e.pointerId);
+        }
+      });
+
+      benchCanvas.addEventListener('pointermove', (e) => {
+        if (!benchDragMode) return;
+        const p = getBenchPointer(e);
+        if (benchDragMode === 'move') {
+          bench.u = Math.max(-360, Math.min(-26, Math.round(toCmX(p.x))));
+          document.getElementById('sliderU').value = bench.u;
+        } else if (benchDragMode === 'height') {
+          bench.h = Math.max(30, Math.min(115, Math.round(toCmY(p.y))));
+          document.getElementById('sliderH').value = bench.h;
+        } else if (benchDragMode === 'focus') {
+          bench.fMag = Math.max(60, Math.min(155, Math.round(Math.abs(toCmX(p.x)))));
+          document.getElementById('sliderF').value = bench.fMag;
+        }
+        syncBenchTelemetry();
+      });
+
+      benchCanvas.addEventListener('pointerup', () => { benchDragMode = null; });
+      benchCanvas.addEventListener('pointercancel', () => { benchDragMode = null; });
+
+      /* -----------------------------------------------------------------------
+         9B. SECTION 3: LASER CORE ESCAPE — 5-LEVEL OPTICAL PUZZLE ENGINE
+         ----------------------------------------------------------------------- */
+      const puzzleCanvas = document.getElementById('puzzleCanvas');
+      const pCtx = puzzleCanvas ? puzzleCanvas.getContext('2d') : null;
+
+      const PUZZLE_LEVELS = [
+        {
+          id: 0,
+          badge: 'LEVEL 1 / 5 • CONCAVE MIRROR',
+          title: 'Level 1: Solar Core Ignition',
+          desc: 'Three parallel laser beams hit a Concave Mirror. Tune the focal length (f) so all reflected beams focus right onto the Crystal Core!',
+          c1: { label: 'Mirror Focal Length (f)', min: 100, max: 360, init: 160, unit: ' cm' },
+          c2: null,
+          cleared: false
+        },
+        {
+          id: 1,
+          badge: 'LEVEL 2 / 5 • CONVEX LENS',
+          title: 'Level 2: Asteroid Field Detour',
+          desc: 'Guide the upper laser beam through a Convex Lens so it threads cleanly between two asteroids and strikes the lower Crystal Core!',
+          c1: { label: 'Lens Focal Length (f)', min: 130, max: 340, init: 310, unit: ' cm' },
+          c2: { label: 'Lens Vertical Shift (Y)', min: 140, max: 290, init: 160, unit: ' px' },
+          cleared: false
+        },
+        {
+          id: 2,
+          badge: 'LEVEL 3 / 5 • CONVEX MIRROR',
+          title: 'Level 3: Twin Sensor Split',
+          desc: 'Use a diverging Convex Mirror to spread two laser beams outward so they charge BOTH Twin Crystal Sensors at the exact same time!',
+          c1: { label: 'Mirror Focal Length (|f|)', min: 100, max: 340, init: 310, unit: ' cm' },
+          c2: null,
+          cleared: false
+        },
+        {
+          id: 3,
+          badge: 'LEVEL 4 / 5 • TILTED MIRROR',
+          title: 'Level 4: Shadow Wall Bounce',
+          desc: 'A dark shield wall blocks the direct beam. Tilt the reflective mirror to ricochet the laser over the wall into the Reactor Core!',
+          c1: { label: 'Mirror Tilt Angle', min: 10, max: 75, init: 52, unit: '°' },
+          c2: null,
+          cleared: false
+        },
+        {
+          id: 4,
+          badge: 'LEVEL 5 / 5 • DUAL-OPTIC COMBO',
+          title: 'Level 5: Dual-Optic Reactor',
+          desc: 'Twin beams cross through a Convex Lens, then strike a Concave Mirror. Tune the Concave Mirror focal length to refocus them onto the hidden Reactor Core!',
+          c1: { label: 'Concave Mirror Focus (f₂)', min: 90, max: 260, init: 235, unit: ' cm' },
+          c2: null,
+          cleared: false
+        }
+      ];
+
+      const puzzleState = {
+        levelIdx: 0,
+        v1: 160,
+        v2: 160,
+        charge: 0
+      };
+
+      function distPointToSeg(px, py, x1, y1, x2, y2) {
+        const dx = x2 - x1;
+        const dy = y2 - y1;
+        const lenSq = dx * dx + dy * dy || 1;
+        const t = Math.max(0, Math.min(1, ((px - x1) * dx + (py - y1) * dy) / lenSq));
+        return {
+          dist: Math.hypot(px - (x1 + t * dx), py - (y1 + t * dy)),
+          t
+        };
+      }
+
+      function clipRayToCircle(x1, y1, x2, y2, cx, cy, r) {
+        const dx = x2 - x1;
+        const dy = y2 - y1;
+        const fx = x1 - cx;
+        const fy = y1 - cy;
+        const a = dx * dx + dy * dy;
+        const b = 2 * (fx * dx + fy * dy);
+        const c = fx * fx + fy * fy - r * r;
+        let disc = b * b - 4 * a * c;
+        if (disc < 0) return null;
+        disc = Math.sqrt(disc);
+        const t1 = (-b - disc) / (2 * a);
+        if (t1 >= 0 && t1 <= 1) {
+          return { x: x1 + t1 * dx, y: y1 + t1 * dy, t: t1 };
+        }
+        return null;
+      }
+
+      function loadPuzzleLevel(idx) {
+        puzzleState.levelIdx = idx;
+        const lv = PUZZLE_LEVELS[idx];
+        puzzleState.v1 = lv.c1.init;
+        puzzleState.v2 = lv.c2 ? lv.c2.init : 210;
+        puzzleState.charge = lv.cleared ? 100 : 0;
+
+        document.getElementById('puzzleLevelBadge').textContent = lv.badge;
+        document.getElementById('puzzleTitle').textContent = lv.title;
+        document.getElementById('puzzleDesc').textContent = lv.desc;
+
+        const c1 = document.getElementById('puzzleCtrl1');
+        document.getElementById('puzzleCtrl1Label').textContent = lv.c1.label;
+        c1.min = lv.c1.min;
+        c1.max = lv.c1.max;
+        c1.value = lv.c1.init;
+        document.getElementById('puzzleCtrl1Val').textContent = `${lv.c1.init}${lv.c1.unit}`;
+
+        const c2Wrap = document.getElementById('puzzleCtrl2Wrap');
+        if (lv.c2) {
+          c2Wrap.classList.remove('hidden');
+          const c2 = document.getElementById('puzzleCtrl2');
+          document.getElementById('puzzleCtrl2Label').textContent = lv.c2.label;
+          c2.min = lv.c2.min;
+          c2.max = lv.c2.max;
+          c2.value = lv.c2.init;
+          document.getElementById('puzzleCtrl2Val').textContent = `${lv.c2.init}${lv.c2.unit}`;
+        } else {
+          c2Wrap.classList.add('hidden');
+        }
+
+        document.querySelectorAll('[data-plevel]').forEach((btn) => {
+          const bi = Number(btn.dataset.plevel);
+          btn.classList.toggle('active', bi === idx);
+          btn.classList.toggle('cleared', PUZZLE_LEVELS[bi].cleared);
+        });
+      }
+
+      document.querySelectorAll('[data-plevel]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          loadPuzzleLevel(Number(btn.dataset.plevel));
+          audio.tap();
+        });
+      });
+
+      document.getElementById('puzzleCtrl1').addEventListener('input', (e) => {
+        const lv = PUZZLE_LEVELS[puzzleState.levelIdx];
+        puzzleState.v1 = Number(e.target.value);
+        document.getElementById('puzzleCtrl1Val').textContent = `${puzzleState.v1}${lv.c1.unit}`;
+      });
+
+      document.getElementById('puzzleCtrl2').addEventListener('input', (e) => {
+        const lv = PUZZLE_LEVELS[puzzleState.levelIdx];
+        puzzleState.v2 = Number(e.target.value);
+        if (lv.c2) document.getElementById('puzzleCtrl2Val').textContent = `${puzzleState.v2}${lv.c2.unit}`;
+      });
+
+      document.getElementById('puzzleResetBtn').addEventListener('click', () => {
+        loadPuzzleLevel(puzzleState.levelIdx);
+        audio.tap();
+      });
+
+      document.getElementById('puzzleNextBtn').addEventListener('click', () => {
+        loadPuzzleLevel((puzzleState.levelIdx + 1) % PUZZLE_LEVELS.length);
+        audio.tap();
+      });
+
+      function drawCrystalCore(ctx, x, y, r, active, now, label = 'CORE') {
+        ctx.save();
+        const pulse = active ? 5 + Math.sin(now * 0.02) * 3 : 0;
+        const grad = ctx.createRadialGradient(x, y, 2, x, y, r + 14 + pulse);
+        grad.addColorStop(0, active ? '#ffffff' : '#00e5ff');
+        grad.addColorStop(0.45, active ? 'rgba(16, 185, 129, 0.85)' : 'rgba(0, 229, 255, 0.35)');
+        grad.addColorStop(1, 'rgba(0, 229, 255, 0)');
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(x, y, r + 14 + pulse, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Diamond Crystal Body
+        ctx.fillStyle = active ? '#10b981' : '#0ea5e9';
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(x, y - r);
+        ctx.lineTo(x + r * 0.82, y);
+        ctx.lineTo(x, y + r);
+        ctx.lineTo(x - r * 0.82, y);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.font = 'bold 10px "JetBrains Mono", monospace';
+        ctx.fillStyle = active ? '#10b981' : '#94a3b8';
+        ctx.textAlign = 'center';
+        ctx.fillText(label, x, y + r + 15);
+        ctx.restore();
+      }
+
+      function drawLaserEmitter(ctx, x, y) {
+        ctx.save();
+        ctx.fillStyle = '#1e293b';
+        ctx.strokeStyle = '#ff2e93';
+        ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        ctx.roundRect(x - 24, y - 16, 36, 32, 8);
+        ctx.fill();
+        ctx.stroke();
+        ctx.fillStyle = '#ff2e93';
+        ctx.shadowColor = '#ff2e93';
+        ctx.shadowBlur = 12;
+        ctx.beginPath();
+        ctx.arc(x + 12, y, 5, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+
+      function renderLaserPuzzle(now) {
+        if (!pCtx) return;
+        const W = puzzleCanvas.width;
+        const H = puzzleCanvas.height;
+        const cy = H * 0.5;
+        const idx = puzzleState.levelIdx;
+        const lv = PUZZLE_LEVELS[idx];
+        const phase = bench.photonPhase;
+
+        pCtx.clearRect(0, 0, W, H);
+
+        // Cosmic Tech Grid
+        pCtx.strokeStyle = 'rgba(255, 46, 147, 0.06)';
+        pCtx.lineWidth = 1;
+        for (let x = 30; x < W; x += 45) { pCtx.beginPath(); pCtx.moveTo(x, 0); pCtx.lineTo(x, H); pCtx.stroke(); }
+        for (let y = 30; y < H; y += 45) { pCtx.beginPath(); pCtx.moveTo(0, y); pCtx.lineTo(W, y); pCtx.stroke(); }
+
+        // Axis Line
+        pCtx.save();
+        pCtx.strokeStyle = 'rgba(148, 163, 184, 0.25)';
+        pCtx.setLineDash([6, 6]);
+        pCtx.beginPath(); pCtx.moveTo(0, cy); pCtx.lineTo(W, cy); pCtx.stroke();
+        pCtx.restore();
+
+        let targetHit = false;
+
+        if (idx === 0) {
+          // LEVEL 1: Solar Core Ignition (Concave Mirror)
+          const mirX = 760;
+          const f = puzzleState.v1;
+          const fx = mirX - f;
+          const core = { x: 480, y: cy, r: 22 };
+
+          drawOpticElement(pCtx, mirX, cy, 130, 'concave_mirror');
+
+          // Focal point indicator
+          pCtx.fillStyle = '#fbbf24';
+          pCtx.beginPath(); pCtx.arc(fx, cy, 4.5, 0, Math.PI * 2); pCtx.fill();
+          pCtx.font = 'bold 11px "JetBrains Mono", monospace';
+          pCtx.textAlign = 'center';
+          pCtx.fillText('F', fx, cy + 18);
+
+          const raysY = [140, 210, 280];
+          targetHit = Math.abs(fx - core.x) <= 16;
+
+          raysY.forEach((ry) => {
+            drawLaserEmitter(pCtx, 48, ry);
+            drawGlowingRay(pCtx, 60, ry, mirX, ry, '#ff2e93', false, 1, phase);
+            const end = projectRay(mirX, ry, fx, cy, 720);
+            drawGlowingRay(pCtx, mirX, ry, targetHit ? core.x : end.x, targetHit ? core.y : end.y, '#fbbf24', false, 1, phase);
+          });
+
+          drawCrystalCore(pCtx, core.x, core.y, core.r, targetHit, now, 'SOLAR CORE');
+          if (targetHit) renderSolarSparkHotspot(pCtx, core.x, core.y, now);
+        } else if (idx === 1) {
+          // LEVEL 2: Asteroid Field Detour (Convex Lens)
+          const lensX = 380;
+          const lensY = puzzleState.v2;
+          const f = puzzleState.v1;
+          const core = { x: 760, y: 275, r: 24 };
+          const asteroids = [
+            { x: 560, y: 128, r: 42 },
+            { x: 560, y: 312, r: 42 }
+          ];
+
+          drawOpticElement(pCtx, lensX, lensY, 108, 'convex_lens');
+          drawLaserEmitter(pCtx, 64, 120);
+
+          // Draw Asteroids
+          asteroids.forEach((a) => {
+            pCtx.save();
+            pCtx.fillStyle = '#1e293b';
+            pCtx.strokeStyle = '#64748b';
+            pCtx.lineWidth = 3;
+            pCtx.beginPath();
+            pCtx.arc(a.x, a.y, a.r, 0, Math.PI * 2);
+            pCtx.fill();
+            pCtx.stroke();
+            pCtx.fillStyle = '#94a3b8';
+            pCtx.font = 'bold 10px "JetBrains Mono", monospace';
+            pCtx.textAlign = 'center';
+            pCtx.fillText('BARRIER', a.x, a.y + 4);
+            pCtx.restore();
+          });
+
+          // Incoming horizontal ray at y=120
+          const rayY = 120;
+          const hitsLens = Math.abs(rayY - lensY) <= 106;
+          drawGlowingRay(pCtx, 76, rayY, hitsLens ? lensX : W, rayY, '#00e5ff', false, 1, phase);
+
+          if (hitsLens) {
+            let endPt = projectRay(lensX, rayY, lensX + f, lensY, 620);
+            let blocked = false;
+            for (const a of asteroids) {
+              const hit = clipRayToCircle(lensX, rayY, endPt.x, endPt.y, a.x, a.y, a.r);
+              if (hit) {
+                endPt = hit;
+                blocked = true;
+                renderSolarSparkHotspot(pCtx, hit.x, hit.y, now);
+                break;
+              }
+            }
+            if (!blocked) {
+              const checkCore = distPointToSeg(core.x, core.y, lensX, rayY, endPt.x, endPt.y);
+              if (checkCore.dist <= core.r) {
+                targetHit = true;
+                endPt = { x: core.x, y: core.y };
+              }
+            }
+            drawGlowingRay(pCtx, lensX, rayY, endPt.x, endPt.y, targetHit ? '#10b981' : '#fbbf24', false, 1, phase);
+          }
+
+          drawCrystalCore(pCtx, core.x, core.y, core.r, targetHit, now, 'TARGET CORE');
+          if (targetHit) renderSolarSparkHotspot(pCtx, core.x, core.y, now);
+        } else if (idx === 2) {
+          // LEVEL 3: Twin Sensor Split (Convex Mirror)
+          const mirX = 690;
+          const f = puzzleState.v1;
+          const vfX = mirX + f;
+          const sensors = [
+            { x: 310, y: 82, r: 22 },
+            { x: 310, y: 338, r: 22 }
+          ];
+
+          drawOpticElement(pCtx, mirX, cy, 130, 'convex_mirror');
+
+          let hits = 0;
+          [165, 255].forEach((ry, rIdx) => {
+            drawLaserEmitter(pCtx, 58, ry);
+            drawGlowingRay(pCtx, 70, ry, mirX, ry, '#ff2e93', false, 1, phase);
+            drawGlowingRay(pCtx, mirX, ry, vfX, cy, '#00e5ff', true, 1);
+
+            let endPt = projectRay(vfX, cy, mirX, ry, 720);
+            const s = sensors[rIdx];
+            const d = distPointToSeg(s.x, s.y, mirX, ry, endPt.x, endPt.y);
+            const isHit = d.dist <= s.r;
+            if (isHit) {
+              hits++;
+              endPt = { x: s.x, y: s.y };
+            }
+            drawGlowingRay(pCtx, mirX, ry, endPt.x, endPt.y, isHit ? '#10b981' : '#00e5ff', false, 1, phase);
+            drawCrystalCore(pCtx, s.x, s.y, s.r, isHit, now, `SENSOR ${rIdx + 1}`);
+            if (isHit) renderSolarSparkHotspot(pCtx, s.x, s.y, now);
+          });
+          targetHit = hits === 2;
+        } else if (idx === 3) {
+          // LEVEL 4: Shadow Wall Bounce (Tilted Plane Mirror)
+          const mx = 430;
+          const my = 320;
+          const ang = (puzzleState.v1 * Math.PI) / 180;
+          const core = { x: 640, y: 95, r: 24 };
+
+          // Draw Shield Wall blocking direct right path
+          pCtx.save();
+          pCtx.fillStyle = 'rgba(255, 46, 147, 0.16)';
+          pCtx.strokeStyle = '#ff2e93';
+          pCtx.lineWidth = 3;
+          pCtx.fillRect(545, 195, 22, 225);
+          pCtx.strokeRect(545, 195, 22, 225);
+          pCtx.restore();
+
+          // Draw Tilted Mirror
+          pCtx.save();
+          pCtx.strokeStyle = '#00e5ff';
+          pCtx.lineWidth = 5;
+          pCtx.shadowColor = '#00e5ff';
+          pCtx.shadowBlur = 14;
+          const halfLen = 68;
+          pCtx.beginPath();
+          pCtx.moveTo(mx - Math.cos(ang) * halfLen, my + Math.sin(ang) * halfLen);
+          pCtx.lineTo(mx + Math.cos(ang) * halfLen, my - Math.sin(ang) * halfLen);
+          pCtx.stroke();
+          pCtx.restore();
+
+          // Incoming horizontal beam
+          drawLaserEmitter(pCtx, 68, my);
+          drawGlowingRay(pCtx, 80, my, mx, my, '#fbbf24', false, 1, phase);
+
+          // Exact reflection of d = (1, 0) off normal n = (-sin a, -cos a)
+          const rx = 1 - 2 * Math.sin(ang) * Math.sin(ang);
+          const ry = -2 * Math.sin(ang) * Math.cos(ang);
+          let endPt = { x: mx + rx * 650, y: my + ry * 650 };
+
+          // Check shield wall block (x = 545, y >= 195)
+          if (rx > 0.01) {
+            const tWall = (545 - mx) / rx;
+            const yWall = my + ry * tWall;
+            if (tWall > 0 && yWall >= 195 && yWall <= 420) {
+              endPt = { x: 545, y: yWall };
+              renderSolarSparkHotspot(pCtx, endPt.x, endPt.y, now);
+            }
+          }
+
+          const dCore = distPointToSeg(core.x, core.y, mx, my, endPt.x, endPt.y);
+          if (dCore.dist <= core.r) {
+            targetHit = true;
+            endPt = { x: core.x, y: core.y };
+          }
+
+          drawGlowingRay(pCtx, mx, my, endPt.x, endPt.y, targetHit ? '#10b981' : '#00e5ff', false, 1, phase);
+          drawCrystalCore(pCtx, core.x, core.y, core.r, targetHit, now, 'REACTOR');
+          if (targetHit) renderSolarSparkHotspot(pCtx, core.x, core.y, now);
+        } else {
+          // LEVEL 5: Dual-Optic Reactor (Convex Lens + Concave Mirror)
+          const lensX = 270;
+          const mirX = 760;
+          const f1 = 220;
+          const crossX = lensX + f1; // 490
+          const f2 = puzzleState.v1;
+          const core = { x: 360, y: cy, r: 22 };
+
+          drawOpticElement(pCtx, lensX, cy, 128, 'convex_lens');
+          drawOpticElement(pCtx, mirX, cy, 134, 'concave_mirror');
+
+          // Compute reflected image distance for object at u = -270
+          const uMir = -(mirX - crossX); // -270
+          const vMir = Math.abs(uMir - (-f2)) < 4 ? -9999 : (uMir * (-f2)) / (uMir - (-f2));
+          const focusX = mirX + vMir;
+          targetHit = vMir < 0 && Math.abs(focusX - core.x) <= 18;
+
+          [145, 275].forEach((ry) => {
+            drawLaserEmitter(pCtx, 52, ry);
+            drawGlowingRay(pCtx, 64, ry, lensX, ry, '#00e5ff', false, 1, phase);
+            const mirY = cy + ((cy - ry) * (mirX - crossX)) / f1;
+            drawGlowingRay(pCtx, lensX, ry, mirX, mirY, '#fbbf24', false, 1, phase);
+
+            let refEnd;
+            if (vMir < 0 && vMir > -2000) {
+              refEnd = targetHit ? { x: core.x, y: core.y } : projectRay(mirX, mirY, focusX, cy, 650);
+            } else {
+              refEnd = projectRay(focusX, cy, mirX, mirY, 650);
+            }
+            drawGlowingRay(pCtx, mirX, mirY, refEnd.x, refEnd.y, targetHit ? '#10b981' : '#ff2e93', false, 1, phase);
+          });
+
+          drawCrystalCore(pCtx, core.x, core.y, core.r, targetHit, now, 'CORE');
+          if (targetHit) renderSolarSparkHotspot(pCtx, core.x, core.y, now);
+        }
+
+        // Update Core Charge Meter & Unlock Level!
+        if (targetHit) {
+          puzzleState.charge = Math.min(100, puzzleState.charge + 2.4);
+          if (puzzleState.charge >= 100 && !lv.cleared) {
+            lv.cleared = true;
+            awardXP(120);
+            audio.win();
+            launchConfetti();
+            pushToast(`🔦 ${lv.title} Cleared!`, '+120 XP awarded! Try the next laser puzzle!', '#ff2e93');
+            const tabBtn = document.querySelector(`[data-plevel="${idx}"]`);
+            if (tabBtn) tabBtn.classList.add('cleared');
+          }
+        } else if (!lv.cleared) {
+          puzzleState.charge = Math.max(0, puzzleState.charge - 1.5);
+        }
+
+        const pct = Math.round(puzzleState.charge);
+        document.getElementById('puzzleChargeBar').style.width = `${pct}%`;
+        document.getElementById('puzzleChargeText').textContent = `${pct}%`;
+        const pill = document.getElementById('puzzleStatusPill');
+        if (lv.cleared) {
+          pill.textContent = '✅ LEVEL CLEARED!';
+          pill.style.color = '#10b981';
+        } else if (targetHit) {
+          pill.textContent = `⚡ CHARGING CORE (${pct}%)`;
+          pill.style.color = '#00e5ff';
+        } else {
+          pill.textContent = '⚡ Align Beam With Core';
+          pill.style.color = '#fbbf24';
+        }
+      }
+
+      /* -----------------------------------------------------------------------
+         9C. SEPARATED PROJECT FOLDER EXPORTER (HTML / CSS / JS)
+         ----------------------------------------------------------------------- */
+      let activeExportTab = 'html';
+      let cachedExportFiles = { html: '', css: '', js: '' };
+
+      function buildSeparatedProjectFiles() {
+        const styleEl = document.getElementById('lumina-styles');
+        const scriptEl = document.getElementById('lumina-script');
+
+        const cssCode = styleEl
+          ? styleEl.textContent.trim()
+          : '/* Already running from external css/styles.css */';
+        const jsCode = scriptEl
+          ? scriptEl.textContent.trim()
+          : '// Already running from external js/app.js';
+
+        // Clone current DOM cleanly and swap inline style/script for external links
+        const clone = document.documentElement.cloneNode(true);
+        const cloneBody = clone.querySelector('body');
+        if (cloneBody) cloneBody.classList.remove('museum-light');
+
+        const cStyle = clone.querySelector('#lumina-styles');
+        if (cStyle) {
+          const link = document.createElement('link');
+          link.setAttribute('rel', 'stylesheet');
+          link.setAttribute('href', 'css/styles.css');
+          cStyle.replaceWith(link);
+        }
+
+        const cScript = clone.querySelector('#lumina-script');
+        if (cScript) {
+          const extScript = document.createElement('script');
+          extScript.setAttribute('src', 'js/app.js');
+          cScript.replaceWith(extScript);
+        }
+
+        const cModal = clone.querySelector('#exportModal');
+        if (cModal) cModal.classList.add('hidden');
+        const cToasts = clone.querySelector('#toastStack');
+        if (cToasts) cToasts.innerHTML = '';
+
+        const htmlCode = `<!DOCTYPE html>\n${clone.outerHTML}`;
+        cachedExportFiles = { html: htmlCode, css: cssCode, js: jsCode };
+      }
+
+      function renderExportTab() {
+        const names = { html: 'index.html', css: 'styles.css', js: 'app.js' };
+        document.getElementById('exportCodeView').textContent = cachedExportFiles[activeExportTab];
+        document.getElementById('exportFileLabel').textContent = names[activeExportTab];
+        document.querySelectorAll('[data-export-tab]').forEach((b) => {
+          b.classList.toggle('active', b.dataset.exportTab === activeExportTab);
+        });
+      }
+
+      function openExportModal() {
+        buildSeparatedProjectFiles();
+        renderExportTab();
+        document.getElementById('exportModal').classList.remove('hidden');
+        audio.tap();
+      }
+
+      function downloadTextFile(filename, content, mime = 'text/plain') {
+        const blob = new Blob([content], { type: mime });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+      }
+
+      function copyTextFallback(text) {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.left = '-9999px';
+        document.body.appendChild(ta);
+        ta.select();
+        try {
+          document.execCommand('copy');
+          pushToast('📋 Copied to Clipboard!', 'Paste directly into your project file.', '#10b981');
+          audio.win();
+        } catch (err) {
+          pushToast('Copy Failed', 'Please select and copy from the code box.', '#fbbf24');
+        }
+        ta.remove();
+      }
+
+      document.getElementById('exportFolderBtn').addEventListener('click', openExportModal);
+      document.getElementById('footerExportBtn').addEventListener('click', openExportModal);
+      document.getElementById('closeExportModal').addEventListener('click', () => {
+        document.getElementById('exportModal').classList.add('hidden');
+        audio.tap();
+      });
+
+      document.querySelectorAll('[data-export-tab]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          activeExportTab = btn.dataset.exportTab;
+          renderExportTab();
+          audio.tap();
+        });
+      });
+
+      document.getElementById('copyExportBtn').addEventListener('click', () => {
+        copyTextFallback(cachedExportFiles[activeExportTab]);
+      });
+
+      document.getElementById('downloadSingleBtn').addEventListener('click', () => {
+        const map = {
+          html: ['index.html', 'text/html'],
+          css: ['styles.css', 'text/css'],
+          js: ['app.js', 'application/javascript']
+        };
+        const [name, mime] = map[activeExportTab];
+        downloadTextFile(name, cachedExportFiles[activeExportTab], mime);
+        audio.win();
+        pushToast(`⬇️ Downloaded ${name}`, 'Place CSS inside css/ and JS inside js/.', '#00e5ff');
+      });
+
+      document.getElementById('downloadAllBtn').addEventListener('click', () => {
+        downloadTextFile('index.html', cachedExportFiles.html, 'text/html');
+        setTimeout(() => downloadTextFile('styles.css', cachedExportFiles.css, 'text/css'), 250);
+        setTimeout(() => downloadTextFile('app.js', cachedExportFiles.js, 'application/javascript'), 500);
+        audio.win();
+        launchConfetti();
+        pushToast('📦 All 3 Project Files Downloaded!', 'Put styles.css in css/ and app.js in js/ next to index.html.', '#10b981');
+      });
+
+      /* -----------------------------------------------------------------------
+         10. SECTION 3 & 4: HANDS-ON MISSIONS & REAL-WORLD WONDERS
+         ----------------------------------------------------------------------- */
+      const MISSIONS_DATA = [
+        {
+          id: 'twin_1to1',
+          title: '1:1 Mirror Twin',
+          desc: 'Form a Real & Inverted image of the exact same size (m ≈ -1.00x).',
+          done: false,
+          check: (r) => !bench.atInfinity && !r.atFocusInf && r.isReal && Math.abs(r.m + 1) < 0.08
+        },
+        {
+          id: 'solar_spark',
+          title: 'Solar Spark Igniter',
+          desc: 'Jump to Very Far (∞) on a Concave Mirror or Convex Lens to spark F!',
+          done: false,
+          check: (r) => bench.atInfinity && r.isReal
+        },
+        {
+          id: 'dentist_closeup',
+          title: 'Dentist Magnifier',
+          desc: 'Use a Concave Mirror inside F to create a giant upright Virtual image.',
+          done: false,
+          check: (r) => bench.device === 'concave_mirror' && !bench.atInfinity && !r.isReal && r.m > 1.35
+        },
+        {
+          id: 'theater_throw',
+          title: 'Theater Projector',
+          desc: 'Use a Convex Lens to project an enlarged Real image onto the screen.',
+          done: false,
+          check: (r) => bench.device === 'convex_lens' && !bench.atInfinity && r.isReal && Math.abs(r.m) > 1.35
+        },
+        {
+          id: 'wide_rearview',
+          title: 'Wide-Angle Rearview',
+          desc: 'Form an upright, diminished Virtual image with a Convex Mirror.',
+          done: false,
+          check: (r) => bench.device === 'convex_mirror' && !bench.atInfinity && !r.isReal && r.m < 0.72
+        }
+      ];
+
+      function renderMissionsList() {
+        const grid = document.getElementById('missionsGrid');
+        const badge = document.getElementById('missionsBadge');
+        if (!grid) return;
+
+        const completedCount = MISSIONS_DATA.filter((m) => m.done).length;
+        badge.textContent = `${completedCount} / ${MISSIONS_DATA.length} Completed`;
+
+        grid.innerHTML = MISSIONS_DATA.map((m) => `
+          <div class="rounded-2xl p-4 border flex flex-col justify-between space-y-2.5 transition ${m.done ? 'bg-[#10b981]/15 border-[#10b981]/60' : 'glass-inset'}">
+            <div>
+              <div class="flex items-center justify-between gap-1.5">
+                <span class="font-extrabold text-xs sm:text-sm ${m.done ? 'text-[#10b981]' : ''}">${m.done ? '✅' : '🎯'} ${m.title}</span>
+                <span class="font-mono-code text-[10px] font-bold px-2 py-0.5 rounded-full ${m.done ? 'bg-[#10b981] text-[#050814]' : 'bg-[#fbbf24]/20 text-[#fbbf24]'}">
+                  ${m.done ? 'DONE' : '+100 XP'}
+                </span>
+              </div>
+              <p class="text-xs text-muted mt-1.5 leading-relaxed">${m.desc}</p>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      function checkMissionsProgress(res) {
+        let unlockedAny = false;
+        for (const m of MISSIONS_DATA) {
+          if (!m.done && m.check(res)) {
+            m.done = true;
+            unlockedAny = true;
+            awardXP(100);
+            audio.win();
+            launchConfetti();
+            pushToast(`🎉 Mission Complete: ${m.title}!`, '+100 XP added to your Explorer Rank!', '#10b981');
+          }
+        }
+        if (unlockedAny) renderMissionsList();
+      }
+
+      const REAL_WORLD_WONDERS = {
+        car_mirror: { device: 'convex_mirror', u: -210, fMag: 100, h: 75, atInfinity: false, obj: 'rocket', label: '🚗 Car Side Mirror' },
+        dentist_mirror: { device: 'concave_mirror', u: -52, fMag: 115, h: 55, atInfinity: false, obj: 'duck', label: '🦷 Dentist Mirror' },
+        magnifying_glass: { device: 'convex_lens', u: -54, fMag: 118, h: 55, atInfinity: false, obj: 'pencil', label: '🔍 Magnifying Glass' },
+        movie_projector: { device: 'convex_lens', u: -142, fMag: 95, h: 52, atInfinity: false, obj: 'rocket', label: '🎬 Movie Projector' },
+        nearsighted_glasses: { device: 'concave_lens', u: -220, fMag: 105, h: 72, atInfinity: false, obj: 'candle', label: '👓 Nearsighted Glasses' },
+        car_headlights: { device: 'concave_mirror', u: -105, fMag: 105, h: 65, atInfinity: false, obj: 'candle', label: '🔦 Car Headlights' }
+      };
+
+      document.querySelectorAll('[data-wonder]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const w = REAL_WORLD_WONDERS[btn.dataset.wonder];
+          if (!w) return;
+          bench.atInfinity = w.atInfinity;
+          bench.fMag = w.fMag;
+          bench.u = w.u;
+          bench.h = w.h;
+          bench.objectKind = w.obj;
+          document.getElementById('sliderF').value = w.fMag;
+          document.getElementById('sliderU').value = w.u;
+          document.getElementById('sliderH').value = w.h;
+          document.querySelectorAll('[data-obj]').forEach((b) => {
+            b.className = b.dataset.obj === w.obj
+              ? 'obj-pill px-2.5 py-1.5 rounded-lg text-xs font-bold bg-[#fbbf24]/25 text-[#fbbf24] border border-[#fbbf24]/50 transition'
+              : 'obj-pill px-2.5 py-1.5 rounded-lg text-xs font-semibold hover:bg-white/10 border border-transparent transition';
+          });
+          selectLabDevice(w.device);
+          audio.wave();
+          pushToast(`${w.label} Loaded!`, 'Explore the rays on the Big Light Lab bench.', '#00e5ff');
+          document.getElementById('big-lab').scrollIntoView({ behavior: 'smooth' });
+        });
+      });
+
+      /* -----------------------------------------------------------------------
+         11. SECTION 5: EXPANDED 12-QUESTION OPTICAL PRACTICE ARENA
+         ----------------------------------------------------------------------- */
+      const PRACTICE_BANK = [
+        // --- CATEGORY 1: VISUAL RAY DIAGRAMS (4 QUESTIONS) ---
+        {
+          id: 'diag_twin_c',
+          category: 'diagrams',
+          badge: '📐 Visual Ray Diagram',
+          q: 'Look at the live diagram: a rocket stands right at the Center of Curvature (C) of a Concave Mirror. Where will its reflected image appear, and what will it look like?',
+          opts: [
+            'At C itself, upside-down (inverted), and the exact same size',
+            'Behind the mirror, upright, and twice as tall',
+            'At Focus (F), shrunk to a tiny pinpoint dot',
+            'At infinity—the rays never meet'
+          ],
+          ans: 0,
+          hint: 'Trace Rule 1 (parallel → through F) and Rule 3 (through F → parallel). Notice how symmetrically both rays intersect right beneath C!',
+          exp: 'When an object sits at C (2F), reflected rays cross directly below it at C—creating a real, inverted twin of identical 1:1 size!',
+          setup: { device: 'concave_mirror', u: -200, fMag: 100, h: 65, atInfinity: false, objectKind: 'rocket' }
+        },
+        {
+          id: 'diag_concave_lens_inf',
+          category: 'diagrams',
+          badge: '📐 Visual Ray Diagram',
+          q: 'Parallel beams of starlight enter a Concave Lens from the left. How does this lens shape the outgoing rays?',
+          opts: [
+            'Focuses them into a hot blazing point on the right',
+            'Spreads them outward as if radiating from the near Focus (F)',
+            'Bounces all rays straight back toward the stars',
+            'Passes them straight through without bending'
+          ],
+          ans: 1,
+          hint: 'A concave lens is thinner in the middle—its edges bend light outward away from the principal axis. Trace the dashed lines backward!',
+          exp: 'A concave lens is a diverging lens: it spreads parallel rays outward so their dashed backward extensions meet at the virtual Focus (F) on the incoming side.',
+          setup: { device: 'concave_lens', u: -220, fMag: 105, h: 70, atInfinity: true, objectKind: 'candle' }
+        },
+        {
+          id: 'diag_convex_lens_between',
+          category: 'diagrams',
+          badge: '📐 Visual Ray Diagram',
+          q: 'A duck is placed between F and 2F in front of a Convex Lens. Where do the refracted rays converge?',
+          opts: [
+            'Beyond 2F on the far side, forming a magnified, upside-down real image',
+            'Between O and F on the same side, upright and tiny',
+            'At Focus (F), smaller than the duck',
+            'Directly inside the glass lens'
+          ],
+          ans: 0,
+          hint: 'As an object moves closer to Focus (F) from 2F, the real image moves farther away on the opposite side and grows larger!',
+          exp: 'Placing an object between F and 2F causes refracted rays to converge beyond 2F on the other side, producing an enlarged, real, inverted image.',
+          setup: { device: 'convex_lens', u: -145, fMag: 95, h: 55, atInfinity: false, objectKind: 'duck' }
+        },
+        {
+          id: 'diag_focus_beam',
+          category: 'diagrams',
+          badge: '📐 Visual Ray Diagram',
+          q: 'A glowing candle is placed right on Focus (F) of a Concave Mirror. What happens to the reflected light rays?',
+          opts: [
+            'They converge at C to make a small upside-down flame',
+            'They emerge strictly parallel to the principal axis toward infinity',
+            'They diverge as if coming from behind the mirror',
+            'They cancel out at the Pole (P)'
+          ],
+          ans: 1,
+          hint: 'Remember Rule 3 ("The Focus Reverse"): any ray starting at Focus (F) reflects parallel to the main axis!',
+          exp: 'When a light source sits right at Focus (F), every reflected ray leaves parallel to the principal axis—creating a powerful beam that never diverges!',
+          setup: { device: 'concave_mirror', u: -105, fMag: 105, h: 65, atInfinity: false, objectKind: 'candle' }
+        },
+
+        // --- CATEGORY 2: REAL-WORLD DETECTIVE (4 QUESTIONS) ---
+        {
+          id: 'det_solar_cooker',
+          category: 'detective',
+          badge: '🕵️ Real-World Detective',
+          q: 'Mystery Case #1: An eco-engineer wants to boil water using only parallel rays from the distant sun. Which setup concentrates sunlight into a single scorching focal point?',
+          opts: [
+            'A Concave Mirror aimed at the sun, placing the kettle at Focus (F)',
+            'A Convex Mirror aimed at the sun, placing the kettle at C',
+            'A Concave Lens held 5 cm above the kettle',
+            'A flat window pane tilted at 45°'
+          ],
+          ans: 0,
+          hint: 'Distant sunlight arrives as parallel rays (u = -∞). You need a converging reflector that gathers all rays to one real point!',
+          exp: 'Parallel rays from infinity reflect off a Concave Mirror and converge at its real Focus (F), creating intense thermal heat!',
+          setup: { device: 'concave_mirror', u: -220, fMag: 105, h: 70, atInfinity: true, objectKind: 'candle' }
+        },
+        {
+          id: 'det_security_dome',
+          category: 'detective',
+          badge: '🕵️ Real-World Detective',
+          q: 'Mystery Case #2: A shopkeeper hangs one curved mirror in the corner to watch every aisle at once. Shoppers look smaller and upright inside it. What mirror is it?',
+          opts: [
+            'A Convex Mirror—it curves outward to capture a super-wide field of view',
+            'A Concave Mirror—it flips shoppers upside-down',
+            'A Convex Lens—it projects shoppers onto the floor',
+            'A Concave Mirror with the shopper at Focus (F)'
+          ],
+          ans: 0,
+          hint: 'Which curved mirror ALWAYS shrinks objects into upright virtual images no matter how far away they stand?',
+          exp: 'A Convex Mirror diverges light outward, always producing diminished, erect virtual images that pack a wide panoramic view into a compact mirror.',
+          setup: { device: 'convex_mirror', u: -210, fMag: 100, h: 75, atInfinity: false, objectKind: 'rocket' }
+        },
+        {
+          id: 'det_jeweler_loupe',
+          category: 'detective',
+          badge: '🕵️ Real-World Detective',
+          q: 'Mystery Case #3: A watchmaker holds a small glass lens very close to a tiny gear (inside Focus F) to inspect miniature teeth right-side up. How does it work?',
+          opts: [
+            'A Convex Lens bends diverging rays so backward extensions form a giant upright virtual image',
+            'A Concave Lens shrinks the gear to sharpen its edges',
+            'A Convex Lens projects a real upside-down gear onto the watchmaker’s eye',
+            'A Convex Mirror reflects light from behind the gear'
+          ],
+          ans: 0,
+          hint: 'To act as a simple magnifier, a converging lens must be held closer to the object than its focal length (u < f)!',
+          exp: 'Holding a Convex Lens closer than Focus (F) creates a magnified, erect virtual image on the same side as the object—perfect for close-up inspection!',
+          setup: { device: 'convex_lens', u: -52, fMag: 115, h: 55, atInfinity: false, objectKind: 'pencil' }
+        },
+        {
+          id: 'det_cinema_projector',
+          category: 'detective',
+          badge: '🕵️ Real-World Detective',
+          q: 'Mystery Case #4: A movie projector uses a Convex Lens to beam an image onto a screen across the yard. How must the glowing film slide be loaded?',
+          opts: [
+            'Upside-down between F and 2F so the projected real image appears right-side up and huge',
+            'Inside Focus (F) so the image is virtual',
+            'At infinity so the screen shows a tiny pinpoint',
+            'Beyond 2F so the movie shrinks smaller than the film'
+          ],
+          ans: 0,
+          hint: 'A real projected image is always inverted! If you want actors right-side up on the screen, how should you insert the film slide?',
+          exp: 'Placing the slide between F and 2F creates a magnified, inverted real image on the screen—so loading the slide upside-down flips the movie right-side up!',
+          setup: { device: 'convex_lens', u: -140, fMag: 95, h: 52, atInfinity: false, objectKind: 'rocket' }
+        },
+
+        // --- CATEGORY 3: FORMULA & SIGN SENSE (4 QUESTIONS) ---
+        {
+          id: 'form_mag_sign',
+          category: 'formula',
+          badge: '🧮 Formula & Sign Sense',
+          q: 'An optical sensor reports a magnification of m = +3.2x for a mirror setup. Without even seeing the bench, what does "+3.2x" reveal?',
+          opts: [
+            'The image is Virtual, Upright (erect), and 3.2 times larger than the object',
+            'The image is Real, Inverted, and 3.2 times larger',
+            'The image is Virtual, Upright, and shrunk to 1/3 size',
+            'The object is sitting at infinity'
+          ],
+          ans: 0,
+          hint: 'Check both parts of m = +3.2: the "+" sign tells you orientation (erect vs. inverted), while "3.2 > 1" tells you size!',
+          exp: 'A positive magnification (+m) always means an erect (virtual) image, and |m| = 3.2 means it is magnified 3.2 times!',
+          setup: { device: 'concave_mirror', u: -52, fMag: 115, h: 55, atInfinity: false, objectKind: 'duck' }
+        },
+        {
+          id: 'form_focal_signs',
+          category: 'formula',
+          badge: '🧮 Formula & Sign Sense',
+          q: 'Under the standard Cartesian sign convention (light traveling left to right), which pair of devices BOTH have a negative focal length (f < 0)?',
+          opts: [
+            'Concave Mirror and Concave Lens',
+            'Convex Mirror and Convex Lens',
+            'Concave Mirror and Convex Lens',
+            'Convex Mirror and Concave Lens'
+          ],
+          ans: 0,
+          hint: 'Both "concave" devices have their principal working Focus (F) on the left side of the origin (negative x-axis)!',
+          exp: 'Both a Concave Mirror (real F on the left) and a Concave Lens (virtual F on the left) have negative focal lengths (f < 0)!',
+          setup: { device: 'concave_lens', u: -185, fMag: 100, h: 65, atInfinity: false, objectKind: 'rocket' }
+        },
+        {
+          id: 'form_lens_2f',
+          category: 'formula',
+          badge: '🧮 Formula & Sign Sense',
+          q: 'A Convex Lens has focal length f = +100 cm, and a candle sits at u = -200 cm (at 2F). Using 1/f = 1/v - 1/u, where does the image form?',
+          opts: [
+            'v = +200 cm on the opposite side, with magnification m = -1.00x',
+            'v = +100 cm at Focus, with m = -0.50x',
+            'v = -200 cm on the same side, with m = +1.00x',
+            'v = +66.7 cm, shrunk to one-third height'
+          ],
+          ans: 0,
+          hint: 'Plug into 1/100 = 1/v - 1/(-200) → 1/v = 1/100 - 1/200 = 1/200!',
+          exp: 'Solving 1/v = 1/100 - 1/200 gives v = +200 cm (at 2F on the right), and m = v/u = 200/(-200) = -1.00x!',
+          setup: { device: 'convex_lens', u: -200, fMag: 100, h: 65, atInfinity: false, objectKind: 'candle' }
+        },
+        {
+          id: 'form_concave_half',
+          category: 'formula',
+          badge: '🧮 Formula & Sign Sense',
+          q: 'A duck stands at u = -100 cm in front of a Concave Lens with focal length f = -100 cm. Using 1/f = 1/v - 1/u, what is the image position and magnification?',
+          opts: [
+            'v = -50 cm (virtual, same side) and m = +0.50x (half-size upright)',
+            'v = +50 cm (real, opposite side) and m = -0.50x',
+            'v = -200 cm and m = +2.00x',
+            'Image forms at infinity'
+          ],
+          ans: 0,
+          hint: 'Substitute f = -100 and u = -100 into 1/(-100) = 1/v - 1/(-100) → 1/v = -1/100 - 1/100 = -2/100!',
+          exp: '1/v = -2/100 gives v = -50 cm (halfway to F on the left), and m = v/u = (-50)/(-100) = +0.50x—an upright, half-size virtual image!',
+          setup: { device: 'concave_lens', u: -100, fMag: 100, h: 70, atInfinity: false, objectKind: 'duck' }
+        }
+      ];
+
+      const arena = {
+        mode: 'all',
+        queue: [...PRACTICE_BANK],
+        idx: 0,
+        score: 0,
+        streak: 0,
+        maxStreak: 0,
+        sessionXP: 0,
+        locked: false,
+        hintShown: false,
+        lightningRemaining: 60.0,
+        lightningTimerId: null
+      };
+
+      function getMultiplier() {
+        if (arena.streak >= 4) return 3;
+        if (arena.streak >= 2) return 2;
+        return 1;
+      }
+
+      function shuffleArray(arr) {
+        const copy = [...arr];
+        for (let i = copy.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [copy[i], copy[j]] = [copy[j], copy[i]];
+        }
+        return copy;
+      }
+
+      function stopLightningTimer() {
+        if (arena.lightningTimerId) {
+          clearInterval(arena.lightningTimerId);
+          arena.lightningTimerId = null;
+        }
+      }
+
+      function startLightningTimer() {
+        stopLightningTimer();
+        arena.lightningRemaining = 60.0;
+        const hud = document.getElementById('lightningHud');
+        const clockEl = document.getElementById('lightningClock');
+        const barEl = document.getElementById('lightningTimeBar');
+        hud.classList.remove('hidden');
+        clockEl.textContent = '60.0s';
+        barEl.style.width = '100%';
+
+        arena.lightningTimerId = setInterval(() => {
+          arena.lightningRemaining = Math.max(0, arena.lightningRemaining - 0.1);
+          clockEl.textContent = `${arena.lightningRemaining.toFixed(1)}s`;
+          barEl.style.width = `${(arena.lightningRemaining / 60) * 100}%`;
+          if (arena.lightningRemaining <= 0) {
+            stopLightningTimer();
+            arena.idx = arena.queue.length;
+            renderPracticeArena(true);
+          }
+        }, 100);
+      }
+
+      function selectPracticeMode(mode) {
+        arena.mode = mode;
+        arena.idx = 0;
+        arena.score = 0;
+        arena.streak = 0;
+        arena.maxStreak = 0;
+        arena.sessionXP = 0;
+        arena.locked = false;
+        arena.hintShown = false;
+
+        document.querySelectorAll('.practice-tab').forEach((btn) => {
+          const isTarget = btn.dataset.practiceMode === mode;
+          if (btn.dataset.practiceMode === 'lightning') {
+            btn.className = isTarget
+              ? 'practice-tab active px-3.5 py-2 rounded-xl text-xs sm:text-sm font-extrabold bg-gradient-to-r from-[#ff2e93] to-[#fbbf24] text-[#050814] shadow-md ml-auto transition'
+              : 'practice-tab px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold text-[#ff2e93] hover:bg-[#ff2e93]/15 border border-[#ff2e93]/40 ml-auto transition';
+          } else {
+            btn.className = isTarget
+              ? 'practice-tab active px-3.5 py-2 rounded-xl text-xs sm:text-sm font-extrabold bg-gradient-to-r from-[#00e5ff] to-[#38bdf8] text-[#050814] shadow-md transition'
+              : 'practice-tab px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold hover:text-[#00e5ff] transition';
+          }
+        });
+
+        if (mode === 'lightning') {
+          arena.queue = shuffleArray(PRACTICE_BANK);
+          startLightningTimer();
+          audio.wave();
+        } else {
+          stopLightningTimer();
+          document.getElementById('lightningHud').classList.add('hidden');
+          arena.queue = mode === 'all'
+            ? [...PRACTICE_BANK]
+            : PRACTICE_BANK.filter((q) => q.category === mode);
+          audio.tap();
+        }
+
+        renderPracticeArena();
+      }
+
+      document.querySelectorAll('.practice-tab').forEach((btn) => {
+        btn.addEventListener('click', () => selectPracticeMode(btn.dataset.practiceMode));
+      });
+
+      function solveQuestionSetup(setup) {
+        const isMirror = setup.device.includes('mirror');
+        const f = (setup.device === 'concave_mirror' || setup.device === 'concave_lens') ? -setup.fMag : setup.fMag;
+        if (setup.atInfinity) {
+          const isReal = (setup.device === 'concave_mirror' || setup.device === 'convex_lens');
+          return { isMirror, f, v: f, m: 0, hPrime: 0, isReal, atFocusInf: false };
+        }
+        let v = 0;
+        let m = 0;
+        let atFocusInf = false;
+        if (isMirror) {
+          if (Math.abs(setup.u - f) < 2.6) { atFocusInf = true; v = Infinity; m = Infinity; }
+          else { v = (setup.u * f) / (setup.u - f); m = -v / setup.u; }
+        } else {
+          if (Math.abs(setup.u + f) < 2.6) { atFocusInf = true; v = Infinity; m = Infinity; }
+          else { v = (setup.u * f) / (setup.u + f); m = v / setup.u; }
+        }
+        const isReal = !atFocusInf && (isMirror ? v < 0 : v > 0);
+        return { isMirror, f, v, m, hPrime: atFocusInf ? Infinity : m * setup.h, isReal, atFocusInf };
+      }
+
+      function renderQuizDiagramCanvas(now, pulsePhase) {
+        const cvs = document.getElementById('quizDiagramCanvas');
+        if (!cvs || arena.idx >= arena.queue.length) return;
+        const item = arena.queue[arena.idx];
+        const setup = item.setup;
+        const res = solveQuestionSetup(setup);
+        const ctx = cvs.getContext('2d');
+        const W = cvs.width;
+        const H = cvs.height;
+        const cx = W * 0.5;
+        const cy = H * 0.52;
+        const sc = 0.68;
+
+        ctx.clearRect(0, 0, W, H);
+
+        // Grid & Principal Axis
+        ctx.strokeStyle = 'rgba(0, 229, 255, 0.06)';
+        ctx.lineWidth = 1;
+        for (let x = cx % 32; x < W; x += 32) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke(); }
+        for (let y = cy % 32; y < H; y += 32) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); }
+
+        ctx.save();
+        ctx.strokeStyle = 'rgba(148, 163, 184, 0.45)';
+        ctx.setLineDash([6, 5]);
+        ctx.beginPath(); ctx.moveTo(0, cy); ctx.lineTo(W, cy); ctx.stroke();
+        ctx.restore();
+
+        // Draw Mirror or Lens
+        drawOpticElement(ctx, cx, cy, 68, setup.device);
+
+        // Draw Optical Points (P/O, F, C/2F)
+        const f = setup.fMag;
+        const pts = res.isMirror
+          ? [
+              { x: cx, l: 'P', c: '#00e5ff' },
+              { x: cx + res.f * sc, l: 'F', c: '#fbbf24' },
+              { x: cx + res.f * 2 * sc, l: 'C', c: '#ff2e93' }
+            ]
+          : [
+              { x: cx, l: 'O', c: '#00e5ff' },
+              { x: cx - f * sc, l: 'F', c: '#fbbf24' },
+              { x: cx - 2 * f * sc, l: '2F', c: '#ff2e93' },
+              { x: cx + f * sc, l: 'F', c: '#fbbf24' },
+              { x: cx + 2 * f * sc, l: '2F', c: '#ff2e93' }
+            ];
+
+        ctx.save();
+        ctx.font = 'bold 10px "JetBrains Mono", monospace';
+        ctx.textAlign = 'center';
+        for (const p of pts) {
+          if (p.x < 10 || p.x > W - 10) continue;
+          ctx.fillStyle = p.c;
+          ctx.beginPath(); ctx.arc(p.x, cy, 3.5, 0, Math.PI * 2); ctx.fill();
+          ctx.fillText(p.l, p.x, cy + 15);
+        }
+        ctx.restore();
+
+        const fPx = cx + res.f * sc;
+
+        // Draw Incoming Setup (Object or Parallel Rays)
+        if (setup.atInfinity) {
+          [-40, -20, 20, 40].forEach((dy) => {
+            const y = cy + dy;
+            drawGlowingRay(ctx, 10, y, cx, y, '#fbbf24', false, 1, pulsePhase);
+            if (arena.locked) {
+              if (setup.device === 'concave_mirror' || setup.device === 'convex_lens') {
+                const end = projectRay(cx, y, fPx, cy, 240);
+                drawGlowingRay(ctx, cx, y, end.x, end.y, '#fbbf24', false, 1, pulsePhase);
+              } else {
+                const end = projectRay(fPx, cy, cx, y, 240);
+                drawGlowingRay(ctx, cx, y, end.x, end.y, '#fbbf24', false, 1, pulsePhase);
+                drawGlowingRay(ctx, cx, y, fPx, cy, '#fbbf24', true, 1);
+              }
+            }
+          });
+          if (arena.locked && res.isReal) {
+            renderSolarSparkHotspot(ctx, fPx, cy, now);
+          }
+        } else {
+          const objX = cx + setup.u * sc;
+          const objY = cy - setup.h * sc;
+
+          // Object Arrow
+          ctx.save();
+          ctx.strokeStyle = '#10b981';
+          ctx.lineWidth = 3;
+          ctx.shadowColor = '#10b981';
+          ctx.shadowBlur = 10;
+          ctx.beginPath(); ctx.moveTo(objX, cy); ctx.lineTo(objX, objY); ctx.stroke();
+          ctx.fillStyle = '#10b981';
+          ctx.beginPath(); ctx.moveTo(objX, objY); ctx.lineTo(objX - 5, objY + 9); ctx.lineTo(objX + 5, objY + 9); ctx.closePath(); ctx.fill();
+          ctx.font = '18px sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillText(OBJECT_GLYPHS[setup.objectKind], objX - 16, (cy + objY) / 2 + 6);
+          ctx.restore();
+
+          // Reveal Solution Rays & Formed Image after answering!
+          if (arena.locked) {
+            const imgX = res.atFocusInf ? null : cx + res.v * sc;
+            const imgY = res.atFocusInf ? null : cy - res.hPrime * sc;
+
+            // Ray 1: Parallel
+            drawGlowingRay(ctx, objX, objY, cx, objY, '#fbbf24', false, 1, pulsePhase);
+            if (setup.device === 'concave_mirror' || setup.device === 'convex_lens') {
+              const end = projectRay(cx, objY, fPx, cy, 260);
+              drawGlowingRay(ctx, cx, objY, end.x, end.y, '#fbbf24', false, 1, pulsePhase);
+              if (!res.isReal && !res.atFocusInf) drawGlowingRay(ctx, cx, objY, imgX, imgY, '#fbbf24', true, 1);
+            } else {
+              const end = projectRay(fPx, cy, cx, objY, 260);
+              drawGlowingRay(ctx, cx, objY, end.x, end.y, '#fbbf24', false, 1, pulsePhase);
+              drawGlowingRay(ctx, cx, objY, fPx, cy, '#fbbf24', true, 1);
+            }
+
+            // Ray 2: Center
+            drawGlowingRay(ctx, objX, objY, cx, cy, '#ff2e93', false, 1, pulsePhase);
+            if (res.isMirror) {
+              const end = projectRay(cx, cy, objX, cy + (cy - objY), 260);
+              drawGlowingRay(ctx, cx, cy, end.x, end.y, '#ff2e93', false, 1, pulsePhase);
+              if (!res.isReal && !res.atFocusInf) drawGlowingRay(ctx, cx, cy, imgX, imgY, '#ff2e93', true, 1);
+            } else {
+              const end = projectRay(objX, objY, cx, cy, 260);
+              drawGlowingRay(ctx, cx, cy, end.x, end.y, '#ff2e93', false, 1, pulsePhase);
+              if (!res.isReal && !res.atFocusInf) drawGlowingRay(ctx, cx, cy, imgX, imgY, '#ff2e93', true, 1);
+            }
+
+            // Formed Image Arrow
+            if (!res.atFocusInf && Math.abs(imgX - cx) < W * 0.48) {
+              const imgCol = res.isReal ? '#fbbf24' : '#00e5ff';
+              ctx.save();
+              if (!res.isReal) ctx.setLineDash([4, 4]);
+              ctx.strokeStyle = imgCol;
+              ctx.lineWidth = 3;
+              ctx.shadowColor = imgCol;
+              ctx.shadowBlur = 10;
+              ctx.beginPath(); ctx.moveTo(imgX, cy); ctx.lineTo(imgX, imgY); ctx.stroke();
+              const dir = res.hPrime >= 0 ? -1 : 1;
+              ctx.setLineDash([]);
+              ctx.fillStyle = imgCol;
+              ctx.beginPath(); ctx.moveTo(imgX, imgY); ctx.lineTo(imgX - 5, imgY - dir * 9); ctx.lineTo(imgX + 5, imgY - dir * 9); ctx.closePath(); ctx.fill();
+              ctx.restore();
+            }
+          }
+        }
+      }
+
+      function renderPracticeArena(timedOut = false) {
+        const box = document.getElementById('quizBox');
+        const progTag = document.getElementById('quizProgTag');
+        const comboTag = document.getElementById('quizComboTag');
+        const bar = document.getElementById('quizProgressFill');
+        const mult = getMultiplier();
+
+        comboTag.textContent = `🔥 Streak: ${arena.streak} (${mult}x XP)`;
+
+        if (arena.idx >= arena.queue.length) {
+          stopLightningTimer();
+          const total = arena.queue.length;
+          const accuracy = total > 0 ? Math.round((arena.score / total) * 100) : 0;
+          const currentRank = computeRank(xp);
+          progTag.textContent = `Score: ${arena.score} / ${total}`;
+          bar.style.width = '100%';
+          launchConfetti();
+          audio.win();
+
+          box.innerHTML = `
+            <div class="text-center py-4 space-y-4">
+              <div class="text-5xl">${timedOut ? '⏱️' : '🏆'}</div>
+              <div>
+                <h3 class="text-2xl sm:text-3xl font-black">${timedOut ? 'Time Up! Lightning Round Complete!' : 'Practice Arena Complete!'}</h3>
+                <p class="text-sm text-muted mt-1">Current Rank: <strong class="text-[#fbbf24]">${currentRank}</strong> (${xp} Total XP)</p>
+              </div>
+
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-2xl mx-auto">
+                <div class="rounded-2xl p-3 bg-[#050814]/70 border border-slate-700/70">
+                  <div class="text-[10px] uppercase text-slate-400">Solved</div>
+                  <div class="font-mono-code text-lg font-extrabold text-[#00e5ff]">${arena.score} / ${total}</div>
+                </div>
+                <div class="rounded-2xl p-3 bg-[#050814]/70 border border-slate-700/70">
+                  <div class="text-[10px] uppercase text-slate-400">Accuracy</div>
+                  <div class="font-mono-code text-lg font-extrabold text-[#10b981]">${accuracy}%</div>
+                </div>
+                <div class="rounded-2xl p-3 bg-[#050814]/70 border border-slate-700/70">
+                  <div class="text-[10px] uppercase text-slate-400">Best Streak</div>
+                  <div class="font-mono-code text-lg font-extrabold text-[#ff2e93]">🔥 ${arena.maxStreak}</div>
+                </div>
+                <div class="rounded-2xl p-3 bg-[#050814]/70 border border-slate-700/70">
+                  <div class="text-[10px] uppercase text-slate-400">Session XP</div>
+                  <div class="font-mono-code text-lg font-extrabold text-[#fbbf24]">+${arena.sessionXP} XP</div>
+                </div>
+              </div>
+
+              <div class="pt-1 flex flex-wrap justify-center gap-3">
+                <button id="shuffleRestartBtn" type="button" class="px-6 py-3 rounded-2xl font-extrabold text-sm bg-gradient-to-r from-[#00e5ff] via-[#fbbf24] to-[#ff2e93] text-[#050814] hover:brightness-110 transition">
+                  🔀 Shuffle &amp; Practice Again
+                </button>
+              </div>
+            </div>
+          `;
+
+          document.getElementById('shuffleRestartBtn').addEventListener('click', () => {
+            arena.idx = 0;
+            arena.score = 0;
+            arena.streak = 0;
+            arena.maxStreak = 0;
+            arena.sessionXP = 0;
+            arena.locked = false;
+            arena.hintShown = false;
+            arena.queue = shuffleArray(arena.queue);
+            if (arena.mode === 'lightning') startLightningTimer();
+            audio.tap();
+            renderPracticeArena();
+          });
+          return;
+        }
+
+        arena.locked = false;
+        arena.hintShown = false;
+        const item = arena.queue[arena.idx];
+        const total = arena.queue.length;
+        progTag.textContent = `Q ${arena.idx + 1} / ${total}`;
+        bar.style.width = `${((arena.idx + 1) / total) * 100}%`;
+
+        const deviceLabels = {
+          concave_mirror: 'Concave Mirror',
+          convex_mirror: 'Convex Mirror',
+          convex_lens: 'Convex Lens',
+          concave_lens: 'Concave Lens'
+        };
+
+        box.innerHTML = `
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+            <!-- Left 7 Cols: Question, Options & Hint -->
+            <div class="lg:col-span-7 space-y-4">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <span class="px-3 py-1 rounded-full font-mono-code text-[11px] font-bold bg-[#00e5ff]/15 text-[#00e5ff] border border-[#00e5ff]/35">
+                  ${item.badge}
+                </span>
+                <button id="toggleHintBtn" type="button" class="px-3 py-1 rounded-full font-mono-code text-[11px] font-bold bg-[#fbbf24]/15 text-[#fbbf24] border border-[#fbbf24]/40 hover:bg-[#fbbf24]/25 transition">
+                  💡 Need a Hint?
+                </button>
+              </div>
+
+              <div class="text-base sm:text-lg font-extrabold leading-snug">${item.q}</div>
+
+              <div id="hintRevealBox" class="hidden p-3 rounded-xl bg-[#fbbf24]/12 border border-[#fbbf24]/40 text-xs sm:text-sm text-[#fbbf24]">
+                <strong>💡 Visual Clue:</strong> ${item.hint}
+              </div>
+
+              <div class="grid grid-cols-1 gap-2.5">
+                ${item.opts.map((opt, idx) => `
+                  <button type="button" data-choice="${idx}" class="text-left px-4 py-3 rounded-xl glass-card hover:border-[#00e5ff] text-xs sm:text-sm font-medium transition">
+                    <span class="font-mono-code text-[#00e5ff] font-bold mr-2">${String.fromCharCode(65 + idx)}.</span>${opt}
+                  </button>
+                `).join('')}
+              </div>
+
+              <div id="quizFeedbackBox" class="hidden p-3.5 rounded-xl text-xs sm:text-sm font-medium"></div>
+
+              <div class="flex flex-wrap items-center justify-between gap-2 pt-1">
+                <button id="testInBenchBtn" type="button" class="hidden px-4 py-2.5 rounded-xl font-extrabold text-xs sm:text-sm bg-[#10b981]/20 text-[#10b981] border border-[#10b981]/50 hover:bg-[#10b981]/30 transition">
+                  🔬 Test in Big Bench ↑
+                </button>
+                <button id="nextQuizBtn" type="button" class="hidden ml-auto px-5 py-2.5 rounded-xl font-extrabold text-xs sm:text-sm bg-[#00e5ff]/20 text-[#00e5ff] border border-[#00e5ff]/50 hover:bg-[#00e5ff]/30 transition">
+                  ${arena.idx === total - 1 ? 'See Final Scoreboard 🏆' : 'Next Question →'}
+                </button>
+              </div>
+            </div>
+
+            <!-- Right 5 Cols: Live Interactive Ray Diagram Preview -->
+            <div class="lg:col-span-5 space-y-2">
+              <div class="flex items-center justify-between font-mono-code text-[11px] text-muted">
+                <span>📡 LIVE SETUP DIAGRAM</span>
+                <span class="text-[#00e5ff] font-bold">${deviceLabels[item.setup.device]}</span>
+              </div>
+              <div class="relative w-full aspect-[440/210] rounded-2xl overflow-hidden bg-[#040712] border border-slate-800 shadow-xl">
+                <canvas id="quizDiagramCanvas" width="440" height="210" class="w-full h-full block"></canvas>
+                <div id="diagramStatusPill" class="pointer-events-none absolute bottom-2.5 right-2.5 px-2.5 py-0.5 rounded-full bg-[#050814]/85 border border-white/15 font-mono-code text-[10px] text-[#fbbf24]">
+                  ❓ Predict Image
+                </div>
+              </div>
+              <p class="text-[11px] text-muted leading-snug">
+                Answer the question to unlock the full ray solution on this diagram—or load it straight into the Big Light Lab!
+              </p>
+            </div>
+          </div>
+        `;
+
+        document.getElementById('toggleHintBtn').addEventListener('click', () => {
+          arena.hintShown = !arena.hintShown;
+          document.getElementById('hintRevealBox').classList.toggle('hidden', !arena.hintShown);
+          audio.tap();
+        });
+
+        box.querySelectorAll('[data-choice]').forEach((btn) => {
+          btn.addEventListener('click', () => {
+            if (arena.locked) return;
+            arena.locked = true;
+            const chosen = Number(btn.dataset.choice);
+            const fb = document.getElementById('quizFeedbackBox');
+            const diagPill = document.getElementById('diagramStatusPill');
+            fb.classList.remove('hidden');
+            diagPill.textContent = '✨ Solution Rays Unlocked';
+            diagPill.style.color = '#10b981';
+
+            if (chosen === item.ans) {
+              arena.score++;
+              arena.streak++;
+              if (arena.streak > arena.maxStreak) arena.maxStreak = arena.streak;
+              const earned = 50 * getMultiplier();
+              arena.sessionXP += earned;
+
+              btn.style.borderColor = '#10b981';
+              btn.style.background = 'rgba(16, 185, 129, 0.22)';
+              fb.className = 'p-3.5 rounded-xl text-xs sm:text-sm font-medium bg-[#10b981]/15 border border-[#10b981]/50 text-[#10b981]';
+              fb.textContent = `✅ Spot on! (+${earned} XP${getMultiplier() > 1 ? ` • ${getMultiplier()}x Combo!` : ''}) — ${item.exp}`;
+              awardXP(earned);
+              audio.win();
+              launchConfetti();
+            } else {
+              arena.streak = 0;
+              btn.style.borderColor = '#ff2e93';
+              btn.style.background = 'rgba(255, 46, 147, 0.2)';
+              const correctBtn = box.querySelector(`[data-choice="${item.ans}"]`);
+              correctBtn.style.borderColor = '#10b981';
+              fb.className = 'p-3.5 rounded-xl text-xs sm:text-sm font-medium bg-[#ff2e93]/15 border border-[#ff2e93]/50 text-[#ff2e93]';
+              fb.textContent = `💡 Nice try! ${item.exp}`;
+              audio.miss();
+            }
+
+            comboTag.textContent = `🔥 Streak: ${arena.streak} (${getMultiplier()}x XP)`;
+            document.getElementById('testInBenchBtn').classList.remove('hidden');
+            document.getElementById('nextQuizBtn').classList.remove('hidden');
+          });
+        });
+
+        document.getElementById('testInBenchBtn').addEventListener('click', () => {
+          const s = item.setup;
+          bench.atInfinity = s.atInfinity;
+          bench.fMag = s.fMag;
+          bench.u = s.u;
+          bench.h = s.h;
+          bench.objectKind = s.objectKind;
+          document.getElementById('sliderF').value = s.fMag;
+          document.getElementById('sliderU').value = s.u;
+          document.getElementById('sliderH').value = s.h;
+          document.querySelectorAll('[data-obj]').forEach((b) => {
+            b.className = b.dataset.obj === s.objectKind
+              ? 'obj-pill px-2.5 py-1.5 rounded-lg text-xs font-bold bg-[#fbbf24]/25 text-[#fbbf24] border border-[#fbbf24]/50 transition'
+              : 'obj-pill px-2.5 py-1.5 rounded-lg text-xs font-semibold hover:bg-white/10 border border-transparent transition';
+          });
+          selectLabDevice(s.device);
+          audio.wave();
+          pushToast('🔬 Loaded in Big Light Lab!', 'Experiment with this exact setup on the main bench.', '#10b981');
+          document.getElementById('big-lab').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        document.getElementById('nextQuizBtn').addEventListener('click', () => {
+          arena.idx++;
+          audio.tap();
+          renderPracticeArena();
+        });
+      }
+
+      /* -----------------------------------------------------------------------
+         12. MASTER ANIMATION LOOP (WINDOW ONLOAD)
+         ----------------------------------------------------------------------- */
+      function animateLoop(now) {
+        bench.photonPhase = (bench.photonPhase + 0.012) % 1;
+        renderGlobalLayers();
+        renderHeroOpticalArray(now);
+        renderRuleMiniCanvas(0, bench.photonPhase);
+        renderRuleMiniCanvas(1, bench.photonPhase);
+        renderRuleMiniCanvas(2, bench.photonPhase);
+        renderBigBench(now);
+        renderLaserPuzzle(now);
+        renderQuizDiagramCanvas(now, bench.photonPhase);
+        requestAnimationFrame(animateLoop);
+      }
+
+      function bootLumina() {
+        updateRuleCardsCopy();
+        loadPuzzleLevel(0);
+        renderMissionsList();
+        renderPracticeArena();
+        syncBenchTelemetry();
+        requestAnimationFrame(animateLoop);
+      }
+
+      if (document.readyState === 'complete') {
+        bootLumina();
+      } else {
+        window.onload = bootLumina;
+      }
+    })();
+  </script>
+</body>
+</html>
