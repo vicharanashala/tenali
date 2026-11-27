@@ -1,22 +1,22 @@
 {
   "src/App.jsx": {
     "no-empty": {
-      "count": 148
+      "count": 144
     },
     "no-restricted-syntax": {
       "count": 1
     },
     "no-unexpected-multiline": {
-      "count": 5
+      "count": 4
     },
     "no-unused-vars": {
-      "count": 209
+      "count": 202
     },
     "no-useless-escape": {
       "count": 4
     },
     "react-hooks/immutability": {
-      "count": 22
+      "count": 21
     },
     "react-hooks/preserve-manual-memoization": {
       "count": 73
@@ -31,7 +31,7 @@
       "count": 6
     },
     "react-hooks/set-state-in-effect": {
-      "count": 93
+      "count": 92
     },
     "react-refresh/only-export-components": {
       "count": 8
@@ -94,6 +94,20 @@
     }
   },
   "src/WaterJugLab.jsx": {
+    "react-hooks/immutability": {
+      "count": 1
+    },
+    "react-hooks/set-state-in-effect": {
+      "count": 1
+    }
+  },
+  "src/apps/SqrtApp.jsx": {
+    "no-empty": {
+      "count": 4
+    },
+    "no-unused-vars": {
+      "count": 7
+    },
     "react-hooks/immutability": {
       "count": 1
     },
