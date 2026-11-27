@@ -19,9 +19,63 @@
 ---
 
 <!-- live-changelog:start -->
-### 📊 Total: 1201 commits · 96 active days · 61 unique authors
+### 📊 Total: 1216 commits · 99 active days · 63 unique authors
 
 > **📖 How to read this:** Each entry shows a clickable SHA, the author, and a one-line subject. Sub-bullets show the **exact files touched** with per-file `+additions −deletions`, the **total line stats**, and (when present) the **commit body** explaining what & why.
+
+#### 📅 2026-11-17  <sub>(4 commits)</sub>
+
+- 🐛 [`6b7d5005`](https://github.com/vicharanashala/tenali/commit/6b7d5005b324e6f6138d98b139d2502dec1c3a45) — **jgupta05072003-code** — accept equivalent answers, state rounding, fix content and add tests (follow-up to #519) (#524)
+    - 📁 **7 files:** `client/src/detective-answer.js` `+97 −11`, `client/src/detective-app.jsx` `+9 −2`, `client/src/detective-board-cases.js` `+2 −2`, `client/src/detective-board-engine.js` `+1 −1`, `client/src/detective-generators.js` `+79 −37`, `client/src/detective-generators.test.js` `+1 −1`, `client/src/detective-leftovers.test.js` `+402 −0`
+    - 📊 **`+591 −54`** · 7 files
+- 📌 [`062e3444`](https://github.com/vicharanashala/tenali/commit/062e344456c2eb98b2e521135b09d8c4dc2a2b17) — **Code-Zero07** — Add Detective Agency case files and Detective Board gameplay for Grade 2 learners (#519)
+    - 📁 **18 files:** `client/src/App.css` `+90 −0`, `client/src/detective-answer.js` `+148 −0`, `client/src/detective-answer.test.js` `+97 −0`, `client/src/detective-app.jsx` `+2436 −281`, `client/src/detective-board-app.jsx` `+1790 −0`, `client/src/detective-board-cases.js` `+1130 −0`, `client/src/detective-board-engine.js` `+544 −0`, `client/src/detective-board.css` `+2419 −0` *(+10 more in [`062e3444`](https://github.com/vicharanashala/tenali/commit/062e344456c2eb98b2e521135b09d8c4dc2a2b17))*
+    - 📊 **`+12951 −281`** · 18 files
+- 📌 [`d2e14d1e`](https://github.com/vicharanashala/tenali/commit/d2e14d1e2af0ded5fefd3ecebaf27b95ba2cd913) — **Jaspreet-j** — Fix fold in guess the number (#523)
+    - 📁 **2 files:** `client/src/App.jsx` `+31 −4`, `client/src/features/tiles.js` `+0 −1`
+    - 📊 **`+31 −5`** · 2 files
+- 📝 [`e2f40698`](https://github.com/vicharanashala/tenali/commit/e2f4069835a370fe23a29b134e8900d3f06c0f8b) — **Jaspreet-j** — add onboarding document (Jaspreet Kaur) (#433)
+    - 📁 **1 file:** `Ideas/ONBOARDING-Jaspreet-Kaur.md` `+112 −0`
+    - 📊 **`+112 −0`** · 1 file
+
+#### 📅 2026-11-12  <sub>(2 commits)</sub>
+
+- ✨ [`48a7ed38`](https://github.com/vicharanashala/tenali/commit/48a7ed38604268f97c1ba90db663ad2ccd98107c) — **jgupta05072003-code** — serve ICT/ submissions at /summership/ict with a sandbox CSP (#515)
+    - 📁 **1 file:** `server/index.js` `+16 −0`
+    - 📊 **`+16 −0`** · 1 file
+- 📝 [`30ec729a`](https://github.com/vicharanashala/tenali/commit/30ec729ae4e84fcfb25b8ddfd9ffc833bfd77cee) — **jgupta05072003-code** — add ICT folder for ICT course material (#514)
+    - 📁 **1 file:** `ICT/README.md` `+3 −0`
+    - 📊 **`+3 −0`** · 1 file
+
+#### 📅 2026-11-10  <sub>(9 commits)</sub>
+
+- 🔧 [`106fd137`](https://github.com/vicharanashala/tenali/commit/106fd137d7dbc3374326b495611c31a819027876) — **25f2002654** — pin the Node.js version and fail closed on an unpatched runtime (#466) (#474)
+    - 📁 **5 files:** `DEPLOYMENT.md` `+51 −0`, `render.yaml` `+9 −1`, `server/__tests__/runtimeVersion.test.js` `+151 −0`, `server/deploy/check-node-version.js` `+118 −0`, `server/package.json` `+3 −0`
+    - 📊 **`+332 −1`** · 5 files
+- 🐛 [`5b7add98`](https://github.com/vicharanashala/tenali/commit/5b7add989b21d4febdd4acd53fb1b1e5f767ef8e) — **Tarang** — update vulnerable client and server dependencies (#507)
+    - 📁 **4 files:** `.gitignore` `+3 −0`, `client/package-lock.json` `+313 −353`, `client/package.json` `+8 −0`, `server/package-lock.json` `+171 −141`
+    - 📊 **`+495 −494`** · 4 files
+- 🐛 [`47f08d99`](https://github.com/vicharanashala/tenali/commit/47f08d990c1c51f2a6360def09331fba5e54eb9f) — **Tarang** — add next round button (#505)
+    - 📁 **1 file:** `client/src/App.jsx` `+5 −0`
+    - 📊 **`+5 −0`** · 1 file
+- 🐛 [`79a95693`](https://github.com/vicharanashala/tenali/commit/79a95693bca6d56b2b9ad65137dbb1c6e3a50014) — **sweta010708-ai** — improve balance scale weight bank and quiz timers (#357)
+    - 📁 **5 files:** `client/eslint-suppressions.json` `+2 −5`, `client/src/App.jsx` `+50 −88`, `client/src/balanceScaleBank.js` `+32 −0`, `client/src/quizFixes.test.jsx` `+143 −0`, `client/src/vachana/index.jsx` `+1 −0`
+    - 📊 **`+228 −93`** · 5 files
+- ✨ [`bb6f457f`](https://github.com/vicharanashala/tenali/commit/bb6f457fb646a02c7e733f6e763a598c55c7a29d) — **Gurnoor Singh** — make pretty URLs like /trig open their mode (#452)
+    - 📁 **1 file:** `client/src/App.jsx` `+50 −0`
+    - 📊 **`+50 −0`** · 1 file
+- ✨ [`5a079771`](https://github.com/vicharanashala/tenali/commit/5a079771374b70682d56b0500d045c2da3c60e80) — **Gurnoor Singh** — fold the Origin tile into Basic Arithmetic (#451)
+    - 📁 **2 files:** `client/src/App.jsx` `+18 −5`, `client/src/features/tiles.js` `+0 −1`
+    - 📊 **`+18 −6`** · 2 files
+- 🐛 [`40232559`](https://github.com/vicharanashala/tenali/commit/40232559e67d79c874cd59b66016a09cde695ac7) — **Gurnoor Singh** — clear CureFlow's eslint errors without changing behaviour (#448)
+    - 📁 **4 files:** `client/eslint-suppressions.json` `+0 −5`, `client/src/monsters/CureFlow.jsx` `+61 −58`, `client/src/monsters/CureFlow.test.jsx` `+117 −0`, `client/src/monsters/monsterStore.js` `+7 −3`
+    - 📊 **`+185 −66`** · 4 files
+- 📝 [`77202bdd`](https://github.com/vicharanashala/tenali/commit/77202bddedbaca0c6c91601b6e8914a187d1e4f1) — **Disha** — add project opener, target audience, and branch deployment model (#232) (#377)
+    - 📁 **1 file:** `README.md` `+47 −3`
+    - 📊 **`+47 −3`** · 1 file
+- 📝 [`e259acff`](https://github.com/vicharanashala/tenali/commit/e259acff997e966bd2fadafe95a7c64b72633815) — **Sonali Bharti** — add Sonali onboarding document (#496)
+    - 📁 **1 file:** `Ideas/ONBOARDING-Sonali-Bharti.md` `+181 −0`
+    - 📊 **`+181 −0`** · 1 file
 
 #### 📅 2026-11-06  <sub>(1 commit)</sub>
 

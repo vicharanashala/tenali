@@ -1554,6 +1554,22 @@ app.post('/api/playground2/run', auth.requireAuth, playground2Limiter, async (re
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 app.use('/riddles/images', express.static(path.join(__dirname, 'riddles', 'images')));
 
+// ICT course submissions: a file added as ICT/<folder>/index.html is served at
+// /summership/ict/<folder>/. The pages are written by students, so they are sent
+// with a sandbox Content-Security-Policy. The page can run its own scripts but gets
+// an opaque origin, so it cannot read this site's storage, cookies or login data
+// (this also means a page cannot use localStorage).
+const ictStatic = express.static(path.join(__dirname, '..', 'ICT'), { index: 'index.html', dotfiles: 'ignore' });
+const ictHeaders = (_req, res, next) => {
+  res.setHeader('Content-Security-Policy', 'sandbox allow-scripts allow-forms allow-popups');
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  next();
+};
+app.use('/summership/ict', ictHeaders, ictStatic);
+app.use('/ict', ictHeaders, ictStatic);
+// An ICT path that matches no file is a plain 404, not the Tenali app.
+app.use(['/summership/ict', '/ict'], (_req, res) => res.status(404).send('Not found'));
+
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // /graph — Prerequisite DAG visualisation
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
