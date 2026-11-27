@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Tenali Puzzles & Games - Flower Addition II</title>
+  <meta name="description" content="Interactive visual flower addition game for preschool children aged 4-5. See addition visually: [Group 1] + [Group 2] = [Combined Group]. Follows Tenali math curriculum visual design.">
+
+  <!-- Google Fonts: Serif for Tenali branding + Rounded Sans for child readability -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Fredoka:wght@400;600;700&family=Nunito:wght@700;800;900&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css?v=2.6">
+</head>
+<body>
+
+  <!-- =======================================================================
+       TOP NAVIGATION BAR (Authentic Tenali Design System)
+       ======================================================================= -->
+  <header class="tenali-nav-header">
+    <div class="nav-left-group">
+      <!-- Glowing Orange Guide Badge -->
+      <a href="#guide" id="guide-pill-btn" class="guide-pill-badge" title="Open Learning Guide & Tips">
+        <span class="guide-title">🧭 Guide</span>
+        <span class="guide-sub">v1.2 Visual</span>
+      </a>
+
+      <!-- Tenali Brand Logo -->
+      <a href="#" class="tenali-brand" title="Tenali">
+        <span class="tenali-logo-text">Tenali</span>
+      </a>
+    </div>
+
+    <!-- Center Navigation Links -->
+    <nav class="nav-center-links" aria-label="Main Navigation">
+      <a href="#" class="nav-pill-item"><span class="nav-icon">🏠</span> Home</a>
+      <a href="#" class="nav-pill-item active"><span class="nav-icon">🧩</span> All Puzzles</a>
+      <a href="#" class="nav-pill-item"><span class="nav-icon">🌸</span> Flower Math II</a>
+      <a href="#" class="nav-pill-item"><span class="nav-icon">🖼️</span> Showcase</a>
+      <a href="#" class="nav-pill-item"><span class="nav-icon">▶️</span> Live Demo</a>
+      <a href="#" class="nav-pill-item"><span class="nav-icon">⚡</span> Features</a>
+      <a href="#" class="nav-pill-item"><span class="nav-icon">📚</span> Curriculum</a>
+    </nav>
+
+    <!-- Right Controls -->
+    <div class="nav-right-controls">
+      <button id="btn-sound-toggle" class="control-btn-circle" title="Toggle Sound & Voice" aria-label="Toggle Sound">
+        🔊
+      </button>
+      <button class="control-btn-circle" title="Theme Mode" aria-label="Theme Mode">
+        ☀️
+      </button>
+      <button class="control-btn-circle modal-close-trigger" title="Settings" aria-label="Settings">
+        ⚙️
+      </button>
+      <div class="user-avatar-pill" title="Student Profile" aria-label="Student Profile">
+        🧒
+      </div>
+    </div>
+  </header>
+
+  <!-- =======================================================================
+       MAIN VIEWPORT & TENALI SHELL (Tenali Dark Amber & Brown Theme)
+       ======================================================================= -->
+  <main class="main-viewport">
+    
+    <div class="tenali-hub-card">
+      
+      <!-- Sub-header inside Card -->
+      <div class="tenali-sub-header">
+        <a href="#" class="pill-back-btn" title="Back to Overview">
+          ← Overview
+        </a>
+
+        <div class="level-badge-indicator">
+          <span class="dot"></span>
+          <span id="level-badge-text">Level 1: Totals up to 4</span>
+        </div>
+
+        <!-- Visible Teacher Voice Toggle for Parents & Teachers -->
+        <button id="teacher-voice-toggle-btn" class="teacher-voice-toggle-btn" title="Toggle Indian Teacher Narration" aria-label="Toggle Teacher Voice">
+          👩‍🏫 Teacher Voice: <span id="teacher-voice-status">ON</span>
+        </button>
+
+        <!-- Activities Dropdown moved into Sub-Header for compact viewport -->
+        <div class="activities-dropdown-wrapper" id="activities-dropdown-wrapper">
+          <button type="button" class="activities-dropdown-btn" id="activities-dropdown-btn" aria-haspopup="true" aria-expanded="false" aria-controls="activities-dropdown-menu" aria-label="Select Activity">
+            <span class="activities-btn-text">Activities</span>
+            <span class="activities-chevron" aria-hidden="true">▼</span>
+          </button>
+          <div class="activities-dropdown-menu" id="activities-dropdown-menu" role="menu" aria-label="Activities">
+            <button type="button" class="activity-dropdown-item active" id="activity-1-item" role="menuitem" data-activity="1">
+              <span class="activity-item-icon">🌸</span>
+              <span class="activity-item-title">Activity 1</span>
+            </button>
+            <button type="button" class="activity-dropdown-item" id="activity-2-item" role="menuitem" data-activity="2">
+              <span class="activity-item-icon">🌼</span>
+              <span class="activity-item-title">Activity 2</span>
+            </button>
+            <button type="button" class="activity-dropdown-item" id="activity-3-item" role="menuitem" data-activity="3">
+              <span class="activity-item-icon">🌺</span>
+              <span class="activity-item-title">Activity 3</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="sub-header-actions" style="display: none;">
+          <button class="control-btn-circle" title="Menu" aria-label="Menu">
+            ☰
+          </button>
+        </div>
+      </div>
+
+      <!-- Website Header — Brown Area -->
+      <div class="tenali-hero-banner">
+        <div class="tenali-hero-brand-group">
+          <!-- Exact Tenali Mascot Illustration -->
+          <img src="tenali_mascot.png" class="tenali-mascot-img" alt="Tenali scholar mascot" width="58" height="88">
+
+          <div class="tenali-hero-text">
+            <h1>Tenali Puzzles &amp; Games</h1>
+            <p>Explore 90+ algorithmically generated math and reasoning games</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Activity Label immediately above the game container, aligned towards the left side -->
+      <div class="activity-section-header">
+        <h2 class="activity-section-title" id="activity-section-title">Activity 1</h2>
+      </div>
+
+      <!-- ===================================================================
+           THE WHITE ACTIVITY CARD (Flower Addition II Design)
+           Preserves exact visual distinction: pure white card, large green
+           equation, dashed pale-green containers, purple & yellow flowers.
+           Features visual representation:
+           [Group 1] + [Group 2] = [Combined Group]
+           =================================================================== -->
+      <section class="flower-activity-card" id="flower-activity-container" aria-label="Flower Addition II Activity">
+        
+        <!-- Single "Count Again" Button in Top-Right Corner of Activity Area -->
+        <button type="button" class="activity-count-again-btn" id="btn-count-again" title="Start counting this round again" aria-label="Count this round again">
+          <svg class="recount-icon" viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 12a9 9 0 1 0 2.6-6.4L2 9"/>
+            <path d="M2 3v6h6"/>
+          </svg>
+          <span>Count Again</span>
+        </button>
+
+        <!-- Large Green Question Banner (e.g. 2 + 2 = ?) -->
+        <div class="math-question-banner">
+          <div class="math-question-text" id="math-question-display">
+            <span class="math-num" id="q-num1">1</span>
+            <span class="math-op">+</span>
+            <span class="math-num" id="q-num2">2</span>
+            <span class="math-op">=</span>
+            <span class="math-target" id="q-target">?</span>
+          </div>
+
+          <button id="audio-speak-btn" class="audio-speak-btn" title="Tap speaker to hear question" aria-label="Listen to Question">
+            🔊
+          </button>
+        </div>
+
+        <!-- ===============================================================
+             VISUAL ADDITION EQUATION:
+             [Group of flowers] + [Group of flowers] = [Combined group of flowers]
+             =============================================================== -->
+        <div class="flower-equation-wrapper" id="flower-equation-wrapper">
+          
+          <!-- First Flower Group Container -->
+          <div class="flower-group-container" id="container-group-1">
+            <div class="group-header-tag">First Group</div>
+            <div class="flower-group-box" id="flower-group-1" title="First flower group - tap any flower to start counting!">
+              <!-- Injected by game.js: purple flower(s) with yellow centers -->
+            </div>
+          </div>
+
+          <!-- Chunky Orange Plus Sign -->
+          <div class="math-operator-symbol math-plus-symbol" aria-hidden="true">+</div>
+
+          <!-- Second Flower Group Container -->
+          <div class="flower-group-container" id="container-group-2">
+            <div class="group-header-tag">Second Group</div>
+            <div class="flower-group-box" id="flower-group-2" title="Second flower group - tap any flower to start counting!">
+              <!-- Injected by game.js: purple flower(s) with yellow centers -->
+            </div>
+          </div>
+
+          <!-- Chunky Orange Equals Sign -->
+          <div class="math-operator-symbol math-equals-symbol" aria-hidden="true">=</div>
+
+          <!-- Combined Result Group Container -->
+          <div class="flower-group-container flower-result-container" id="container-group-result">
+            <div class="group-header-tag result-tag">Combined Total</div>
+            <div class="flower-group-box flower-combined-group-box" id="flower-group-result" title="Combined flower group - tap any flower to start counting!">
+              <!-- Injected by game.js: purple flower(s) showing the combined sum -->
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Answer Section with Three Flower-Shaped Buttons -->
+        <!-- Numbers appear DIRECTLY inside the yellow centres, never separate! -->
+        <div class="answer-stage-container">
+          <div class="answer-prompt-text">
+            👉 Look at the flowers! Tap the flower showing the total:
+          </div>
+
+          <div class="flower-answer-buttons" id="flower-answer-buttons">
+            <!-- Injected by game.js: 3 flower buttons with yellow centres and numbers -->
+          </div>
+        </div>
+
+        <!-- Interactive Cheerful Feedback & Next Question Button -->
+        <div class="feedback-ribbon" id="feedback-ribbon" aria-live="polite">
+          <!-- Populated when user selects an answer -->
+        </div>
+
+        <!-- Activity Helpers Toolbar -->
+        <div class="activity-helpers-bar">
+          <button id="btn-count-hint" class="helper-action-btn" title="Light up flowers one by one across the equation">
+            💡 Count with Me
+          </button>
+        </div>
+
+      </section>
+
+      <!-- ===================================================================
+           ACTIVITY 2: FLOWER MERGE ADDITION CARD
+           Visual Addition by Merging:
+           [Flower with num1 petals] + [Flower with num2 petals] = [Answer Box]
+           After counting, individual flowers gently glide and merge into 1 Grand Flower!
+           =================================================================== -->
+      <section class="flower-activity-card flower-merge-activity-card" id="flower-merge-activity-container" aria-label="Flower Merge Addition Activity" style="display: none;">
+        
+        <!-- Top Controls: Question Speaker on Left & Count Again on Right -->
+        <div class="merge-top-bar">
+          <button id="merge-audio-speak-btn" class="audio-speak-btn" title="Tap speaker to hear question" aria-label="Listen to Question">
+            🔊
+          </button>
+          <button type="button" class="activity-count-again-btn" id="btn-merge-count-again" title="Start counting this round again" aria-label="Count this round again">
+            <svg class="recount-icon" viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 12a9 9 0 1 0 2.6-6.4L2 9"/>
+              <path d="M2 3v6h6"/>
+            </svg>
+            <span>Count Again</span>
+          </button>
+        </div>
+
+        <!-- ===============================================================
+             VISUAL ADDITION EQUATION:
+             [First Flower] + [Second Flower] = [Merged Answer Box]
+             =============================================================== -->
+        <div class="flower-equation-wrapper merge-equation-wrapper" id="merge-flower-equation-wrapper">
+          
+          <!-- First Flower Container (First Addend) -->
+          <div class="flower-group-container merge-group-container" id="merge-container-1">
+            <div class="group-header-tag">First Group</div>
+            <div class="flower-group-box merge-flower-host" id="merge-flower-1-box" title="Tap the first flower to reveal flowers in the Answer Box!">
+              <!-- Injected by activity2.js: Flower with addend num1 in center -->
+            </div>
+          </div>
+
+          <!-- Chunky Orange Plus Sign -->
+          <div class="math-operator-symbol math-plus-symbol" id="merge-plus-symbol" aria-hidden="true">+</div>
+
+          <!-- Second Flower Container (Second Addend) -->
+          <div class="flower-group-container merge-group-container" id="merge-container-2">
+            <div class="group-header-tag">Second Group</div>
+            <div class="flower-group-box merge-flower-host" id="merge-flower-2-box" title="Tap the second flower to reveal flowers in the Answer Box!">
+              <!-- Injected by activity2.js: Flower with addend num2 in center -->
+            </div>
+          </div>
+
+          <!-- Chunky Orange Equals Sign -->
+          <div class="math-operator-symbol math-equals-symbol" id="merge-equals-symbol" aria-hidden="true">=</div>
+
+          <!-- Answer Box Container (Starts Empty, Populates one-by-one, then Merges!) -->
+          <div class="flower-group-container flower-result-container merge-result-container" id="merge-container-result">
+            <div class="group-header-tag result-tag" id="merge-result-tag">Answer Box</div>
+            <div class="flower-group-box flower-combined-group-box merge-answer-box" id="merge-answer-box" title="Watch flowers appear, count them, and see them merge!">
+              <!-- Injected by activity2.js: individual flowers appear, child counts, then they merge into one grand flower! -->
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Answer Section with Three Flower-Shaped Buttons -->
+        <div class="answer-stage-container" id="merge-answer-stage-container">
+          <div class="answer-prompt-text" id="merge-answer-prompt-text">
+            👉 Look at the flowers! Tap the flower showing the total:
+          </div>
+
+          <div class="flower-answer-buttons" id="merge-flower-answer-buttons">
+            <!-- Injected by activity2.js: 3 flower buttons with yellow centres and numbers -->
+          </div>
+        </div>
+
+        <!-- Interactive Cheerful Feedback Ribbon -->
+        <div class="feedback-ribbon" id="merge-feedback-ribbon" aria-live="polite">
+          <!-- Populated when user selects an answer -->
+        </div>
+
+        <!-- Activity Helpers Toolbar -->
+        <div class="activity-helpers-bar">
+          <button id="btn-merge-count-hint" class="helper-action-btn" title="Count with me step by step and watch the flowers merge!">
+            💡 Count with Me
+          </button>
+        </div>
+
+      </section>
+
+      <!-- ===================================================================
+           ACTIVITY 3: FLOWER MERGE ADDITION CARD (EXACT CLONE OF ACTIVITY 2)
+           Visual Addition by Merging:
+           [Flower with num1 petals] + [Flower with num2 petals] = [Answer Box]
+           After counting, individual flowers gently glide and merge into 1 Grand Flower!
+           =================================================================== -->
+      <section class="flower-activity-card flower-merge-activity-card" id="flower-merge-3-activity-container" aria-label="Activity 3: Flower Merge Addition Activity" style="display: none;">
+        
+        <!-- Top Controls: Question Speaker on Left & Count Again on Right -->
+        <div class="merge-top-bar">
+          <button id="merge-3-audio-speak-btn" class="audio-speak-btn" title="Tap speaker to hear question" aria-label="Listen to Question">
+            🔊
+          </button>
+          <button type="button" class="activity-count-again-btn" id="btn-merge-3-count-again" title="Start counting this round again" aria-label="Count this round again">
+            <svg class="recount-icon" viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 12a9 9 0 1 0 2.6-6.4L2 9"/>
+              <path d="M2 3v6h6"/>
+            </svg>
+            <span>Count Again</span>
+          </button>
+        </div>
+
+        <!-- ===============================================================
+             VISUAL ADDITION EQUATION:
+             [First Flower] + [Second Flower] = [Merged Answer Box]
+             =============================================================== -->
+        <div class="flower-equation-wrapper merge-equation-wrapper" id="merge-3-flower-equation-wrapper">
+          
+          <!-- First Flower Container (First Addend) -->
+          <div class="flower-group-container merge-group-container" id="merge-3-container-1">
+            <div class="group-header-tag">First Flower</div>
+            <div class="flower-group-box merge-flower-host" id="merge-3-flower-1-box" title="Tap the first flower to reveal flowers in the Answer Box!">
+              <!-- Injected by activity3.js: Flower with addend num1 in center -->
+            </div>
+          </div>
+
+          <!-- Chunky Orange Plus Sign -->
+          <div class="math-operator-symbol math-plus-symbol" id="merge-3-plus-symbol" aria-hidden="true">+</div>
+
+          <!-- Second Flower Container (Second Addend) -->
+          <div class="flower-group-container merge-group-container" id="merge-3-container-2">
+            <div class="group-header-tag">Second Flower</div>
+            <div class="flower-group-box merge-flower-host" id="merge-3-flower-2-box" title="Tap the second flower to reveal flowers in the Answer Box!">
+              <!-- Injected by activity3.js: Flower with addend num2 in center -->
+            </div>
+          </div>
+
+          <!-- Chunky Orange Equals Sign -->
+          <div class="math-operator-symbol math-equals-symbol" id="merge-3-equals-symbol" aria-hidden="true">=</div>
+
+          <!-- Answer Box Container (Starts Empty, Populates one-by-one, then Merges!) -->
+          <div class="flower-group-container flower-result-container merge-result-container" id="merge-3-container-result">
+            <div class="group-header-tag result-tag" id="merge-3-result-tag">Answer Box</div>
+            <div class="flower-group-box flower-combined-group-box merge-answer-box" id="merge-3-answer-box" title="Watch flowers appear, count them, and see them merge!">
+              <!-- Injected by activity3.js: individual flowers appear, child counts, then they merge into one grand flower! -->
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Answer Section with Three Flower-Shaped Buttons -->
+        <div class="answer-stage-container" id="merge-3-answer-stage-container">
+          <div class="answer-prompt-text" id="merge-3-answer-prompt-text">
+            👉 Look at the flowers! Tap the flower showing the total:
+          </div>
+
+          <div class="flower-answer-buttons" id="merge-3-flower-answer-buttons">
+            <!-- Injected by activity3.js: 3 flower buttons with yellow centres and numbers -->
+          </div>
+        </div>
+
+        <!-- Interactive Cheerful Feedback Ribbon -->
+        <div class="feedback-ribbon" id="merge-3-feedback-ribbon" aria-live="polite">
+          <!-- Populated when user selects an answer -->
+        </div>
+
+        <!-- Activity Helpers Toolbar -->
+        <div class="activity-helpers-bar">
+          <button id="btn-merge-3-count-hint" class="helper-action-btn" title="Count with me step by step and watch the flowers merge!">
+            💡 Count with Me
+          </button>
+        </div>
+
+      </section>
+
+      <!-- Level Difficulty Switcher -->
+      <div class="level-switcher-bar">
+        <button class="level-toggle-btn active" data-level="1">Level 1: Totals up to 4</button>
+        <button class="level-toggle-btn" data-level="2">Level 2: Totals up to 6</button>
+        <button class="level-toggle-btn" data-level="3">Level 3: Totals up to 9</button>
+      </div>
+
+      <!-- Progress Tracking Strip with Stars -->
+      <div class="quest-progress-strip">
+        <div class="stars-track-wrap">
+          <span class="stars-track-label">Quest Stars:</span>
+          <div class="stars-meter-row">
+            <span class="star-slot">⭐</span>
+            <span class="star-slot">⭐</span>
+            <span class="star-slot">⭐</span>
+            <span class="star-slot">⭐</span>
+            <span class="star-slot">⭐</span>
+            <span class="star-slot">⭐</span>
+            <span class="star-slot">⭐</span>
+            <span class="star-slot">⭐</span>
+            <span class="star-slot">⭐</span>
+            <span class="star-slot">⭐</span>
+          </div>
+        </div>
+
+        <div class="score-stats-group">
+          <span class="stat-chip streak">
+            🔥 <span id="stat-streak-val">0</span> Streak
+          </span>
+          <span class="stat-chip">
+            🎯 Preschool Math 4–5
+          </span>
+        </div>
+      </div>
+
+      <!-- ===================================================================
+           BOTTOM CARDS (Guided Learning Journey & Today's Quest)
+           =================================================================== -->
+      <div class="tenali-bottom-cards-grid">
+        
+        <!-- Guided Learning Journey Card -->
+        <a href="#journey" class="tenali-orange-card modal-close-trigger" title="Guided Learning Journey">
+          <div class="orange-card-left">
+            <div class="orange-card-title">
+              ⭐ Guided Learning Journey
+            </div>
+            <div class="orange-card-desc">
+              Embark on a structured, sequential math learning path with checkpoints.
+            </div>
+          </div>
+          <div class="orange-card-arrow">➔</div>
+        </a>
+
+        <!-- Today's Quest Card -->
+        <a href="#quest" class="tenali-orange-card modal-close-trigger" title="Today's Quest">
+          <div class="orange-card-left">
+            <div class="orange-card-tag">🚀 TODAY'S QUEST</div>
+            <div class="orange-card-title">
+              Basic Arithmetic: Flower Addition II
+            </div>
+            <div class="orange-card-desc">
+              Visual addition: [Group 1] + [Group 2] = [Combined Group] &bull; single-digit totals up to 9
+            </div>
+          </div>
+          <div class="orange-card-arrow">➔</div>
+        </a>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- =======================================================================
+       CONFETTI CANVAS & MODALS
+       ======================================================================= -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- Learning Guide Modal (Triggered by Orange Guide Badge) -->
+  <div id="guide-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="guide-title">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h2 id="guide-title" class="modal-title">🧭 Tenali Learning Guide</h2>
+        <button class="modal-close-btn modal-close-trigger" aria-label="Close modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Teaching Method for Ages 4–5 (Concrete to Representational Addition):</strong></p>
+        <p>
+          In <strong>Flower Addition II</strong>, children see arithmetic visually represented as two sets of objects combining into one unified total group:
+        </p>
+        
+        <div class="modal-guide-tip">
+          🌸 <strong>1. First Group:</strong> Tap flowers in any order to count the first group.<br>
+          🌸 <strong>2. Second Group:</strong> Tap to count the second group, starting again from 1.<br>
+          🌸 <strong>3. Combined Total:</strong> Watch both groups appear together, then independently count the total collection!<br>
+          🌸 <strong>4. Answer Buttons:</strong> Tap the flower showing the correct total!
+        </div>
+
+        <p>
+          <strong>Tactile & Positive:</strong> Children can tap flowers anytime to hear counting sounds.
+          Incorrect choices trigger gentle encouragement with zero penalties. Tap <strong>"💡 Count with Me"</strong> anytime for animated guided counting across the entire equation!
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button class="next-question-btn modal-close-trigger">Got It!</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quest Complete Celebration Modal -->
+  <div id="quest-complete-modal" class="modal-backdrop" role="dialog" aria-modal="true">
+    <div class="modal-dialog" style="text-align: center;">
+      <img src="tenali_mascot.png" alt="Tenali scholar mascot" width="75" height="110" style="margin: 0 auto; display: block; filter: drop-shadow(0 4px 16px rgba(249,115,22,0.45));">
+      <h2 class="modal-title" id="modal-complete-title" style="color: var(--tenali-orange-light); font-size: 28px; margin-top: 10px;">
+        Level 1 Completed!
+      </h2>
+      <div class="modal-body">
+        <p style="font-size: 17px; font-weight: 700; color: #ffffff;" id="modal-complete-stars-text">
+          You earned 10 ⭐ in Level 1!
+        </p>
+        <p id="modal-complete-desc-text">
+          Wonderful! 🌸 You can now add numbers to make 4. Ready to learn to make 6?
+        </p>
+      </div>
+      <div class="modal-footer" style="justify-content: center;">
+        <button id="btn-play-again" class="next-question-btn">
+          Start Next Level
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="game.js?v=2.2"></script>
+  <script src="activity2.js?v=2.6"></script>
+  <script src="activity3.js?v=1.0"></script>
+  <script>
+    (function () {
+      function attachBackHandler() {
+        var backBtn = document.querySelector('.pill-back-btn');
+        if (!backBtn) return;
+        backBtn.addEventListener('click', function (e) {
+          e.preventDefault();
+          window.speechSynthesis?.cancel();
+          window.parent.postMessage(
+            { type: 'tenali:back' },
+            window.location.origin
+          );
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', attachBackHandler);
+      } else {
+        attachBackHandler();
+      }
+    })();
+  </script>
+</body>
+</html>

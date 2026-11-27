@@ -87,6 +87,7 @@ import SudokuApp from './SudokuApp';
 import VisualMathLabRedux from './VisualMathLabRedux';
 import WaterJugLab from './WaterJugLab';
 import CoordGeomInteractiveApp from './apps/CoordGeomInteractiveApp.jsx';
+import FlowerAdditionApp from './components/Addition/FlowerAdditionApp.jsx';
 import { playSound } from './audioContext';
 import { cjTakeReco } from './cjReco'; // Feature CR — Road License difficulty hand-off
 import GlossaryText from './components/common/GlossaryText';
@@ -42717,6 +42718,7 @@ function App() {
     sudoku: SudokuApp,          // 9x9 Sudoku puzzle
 
     'comic-addition': ComicAdditionApp,
+    'flower-addition': FlowerAdditionApp,
     gk: GK,                    // General Knowledge
     addition: AdditionApp,         // Basic addition
     'column-addition': ColumnAddition, // Column Addition with carries
