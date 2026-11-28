@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MATH QUEST – The Lost Kingdom of Numbers</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- TOP HUD BAR -->
+  <header class="hud">
+    <div class="hud-brand" id="btnHome">
+      <span class="logo-icon">🧭</span>
+      <div>
+        <h1>MATH QUEST</h1>
+        <p class="subtitle">The Lost Kingdom of Numbers</p>
+      </div>
+    </div>
+
+    <div class="hud-stats">
+      <div class="stat-pill star-pill" title="Stars Earned">
+        <span>⭐</span> <span id="starCount">0</span> / 9
+      </div>
+      <div class="stat-pill coin-pill" title="Gold Coins">
+        <span>🪙</span> <span id="coinCount">0</span>
+      </div>
+      <div class="stat-pill badge-pill" id="btnBadges" title="View Explorer Badges">
+        <span>🏆</span> Badges (<span id="badgeCount">0</span>)
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN GAME CONTAINER -->
+  <main id="app">
+    <!-- SCREEN 1: ADVENTURE MAP -->
+    <section id="mapScreen" class="screen active">
+      <div class="map-header">
+        <h2>🗺️ Kingdom Adventure Map</h2>
+        <p>Select a glowing world to begin your quest!</p>
+        <div class="progress-wrapper">
+          <div class="progress-label">Kingdom Progress: <span id="progressText">0%</span></div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="world-map">
+        <!-- WORLD 1: ACTIVE (NCERT Ch 1: Patterns in Mathematics) -->
+        <div class="world-node unlocked" data-world="1" id="world1Card">
+          <div class="world-badge-tag">PLAYABLE</div>
+          <div class="world-icon">🏛️</div>
+          <h3>World 1: Temple of Patterns</h3>
+          <p class="world-topic">Number Sequences &amp; Shapes</p>
+          <div class="world-stars" id="world1Stars">☆☆☆</div>
+          <button class="btn-play">Enter Temple ▶</button>
+        </div>
+
+        <div class="path-connector">➔</div>
+
+        <!-- WORLD 2: LOCKED PREVIEW -->
+        <div class="world-node locked" data-world="2">
+          <div class="lock-overlay">🔒 Complete World 1</div>
+          <div class="world-icon">📐</div>
+          <h3>World 2: Canyon of Angles</h3>
+          <p class="world-topic">Lines, Rays &amp; Angles</p>
+          <div class="world-stars">☆☆☆</div>
+        </div>
+
+        <div class="path-connector">➔</div>
+
+        <!-- WORLD 3: LOCKED PREVIEW -->
+        <div class="world-node locked" data-world="3">
+          <div class="lock-overlay">🔒 Coming Soon</div>
+          <div class="world-icon">💎</div>
+          <h3>World 3: Prime Peak</h3>
+          <p class="world-topic">Factors, Multiples &amp; Primes</p>
+          <div class="world-stars">☆☆☆</div>
+        </div>
+
+        <div class="path-connector">➔</div>
+
+        <!-- WORLD 4: LOCKED PREVIEW -->
+        <div class="world-node locked" data-world="4">
+          <div class="lock-overlay">🔒 Coming Soon</div>
+          <div class="world-icon">🦋</div>
+          <h3>World 4: Symmetry Sanctuary</h3>
+          <p class="world-topic">Mirror &amp; Rotational Symmetry</p>
+          <div class="world-stars">☆☆☆</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREEN 2: WORLD 1 MISSION HUB -->
+    <section id="worldHubScreen" class="screen">
+      <div class="hub-top">
+        <button class="btn-back" id="btnBackToMap">⬅ Back to Map</button>
+        <h2>🏛️ Temple of Patterns</h2>
+      </div>
+      <p class="one-line-tip">Complete all 3 temple missions to unlock the Royal Pattern Crown!</p>
+
+      <div class="mission-grid">
+        <!-- MISSION 1 -->
+        <div class="mission-card" id="mission1Card">
+          <div class="mission-status" id="m1Status">NEW</div>
+          <div class="mission-art">🤖🌉</div>
+          <h3>Mission 1: Robot's Bridge</h3>
+          <p>Fix the broken number tiles so Robo-6 can cross!</p>
+          <button class="btn-mission" onclick="startMission(1)">Play Mission 1</button>
+        </div>
+
+        <!-- MISSION 2 -->
+        <div class="mission-card locked-mission" id="mission2Card">
+          <div class="mission-status" id="m2Status">🔒 LOCKED</div>
+          <div class="mission-art">🔮🏺</div>
+          <h3>Mission 2: Relic Matcher</h3>
+          <p>Match visual dot shapes to their secret number sequences!</p>
+          <button class="btn-mission" id="btnM2" onclick="startMission(2)" disabled>Locked</button>
+        </div>
+
+        <!-- MISSION 3 -->
+        <div class="mission-card locked-mission" id="mission3Card">
+          <div class="mission-status" id="m3Status">🔒 LOCKED</div>
+          <div class="mission-art">⏳🗝️</div>
+          <h3>Mission 3: Vault Rush</h3>
+          <p>Beat the 45-second clock to unlock the golden chest!</p>
+          <button class="btn-mission" id="btnM3" onclick="startMission(3)" disabled>Locked</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREEN 3: ACTIVE MINI-GAME ARENA -->
+    <section id="gameArenaScreen" class="screen">
+      <div class="arena-header">
+        <button class="btn-back" id="btnQuitMission">✖ Exit Mission</button>
+        <div class="arena-title" id="arenaTitle">Mission 1</div>
+        <div class="timer-box hidden" id="timerBox">⏱️ <span id="timerVal">45</span>s</div>
+      </div>
+
+      <!-- SHORT 1-LINE INSTRUCTION -->
+      <div class="instruction-banner">
+        <span class="guide-avatar">🤖</span>
+        <span id="instructionText">Tap the missing number to repair the bridge!</span>
+      </div>
+
+      <!-- DYNAMIC PUZZLE AREA -->
+      <div id="puzzleStage" class="puzzle-stage"></div>
+
+      <!-- TINY VISUAL HINT BOX (ONLY APPEARS ON WRONG ANSWER) -->
+      <div id="visualHintBox" class="visual-hint hidden">
+        <div class="hint-header">💡 Visual Clue</div>
+        <div id="visualHintContent" class="hint-visual"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- CELEBRATION & REWARD MODAL -->
+  <div id="rewardModal" class="modal hidden">
+    <div class="modal-card celebration">
+      <div class="confetti-burst">🎉✨🏆✨🎉</div>
+      <h2 id="modalTitle">Mission Complete!</h2>
+      <div class="earned-stars" id="modalStars">⭐⭐⭐</div>
+      <p id="modalRewardText">You earned +50 Gold Coins &amp; a new Badge!</p>
+      <button class="btn-play" id="btnModalContinue">Continue Adventure ▶</button>
+    </div>
+  </div>
+
+  <!-- BADGES GALLERY MODAL -->
+  <div id="badgesModal" class="modal hidden">
+    <div class="modal-card">
+      <h2>🏆 Explorer Badge Vault</h2>
+      <div class="badges-list" id="badgesList"></div>
+      <button class="btn-back" id="btnCloseBadges">Close</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
