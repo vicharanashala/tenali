@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Doppler Effect — Interactive Physics Lab</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --surface: #131b31;
+      --surface-2: #1a2442;
+      --border: rgba(255, 255, 255, 0.1);
+      --text: #eef2ff;
+      --muted: #9aa7c7;
+      --cyan: #38bdf8;
+      --magenta: #f472b6;
+      --green: #34d399;
+      --amber: #fbbf24;
+      --red: #f87171;
+      --radius: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+      background: radial-gradient(circle at top right, #162244 0%, var(--bg) 60%);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.55;
+    }
+
+    /* Header & Navigation */
+    .app-header {
+      padding: 28px 20px 0;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      background: rgba(11, 16, 32, 0.75);
+      backdrop-filter: blur(10px);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 999px;
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--cyan);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    .app-header h1 {
+      font-size: 2rem;
+      letter-spacing: -0.5px;
+    }
+
+    .app-header p {
+      color: var(--muted);
+      margin-top: 6px;
+      font-size: 0.98rem;
+    }
+
+    .tab-nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 20px;
+    }
+
+    .tab-btn {
+      background: transparent;
+      color: var(--muted);
+      border: none;
+      padding: 12px 20px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn:hover {
+      color: var(--text);
+    }
+
+    .tab-btn.active {
+      color: var(--cyan);
+      border-bottom-color: var(--cyan);
+    }
+
+    /* Main Layout */
+    .container {
+      max-width: 1220px;
+      margin: 26px auto 50px;
+      padding: 0 18px;
+    }
+
+    .tab-panel {
+      display: none;
+      animation: fadeIn 0.25s ease;
+    }
+
+    .tab-panel.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Cards */
+    .canvas-card,
+    .controls-card,
+    .info-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    /* Simulation Layout */
+    .sim-layout {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr;
+      gap: 20px;
+    }
+
+    .canvas-topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .status-pill {
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      background: rgba(52, 211, 153, 0.15);
+      color: var(--green);
+    }
+
+    .status-pill.supersonic {
+      background: rgba(248, 113, 113, 0.2);
+      color: var(--red);
+    }
+
+    .canvas-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    #dopplerCanvas {
+      width: 100%;
+      height: auto;
+      display: block;
+      background: #070b16;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+
+    .legend {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-right: 6px;
+    }
+    .source-dot { background: var(--magenta); box-shadow: 0 0 8px var(--magenta); }
+    .observer-dot { background: var(--green); box-shadow: 0 0 8px var(--green); }
+    .wave-dot { background: var(--cyan); }
+
+    /* Readouts & Sliders */
+    .controls-card h2,
+    .info-card h2 {
+      font-size: 1.25rem;
+      margin-bottom: 14px;
+      color: var(--cyan);
+    }
+
+    .readout-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .readout-box {
+      background: var(--surface-2);
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+
+    .readout-box.highlight {
+      border-color: rgba(56, 189, 248, 0.5);
+      background: rgba(56, 189, 248, 0.08);
+    }
+
+    .readout-box .label {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .readout-box .value {
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+
+    .slider-group {
+      margin-bottom: 14px;
+    }
+
+    .slider-group label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+    }
+
+    .slider-group input[type="range"] {
+      width: 100%;
+      accent-color: var(--cyan);
+      cursor: pointer;
+    }
+
+    .slider-group small {
+      color: var(--muted);
+      font-size: 0.76rem;
+    }
+
+    .preset-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    /* Buttons */
+    .btn {
+      padding: 8px 14px;
+      border-radius: 8px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 0.88rem;
+      transition: transform 0.1s ease, opacity 0.2s ease;
+    }
+
+    .btn:active { transform: scale(0.97); }
+    .btn.primary { background: var(--cyan); color: #041322; }
+    .btn.secondary { background: var(--surface-2); color: var(--text); border: 1px solid var(--border); }
+    .btn.accent { background: var(--magenta); color: #1f0514; }
+    .btn.full-btn { width: 100%; padding: 12px; font-size: 1rem; margin-top: 10px; }
+
+    .chip {
+      background: var(--surface-2);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      cursor: pointer;
+    }
+    .chip:hover { border-color: var(--cyan); color: var(--cyan); }
+
+    /* Learn Tab */
+    .card-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .full-width { grid-column: 1 / -1; }
+
+    .callout {
+      margin-top: 12px;
+      padding: 12px 16px;
+      border-left: 4px solid var(--cyan);
+      background: rgba(56, 189, 248, 0.08);
+      border-radius: 0 8px 8px 0;
+    }
+
+    .formula-box {
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-align: center;
+      padding: 16px;
+      background: var(--surface-2);
+      border-radius: 10px;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .frac {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 1.15rem;
+    }
+    .frac .num { border-bottom: 2px solid var(--text); padding: 0 6px; }
+    .frac .den { padding: 0 6px; }
+
+    .clean-list {
+      list-style: none;
+      display: grid;
+      gap: 6px;
+      font-size: 0.94rem;
+    }
+
+    .rule-box {
+      padding: 12px 14px;
+      border-radius: 10px;
+      margin-top: 10px;
+      font-size: 0.92rem;
+    }
+    .rule-box.positive { background: rgba(52, 211, 153, 0.1); border: 1px solid rgba(52, 211, 153, 0.35); }
+    .rule-box.negative { background: rgba(244, 114, 182, 0.1); border: 1px solid rgba(244, 114, 182, 0.35); }
+
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 0.92rem; }
+    th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border); }
+    th { color: var(--cyan); background: var(--surface-2); }
+    .up { color: var(--green); font-weight: 600; }
+    .down { color: var(--magenta); font-weight: 600; }
+
+    /* Numerical Solver */
+    .solver-layout {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 20px;
+    }
+
+    .muted { color: var(--muted); font-size: 0.9rem; margin-bottom: 14px; }
+
+    .form-row {
+      margin-bottom: 14px;
+    }
+
+    .form-row label,
+    .input-field label {
+      display: block;
+      font-size: 0.86rem;
+      color: var(--muted);
+      margin-bottom: 5px;
+    }
+
+    select, input[type="number"] {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--surface-2);
+      color: var(--text);
+      font-size: 0.95rem;
+    }
+
+    .inputs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .input-field.disabled {
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    .solver-output .step {
+      background: var(--surface-2);
+      padding: 12px 14px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      border-left: 3px solid var(--cyan);
+    }
+
+    .solver-output .final-ans {
+      background: rgba(52, 211, 153, 0.12);
+      border: 1px solid var(--green);
+      padding: 16px;
+      border-radius: 10px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--green);
+      text-align: center;
+    }
+
+    .solver-output .error-box {
+      background: rgba(248, 113, 113, 0.15);
+      border: 1px solid var(--red);
+      color: var(--red);
+      padding: 12px;
+      border-radius: 8px;
+    }
+
+    /* Quiz */
+    .quiz-container { max-width: 760px; margin: 0 auto; }
+    .quiz-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 18px; }
+    .score-pill { background: var(--surface-2); padding: 6px 14px; border-radius: 999px; font-weight: 700; color: var(--amber); }
+    .quiz-center { text-align: center; padding: 30px 10px; }
+    .quiz-center p { margin-bottom: 18px; color: var(--muted); }
+    .quiz-progress { font-size: 0.85rem; color: var(--cyan); font-weight: 600; margin-bottom: 8px; }
+    #quiz-question { font-size: 1.15rem; margin-bottom: 16px; }
+    .quiz-options { display: grid; gap: 10px; }
+
+    .option-btn {
+      text-align: left;
+      padding: 12px 16px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--surface-2);
+      color: var(--text);
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .option-btn:hover:not(:disabled) { border-color: var(--cyan); }
+    .option-btn.correct { background: rgba(52, 211, 153, 0.2); border-color: var(--green); color: var(--green); }
+    .option-btn.wrong { background: rgba(248, 113, 113, 0.2); border-color: var(--red); color: var(--red); }
+
+    .quiz-feedback {
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      background: rgba(56, 189, 248, 0.1);
+      border-left: 4px solid var(--cyan);
+      font-size: 0.92rem;
+    }
+
+    .quiz-footer { margin-top: 16px; text-align: right; }
+    .hidden { display: none !important; }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .sim-layout, .card-grid, .solver-layout { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-content">
+      <div class="badge">Class 11 &amp; 12 Physics</div>
+      <h1>The Doppler Effect</h1>
+      <p>Visualize sound wavefronts, master the formula, solve numericals, and test your knowledge.</p>
+    </div>
+    <nav class="tab-nav" role="tablist">
+      <button class="tab-btn active" data-tab="sim-tab">1. Simulation</button>
+      <button class="tab-btn" data-tab="learn-tab">2. Concepts &amp; Formula</button>
+      <button class="tab-btn" data-tab="solver-tab">3. Numerical Solver</button>
+      <button class="tab-btn" data-tab="quiz-tab">4. Short Quiz</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- ==================== TAB 1: SIMULATION ==================== -->
+    <section id="sim-tab" class="tab-panel active">
+      <div class="sim-layout">
+        <div class="canvas-card">
+          <div class="canvas-topbar">
+            <span class="status-pill" id="regime-badge">Subsonic (v_s &lt; v)</span>
+            <div class="canvas-actions">
+              <button id="toggle-play" class="btn primary">Pause</button>
+              <button id="reset-sim" class="btn secondary">Reset</button>
+              <button id="toggle-sound" class="btn accent">Sound: OFF</button>
+            </div>
+          </div>
+          <canvas id="dopplerCanvas" width="840" height="400"></canvas>
+          <div class="legend">
+            <span><i class="dot source-dot"></i> Sound Source (S)</span>
+            <span><i class="dot observer-dot"></i> Observer (O)</span>
+            <span><i class="dot wave-dot"></i> Sound Wavefronts</span>
+          </div>
+        </div>
+
+        <aside class="controls-card">
+          <h2>Simulation Controls</h2>
+
+          <div class="readout-grid">
+            <div class="readout-box">
+              <span class="label">Actual Freq (f)</span>
+              <span class="value" id="readout-f">440 Hz</span>
+            </div>
+            <div class="readout-box highlight">
+              <span class="label">Apparent Freq (f')</span>
+              <span class="value" id="readout-fprime">440.0 Hz</span>
+            </div>
+            <div class="readout-box">
+              <span class="label">Shift (Δf)</span>
+              <span class="value" id="readout-shift">0.0 Hz</span>
+            </div>
+            <div class="readout-box">
+              <span class="label">Mach Number</span>
+              <span class="value" id="readout-mach">0.00</span>
+            </div>
+          </div>
+
+          <div class="slider-group">
+            <label>Source Velocity (v<sub>s</sub>): <strong id="val-vs">100 m/s</strong></label>
+            <input type="range" id="slider-vs" min="-400" max="400" step="5" value="100" />
+            <small>Positive = moving right | Negative = moving left</small>
+          </div>
+
+          <div class="slider-group">
+            <label>Observer Velocity (v<sub>o</sub>): <strong id="val-vo">0 m/s</strong></label>
+            <input type="range" id="slider-vo" min="-200" max="200" step="5" value="0" />
+            <small>Positive = moving right | Negative = moving left</small>
+          </div>
+
+          <div class="slider-group">
+            <label>Source Frequency (f): <strong id="val-f">440 Hz</strong></label>
+            <input type="range" id="slider-f" min="200" max="800" step="10" value="440" />
+          </div>
+
+          <div class="slider-group">
+            <label>Speed of Sound (v): <strong id="val-v">340 m/s</strong></label>
+            <input type="range" id="slider-v" min="300" max="360" step="1" value="340" />
+          </div>
+
+          <div class="preset-row">
+            <span>Quick Presets:</span>
+            <button class="chip" data-preset="approach">Ambulance Passing</button>
+            <button class="chip" data-preset="stationary">Both Stationary</button>
+            <button class="chip" data-preset="supersonic">Sonic Boom (Mach 1.2)</button>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 2: CONCEPTS & FORMULA ==================== -->
+    <section id="learn-tab" class="tab-panel">
+      <div class="card-grid">
+        <article class="info-card full-width">
+          <h2>What is the Doppler Effect?</h2>
+          <p>
+            The <strong>Doppler Effect</strong> is the apparent change in the frequency (or pitch) of a wave
+            when there is <strong>relative motion</strong> between the source of the wave and the observer.
+          </p>
+          <div class="callout">
+            <strong>Everyday Example:</strong> When an ambulance approaches you, its siren sounds
+            <em>higher-pitched</em> because the sound waves get compressed. As it moves away, the waves
+            stretch out, so the siren sounds <em>lower-pitched</em>.
+          </div>
+        </article>
+
+        <article class="info-card">
+          <h2>The Master Formula (Class 11/12)</h2>
+          <div class="formula-box">
+            f' = f &times; <span class="frac"><span class="num">v &plusmn; v<sub>o</sub></span><span class="den">v &mp; v<sub>s</sub></span></span>
+          </div>
+          <ul class="clean-list">
+            <li><strong>f'</strong> = Apparent frequency heard by observer (Hz)</li>
+            <li><strong>f</strong> = Actual frequency emitted by source (Hz)</li>
+            <li><strong>v</strong> = Speed of sound in the medium (~340 m/s in air)</li>
+            <li><strong>v<sub>o</sub></strong> = Speed of the observer (m/s)</li>
+            <li><strong>v<sub>s</sub></strong> = Speed of the source (m/s)</li>
+          </ul>
+        </article>
+
+        <article class="info-card">
+          <h2>Easy Sign Convention Trick</h2>
+          <p>Never memorize 8 separate formulas! Just remember one rule:</p>
+          <div class="rule-box positive">
+            <strong>Moving TOWARDS each other &rarr; Pitch INCREASES (f' &gt; f)</strong>
+            <p>Use <strong>+v<sub>o</sub></strong> in the numerator and <strong>&minus;v<sub>s</sub></strong> in the denominator.</p>
+          </div>
+          <div class="rule-box negative">
+            <strong>Moving AWAY from each other &rarr; Pitch DECREASES (f' &lt; f)</strong>
+            <p>Use <strong>&minus;v<sub>o</sub></strong> in the numerator and <strong>+v<sub>s</sub></strong> in the denominator.</p>
+          </div>
+        </article>
+
+        <article class="info-card full-width">
+          <h2>Important Exam Cases at a Glance</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Case</th>
+                  <th>Condition</th>
+                  <th>Formula</th>
+                  <th>Effect on Pitch</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1. Source approaches stationary observer</td>
+                  <td>v<sub>o</sub> = 0, source toward O</td>
+                  <td>f' = f &times; v / (v &minus; v<sub>s</sub>)</td>
+                  <td class="up">Increases (f' &gt; f)</td>
+                </tr>
+                <tr>
+                  <td>2. Source recedes from stationary observer</td>
+                  <td>v<sub>o</sub> = 0, source away from O</td>
+                  <td>f' = f &times; v / (v + v<sub>s</sub>)</td>
+                  <td class="down">Decreases (f' &lt; f)</td>
+                </tr>
+                <tr>
+                  <td>3. Observer approaches stationary source</td>
+                  <td>v<sub>s</sub> = 0, observer toward S</td>
+                  <td>f' = f &times; (v + v<sub>o</sub>) / v</td>
+                  <td class="up">Increases (f' &gt; f)</td>
+                </tr>
+                <tr>
+                  <td>4. Observer recedes from stationary source</td>
+                  <td>v<sub>s</sub> = 0, observer away from S</td>
+                  <td>f' = f &times; (v &minus; v<sub>o</sub>) / v</td>
+                  <td class="down">Decreases (f' &lt; f)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 3: NUMERICAL SOLVER ==================== -->
+    <section id="solver-tab" class="tab-panel">
+      <div class="solver-layout">
+        <div class="info-card">
+          <h2>Numerical Problem Solver</h2>
+          <p class="muted">Select a physical scenario, choose what you want to find, and enter your known values.</p>
+
+          <div class="form-row">
+            <label for="case-select">1. Select Case / Motion Type:</label>
+            <select id="case-select">
+              <option value="s_towards">Case 1: Source moving TOWARDS stationary observer</option>
+              <option value="s_away">Case 2: Source moving AWAY from stationary observer</option>
+              <option value="o_towards">Case 3: Observer moving TOWARDS stationary source</option>
+              <option value="o_away">Case 4: Observer moving AWAY from stationary source</option>
+              <option value="both_towards">Case 5: Both moving TOWARDS each other</option>
+              <option value="both_away">Case 6: Both moving AWAY from each other</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label for="target-select">2. What do you want to calculate?</label>
+            <select id="target-select">
+              <option value="fprime">Apparent Frequency (f')</option>
+              <option value="f">Actual Frequency (f)</option>
+              <option value="vs">Source Speed (v_s)</option>
+              <option value="vo">Observer Speed (v_o)</option>
+            </select>
+          </div>
+
+          <div class="inputs-grid">
+            <div class="input-field" id="field-v">
+              <label for="in-v">Speed of Sound v (m/s)</label>
+              <input type="number" id="in-v" value="340" step="any" />
+            </div>
+            <div class="input-field" id="field-f">
+              <label for="in-f">Actual Frequency f (Hz)</label>
+              <input type="number" id="in-f" value="500" step="any" />
+            </div>
+            <div class="input-field" id="field-fprime">
+              <label for="in-fprime">Apparent Frequency f' (Hz)</label>
+              <input type="number" id="in-fprime" value="550" step="any" />
+            </div>
+            <div class="input-field" id="field-vs">
+              <label for="in-vs">Source Speed v<sub>s</sub> (m/s)</label>
+              <input type="number" id="in-vs" value="20" step="any" />
+            </div>
+            <div class="input-field" id="field-vo">
+              <label for="in-vo">Observer Speed v<sub>o</sub> (m/s)</label>
+              <input type="number" id="in-vo" value="0" step="any" />
+            </div>
+          </div>
+
+          <button id="solve-btn" class="btn primary full-btn">Calculate Answer</button>
+        </div>
+
+        <div class="info-card result-card">
+          <h2>Step-by-Step Solution</h2>
+          <div id="solver-output" class="solver-output">
+            <p class="muted">Enter values on the left and click <strong>Calculate Answer</strong> to see the formula, substitution, and final result.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 4: SHORT QUIZ ==================== -->
+    <section id="quiz-tab" class="tab-panel">
+      <div class="quiz-container info-card">
+        <div class="quiz-header">
+          <div>
+            <h2>Quick Concept Quiz</h2>
+            <p class="muted">Optional 5-question check to test your Class 11/12 Doppler Effect skills.</p>
+          </div>
+          <div class="score-pill" id="quiz-score-pill">Score: 0 / 5</div>
+        </div>
+
+        <div id="quiz-start-screen" class="quiz-center">
+          <p>Ready to test your understanding of wavefronts, sign conventions, and numericals?</p>
+          <button id="start-quiz-btn" class="btn primary">Start 5-Question Quiz</button>
+        </div>
+
+        <div id="quiz-body" class="hidden">
+          <div class="quiz-progress" id="quiz-progress">Question 1 of 5</div>
+          <h3 id="quiz-question">Question text goes here</h3>
+          <div id="quiz-options" class="quiz-options"></div>
+          <div id="quiz-feedback" class="quiz-feedback hidden"></div>
+          <div class="quiz-footer">
+            <button id="next-question-btn" class="btn primary hidden">Next Question &rarr;</button>
+          </div>
+        </div>
+
+        <div id="quiz-end-screen" class="quiz-center hidden">
+          <h3 id="final-score-title">Quiz Complete!</h3>
+          <p id="final-score-msg"></p>
+          <button id="restart-quiz-btn" class="btn primary">Try Again</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    /* ==========================================================================
+    1. TAB NAVIGATION
+       ========================================================================== */
+    const tabBtns = document.querySelectorAll(".tab-btn");
+    const tabPanels = document.querySelectorAll(".tab-panel");
+
+    tabBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        tabBtns.forEach((b) => b.classList.remove("active"));
+        tabPanels.forEach((p) => p.classList.remove("active"));
+        btn.classList.add("active");
+        document.getElementById(btn.dataset.tab).classList.add("active");
+      });
+    });
+
+    /* ==========================================================================
+    2. DOPPLER EFFECT CANVAS SIMULATION + WEB AUDIO
+       ========================================================================== */
+    const canvas = document.getElementById("dopplerCanvas");
+    const ctx = canvas.getContext("2d");
+
+    const sliderVs = document.getElementById("slider-vs");
+    const sliderVo = document.getElementById("slider-vo");
+    const sliderF = document.getElementById("slider-f");
+    const sliderV = document.getElementById("slider-v");
+
+    const valVs = document.getElementById("val-vs");
+    const valVo = document.getElementById("val-vo");
+    const valF = document.getElementById("val-f");
+    const valV = document.getElementById("val-v");
+
+    const readoutF = document.getElementById("readout-f");
+    const readoutFprime = document.getElementById("readout-fprime");
+    const readoutShift = document.getElementById("readout-shift");
+    const readoutMach = document.getElementById("readout-mach");
+    const regimeBadge = document.getElementById("regime-badge");
+
+    let isPlaying = true;
+    let soundEnabled = false;
+    let audioCtx = null;
+    let oscillator = null;
+    let gainNode = null;
+
+    // Simulation scale: 1 meter = 0.45 pixels, time slowed down for clear visuals
+    const PIXELS_PER_METER = 0.45;
+    const TIME_SCALE = 0.35;
+
+    let source = { x: 140, y: 200 };
+    let observer = { x: 640, y: 200 };
+    let wavefronts = [];
+    let emitAccumulator = 0;
+    let lastTimestamp = performance.now();
+
+    function resetSimulation() {
+      source = { x: 140, y: canvas.height / 2 };
+      observer = { x: 640, y: canvas.height / 2 };
+      wavefronts = [];
+      emitAccumulator = 0;
+    }
+
+    function getSimParams() {
+      return {
+        vs: Number(sliderVs.value),
+        vo: Number(sliderVo.value),
+        f: Number(sliderF.value),
+        v: Number(sliderV.value),
+      };
+    }
+
+    function updateLabels() {
+      const { vs, vo, f, v } = getSimParams();
+      valVs.textContent = `${vs} m/s`;
+      valVo.textContent = `${vo} m/s`;
+      valF.textContent = `${f} Hz`;
+      valV.textContent = `${v} m/s`;
+      readoutF.textContent = `${f} Hz`;
+
+      const mach = Math.abs(vs) / v;
+      readoutMach.textContent = mach.toFixed(2);
+      if (mach >= 1) {
+        regimeBadge.textContent = `Supersonic / Sonic Boom (Mach ${mach.toFixed(2)})`;
+        regimeBadge.classList.add("supersonic");
+      } else {
+        regimeBadge.textContent = `Subsonic (v_s < v)`;
+        regimeBadge.classList.remove("supersonic");
+      }
+    }
+
+    [sliderVs, sliderVo, sliderF, sliderV].forEach((s) =>
+      s.addEventListener("input", updateLabels)
+    );
+
+    document.getElementById("toggle-play").addEventListener("click", (e) => {
+      isPlaying = !isPlaying;
+      e.target.textContent = isPlaying ? "Pause" : "Play";
+      if (gainNode) gainNode.gain.value = isPlaying && soundEnabled ? 0.08 : 0;
+    });
+
+    document.getElementById("reset-sim").addEventListener("click", resetSimulation);
+
+    document.getElementById("toggle-sound").addEventListener("click", (e) => {
+      soundEnabled = !soundEnabled;
+      if (soundEnabled) {
+        if (!audioCtx) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          oscillator = audioCtx.createOscillator();
+          gainNode = audioCtx.createGain();
+          oscillator.type = "sine";
+          oscillator.frequency.value = 440;
+          gainNode.gain.value = 0.08;
+          oscillator.connect(gainNode);
+          gainNode.connect(audioCtx.destination);
+          oscillator.start();
+        } else {
+          audioCtx.resume();
+          gainNode.gain.value = isPlaying ? 0.08 : 0;
+        }
+        e.target.textContent = "Sound: ON";
+      } else {
+        if (gainNode) gainNode.gain.value = 0;
+        e.target.textContent = "Sound: OFF";
+      }
+    });
+
+    // Quick Presets
+    document.querySelectorAll(".chip").forEach((chip) => {
+      chip.addEventListener("click", () => {
+        const preset = chip.dataset.preset;
+        if (preset === "approach") {
+          sliderVs.value = 120;
+          sliderVo.value = 0;
+          sliderF.value = 440;
+          sliderV.value = 340;
+        } else if (preset === "stationary") {
+          sliderVs.value = 0;
+          sliderVo.value = 0;
+          sliderF.value = 440;
+          sliderV.value = 340;
+        } else if (preset === "supersonic") {
+          sliderVs.value = 400;
+          sliderVo.value = 0;
+          sliderF.value = 440;
+          sliderV.value = 340;
+        }
+        updateLabels();
+        resetSimulation();
+      });
+    });
+
+    function computeApparentFrequency(vs, vo, f, v) {
+      const dir = observer.x >= source.x ? 1 : -1;
+      const voTowards = -vo * dir;
+      const vsTowards = vs * dir;
+
+      const denom = v - vsTowards;
+      if (denom <= 1) return null; // Sonic boom / singularity
+      const fPrime = f * ((v + voTowards) / denom);
+      return Math.max(0, fPrime);
+    }
+
+    function animate(now) {
+      const dt = Math.min((now - lastTimestamp) / 1000, 0.05);
+      lastTimestamp = now;
+
+      const { vs, vo, f, v } = getSimParams();
+
+      if (isPlaying) {
+        const simDt = dt * TIME_SCALE;
+
+        source.x += vs * PIXELS_PER_METER * simDt;
+        observer.x += vo * PIXELS_PER_METER * simDt;
+
+        if (source.x > canvas.width + 20) source.x = -20;
+        if (source.x < -20) source.x = canvas.width + 20;
+        if (observer.x > canvas.width - 20) observer.x = 20;
+        if (observer.x < 20) observer.x = canvas.width - 20;
+
+        const emitInterval = 110 / f;
+        emitAccumulator += dt;
+        if (emitAccumulator >= emitInterval) {
+          emitAccumulator = 0;
+          wavefronts.push({ x: source.x, y: source.y, r: 2 });
+        }
+
+        for (let i = wavefronts.length - 1; i >= 0; i--) {
+          wavefronts[i].r += v * PIXELS_PER_METER * simDt;
+          if (wavefronts[i].r > canvas.width * 1.1) {
+            wavefronts.splice(i, 1);
+          }
+        }
+      }
+
+      const fPrime = computeApparentFrequency(vs, vo, f, v);
+      if (fPrime === null) {
+        readoutFprime.textContent = "Shockwave!";
+        readoutShift.textContent = "Sonic Boom";
+      } else {
+        readoutFprime.textContent = `${fPrime.toFixed(1)} Hz`;
+        const diff = fPrime - f;
+        readoutShift.textContent = `${diff >= 0 ? "+" : ""}${diff.toFixed(1)} Hz`;
+        if (soundEnabled && oscillator && isPlaying) {
+          oscillator.frequency.setTargetAtTime(
+            Math.min(Math.max(fPrime, 80), 2000),
+            audioCtx.currentTime,
+            0.04
+          );
+        }
+      }
+
+      // Draw Scene
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Subtle background grid
+      ctx.strokeStyle = "rgba(255,255,255,0.04)";
+      ctx.lineWidth = 1;
+      for (let x = 0; x < canvas.width; x += 40) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, canvas.height);
+        ctx.stroke();
+      }
+      for (let y = 0; y < canvas.height; y += 40) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(canvas.width, y);
+        ctx.stroke();
+      }
+
+      // Draw Wavefronts
+      wavefronts.forEach((w) => {
+        const alpha = Math.max(0, 1 - w.r / (canvas.width * 0.95));
+        ctx.strokeStyle = `rgba(56, 189, 248, ${alpha * 0.85})`;
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.arc(w.x, w.y, w.r, 0, Math.PI * 2);
+        ctx.stroke();
+      });
+
+      // Draw Observer (O)
+      ctx.fillStyle = "#34d399";
+      ctx.beginPath();
+      ctx.arc(observer.x, observer.y, 12, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = "#041322";
+      ctx.font = "bold 12px sans-serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText("O", observer.x, observer.y);
+
+      // Draw Source (S)
+      ctx.fillStyle = "#f472b6";
+      ctx.beginPath();
+      ctx.arc(source.x, source.y, 13, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = "#1f0514";
+      ctx.fillText("S", source.x, source.y);
+
+      requestAnimationFrame(animate);
+    }
+
+    updateLabels();
+    requestAnimationFrame(animate);
+
+    /* ==========================================================================
+    3. NUMERICAL PROBLEM SOLVER
+       ========================================================================== */
+    const caseSelect = document.getElementById("case-select");
+    const targetSelect = document.getElementById("target-select");
+    const solverOutput = document.getElementById("solver-output");
+
+    const fields = {
+      v: document.getElementById("field-v"),
+      f: document.getElementById("field-f"),
+      fprime: document.getElementById("field-fprime"),
+      vs: document.getElementById("field-vs"),
+      vo: document.getElementById("field-vo"),
+    };
+
+    function updateSolverInputs() {
+      const c = caseSelect.value;
+      const target = targetSelect.value;
+
+      Object.values(fields).forEach((el) => el.classList.remove("disabled"));
+      if (fields[target]) fields[target].classList.add("disabled");
+
+      if (c === "s_towards" || c === "s_away") {
+        document.getElementById("in-vo").value = 0;
+        fields.vo.classList.add("disabled");
+      } else if (c === "o_towards" || c === "o_away") {
+        document.getElementById("in-vs").value = 0;
+        fields.vs.classList.add("disabled");
+      }
+    }
+
+    caseSelect.addEventListener("change", updateSolverInputs);
+    targetSelect.addEventListener("change", updateSolverInputs);
+    updateSolverInputs();
+
+    document.getElementById("solve-btn").addEventListener("click", () => {
+      const c = caseSelect.value;
+      const target = targetSelect.value;
+
+      const v = parseFloat(document.getElementById("in-v").value);
+      const f = parseFloat(document.getElementById("in-f").value);
+      const fp = parseFloat(document.getElementById("in-fprime").value);
+      let vs = parseFloat(document.getElementById("in-vs").value);
+      let vo = parseFloat(document.getElementById("in-vo").value);
+
+      let sO = 0;
+      let sS = 0;
+      let formulaStr = "";
+
+      if (c === "s_towards") { sO = 0; sS = -1; vo = 0; formulaStr = "f' = f × [ v / (v - v_s) ]"; }
+      if (c === "s_away")    { sO = 0; sS = +1; vo = 0; formulaStr = "f' = f × [ v / (v + v_s) ]"; }
+      if (c === "o_towards") { sO = +1; sS = 0; vs = 0; formulaStr = "f' = f × [ (v + v_o) / v ]"; }
+      if (c === "o_away")    { sO = -1; sS = 0; vs = 0; formulaStr = "f' = f × [ (v - v_o) / v ]"; }
+      if (c === "both_towards") { sO = +1; sS = -1; formulaStr = "f' = f × [ (v + v_o) / (v - v_s) ]"; }
+      if (c === "both_away")    { sO = -1; sS = +1; formulaStr = "f' = f × [ (v - v_o) / (v + v_s) ]"; }
+
+      const showError = (msg) => {
+        solverOutput.innerHTML = `<div class="error-box"><strong>Error:</strong> ${msg}</div>`;
+      };
+
+      if (isNaN(v) || v <= 0) return showError("Speed of sound (v) must be a positive number.");
+
+      let answerHtml = "";
+
+      if (target === "fprime") {
+        if (isNaN(f) || isNaN(vs) || isNaN(vo)) return showError("Please enter valid numbers for f, v_s, and v_o.");
+        const denom = v + sS * vs;
+        if (denom <= 0) return showError("Denominator (v ± v_s) must be greater than 0 (subsonic condition).");
+        const num = v + sO * vo;
+        const result = f * (num / denom);
+
+        answerHtml = `
+          <div class="step"><strong>Step 1 (Formula):</strong> ${formulaStr}</div>
+          <div class="step"><strong>Step 2 (Substitute):</strong> f' = ${f} × (${num.toFixed(2)} / ${denom.toFixed(2)})</div>
+          <div class="final-ans">Apparent Frequency (f') = ${result.toFixed(2)} Hz</div>
+        `;
+      } else if (target === "f") {
+        if (isNaN(fp) || isNaN(vs) || isNaN(vo)) return showError("Please enter valid numbers for f', v_s, and v_o.");
+        const num = v + sO * vo;
+        const denom = v + sS * vs;
+        if (num <= 0 || denom <= 0) return showError("Velocities must be less than the speed of sound.");
+        const result = fp * (denom / num);
+
+        answerHtml = `
+          <div class="step"><strong>Step 1 (Rearrange):</strong> f = f' × [ (v ${sS >= 0 ? "+" : "-"} v_s) / (v ${sO >= 0 ? "+" : "-"} v_o) ]</div>
+          <div class="step"><strong>Step 2 (Substitute):</strong> f = ${fp} × (${denom.toFixed(2)} / ${num.toFixed(2)})</div>
+          <div class="final-ans">Actual Frequency (f) = ${result.toFixed(2)} Hz</div>
+        `;
+      } else if (target === "vs") {
+        if (sS === 0) return showError("In this case the source is stationary (v_s = 0). Pick a case where the source moves.");
+        if (isNaN(f) || isNaN(fp) || fp <= 0) return showError("Please enter valid positive frequencies f and f'.");
+        const num = v + sO * vo;
+        const result = ((f / fp) * num - v) / sS;
+
+        answerHtml = `
+          <div class="step"><strong>Step 1 (Formula):</strong> ${formulaStr}</div>
+          <div class="step"><strong>Step 2 (Solve for v_s):</strong> v ${sS > 0 ? "+" : "-"} v_s = (${f} / ${fp}) × ${num.toFixed(2)} = ${((f / fp) * num).toFixed(2)}</div>
+          <div class="final-ans">Source Speed (v_s) = ${result.toFixed(2)} m/s</div>
+        `;
+      } else if (target === "vo") {
+        if (sO === 0) return showError("In this case the observer is stationary (v_o = 0). Pick a case where the observer moves.");
+        if (isNaN(f) || isNaN(fp) || f <= 0) return showError("Please enter valid positive frequencies f and f'.");
+        const denom = v + sS * vs;
+        const result = ((fp / f) * denom - v) / sO;
+
+        answerHtml = `
+          <div class="step"><strong>Step 1 (Formula):</strong> ${formulaStr}</div>
+          <div class="step"><strong>Step 2 (Solve for v_o):</strong> v ${sO > 0 ? "+" : "-"} v_o = (${fp} / ${f}) × ${denom.toFixed(2)} = ${((fp / f) * denom).toFixed(2)}</div>
+          <div class="final-ans">Observer Speed (v_o) = ${result.toFixed(2)} m/s</div>
+        `;
+      }
+
+      solverOutput.innerHTML = answerHtml;
+    });
+
+    /* ==========================================================================
+    4. SHORT CONCEPT QUIZ
+       ========================================================================== */
+    const quizData = [
+      {
+        q: "An ambulance with its siren on moves TOWARDS a stationary listener. What happens to the apparent frequency and wavelength?",
+        options: [
+          "Frequency increases, wavelength decreases",
+          "Frequency decreases, wavelength increases",
+          "Both frequency and wavelength increase",
+          "Both remain unchanged",
+        ],
+        answer: 0,
+        explanation: "As the source approaches, wavefronts compress (shorter wavelength), so more crests reach the ear per second (higher frequency).",
+      },
+      {
+        q: "A train blows a 500 Hz whistle while moving AWAY from a stationary observer at 34 m/s. (Take v = 340 m/s). What is the apparent frequency?",
+        options: ["555.6 Hz", "454.5 Hz", "500 Hz", "400 Hz"],
+        answer: 1,
+        explanation: "Using f' = f × v / (v + v_s) = 500 × 340 / (340 + 34) = 500 × 340 / 374 ≈ 454.5 Hz.",
+      },
+      {
+        q: "If both the source and the observer move in the SAME direction with the SAME speed, the apparent frequency is:",
+        options: [
+          "Greater than actual frequency",
+          "Less than actual frequency",
+          "Equal to actual frequency",
+          "Zero",
+        ],
+        answer: 2,
+        explanation: "There is zero relative motion between source and observer, so no Doppler shift occurs (f' = f).",
+      },
+      {
+        q: "What phenomenon occurs when a sound source moves faster than the speed of sound (v_s > v)?",
+        options: ["Resonance", "Echo", "Sonic Boom / Shockwave", "Refraction"],
+        answer: 2,
+        explanation: "When v_s > v, the wavefronts pile up constructively along a conical shock front called a Mach cone, producing a sonic boom.",
+      },
+      {
+        q: "In astronomy, the light from a distant galaxy shows a 'Redshift'. What does this tell us?",
+        options: [
+          "The galaxy is moving towards Earth",
+          "The galaxy is moving away from Earth",
+          "The galaxy is stationary",
+          "The galaxy is rotating",
+        ],
+        answer: 1,
+        explanation: "Red light has a longer wavelength (lower frequency). A shift toward red means the light waves are stretched because the galaxy is receding.",
+      },
+    ];
+
+    let currentQ = 0;
+    let score = 0;
+
+    const startScreen = document.getElementById("quiz-start-screen");
+    const quizBody = document.getElementById("quiz-body");
+    const endScreen = document.getElementById("quiz-end-screen");
+    const scorePill = document.getElementById("quiz-score-pill");
+    const progressEl = document.getElementById("quiz-progress");
+    const questionEl = document.getElementById("quiz-question");
+    const optionsEl = document.getElementById("quiz-options");
+    const feedbackEl = document.getElementById("quiz-feedback");
+    const nextBtn = document.getElementById("next-question-btn");
+
+    function startQuiz() {
+      currentQ = 0;
+      score = 0;
+      scorePill.textContent = `Score: 0 / ${quizData.length}`;
+      startScreen.classList.add("hidden");
+      endScreen.classList.add("hidden");
+      quizBody.classList.remove("hidden");
+      loadQuestion();
+    }
+
+    function loadQuestion() {
+      const item = quizData[currentQ];
+      progressEl.textContent = `Question ${currentQ + 1} of ${quizData.length}`;
+      questionEl.textContent = item.q;
+      optionsEl.innerHTML = "";
+      feedbackEl.classList.add("hidden");
+      nextBtn.classList.add("hidden");
+
+      item.options.forEach((opt, idx) => {
+        const btn = document.createElement("button");
+        btn.className = "option-btn";
+        btn.textContent = opt;
+        btn.addEventListener("click", () => selectAnswer(idx, btn));
+        optionsEl.appendChild(btn);
+      });
+    }
+
+    function selectAnswer(selectedIdx, btn) {
+      const item = quizData[currentQ];
+      const allBtns = optionsEl.querySelectorAll(".option-btn");
+      allBtns.forEach((b) => (b.disabled = true));
+
+      if (selectedIdx === item.answer) {
+        btn.classList.add("correct");
+        score++;
+        scorePill.textContent = `Score: ${score} / ${quizData.length}`;
+        feedbackEl.innerHTML = `<strong>Correct!</strong> ${item.explanation}`;
+      } else {
+        btn.classList.add("wrong");
+        allBtns[item.answer].classList.add("correct");
+        feedbackEl.innerHTML = `<strong>Not quite.</strong> ${item.explanation}`;
+      }
+
+      feedbackEl.classList.remove("hidden");
+      nextBtn.textContent =
+        currentQ === quizData.length - 1 ? "See Final Score" : "Next Question →";
+      nextBtn.classList.remove("hidden");
+    }
+
+    nextBtn.addEventListener("click", () => {
+      currentQ++;
+      if (currentQ < quizData.length) {
+        loadQuestion();
+      } else {
+        quizBody.classList.add("hidden");
+        endScreen.classList.remove("hidden");
+        document.getElementById("final-score-title").textContent =
+          `You scored ${score} out of ${quizData.length}!`;
+        document.getElementById("final-score-msg").textContent =
+          score >= 4
+            ? "Great job! You have a solid grasp of the Doppler Effect."
+            : "Good effort! Review the Concepts & Formula tab and try again.";
+      }
+    });
+
+    document.getElementById("start-quiz-btn").addEventListener("click", startQuiz);
+    document.getElementById("restart-quiz-btn").addEventListener("click", startQuiz);
+  </script>
+</body>
+</html>
