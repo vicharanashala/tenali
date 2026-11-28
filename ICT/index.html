@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Can Mathematics Predict Luck? – Exploring Probability</title>
+  <meta name="description" content="An interactive Class 8–10 mathematics project exploring Probability through simulations, games, visual graphs, and quizzes." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Sticky Navigation Bar -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a href="#home" class="brand">
+        <span class="brand-icon" aria-hidden="true">🎲</span>
+        <span class="brand-text">Predict<span class="brand-accent">Luck</span></span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+        <a href="#mystery" class="nav-link">Mystery</a>
+        <a href="#learn" class="nav-link">Learn Math</a>
+        <a href="#coin-lab" class="nav-link">Coin Lab</a>
+        <a href="#dice-lab" class="nav-link">Dice Lab</a>
+        <a href="#challenge" class="nav-link">Predict Game</a>
+        <a href="#quiz" class="nav-link">Quiz</a>
+        <a href="#summary" class="nav-link">Summary</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- =====================================================
+         SECTION 1: HOMEPAGE – CAN MATHEMATICS PREDICT LUCK?
+         ===================================================== -->
+    <section id="home" class="hero">
+      <div class="hero-bg-shapes" aria-hidden="true">
+        <span class="float-shape shape-1">🪙</span>
+        <span class="float-shape shape-2">🎲</span>
+        <span class="float-shape shape-3">🃏</span>
+        <span class="float-shape shape-4">🎯</span>
+        <span class="float-shape shape-5">📊</span>
+      </div>
+
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <div class="pill-badge">✨ Interactive Mathematics Project • Class 8–10</div>
+          <h1 class="hero-title">
+            CAN MATHEMATICS <span class="gradient-text">PREDICT LUCK?</span>
+          </h1>
+          <p class="hero-subtitle">
+            Is winning a game just luck, or can mathematics help us understand the chances?
+          </p>
+          <p class="hero-desc">
+            Welcome to an interactive math classroom! Flip virtual coins, roll animated dice, test your predictions, and discover how numbers measure chance in everyday life.
+          </p>
+          <div class="hero-actions">
+            <a href="#mystery" class="btn btn-primary btn-lg">
+              Start Exploring <span aria-hidden="true">→</span>
+            </a>
+            <a href="#coin-lab" class="btn btn-outline btn-lg">
+              Jump to Live Labs 🧪
+            </a>
+          </div>
+          <div class="hero-stats">
+            <div class="mini-stat">
+              <strong>2 Live Labs</strong>
+              <span>Coin &amp; Dice Simulators</span>
+            </div>
+            <div class="mini-stat">
+              <strong>6 Challenges</strong>
+              <span>Predict Before Playing</span>
+            </div>
+            <div class="mini-stat">
+              <strong>10-Q Quiz</strong>
+              <span>Instant Explanations</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Animated Hero Illustration -->
+        <div class="hero-visual">
+          <div class="visual-stage">
+            <div class="hero-card-main">
+              <div class="hero-toy-row">
+                <div class="hero-coin-spin" id="heroCoinBtn" title="Click to flip!" role="button" tabindex="0" aria-label="Animated probability coin">
+                  <div class="hero-coin-face">H</div>
+                </div>
+                <div class="hero-die-bounce" id="heroDieBtn" title="Click to roll!" role="button" tabindex="0" aria-label="Animated probability die">
+                  <span id="heroDieFace">⚄</span>
+                </div>
+              </div>
+              <div class="hero-wheel-box">
+                <div class="mini-spinner" id="heroSpinner"></div>
+                <div class="spinner-pointer">▼</div>
+              </div>
+              <div class="hero-formula-chip">
+                <span>P(Event) =</span>
+                <span class="chip-frac">Favourable ÷ Total</span>
+              </div>
+              <p class="hero-tip">Click the coin, die, or wheel to play!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         SECTION 2: THE MYSTERY OF CHANCE
+         ===================================================== -->
+    <section id="mystery" class="section section-alt">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag tag-purple">Section 1 • Think First!</span>
+          <h2 class="section-title">The Mystery of Chance</h2>
+          <p class="section-subtitle">
+            Before learning any formulas, trust your instincts! Make a prediction for each question below, then see what mathematics says.
+          </p>
+        </div>
+
+        <div class="mystery-grid" id="mysteryGrid">
+          <!-- Cards populated cleanly by script.js -->
+        </div>
+
+        <!-- Simple English Explanation Card -->
+        <div class="info-banner">
+          <div class="info-banner-icon">💡</div>
+          <div class="info-banner-body">
+            <h3>So, What Are Chance and Probability?</h3>
+            <p>
+              Every day we face events where we aren't 100% sure what will happen — like whether it will rain today, who wins a cricket coin toss, or what number pops up on a Ludo die.
+            </p>
+            <p>
+              <strong>Chance</strong> is our everyday word for how likely something is to happen. <strong>Probability</strong> is how mathematics measures that chance using a number from <strong>0</strong> (impossible) to <strong>1</strong> (certain)!
+            </p>
+            <div class="everyday-chips">
+              <span>🌦️ Weather Forecast: "70% chance of rain"</span>
+              <span>🏏 Cricket Toss: "50-50 chance of Heads"</span>
+              <span>🎲 Ludo Game: "1 in 6 chance of rolling a 6"</span>
+              <span>🎟️ Lucky Draw: "1 winning ticket out of 100"</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         SECTION 3: LEARN THE MATHEMATICS
+         ===================================================== -->
+    <section id="learn" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag tag-blue">Section 2 • Core Concepts</span>
+          <h2 class="section-title">Learn the Mathematics</h2>
+          <p class="section-subtitle">
+            Let's build your probability toolkit step by step — in simple English, with zero scary jargon.
+          </p>
+        </div>
+
+        <!-- 6 Core Concept Cards -->
+        <div class="concept-grid">
+          <article class="concept-card accent-indigo">
+            <div class="concept-emoji">🎯</div>
+            <h3>1. What is Probability?</h3>
+            <p>Probability is a <strong>mathematical measure of how likely an event is to happen</strong>. It turns words like "unlikely", "fifty-fifty", and "very likely" into exact numbers between 0 and 1.</p>
+            <div class="concept-example"><strong>Example:</strong> A coin has a probability of <strong>1/2</strong> (or 50%) of landing on Heads.</div>
+          </article>
+
+          <article class="concept-card accent-pink">
+            <div class="concept-emoji">🧪</div>
+            <h3>2. What is an Experiment?</h3>
+            <p>An <strong>experiment</strong> (or trial) is any activity or action that produces a result we cannot predict with 100% certainty beforehand.</p>
+            <div class="concept-example"><strong>Example:</strong> Tossing a coin, rolling a die, or picking a ball from a bag without looking.</div>
+          </article>
+
+          <article class="concept-card accent-amber">
+            <div class="concept-emoji">✨</div>
+            <h3>3. What is an Outcome?</h3>
+            <p>An <strong>outcome</strong> is a single possible result of an experiment.</p>
+            <div class="concept-example"><strong>Example:</strong> Getting <strong>Heads</strong> when you toss a coin, or rolling a <strong>4</strong> on a die.</div>
+          </article>
+
+          <article class="concept-card accent-emerald">
+            <div class="concept-emoji">📦</div>
+            <h3>4. Total Possible Outcomes</h3>
+            <p><strong>Possible outcomes</strong> are ALL the different results that could happen in an experiment (also called the <em>Sample Space</em>).</p>
+            <div class="concept-example"><strong>Example:</strong> Rolling a die has <strong>6</strong> possible outcomes: {1, 2, 3, 4, 5, 6}.</div>
+          </article>
+
+          <article class="concept-card accent-sky">
+            <div class="concept-emoji">⭐</div>
+            <h3>5. Favourable Outcomes</h3>
+            <p><strong>Favourable outcomes</strong> are the specific results that you <em>want</em> or are looking for in an event.</p>
+            <div class="concept-example"><strong>Example:</strong> If you want an <strong>even number</strong> on a die, the favourable outcomes are {2, 4, 6} — that's <strong>3</strong> outcomes!</div>
+          </article>
+
+          <article class="concept-card accent-violet">
+            <div class="concept-emoji">⚖️</div>
+            <h3>6. Types of Events</h3>
+            <ul class="mini-list">
+              <li><strong>Impossible Event (P = 0):</strong> Can NEVER happen (e.g., rolling a 7 on a standard die).</li>
+              <li><strong>Certain Event (P = 1):</strong> Will ALWAYS happen (e.g., rolling a number from 1 to 6).</li>
+              <li><strong>Equally Likely Events:</strong> Every outcome has the exact same chance (e.g., Heads and Tails on a fair coin).</li>
+            </ul>
+          </article>
+        </div>
+
+        <!-- Interactive 0 to 1 Probability Scale -->
+        <div class="scale-card">
+          <div class="scale-header">
+            <h3>📏 Interactive Probability Scale (0 to 1)</h3>
+            <p>Drag the slider or click the markers to see how everyday events fit on the probability line!</p>
+          </div>
+
+          <div class="scale-markers">
+            <button class="scale-btn" data-val="0">0<br /><small>Impossible</small></button>
+            <button class="scale-btn" data-val="0.25">0.25 (1/4)<br /><small>Unlikely</small></button>
+            <button class="scale-btn" data-val="0.5">0.5 (1/2)<br /><small>Equally Likely</small></button>
+            <button class="scale-btn" data-val="0.75">0.75 (3/4)<br /><small>Likely</small></button>
+            <button class="scale-btn" data-val="1">1<br /><small>Certain</small></button>
+          </div>
+
+          <input type="range" id="probScaleSlider" min="0" max="100" value="50" class="prob-slider" aria-label="Probability scale slider from 0 to 100 percent" />
+
+          <div class="scale-readout" id="scaleReadout">
+            <div class="scale-badge" id="scaleLabel">Equally Likely (Even Chance)</div>
+            <div class="scale-numbers">
+              <span>Decimal: <strong id="scaleDecimal">0.50</strong></span>
+              <span>Percentage: <strong id="scalePercent">50%</strong></span>
+            </div>
+            <p id="scaleExample">Example: Getting Heads when tossing a fair coin.</p>
+          </div>
+        </div>
+
+        <!-- The Probability Formula Spotlight -->
+        <div class="formula-box">
+          <div class="formula-badge">📐 The Golden Formula of Probability</div>
+          <div class="formula-display">
+            <span class="formula-left">P(Event) =</span>
+            <div class="fraction">
+              <span class="numerator">Number of Favourable Outcomes</span>
+              <span class="fraction-bar"></span>
+              <span class="denominator">Total Number of Possible Outcomes</span>
+            </div>
+          </div>
+          <div class="formula-breakdown">
+            <div class="fb-item">
+              <span class="fb-tag fb-top">Top Number (Numerator)</span>
+              <p>Count how many ways <strong>what you want</strong> can happen.</p>
+            </div>
+            <div class="fb-item">
+              <span class="fb-tag fb-bottom">Bottom Number (Denominator)</span>
+              <p>Count <strong>all possible results</strong> that could happen (assuming each is equally likely).</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step-by-Step Worked Examples -->
+        <div class="examples-block">
+          <h3 class="sub-heading">📝 Step-by-Step Worked Examples (No Steps Skipped!)</h3>
+          <div class="example-tabs" role="tablist">
+            <button class="tab-btn active" data-tab="ex-coin" role="tab" aria-selected="true">🪙 Coin Example</button>
+            <button class="tab-btn" data-tab="ex-dice" role="tab" aria-selected="false">🎲 Dice Example</button>
+            <button class="tab-btn" data-tab="ex-balls" role="tab" aria-selected="false">🔴 Coloured Balls Example</button>
+          </div>
+
+          <!-- Example 1: Coin -->
+          <div class="tab-panel active" id="ex-coin">
+            <div class="example-question">
+              <strong>Problem:</strong> A fair coin is tossed once. What is the probability of getting <strong>Heads</strong>?
+            </div>
+            <div class="example-visual-row">
+              <span class="ball-chip chip-gold">Heads (H) ✓</span>
+              <span class="ball-chip chip-slate">Tails (T)</span>
+            </div>
+            <ol class="step-list">
+              <li><strong>Step 1 – List all possible outcomes:</strong> When you toss a coin, you can get Heads (H) or Tails (T). So, <strong>Total possible outcomes = 2</strong>.</li>
+              <li><strong>Step 2 – Count favourable outcomes:</strong> We want Heads. Only 1 outcome is Heads. So, <strong>Favourable outcomes = 1</strong>.</li>
+              <li><strong>Step 3 – Put values into the formula:</strong> P(Heads) = Favourable ÷ Total = <strong>1 / 2</strong>.</li>
+              <li><strong>Step 4 – Convert to decimal &amp; percentage:</strong> 1 ÷ 2 = <strong>0.5</strong>, which equals <strong>50%</strong>.</li>
+            </ol>
+          </div>
+
+          <!-- Example 2: Dice -->
+          <div class="tab-panel" id="ex-dice">
+            <div class="example-question">
+              <strong>Problem:</strong> A fair 6-sided die is rolled once. What is the probability of getting an <strong>even number</strong>?
+            </div>
+            <div class="example-visual-row">
+              <span class="ball-chip chip-slate">1</span>
+              <span class="ball-chip chip-green">2 ✓</span>
+              <span class="ball-chip chip-slate">3</span>
+              <span class="ball-chip chip-green">4 ✓</span>
+              <span class="ball-chip chip-slate">5</span>
+              <span class="ball-chip chip-green">6 ✓</span>
+            </div>
+            <ol class="step-list">
+              <li><strong>Step 1 – List all possible outcomes:</strong> A standard die has faces {1, 2, 3, 4, 5, 6}. So, <strong>Total possible outcomes = 6</strong>.</li>
+              <li><strong>Step 2 – Count favourable outcomes:</strong> Even numbers in {1, 2, 3, 4, 5, 6} are 2, 4, and 6. So, <strong>Favourable outcomes = 3</strong>.</li>
+              <li><strong>Step 3 – Apply the formula:</strong> P(Even) = 3 / 6.</li>
+              <li><strong>Step 4 – Simplify the fraction:</strong> Divide top and bottom by 3 → 3 ÷ 3 = 1 and 6 ÷ 3 = 2. So, P(Even) = <strong>1 / 2 = 0.5 = 50%</strong>.</li>
+            </ol>
+          </div>
+
+          <!-- Example 3: Coloured Balls -->
+          <div class="tab-panel" id="ex-balls">
+            <div class="example-question">
+              <strong>Problem:</strong> A bag contains <strong>3 Red</strong>, <strong>2 Blue</strong>, and <strong>5 Green</strong> balls. One ball is picked at random without looking. What is the probability of picking a <strong>Red ball</strong>?
+            </div>
+            <div class="example-visual-row">
+              <span class="dot-ball red">R</span><span class="dot-ball red">R</span><span class="dot-ball red">R</span>
+              <span class="dot-ball blue">B</span><span class="dot-ball blue">B</span>
+              <span class="dot-ball green">G</span><span class="dot-ball green">G</span><span class="dot-ball green">G</span><span class="dot-ball green">G</span><span class="dot-ball green">G</span>
+            </div>
+            <ol class="step-list">
+              <li><strong>Step 1 – Find total number of balls:</strong> 3 Red + 2 Blue + 5 Green = <strong>10 total possible outcomes</strong>.</li>
+              <li><strong>Step 2 – Count favourable outcomes:</strong> There are <strong>3 Red balls</strong>.</li>
+              <li><strong>Step 3 – Put values into the formula:</strong> P(Red) = <strong>3 / 10</strong>.</li>
+              <li><strong>Step 4 – Convert to decimal &amp; percentage:</strong> 3 ÷ 10 = <strong>0.3</strong>, which equals <strong>30%</strong>.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         SECTION 4: INTERACTIVE COIN TOSS LAB
+         ===================================================== -->
+    <section id="coin-lab" class="section section-alt">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag tag-amber">Section 3 • Interactive Experiment</span>
+          <h2 class="section-title">Interactive Coin Toss Lab</h2>
+          <p class="section-subtitle">
+            Does a fair coin ALWAYS give 50% Heads and 50% Tails? Toss the coin below and watch the live graph!
+          </p>
+        </div>
+
+        <div class="lab-grid">
+          <!-- Left: Coin Simulator & Controls -->
+          <div class="lab-card lab-stage-card">
+            <div class="coin-scene">
+              <div class="coin-3d" id="virtualCoin">
+                <div class="coin-side coin-heads">
+                  <span>HEADS</span>
+                  <small>★</small>
+                </div>
+                <div class="coin-side coin-tails">
+                  <span>TAILS</span>
+                  <small>✦</small>
+                </div>
+              </div>
+            </div>
+
+            <div class="outcome-pill" id="coinOutcomeBadge">Ready to toss!</div>
+
+            <div class="lab-controls">
+              <button class="btn btn-primary" id="tossOneBtn">🪙 Toss Coin</button>
+              <button class="btn btn-secondary" id="tossTenBtn">⚡ Toss 10 Times</button>
+              <button class="btn btn-soft" id="tossHundredBtn">🚀 Toss 100 Times</button>
+              <button class="btn btn-danger-outline" id="resetCoinBtn">↺ Reset</button>
+            </div>
+
+            <div class="history-strip">
+              <span class="history-label">Recent tosses:</span>
+              <div class="history-dots" id="coinHistory">
+                <span class="muted-note">No tosses yet</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Live Stats & Bar Graph -->
+          <div class="lab-card">
+            <h3 class="card-title">📊 Live Experimental Results</h3>
+
+            <div class="stat-boxes">
+              <div class="stat-box">
+                <span class="stat-label">Total Tosses</span>
+                <strong class="stat-val" id="coinTotal">0</strong>
+              </div>
+              <div class="stat-box stat-heads">
+                <span class="stat-label">Heads</span>
+                <strong class="stat-val" id="coinHeadsCount">0</strong>
+                <small id="coinHeadsProb">P(H) = 0% (0.00)</small>
+              </div>
+              <div class="stat-box stat-tails">
+                <span class="stat-label">Tails</span>
+                <strong class="stat-val" id="coinTailsCount">0</strong>
+                <small id="coinTailsProb">P(T) = 0% (0.00)</small>
+              </div>
+            </div>
+
+            <!-- Live Animated Bar Graph -->
+            <div class="chart-wrapper">
+              <div class="chart-title-row">
+                <span>Live Frequency Graph</span>
+                <span class="chart-legend"><span class="dashed-sample"></span> Theoretical 50%</span>
+              </div>
+              <div class="bar-chart coin-chart">
+                <div class="reference-line" style="bottom: 50%;" title="Theoretical Probability: 50%">
+                  <span>50%</span>
+                </div>
+                <div class="bar-col">
+                  <div class="bar-value" id="barHeadsLabel">0 (0%)</div>
+                  <div class="bar-track">
+                    <div class="bar-fill fill-amber" id="barHeadsFill" style="height: 0%;"></div>
+                  </div>
+                  <div class="bar-name">Heads</div>
+                </div>
+                <div class="bar-col">
+                  <div class="bar-value" id="barTailsLabel">0 (0%)</div>
+                  <div class="bar-track">
+                    <div class="bar-fill fill-indigo" id="barTailsFill" style="height: 0%;"></div>
+                  </div>
+                  <div class="bar-name">Tails</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="discovery-note">
+          <strong>🤔 Why isn't it always 50% after 4 or 10 tosses?</strong>
+          Each coin toss is completely independent — the coin doesn't "remember" its last toss! In a small number of tosses, random streaks happen (like 7 Heads out of 10). Now click <strong>"Toss 100 Times"</strong> a few times and watch! The more times you toss, the closer the experimental probability gets to the theoretical <strong>50% (0.5)</strong>. Mathematicians call this the <strong>Law of Large Numbers</strong>.
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         SECTION 5: INTERACTIVE DICE LAB
+         ===================================================== -->
+    <section id="dice-lab" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag tag-emerald">Section 4 • Interactive Experiment</span>
+          <h2 class="section-title">Interactive Dice Lab</h2>
+          <p class="section-subtitle">
+            Roll a fair 6-sided die and test whether every number from 1 to 6 really shows up equally often!
+          </p>
+        </div>
+
+        <div class="lab-grid">
+          <!-- Left: Virtual Die -->
+          <div class="lab-card lab-stage-card">
+            <div class="dice-stage">
+              <div class="die-cube" id="virtualDie" aria-live="polite">
+                <!-- Pips rendered dynamically by script.js -->
+              </div>
+            </div>
+
+            <div class="outcome-pill pill-emerald" id="diceOutcomeBadge">Click Roll Dice to begin!</div>
+
+            <div class="lab-controls">
+              <button class="btn btn-emerald" id="rollOneBtn">🎲 Roll Dice</button>
+              <button class="btn btn-secondary" id="rollTenBtn">⚡ Roll 10 Times</button>
+              <button class="btn btn-soft" id="rollSixtyBtn">🚀 Roll 60 Times</button>
+              <button class="btn btn-danger-outline" id="resetDiceBtn">↺ Reset</button>
+            </div>
+
+            <div class="dice-summary-bar">
+              <span>Total Rolls: <strong id="diceTotal">0</strong></span>
+              <span>Last Roll: <strong id="diceLast">—</strong></span>
+            </div>
+          </div>
+
+          <!-- Right: Live 1–6 Frequency Graph & Table -->
+          <div class="lab-card">
+            <h3 class="card-title">📈 Frequency of Numbers (1 to 6)</h3>
+
+            <div class="chart-wrapper">
+              <div class="chart-title-row">
+                <span>Percentage of Each Face</span>
+                <span class="chart-legend"><span class="dashed-sample"></span> Theoretical 1/6 ≈ 16.7%</span>
+              </div>
+              <div class="bar-chart dice-chart" id="diceBarChart">
+                <!-- Dashed theoretical line at 16.7% (scaled on a 0-40% visual chart axis so bars are super readable!) -->
+                <div class="reference-line" style="bottom: 41.7%;" title="Theoretical Probability: 16.7% (1/6)">
+                  <span>16.7%</span>
+                </div>
+                <!-- 6 bars rendered by script.js -->
+              </div>
+            </div>
+
+            <div class="dice-freq-grid" id="diceFreqGrid">
+              <!-- Frequency badges 1-6 rendered by script.js -->
+            </div>
+          </div>
+        </div>
+
+        <div class="discovery-note note-emerald">
+          <strong>🎲 Why does every number have a probability of 1/6?</strong>
+          A fair die has <strong>6 identical flat faces</strong> numbered 1, 2, 3, 4, 5, and 6. None of the sides is heavier or bigger than the others, so every number is <strong>equally likely</strong>. Since only <strong>1</strong> face shows any chosen number out of <strong>6</strong> total faces:
+          <code>P(any single number) = 1 / 6 ≈ 0.167 (16.7%)</code>.
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         SECTION 6: PROBABILITY CHALLENGE – PREDICT BEFORE YOU PLAY
+         ===================================================== -->
+    <section id="challenge" class="section section-alt">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag tag-pink">Section 5 • Interactive Game</span>
+          <h2 class="section-title">Probability Challenge: Predict Before You Play!</h2>
+          <p class="section-subtitle">
+            Can you outsmart luck? Lock in your mathematical prediction first, then play the scenario to see why!
+          </p>
+        </div>
+
+        <div class="challenge-wrapper">
+          <div class="challenge-topbar">
+            <span id="challengeCounter">Challenge 1 of 6</span>
+            <span class="score-chip">Predictions Right: <strong id="challengeScore">0</strong></span>
+          </div>
+
+          <div class="challenge-card" id="challengeCard">
+            <!-- Dynamically populated by script.js -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         SECTION 7: PRACTICE QUIZ (10 QUESTIONS)
+         ===================================================== -->
+    <section id="quiz" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag tag-indigo">Section 6 • Test Yourself</span>
+          <h2 class="section-title">Interactive Practice Quiz</h2>
+          <p class="section-subtitle">
+            Test your probability superpowers with 10 Easy &amp; Medium questions — complete with instant step-by-step explanations!
+          </p>
+        </div>
+
+        <div class="quiz-container" id="quizContainer">
+          <!-- Quiz Header & Progress -->
+          <div class="quiz-top">
+            <div class="quiz-meta">
+              <span id="quizProgressText">Question 1 of 10</span>
+              <span class="diff-badge" id="quizDiffBadge">Easy</span>
+            </div>
+            <div class="quiz-score-pill">Score: <strong id="quizScoreDisplay">0</strong> / 10</div>
+          </div>
+
+          <div class="progress-track">
+            <div class="progress-fill" id="quizProgressBar" style="width: 10%;"></div>
+          </div>
+
+          <!-- Active Question Area -->
+          <div id="quizQuestionArea">
+            <h3 class="quiz-question" id="quizQuestionText"></h3>
+            <div class="quiz-options" id="quizOptions"></div>
+            <div class="quiz-feedback hidden" id="quizFeedback"></div>
+            <div class="quiz-footer">
+              <button class="btn btn-primary hidden" id="quizNextBtn">Next Question →</button>
+            </div>
+          </div>
+
+          <!-- Final Results Area -->
+          <div id="quizResultArea" class="quiz-result hidden">
+            <div class="result-trophy" id="resultTrophy">🏆</div>
+            <h3 id="resultHeading">Great Job!</h3>
+            <p class="result-score-big" id="resultScoreText"></p>
+            <p id="resultMessage"></p>
+            <div class="result-review" id="resultReview"></div>
+            <button class="btn btn-primary btn-lg" id="restartQuizBtn">🔄 Restart Quiz</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         SECTION 8: FINAL LEARNING SUMMARY – WHAT DID WE DISCOVER?
+         ===================================================== -->
+    <section id="summary" class="section section-alt">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag tag-purple">Section 7 • Final Takeaways</span>
+          <h2 class="section-title">What Did We Discover?</h2>
+          <p class="section-subtitle">
+            Mathematics cannot tell us the exact result of a single coin flip — but it CAN predict patterns and measure luck accurately!
+          </p>
+        </div>
+
+        <div class="summary-grid">
+          <div class="summary-card">
+            <span class="sum-num">01</span>
+            <h3>Measures Likelihood</h3>
+            <p>Probability tells us how likely an event is to happen using clear numbers instead of guesses.</p>
+          </div>
+          <div class="summary-card">
+            <span class="sum-num">02</span>
+            <h3>Impossible Event = 0</h3>
+            <p>If an event can never happen (like rolling an 8 on a regular die), its probability is <strong>0</strong>.</p>
+          </div>
+          <div class="summary-card">
+            <span class="sum-num">03</span>
+            <h3>Certain Event = 1</h3>
+            <p>If an event is guaranteed to happen (like the sun rising tomorrow), its probability is <strong>1</strong>.</p>
+          </div>
+          <div class="summary-card">
+            <span class="sum-num">04</span>
+            <h3>Always Between 0 and 1</h3>
+            <p>For every event, <strong>0 ≤ P(E) ≤ 1</strong>. Probability can never be negative or greater than 1 (100%).</p>
+          </div>
+          <div class="summary-card">
+            <span class="sum-num">05</span>
+            <h3>The Formula</h3>
+            <p>When outcomes are equally likely: <strong>P(E) = Favourable Outcomes ÷ Total Possible Outcomes</strong>.</p>
+          </div>
+          <div class="summary-card">
+            <span class="sum-num">06</span>
+            <h3>Experiments Vary, Patterns Stabilize</h3>
+            <p>Experimental probability changes when repeated, but with many trials it gets closer to theoretical probability.</p>
+          </div>
+        </div>
+
+        <!-- Final Fun Interactive Challenge: Mystery Bag Detective -->
+        <div class="bonus-box">
+          <div class="bonus-header">
+            <span class="pill-badge">🕵️ Final Fun Challenge</span>
+            <h3>The Mystery Bag Detective!</h3>
+            <p>
+              Inside this secret bag are <strong>10 coloured balls</strong> (Red, Blue, and Yellow). Draw balls (each ball goes back into the bag) to gather clues, then guess how many of each colour are hidden inside!
+            </p>
+          </div>
+
+          <div class="bonus-body">
+            <div class="bonus-controls">
+              <button class="btn btn-primary" id="drawOneBallBtn">🎒 Draw 1 Ball</button>
+              <button class="btn btn-secondary" id="drawTenBallsBtn">⚡ Draw 10 Balls</button>
+              <button class="btn btn-emerald" id="revealBagBtn">🔓 Reveal Secret Bag</button>
+              <button class="btn btn-danger-outline" id="newBagBtn">🎲 New Secret Bag</button>
+            </div>
+
+            <div class="bag-last-draw" id="bagLastDraw">Click "Draw 1 Ball" or "Draw 10 Balls" to collect evidence!</div>
+
+            <div class="bag-tallies">
+              <div class="bag-tally red-tally">
+                <span>🔴 Red Drawn</span>
+                <strong id="bagRedCount">0</strong>
+                <small id="bagRedPct">0%</small>
+              </div>
+              <div class="bag-tally blue-tally">
+                <span>🔵 Blue Drawn</span>
+                <strong id="bagBlueCount">0</strong>
+                <small id="bagBluePct">0%</small>
+              </div>
+              <div class="bag-tally yellow-tally">
+                <span>🟡 Yellow Drawn</span>
+                <strong id="bagYellowCount">0</strong>
+                <small id="bagYellowPct">0%</small>
+              </div>
+            </div>
+
+            <div class="bag-reveal-panel hidden" id="bagRevealPanel"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>
+        <strong>Can Mathematics Predict Luck? – Exploring Probability</strong>
+        <p>Interactive Mathematics Teaching Project (Class 8–10) • Created by <span class="editable-name">[Your Name / Class]</span></p>
+      </div>
+      <a href="#home" class="back-top">↑ Back to Top</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
