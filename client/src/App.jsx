@@ -44599,6 +44599,7 @@ function App() {
     linearalgebra: LinearAlgebraApp, // Linear Algebra Module 1
     missionquiz: MissionQuizApp, // Mission-specific Linear Algebra Quiz
     'math-lab': MathLabHubApp,
+    'astro-courier': AstroCourierApp,
     'visual-math-lab-redux': VisualMathLabRedux,
     'mensuration-lab': MensurationLabApp,
     'basic-arith-lab': BasicArithmeticLabApp,
@@ -45498,6 +45499,147 @@ function App() {
  * @param {Object} props
  * @param {Function} props.onSelect - Callback when user selects a quiz: receives mode key (e.g., 'gk')
  */
+function makeAstroMission(index) {
+  const speed = 2 + Math.floor(Math.random() * 7)
+  const duration = 3 + Math.floor(Math.random() * 6)
+  const distance = speed * duration
+  const solveFor = ['speed', 'distance', 'time'][index % 3]
+  const answer = solveFor === 'speed' ? speed : solveFor === 'distance' ? distance : duration
+  const choices = [answer]
+  for (let offset = 1; choices.length < 4; offset++) {
+    for (const candidate of [answer - offset, answer + offset]) {
+      if (candidate > 0 && !choices.includes(candidate)) choices.push(candidate)
+      if (choices.length === 4) break
+    }
+  }
+  choices.sort(() => Math.random() - 0.5)
+  return { id: `astro-${index}-${Date.now()}`, speed, duration, distance, solveFor, answer, choices }
+}
+
+function AstroCourierApp({ onBack }) {
+  const [round, setRound] = useState(0)
+  const [mission, setMission] = useState(() => makeAstroMission(0))
+  const [elapsed, setElapsed] = useState(0)
+  const [selected, setSelected] = useState(null)
+  const [score, setScore] = useState(0)
+  const [playing, setPlaying] = useState(false)
+  const clockMax = mission.solveFor === 'time' ? 10 : mission.duration
+  const finished = round >= 5
+  const revealed = selected !== null
+  const isCorrect = selected === mission.answer
+  useProgressSubmit(revealed, isCorrect, 'astro-courier', mission.id)
+
+  useEffect(() => {
+    if (!playing) return undefined
+    const timer = window.setInterval(() => {
+      setElapsed(current => Math.min(clockMax, current + 1))
+    }, 500)
+    return () => window.clearInterval(timer)
+  }, [playing, clockMax])
+
+  useEffect(() => {
+    if (playing && elapsed >= mission.duration) setPlaying(false)
+  }, [playing, elapsed, mission.duration])
+
+  const submitAnswer = (choice) => {
+    if (revealed) return
+    setSelected(choice)
+    setPlaying(false)
+    if (choice === mission.answer) setScore(value => value + 1)
+  }
+
+  const nextMission = () => {
+    const nextRound = round + 1
+    setRound(nextRound)
+    setSelected(null)
+    setElapsed(0)
+    setMission(makeAstroMission(nextRound))
+  }
+
+  const progress = Math.min(1, elapsed / mission.duration)
+  const roverX = 54 + progress * 492
+
+  return (
+    <QuizLayout title="🚀 Astro Courier" subtitle="A tiny motion mission: distance = speed × time" onBack={onBack}>
+      {finished ? (
+        <div style={{ maxWidth: 620, margin: '24px auto', textAlign: 'center', padding: 28, borderRadius: 20, background: 'var(--clr-surface)', border: '1px solid var(--clr-border)' }}>
+          <div style={{ fontSize: '3rem' }}>{score >= 4 ? '🌟' : '🪐'}</div>
+          <h2 style={{ margin: '8px 0' }}>Mission complete!</h2>
+          <p style={{ color: 'var(--clr-text-soft)' }}>You solved {score} of 5 motion missions correctly.</p>
+          <button className="btn" onClick={() => { setRound(0); setMission(makeAstroMission(0)); setScore(0); setElapsed(0); setSelected(null) }}>Fly another set</button>
+        </div>
+      ) : (
+        <div style={{ maxWidth: 700, margin: '0 auto' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 12, marginBottom: 16 }}>
+            <span style={{ color: 'var(--clr-text-soft)' }}>MISSION {round + 1} / 5</span>
+            <span style={{ borderRadius: 99, padding: '6px 12px', background: 'var(--clr-accent-soft)', color: 'var(--clr-accent)', fontWeight: 700 }}>⭐ {score} solved</span>
+          </div>
+          <div style={{ padding: '20px clamp(16px, 4vw, 30px)', borderRadius: 20, background: 'linear-gradient(145deg, #10283b, #173b4b 58%, #3c5360)', color: '#f3fbff', overflow: 'hidden', position: 'relative' }}>
+            <div style={{ fontSize: '0.78rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: '#9bd4db' }}>Lunar delivery route</div>
+            <h2 style={{ margin: '8px 0 4px', color: '#fff' }}>
+              {mission.solveFor === 'speed' && <>The rover covers {mission.distance} metres in {mission.duration} seconds.</>}
+              {mission.solveFor === 'distance' && <>The rover travels at {mission.speed} m/s for {mission.duration} seconds.</>}
+              {mission.solveFor === 'time' && <>The rover must cover {mission.distance} metres at {mission.speed} m/s.</>}
+            </h2>
+            <p style={{ margin: 0, color: '#c3d8df' }}>
+              {mission.solveFor === 'speed' && 'Find its steady speed.'}
+              {mission.solveFor === 'distance' && 'How far will it travel?'}
+              {mission.solveFor === 'time' && 'How many seconds will the trip take?'}
+            </p>
+            <svg viewBox="0 0 600 155" role="img" aria-label={`Rover motion visualization at ${elapsed} of ${mission.duration} seconds`} style={{ display: 'block', width: '100%', marginTop: 10 }}>
+              <defs>
+                <linearGradient id="astro-track" x1="0" x2="1"><stop offset="0%" stopColor="#44d6c2"/><stop offset="100%" stopColor="#a2ec94"/></linearGradient>
+              </defs>
+              <circle cx="493" cy="30" r="17" fill="#ffe7a4" opacity=".95" />
+              <path d="M18 114 Q110 95 194 112 T360 109 T582 105 L582 155 L18 155Z" fill="#53666a" opacity=".75" />
+              <line x1="54" y1="112" x2="546" y2="112" stroke="#c7d8d2" strokeWidth="4" strokeLinecap="round" />
+              <line x1="54" y1="112" x2={roverX} y2="112" stroke="url(#astro-track)" strokeWidth="7" strokeLinecap="round" />
+              {[0, 1, 2, 3, 4].map((tick, index) => <g key={tick}><line x1={54 + index * 123} y1="103" x2={54 + index * 123} y2="122" stroke="#e5f0e9" strokeWidth="2"/><circle cx={54 + index * 123} cy="112" r="3" fill="#fff"/></g>)}
+              <text x="54" y="145" fill="#eff8f5" fontSize="13" textAnchor="middle">START</text>
+              <text x="546" y="145" fill="#eff8f5" fontSize="13" textAnchor="middle">{mission.solveFor === 'distance' ? 'BEACON' : `BEACON · ${mission.distance} m`}</text>
+              <text x={roverX} y="84" textAnchor="middle" fontSize="27">🚙</text>
+              <text x="300" y="28" fill="#e0f5ee" fontSize="14" textAnchor="middle">scrub the mission clock</text>
+            </svg>
+            <div style={{ display: 'flex', justifyContent: 'space-between', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
+              <label style={{ flex: '1 1 250px', color: '#e8f5f2', fontWeight: 600 }}>
+                Elapsed time: <strong>{elapsed}s</strong>
+                <input aria-label="Scrub rover mission time" type="range" min="0" max={clockMax} step="1" value={elapsed} onChange={event => { setElapsed(Number(event.target.value)); setPlaying(false) }} style={{ display: 'block', width: '100%', accentColor: '#6de2cf', marginTop: 8 }} />
+              </label>
+              <button type="button" onClick={() => { if (elapsed >= mission.duration) setElapsed(0); setPlaying(value => !value) }} style={{ border: '1px solid #9bd4db', borderRadius: 12, padding: '10px 15px', background: 'rgba(255,255,255,.1)', color: '#fff', cursor: 'pointer', fontWeight: 700 }}>
+                {playing ? 'Ⅱ Pause trip' : '▶ Run rover'}
+              </button>
+            </div>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, margin: '18px 0', flexWrap: 'wrap' }}>
+            <span style={{ color: 'var(--clr-text-soft)' }}>{mission.solveFor === 'distance' ? 'distance = speed × time' : mission.solveFor === 'time' ? 'time = distance ÷ speed' : 'speed = distance ÷ time'}</span>
+            <span style={{ padding: '7px 12px', borderRadius: 10, background: 'var(--clr-surface)', fontWeight: 700 }}>
+              {mission.solveFor === 'speed' && <>{mission.distance} m ÷ {mission.duration} s = ? m/s</>}
+              {mission.solveFor === 'distance' && <>{mission.speed} m/s × {mission.duration} s = ? m</>}
+              {mission.solveFor === 'time' && <>{mission.distance} m ÷ {mission.speed} m/s = ? s</>}
+            </span>
+          </div>
+          <div role="group" aria-label={`Choose the ${mission.solveFor}`} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(110px, 1fr))', gap: 10 }}>
+            {mission.choices.map(choice => {
+              const chosen = selected === choice
+              const right = revealed && choice === mission.answer
+              const unit = mission.solveFor === 'speed' ? 'm/s' : mission.solveFor === 'distance' ? 'm' : 's'
+              return <button key={choice} type="button" onClick={() => submitAnswer(choice)} disabled={revealed} style={{ border: `2px solid ${right ? 'var(--clr-correct)' : chosen ? 'var(--clr-wrong)' : 'var(--clr-border)'}`, borderRadius: 14, padding: '14px 10px', background: right ? 'var(--clr-correct-bg)' : chosen ? 'var(--clr-wrong-bg)' : 'var(--clr-card)', color: 'var(--clr-text)', cursor: revealed ? 'default' : 'pointer', fontSize: '1.1rem', fontWeight: 700 }}>
+                {choice} {unit} {right ? '✓' : chosen ? '✕' : ''}
+              </button>
+            })}
+          </div>
+          {revealed && <div style={{ marginTop: 16, padding: 14, borderRadius: 12, background: isCorrect ? 'var(--clr-correct-bg)' : 'var(--clr-wrong-bg)', color: 'var(--clr-text)' }}>
+            {isCorrect ? 'Great navigation!' : 'Almost!'} {mission.solveFor === 'speed' && <>{mission.distance} ÷ {mission.duration} = <strong>{mission.answer} m/s</strong>. Speed tells us the distance travelled each second.</>}
+            {mission.solveFor === 'distance' && <>{mission.speed} × {mission.duration} = <strong>{mission.answer} m</strong>. Multiply speed by time to find the distance.</>}
+            {mission.solveFor === 'time' && <>{mission.distance} ÷ {mission.speed} = <strong>{mission.answer} s</strong>. Divide distance by speed to find the travel time.</>}
+          </div>}
+          {revealed && <div style={{ textAlign: 'center', marginTop: 16 }}><button className="btn" onClick={nextMission}>{round === 4 ? 'See mission result' : 'Next mission →'}</button></div>}
+        </div>
+      )}
+    </QuizLayout>
+  )
+}
+
 function Home({ onSelect, onBackToLanding, completedTopics = [], goldMastery = [], coins = 0, isGoalSelection = false, onBack }) {
   const [showAbout, setShowAbout] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
