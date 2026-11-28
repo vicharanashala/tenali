@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LightLab - Explore the World of Light</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="navbar">
+    <div class="nav-container">
+      <div class="brand" onclick="switchTab('home')">
+        <span class="brand-icon">🔦</span>
+        <span class="brand-title">LightLab</span>
+        <span class="brand-badge">Interactive Optics</span>
+      </div>
+      <nav class="nav-links">
+        <button class="nav-btn active" data-tab="home" onclick="switchTab('home')">Home Grid</button>
+        <button class="nav-btn" data-tab="refraction" onclick="switchTab('refraction')">Reflection & Refraction</button>
+        <button class="nav-btn" data-tab="raylab" onclick="switchTab('raylab')">Mirrors & Lenses</button>
+        <button class="nav-btn" data-tab="illusions" onclick="switchTab('illusions')">Optical Illusions</button>
+        <button class="nav-btn" data-tab="quiz" onclick="switchTab('quiz')">Optics Quiz</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="view-home" class="view active">
+      <div class="hero-banner">
+        <div class="hero-text">
+          <span class="pill">Understand → Interact → Discover → Test</span>
+          <h1>Explore the World of Light</h1>
+          <p>
+            Master geometrical optics through real-time ray simulations, interactive mirrors and lenses,
+            visual illusions, and step-by-step adaptive quizzes.
+          </p>
+          <div class="hero-actions">
+            <button class="btn btn-primary" onclick="switchTab('refraction')">Launch Simulations →</button>
+            <button class="btn btn-secondary" onclick="switchTab('quiz')">Take Optics Quiz</button>
+          </div>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-card">
+            <span class="stat-num">4</span>
+            <span class="stat-label">Interactive Labs</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num">Real-Time</span>
+            <span class="stat-label">Snell & Lens Math</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num">Step-by-Step</span>
+            <span class="stat-label">Worked Solutions</span>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="section-heading">Choose an Optics Module</h2>
+      <div class="module-grid">
+        <div class="module-card card-blue" onclick="switchTab('refraction')">
+          <div class="card-tag">Wave & Boundary</div>
+          <h3>Reflection & Refraction Lab</h3>
+          <p>Adjust incident angles and refractive indices (n₁, n₂) to observe Snell's Law and Total Internal Reflection (TIR).</p>
+          <span class="card-cta">Open Simulator →</span>
+        </div>
+
+        <div class="module-card card-green" onclick="switchTab('raylab')">
+          <div class="card-tag">Ray Tracing</div>
+          <h3>Mirrors & Lenses Workbench</h3>
+          <p>Drag objects along the principal axis for concave/convex mirrors and lenses to trace principal rays and image nature.</p>
+          <span class="card-cta">Trace Rays →</span>
+        </div>
+
+        <div class="module-card card-purple" onclick="switchTab('illusions')">
+          <div class="card-tag">Perception & Brain</div>
+          <h3>Optical Illusions Studio</h3>
+          <p>Test how your visual cortex interprets contrast, depth cues, and motion—then toggle the physics reveal overlay.</p>
+          <span class="card-cta">Explore Illusions →</span>
+        </div>
+
+        <div class="module-card card-orange" onclick="switchTab('quiz')">
+          <div class="card-tag">Practice & Mastery</div>
+          <h3>Optics Challenge Quiz</h3>
+          <p>Solve conceptual and numerical optics questions with instant feedback, score tracking, and step-by-step explanations.</p>
+          <span class="card-cta">Start Quiz →</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-refraction" class="view">
+      <div class="module-header">
+        <div>
+          <h2>Reflection & Refraction Simulator</h2>
+          <p>Explore the Law of Reflection (θᵢ = θᵣ) and Snell's Law (n₁ sin θ₁ = n₂ sin θ₂).</p>
+        </div>
+        <button class="btn btn-outline" onclick="switchTab('home')">← Back to Grid</button>
+      </div>
+
+      <div class="lab-layout">
+        <div class="canvas-wrapper">
+          <canvas id="refractionCanvas" width="640" height="420"></canvas>
+        </div>
+
+        <div class="controls-panel">
+          <h3>Parameters</h3>
+
+          <div class="control-group">
+            <label for="incAngle">Incident Angle (θᵢ): <strong id="incAngleVal">40°</strong></label>
+            <input type="range" id="incAngle" min="0" max="85" value="40" />
+          </div>
+
+          <div class="control-group">
+            <label for="medium1">Medium 1 (Top): <strong id="n1Val">1.00</strong></label>
+            <select id="medium1">
+              <option value="1.00" selected>Air (n = 1.00)</option>
+              <option value="1.33">Water (n = 1.33)</option>
+              <option value="1.50">Crown Glass (n = 1.50)</option>
+              <option value="2.42">Diamond (n = 2.42)</option>
+            </select>
+          </div>
+
+          <div class="control-group">
+            <label for="medium2">Medium 2 (Bottom): <strong id="n2Val">1.50</strong></label>
+            <select id="medium2">
+              <option value="1.00">Air (n = 1.00)</option>
+              <option value="1.33">Water (n = 1.33)</option>
+              <option value="1.50" selected>Crown Glass (n = 1.50)</option>
+              <option value="2.42">Diamond (n = 2.42)</option>
+            </select>
+          </div>
+
+          <div class="readout-box" id="refractionReadout"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-raylab" class="view">
+      <div class="module-header">
+        <div>
+          <h2>Mirrors & Lenses Ray Diagram Lab</h2>
+          <p>Observe how principal rays form real or virtual images across spherical mirrors and thin lenses.</p>
+        </div>
+        <button class="btn btn-outline" onclick="switchTab('home')">← Back to Grid</button>
+      </div>
+
+      <div class="lab-layout">
+        <div class="canvas-wrapper">
+          <canvas id="rayCanvas" width="640" height="420"></canvas>
+        </div>
+
+        <div class="controls-panel">
+          <h3>Optical Element</h3>
+
+          <div class="control-group">
+            <label for="elementType">Select Element:</label>
+            <select id="elementType">
+              <option value="convex-lens" selected>Convex (Converging) Lens</option>
+              <option value="concave-lens">Concave (Diverging) Lens</option>
+              <option value="concave-mirror">Concave (Converging) Mirror</option>
+              <option value="convex-mirror">Convex (Diverging) Mirror</option>
+            </select>
+          </div>
+
+          <div class="control-group">
+            <label for="objDist">Object Distance (|u|): <strong id="objDistVal">180 px</strong></label>
+            <input type="range" id="objDist" min="40" max="280" value="180" />
+          </div>
+
+          <div class="control-group">
+            <label for="focalLen">Focal Length (|f|): <strong id="focalLenVal">90 px</strong></label>
+            <input type="range" id="focalLen" min="50" max="140" value="90" />
+          </div>
+
+          <div class="readout-box" id="rayReadout"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-illusions" class="view">
+      <div class="module-header">
+        <div>
+          <h2>Optical Illusions Studio</h2>
+          <p>Discover how context, luminance, and perspective trick human visual perception.</p>
+        </div>
+        <button class="btn btn-outline" onclick="switchTab('home')">← Back to Grid</button>
+      </div>
+
+      <div class="illusion-tabs">
+        <button class="pill-btn active" onclick="selectIllusion('muller', this)">1. Müller-Lyer Illusion</button>
+        <button class="pill-btn" onclick="selectIllusion('ebbinghaus', this)">2. Ebbinghaus Size Illusion</button>
+        <button class="pill-btn" onclick="selectIllusion('contrast', this)">3. Simultaneous Contrast</button>
+      </div>
+
+      <div class="lab-layout">
+        <div class="canvas-wrapper">
+          <canvas id="illusionCanvas" width="640" height="380"></canvas>
+        </div>
+
+        <div class="controls-panel">
+          <h3 id="illusionTitle">Müller-Lyer Illusion</h3>
+          <p id="illusionDesc" class="muted-text">
+            Which horizontal shaft looks longer—the top line with inward fins or the bottom line with outward fins?
+          </p>
+          <button class="btn btn-primary full-width" id="revealBtn" onclick="toggleIllusionReveal()">
+            Reveal Geometric Truth
+          </button>
+          <div class="readout-box" id="illusionExplanation" style="margin-top: 1rem;">
+            Click the button above to overlay measurement guides.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-quiz" class="view">
+      <div class="module-header">
+        <div>
+          <h2>LightLab Interactive Quiz</h2>
+          <p>Test your concepts on reflection, refraction, lenses, mirrors, and human vision.</p>
+        </div>
+        <button class="btn btn-outline" onclick="switchTab('home')">← Back to Grid</button>
+      </div>
+
+      <div class="quiz-container" id="quizBox">
+        <div class="quiz-top-bar">
+          <span id="quizProgress">Question 1 of 6</span>
+          <span class="score-badge" id="quizScore">Score: 0</span>
+        </div>
+
+        <h3 id="quizQuestion" class="quiz-question">Loading question...</h3>
+        <div id="quizOptions" class="quiz-options"></div>
+
+        <div id="quizExplanation" class="explanation-box hidden"></div>
+
+        <div class="quiz-actions">
+          <button class="btn btn-secondary" id="hintBtn" onclick="showQuizExplanation()">Show Step-by-Step Solution</button>
+          <button class="btn btn-primary hidden" id="nextBtn" onclick="nextQuestion()">Next Question →</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>LightLab – Interactive Optics Learning Platform</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

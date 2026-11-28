@@ -1,27 +1,16 @@
-node_modules
+# OS generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor and IDE directories
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs and temporary files
 *.log
-client/dist
-server.log
-
-server/in_memory_users_db.json
-server/lil/learning_journey/in_memory_journey_progress.json
-server/dictionaryCache
-ISSUE_DRAFT.md
-PR_DRAFT.md
-**/*.ps1
-.env
-
-# local scratch / debug throwaways
-scratch/
-server/_probe*.js
-.env
-*.env
-
-# Backup snapshots — never commit these; use git history instead
-*.bak
-*.bak.*
-__pycache__/
-*.pyc
-
-# Local npm backup files
-client/*.backup
+temp/
+tmp/
