@@ -18,6 +18,7 @@ export const TILES = [
     { key: 'column-multiplication', name: 'Column Multiplication', subtitle: 'Vertical multiplication with carrying', color: 'blue', category: 'number-foundations', foldInto: 'basicarith' },
     { key: 'column-subtraction', name: 'Column Subtraction', subtitle: 'Vertical subtraction with borrowing', color: 'blue', category: 'number-foundations', foldInto: 'basicarith' },
     { key: 'angles', name: 'Angles', subtitle: 'Lines, points, parallel lines', color: 'green', category: 'shape-space' },
+    { key: 'astro-courier', name: '🚀 Astro Courier', subtitle: 'Rover missions: speed, distance & time', color: 'teal', category: 'shelf' },
     { key: 'basicarith', name: 'Arithmetic', subtitle: '+, −, ×, ÷ with positive & negative', color: 'purple', category: 'number-foundations' },
     { key: 'banking', name: 'Banking (RD)', subtitle: 'Interest & recurring deposits', color: 'blue', category: 'everyday-maths' },
     { key: 'bearings', name: 'Bearings', subtitle: 'Three-figure bearings', color: 'green', category: 'shape-space' },
